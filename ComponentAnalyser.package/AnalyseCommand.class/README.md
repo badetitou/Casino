@@ -1,0 +1,1 @@
+model := MooseModel root allModels select: [ :model | model name = 'BLCoreIncubatorGwt' ]
