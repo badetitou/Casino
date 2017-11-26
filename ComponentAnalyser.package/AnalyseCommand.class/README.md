@@ -10,3 +10,5 @@ mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/output.m
 mooseModel := MooseModel importFromMSEStream: mseFile.
 
 blApp := BLApplication new model: mooseModel; applicationXml: xml.
+
+blApp modelPhases 
