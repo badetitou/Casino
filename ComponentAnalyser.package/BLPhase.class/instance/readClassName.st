@@ -1,3 +1,0 @@
-accessing
-readClassName
-	^ readClassName

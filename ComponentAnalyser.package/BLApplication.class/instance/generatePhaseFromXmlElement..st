@@ -1,6 +1,6 @@
 accessing
 generatePhaseFromXmlElement: xmlElement
 	^ BLPhase new
-		readClassName: (xmlElement attributeAt: #className);
+		realClassName: ((xmlElement attributeAt: #className) ifNotNil: [ :a | a replaceAllRegex: '\.' with: '::']);
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue)
