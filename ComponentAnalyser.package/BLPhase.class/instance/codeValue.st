@@ -1,0 +1,3 @@
+accessing
+codeValue
+	^ codeValue

@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 11/26/2017 18:12",
+	"super" : "Object",
+	"category" : "ComponentAnalyser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"codePhase",
+		"codeValue",
+		"readClassName"
+	],
+	"name" : "BLPhase",
+	"type" : "normal"
+}

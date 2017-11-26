@@ -1,3 +1,12 @@
-model := (MooseModel root allModels select: [ :model | model name = 'BLCoreIncubatorGwt' ]) at: 1.
-ac := AnalyseCommand new.
-ac getCompositeFromModel: model
+aw := AnalyseCommand new.
+
+fileName := '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt/src/fr/bl/application.module.xml'.
+xml := aw getXmlFile: fileName.
+
+MooseModel resetRoot.
+MooseModel resetMeta.
+
+mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/output.mse' .
+mooseModel := MooseModel importFromMSEStream: mseFile.
+
+blApp := BLApplication new model: mooseModel; applicationXml: xml.
