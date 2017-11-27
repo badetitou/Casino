@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "BenoitVerhaeghe 11/27/2017 16:30",
+	"commentStamp" : "",
 	"super" : "Object",
 	"category" : "ComponentAnalyser",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "AnalyseCommand",
+	"instvars" : [
+		"from",
+		"to"
+	],
+	"name" : "BLLink",
 	"type" : "normal"
 }
