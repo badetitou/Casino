@@ -1,12 +1,15 @@
 accessing
 phasesLink
 	| blLink |
-	blLink := ((self modelPhases collect: #attributes thenSelect: [ :e | e size ~= 0 ])
-		flatCollect: [ :e | (e collect: #declaredType) flatCollect: #outgoingInvocationsGroup ])
+	blLink := ((self model allMethods
+		select: [ :e | 
+			e mooseName
+				= 'fr::bl::client::core::incubator::ConstantsPhase::Util.get()' ])
+		at: 1) incomingInvocations
 		collect: [ :e | 
-			((self phases collect: #codePhase) includes: (e signature replaceAllRegex: '\(\)' with: ''))
-				ifTrue: [ Association  new
-						key: e sender parentType container
-						value: (self getPhaseClassFrom: (self getPhaseNamed: (e signature replaceAllRegex: '\(\)' with: ''))) ] ]
+			((self phases collect: #codePhase)
+				includes: (e previous signature replaceAllRegex: '\(\)' with: ''))
+				ifTrue:
+					[ self collectAssociationFrom: e ] ]
 		thenSelect: #isNotNil.
-	^ blLink
+	^ blLink flatten
