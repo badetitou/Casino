@@ -2,9 +2,11 @@ accessing
 linkPhaseView
 	| view |
 	view := RTMondrian new.
-	view shape circle if: [ :each | each isAnnotatedWith: 'Deprecated' ] color: Color red.
+	view shape circle.
 	view nodes: (self modelPhases) asSet.
-	view edges useAssociations: self phasesLinkTrue.
+	(view shape line arrowedLine headOffset: 1.0) shape head baseSize: 5.0; size: 8.
+	
+	view edges useAssociations: self phasesLink.
 	view layout force.
 	view view pushBackEdges.
 	^ view

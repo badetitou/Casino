@@ -11,8 +11,14 @@ mooseModel := MooseModel importFromMSEStream: mseFile.
 
 blApp := BLApplication new model: mooseModel; applicationXml: xml.
 
+blApp model.
+
+blApp model allModelClasses .
+
+blApp phases.
+
 blApp modelPhases.
 
 blApp phasesLink.
 
-blApp model
+blApp linkPhaseView
