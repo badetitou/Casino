@@ -11,7 +11,7 @@ linkView
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
-	view edges useAssociations: (self phasesLink, self linkPageMetierAndPhase ).
+	view edges useAssociations: (self phasesLink, self linkPageMetierAndPhaseConstructor  ).
 	view layout force.
 	view view pushBackEdges.
 	^ view
