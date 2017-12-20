@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "FAMIXNamedEntity",
+	"category" : "BLWebModel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"codePhase",
+		"codeValue",
+		"realClassName"
+	],
+	"name" : "BLMoosePhase",
+	"type" : "normal"
+}
