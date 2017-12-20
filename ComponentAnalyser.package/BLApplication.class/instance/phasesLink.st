@@ -4,8 +4,8 @@ phasesLink
 	blLink := ((self model allMethods
 		select: [ :e | 
 			e mooseName
-				= 'fr::bl::client::core::incubator::ConstantsPhase::Util.get()' ]) flatCollect: #incomingInvocations)
-		collect: [ :e | 
+				= 'fr::bl::client::core::incubator::ConstantsPhase::Util.get()' ]) collect: #incomingInvocations)
+		flatCollect: [ :e | 
 			((self phases collect: #codePhase)
 				includes: (e previous signature replaceAllRegex: '\(\)' with: ''))
 				ifTrue:

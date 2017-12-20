@@ -16,6 +16,8 @@ mooseModel := MooseModel importFromMSEStream: mseFile .
 
 mooseModel rootFolder: '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt'.
 
+MooseModel root add: mooseModel.
+
 blApp := BLApplication new model: mooseModel; applicationXml: xml.
 
 blApp model.
@@ -37,3 +39,5 @@ blApp linkPageMetierAndPhase.
 blApp linkPageMetierAndPhaseConstructor.
 
 blApp linkView.
+
+blApp modelWidget.

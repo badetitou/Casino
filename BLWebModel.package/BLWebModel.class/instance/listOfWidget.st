@@ -1,0 +1,3 @@
+initialization
+listOfWidget
+	^ widgetGroup
