@@ -6,11 +6,12 @@ xml := aw getXmlFile: fileName.
 MooseModel resetRoot.
 MooseModel resetMeta.
 
+"
 mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/output.mse' .
+"
 
-"
 mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/General.mse' .
-"
+
 mooseModel := MooseModel importFromMSEStream: mseFile .
 
 mooseModel rootFolder: '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt'.
