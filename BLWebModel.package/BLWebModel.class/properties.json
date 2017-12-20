@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 12/20/2017 16:32",
+	"super" : "Object",
+	"category" : "BLWebModel",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pageMetierGroup",
+		"phaseGroup",
+		"widgetGroup",
+		"actionGroup",
+		"model"
+	],
+	"name" : "BLWebModel",
+	"type" : "normal"
+}
