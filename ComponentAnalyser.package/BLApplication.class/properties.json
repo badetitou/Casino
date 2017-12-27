@@ -8,7 +8,8 @@
 	"instvars" : [
 		"applicationXml",
 		"model",
-		"cacheModelPhases"
+		"cacheModelPhases",
+		"modelWidgetInstanceCache"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"
