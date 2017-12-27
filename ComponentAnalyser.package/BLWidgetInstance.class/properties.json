@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"link"
+		"link",
+		"widgetClass"
 	],
 	"name" : "BLWidgetInstance",
 	"type" : "normal"
