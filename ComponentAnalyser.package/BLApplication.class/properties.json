@@ -9,7 +9,9 @@
 		"applicationXml",
 		"model",
 		"cacheModelPhases",
-		"modelWidgetInstanceCache"
+		"modelWidgetInstanceCache",
+		"linkFromConstructorCache",
+		"modelWidgetCache"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"

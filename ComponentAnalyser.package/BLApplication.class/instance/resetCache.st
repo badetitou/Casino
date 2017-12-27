@@ -1,5 +1,5 @@
 actions
 resetCache
 	cacheModelPhases := nil.
-	modelWidgetInstanceCache := nil
-	
+	modelWidgetInstanceCache := nil.
+	linkFromConstructorCache := nil
