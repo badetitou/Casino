@@ -38,6 +38,14 @@ blApp linkPageMetierAndPhase.
 
 blApp linkPageMetierAndPhaseConstructor.
 
-blApp linkView.
+blApp linkViewPhasePage.
 
 blApp modelWidget.
+
+blApp linkFromConstructor.
+
+blApp modelWidgetInstance.
+
+blApp resetCache.
+
+blApp linkView.
