@@ -13,6 +13,7 @@ modelWidgetInstanceFromPhaseAndPageMetier
 					candidate isConstructor and: (self modelWidget includes: candidate parentType) ]. 
 				invocations collect: [ :invocation | | instance | instance := BLWidgetInstance new.
 					instance link: (Association new key: element value: instance).
-					instance widgetClass: ((invocation candidates at: 1) parentType)
+					instance widgetClass: ((invocation candidates at: 1) parentType).
+					instance constructor: invocation.
 					 ]
 			 ] ]
