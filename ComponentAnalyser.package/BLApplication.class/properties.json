@@ -11,7 +11,8 @@
 		"cacheModelPhases",
 		"modelWidgetInstanceCache",
 		"linkFromConstructorCache",
-		"modelWidgetCache"
+		"modelWidgetCache",
+		"modelWidgetInstanceFromPhaseAndPageMetierCache"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"
