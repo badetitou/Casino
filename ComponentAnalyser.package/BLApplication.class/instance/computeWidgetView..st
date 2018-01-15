@@ -9,7 +9,7 @@ computeWidgetView: widget
 		flatCollect: [ :class | class attributes collect: [ :attr | Association new key: class value: attr declaredType ] ])
 		asOrderedCollection.
 	links := classes
-		flatCollect: [ :class | class superInheritances collect: [ :herit | Association new key: class value: herit value to ] ].
+		flatCollect: [ :class | class superInheritances collect: [ :herit | Association new key: class value: (self getClassFromHeritance: herit)] ].
 	view shape circle
 		color: [ :cl | 
 			(self modelWidget includes: cl)
