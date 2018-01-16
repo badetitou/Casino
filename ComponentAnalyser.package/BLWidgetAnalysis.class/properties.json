@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "ComponentAnalyser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"model",
+		"modelWidgetCache"
+	],
+	"name" : "BLWidgetAnalysis",
+	"type" : "normal"
+}
