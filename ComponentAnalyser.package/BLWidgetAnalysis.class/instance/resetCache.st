@@ -1,0 +1,3 @@
+accessing
+resetCache
+	widgetDefinitionCache := nil

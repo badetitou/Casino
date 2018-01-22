@@ -1,7 +1,7 @@
 accessing
 computeMetrics
 	| data data1 nbUsage results |
-	data1 := self widgetDependencies.
+	data1 := self viewsWidget.
 	data := (data1 collect: [ :el | el view elements collect: #model ]) values flatten.
 	nbUsage := data asBag.
 	results := Dictionary new.
