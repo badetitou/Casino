@@ -2,7 +2,6 @@ accessing
 computeWidgetView: widget
 	| view classes links attributes |
 	view := RTMondrian new.
-	classes := OrderedCollection new.
 	classes := {widget superclassHierarchyGroup.
 	{widget}} flatten.
 	attributes := (classes
