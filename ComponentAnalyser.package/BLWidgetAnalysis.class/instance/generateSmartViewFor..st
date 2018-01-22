@@ -1,7 +1,6 @@
 accessing
 generateSmartViewFor: aClass
 	| view links attributes |
-	self haltIf: ['AbstractGeneratedPhase' match: aClass name].
 	links := (self widgetDefinition collect: [ :definition | definition at: #links ]) at: aClass.
 	attributes := (self widgetDefinition collect: [ :definition | definition at: #attributes ]) values flatten
 		asSet.
@@ -11,7 +10,7 @@ generateSmartViewFor: aClass
 		color: [ :cl | 
 			(self isClassFromGWT: cl)
 				ifTrue: [ Color blue ]
-				ifFalse: [ Color red ] ];
+				ifFalse: [ Color green ] ];
 		width: [ :cl | (cl queryAll: #out) size ];
 		height: [ :cl | cl numberOfLinesOfCode * -1 ].
 	view

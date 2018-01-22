@@ -2,14 +2,15 @@ accessing
 viewAll
 	| view links attributes |
 	links := (self widgetDefinition collect: [ :definition | definition at: #links ]) values flatten asSet.
-	attributes := (self widgetDefinition collect: [ :definition | definition at: #attributes ]) values flatten asSet.
+	attributes := (self widgetDefinition collect: [ :definition | definition at: #attributes ]) values flatten
+		asSet.
 	links := links select: [ :a | self isAssociationInGWTAndWidget: a ].
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
 			(self isClassFromGWT: cl)
 				ifTrue: [ Color blue ]
-				ifFalse: [ Color red ] ];
+				ifFalse: [ Color green ] ];
 		width: [ :cl | (cl queryAll: #out) size ];
 		height: [ :cl | cl numberOfLinesOfCode * -1 ].
 	view
