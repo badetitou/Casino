@@ -4,4 +4,5 @@ resetCache
 	modelWidgetInstanceCache := nil.
 	linkFromConstructorCache := nil.
 	modelWidgetInstanceFromPhaseAndPageMetierCache := nil.
-	linkWidgetFromPPPhaseCache := nil
+	linkWidgetFromPPPhaseCache := nil.
+	modelWidgetCache := nil.
