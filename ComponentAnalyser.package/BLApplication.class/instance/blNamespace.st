@@ -1,0 +1,3 @@
+accessing
+blNamespace
+	^ 'fr::bl::*'
