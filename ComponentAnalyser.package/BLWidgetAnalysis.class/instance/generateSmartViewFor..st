@@ -10,20 +10,18 @@ generateSmartViewFor: aClass
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
-			(references includes: cl)
-				ifTrue: [ Color orange ]
-				ifFalse: [ (self isClassFromGWT: cl)
+			 (self isClassFromGWT: cl)
 						ifTrue: [ Color blue ]
-						ifFalse: [ Color green ] ] ].
+						ifFalse: [ Color green ] ];
+					width: references size.
 	view
 		nodes:
 			{(links collect: #key).
-			(links collect: #value).
-			references} flatten asSet.
+			(links collect: #value)} flatten asSet.
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
-	view edges useAssociations: {links. references asOrderedCollection flatCollect: [:a | { a -> aClass}] } flatten.
+	view edges useAssociations: {links} flatten.
 	view treeLayout
 		verticalGap: 10;
 		horizontalGap: 10.

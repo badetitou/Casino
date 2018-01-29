@@ -7,4 +7,4 @@ widgetDefinition
 		#attributes -> (tmpClasses
 		flatCollect: [ :class | class attributes collect: [ :attr | Association new key: class value: attr declaredType ] ]).
 		#links -> (tmpClasses 
-		flatCollect: [ :class | class superInheritances collect: [ :herit | Association new key: class value: (self getClassFromHeritance: herit)] ])} asDictionary]) asDictionary  ]
+		flatCollect: [ :class | class superInheritances collect: [ :herit | Association new key: (self getClassFromHeritance: herit) value: class] ])} asDictionary]) asDictionary  ]

@@ -1,3 +1,4 @@
 accessing
 resetCache
-	widgetDefinitionCache := nil
+	widgetDefinitionCache := nil.
+	modelWidgetCache := nil.

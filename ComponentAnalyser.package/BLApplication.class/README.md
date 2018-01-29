@@ -10,7 +10,9 @@ MooseModel resetMeta.
 mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/output.mse' .
 "
 
-mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/General.mse' .
+"mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/General.mse' ."
+
+mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/GeneralXmlui.mse' .
 
 mooseModel := MooseModel importFromMSEStream: mseFile .
 
@@ -63,13 +65,31 @@ blApp linkViewPPWidget.
 
 blApp linkViewPPWidgetHighlightCallPhaseWidget.
 
+blApp linkXmlUi.
+blApp linkViewPPWXmlUI.
+
+(blApp modelPhases , blApp modelPageMetier , blApp modelWidgetInstanceFromPhaseAndPageMetier , (blApp linkXmlUi collect: #key)) asSet.
+
 blApp getAsyncCall.
 blApp asyncClass.
 
-
-
+blApp modelServices.
 
 "------------------ Adherence ----------------"
 
 blApp modelWidget.
-blApp widgetDependencies.
+blApp viewsWidget.
+blApp infoAnonymousWidget.
+
+blWid := BLWidgetAnalysis new model: mooseModel.
+blWid resetCache.
+blWid modelWidget.
+blWid computeMetrics.
+
+blWid viewDependancyHeritCore.
+blWid viewDependancyHeritCoreAndDepth: 1.
+
+blWid modelWidget.
+
+blWid widgetDefinition.
+blWid viewAll.
