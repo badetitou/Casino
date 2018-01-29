@@ -1,0 +1,3 @@
+*ComponentAnalyser
+isInterface
+	^ parameterizableClass isInterface

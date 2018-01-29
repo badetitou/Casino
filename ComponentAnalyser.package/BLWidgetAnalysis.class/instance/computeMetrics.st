@@ -9,5 +9,8 @@ computeMetrics
 		do: [ :aClass | 
 			results at: aClass put: (self computeMetricFor: aClass from: data1).
 			(results at: aClass) at: #nbUsage put: (nbUsage occurrencesOf: aClass).
-			(results at: aClass) at: #smartView put: (self generateSmartViewFor: aClass) ].
+			(results at: aClass) at: #smartView put: (self generateSmartViewFor: aClass).
+			(results at: aClass) at: #heritView put: (self generateClassHeritViewFor: aClass).
+			(results at: aClass) at: #implementsView put: (self generateClassImplementsViewFor: aClass).
+			(results at: aClass) at: #nbOverriding put: (aClass methods select: #isOverriding) size ].
 	^ results
