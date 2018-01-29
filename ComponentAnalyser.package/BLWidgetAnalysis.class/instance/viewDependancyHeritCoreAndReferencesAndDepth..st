@@ -3,8 +3,15 @@ viewDependancyHeritCoreAndReferencesAndDepth: theDepth
 	| view nodes references |
 	nodes := self modelWidget asSet.
 	1 to: theDepth do: [ :val | nodes addAll: (nodes collect: #superclass thenSelect: #isNotNil) ].
-	nodes := nodes select: [ :el | (self isClassFromGWT: el) or: (self isClassFromWidget: el) ].
-	references := (nodes collect: [ :a | a -> (((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass) collect: [ :b | Association new key: b value: a ] thenSelect: [:b | self modelWidget includes: b value ]) ]) asDictionary.
+	nodes := nodes
+		select: [ :el | (self isClassFromGWT: el) or: (self isClassFromWidget: el) ].
+	references := (nodes
+		collect: [ :a | 
+			a
+				->
+					(((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
+						collect: [ :b | Association new key: b value: a ]
+						thenSelect: [ :b | self modelWidget includes: b value ]) ]) asDictionary.
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
