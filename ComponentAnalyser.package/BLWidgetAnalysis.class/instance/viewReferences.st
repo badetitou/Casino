@@ -5,7 +5,7 @@ viewReferences
 	references := nodes
 		flatCollect: [ :a | 
 			((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
-				collect: [ :b | Association new key: a value: b ]
+				collect: [ :b | Association new key: b value: a ]
 				thenSelect: [ :b | self modelWidget includes: b value ] ].
 	view := RTMondrian new.
 	view shape rectangle
