@@ -14,7 +14,10 @@
 		"modelWidgetCache",
 		"modelWidgetInstanceFromPhaseAndPageMetierCache",
 		"linkWidgetFromPPPhaseCache",
-		"phasesCache"
+		"phasesCache",
+		"sourceApp",
+		"sourceCore",
+		"modelAsyncCache"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"
