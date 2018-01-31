@@ -16,7 +16,7 @@ mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/GeneralX
 
 mooseModel := MooseModel importFromMSEStream: mseFile .
 
-mooseModel rootFolder: '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt'.
+mooseModel rootFolder: '/home/badetitou/Document/PFE/'.
 
 MooseModel root add: mooseModel.
 
@@ -57,6 +57,8 @@ blApp linkView.
 
 blApp modelWidgetInstanceFromPhaseAndPageMetier.
 
+blApp modelWidgetInstanceFromPhaseAndPageMetier collect: [:a | blApp getPotentialAttributeFromConstructor: a constructor].
+
 blApp resetCache.
 blApp linkViewWidgetInstanceFromPhaseAndPageMetier.
 
@@ -75,6 +77,9 @@ blApp asyncClass.
 
 blApp modelServices.
 
+blApp modelAsync.
+blApp getAsyncConstructor.
+
 "------------------ Adherence ----------------"
 
 blApp modelWidget.
@@ -88,6 +93,8 @@ blWid computeMetrics.
 
 blWid viewDependancyHeritCore.
 blWid viewDependancyHeritCoreAndDepth: 1.
+blWid viewDependancyHeritCoreAndReferencesAndDepth: 5.
+blWid viewReferences.
 
 blWid modelWidget.
 

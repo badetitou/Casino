@@ -1,5 +1,6 @@
 accessing
 modelWidgetInstance
+	"Don't use please"
 	^ modelWidgetInstanceCache
 		ifNil: [ modelWidgetInstanceCache := self getWidgetConstructor
 				flatCollect: [ :method | 
