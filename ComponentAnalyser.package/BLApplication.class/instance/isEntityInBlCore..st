@@ -1,3 +1,3 @@
 accessing
 isEntityInBlCore: anEntity
-	self flag: #todo
+	^ self sourceCore match: ((anEntity atScope: FAMIXClass) at: 1) sourceAnchor fileName
