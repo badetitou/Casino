@@ -29,9 +29,10 @@ viewReferencesAppToGWT
 	lb
 		view: view view;
 		right.
-	lb addText: 'Legende'.
+	lb addText: 'From BlApp to GWT'.
 	lb addColor: Color blue text: 'GWT'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
 	lb addLineColor: Color gray text: 'refer to'.
+	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ''.
 	lb build.
 	^ view
