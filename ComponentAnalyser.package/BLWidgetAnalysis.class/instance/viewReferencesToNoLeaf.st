@@ -31,9 +31,10 @@ viewReferencesToNoLeaf
 	lb
 		view: view view;
 		right.
-	lb addText: 'Legende'.
+	lb addText: 'BlAPP -> WidgetLeaf'.
 	lb addColor: Color green text: 'Widget'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
+	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ''.
 	lb addLineColor: Color gray text: 'refer to'.
 	lb build.
 	^ view
