@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MooseGroup",
+	"category" : "ComponentAnalyser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLWidgetGroup",
+	"type" : "normal"
+}

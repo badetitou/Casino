@@ -11,7 +11,7 @@ groupWithDepth: aDepth
 				at: topElement
 				ifPresent: [ :a | a add: anElement model ]
 				ifAbsentPut: [ | od |
-					od := Set new.
+					od := BLWidgetGroup new.
 					od add: anElement model.
 					od ] ].
 	^ result

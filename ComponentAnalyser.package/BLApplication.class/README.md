@@ -20,7 +20,10 @@ mooseModel rootFolder: '/home/badetitou/Document/PFE/'.
 
 MooseModel root add: mooseModel.
 
-blApp := BLApplication new model: mooseModel; applicationXml: xml.
+blApp := BLApplication new model: mooseModel; applicationXml: xml;
+sourceApp: './Source/BLCoreIncubatorGwt/*';
+sourceCore: './Source/BLCore-6.1.4/*'.
+
 
 blApp model.
 
@@ -86,7 +89,7 @@ blApp modelWidget.
 blApp viewsWidget.
 blApp infoAnonymousWidget.
 
-blWid := BLWidgetAnalysis new model: mooseModel.
+blWid := BLWidgetAnalysis new model: mooseModel; appTools: blApp.
 blWid resetCache.
 blWid modelWidget.
 blWid computeMetrics.
@@ -95,8 +98,27 @@ blWid viewDependancyHeritCore.
 blWid viewDependancyHeritCoreAndDepth: 1.
 blWid viewDependancyHeritCoreAndReferencesAndDepth: 5.
 blWid viewReferences.
+blWid viewGroupReferencesForDepth: 0.
+
 
 blWid modelWidget.
 
 blWid widgetDefinition.
 blWid viewAll.
+
+
+"------------- Adherence App -> Core ---------"
+
+blWid viewReferencesToLeaf.
+blWid viewReferencesToNoLeaf.
+blWid viewReferencesToWidgetInterface.
+
+"### Compute best to start migration App ###"
+
+blWid computeBestMigrationOrder.
+
+blWid groupWithDepth: 0.
+
+"------------- Adherence App -> GWT ---------"
+
+blWid viewReferencesAppToGWT
