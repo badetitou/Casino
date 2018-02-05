@@ -19,7 +19,8 @@
 		"sourceCore",
 		"modelAsyncCache",
 		"cacheModelService",
-		"modelContentWidgetCache"
+		"modelContentWidgetCache",
+		"modelContentWidgetInstanceCache"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"

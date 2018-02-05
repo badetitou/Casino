@@ -9,4 +9,5 @@ resetCache
 	modelWidgetCache := nil.
 	modelAsyncCache := nil.
 	cacheModelService := nil.
-	modelContentWidgetCache := nil
+	modelContentWidgetCache := nil.
+	modelContentWidgetInstanceCache := nil
