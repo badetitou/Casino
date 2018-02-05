@@ -5,7 +5,7 @@ linkViewPPWXmlUIService
 	view shape circle
 		color: [ :cl | 
 			(self modelAsync includes: cl)
-				ifTrue: [ Color pink ]
+				ifTrue: [ Color tan muchDarker ]
 				ifFalse: [ (self modelServices includes: cl)
 						ifTrue: [ Color orange ]
 						ifFalse: [ (self modelWidgetInstanceFromPhaseAndPageMetier includes: cl)
@@ -17,20 +17,21 @@ linkViewPPWXmlUIService
 												ifTrue: [ Color yellow ]
 												ifFalse: [ Color blue ] ]
 										ifFalse: [ Color red ] ] ] ] ].
-	view
-		nodes:
-			(self modelPhases , self modelPageMetier , self modelWidgetInstanceFromPhaseAndPageMetier , (self linkXmlUi collect: #key) , self modelServices , self modelAsync)
-				asSet.
+	view nodes: (self modelPhases , self modelPageMetier , self modelWidgetInstanceFromPhaseAndPageMetier , (self linkXmlUi collect: #key) , self modelServices , self modelAsync) asSet.
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
 	view shape line
 		color: [ :e | 
-			(self linkWidgetFromPPPhase includes: e)
-				ifTrue: [ Color blue ]
-				ifFalse: [ Color gray ] ].
+			(self linkPhaseOrPageMetierToAsync includes: e)
+				ifTrue: [ Color orange ]
+				ifFalse: [ (self linkWidgetToService includes: e)
+						ifTrue: [ Color orange ]
+						ifFalse: [ (self linkWidgetFromPPPhase includes: e)
+								ifTrue: [ Color blue ]
+								ifFalse: [ Color gray ] ] ] ].
 	view edges
-		useAssociations: self linkWidgetFromPPPhase , self linkFromConstructor , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link) , self linkXmlUi.
+		useAssociations: self linkWidgetFromPPPhase , self linkFromConstructor , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link) , self linkXmlUi , self linkWidgetToService , self linkPhaseOrPageMetierToAsync.
 	view layout force strength: 0.4.
 	view view pushBackEdges.
 	lb := RTLegendBuilder new.
@@ -44,8 +45,9 @@ linkViewPPWXmlUIService
 	lb addColor: Color blue text: 'Normal Phase'.
 	lb addColor: Color red text: 'Page Metier'.
 	lb addColor: Color orange text: 'Service'.
-	lb addColor: Color pink text: 'AsynchroneClass'.
+	lb addColor: Color tan muchDarker text: 'AsynchroneClass'.
 	lb addLineColor: Color gray text: 'contain'.
 	lb addLineColor: Color blue text: 'link action'.
+	lb addLineColor: Color orange text: 'link from element to Service'.
 	lb build.
 	^ view
