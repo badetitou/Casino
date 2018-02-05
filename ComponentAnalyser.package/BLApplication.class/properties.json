@@ -17,7 +17,8 @@
 		"phasesCache",
 		"sourceApp",
 		"sourceCore",
-		"modelAsyncCache"
+		"modelAsyncCache",
+		"cacheModelService"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"
