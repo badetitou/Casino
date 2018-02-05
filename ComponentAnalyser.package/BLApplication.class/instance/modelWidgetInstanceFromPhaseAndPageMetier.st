@@ -4,14 +4,12 @@ modelWidgetInstanceFromPhaseAndPageMetier
 		ifNil: [ modelWidgetInstanceFromPhaseAndPageMetierCache := {(self modelPageMetier
 				, self modelPhases)} flatten
 				flatCollect: [ :element | 
-					| listClass invocations |
-					listClass := element superclassHierarchy.
-					listClass add: element.
-					invocations := (listClass flatCollect: #outgoingInvocations)
+					| invocations |
+					invocations := (element withSuperclassHierarchy flatCollect: #outgoingInvocations)
 						select: [ :e | 
 							| candidate |
 							candidate := e candidates at: 1.
-							candidate isConstructor and: (self modelWidget includes: candidate parentType) ].
+							candidate isConstructor and: [ self modelWidget includes: candidate parentType ] ].
 					invocations
 						collect: [ :invocation | 
 							| instance |

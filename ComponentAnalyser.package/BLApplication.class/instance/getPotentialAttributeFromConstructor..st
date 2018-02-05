@@ -1,8 +1,5 @@
 accessing
 getPotentialAttributeFromConstructor: aConstructor
-	| receiverVariable tmpWidget |
-	tmpWidget := aConstructor.
-	receiverVariable := nil.
-	[ tmpWidget isNotNil and: [ receiverVariable isNil ] ]
-		whileTrue: [ tmpWidget receiver ifNil: [ tmpWidget := tmpWidget previous ] ifNotNil: [ receiverVariable := tmpWidget receiver ] ].
-	^ receiverVariable
+	aConstructor receiver ifNotNil: [:receiver | receiver isImplicitVariable ifTrue: [ ^ aConstructor receiver ] ].
+	aConstructor from name = '<Initializer>' ifTrue: [ ^ ((aConstructor from belongsTo attributes select: [ :a | a sourceAnchor startPos < aConstructor sourceAnchor startPos ]) sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ]) last ].
+	^ (( aConstructor from accesses select: [ :access | access sourceAnchor endPos < aConstructor sourceAnchor startPos]) sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ]) ifNotEmpty: [ :a | a last variable ] ifEmpty: [ ((aConstructor from localVariables select: [ :access | access sourceAnchor startPos < aConstructor sourceAnchor startPos]) sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ]) ifNotEmpty: [ :a | a last ] ifEmpty: [ ( ( aConstructor from outgoingInvocations collect: #receiver thenSelect: [:b | b isNotNil and: [ b isImplicitVariable not] ] ) sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ] ) last  ] ] .
