@@ -8,4 +8,5 @@ resetCache
 	linkWidgetFromPPPhaseCache := nil.
 	modelWidgetCache := nil.
 	modelAsyncCache := nil.
-	cacheModelService := nil
+	cacheModelService := nil.
+	modelContentWidgetCache := nil
