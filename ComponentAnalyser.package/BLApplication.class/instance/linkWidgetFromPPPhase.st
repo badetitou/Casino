@@ -1,5 +1,6 @@
 accessing
 linkWidgetFromPPPhase
+	self flag: #stillWorkToDoWithLocalVariable.
 	^ linkWidgetFromPPPhaseCache
 		ifNil: [ linkWidgetFromPPPhaseCache := ((self model allMethods
 				select: [ :e | e mooseName = 'fr::bl::client::core::incubator::ConstantsPhase::Util.get()' ])
@@ -12,17 +13,12 @@ linkWidgetFromPPPhase
 					elConstructor
 						ifNil: [ self modelWidgetInstanceFromPhaseAndPageMetier
 								do: [ :aWidgetInvocation | 
-									| receiverVariable |
-									"el sender parentType belongsTo outgoingInvocations select: [ :invocation | invocation previous = el ]"
-									receiverVariable := self getPotentialAttributeFromConstructor: aWidgetInvocation constructor.
-									el sender belongsTo isAnonymousClass
-										ifTrue: [ el next
-												ifNotNil: [ :a | 
-													a receiver
-														ifNotNil: [ :b | 
-														
-															b = receiverVariable
-																ifTrue: [ link := Association new key: aWidgetInvocation value: (self searchCalledPhase: el) ] ] ] ] ] ]
+									el from belongsTo isAnonymousClass
+										ifTrue: [ | expectedVariable |
+											expectedVariable := self correspondingAccesses: el from belongsTo belongsTo accesses toInvocation: el.
+											expectedVariable
+												ifNotNil: [ (self getPotentialAttributeFromConstructor: aWidgetInvocation constructor) = expectedVariable variable
+														ifTrue: [ link := Association new key: aWidgetInvocation value: (self searchCalledPhase: el) ] ] ] ] ]
 						ifNotNil: [ self modelWidgetInstanceFromPhaseAndPageMetier
 								do: [ :aWidgetInvocation | 
 									aWidgetInvocation constructor = elConstructor
