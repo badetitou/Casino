@@ -1,4 +1,4 @@
 accessing
 isClassFromWidget: aClass
-	^ self widgetNamespace  match: aClass container mooseName
+	^ self widgetNamespace  match: aClass belongsTo mooseName
 	
