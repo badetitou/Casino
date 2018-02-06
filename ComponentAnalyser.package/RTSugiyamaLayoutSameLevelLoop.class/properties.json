@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "RTSugiyamaLayout",
+	"category" : "ComponentAnalyser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "RTSugiyamaLayoutSameLevelLoop",
+	"type" : "normal"
+}

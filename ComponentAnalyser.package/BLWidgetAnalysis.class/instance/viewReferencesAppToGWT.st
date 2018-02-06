@@ -22,9 +22,7 @@ viewReferencesAppToGWT
 	view edges useAssociations: references.
 	view layout sugiyama.
 	lb := RTLegendBuilder new.
-	lb
-		view: view view;
-		right.
+	lb view: view view.
 	lb addText: 'From BlApp to GWT'.
 	lb addColor: Color blue text: 'GWT'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
