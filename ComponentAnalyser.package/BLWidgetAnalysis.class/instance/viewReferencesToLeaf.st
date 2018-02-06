@@ -1,7 +1,7 @@
 accessing
 viewReferencesToLeaf
 	| view nodes references lb tmpNode |
-	nodes := self modelWidget asSet reject: [ :class | class subInheritances isNotEmpty and: [class isClass]].
+	nodes := self modelWidget asSet reject: [ :class | class subInheritances isNotEmpty and: [ class isClass ] ].
 	references := nodes
 		flatCollect: [ :a | 
 			((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
@@ -15,7 +15,7 @@ viewReferencesToLeaf
 			(self isClassFromWidget: cl)
 				ifTrue: [ Color green ]
 				ifFalse: [ Color orange ] ];
-			width: [:cl | (references select: [:b | b value = cl]) size].
+		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
 	"view nodes: nodes asSet."
 	tmpNode := references select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ].
 	view
