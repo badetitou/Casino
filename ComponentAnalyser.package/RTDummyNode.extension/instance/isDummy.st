@@ -1,0 +1,3 @@
+*ComponentAnalyser
+isDummy
+	^ true
