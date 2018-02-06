@@ -3,18 +3,14 @@ viewReferencesAppToGWT
 	| view nodes references lb |
 	nodes := self appTools modelPhases.
 	nodes addAll: self appTools modelPageMetier.
-	references := nodes
-		flatCollect: [ :a | 
-			((a queryOutgoing: FAMIXInvocation) atScope: FAMIXClass)
-				collect: [ :b | Association new key: a value: b ]
-				thenSelect: [ :b | self isClassFromGWT: b value ] ].
+	references := nodes flatCollect: [ :a | ((a queryOutgoing: FAMIXInvocation) atScope: FAMIXClass) collect: [ :b | Association new key: a value: b ] thenSelect: [ :b | self isClassFromGWT: b value ] ] .
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
 			(self isClassFromGWT: cl)
 				ifTrue: [ Color blue ]
 				ifFalse: [ Color orange ] ];
-		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
+		height: [ :cl | (self isClassFromGWT: cl) ifTrue: [(references select: [ :b | b value = cl ]) size ] ifFalse: [ (references select: [ :b | b key = cl and: [ self isClassFromGWT: b value ] ]) size] ].
 	"view nodes: nodes asSet."
 	view
 		nodes:
@@ -33,6 +29,6 @@ viewReferencesAppToGWT
 	lb addColor: Color blue text: 'GWT'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
 	lb addLineColor: Color gray text: 'refer to'.
-	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ''.
+	lb addRectanglePolymetricWidth: '' height: 'number of references (#in GWT, #out BlApp)' box: ''.
 	lb build.
-	^ view
+	^ view 
