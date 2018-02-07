@@ -1,10 +1,11 @@
 private
 buildLayers: g
-	| w layerNr u vertices layer vertex done |
+	| w layerNr u vertices layer vertex done cycles |
 	w := self maxFloat.
 	u := OrderedCollection new.
 	layers := IdentityDictionary new.
 	layerNrs := IdentityDictionary new.	"Assign all nodes to layers"
+	cycles := self computeCycleFor: g.
 	[ g isEmpty ]
 		whileFalse: [ vertices := g
 				select: [ :e | (self childrenFor: e) allSatisfy: [ :node | u includes: node ] ].
@@ -14,7 +15,8 @@ buildLayers: g
 			[ done ]
 				whileFalse: [ layer := layers at: layerNr ifAbsentPut: [ OrderedCollection new ].
 					(layer size >= w
-						or: [ (self childrenFor: vertex) anySatisfy: [ :n | (layerNrs at: n) >= layerNr ] ])
+						or:
+							[ (self childrenFor: vertex) anySatisfy: [ :n | (layerNrs at: n) >= layerNr ] ])
 						ifTrue: [ layerNr := layerNr + 1 ]
 						ifFalse: [ done := true ] ].
 			layer add: vertex.

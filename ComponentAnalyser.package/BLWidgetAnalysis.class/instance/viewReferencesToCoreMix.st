@@ -4,7 +4,10 @@ viewReferencesToCoreMix
 	namespaces := (self modelWidget collect: [ :el | self computeNamespaceOf: el ]) asSet.
 	nodes := self modelWidget copy.
 	references := nodes
-		flatCollect: [ :a | ((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass) collect: [ :b | Association new key: b value: a ] thenReject: [ :b | self modelWidget includes: b key ] ].
+		flatCollect: [ :a | 
+			((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
+				collect: [ :b | Association new key: b value: a ]
+				thenReject: [ :b | self modelWidget includes: b key ] ].
 	nodes addAll: self appTools modelPhases.
 	nodes addAll: self appTools modelPageMetier.
 	view := RTMondrian new.
@@ -35,9 +38,8 @@ viewReferencesToCoreMix
 					view treeLayout ] ].
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
-		color: Color white;
 		size: 8.
-	view edges useAssociations: references.
+	view edges useAssociations: tmpNode.
 	view layout sugiyama.
 	lb := RTLegendBuilder new.
 	lb view: view view.
