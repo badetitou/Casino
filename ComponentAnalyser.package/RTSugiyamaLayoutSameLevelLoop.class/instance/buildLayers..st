@@ -6,6 +6,7 @@ buildLayers: g
 	layers := IdentityDictionary new.
 	layerNrs := IdentityDictionary new.	"Assign all nodes to layers"
 	cycles := self computeCycleFor: g.
+	self halt.
 	[ g isEmpty ]
 		whileFalse: [ vertices := g select: [ :e | (self childrenFor: e) allSatisfy: [ :node | u includes: node ] ].
 			vertex := vertices detectMax: [ :e | labels at: e ].
@@ -14,8 +15,8 @@ buildLayers: g
 			[ done ]
 				whileFalse: [ layer := layers at: layerNr ifAbsentPut: [ OrderedCollection new ].
 					(layer size >= w
-						or: [ (self childrenFor: vertex)
-								anySatisfy: [ :n | (layerNrs at: n) >= layerNr and: [ (self is: (layerNrs at: n) inSameCycleGroupOf: vertex fromCycles: cycles) not ] ] ])
+						or: [ ((self childrenFor: vertex) anySatisfy: [ :n | (layerNrs at: n) >= layerNr ])
+								and: [ (layerNrs keysAtValue: layerNr) anySatisfy: [ :elAtLayerN | (self is: elAtLayerN inSameCycleGroupOf: vertex fromCycles: cycles) not ] ] ])
 						ifTrue: [ layerNr := layerNr + 1 ]
 						ifFalse: [ done := true ] ].
 			layer add: vertex.
