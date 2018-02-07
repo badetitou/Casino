@@ -29,8 +29,7 @@ viewReferencesToNoLeaf
 	view layout sugiyama.
 	lb := RTLegendBuilder new.
 	lb
-		view: view view;
-		right.
+		view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
 	lb addColor: Color green text: 'Widget'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
