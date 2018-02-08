@@ -43,8 +43,7 @@ linkViewPPContentWXmlUIService
 	view view pushBackEdges.
 	lb := RTLegendBuilder new.
 	lb
-		view: view view;
-		right.
+		view: view view.
 	lb addText: 'Legende'.
 	lb addColor: Color white text: 'Widget Instance with "click" possibility'.
 	lb addColor: Color green text: 'Widget Instance without "click" possibility'.
