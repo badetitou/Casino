@@ -1,5 +1,5 @@
 private
-computeLineColorFor: aFAMIXMethod withBrightnessFrom: methods
+computeLineColorFor: aFAMIXMethod withBrightnessFrom: methods 
 	^ (self computeColorFor: aFAMIXMethod model)
 		adjustBrightness:
 			-1

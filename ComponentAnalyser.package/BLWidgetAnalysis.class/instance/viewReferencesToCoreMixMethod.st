@@ -2,9 +2,7 @@ accessing
 viewReferencesToCoreMixMethod
 	| view nodes references lb tmpNode methods |
 	nodes := self modelWidget copy.
-	methods := (nodes asOrderedCollection
-		flatCollect:
-			[ :a | (a queryIncoming: FAMIXInvocation) collect: [ :invoc | invoc from -> (invoc to at: 1) ] ])
+	methods := (nodes asOrderedCollection flatCollect: [ :a | (a queryIncoming: FAMIXInvocation) collect: [ :invoc | invoc from -> (invoc to at: 1) ] ])
 		reject: [ :b | self modelWidget includes: b key belongsTo ].
 	references := methods collect: [ :assoc | assoc key belongsTo -> assoc value belongsTo ].
 	nodes addAll: self appTools modelPhases.
@@ -13,8 +11,7 @@ viewReferencesToCoreMixMethod
 	view shape rectangle
 		color: [ :cl | self computeColorFor: cl withBrightnessFrom: references ];
 		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
-	tmpNode := (references
-		select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ]) asSet.
+	tmpNode := (references select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ]) asSet.
 	view
 		nodes:
 			{(tmpNode collect: #key).
@@ -26,14 +23,16 @@ viewReferencesToCoreMixMethod
 		shape:
 			(RTParametrableGradientColoredLine new
 				colorsForBlock: [ :el | self computeLineColorsFor: el from: methods ];
-				precision: 20;
+				precision: 1;
+				withBorderAttachPoint;
+				width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ];
 				gradientColorShape).
 	view edges useAssociations: tmpNode.
-	"view shape line width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ]"
+	"view shape line width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ]."
 	"	view edgesFrom: #subInheritances."
-	view layout sugiyama.
-	"		verticalGap: 500;
-		horizontalGap: 200"
+	view layout sugiyama
+		verticalGap: 500;
+		horizontalGap: 200.
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
