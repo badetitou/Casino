@@ -1,0 +1,3 @@
+accessing
+gwtColor
+	^ Color lightBlue 

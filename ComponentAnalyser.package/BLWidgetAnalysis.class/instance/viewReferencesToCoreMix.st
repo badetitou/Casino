@@ -1,13 +1,10 @@
 accessing
 viewReferencesToCoreMix
-	| view nodes references lb tmpNode namespaces |
-	namespaces := (self modelWidget collect: [ :el | self computeNamespaceOf: el ]) asSet.
+	| view nodes references lb tmpNode |
 	nodes := self modelWidget copy.
-	references := nodes
-		flatCollect: [ :a | 
-			((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
-				collect: [ :b | Association new key: b value: a ]
-				thenReject: [ :b | self modelWidget includes: b key ] ].
+	references := nodes asOrderedCollection
+		flatCollect:
+			[ :a | ((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass) collect: [ :b | Association new key: b value: a ] thenReject: [ :b | self modelWidget includes: b key ] ].
 	nodes addAll: self appTools modelPhases.
 	nodes addAll: self appTools modelPageMetier.
 	view := RTMondrian new.
@@ -16,31 +13,23 @@ viewReferencesToCoreMix
 			cl isNamespace
 				ifTrue: [ Color gray ]
 				ifFalse: [ (self isClassFromWidget: cl)
-						ifTrue: [ Color green ]
-						ifFalse: [ Color orange ] ] ];
+						ifTrue: [ Color lightGreen ]
+						ifFalse: [ Color lightOrange ] ] ];
 		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
-	"view nodes: nodes asSet."
 	tmpNode := references select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ].
-	view nodes: (tmpNode collect: #key).
 	view
-		nodes: namespaces
-		forEach: [ :el | 
-			el isNamespace
-				ifTrue: [ view shape rectangle
-						color: [ :cl | 
-							cl subInheritances isEmpty
-								ifTrue: [ Color green ]
-								ifFalse: [ Color green muchDarker ] ];
-						width: [ :cl | cl numberOfAttributes ];
-						height: #numberOfMethods.
-					view nodes: el classes.
-					view edgesFrom: #superclass.
-					view treeLayout ] ].
+		nodes:
+			{(tmpNode collect: #key).
+			(tmpNode collect: #value)} flatten asSet.
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
+	view shape line width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ].
 	view edges useAssociations: tmpNode.
-	view layout sugiyama.
+	view edgesFrom: #subInheritances.
+	view layout sugiyama
+		verticalGap: 500;
+		horizontalGap: 200.
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
