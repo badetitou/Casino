@@ -2,9 +2,7 @@ glamour
 viewReferencesToCoreMixMethodForClassMatch: aRegex toGl: aGlamourMondrianView
 	| view nodes references lb tmpNode methods |
 	nodes := self modelWidget copy select: [ :el | aRegex match: el name ].
-	methods := (nodes asOrderedCollection
-		flatCollect:
-			[ :a | (a queryIncoming: FAMIXInvocation) collect: [ :invoc | invoc from -> (invoc to at: 1) ] ])
+	methods := (nodes asOrderedCollection flatCollect: [ :a | (a queryIncoming: FAMIXInvocation) collect: [ :invoc | invoc from -> (invoc to at: 1) ] ])
 		reject: [ :b | self modelWidget includes: b key belongsTo ].
 	references := methods collect: [ :assoc | assoc key belongsTo -> assoc value belongsTo ].
 	nodes addAll: self appTools modelPhases.
@@ -13,8 +11,7 @@ viewReferencesToCoreMixMethodForClassMatch: aRegex toGl: aGlamourMondrianView
 	view shape rectangle
 		color: [ :cl | self computeColorFor: cl withBrightnessFrom: references ];
 		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
-	tmpNode := (references
-		select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ]) asSet.
+	tmpNode := (references select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ]) asSet.
 	view
 		nodes:
 			{(tmpNode collect: #key).
@@ -28,8 +25,7 @@ viewReferencesToCoreMixMethodForClassMatch: aRegex toGl: aGlamourMondrianView
 				colorsForBlock: [ :el | self computeLineColorsFor: el from: methods ];
 				precision: 1;
 				withBorderAttachPoint;
-				width:
-						[ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ];
+				width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ];
 				gradientColorShape).
 	view edges useAssociations: tmpNode.
 	"view shape line width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ]."
@@ -40,9 +36,9 @@ viewReferencesToCoreMixMethodForClassMatch: aRegex toGl: aGlamourMondrianView
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
-	lb addColor: Color green text: 'Widget'.
-	lb addColor: Color orange text: 'Other Class (from BlApp)'.
+	lb addColorFadingFrom: self widgetColor to: Color black text: 'Widget from "simple" to "Max references" (compare to the others nodes)'.
+	lb addColorFadingFrom: self appColor to: Color black text: 'AppClass from "simple" to "Max references" (compare to the others nodes)'.
+	lb addLineColorFadingFrom: Color white to: Color black text: 'Number of method imply in an edge compare to the Number of method in all references of the node'.
 	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ' '.
-	lb addLineColor: Color gray text: 'refer to'.
 	lb build.
 	^ view

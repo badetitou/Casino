@@ -40,9 +40,8 @@ viewReferencesToCoreMixMethodForClassMatch: aRegex
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
-	lb addColor: Color green text: 'Widget'.
-	lb addColor: Color orange text: 'Other Class (from BlApp)'.
-	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ' '.
-	lb addLineColor: Color gray text: 'refer to'.
+	lb addColorFadingFrom: self widgetColor to: Color black text: 'Widget from "simple" to "Max references" (compare to the others nodes)'.
+	lb addColorFadingFrom: self appColor to: Color black text: 'AppClass from "simple" to "Max references" (compare to the others nodes)'.
+	lb addLineColorFadingFrom: Color white to: Color black text: 'Number of method imply in an edge compare to the Number of method in all references of the node'.	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ' '.
 	lb build.
 	^ view
