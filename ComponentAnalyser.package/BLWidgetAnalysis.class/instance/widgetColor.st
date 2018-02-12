@@ -1,0 +1,3 @@
+accessing
+widgetColor
+	^ Color lightGreen 

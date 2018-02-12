@@ -1,8 +1,9 @@
 accessing
 viewReferencesToLeaf
 	| view nodes references lb tmpNode |
-	nodes := self modelWidget asSet reject: [ :class | class subInheritances isNotEmpty and: [ class isClass ] ].
-	references := nodes
+	nodes := self modelWidget asSet
+		reject: [ :class | class subInheritances isNotEmpty and: [ class isClass ] ].
+	references := nodes asOrderedCollection
 		flatCollect: [ :a | 
 			((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
 				collect: [ :b | Association new key: b value: a ]
@@ -15,9 +16,9 @@ viewReferencesToLeaf
 			(self isClassFromWidget: cl)
 				ifTrue: [ Color green ]
 				ifFalse: [ Color orange ] ];
-		width: [ :cl | (references select: [ :b | b value = cl ]) size ].
-	"view nodes: nodes asSet."
-	tmpNode := references select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ].
+		width: [ :cl | (references select: [ :b | b value = cl ]) asSet size ].
+	tmpNode := references
+		select: [ :a | (nodes includes: a key) and: [ nodes includes: a value ] ].
 	view
 		nodes:
 			{(tmpNode collect: #key).
@@ -25,12 +26,11 @@ viewReferencesToLeaf
 	(view shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
+	view shape line width: [ :asso | (references select: [ :a | a key = asso key and: [ a value = asso value ] ]) size ].
 	view edges useAssociations: references.
 	view layout sugiyama.
 	lb := RTLegendBuilder new.
-	lb
-		view: view view;
-		right.
+	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
 	lb addColor: Color green text: 'Widget'.
 	lb addColor: Color orange text: 'Other Class (from BlApp)'.
