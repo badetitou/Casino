@@ -36,7 +36,7 @@ viewReferencesToCoreMixMethodForClassMatch: aRegex toGl: aGlamourMondrianView
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'BlAPP -> WidgetLeaf'.
-	lb addColorFadingFrom: self widgetColor to: Color black text: 'Widget from "simple" to "Max references" (compare to the others nodes)'.
+	lb addColorFadingFrom: self coreColor to: Color black text: 'Widget from "simple" to "Max references" (compare to the others nodes)'.
 	lb addColorFadingFrom: self appColor to: Color black text: 'AppClass from "simple" to "Max references" (compare to the others nodes)'.
 	lb addLineColorFadingFrom: Color white to: Color black text: 'Number of method imply in an edge compare to the Number of method in all references of the node'.
 	lb addRectanglePolymetricWidth: 'number of references' height: '' box: ' '.
