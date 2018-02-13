@@ -1,3 +1,3 @@
 accessing
-widgetColor
+coreColor
 	^ Color lightGreen 
