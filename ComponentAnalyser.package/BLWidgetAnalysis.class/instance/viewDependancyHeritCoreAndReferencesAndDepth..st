@@ -7,14 +7,14 @@ viewDependancyHeritCoreAndReferencesAndDepth: theDepth
 	references := (nodes
 		collect: [ :a | 
 			a
-				-> (((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass) collect: [ :b | Association new key: b value: a ] thenSelect: [ :b | self modelWidget includes: b value ]) ])
-		asDictionary.
+				->
+					(((a queryIncoming: FAMIXInvocation) atScope: FAMIXClass)
+						collect: [ :b | Association new key: b value: a ]
+						thenSelect: [ :b | self modelWidget includes: b value ]) ]) asDictionary.
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
-			(self isClassFromGWT: cl)
-				ifTrue: [ Color blue ]
-				ifFalse: [ Color green ] ];
+			self computeColorFor: cl	];
 		height: [ :cl | cl methods size ];
 		width: [ :cl | (references at: cl) size ].
 	view nodes: {nodes} flatten asSet.
@@ -26,8 +26,7 @@ viewDependancyHeritCoreAndReferencesAndDepth: theDepth
 		verticalGap: 10;
 		horizontalGap: 10.
 	lb := RTLegendBuilder new.
-	lb
-		view: view view.
+	lb view: view view.
 	lb addText: 'Legende'.
 	lb addColor: Color blue text: 'Class from GWT'.
 	lb addColor: Color green text: 'Other Class (from BlCore)'.
