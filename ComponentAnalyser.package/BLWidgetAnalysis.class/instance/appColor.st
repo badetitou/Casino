@@ -1,3 +1,3 @@
-accessing
+color
 appColor
-	^ Color lightOrange 
+	^ Color orange
