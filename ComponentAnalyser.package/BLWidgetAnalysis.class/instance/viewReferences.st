@@ -8,9 +8,7 @@ viewReferences
 	view := RTMondrian new.
 	view shape rectangle
 		color: [ :cl | 
-			(self isClassFromGWT: cl)
-				ifTrue: [ Color blue ]
-				ifFalse: [ Color green ] ];
+			self computeColorFor: cl ];
 		height: [ :cl | cl methods size ].
 	view nodes: {nodes} flatten asSet.
 	(view shape line arrowedLine headOffset: 1.0) shape head
@@ -23,8 +21,8 @@ viewReferences
 		view: view view;
 		right.
 	lb addText: 'Legende'.
-	lb addColor: Color blue text: 'Class from GWT'.
-	lb addColor: Color green text: 'Other Class (from BlCore)'.
+	lb addColor: self gwtColor  text: 'Class from GWT'.
+	lb addColor: self coreColor text: 'Other Class (from BlCore)'.
 	lb addRectanglePolymetricWidth: '' height: 'number of methods' box: ''.
 	lb addLineColor: Color gray text: 'refer to'.
 	lb build.

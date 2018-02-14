@@ -28,8 +28,8 @@ viewDependancyHeritCoreAndReferencesAndDepth: theDepth
 	lb := RTLegendBuilder new.
 	lb view: view view.
 	lb addText: 'Legende'.
-	lb addColor: Color blue text: 'Class from GWT'.
-	lb addColor: Color green text: 'Other Class (from BlCore)'.
+	lb addColor: self gwtColor text: 'Class from GWT'.
+	lb addColor: self coreColor  text: 'Other Class (from BlCore)'.
 	lb addRectanglePolymetricWidth: 'number of references' height: 'number of methods' box: 'aWidget'.
 	lb addLineColor: Color gray text: 'superclass'.
 	lb build.

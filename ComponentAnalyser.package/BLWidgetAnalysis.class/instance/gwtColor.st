@@ -1,3 +1,3 @@
-accessing
+color
 gwtColor
-	^ Color lightBlue 
+	^ Color blue

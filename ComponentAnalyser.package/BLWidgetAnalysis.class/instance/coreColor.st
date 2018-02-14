@@ -1,3 +1,3 @@
-accessing
+color
 coreColor
-	^ Color lightGreen 
+	^ Color green
