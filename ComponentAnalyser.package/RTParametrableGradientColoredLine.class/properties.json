@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "RTGradientColoredLine",
+	"category" : "ComponentAnalyser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"colorsForBlock"
+	],
+	"name" : "RTParametrableGradientColoredLine",
+	"type" : "normal"
+}
