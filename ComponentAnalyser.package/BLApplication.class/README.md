@@ -1,6 +1,6 @@
 aw := AnalyseCommand new.
 
-fileName := '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt/src/fr/bl/application.module.xml'.
+fileName := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 xml := aw getXmlFile: fileName.
 
 MooseModel resetRoot.
@@ -12,11 +12,11 @@ mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/output.m
 
 "mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/General.mse' ."
 
-mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/GeneralXmlui.mse' .
+mseFile := StandardFileStream fileNamed:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .
 
 mooseModel := MooseModel importFromMSEStream: mseFile .
 
-mooseModel rootFolder: '/home/badetitou/Document/PFE/'.
+mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE'.
 
 MooseModel root add: mooseModel.
 
@@ -73,15 +73,19 @@ blApp linkViewPPWidgetHighlightCallPhaseWidget.
 blApp linkXmlUi.
 blApp linkViewPPWXmlUI.
 
-(blApp modelPhases , blApp modelPageMetier , blApp modelWidgetInstanceFromPhaseAndPageMetier , (blApp linkXmlUi collect: #key)) asSet.
-
-blApp getAsyncCall.
-blApp asyncClass.
-
 blApp modelServices.
-
 blApp modelAsync.
-blApp getAsyncConstructor.
+
+blApp linkPhaseOrPageMetierToAsync.
+blApp linkWidgetToService.
+
+blApp linkViewPPWXmlUIService.
+
+blApp resetCache.
+blApp modelContentWidget.
+blApp modelContentWidgetInstance.
+
+blApp linkViewPPContentWXmlUIService.
 
 "------------------ Adherence ----------------"
 
