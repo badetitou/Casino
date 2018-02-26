@@ -1,8 +1,7 @@
 accessing
 modelWidgetInstanceFromPhaseAndPageMetier
 	^ modelWidgetInstanceFromPhaseAndPageMetierCache
-		ifNil: [ modelWidgetInstanceFromPhaseAndPageMetierCache := {(self modelPageMetier
-				, self modelPhases)} flatten
+		ifNil: [ modelWidgetInstanceFromPhaseAndPageMetierCache := {(self modelPageMetier , self modelPhases)} flatten
 				flatCollect: [ :element | 
 					| invocations |
 					invocations := (element withSuperclassHierarchy flatCollect: #outgoingInvocations)
