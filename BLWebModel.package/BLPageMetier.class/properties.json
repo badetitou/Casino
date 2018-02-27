@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLMooseWidget",
+	"name" : "BLPageMetier",
 	"type" : "normal"
 }

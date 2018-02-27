@@ -1,0 +1,4 @@
+initialization
+getPageMetierFromClass: aClass
+	^ nil
+	

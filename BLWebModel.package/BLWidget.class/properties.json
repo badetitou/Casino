@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLMooseAction",
+	"name" : "BLWidget",
 	"type" : "normal"
 }
