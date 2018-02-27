@@ -16,6 +16,6 @@
 		"actionAppel",
 		"service"
 	],
-	"name" : "BLModelMetamodelGenerator",
+	"name" : "BLMetamodelGenerator",
 	"type" : "normal"
 }
