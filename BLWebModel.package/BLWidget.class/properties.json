@@ -1,11 +1,17 @@
 {
 	"commentStamp" : "",
-	"super" : "FAMIXNamedEntity",
+	"super" : "FAMIXEntity",
 	"category" : "BLWebModel",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"realClass",
+		"constructor",
+		"containerMetier",
+		"containerPhase",
+		"notFound"
+	],
 	"name" : "BLWidget",
 	"type" : "normal"
 }

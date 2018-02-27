@@ -52,7 +52,8 @@ blApp modelWidgetInstanceFromPhaseAndPageMetier.
 
 blApp modelWidgetInstanceFromPhaseAndPageMetier collect: [:a | blApp getPotentialAttributeFromConstructor: a constructor].
 
-blApp resetCache. blApp linkViewWidgetInstanceFromPhaseAndPageMetier.
+blApp resetCache. 
+blApp linkViewWidgetInstanceFromPhaseAndPageMetier.
 
 blApp linkWidgetFromPPPhase. blApp linkViewPPWidget.
 
