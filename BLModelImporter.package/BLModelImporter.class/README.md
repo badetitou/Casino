@@ -1,9 +1,8 @@
 BLMetamodelGenerator new generate.
 
-aw := AnalyseCommand new.
 
-fileName := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
-xml := aw getXmlFile: fileName.
+filePath := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+xml := PPXmlParser parse: filePath asFileReference contents.
 
 mseFile := StandardFileStream fileNamed:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .
 
