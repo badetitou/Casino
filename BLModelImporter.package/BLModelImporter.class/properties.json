@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 2/27/2018 12:12",
+	"super" : "Object",
+	"category" : "BLModelImporter",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"srcModel",
+		"applicationXml",
+		"sourceApp",
+		"sourceCore",
+		"model"
+	],
+	"name" : "BLModelImporter",
+	"type" : "normal"
+}
