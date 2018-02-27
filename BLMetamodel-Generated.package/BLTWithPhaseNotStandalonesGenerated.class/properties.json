@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "FmxTraitEntity",
+	"category" : "BLMetamodel-Generated-Traits",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"#phaseNotStandalones => FMMany type: #BLTWithPageMetiers opposite: #pageMetiers"
+	],
+	"name" : "BLTWithPhaseNotStandalonesGenerated",
+	"type" : "normal"
+}

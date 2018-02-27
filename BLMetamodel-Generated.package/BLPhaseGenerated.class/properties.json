@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "MooseEntity",
+	"category" : "BLMetamodel-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"codePhase",
+		"codeValue",
+		"realClassName"
+	],
+	"name" : "BLPhaseGenerated",
+	"type" : "normal"
+}

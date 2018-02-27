@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLPhaseStandAloneGenerated",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLPhaseStandAlone",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLTWithPageMetiersGenerated",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLTWithPageMetiers",
+	"type" : "normal"
+}

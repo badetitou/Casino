@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MooseEntity",
+	"category" : "BLMetamodel-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLServiceGenerated",
+	"type" : "normal"
+}

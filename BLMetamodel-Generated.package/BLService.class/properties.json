@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLServiceGenerated",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLService",
+	"type" : "normal"
+}

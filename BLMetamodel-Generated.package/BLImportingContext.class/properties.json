@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "FamixImportingContext",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLImportingContext",
+	"type" : "normal"
+}
