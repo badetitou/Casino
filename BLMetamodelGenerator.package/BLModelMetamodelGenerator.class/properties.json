@@ -1,0 +1,21 @@
+{
+	"commentStamp" : "",
+	"super" : "FamixMetamodelGenerator",
+	"category" : "BLMetamodelGenerator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"phase",
+		"phaseStandalone",
+		"phaseNotStandalone",
+		"pageMetier",
+		"widget",
+		"action",
+		"actionAsynchrone",
+		"actionAppel",
+		"service"
+	],
+	"name" : "BLModelMetamodelGenerator",
+	"type" : "normal"
+}
