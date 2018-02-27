@@ -87,6 +87,10 @@ blApp modelContentWidgetInstance.
 
 blApp linkViewPPContentWXmlUIService.
 
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP.
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier.
+blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
+
 "------------------ Adherence ----------------"
 
 blApp modelWidget.
@@ -123,6 +127,19 @@ blWid computeBestMigrationOrder.
 
 blWid groupWithDepth: 0.
 
+
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP.
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier.
+blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
+
 "------------- Adherence App -> GWT ---------"
 
-blWid viewReferencesAppToGWT
+blWid viewReferencesAppToGWT.
+
+blWid usageOfGWTWidgetPP.
+blWid usageOfGWTWidget.
+
+
+"-------------- glamour -------------------"
+
+blWid openGlamour 
