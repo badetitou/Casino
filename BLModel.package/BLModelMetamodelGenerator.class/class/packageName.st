@@ -1,3 +1,0 @@
-accessing
-packageName
-	^ #'BLModel-Generated'
