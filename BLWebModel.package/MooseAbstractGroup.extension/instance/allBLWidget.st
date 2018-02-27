@@ -1,4 +1,4 @@
 *BLWebModel
 allBLWidget
 	<navigation: 'BL Widget'>
-	^ self allWithType: BLMooseWidget
+	^ self allWithType: BLWidget

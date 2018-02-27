@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLMoosePageMetier",
+	"name" : "BLAction",
 	"type" : "normal"
 }

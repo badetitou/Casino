@@ -1,3 +1,3 @@
 initialization
 createPageMetierInModel: aPageMetier
-	^ BLMoosePageMetier new name: aPageMetier mooseName
+	^ BLPageMetier new name: aPageMetier mooseName
