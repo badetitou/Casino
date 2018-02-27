@@ -9,7 +9,8 @@
 		"codePhase",
 		"codeValue",
 		"realClassName",
-		"metiers"
+		"metiers",
+		"widgets"
 	],
 	"name" : "BLPhase",
 	"type" : "normal"

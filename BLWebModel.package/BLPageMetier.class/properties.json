@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"container"
+		"container",
+		"widgets"
 	],
 	"name" : "BLPageMetier",
 	"type" : "normal"

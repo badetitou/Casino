@@ -1,5 +1,6 @@
 accessing
 linkWidgetFromPPPhase
+	"Action d'appel"
 	self flag: #stillWorkToDoWithLocalVariable.
 	^ linkWidgetFromPPPhaseCache
 		ifNil: [ linkWidgetFromPPPhaseCache := ((self model allMethods
