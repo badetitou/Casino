@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLActionGenerated",
+	"category" : "BLMetamodel-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLactionAppelGenerated",
+	"type" : "normal"
+}

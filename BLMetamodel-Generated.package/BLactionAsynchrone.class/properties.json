@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLactionAsynchroneGenerated",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLactionAsynchrone",
+	"type" : "normal"
+}

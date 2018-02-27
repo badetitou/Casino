@@ -1,0 +1,4 @@
+meta
+metamodel
+
+	^ BLMetamodelGenerator metamodel

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLWidgetGenerated",
+	"category" : "BLMetamodel-Generated",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLWidget",
+	"type" : "normal"
+}
