@@ -1,10 +1,10 @@
 "Generate BlApp"
 aw := AnalyseCommand new.
-fileName := '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt/src/fr/bl/application.module.xml'.
+fileName := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 xml := aw getXmlFile: fileName.
-mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/General.mse' .
+mseFile := StandardFileStream fileNamed:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .
 mooseModel := MooseModel importFromMSEStream: mseFile .
-mooseModel rootFolder: '/home/badetitou/Document/PFE/Source/BLCoreIncubatorGwt'.
+mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE'.
 blApp := BLApplication new model: mooseModel; applicationXml: xml.
 
 
