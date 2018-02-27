@@ -7,4 +7,4 @@ phaseCanStandalone: aPhase
 		add: 'AbstractSimplePhaseController';
 		add: 'AbstractGeneratedPhase';
 		add: 'AbstractGeneratedTabPhase'.
-	^ aPhase superclassHierarchy contains: [ :a | list includes: a name ]
+	^ aPhase superclassHierarchy anySatisfy: [ :a | list includes: a name ]
