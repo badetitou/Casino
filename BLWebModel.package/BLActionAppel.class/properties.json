@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "FAMIXAssociation",
+	"super" : "BLAction",
 	"category" : "BLWebModel",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLAction",
+	"name" : "BLActionAppel",
 	"type" : "normal"
 }
