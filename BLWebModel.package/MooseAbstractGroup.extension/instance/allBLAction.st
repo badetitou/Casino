@@ -1,4 +1,4 @@
 *BLWebModel
 allBLAction
-	<navigation: 'BL Action'>
-	^ self allWithType: BLAction
+	<navigation: 'BL Service'>
+	^ self allWithType: BLService
