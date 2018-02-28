@@ -5,4 +5,5 @@ createModelIn: aModel from: aBlApplication
 	self generatePageMetierfrom: aBlApplication.
 	self addLinkPhaseToPageMetierFrom: aBlApplication.
 	self generateWidgetfrom: aBlApplication.
+	self generateBLActionAppelFrom: aBlApplication.
 	self addListsToModel

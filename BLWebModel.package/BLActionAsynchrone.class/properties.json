@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLActionAsync",
+	"name" : "BLActionAsynchrone",
 	"type" : "normal"
 }

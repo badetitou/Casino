@@ -5,7 +5,11 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"widget",
+		"call",
+		"appelant"
+	],
 	"name" : "BLAction",
 	"type" : "normal"
 }
