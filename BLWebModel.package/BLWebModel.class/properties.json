@@ -10,7 +10,8 @@
 		"phaseGroup",
 		"widgetGroup",
 		"actionGroup",
-		"model"
+		"model",
+		"listOfActionAppel"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"

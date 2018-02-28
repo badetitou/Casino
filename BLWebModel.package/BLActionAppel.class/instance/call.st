@@ -1,5 +1,6 @@
 accessing
 call
 	<MSEProperty: #call type: #BLPhase opposite: #actions>
-	<source>
+	<MSEComment: 'All Famix accesses pointing to this structural entity'>
+	<target>
 	^ call
