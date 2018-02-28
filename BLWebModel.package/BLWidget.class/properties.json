@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "FAMIXSourcedEntity",
+	"super" : "FAMIXNamedEntity",
 	"category" : "BLWebModel",
 	"classinstvars" : [ ],
 	"pools" : [ ],
