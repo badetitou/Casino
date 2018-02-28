@@ -11,7 +11,7 @@
 		"widgetGroup",
 		"actionGroup",
 		"model",
-		"listOfActionAppel"
+		"listOfService"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"
