@@ -55,39 +55,56 @@ blApp modelWidgetInstanceFromPhaseAndPageMetier collect: [:a | blApp getPotentia
 blApp resetCache. 
 blApp linkViewWidgetInstanceFromPhaseAndPageMetier.
 
-blApp linkWidgetFromPPPhase. blApp linkViewPPWidget.
+blApp linkWidgetFromPPPhase. 
+blApp linkViewPPWidget.
 
 blApp linkViewPPWidgetHighlightCallPhaseWidget.
 
-blApp linkXmlUi. blApp linkViewPPWXmlUI.
+blApp linkXmlUi. 
+blApp linkViewPPWXmlUI.
 
-blApp modelServices. blApp modelAsync.
+blApp modelServices. 
+blApp modelAsync.
 
-blApp linkPhaseOrPageMetierToAsync. blApp linkWidgetToService.
+blApp linkPhaseOrPageMetierToAsync. 
+blApp linkWidgetToService.
 
 blApp linkViewPPWXmlUIService.
 
-blApp resetCache. blApp modelContentWidget. blApp modelContentWidgetInstance.
+blApp resetCache. blApp modelContentWidget. 
+blApp modelContentWidgetInstance.
 
 blApp linkViewPPContentWXmlUIService.
 
-blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP. blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier. blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP. 
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier. 
+blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
 
 "------------------ Adherence ----------------"
 
-blApp modelWidget. blApp viewsWidget. blApp infoAnonymousWidget.
+blApp modelWidget. blApp viewsWidget. 
+blApp infoAnonymousWidget.
 
-blWid := BLWidgetAnalysis new model: mooseModel; appTools: blApp. blWid resetCache. blWid modelWidget. blWid computeMetrics.
+blWid := BLWidgetAnalysis new model: mooseModel; appTools: blApp. blWid resetCache. 
+blWid modelWidget. 
+blWid computeMetrics.
 
-blWid viewDependancyHeritCore. blWid viewDependancyHeritCoreAndDepth: 1. blWid viewDependancyHeritCoreAndReferencesAndDepth: 5. blWid viewReferences. blWid viewGroupReferencesForDepth: 0.
+blWid viewDependancyHeritCore. 
+blWid viewDependancyHeritCoreAndDepth: 1. 
+blWid viewDependancyHeritCoreAndReferencesAndDepth: 5. 
+blWid viewReferences. 
+blWid viewGroupReferencesForDepth: 0.
 
 blWid modelWidget.
 
-blWid widgetDefinition. blWid viewAll.
+blWid widgetDefinition. 
+blWid viewAll.
 
 "------------- Adherence App -> Core ---------"
 
-blWid viewReferencesToLeaf. blWid viewReferencesToNoLeaf. blWid viewReferencesToWidgetInterface.
+blWid viewReferencesToLeaf. 
+blWid viewReferencesToNoLeaf. 
+blWid viewReferencesToWidgetInterface.
 
 "### Compute best to start migration App ###"
 
@@ -95,13 +112,16 @@ blWid computeBestMigrationOrder.
 
 blWid groupWithDepth: 0.
 
-blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP. blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier. blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetierPerPP. 
+blApp usageOfmodelWidgetInstanceFromPhaseAndPageMetier. 
+blApp notUsedModelWidgetInstanceFromPhaseAndPageMetier.
 
 "------------- Adherence App -> GWT ---------"
 
 blWid viewReferencesAppToGWT.
 
-blWid usageOfGWTWidgetPP. blWid usageOfGWTWidget.
+blWid usageOfGWTWidgetPP.
+blWid usageOfGWTWidget.
 
 "-------------- glamour -------------------"
 

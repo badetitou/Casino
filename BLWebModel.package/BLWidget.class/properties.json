@@ -10,7 +10,9 @@
 		"constructor",
 		"containerMetier",
 		"containerPhase",
-		"notFound"
+		"notFound",
+		"actionsAppel",
+		"actionsAsynchrone"
 	],
 	"name" : "BLWidget",
 	"type" : "normal"
