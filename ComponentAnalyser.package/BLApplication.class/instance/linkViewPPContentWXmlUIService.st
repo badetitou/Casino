@@ -37,7 +37,7 @@ linkViewPPContentWXmlUIService
 	view edges
 		useAssociations:
 			self linkWidgetFromPPPhase , self linkFromConstructor , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link)
-				, self linkXmlUi , self linkWidgetToService , self linkPhaseOrPageMetierToAsync
+				, self linkWidgetToService, self linkXmlUiPhaseAndPageMetier, self linkPhaseOrPageMetierToAsync
 				, (self modelContentWidgetInstance collect: #link).
 	view layout force strength: 0.4.
 	view view pushBackEdges.
