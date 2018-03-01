@@ -8,7 +8,7 @@ mseFile := StandardFileStream fileNamed:  '/home/badetitou/Document/PFE/GeneralX
 mooseModel := MooseModel importFromMSEStream: mseFile .
 "mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE'."
 mooseModel rootFolder: '/home/badetitou/Document/PFE/'.
-blApp := BLApplication new model: mooseModel; applicationXml: xml.
+blApp := BLApplication new model: mooseModel; applicationXml: xml ; sourceApp: './Source/BLCoreIncubatorGwt/'; sourceCore: './Source/BLCore-6.1.4/'.
 
 
 "Reset Work"
