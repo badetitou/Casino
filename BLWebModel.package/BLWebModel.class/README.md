@@ -10,6 +10,26 @@ mooseModel := MooseModel importFromMSEStream: mseFile .
 mooseModel rootFolder: '/home/badetitou/Document/PFE/'.
 blApp := BLApplication new model: mooseModel; applicationXml: xml ; sourceApp: './Source/BLCoreIncubatorGwt/'; sourceCore: './Source/BLCore-6.1.4/'.
 
+blApp resetCache.
+blApp linkViewPPContentWXmlUIService.
+
+blApp linkFromConstructor.
+
+blApp resetCache.
+blApp linkFromConstructorWithoutSuperCall.
+
+blApp linkXmlUi.
+
+blApp linkXmlUiPhaseAndPageMetier.
+blApp linkPhasePageMetierToPhasePageMetierFromConstructor.
+
+blApp linkXmlUiSuperClass.
+
+blApp modelPageMetier.
+
+blApp linkPageMetierToPageMetier.
+
+{blApp modelPhases , blApp modelPageMetier } flatten select: [ :a | '*XMLUi' match: a superclass mooseName ].
 
 "Reset Work"
 MooseModel resetRoot.
