@@ -20,7 +20,8 @@
 		"modelAsyncCache",
 		"cacheModelService",
 		"modelContentWidgetCache",
-		"modelContentWidgetInstanceCache"
+		"modelContentWidgetInstanceCache",
+		"linkFromConstructorWithoutSuperCall"
 	],
 	"name" : "BLApplication",
 	"type" : "normal"

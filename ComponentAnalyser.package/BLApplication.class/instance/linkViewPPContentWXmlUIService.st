@@ -36,9 +36,8 @@ linkViewPPContentWXmlUIService
 								ifFalse: [ Color gray ] ] ] ].
 	view edges
 		useAssociations:
-			self linkWidgetFromPPPhase , self linkFromConstructor , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link)
-				, self linkWidgetToService, self linkXmlUiPhaseAndPageMetier, self linkPhaseOrPageMetierToAsync
-				, (self modelContentWidgetInstance collect: #link).
+			self linkWidgetFromPPPhase , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link)
+				, self linkWidgetToService, self linkXmlUiPhaseAndPageMetier, self linkPhaseOrPageMetierToAsync,  self linkPhasePageMetierToPhasePageMetierFromConstructor , (self modelContentWidgetInstance collect: #link).
 	view layout force strength: 0.4.
 	view view pushBackEdges.
 	lb := RTLegendBuilder new.
