@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLAction",
+	"category" : "BL-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLActionAppel",
+	"type" : "normal"
+}

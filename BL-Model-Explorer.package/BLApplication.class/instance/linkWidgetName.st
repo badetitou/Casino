@@ -1,0 +1,3 @@
+accessing
+linkWidgetName
+	^ { 'BLLinkLabel'. 'BLLinkButton' }.

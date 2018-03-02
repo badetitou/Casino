@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "BL-Model-Explorer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"link",
+		"constructor"
+	],
+	"name" : "BLAsyncInstance",
+	"type" : "normal"
+}

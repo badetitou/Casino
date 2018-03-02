@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "FAMIXNamedEntity",
+	"category" : "BL-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLService",
+	"type" : "normal"
+}

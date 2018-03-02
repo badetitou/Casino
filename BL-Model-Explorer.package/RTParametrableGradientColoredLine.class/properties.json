@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "RTGradientColoredLine",
+	"category" : "BL-Model-Explorer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"colorsForBlock"
+	],
+	"name" : "RTParametrableGradientColoredLine",
+	"type" : "normal"
+}

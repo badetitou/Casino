@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "",
+	"super" : "FAMIXNamedEntity",
+	"category" : "BL-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"realClass",
+		"constructor",
+		"containerMetier",
+		"containerPhase",
+		"notFound",
+		"actionsAppel",
+		"actionsAsynchrone"
+	],
+	"name" : "BLWidget",
+	"type" : "normal"
+}

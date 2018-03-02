@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "",
+	"super" : "RTLegendItem",
+	"category" : "BL-Model-Explorer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"color",
+		"text",
+		"description",
+		"colors"
+	],
+	"name" : "RTFadingColorLineLegendItem",
+	"type" : "normal"
+}
