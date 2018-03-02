@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "FAMIXAssociation",
+	"category" : "BL-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"call",
+		"appelant"
+	],
+	"name" : "BLAction",
+	"type" : "normal"
+}

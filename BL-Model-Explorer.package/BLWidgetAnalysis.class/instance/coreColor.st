@@ -1,0 +1,3 @@
+color
+coreColor
+	^ Color green

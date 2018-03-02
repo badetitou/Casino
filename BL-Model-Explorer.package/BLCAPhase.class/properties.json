@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 11/26/2017 18:12",
+	"super" : "Object",
+	"category" : "BL-Model-Explorer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"codePhase",
+		"codeValue",
+		"realClassName"
+	],
+	"name" : "BLCAPhase",
+	"type" : "normal"
+}

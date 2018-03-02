@@ -1,0 +1,1 @@
+I represent a widget a widget instance in the model
