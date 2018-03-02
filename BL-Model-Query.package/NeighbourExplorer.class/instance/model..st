@@ -1,3 +1,3 @@
 accessing
 model: aBLModel
-	^ aBLModel
+	model :=  aBLModel
