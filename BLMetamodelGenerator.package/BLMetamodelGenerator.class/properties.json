@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "BenoitVerhaeghe 3/7/2018 10:48",
 	"super" : "FamixMetamodelGenerator",
 	"category" : "BLMetamodelGenerator",
 	"classinstvars" : [ ],
