@@ -28,6 +28,6 @@ openGlamour
 				andShow: [ :composite | 
 					composite text
 						title: 'Details';
-						display: [ :blEl | blEl asString ] ] ];
+						display: [ :blEl | blEl sourceAnchor ifNil: ['TODO '] ifNotNil: #sourceText ] ]  ];
 		title: 'Neighbour Explorer';
 		openOn: self model allBLPhase
