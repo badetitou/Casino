@@ -3,7 +3,7 @@ linkWidgetToService
 	^ self modelAsync
 		collect: [ :asyncClass | 
 			| to |
-			to := (asyncClass belongsTo outgoingInvocations
+			to := ((asyncClass isAbstract ifTrue: [ asyncClass belongsTo outgoingInvocations ] ifFalse: [asyncClass outgoingInvocations ])
 				flatCollect: [ :b | 
 					| candidates adding |
 					candidates := ((b candidates at: 1) atScope: FAMIXClass) asOrderedCollection.
