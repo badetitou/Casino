@@ -22,7 +22,7 @@ mooseModel rootFolder: 'D:\Developpement\mse\Copie-SourceAndDependencies'.
 
 MooseModel root add: mooseModel.
 
-blApp := BLApplication new model: mooseModel; applicationXml: xml; sourceApp: './BLGRHGwt/'; sourceCore: './BLCoreGwt/'.
+blApp := BLApplication new model: mooseModel; applicationXml: xml; sourceApp: '../Copie-SourceAndDependencies/BLGRHGwt/*'; sourceCore: '../Copie-SourceAndDependencies/BLCoreGwt/*'.
 
 blApp model.
 
@@ -46,13 +46,16 @@ blApp modelWidget.
 
 blApp linkFromConstructor.
 
-blApp getConstructor. blApp getWidgetConstructor.
+blApp getConstructor. 
+blApp getWidgetConstructor.
 
 blApp modelWidgetInstance.
 
-blApp resetCache. blApp linkViewWithExternalWidget.
+blApp resetCache. 
+blApp linkViewWithExternalWidget.
 
-blApp resetCache. blApp linkView.
+blApp resetCache. 
+blApp linkView.
 
 blApp modelWidgetInstanceFromPhaseAndPageMetier.
 
