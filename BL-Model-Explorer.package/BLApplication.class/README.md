@@ -1,6 +1,9 @@
+Smalltalk garbageCollectMost.
+
 aw := AnalyseCommand new.
 
-fileName := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'. xml := aw getXmlFile: fileName.
+fileName := 'D:\Developpement\mse\Copie-SourceAndDependencies\BLGRHGwt\src\fr\bl\GRH.module.xml'. 
+xml := aw getXmlFile: fileName.
 
 MooseModel resetRoot. MooseModel resetMeta.
 
@@ -8,15 +11,18 @@ MooseModel resetRoot. MooseModel resetMeta.
 
 "mseFile := StandardFileStream fileNamed: '/home/badetitou/Document/PFE/General.mse' ."
 
-mseFile := StandardFileStream fileNamed: 'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .
+"mseFile := StandardFileStream fileNamed: 'D:\Developpement\mse\Copie-SourceAndDependencies\Copie-SourceAndDependencies.mse' .
+"
+
+mseFile := StandardFileStream fileNamed: 'D:\Developpement\mse\verveinej\BLGRH.mse' .
 
 mooseModel := MooseModel importFromMSEStream: mseFile .
 
-mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE'.
+mooseModel rootFolder: 'D:\Developpement\mse\Copie-SourceAndDependencies'.
 
 MooseModel root add: mooseModel.
 
-blApp := BLApplication new model: mooseModel; applicationXml: xml; sourceApp: './Source/BLCoreIncubatorGwt/'; sourceCore: './Source/BLCore-6.1.4/'.
+blApp := BLApplication new model: mooseModel; applicationXml: xml; sourceApp: './BLGRHGwt/'; sourceCore: './BLCoreGwt/'.
 
 blApp model.
 
