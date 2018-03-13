@@ -29,15 +29,15 @@ linkViewPPContentWXmlUIService
 		color: [ :e | 
 			(self linkPhaseOrPageMetierToAsync includes: e)
 				ifTrue: [ Color orange ]
-				ifFalse: [ (self linkWidgetToService includes: e)
+				ifFalse: [ "(self linkWidgetToService includes: e)
 						ifTrue: [ Color orange ]
-						ifFalse: [ (self linkWidgetFromPPPhase includes: e)
+						ifFalse: [" (self linkWidgetFromPPPhase includes: e)
 								ifTrue: [ Color blue ]
-								ifFalse: [ Color gray ] ] ] ].
+								ifFalse: [ Color gray ] "]" ] ].
 	view edges
 		useAssociations:
 			self linkWidgetFromPPPhase , (self modelWidgetInstanceFromPhaseAndPageMetier collect: #link)
-				, self linkWidgetToService, self linkXmlUiPhaseAndPageMetier, self linkPhaseOrPageMetierToAsync,  self linkPhasePageMetierToPhasePageMetierFromConstructor , (self modelContentWidgetInstance collect: #link), self linkForAbstractTabPhase.
+				", self linkWidgetToService", self linkXmlUiPhaseAndPageMetier, self linkPhaseOrPageMetierToAsync,  self linkPhasePageMetierToPhasePageMetierFromConstructor , (self modelContentWidgetInstance collect: #link), self linkForAbstractTabPhase.
 	view layout force strength: 0.4.
 	view view pushBackEdges.
 	lb := RTLegendBuilder new.

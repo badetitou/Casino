@@ -1,6 +1,6 @@
 accessing
-searchCalledPhase: e
+searchCalledPhase: aSignature
 	^ self
 		getPhaseClassFrom:
-			(self
-				getPhaseNamed: (e previous signature replaceAllRegex: '\(\)' with: ''))
+			((self
+				getPhaseNamed: (aSignature replaceAllRegex: '\(\)' with: '')) ifNil: [^nil])
