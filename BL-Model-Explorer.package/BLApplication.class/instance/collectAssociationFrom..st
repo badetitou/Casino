@@ -1,4 +1,8 @@
 accessing
-collectAssociationFrom: e
-	^ (self searchCandidatesInvokingPhaseFromAssociation: e)
-		collect: [ :a | Association new key: a value: (self searchCalledPhase: e) ].
+collectAssociationFrom: invoc
+	| phase |
+	phase :=  self searchCalledPhaseFromInvocation: invoc .
+	"self haltIf: ['*PhaseDag*' match: phase value mooseName]."
+	^ (self searchCandidatesInvokingPhaseFromAssociation: invoc) collect: [ :from | Association new key: from value: phase ]
+	
+	
