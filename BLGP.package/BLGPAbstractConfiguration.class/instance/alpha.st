@@ -1,3 +1,3 @@
-example
+accessing
 alpha
 	^ 0

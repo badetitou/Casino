@@ -1,14 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "GPNode",
+	"super" : "BLRuleExecution",
 	"category" : "BLGP",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"conditions",
-		"executions"
-	],
-	"name" : "BLRule",
+	"instvars" : [ ],
+	"name" : "BLRuleExecutionCreateClass",
 	"type" : "normal"
 }

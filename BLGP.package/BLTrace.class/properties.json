@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"collection"
+		"collection",
+		"model"
 	],
 	"name" : "BLTrace",
 	"type" : "normal"
