@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "BLGroupRule",
+	"instvars" : [
+		"conditions"
+	],
+	"name" : "BLRule",
 	"type" : "normal"
 }

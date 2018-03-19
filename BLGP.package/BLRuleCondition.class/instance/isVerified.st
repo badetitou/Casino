@@ -1,3 +1,0 @@
-testing
-isVerified
-	self subclassResponsibility 

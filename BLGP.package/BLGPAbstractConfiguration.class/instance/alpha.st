@@ -1,3 +1,3 @@
 example
 alpha
-	^ 8
+	^ 0

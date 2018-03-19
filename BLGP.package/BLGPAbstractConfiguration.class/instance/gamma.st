@@ -1,3 +1,3 @@
 example
 gamma
-	^ 0
+	^ 8

@@ -1,3 +1,3 @@
-api
+private
 run
 	self notYetImplemented 
