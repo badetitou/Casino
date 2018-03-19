@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BLGroupRule",
+	"super" : "BLRule",
 	"category" : "BLGP",
 	"classinstvars" : [ ],
 	"pools" : [ ],

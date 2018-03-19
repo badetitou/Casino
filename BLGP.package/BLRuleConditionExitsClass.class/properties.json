@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "BLRule",
+	"super" : "BLRuleCondition",
 	"category" : "BLGP",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLAddMethodToClass",
+	"name" : "BLRuleConditionExitsClass",
 	"type" : "normal"
 }

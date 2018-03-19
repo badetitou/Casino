@@ -1,0 +1,3 @@
+testing
+isVerifiedUsing: aContext
+	self subclassResponsibility
