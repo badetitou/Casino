@@ -8,4 +8,4 @@ distanceFromSolutionOf: individual
 	1 to: self exampleDataSource size do: [ :idx | 
 		distance := distance
 			+ (self distanceBetween: (result at: idx) and: (self exampleDataTarget at: idx)) ].
-		^distance 
+	^ distance
