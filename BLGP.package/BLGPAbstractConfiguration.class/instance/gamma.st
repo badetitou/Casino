@@ -1,3 +1,3 @@
-example
+accessing
 gamma
 	^ 8

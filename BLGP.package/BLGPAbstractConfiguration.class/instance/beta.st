@@ -1,3 +1,3 @@
-example
+accessing
 beta
 	^ 2
