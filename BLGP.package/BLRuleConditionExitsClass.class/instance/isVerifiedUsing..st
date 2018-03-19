@@ -1,3 +1,3 @@
 testing
 isVerifiedUsing: aContext
-	^ aContext isKindOf: FAMIXClass
+	^ aContext select: [ :a | a isClass and: [ a name = attributName ] ]
