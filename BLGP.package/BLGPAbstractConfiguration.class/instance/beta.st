@@ -1,0 +1,3 @@
+example
+beta
+	^ 2

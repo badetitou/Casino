@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GPNode",
+	"category" : "BLGP",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"collection"
+	],
+	"name" : "BLTrace",
+	"type" : "normal"
+}
