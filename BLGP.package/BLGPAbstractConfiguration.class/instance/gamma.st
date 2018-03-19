@@ -1,0 +1,3 @@
+example
+gamma
+	^ 0

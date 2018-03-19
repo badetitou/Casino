@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLGroupRule",
+	"category" : "BLGP",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLCreateClass",
+	"type" : "normal"
+}

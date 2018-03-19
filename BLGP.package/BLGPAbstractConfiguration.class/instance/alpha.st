@@ -1,0 +1,3 @@
+example
+alpha
+	^ 8

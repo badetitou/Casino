@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GPNode",
+	"category" : "BLGP",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLGroupRule",
+	"type" : "normal"
+}

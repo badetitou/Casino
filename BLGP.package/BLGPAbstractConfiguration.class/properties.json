@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GPConfiguration",
+	"category" : "BLGP",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLGPAbstractConfiguration",
+	"type" : "normal"
+}
