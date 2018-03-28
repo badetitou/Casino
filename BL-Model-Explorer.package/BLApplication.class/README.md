@@ -109,6 +109,24 @@ blWid modelWidget.
 blWid widgetDefinition. 
 blWid viewAll.
 
+"------------------ Core -> Core info ----------------"
+
+blWid widgetExtendsHtml.
+blWid widgetIsExportable.
+
+blWid widgetExtendsHtml intersection: blWid widgetIsExportable "Group  intersected with Group (0 entities)".
+
+toFind := blWid modelWidget copy.
+toFind removeAll: blWid widgetIsExportable. 
+toFind removeAll: blWid widgetExtendsHtml.
+toFind.
+
+
+a := ((toFind at: 1) superclassHierarchy).
+(toFind collect: #superclassHierarchy) do: [:b | a := a intersection: b].
+a.
+
+
 "------------- Adherence App -> Core ---------"
 
 blWid viewReferencesToLeaf. 
@@ -131,6 +149,8 @@ blWid viewReferencesAppToGWT.
 
 blWid usageOfGWTWidgetPP.
 blWid usageOfGWTWidget.
+blWid usageOfGWTWidgetWithCode.
+blWid usageOfGWTWidgetWithCode collect: [:a | a asString].
 
 "-------------- glamour -------------------"
 
