@@ -127,6 +127,12 @@ a := ((toFind at: 1) superclassHierarchy).
 a.
 
 
+blWid usageOfAllWidgetPP.
+blWid usageOfAllWidget.
+blWid usageOfAllWidgetWithCode.
+blWid usageOfAllWidgetWithCode collect: [:a | a asString].
+
+
 "------------- Adherence App -> Core ---------"
 
 blWid viewReferencesToLeaf. 
@@ -151,6 +157,7 @@ blWid usageOfGWTWidgetPP.
 blWid usageOfGWTWidget.
 blWid usageOfGWTWidgetWithCode.
 blWid usageOfGWTWidgetWithCode collect: [:a | a asString].
+
 
 "-------------- glamour -------------------"
 
