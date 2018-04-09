@@ -1,0 +1,3 @@
+accessing
+export
+	self subclassResponsibility 

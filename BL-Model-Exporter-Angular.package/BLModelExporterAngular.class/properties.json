@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLModelExporter",
+	"category" : "BL-Model-Exporter-Angular",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLModelExporterAngular",
+	"type" : "normal"
+}

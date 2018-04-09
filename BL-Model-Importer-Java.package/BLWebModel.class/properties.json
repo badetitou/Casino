@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "BenoitVerhaeghe 3/1/2018 11:05",
 	"super" : "Object",
-	"category" : "BL-Model",
+	"category" : "BL-Model-Importer-Java",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
