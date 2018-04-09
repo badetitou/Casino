@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "BL-Model",
+	"category" : "BL-Model-Importer",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
