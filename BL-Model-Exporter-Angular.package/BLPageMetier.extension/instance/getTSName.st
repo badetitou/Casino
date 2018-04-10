@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 getTSName
-	^ self name , '.component.ts'
+	^ self getAcceptedName  , '.component.ts'

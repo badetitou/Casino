@@ -1,6 +1,6 @@
 *BL-Model-Exporter-Angular
 generateTSSourceCode
-	^ '@Component({
+	^'@Component({
     templateUrl: ''./index.component.html''
 })
 export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
@@ -20,4 +20,4 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
     public init(): void {
 
     }
-}'
+}'.

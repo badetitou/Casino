@@ -1,8 +1,8 @@
 *BL-Model-Exporter-Angular
 accept: anExporter
 	| pageMetierRoot |
-	pageMetierRoot := ((self container at: 1) componentsRootFromExporter: anExporter) / self name.
-	pageMetierRoot createDirectory.
+	pageMetierRoot := ((self container at: 1) componentsRootFromExporter: anExporter) / self getFolderName.
+	[pageMetierRoot createDirectory] on: DirectoryExists do: [].
 	"Write pageMetier.module.ts"
 	anExporter writeFile: pageMetierRoot / self getHTMLName withCode: self generateHTMLSourceCode.
 	"Write pageMetier.route.ts"

@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 getSelector
-	^ 'bl-', self mooseModel name, '-', (self container at: 1) name, '-', self name
+	^  (self container at: 1) getSelector , '-' , self getAcceptedName
