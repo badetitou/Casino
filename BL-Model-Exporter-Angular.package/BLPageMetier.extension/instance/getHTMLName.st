@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 getHTMLName
-	^ self name, '.component.html'
+	^ self getAcceptedName  , '.component.html'
