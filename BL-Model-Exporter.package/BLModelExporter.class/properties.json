@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"model"
+		"model",
+		"root"
 	],
 	"name" : "BLModelExporter",
 	"type" : "normal"
