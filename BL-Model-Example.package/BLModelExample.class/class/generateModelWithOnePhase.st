@@ -10,11 +10,4 @@ generateModelWithOnePhase
 				realClassName: #fr::bl::Phase1;
 				codeValue: #codeValue;
 				codePhase: #codePhase).
-	model
-		add:
-			(BLPhase new
-				name: #Phase2;
-				realClassName: #fr::bl::Phase2;
-				codeValue: #codeValue;
-				codePhase: #codePhase).
 	^ model
