@@ -1,3 +1,3 @@
-initialization
+accessing
 model: anObject
 	model := anObject

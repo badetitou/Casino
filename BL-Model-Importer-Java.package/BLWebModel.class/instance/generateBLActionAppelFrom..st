@@ -1,4 +1,4 @@
-initialization
+as yet unclassified
 generateBLActionAppelFrom: aBlApplication
 	aBlApplication linkWidgetFromPPPhase
 		do: [ :el | 

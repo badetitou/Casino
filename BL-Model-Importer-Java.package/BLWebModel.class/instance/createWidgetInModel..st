@@ -1,4 +1,4 @@
-initialization
+as yet unclassified
 createWidgetInModel: aWidget
 	| widget |
 	widget := BLWidget new

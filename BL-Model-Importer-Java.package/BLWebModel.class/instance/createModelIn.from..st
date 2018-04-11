@@ -1,14 +1,14 @@
-initialization
+as yet unclassified
 createModelIn: aModel from: aBlApplication
 	model := aModel.
-	self generatePhasefrom: aBlApplication.
-	self generatePageMetierfrom: aBlApplication.
-	self generateXMLUifrom: aBlApplication.
-	self addLinkPhaseToPageMetierFrom: aBlApplication.
-	self addLinkForAbstractTabPhaseFrom: aBlApplication.
-	self addLinkXmlUiFrom: aBlApplication.
-	self addLinkPageMetierToPageMetier: aBlApplication.
-	self generateWidgetfrom: aBlApplication.
+	self generatePhase.
+	self generatePageMetier.
+	self generateXMLUi.
+	self addLinkPhaseToPageMetier.
+	self addLinkForAbstractTabPhase.
+	self addLinkXmlUi.
+	self addLinkPageMetierToPageMetier.
+	self generateWidget.
 	self generateBLActionAppelFrom: aBlApplication.
-	self generateServicefrom: aBlApplication.
+	self generateService.
 	self addListsToModel

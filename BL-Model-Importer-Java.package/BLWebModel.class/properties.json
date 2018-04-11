@@ -11,7 +11,9 @@
 		"widgetGroup",
 		"actionGroup",
 		"model",
-		"listOfService"
+		"listOfService",
+		"xml",
+		"cacheModelPhases"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"
