@@ -1,4 +1,4 @@
 accessing
 basicRun
-	self modelKind new createModelIn: model from: blApplication.
+	self modelKind new createModelIn: model.
 	model install
