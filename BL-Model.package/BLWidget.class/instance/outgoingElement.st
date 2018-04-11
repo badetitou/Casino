@@ -1,3 +1,0 @@
-accessing
-outgoingElement
-	^ self actionsAppel

@@ -1,3 +1,3 @@
 *BL-Model-Query
 color
-	^ Color blue
+	^ self metiers ifEmpty: [Color yellow ] ifNotEmpty: [Color blue]
