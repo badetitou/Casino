@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "BenoitVerhaeghe 3/2/2018 17:27",
 	"super" : "Object",
-	"category" : "BL-Model-Query",
+	"category" : "BL-Model-Query-Neighbour",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
