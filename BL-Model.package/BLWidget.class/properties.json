@@ -11,8 +11,7 @@
 		"containerMetier",
 		"containerPhase",
 		"notFound",
-		"actionsAppel",
-		"actionsAsynchrone"
+		"actionsAppel"
 	],
 	"name" : "BLWidget",
 	"type" : "normal"
