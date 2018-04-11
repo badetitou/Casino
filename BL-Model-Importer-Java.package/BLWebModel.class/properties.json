@@ -13,7 +13,8 @@
 		"model",
 		"listOfService",
 		"xml",
-		"cacheModelPhases"
+		"cacheModelPhases",
+		"sourceModel"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"

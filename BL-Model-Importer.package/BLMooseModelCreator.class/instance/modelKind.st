@@ -1,4 +1,3 @@
 accessing
 modelKind
-	^ BLWebModel 
-	
+	self subclassResponsibility 
