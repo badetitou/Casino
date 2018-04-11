@@ -5,7 +5,8 @@ createWidgetInModel: aWidget
 		constructor: aWidget constructor;
 		realClass: aWidget widgetClass;
 		name: aWidget constructor asString;
-		notFound: false.
+		notFound: false;
+		source: aWidget.
 	(self getPageMetierFromClass: aWidget link key)
 		ifNotNil: [ :a | a widgets add: widget ]
 		ifNil: [ (self getPhaseFromClass: aWidget link key)
