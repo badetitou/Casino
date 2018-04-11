@@ -9,7 +9,7 @@ linkWidgetFromPPPhase
 			[ elConstructor isNotNil and: [ (elConstructor candidates at: 1) isConstructor not ] ]
 				whileTrue: [ elConstructor := elConstructor previous ].
 			elConstructor
-				ifNil: [ self widgetInstanceFromPhaseAndPageMetier
+				ifNil: [ self modelWidgetInstances
 						do: [ :aWidgetInvocation | 
 							el from belongsTo isAnonymousClass
 								ifTrue: [ | expectedVariable |

@@ -14,7 +14,8 @@
 		"listOfService",
 		"xml",
 		"cacheModelPhases",
-		"sourceModel"
+		"sourceModel",
+		"modelWidgetCache"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"

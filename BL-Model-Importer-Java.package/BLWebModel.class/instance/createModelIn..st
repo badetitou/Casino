@@ -7,7 +7,7 @@ createModelIn: aModel
 	self addLinkForAbstractTabPhase.
 	"self addLinkXmlUi."
 	self addLinkPageMetierToPageMetier.
-	"self generateWidget.
-	self generateBLActionAppel.
+	self generateWidget.
+	"self generateBLActionAppel.
 	self generateService."
 	self addListsToModel
