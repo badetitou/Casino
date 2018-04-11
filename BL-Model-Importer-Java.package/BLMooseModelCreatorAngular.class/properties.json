@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "BLMooseModelCreator",
+	"category" : "BL-Model-Importer-Java",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"xml",
+		"sourceModel"
+	],
+	"name" : "BLMooseModelCreatorAngular",
+	"type" : "normal"
+}

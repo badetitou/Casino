@@ -1,5 +1,5 @@
 as yet unclassified
-createModelIn: aModel from: aBlApplication
+createModelIn: aModel
 	model := aModel.
 	self generatePhase.
 	self generatePageMetier.
