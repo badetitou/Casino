@@ -1,6 +1,6 @@
 adding
-addLinkXmlUiFrom: aBlApplication
-	aBlApplication linkXmlUiPhaseAndPageMetier
+addLinkXmlUi
+	self linkXmlUiPhaseAndPageMetier
 		do: [ :assoc |
 			| a |
 			a := (self getPhaseFromClass: assoc value).

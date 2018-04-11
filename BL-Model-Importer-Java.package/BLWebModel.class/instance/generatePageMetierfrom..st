@@ -1,4 +1,4 @@
-initialization
+as yet unclassified
 generatePageMetierfrom: aBlApplication
 	aBlApplication modelPageMetier
 		do:
