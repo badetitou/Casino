@@ -9,5 +9,5 @@ createModelIn: aModel
 	self addLinkPageMetierToPageMetier.
 	self generateWidget.
 	self generateBLActionAppel.
-	"self generateService."
+	self generateService.
 	self addListsToModel
