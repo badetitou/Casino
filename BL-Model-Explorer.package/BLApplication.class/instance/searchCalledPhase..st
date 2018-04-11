@@ -1,5 +1,6 @@
 accessing
 searchCalledPhase: aSignature
+
 	^ self
 		getPhaseClassFrom:
 			((self

@@ -8,6 +8,6 @@ createModelIn: aModel
 	"self addLinkXmlUi."
 	self addLinkPageMetierToPageMetier.
 	self generateWidget.
-	"self generateBLActionAppel.
-	self generateService."
+	self generateBLActionAppel.
+	"self generateService."
 	self addListsToModel
