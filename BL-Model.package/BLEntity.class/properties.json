@@ -1,16 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BLEntity",
+	"super" : "FAMIXNamedEntity",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"container",
-		"widgets",
-		"containerMetier",
-		"metiers"
+		"source"
 	],
-	"name" : "BLPageMetier",
+	"name" : "BLEntity",
 	"type" : "normal"
 }
