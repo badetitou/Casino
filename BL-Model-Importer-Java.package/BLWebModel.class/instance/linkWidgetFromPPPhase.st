@@ -1,6 +1,5 @@
 private
 linkWidgetFromPPPhase
-	self notYetImplemented.
 	self flag: #stillWorkToDoWithLocalVariable.
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
