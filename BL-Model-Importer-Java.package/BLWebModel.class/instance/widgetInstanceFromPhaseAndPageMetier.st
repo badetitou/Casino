@@ -1,6 +1,6 @@
 as yet unclassified
 widgetInstanceFromPhaseAndPageMetier
-	^ {(self modelPhases  , self modelPageMetier)} flatten
+	^ {(self modelPhases , self modelPageMetier)} flatten
 		flatCollect: [ :element | 
 			| invocations |
 			invocations := (element withSuperclassHierarchy flatCollect: #outgoingInvocations)

@@ -1,5 +1,7 @@
 as yet unclassified
 generatePhase
-	xml nodesDo: [ :aXmlNode | 
+	xml
+		nodesDo: [ :aXmlNode | 
 			(aXmlNode isElement and: [ aXmlNode name localName = 'phase' ])
-				ifTrue: [ self listOfPhases add: (self createPhaseInModel: aXmlNode) ] ]
+				ifTrue: [ self listOfPhases add: (self createPhaseInModel: aXmlNode) ] ].
+	self listOfPhases: (self listOfPhases select: #isNotNil) 
