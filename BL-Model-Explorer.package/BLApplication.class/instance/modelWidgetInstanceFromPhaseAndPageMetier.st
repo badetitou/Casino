@@ -1,5 +1,6 @@
 accessing
 modelWidgetInstanceFromPhaseAndPageMetier
+	self halt. 
 	^ modelWidgetInstanceFromPhaseAndPageMetierCache
 		ifNil: [ modelWidgetInstanceFromPhaseAndPageMetierCache := {(self modelPageMetier , self modelPhases)} flatten
 				flatCollect: [ :element | 

@@ -1,6 +1,6 @@
 as yet unclassified
 generateBLActionAppel
-	self linkWidgetFromPPPhase
+	self linkFromWidgetActionAppel
 		do: [ :el | 
 			| action |
 			action := BLActionAppel new.
