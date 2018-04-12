@@ -1,16 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BLEntityWithUi",
+	"super" : "BLEntity",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"container",
-		"widgets",
-		"containerMetier",
-		"metiers"
+		"ui"
 	],
-	"name" : "BLPageMetier",
+	"name" : "BLEntityWithUi",
 	"type" : "normal"
 }

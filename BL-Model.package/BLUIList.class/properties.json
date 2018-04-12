@@ -1,16 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BLEntityWithUi",
+	"super" : "BLWidget",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"container",
-		"widgets",
-		"containerMetier",
-		"metiers"
+		"elements"
 	],
-	"name" : "BLPageMetier",
+	"name" : "BLUIList",
 	"type" : "normal"
 }
