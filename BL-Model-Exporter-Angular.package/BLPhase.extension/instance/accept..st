@@ -2,7 +2,7 @@
 accept: anExporter
 	| phaseRoot |
 	phaseRoot := self rootFromExporter: anExporter.
-	phaseRoot createDirectory.
+	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
 	anExporter writeFile: phaseRoot / self getModuleName withCode: self generateModuleSourceCode.
 	"Write phase.route.ts"

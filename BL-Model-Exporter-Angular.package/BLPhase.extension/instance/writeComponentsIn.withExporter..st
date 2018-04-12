@@ -2,9 +2,9 @@
 writeComponentsIn: phaseRoot withExporter: anExporter
 	| componentsRoot indexRoot |
 	componentsRoot := self componentsRootFromExporter: anExporter.
-	componentsRoot createDirectory.
+	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
-	indexRoot createDirectory.
+	indexRoot ensureCreateDirectory.
 	anExporter writeFile: indexRoot / self getTSName withCode: self generateTSSourceCode.
 	anExporter writeFile: indexRoot / self getHTMLName withCode: self generateHTMLSourceCode.
 	self metiers do: [ :metier | anExporter visit: metier ]
