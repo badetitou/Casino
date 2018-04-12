@@ -1,12 +1,10 @@
 private
 linkFromWidgetActionAppel
 	" At the end, collection of link (link = Association between a BLWidget and a BLPhase). Should have ~ 2000"
-	self halt. 
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
 			| link elContainer found |
 			link := self linkFromWidgetActionAppelCase1: el.
-			self halt. 
 			"elConstructor := el.
 			[ elConstructor isNotNil and: [ (elConstructor candidates at: 1) isConstructor not ] ] whileTrue: [ elConstructor := elConstructor previous ].
 			elConstructor
@@ -24,6 +22,6 @@ linkFromWidgetActionAppel
 						do: [ :aBLWidget | 
 							aBLWidget source constructor = elConstructor
 								ifTrue: [ link := Association new key: aBLWidget value: (self searchCalledPhaseFromInvocation: el) ] ].
-					link ifNil: [ self halt ] ].
-			link "]
+					link ifNil: [ self halt ] ]."
+			link ]
 		thenSelect: #isNotNil
