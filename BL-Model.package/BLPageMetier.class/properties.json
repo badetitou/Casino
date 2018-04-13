@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BLEntityWithUi",
+	"super" : "BLEntity",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
