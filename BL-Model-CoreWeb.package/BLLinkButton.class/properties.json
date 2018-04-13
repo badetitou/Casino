@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLUIList",
+	"category" : "BL-Model-CoreWeb",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLLinkButton",
+	"type" : "normal"
+}
