@@ -9,9 +9,9 @@ import { PHASE_ROUTES } from ''./' , self name
 		,
 			'.route'';
 '.
-	text := text , (self metiers flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''./components/' , metier getLocalComponentPath ]).
-	text := text
-		, String crlf , 
+	text := text , (self metiers flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''./components/' , metier getLocalComponentPath , ''';'  , String crlf ]).
+	text := text 
+		,
 			'
 export const COMPONENTS: any[] = [
     IndexComponent,

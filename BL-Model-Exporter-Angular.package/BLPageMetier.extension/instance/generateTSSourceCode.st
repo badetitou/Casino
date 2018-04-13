@@ -1,6 +1,12 @@
 *BL-Model-Exporter-Angular
 generateTSSourceCode
 	^ '
+import {
+    Component,
+    OnDestroy,
+    OnInit
+} from ''@angular/core'';
+
 @Component({
     selector: ''' , self getSelector
 		,
