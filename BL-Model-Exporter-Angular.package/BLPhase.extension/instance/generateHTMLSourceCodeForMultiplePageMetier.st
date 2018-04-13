@@ -1,6 +1,7 @@
 *BL-Model-Exporter-Angular
 generateHTMLSourceCodeForMultiplePageMetier
-	| text |
+	| text id |
+	id := 1.
 	text := '<bl-phase-business-pages-tab-container (tabSelected)="onTabSelected($event)">
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
@@ -9,9 +10,7 @@ generateHTMLSourceCodeForMultiplePageMetier
                 </div>
             </div>
         </bl-phase-business-pages-tab-header>'.
-	self metiers
-		do: [ :metier | 
-			text := text , ' <bl-phase-business-page-tab id="P1" title="Page 1" (tabSelected)="onTabSelected(1)">	' , String crlf
-				, metier getTag , String crlf , '</bl-phase-business-page-tab>', String crlf ].
+	text := text , (self metiers flatCollect: [ :metier | id := id +1.  ' <bl-phase-business-page-tab id="P' , id asString  , '" title="Page ' , id asString , '" (tabSelected)="onTabSelected(' , id asString  , ')">	' , String crlf , metier getTag , String crlf
+				, '</bl-phase-business-page-tab>' , String crlf ]).
 	text := text , '</bl-phase-business-pages-tab-container>'.
 	^ text
