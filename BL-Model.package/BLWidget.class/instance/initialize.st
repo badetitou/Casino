@@ -1,6 +1,5 @@
 accessing
 initialize
 	super initialize.
-	actionsAppel := FMMultivalueLink
-		on: self
-		opposite: #appelant:
+	actionsAppel := FMMultivalueLink on: self opposite: #appelant:.
+	widgets := FMMultivalueLink on: self opposite: #containerWidget:
