@@ -10,7 +10,6 @@
 		"codeValue",
 		"realClassName",
 		"metiers",
-		"widgets",
 		"actions"
 	],
 	"name" : "BLPhase",

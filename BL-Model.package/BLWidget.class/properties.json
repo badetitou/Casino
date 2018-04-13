@@ -12,7 +12,9 @@
 		"containerPhase",
 		"notFound",
 		"actionsAppel",
-		"attributes"
+		"attributes",
+		"containerWidget",
+		"widgets"
 	],
 	"name" : "BLWidget",
 	"type" : "normal"
