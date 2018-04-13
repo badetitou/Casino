@@ -1,4 +1,4 @@
-accessing
+model
 widgets
 	<MSEProperty: #widgets type: #BLWidget opposite: #containerWidget>
 	<multivalued>

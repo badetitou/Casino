@@ -1,4 +1,4 @@
-accessing
+model
 actionsAppel
 	<MSEProperty: #actionsAppel type: #BLActionAppel opposite: #appelant>
 	<multivalued>

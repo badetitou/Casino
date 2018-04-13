@@ -1,3 +1,3 @@
-accessing
+model
 realClass: aClass
 	realClass := aClass
