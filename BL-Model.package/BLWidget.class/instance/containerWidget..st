@@ -1,3 +1,3 @@
-accessing
+model
 containerWidget: aBLWidget
 	containerWidget := aBLWidget

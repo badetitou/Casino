@@ -1,3 +1,3 @@
-accessing
+model
 constructor: theFAMIXInvocationOfTheInstanciation
 	constructor := theFAMIXInvocationOfTheInstanciation

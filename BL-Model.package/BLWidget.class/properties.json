@@ -14,7 +14,8 @@
 		"actionsAppel",
 		"attributes",
 		"containerWidget",
-		"widgets"
+		"widgets",
+		"parameters"
 	],
 	"name" : "BLWidget",
 	"type" : "normal"

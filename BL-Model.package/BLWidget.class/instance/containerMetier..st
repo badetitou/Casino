@@ -1,3 +1,3 @@
-accessing
+model
 containerMetier: aBLPageMetier
 	containerMetier := aBLPageMetier
