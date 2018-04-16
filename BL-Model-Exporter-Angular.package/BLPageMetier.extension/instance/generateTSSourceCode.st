@@ -15,7 +15,7 @@ import {
 		,
 			'''
 })
-export class ' , self componentName
+export class ' , self componentName capitalized 
 		,
 			' implements OnInit, OnDestroy {
 
