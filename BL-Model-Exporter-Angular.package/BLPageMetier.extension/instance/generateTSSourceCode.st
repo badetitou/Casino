@@ -5,7 +5,14 @@ import {
     Component,
     OnDestroy,
     OnInit
-} from ''@angular/core'';
+} from ''@angular/core'';'
+		,
+			(self collectPhaseCalled
+				ifNotEmpty: [ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
+import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
+import { PhaseService } from ''../../../../../components/service/phase.service'';' ])
+		,
+			'
 
 @Component({
     selector: ''' , self getSelector
@@ -15,11 +22,26 @@ import {
 		,
 			'''
 })
-export class ' , self componentName capitalized 
+export class ' , self componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
+			' , (self collectPhaseCalled flatCollect: [ :phase | 'public ' , phase name , ': Phase;' , String crlf ])
+		,
+			'
 
-    constructor() {
+    constructor('
+		,
+			(self collectPhaseCalled
+				ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
+		,
+			' ) {
+					
+				' 
+		,
+			(self collectPhaseCalled
+				flatCollect: [ :phase | 'this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
+		,
+			'	
     }
 
     public ngOnInit(): void {
@@ -29,4 +51,13 @@ export class ' , self componentName capitalized
     public ngOnDestroy(): void {
 
     }
+'
+		,
+			(self collectPhaseCalled
+				ifNotEmpty: [ '     public openPhase(phase: Phase): void {
+        this._desktopStateService.selectPhase(phase);
+    } ' ])
+		,
+			'
+
 }'
