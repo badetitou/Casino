@@ -1,3 +1,3 @@
 *BL-Model-Importer-Java
-isInitializationInitializer
+isInstanciationInitializer
 	^ '<Initializer>' match: self name
