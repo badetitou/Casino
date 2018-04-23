@@ -1,3 +1,3 @@
 *BL-Model-Query
 outgoingElement
-	^ actionsAppel 
+	^ actionsAppel , self widgets collect: [ :el | Association new key: self value: el ]
