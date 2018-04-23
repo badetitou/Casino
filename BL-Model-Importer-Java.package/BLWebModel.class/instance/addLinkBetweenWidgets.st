@@ -8,7 +8,7 @@ addLinkBetweenWidgets
 						thenSelect: #isNotNil)
 						ifNotEmpty:
 							[ :founds | founds do: [ :found | found blWidget widgets add: widgetContainer blWidget ] ]
-						ifEmpty: [ self flag: #superClassDependency ] ]
+						ifEmpty: [ ] ]
 				ifTrue: [ widgetContainer
 						do: [ :widget | 
 							| containerInvocation |
