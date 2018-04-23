@@ -4,4 +4,4 @@ addPPPToWidget
 		do: [ :widget | 
 			| found |
 			found := self widgetOwnerCase1: widget source from.
-			found widgets add: widget ]
+			found ifNotNil: [ found widgets add: widget ] ]
