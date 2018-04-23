@@ -11,6 +11,7 @@ createModelIn: aModel
 	self addLinkXmlUi."
 	self addLinkPageMetierToPageMetier.
 	self generateWidget.
+	self addLinkBetweenWidgets.
 	self generateBLActionAppel.
 	self generateService.
 	self addListsToModel
