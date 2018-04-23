@@ -1,3 +1,3 @@
 accessing
 listOfWidget
-	^ widgetGroup
+	^ widgetGroup collect: #blWidget

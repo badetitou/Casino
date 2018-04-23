@@ -1,7 +1,6 @@
 adding
 addLinkBetweenWidgets
-	self listOfWidget
-		do: [ :widget |
-			| variable |
-			variable := self searchAffectationForInvocation: widget constructor.
-			variable allUsages.]
+	self listOfWidgetContainer
+		do: [ :widgetContainer |
+			widgetContainer variable allUsages.
+			self halt]
