@@ -5,7 +5,7 @@ allUsages
 	posUsages := self parentBehaviouralEntity sourceAnchor
 		findAllOccurrencesOfString: self name
 		startingAt: 0.
-	^ posUsages
+	^ (posUsages
 		flatCollect: [ :usage | 
 			((self parentBehaviouralEntity queryAll: #out) select: [:el | el sourceAnchor isNotNil ])
-				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ]
+				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ]) reject: [ :invoc | invoc receiver = self ]
