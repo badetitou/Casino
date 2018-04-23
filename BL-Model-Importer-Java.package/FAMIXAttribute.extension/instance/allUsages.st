@@ -1,7 +1,7 @@
 *BL-Model-Importer-Java
 allUsages
 	| posUsages |
-	posUsages := (self parentType methods reject: #isInstanciationInitializer) flatCollect: [ :method | method sourceAnchor
+	posUsages := (self parentType methods select: [ :method | method hasSourceAnchor and: [method isInstanciationInitializer not ] ] ) flatCollect: [ :method | method sourceAnchor
 		findAllOccurrencesOfString: self name
 		startingAt: 0. ].
 	^ (posUsages
