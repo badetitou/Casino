@@ -3,8 +3,11 @@ widgetInstance
 	^ (self widgetConstructorsInvocation
 		reject: [ :invocation | self widgetNamespace match: invocation from mooseName ])
 		collect: [ :invocation  | 
-			| found widget |
-			found := self widgetOwnerCase1: invocation from.
+			| found variable widget |
+
+			"found := self widgetOwnerCase1: invocation from."
+			variable := self searchAffectationForInvocation: invocation.
+			self halt. 
 			widget := BLWidget new
 				constructor: invocation;
 				realClass: (invocation candidates at: 1) parentType;
