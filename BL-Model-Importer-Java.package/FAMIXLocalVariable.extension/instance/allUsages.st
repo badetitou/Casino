@@ -7,5 +7,5 @@ allUsages
 		startingAt: 0.
 	^ (posUsages
 		flatCollect: [ :usage | 
-			((self parentBehaviouralEntity queryAll: #out) select: [:el | el sourceAnchor isNotNil ])
+			((self parentBehaviouralEntity queryAllOutgoingInvocations) select: [:el | el sourceAnchor isNotNil ])
 				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ]) reject: [ :invoc | invoc receiver = self ]
