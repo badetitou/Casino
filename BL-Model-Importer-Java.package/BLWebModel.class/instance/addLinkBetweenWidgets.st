@@ -2,6 +2,6 @@ adding
 addLinkBetweenWidgets
 	self listOfWidgetContainer
 		do: [ :widgetContainer |
-			(self listOfWidgetContainer select: [ :a | (widgetContainer affectedActions allUsages collect: #receiver) includes: a variable ]) ifNotEmpty: [ self halt ].
-			self halt. 
+			
+			((widgetContainer affectedActions allUsages collect: #receiver) collect: [ :var | self listOfWidgetContainer at: var ifAbsent: [  ] ] thenSelect: #isNotNil) ifNotEmpty: [ self halt ].
 			]
