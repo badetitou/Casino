@@ -12,7 +12,6 @@ createModelIn: aModel
 	self addLinkPageMetierToPageMetier.
 	self generateWidget.
 	self addLinkBetweenWidgets.
-	self halt. 
 	self generateBLActionAppel.
 	self generateService.
 	self addListsToModel
