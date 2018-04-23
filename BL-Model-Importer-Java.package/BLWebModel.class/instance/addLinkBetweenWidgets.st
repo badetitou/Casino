@@ -4,4 +4,4 @@ addLinkBetweenWidgets
 		do: [ :widget |
 			| variable |
 			variable := self searchAffectationForInvocation: widget constructor.
-			self halt ]
+			variable allUsages.]
