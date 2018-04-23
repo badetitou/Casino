@@ -16,5 +16,5 @@ searchAffectationForInvocation: anInvocation
 				select:
 					[ :access | access sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ access sourceAnchor endPos + 5 > anInvocation sourceAnchor startPos ] ])
 				at: 1
-				ifAbsent: [ (anInvocation from isInitializationInitializer) ifTrue: [ (((anInvocation from atScope: FAMIXClass) at: 1) attributes  select:
+				ifAbsent: [ (anInvocation from isInstanciationInitializer) ifTrue: [ (((anInvocation from atScope: FAMIXClass) at: 1) attributes  select:
 					[ :attribute | attribute sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ attribute sourceAnchor endPos > anInvocation sourceAnchor endPos ] ]) at: 1 ifAbsent: [ ^ nil ]  ] ] ]
