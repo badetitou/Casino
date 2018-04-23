@@ -14,4 +14,4 @@ widgetInstance
 						name: invocation asString;
 						source: invocation;
 						yourself).
-			blWidget variable: (self searchAffectationForInvocation: invocation). blWidget ]
+			blWidget affectedActions: (self searchAffectationForInvocation: invocation). blWidget ]

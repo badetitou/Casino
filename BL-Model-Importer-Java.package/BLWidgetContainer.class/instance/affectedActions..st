@@ -1,3 +1,3 @@
 accessing
-variable: anObject
+affectedActions: anObject
 	variable := anObject
