@@ -1,6 +1,10 @@
 *BL-Model-Importer-Java
 newFor: anInvocation
-	| handled |
-	handled := self subclasses do: [ :subclass | subclass newFor: anInvocation ].
-	handled ifNil: [ (self canHandle: anInvocation) ifTrue: [ ^ self new ] ifFalse: [ ^ nil ] ].
-	^ handled
+	self subclasses
+		do: [ :subclass | 
+			| try |
+			try := subclass newFor: anInvocation.
+			try ifNotNil: [ ^ try ] ].
+	(self canHandle: anInvocation)
+		ifTrue: [ ^ self creatWidgetFor: anInvocation ]
+		ifFalse: [ ^ nil ]

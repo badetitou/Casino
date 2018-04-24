@@ -7,10 +7,6 @@ widgetInstance
 			blWidget := BLWidgetContainer new.
 			blWidget
 				blWidget:
-					(BLWidget new
-						constructor: invocation;
-						realClass: (invocation candidates at: 1) parentType;
-						name: invocation asString;
-						source: invocation;
-						yourself).
-			blWidget affectedActions: (self searchAffectationForInvocation: invocation). blWidget ]
+					((BLWidget newFor: invocation)).
+			blWidget affectedActions: (self searchAffectationForInvocation: invocation).
+			blWidget ]
