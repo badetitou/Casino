@@ -10,9 +10,9 @@ linkFromWidgetActionAppelCase2: anInvocation
 	self listOfWidgetContainer
 		at:
 			((anInvocation from parentType container outgoingInvocations
-				select: [ :invoc | 
+				select: [ :invoc | invoc sourceAnchor isNotNil and: [ 
 					invoc sourceAnchor startPos < anInvocation sourceAnchor startPos
-						and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ]) at: 1)
+						and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]) at: 1 ifAbsent: [ ^ nil ])
 				receiver
 		ifPresent: [ :widgetContainer | 
 			^ Association new
