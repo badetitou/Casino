@@ -8,6 +8,7 @@ openViewForModel: aBLModel
 		useAssociations:
 			((aBLModel allBLPhase collect: #allAssociations) , (aBLModel allBLPageMetier collect: #allAssociations)
 				, (aBLModel allBLWidget collect: #allAssociations)) flatten.
-	b layout force strength: 0.4.
-	b view pushBackEdges.
+	"b layout force strength: 0.4.
+	b view pushBackEdges."
+		b layout horizontalTree.
 	^ b
