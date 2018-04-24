@@ -5,6 +5,7 @@ linkFromWidgetActionAppel
 		collect: [ :el | 
 			| link elContainer found |
 			link := self linkFromWidgetActionAppelCase1: el.
+			link ifNil: [ link := self linkFromWidgetActionAppelCase2: el. ].
 			"elConstructor := el.
 			[ elConstructor isNotNil and: [ (elConstructor candidates at: 1) isConstructor not ] ] whileTrue: [ elConstructor := elConstructor previous ].
 			elConstructor
