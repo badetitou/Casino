@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Importer
 canHandle: anInvocation
-	^ false
+	^ 'BLLinkLabel' match: anInvocation invokedClass name
