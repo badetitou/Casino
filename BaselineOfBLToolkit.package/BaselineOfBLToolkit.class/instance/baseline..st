@@ -14,6 +14,7 @@ baseline: spec
 				package: 'BL-Model-Importer-Java' with: [ spec requires: #('BL-Model-Importer') ];
 				package: 'BL-Model-Query';
 				package: 'BL-Model-CoreWeb' with: [ spec requires: #('BL-Model') ];
+				package: 'BL-Model-CoreWeb-Exporter' with: [ spec requires: #('BL-Model-CoreWeb') ];
 				group: 'default' with: #('BL-Model' 'BL-Model-Exporter' 'BL-Model-Exporter-Angular' 'BL-Model-Importer' 'BL-Model-Importer-Java');
-				group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb');
+				group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter');
 				group: 'all' with: #('BL-Model' 'BL-Model-Example' 'BL-Model-Exporter' 'BL-Model-Exporter-Angular' 'BL-Model-Importer' 'BL-Model-Importer-Java' 'BL-Model-Query' 'BL-Model-CoreWeb')  ]
