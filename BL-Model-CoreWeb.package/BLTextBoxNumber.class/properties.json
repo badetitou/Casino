@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLInputText",
+	"name" : "BLTextBoxNumber",
 	"type" : "normal"
 }
