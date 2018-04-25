@@ -1,3 +1,4 @@
 *BL-Model-Importer-Java
 parameters
-	^ ((signature replaceAllRegex: '.*\(' with: '' ) replaceAllRegex: '\)' with: '' ) substrings: ','
+
+	^ ((signature copyFrom: ((signature findString: '(') +1) to: ((signature findLastOccurrenceOfString: ')' startingAt: 0) -1)) replaceAllRegex: '"' with: '') substrings: ','.

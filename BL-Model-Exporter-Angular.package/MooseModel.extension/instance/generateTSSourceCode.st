@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
     public phaseHome: Phase;
 
     constructor(private _phaseService: PhaseService) {
-        this.phaseHome = this._phaseService.getPhase(''home'');
+        this.phaseHome = this._phaseService.getPhase(''', self appName, ''');
     }
 
     public ngOnInit(): void {
