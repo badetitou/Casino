@@ -1,5 +1,5 @@
 accessing
-getPhaseCallInvocations
+getPhaseCallInvocations 
 	^ (((self model allClasses
 		select:
 			[ :a | '*ConstantsPhase' match: a mooseName ])
