@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLInputText",
+	"name" : "BLRadioButton",
 	"type" : "normal"
 }

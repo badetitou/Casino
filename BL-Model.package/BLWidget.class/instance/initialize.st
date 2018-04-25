@@ -3,5 +3,5 @@ initialize
 	super initialize.
 	actionsAppel := FMMultivalueLink on: self opposite: #appelant:.
 	widgets := FMMultivalueLink on: self opposite: #containerWidget:.
-	parameters := OrderedCollection new.
+	parameters := Dictionary new.
 	attributes := Dictionary new

@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "BLInput",
+	"super" : "BLUIList",
 	"category" : "BL-Model-CoreWeb",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLInputText",
+	"name" : "BLInput",
 	"type" : "normal"
 }
