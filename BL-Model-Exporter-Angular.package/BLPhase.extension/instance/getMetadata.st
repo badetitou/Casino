@@ -11,6 +11,7 @@ getMetadata
    "
 
 	^ 'id: ''' , self name , ''',' , String crlf , 'code: ''' , self name , ''','
-		, String crlf , 'label: '''',' , String crlf , 'link: ''' , self name , ''','
-		, String crlf , 'subLabel: '''',' , String crlf , 'icon: ''address-book'','
-		, String crlf , 'datas: {},' , String crlf
+		, String crlf , 'label: ' , (BLModelExporterAngular convertIfString: self title)
+		, ',' , String crlf , 'link: ''' , self name , ''',' , String crlf , 'subLabel: '
+		, (BLModelExporterAngular convertIfString: self subtitle) , ',' , String crlf
+		, 'icon: ''address-book'',' , String crlf , 'datas: {},' , String crlf
