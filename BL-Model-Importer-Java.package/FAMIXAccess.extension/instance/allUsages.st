@@ -1,9 +1,8 @@
 *BL-Model-Importer-Java
 allUsages
 	| posUsages |
-	posUsages := self from  sourceAnchor
-		findAllOccurrencesOfString: self variable name
-		startingAt: 0.
+	posUsages := self from sourceAnchor
+		findAllOccurrencesOfVariableNamed: self variable name.
 	^ (posUsages
 		flatCollect: [ :usage | 
 			((self from queryAllOutgoingInvocations  ) select: [:el | el sourceAnchor isNotNil ])

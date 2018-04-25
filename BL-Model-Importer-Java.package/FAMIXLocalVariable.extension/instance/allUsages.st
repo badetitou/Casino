@@ -3,9 +3,8 @@ allUsages
 	"All the invocations the localVariable involved"
 	| posUsages |
 	posUsages := self parentBehaviouralEntity sourceAnchor
-		findAllOccurrencesOfString: self name
-		startingAt: 0.
-	^ (posUsages
+		findAllOccurrencesOfVariableNamed: self name.
+		^ (posUsages
 		flatCollect: [ :usage | 
 			((self parentBehaviouralEntity queryAllOutgoingInvocations) select: [:el | el sourceAnchor isNotNil ])
 				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ]) reject: [ :invoc | invoc receiver = self ]
