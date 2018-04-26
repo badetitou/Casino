@@ -9,7 +9,8 @@
 		"container",
 		"widgets",
 		"containerMetier",
-		"metiers"
+		"metiers",
+		"title"
 	],
 	"name" : "BLPageMetier",
 	"type" : "normal"
