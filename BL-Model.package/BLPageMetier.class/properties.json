@@ -6,11 +6,11 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"container",
 		"widgets",
 		"containerMetier",
 		"metiers",
-		"title"
+		"title",
+		"containerPhase"
 	],
 	"name" : "BLPageMetier",
 	"type" : "normal"
