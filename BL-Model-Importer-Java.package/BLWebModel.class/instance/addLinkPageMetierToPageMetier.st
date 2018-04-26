@@ -1,5 +1,4 @@
 adding
-addLinkPageMetierToPageMetier
+addLinkPageMetierToPageMetier 
 	self linkPageMetierToPageMetier
-		do:
-			[ :assoc | ( assoc key) metiers add: ( assoc value) ]
+		do: [ :assoc | self addTo: assoc key from: assoc value in: #metiers ]
