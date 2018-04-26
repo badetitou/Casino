@@ -1,4 +1,4 @@
-initialization
+accessing
 container
 	<MSEProperty: #container type: #BLPhase opposite: #metiers> 
 	<multivalued> 

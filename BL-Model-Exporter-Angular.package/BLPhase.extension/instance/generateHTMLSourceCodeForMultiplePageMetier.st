@@ -15,8 +15,7 @@ generateHTMLSourceCodeForMultiplePageMetier
 			(self metiers
 				flatCollect: [ :metier | 
 					id := id + 1.
-					' <bl-phase-business-page-tab id="P' , id asString , '" title="Page ' , id asString
-						, '">	' , String crlf , metier getTag , String crlf
-						, '</bl-phase-business-page-tab>' , String crlf ]).
+					' <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title , '">	' , String crlf , metier getTag
+						, String crlf , '</bl-phase-business-page-tab>' , String crlf ]).
 	text := text , '</bl-phase-business-pages-tab-container>'.
 	^ text

@@ -3,4 +3,5 @@ createPageMetierInModel: aPageMetier
 	^ BLPageMetier new
 		name: aPageMetier mooseName;
 		sourceAnchor: aPageMetier sourceAnchor;
-		source: aPageMetier
+		source: aPageMetier;
+		computeTitle 

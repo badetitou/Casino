@@ -1,4 +1,4 @@
-initialization
+accessing
 metiers
 	<MSEProperty: #metiers type: #BLPageMetier opposite: #containerMetier>
 	<multivalued>

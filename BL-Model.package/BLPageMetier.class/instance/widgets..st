@@ -1,3 +1,3 @@
-initialization
+accessing
 widgets: listOfWidget
 	widgets := listOfWidget

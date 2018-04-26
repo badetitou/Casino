@@ -1,4 +1,4 @@
-initialization
+accessing
 containerMetier: containersMetier
 	containerMetier := FMMultivalueLink
 		on: self
