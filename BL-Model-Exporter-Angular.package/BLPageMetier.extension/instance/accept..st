@@ -9,4 +9,4 @@ accept: anExporter
 	anExporter writeFile: pageMetierRoot / self getHTMLName withCode: self generateHTMLSourceCode.
 	"Write pageMetier.route.ts"
 	anExporter writeFile: pageMetierRoot / self getTSName withCode: self generateTSSourceCode.
-	self metiers do: [ :metier | metier accept: anExporter  ]
+	self metiers do: [ :metier | metier accept: anExporter ]
