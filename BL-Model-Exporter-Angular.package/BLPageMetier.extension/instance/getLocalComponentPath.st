@@ -1,4 +1,5 @@
 *BL-Model-Exporter-Angular
 getLocalComponentPath
-	" return   pageMetierName/pageMetierName.component"
-	^ self getAcceptedName , '/' , self getAcceptedName , '.component'
+	" return pageMetierName/pageMetierName.component"
+
+	^ self getLocalPath , '/' , self getAcceptedName , '.component'

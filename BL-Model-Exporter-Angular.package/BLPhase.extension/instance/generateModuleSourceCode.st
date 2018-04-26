@@ -9,8 +9,11 @@ import { PHASE_ROUTES } from ''./' , self name
 		,
 			'.route'';
 '.
-	text := text , (self metiers flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''./components/' , metier getLocalComponentPath , ''';'  , String crlf ]).
-	text := text 
+	text := text
+		,
+			(self recursiveMetiers flattened
+				flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''.' , metier getLocalComponentPath , ''';' , String crlf ]).
+	text := text
 		,
 			'
 export const COMPONENTS: any[] = [
@@ -35,4 +38,4 @@ export const COMPONENTS: any[] = [
     ]
 })
 export class ' , self getModuleClassName , ' {}'.
-	^ text
+	^ text, String crlf
