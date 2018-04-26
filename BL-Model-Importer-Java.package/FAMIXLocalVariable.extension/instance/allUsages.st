@@ -1,10 +1,13 @@
 *BL-Model-Importer-Java
 allUsages
 	"All the invocations the localVariable involved"
+
 	| posUsages |
 	posUsages := self parentBehaviouralEntity sourceAnchor
 		findAllOccurrencesOfVariableNamed: self name.
-		^ (posUsages
+	^ ((posUsages
 		flatCollect: [ :usage | 
-			((self parentBehaviouralEntity queryAllOutgoingInvocations) select: [:el | el sourceAnchor isNotNil ])
-				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ]) reject: [ :invoc | invoc receiver = self ]
+			(self parentBehaviouralEntity queryAllOutgoingInvocations
+				select: [ :el | el sourceAnchor isNotNil ])
+				select: [ :out | out sourceAnchor startPos < usage and: [ out sourceAnchor endPos > usage ] ] ])
+		reject: [ :invoc | invoc receiver = self ]) ifEmpty: [ self parentBehaviouralEntity allUsages ]

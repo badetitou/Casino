@@ -6,16 +6,17 @@ addLinkBetweenWidgets
 				ifFalse: [ ((widgetContainer affectedActions allUsages collect: #receiver)
 						collect: [ :var | self listOfWidgetContainer at: var ifAbsent: [  ] ]
 						thenSelect: #isNotNil)
-						ifNotEmpty: [ :founds | founds do: [ :found | found blWidget widgets add: widgetContainer blWidget ] ]
-						ifEmpty: [  ] ]
+						ifNotEmpty:
+							[ :founds | founds do: [ :found | found blWidget widgets add: widgetContainer blWidget ] ]
+						ifEmpty: [   ] ]
 				ifTrue: [ widgetContainer
 						do: [ :widget | 
 							| containerInvocation |
 							containerInvocation := widget blWidget constructor container.
 							[ containerInvocation isNotNil ]
-								whileTrue: [  self listOfWidgetContainer
-												at: containerInvocation receiver
-												ifPresent: [ :found | 
-													found blWidget widgets add: widget blWidget.
-													containerInvocation := nil ]
-												ifAbsent: [ containerInvocation := containerInvocation container ] ] ] ] ]
+								whileTrue: [ self listOfWidgetContainer
+										at: containerInvocation receiver
+										ifPresent: [ :found | 
+											found blWidget widgets add: widget blWidget.
+											containerInvocation := nil ]
+										ifAbsent: [ containerInvocation := containerInvocation container ] ] ] ] ]
