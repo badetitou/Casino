@@ -1,7 +1,7 @@
 as yet unclassified
 widgetInstance
 	^ (self widgetConstructorsInvocation
-		reject: [ :invocation | self widgetNamespace match: invocation from mooseName ])
+		reject: [ :invocation | (self widgetNamespace match: invocation from mooseName) or: [ '*noname#super*' match: invocation asString  ] ])
 		collect: [ :invocation | 
 			| blWidget |
 			blWidget := BLWidgetContainer new.
