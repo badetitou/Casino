@@ -10,7 +10,7 @@ baseline: spec
 				package: 'BL-Model-Example' with: [ spec requires: #('BL-Model-CoreWeb') ];
 				package: 'BL-Model-Exporter' with: [ spec requires: #('BL-Model') ];
 				package: 'BL-Model-Exporter-Angular' with: [ spec requires: #('BL-Model-Exporter') ];
-				package: 'BL-Model-Importer' with: [ spec requires: #('BL-Model-Explorer' 'BL-Model') ];
+				package: 'BL-Model-Importer' with: [ spec requires: #( 'BL-Model') ];
 				package: 'BL-Model-Importer-Java' with: [ spec requires: #('BL-Model-Importer') ];
 				package: 'BL-Model-Query';
 				package: 'BL-Model-CoreWeb' with: [ spec requires: #('BL-Model') ];
