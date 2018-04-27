@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLPanel",
+	"category" : "BL-Model-CoreWeb",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLHorizontalPanel",
+	"type" : "normal"
+}
