@@ -2,7 +2,7 @@
 createWidgetFor: anInvocation
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget attributes
+	widget parameters
 		at: #header
 		put:
 			(anInvocation parameters

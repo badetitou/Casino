@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLInput",
+	"category" : "BL-Model-CoreWeb",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLTextArea",
+	"type" : "normal"
+}
