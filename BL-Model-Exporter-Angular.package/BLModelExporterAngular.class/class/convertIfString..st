@@ -1,5 +1,5 @@
 actions
 convertIfString: anObject
 	anObject isString
-		ifTrue: [ ^ '''' , (anObject copyReplaceAll: '''' with: '\''') , '''' ].
+		ifTrue: [ ^ '"' , (anObject copyReplaceAll: '''' with: '\''') , '"' ].
 	^ anObject
