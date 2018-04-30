@@ -5,14 +5,14 @@ generateModuleSourceCode
 import { CommonModule } from ''@angular/common'';
 import { ComponentsModule } from ''../../../components/components.module'';
 import { IndexComponent } from ''./components/index/index.component'';
-import { PHASE_ROUTES } from ''./' , self name
-		,
-			'.route'';', String crlf, 
-			self widgetsDependencies.
+import { PHASE_ROUTES } from ''./' , self name , '.route'';' , String crlf
+		, self widgetsDependenciesImportInstruction.
 	text := text
 		,
 			(self recursiveMetiers flattened
-				flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''.' , metier getLocalComponentPath , ''';' , String crlf ]).
+				flatCollect: [ :metier | 
+					'import { ' , metier componentName , ' } from ''.' , metier getLocalComponentPath , ''';'
+						, String crlf ]).
 	text := text
 		,
 			'
@@ -30,7 +30,7 @@ export const COMPONENTS: any[] = [
     imports: [
         CommonModule,
         PHASE_ROUTES,
-
+',  self widgetsDependenciesName, '
         ComponentsModule
     ],
     entryComponents: [
