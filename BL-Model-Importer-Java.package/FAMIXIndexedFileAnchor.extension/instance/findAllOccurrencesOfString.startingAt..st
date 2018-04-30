@@ -1,7 +1,0 @@
-*BL-Model-Importer-Java
-findAllOccurrencesOfString: aString startingAt: anIndexPosition
-	self halt.
-	"the name of the variable. Cannot be surrounded by other 'word character' (else we can grep others variables)"
-
-	^ (self sourceText findAllOccurrencesOfString: aString startingAt: 1)
-		collect: [ :pos | pos + self startPos ]

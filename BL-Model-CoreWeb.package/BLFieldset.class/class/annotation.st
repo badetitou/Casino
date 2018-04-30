@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLFiledset super: #BLWidget>
+	<MSEClass: #BLFieldset super: #BLWidget>
 	<package: #BLWebModel>
 	^ self

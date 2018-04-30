@@ -1,4 +1,4 @@
 *BL-Model-Query
 recursiveMetier
 	^ {self.
-	(self metiers flatCollect: #recursiveMetier)}
+	(self metiers collect: #recursiveMetier)}

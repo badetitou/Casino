@@ -11,7 +11,7 @@ import {
 				ifNotEmpty: [ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
 import { PhaseService } from ''../../../../../components/service/phase.service'';' ])
-		,
+		, String crlf, self widgetsDependencies, 
 			'
 
 @Component({
@@ -31,12 +31,11 @@ export class ' , self componentName capitalized
 
     constructor('
 		,
-			(self collectPhaseCalled
-				ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
+			(self collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
 		,
 			' ) {
 					
-				' 
+				'
 		,
 			(self collectPhaseCalled
 				flatCollect: [ :phase | 'this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])

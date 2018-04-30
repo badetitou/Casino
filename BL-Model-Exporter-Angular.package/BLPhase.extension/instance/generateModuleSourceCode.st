@@ -7,8 +7,8 @@ import { ComponentsModule } from ''../../../components/components.module'';
 import { IndexComponent } from ''./components/index/index.component'';
 import { PHASE_ROUTES } from ''./' , self name
 		,
-			'.route'';
-'.
+			'.route'';', String crlf, 
+			self widgetsDependencies.
 	text := text
 		,
 			(self recursiveMetiers flattened
@@ -38,4 +38,4 @@ export const COMPONENTS: any[] = [
     ]
 })
 export class ' , self getModuleClassName , ' {}'.
-	^ text, String crlf
+	^ text , String crlf
