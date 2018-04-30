@@ -5,7 +5,7 @@ createWidgetFor: anInvocation
 	widget attributes
 		at: #header
 		put:
-			(anInvocation attributes
+			(anInvocation parameters
 				at: 1
 				ifAbsent: [ self flag: #todo.
 					'todo' ]).
