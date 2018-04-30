@@ -1,6 +1,6 @@
-*BL-Model-CoreWeb-Importer
+as yet unclassified
 createWidgetFor: anInvocation
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget parameters at: #type put: 'date'.
+	widget attributes at: #timeOnly put: 'true'.
 	^ widget
