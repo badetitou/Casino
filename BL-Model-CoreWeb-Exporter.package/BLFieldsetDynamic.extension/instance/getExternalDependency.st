@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Exporter
-getExternalDependencies
+getExternalDependency
 	^ PNGAccordion

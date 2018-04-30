@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "WidgetDependency",
+	"super" : "PrimeNGComponent",
 	"category" : "BL-Model-CoreWeb",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "PrimeNGComponent",
+	"name" : "PNGTieredMenu",
 	"type" : "normal"
 }
