@@ -2,5 +2,5 @@
 widgetsDependencies
 	^ ''
 		,
-			(((self recursiveWidgets) select: #hasExternalDependencies thenCollect: #getExternalDependencies) asSet asOrderedCollection
+			(((self recursiveWidgets) select: #hasExternalDependency thenCollect: #getExternalDependencies) flattened asSet asOrderedCollection
 				flatCollect: [ :dependency | dependency importString , String crlf ])

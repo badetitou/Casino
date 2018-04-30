@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Exporter
-hasExternalDependencies
+hasExternalDependency
 	^ true

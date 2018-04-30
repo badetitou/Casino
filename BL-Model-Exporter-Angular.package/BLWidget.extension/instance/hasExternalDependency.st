@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
-hasExternalDependencies
+hasExternalDependency
 	^ false
