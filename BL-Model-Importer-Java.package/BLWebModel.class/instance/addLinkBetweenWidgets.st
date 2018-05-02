@@ -21,6 +21,6 @@ addLinkBetweenWidgets
 								whileTrue: [ self listOfWidgetContainer
 										at: containerInvocation receiver
 										ifPresent: [ :found | 
-											found blWidget widgets add: widget blWidget.
+											found blWidget addWidget: widget blWidget.
 											containerInvocation := nil ]
 										ifAbsent: [ containerInvocation := containerInvocation container ] ] ] ] ]
