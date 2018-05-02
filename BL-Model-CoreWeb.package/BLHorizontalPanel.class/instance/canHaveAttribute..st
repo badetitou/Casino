@@ -1,3 +1,3 @@
 testing
 canHaveAttribute: blAttributeClass
-	^ true
+	^  blAttributeClass ~= BLEnable 

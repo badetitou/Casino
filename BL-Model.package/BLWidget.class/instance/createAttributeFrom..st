@@ -1,3 +1,3 @@
 accessing
 createAttributeFrom: anInvocation
-	(BLAttribute newFrom: anInvocation for: self) ifNotNil: [ :attribute | self attributes add: attribute  ]
+	(BLAttribute newFrom: anInvocation for: self) ifNotNil: [ :attribute | self addAttribute: attribute ]
