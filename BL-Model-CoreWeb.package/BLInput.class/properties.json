@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "BLUIList",
-	"category" : "BL-Model-CoreWeb",
+	"category" : "BL-Model-CoreWeb-Widget",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

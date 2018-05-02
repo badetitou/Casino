@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "WidgetDependency",
-	"category" : "BL-Model-CoreWeb",
+	"category" : "BL-Model-CoreWeb-Dependency",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

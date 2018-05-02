@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "PrimeNGComponent",
-	"category" : "BL-Model-CoreWeb",
+	"category" : "BL-Model-CoreWeb-Dependency",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
