@@ -1,3 +1,3 @@
 testing
 canHaveAttribute: blAttributeClass
-	^ blAttributeClass ~= BLWidthParent
+	^ blAttributeClass ~= BLWidthParent and: [ blAttributeClass ~= BLEnable ]
