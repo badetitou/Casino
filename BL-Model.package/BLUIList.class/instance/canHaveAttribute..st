@@ -1,0 +1,3 @@
+accessing
+canHaveAttribute: blAttributeClass
+	^ true
