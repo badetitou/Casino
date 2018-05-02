@@ -13,7 +13,8 @@
 		"attributes",
 		"containerWidget",
 		"widgets",
-		"parameters"
+		"parameters",
+		"variable"
 	],
 	"name" : "BLWidget",
 	"type" : "normal"

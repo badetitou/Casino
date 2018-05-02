@@ -2,7 +2,7 @@
 createWidgetFor: anInvocation
 	^ self new
 		constructor: anInvocation;
-		realClass: anInvocation invokedClass ;
+		realClass: anInvocation invokedClass;
 		name: anInvocation asString;
 		source: anInvocation;
 		yourself
