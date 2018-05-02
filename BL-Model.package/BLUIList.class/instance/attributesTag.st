@@ -1,3 +1,3 @@
 accessing
 attributesTag
-	^ self attributes flatCollect: [ :attribute | attribute asString , ' ' ]
+	^ self attributes asOrderedCollection flatCollect: [ :attribute | attribute asString , ' ' ]
