@@ -6,5 +6,5 @@ newFor: anInvocation
 			try := subclass newFor: anInvocation.
 			try ifNotNil: [ ^ try ] ].
 	(self canHandle: anInvocation)
-		ifTrue: [ ^ self createWidgetFor: anInvocation ]
+		ifTrue: [ ^ self createAttributeFor: anInvocation ]
 		ifFalse: [ ^ nil ]

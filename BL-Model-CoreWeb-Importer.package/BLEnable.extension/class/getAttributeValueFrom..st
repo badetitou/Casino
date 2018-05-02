@@ -1,3 +1,3 @@
-*BL-Model-Importer-Java
+*BL-Model-CoreWeb-Importer
 getAttributeValueFrom: anInvocation
 	^ anInvocation parameters
