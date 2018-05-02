@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLAttribute",
+	"category" : "BL-Model-CoreWeb",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLEnable",
+	"type" : "normal"
+}
