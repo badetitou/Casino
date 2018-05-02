@@ -1,0 +1,3 @@
+adding
+addWidgetAttributes
+	self listOfWidget 
