@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Exporter
 asString
-	^ '(onclick)="ui-g"'
+	^ '(' , self name , ')="' , self attributeValue , '"'
