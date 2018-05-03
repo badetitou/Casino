@@ -1,3 +1,3 @@
 as yet unclassified
 importString
-	^ 'import {', self moduleName,' } from ''' , self modulePath, ''';'
+	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
