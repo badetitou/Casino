@@ -6,4 +6,7 @@ attributeMethod
 		,
 			': void {
         // TODO by developers
-    }' , String crlf, String crlf
+        /*
+', self oldMethod ,'
+        */
+    }' , String crlf , String crlf
