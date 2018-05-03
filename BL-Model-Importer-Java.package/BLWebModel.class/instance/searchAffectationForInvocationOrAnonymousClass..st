@@ -1,5 +1,5 @@
 private
-searchAffectationForInvocation: anInvocation
+searchAffectationForInvocationOrAnonymousClass: anInvocationOrAnonymousClass
 	"The mooseVariable if there is an affactation
 	else nil
 	
@@ -9,4 +9,4 @@ searchAffectationForInvocation: anInvocation
 	3. We look in declaration in the class
 	"
 
-	^ anInvocation affectation 
+	^ anInvocationOrAnonymousClass affectation

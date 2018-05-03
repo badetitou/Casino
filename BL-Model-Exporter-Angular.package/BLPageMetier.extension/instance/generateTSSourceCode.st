@@ -27,24 +27,19 @@ import { PhaseService } from ''../../../../../components/service/phase.service''
 export class ' , self componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
-			' , (self collectPhaseCalled flatCollect: [ :phase | 'public ' , phase name , ': Phase;' , String crlf ])
+
+' , (self collectPhaseCalled flatCollect: [ :phase | 'public ' , phase name , ': Phase;' , String crlf ])
+		, (self recursiveWidgets flatCollect: [ :widget | '    ', widget idViewChild ])
 		,
 			'
-
-    constructor('
-		, (self collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
+    constructor(' , (self collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
 		,
 			') {
- 
-				'
-		, (self collectPhaseCalled flatCollect: [ :phase | 'this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
+' ,
+		(self collectPhaseCalled flatCollect: [ :phase | 'this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
 		,
 			'	
     }
-
-' , (self recursiveWidgets flatCollect: [ :widget | widget idViewChild ])
-		,
-			'
 
     public ngOnInit(): void {
 
