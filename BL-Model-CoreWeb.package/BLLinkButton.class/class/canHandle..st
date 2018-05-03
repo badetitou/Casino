@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLLinkButton' match: anInvocation invokedClass name
+	^ 'Button|BLLinkButton' matches: anInvocation invokedClass name

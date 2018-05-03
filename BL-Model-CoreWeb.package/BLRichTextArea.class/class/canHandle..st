@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLRichTextArea' match: anInvocation invokedClass name
+	^ 'BLRichTextArea|RichTextArea' match: anInvocation invokedClass name

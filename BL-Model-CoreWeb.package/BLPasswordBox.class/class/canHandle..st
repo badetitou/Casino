@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLPasswordBox' match: anInvocation invokedClass name
+	^ 'BLPasswordBox|PasswordTextBox' matches: anInvocation invokedClass name
