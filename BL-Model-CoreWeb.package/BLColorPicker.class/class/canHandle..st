@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLTextBoxColorPicker' match: anInvocation invokedClass name
+	^ 'BLTextBoxColorPicker' match: anInvocation invokedClassName

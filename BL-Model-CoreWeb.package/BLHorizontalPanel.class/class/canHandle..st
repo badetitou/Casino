@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ '*HorizontalPanel' match: anInvocation invokedClass name
+	^ '*HorizontalPanel' match: anInvocation invokedClassName

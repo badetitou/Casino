@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLSliderBar' match: anInvocation invokedClass name
+	^ 'BLSliderBar' match: anInvocation invokedClassName

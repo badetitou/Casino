@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLRadioButton' match: anInvocation invokedClass name
+	^ 'BLRadioButton' match: anInvocation invokedClassName

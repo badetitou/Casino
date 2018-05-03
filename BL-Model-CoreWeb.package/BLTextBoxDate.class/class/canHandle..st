@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLTextBoxDate|BLTextBoxDatePicker' matches: anInvocation invokedClass name
+	^ 'BLTextBoxDate|BLTextBoxDatePicker' matches: anInvocation invokedClassName

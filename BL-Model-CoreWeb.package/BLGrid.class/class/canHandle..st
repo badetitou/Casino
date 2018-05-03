@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLFlexTable|BLGrid' matches: anInvocation invokedClass name
+	^ 'BLFlexTable|BLGrid' matches: anInvocation invokedClassName

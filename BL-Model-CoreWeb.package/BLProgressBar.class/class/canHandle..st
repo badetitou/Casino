@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLProgressBar' match: anInvocation invokedClass name
+	^ 'BLProgressBar' match: anInvocation invokedClassName
