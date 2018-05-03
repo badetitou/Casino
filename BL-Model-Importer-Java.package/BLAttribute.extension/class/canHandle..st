@@ -1,3 +1,3 @@
 *BL-Model-Importer-Java
-canHandle: anInvocation
+canHandle: aFAMIXElement
 	^ false

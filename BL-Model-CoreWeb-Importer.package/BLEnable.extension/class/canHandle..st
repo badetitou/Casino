@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Importer
 canHandle: anInvocation
-	^ anInvocation attributeName = 'enabled'
+	^ anInvocation isInvocation and: [ anInvocation attributeName = 'enabled' ]

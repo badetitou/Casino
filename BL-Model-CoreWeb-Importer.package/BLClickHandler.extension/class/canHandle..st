@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Importer
-canHandle: anInvocation
-	^ anInvocation attributeName = 'width'
+canHandle: aFAMIXClass
+	^ aFAMIXClass isClass and: [ aFAMIXClass name includesSubstring: 'ClickHandler' ]
