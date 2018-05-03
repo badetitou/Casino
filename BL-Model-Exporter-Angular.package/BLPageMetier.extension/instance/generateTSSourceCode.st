@@ -7,14 +7,16 @@ import {
     OnInit,
     ViewChild,
     ViewContainerRef
-} from ''@angular/core'';'
+} from ''@angular/core'';
+'
 		,
 			(self collectPhaseCalled
 				ifNotEmpty:
 					[ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
-import { PhaseService } from ''../../../../../components/service/phase.service'';' ])
-		, String crlf , self widgetsDependencies
+import { PhaseService } from ''../../../../../components/service/phase.service'';
+' ])
+		, self widgetsDependencies
 		,
 			'
 
