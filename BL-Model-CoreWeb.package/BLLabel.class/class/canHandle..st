@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLLabel' match: anInvocation invokedClass name
+	^ 'BLLabel|Label' matches: anInvocation invokedClass name

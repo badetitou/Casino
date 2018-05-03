@@ -1,3 +1,3 @@
 accessing
 widgetNamespace
-	^ 'fr::bl::client::core::refui::*'
+	^ 'fr::bl::client::core::refui*'

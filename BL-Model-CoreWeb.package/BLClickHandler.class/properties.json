@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLAttribute",
+	"category" : "BL-Model-CoreWeb-Attribute",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLClickHandler",
+	"type" : "normal"
+}
