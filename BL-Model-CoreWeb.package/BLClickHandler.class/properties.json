@@ -5,7 +5,9 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"oldMethod"
+	],
 	"name" : "BLClickHandler",
 	"type" : "normal"
 }
