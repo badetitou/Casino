@@ -1,6 +1,8 @@
 private
 linkFromWidgetActionAppel
-	" At the end, collection of link (link = Association between a BLWidget and a BLPhase). Should have ~ 2000"
+	" Miss 7
+	4 for dispatch -> ignore
+	3 for carousel"
 
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
