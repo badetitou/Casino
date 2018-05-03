@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLFieldSetPanelDynamic' match: anInvocation invokedClass name
+	^ 'BLFieldSetPanelDynamic' match: anInvocation invokedClassName

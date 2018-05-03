@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLImage|BLImageButton' matches: anInvocation invokedClass name
+	^ 'BLImage|BLImageButton' matches: anInvocation invokedClassName

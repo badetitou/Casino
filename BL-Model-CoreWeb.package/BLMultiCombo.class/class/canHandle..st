@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLMultiCombo' match: anInvocation invokedClass name
+	^ 'BLMultiCombo' match: anInvocation invokedClassName

@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'Button|BLLinkButton' matches: anInvocation invokedClass name
+	^ 'Button|BLLinkButton' matches: anInvocation invokedClassName

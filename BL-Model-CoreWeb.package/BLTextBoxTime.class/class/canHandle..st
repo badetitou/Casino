@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxTime' matches: anInvocation invokedClass name
+	^ 'BLTextBoxTime' matches: anInvocation invokedClassName

@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLTextBox' match: anInvocation invokedClass name
+	^ 'BLTextBox' match: anInvocation invokedClassName

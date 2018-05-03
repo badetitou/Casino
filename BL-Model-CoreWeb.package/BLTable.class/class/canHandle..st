@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLTableList*' match: anInvocation invokedClass name
+	^ 'BLTableList*' match: anInvocation invokedClassName

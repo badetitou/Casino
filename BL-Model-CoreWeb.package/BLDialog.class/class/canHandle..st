@@ -1,3 +1,3 @@
-as yet unclassified
+testing
 canHandle: anInvocation
-	^ 'BLDialogBox' match: anInvocation invokedClass name
+	^ 'BLDialogBox' match: anInvocation invokedClassName

@@ -10,9 +10,11 @@ import {
 } from ''@angular/core'';'
 		,
 			(self collectPhaseCalled
-				ifNotEmpty: [ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
+				ifNotEmpty:
+					[ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
-import { PhaseService } from ''../../../../../components/service/phase.service'';' ]) , String crlf , self widgetsDependencies
+import { PhaseService } from ''../../../../../components/service/phase.service'';' ])
+		, String crlf , self widgetsDependencies
 		,
 			'
 
@@ -28,17 +30,28 @@ export class ' , self componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
 
-' , (self collectPhaseCalled flatCollect: [ :phase | 'public ' , phase name , ': Phase;' , String crlf ])
-		, (self recursiveWidgets flatCollect: [ :widget | '    ', widget idViewChild ])
+'
+		,
+			(self collectPhaseCalled
+				flatCollect: [ :phase | 'public ' , phase name , ': Phase;' , String crlf ])
+		, (self recursiveWidgets flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
-    constructor(' , (self collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
+    constructor('
+		,
+			(self collectPhaseCalled
+				ifNotEmpty:
+					[ 'protected _desktopStateService: DesktopStateService,private _phaseService: PhaseService,' ])
 		,
 			') {
-' ,
-		(self collectPhaseCalled flatCollect: [ :phase | 'this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
+'
 		,
-			'	
+			(self collectPhaseCalled
+				flatCollect: [ :phase | 
+					'    this.' , phase name , '= this._phaseService.getPhase(''' , phase name , ''');'
+						, String crlf ])
+		,
+			'
     }
 
     public ngOnInit(): void {
