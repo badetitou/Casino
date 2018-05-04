@@ -1,0 +1,3 @@
+accessing
+getSelector
+	^ 'p-fileUpload'
