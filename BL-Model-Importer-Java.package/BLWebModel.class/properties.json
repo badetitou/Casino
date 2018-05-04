@@ -16,7 +16,8 @@
 		"cacheModelPhases",
 		"sourceModel",
 		"modelWidgetCache",
-		"xmlUiLink"
+		"xmlUiLink",
+		"xmlUiWidgetLink"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"

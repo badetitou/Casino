@@ -4,6 +4,7 @@ createModelIn: aModel
 	self generatePhase.
 	self generatePageMetier.
 	self addLinkXmlUi.
+	self addLinkXmlUiWidget.
 	self addLinkForAbstractTabPhase.
 	self addLinkPhaseToPageMetier.
 	self addLinkPageMetierToPageMetier.
