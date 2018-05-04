@@ -2,12 +2,13 @@ as yet unclassified
 createWidgetFor: anInvocation
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget widgets
-		add:
+	widget
+		addWidget:
 			(BLUILeaf new
 				text:
 					(anInvocation parameters
 						at: 1
 						ifAbsent: [ self flag: #todo.
 							'TODO' ])).
+	widget parameters at: 'class' put: (anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]).
 	^ widget
