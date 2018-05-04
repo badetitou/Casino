@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLUIList",
+	"category" : "BL-Model-CoreWeb-Widget",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLFileUpload",
+	"type" : "normal"
+}
