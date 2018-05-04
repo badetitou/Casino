@@ -10,5 +10,5 @@ createWidgetFor: anInvocation
 						at: 1
 						ifAbsent: [ self flag: #todo.
 							'TODO' ])).
-	widget parameters at: 'class' put: (anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]).
+	widget parameters at: 'class' put: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.').
 	^ widget

@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 asString
-	^ '[', self name, ']="', self attributeValue , '"'
+	^ self leftToken  , self name , self rightToken ,'="' , self attributeValue , '"'
