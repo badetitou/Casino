@@ -21,4 +21,4 @@ baseline: spec
 				group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 				group: 'all'
 					with:
-					#('BL-Model' 'BL-Model-Example' 'BL-Model-Exporter' 'BL-Model-Exporter-Angular' 'BL-Model-Importer' 'BL-Model-Importer-Java' 'BL-Model-Query' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer') ]
+					#('bl' 'BL-Model-Query') ]
