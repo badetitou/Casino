@@ -1,4 +1,4 @@
-*BL-Model-CoreWeb-Exporter
+*BL-Model-CoreWeb
 allBLLinkButton
 	<navigation: 'BL Link Button'>
 	^ self allWithType: BLLinkButton

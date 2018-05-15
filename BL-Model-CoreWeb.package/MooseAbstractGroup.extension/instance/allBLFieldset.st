@@ -1,4 +1,4 @@
-*BL-Model-CoreWeb-Exporter
+*BL-Model-CoreWeb
 allBLFieldset
 	<navigation: 'BL Fieldset'>
 	^ self allWithType: BLFieldset
