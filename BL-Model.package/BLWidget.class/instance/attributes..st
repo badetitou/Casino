@@ -1,3 +1,3 @@
-accessing
+model
 attributes: anObject
 	attributes := anObject

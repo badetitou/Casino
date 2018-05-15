@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "FAMIXEntity",
 	"category" : "BL-Model-CoreWeb-Dependency",
 	"classinstvars" : [ ],
 	"pools" : [ ],
