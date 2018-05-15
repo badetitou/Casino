@@ -1,3 +1,3 @@
-*BL-Model-Exporter-Angular
+*BL-Model-Importer-Java
 addWidget: aWidget
 	widgets add: aWidget
