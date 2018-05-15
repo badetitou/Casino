@@ -1,3 +1,3 @@
 *BL-Model-Query
 outgoingElement
-	^ OrderedCollection new
+	^ self actions
