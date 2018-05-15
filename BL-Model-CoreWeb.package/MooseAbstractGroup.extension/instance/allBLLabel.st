@@ -1,4 +1,4 @@
-*BL-Model-CoreWeb-Exporter
+*BL-Model-CoreWeb
 allBLLabel
 	<navigation: 'BL Label'>
 	^ self allWithType: BLLabel
