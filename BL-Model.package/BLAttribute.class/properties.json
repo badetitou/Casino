@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
+	"super" : "FAMIXNamedEntity",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"attributeValue",
-		"name"
+		"widget"
 	],
 	"name" : "BLAttribute",
 	"type" : "normal"
