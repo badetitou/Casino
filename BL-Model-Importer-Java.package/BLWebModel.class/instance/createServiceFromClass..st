@@ -1,3 +1,3 @@
 as yet unclassified
 createServiceFromClass: aServiceClass
-	^ BLService new name: aServiceClass mooseName 
+	^ BLService new name: aServiceClass mooseName; source: aServiceClass 
