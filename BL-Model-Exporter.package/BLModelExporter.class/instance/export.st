@@ -1,3 +1,4 @@
-accessing
+run
 export
-	self subclassResponsibility 
+	self prepareExport.
+	self visit: model
