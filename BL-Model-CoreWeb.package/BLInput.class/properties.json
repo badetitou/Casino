@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BLUIList",
+	"super" : "BLUIContainer",
 	"category" : "BL-Model-CoreWeb-Widget",
 	"classinstvars" : [ ],
 	"pools" : [ ],

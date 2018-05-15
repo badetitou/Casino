@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 getSelector
-	^  (self container at: 1) getSelector , '-' , self getAcceptedName
+	^  (self container ) getSelector , '-' , self getAcceptedName
