@@ -5,4 +5,5 @@ initialize
 	phaseGroup := OrderedCollection new.
 	widgetGroup := Dictionary new.
 	actionGroup := OrderedCollection new.
-	listOfService := OrderedCollection new
+	listOfService := OrderedCollection new.
+	listOfServiceAction := OrderedCollection new

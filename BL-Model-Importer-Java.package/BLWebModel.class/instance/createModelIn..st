@@ -16,4 +16,5 @@ createModelIn: aModel
 	self addOnClickAttribute.
 	self generateBLActionAppel.
 	self generateService.
+	self generateServiceAction.
 	self addListsToModel
