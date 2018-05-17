@@ -1,13 +1,22 @@
 # BL-ToolKit
 
-## Minimum for exploration
+This repository contains the main packages of BL-Toolkit.
+It includes:
 
-- BL-Model-Explorer
+- A meta-model to represent web site
+- An Importer for this meta-model
+- An Exporter for this meta-model
+- A Specific Importer for JAVA
+- A Specific Exporter to Angular
 
-## Load Model
+It also contains some specific package for a company (but you don't need to know)
 
-clone and load packages
-- BL-Model
-- BL-Model-Explorer
-- BL-Model-Query
-- BLModelImporter
+## Installation
+
+In Iceberg, BaselineOfBLToolkit load.
+
+## Meta-Model
+
+The current meta-model is
+
+![Meta Model V4][./doc/images/ModelV4.png]
