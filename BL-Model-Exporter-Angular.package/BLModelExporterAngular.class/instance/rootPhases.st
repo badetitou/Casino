@@ -1,3 +1,3 @@
 accessing
 rootPhases
-	^ rootPhases
+	^ self root / 'phases'

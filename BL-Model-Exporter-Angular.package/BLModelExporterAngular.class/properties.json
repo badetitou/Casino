@@ -5,9 +5,7 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [
-		"rootPhases"
-	],
+	"instvars" : [ ],
 	"name" : "BLModelExporterAngular",
 	"type" : "normal"
 }

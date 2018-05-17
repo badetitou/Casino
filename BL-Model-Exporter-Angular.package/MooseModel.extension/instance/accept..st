@@ -10,15 +10,8 @@ accept: anExporter
 	"Write components"
 	rootComponents := root / 'components' / 'index'.
 	rootComponents ensureCreateDirectory.
-	anExporter
-		writeFile: rootComponents / self getHTMLName
-		withCode: self generateHTMLSourceCode.
-	anExporter
-		writeFile: rootComponents / self getTSName
-		withCode: self generateTSSourceCode.
+	anExporter writeFile: rootComponents / self getHTMLName withCode: self generateHTMLSourceCode.
+	anExporter writeFile: rootComponents / self getTSName withCode: self generateTSSourceCode.
 	rootPhases := root / 'phases'.
 	rootPhases createDirectory.
-	self allBLPhase
-		do: [ :phase | 
-			anExporter visit: phase.
-]
+	(self allBLPhase , self allBLService) do: [ :rootElement | anExporter visit: rootElement ]
