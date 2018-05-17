@@ -6,17 +6,21 @@ import { FormsModule } from ''@angular/forms'';
 import { BrowserAnimationsModule } from ''@angular/platform-browser/animations'';
 import { ToastrModule } from ''ngx-toastr'';
 
-import { DEMOS_ROUTES } from ''./' , self name , '.routing'';
+import { DEMOS_ROUTES } from ''./' , self name
+		,
+			'.routing'';
 import { IndexComponent } from ''./components/index/index.component'';
 import { ComponentsModule } from ''../components/components.module'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
+',
+(self allBLService flatCollect: [ :service | 'import { ', service name, ' } from ''./', service getLocalPath ,''';', String crlf  ] ) 
+,'
 
-export const phases: Phase[] = ['
-		, (self allBLPhase flatCollect: [ :blPhase | '{' , String crlf , blPhase getMetadata , '},' , String crlf ])
+export const phases: Phase[] = [
+' , (self allBLPhase flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
 		,
 			'
-	
 ];
 
 @NgModule({
@@ -37,7 +41,8 @@ export const phases: Phase[] = ['
         IndexComponent
     ],
     providers: [
-        { provide: PHASES, useValue: phases } as Provider
+', (self allBLService flatCollect: [:service | '    ', service name, ',', String crlf]),
+        '    { provide: PHASES, useValue: phases } as Provider
     ]
 })
 export class ' , self name capitalized , 'Module { }'

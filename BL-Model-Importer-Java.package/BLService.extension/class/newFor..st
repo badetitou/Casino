@@ -1,5 +1,6 @@
 *BL-Model-Importer-Java
-newFor: aServiceClass 
-	^ self new name: aServiceClass mooseName;
+newFor: aServiceClass
+	^ self new
+		name: aServiceClass name;
 		source: aServiceClass;
-		yourself 
+		yourself

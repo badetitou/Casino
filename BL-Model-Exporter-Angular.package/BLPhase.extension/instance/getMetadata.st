@@ -1,17 +1,23 @@
 *BL-Model-Exporter-Angular
 getMetadata
-	" asString : 
-        id: 'phase1_2',
-        code: 'phase1',
-        label: 'Phase 1 - 2',
-        link: 'phase1',
-        subLabel: 'Bienvenue sur la phase 1 - 2',
-        icon: 'address-book',
-        datas: {'text': '2'}
+	" asString :
+{ 
+    id: 'phase1_2',
+    code: 'phase1',
+    label: 'Phase 1 - 2',
+    link: 'phase1',
+    subLabel: 'Bienvenue sur la phase 1 - 2',
+    icon: 'address-book',
+    datas: {'text': '2'}
+}
    "
 
-	^ 'id: ''' , self name , ''',' , String crlf , 'code: ''' , self name , ''','
-		, String crlf , 'label: ' , (BLModelExporterAngular convertIfString: self title)
-		, ',' , String crlf , 'link: ''' , self name , ''',' , String crlf , 'subLabel: '
-		, (BLModelExporterAngular convertIfString: self subtitle) , ',' , String crlf
-		, 'icon: ''address-book'',' , String crlf , 'datas: {},' , String crlf
+	^ '{
+    id: ''' , self name ,''',
+    code: ''' , self name,''',
+    label: ''' , self title protectQuote ,''',
+    link: ''' , self name,''',
+    subLabel: ''' , self subtitle protectQuote, ''',
+    icon: ''address-book'',
+    datas: {},
+}'
