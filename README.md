@@ -19,4 +19,4 @@ In Iceberg, BaselineOfBLToolkit load.
 
 The current meta-model is
 
-![Meta Model V4][./doc/images/ModelV4.png]
+![Meta Model V4](./doc/images/ModelV4.png)
