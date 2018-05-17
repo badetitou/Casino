@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "BLAttribute",
+	"super" : "BLNormalAttribute",
 	"category" : "BL-Model-CoreWeb-Attribute",
 	"classinstvars" : [ ],
 	"pools" : [ ],
