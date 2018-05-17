@@ -7,7 +7,7 @@ generateHTMLSourceCode
 				,
 					(self metiers
 						flatCollect: [ :metier | 
-							'<bl-tab title=' , (BLModelExporterAngular
-								convertIfString: metier title) , '>' , String crlf , metier getTag , String crlf , '</bl-tab>', String crlf ]) , '</bl-tabs>' , String crlf ].
+							'    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>' , String crlf , '        ',metier getTag
+								, String crlf , '    </bl-tab>' , String crlf ]) , '</bl-tabs>' , String crlf ].
 	text := text , (self widgets flatCollect: [ :widget | widget getDom , String crlf ]).
 	^ text
