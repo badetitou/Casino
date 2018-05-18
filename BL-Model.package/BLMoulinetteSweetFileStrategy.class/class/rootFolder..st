@@ -1,3 +1,3 @@
 accessing
 rootFolder: aRootFolder
-	rootFolder := aRootFolder 
+	rootFolder := aRootFolder asFileReference 
