@@ -2,5 +2,6 @@
 notAnonymousContainer
 	| class |
 	class := self.
-	[ class isNotNil and: [ class isAnonymousClass or: class isClass not ] ] whileTrue: [ class := class belongsTo  ].
+	[ class isNotNil and: [ class isAnonymousClass ] ]
+		whileTrue: [ class := class belongsTo ].
 	^ class
