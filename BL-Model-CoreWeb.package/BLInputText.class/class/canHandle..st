@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBox' = anInvocation invokedClassName
+	^ 'BLTextBox|TextBox' = anInvocation invokedClassName
