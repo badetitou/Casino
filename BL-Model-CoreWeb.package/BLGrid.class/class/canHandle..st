@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFlexTable|BLGrid' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLFlexTable|BLGrid' matches: anInvocation invokedClassName

@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxDate|BLTextBoxDatePicker' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLTextBoxDate|BLTextBoxDatePicker' matches: anInvocation invokedClassName

@@ -1,4 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLDefaultQuickSearch' asRegex
-		matchesPrefix: anInvocation invokedClassName
+	^ 'BLDefaultQuickSearch' = anInvocation invokedClassName

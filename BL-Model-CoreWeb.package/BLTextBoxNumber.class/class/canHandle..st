@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxNumber' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLTextBoxNumber' = anInvocation invokedClassName
