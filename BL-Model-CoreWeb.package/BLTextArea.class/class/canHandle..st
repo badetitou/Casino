@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextArea|TextArea' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLTextArea|TextArea' matches: anInvocation invokedClassName

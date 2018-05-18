@@ -1,3 +1,3 @@
 meta
 canHandle: anInvocation
-	^ 'HTML' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'HTML' = anInvocation invokedClassName

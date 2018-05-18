@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLListBox|ListBox' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLListBox|ListBox' matches: anInvocation invokedClassName

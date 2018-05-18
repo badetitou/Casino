@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLMultiCombo' asRegex matchesPrefix: anInvocation invokedClassName
+	^ 'BLMultiCombo' = anInvocation invokedClassName
