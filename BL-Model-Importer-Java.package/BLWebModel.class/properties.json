@@ -18,7 +18,8 @@
 		"modelWidgetCache",
 		"xmlUiLink",
 		"xmlUiWidgetLink",
-		"listOfServiceAction"
+		"listOfServiceAction",
+		"listOfAttribute"
 	],
 	"name" : "BLWebModel",
 	"type" : "normal"
