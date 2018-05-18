@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFieldSetPanelDynamic' match: anInvocation invokedClassName
+	^ 'BLFieldSetPanelDynamic|BLGroupBoxPanel' asRegex matchesPrefix: anInvocation invokedClassName

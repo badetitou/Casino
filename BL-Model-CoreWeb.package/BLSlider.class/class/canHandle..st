@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLSliderBar' match: anInvocation invokedClassName
+	^ 'BLSliderBar' asRegex matchesPrefix: anInvocation invokedClassName

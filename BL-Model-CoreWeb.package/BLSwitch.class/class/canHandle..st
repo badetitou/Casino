@@ -1,3 +1,3 @@
 meta
 canHandle: anInvocation
-	^ 'BLToggleButton' matches: anInvocation invokedClassName
+	^ 'BLToggleButton' asRegex matchesPrefix: anInvocation invokedClassName

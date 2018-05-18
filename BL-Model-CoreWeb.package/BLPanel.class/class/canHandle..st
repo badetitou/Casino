@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ '*Panel' match: anInvocation invokedClassName
+	^ '.*Panel' asRegex matchesPrefix: anInvocation invokedClassName

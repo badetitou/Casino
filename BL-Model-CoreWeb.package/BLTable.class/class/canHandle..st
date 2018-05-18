@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTableList*' match: anInvocation invokedClassName
+	^ 'BLTableList*' asRegex matchesPrefix: anInvocation invokedClassName

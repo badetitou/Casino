@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLDialogBox' match: anInvocation invokedClassName
+	^ 'BLDialogBox' asRegex matchesPrefix: anInvocation invokedClassName

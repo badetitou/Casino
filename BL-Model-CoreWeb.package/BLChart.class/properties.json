@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLUIContainer",
+	"category" : "BL-Model-CoreWeb-Widget",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLChart",
+	"type" : "normal"
+}

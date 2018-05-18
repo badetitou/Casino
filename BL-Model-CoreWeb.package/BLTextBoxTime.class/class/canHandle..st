@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxTime' matches: anInvocation invokedClassName
+	^ 'BLTextBoxTime' asRegex matchesPrefix: anInvocation invokedClassName

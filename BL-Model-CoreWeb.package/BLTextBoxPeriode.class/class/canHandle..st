@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxPeriode|BLTextBoxPeriodePicker' matches: anInvocation invokedClassName
+	^ 'BLTextBoxPeriode|BLTextBoxPeriodePicker' asRegex matchesPrefix: anInvocation invokedClassName
