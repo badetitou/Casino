@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLCheckBox' = anInvocation invokedClassName
+	^ 'BLCheckBox|CheckBox' matches: anInvocation invokedClassName

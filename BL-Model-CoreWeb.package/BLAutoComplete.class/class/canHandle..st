@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLDefaultQuickSearch' = anInvocation invokedClassName
+	^ 'BLDefaultQuickSearch|QuicksearchExempleREL' matches: anInvocation invokedClassName
