@@ -4,23 +4,30 @@ attributeMethod
 
 	| methodsText |
 	methodsText := self oldMethodConverted.
-	^ (self oldMethod methods size = 1) ifTrue: [ '    public ' , self attributeValue
-		,
-			': void {
+	^ self oldMethod methods size = 1
+		ifTrue: [ '    public ' , self attributeValue
+				,
+					': void {
         // TODO by developers
         /*
 ' , (self extractOnClickMethod: methodsText)
-		,
-			'
+				,
+					'
         */
     }' , String crlf , String crlf ]
-ifFalse: [ '    public ' , self attributeValue
-		,
-			': void {
+		ifFalse: [ '    public ' , self attributeValue
+				,
+					': void {
         // TODO by developers
         /*
-' , (methodsText)
-		,
-			'
+' , (self extractOnClickMethod: methodsText)
+				,
+					'
         */
-    }' , String crlf , String crlf ]
+    }
+
+'
+				,
+					((self oldMethod methods reject: [ :method | method name = 'onClick' ])
+						flatCollect: [ :method | '/*' , (self extractMethodNamed: method name From: methodsText) , '*/', String crlf , String crlf  ])
+				]
