@@ -7,5 +7,7 @@ addOnClickAttribute
 				do: [ :receiver | 
 					self listOfWidgetContainer
 						at: receiver
-						ifPresent: [ :found | (found blWidget createAttributeFrom: class) ifNotNil: [:attribute | self listOfAttribute add: attribute ] ]
+						ifPresent: [ :found | 
+							found blWidget createAttributeFrom: class
+								 ]
 						ifAbsent: [  ] ] ]
