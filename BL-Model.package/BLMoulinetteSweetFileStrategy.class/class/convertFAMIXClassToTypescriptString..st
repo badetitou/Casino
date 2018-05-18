@@ -1,8 +1,9 @@
 as yet unclassified
 convertFAMIXClassToTypescriptString: aFAMIXClass
-	| correspondingTSFile | 
+	| correspondingTSFile tsClassName rightBracketPos leftBracketPos contentLocalCache |  
 	correspondingTSFile := self rootFolder / (self computeTSFileNameFromFAMIXCLass: aFAMIXClass).
-	self computeTSClassNameFromFAMIXCLass: aFAMIXClass.
-	correspondingTSFile.
-	
-	^ self halt. 
+	tsClassName := self computeTSClassNameFromFAMIXCLass: aFAMIXClass.
+	contentLocalCache := correspondingTSFile contents.
+	rightBracketPos := contentLocalCache indexOf: ${ startingAt: ( contentLocalCache findString:  'export class ', tsClassName).
+	leftBracketPos :=contentLocalCache findCloseBracketFor: rightBracketPos.
+	^ (contentLocalCache copyFrom: rightBracketPos to: leftBracketPos) replaceAllRegex: '\*/' with: '//'
