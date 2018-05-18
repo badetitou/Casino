@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 5/18/2018 09:54",
+	"super" : "BLMoulinetteStrategy",
+	"category" : "BL-Model",
+	"classinstvars" : [
+		"rootFolder"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLMoulinetteSweetFileStrategy",
+	"type" : "normal"
+}

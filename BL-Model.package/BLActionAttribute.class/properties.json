@@ -4,8 +4,12 @@
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classvars" : [
+		"moulinetteStrategy"
+	],
+	"instvars" : [
+		"oldMethod"
+	],
 	"name" : "BLActionAttribute",
 	"type" : "normal"
 }

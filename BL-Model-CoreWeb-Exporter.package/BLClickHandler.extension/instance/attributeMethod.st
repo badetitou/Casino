@@ -7,6 +7,7 @@ attributeMethod
 			': void {
         // TODO by developers
         /*
-', self oldMethod ,'
+' , self oldMethodConverted  ,
+			'
         */
     }' , String crlf , String crlf

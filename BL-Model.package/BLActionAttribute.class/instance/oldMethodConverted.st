@@ -1,0 +1,3 @@
+accessing
+oldMethodConverted
+	^ self moulinetteStrategy convertFAMIXClassToTypescriptString: oldMethod

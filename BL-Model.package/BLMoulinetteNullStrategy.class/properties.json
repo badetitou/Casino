@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "BLActionAttribute",
-	"category" : "BL-Model-CoreWeb-Attribute",
+	"super" : "BLMoulinetteStrategy",
+	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "BLClickHandler",
+	"name" : "BLMoulinetteNullStrategy",
 	"type" : "normal"
 }
