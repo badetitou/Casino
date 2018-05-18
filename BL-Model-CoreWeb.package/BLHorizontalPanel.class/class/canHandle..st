@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ '*HorizontalPanel' match: anInvocation invokedClassName
+	^ '.*HorizontalPanel' asRegex matchesPrefix: anInvocation invokedClassName

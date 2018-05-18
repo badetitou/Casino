@@ -1,0 +1,3 @@
+accessing
+modulePath
+	^ 'primeng/chart'

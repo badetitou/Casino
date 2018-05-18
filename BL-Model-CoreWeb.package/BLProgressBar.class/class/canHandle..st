@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLProgressBar' match: anInvocation invokedClassName
+	^ 'BLProgressBar' asRegex matchesPrefix: anInvocation invokedClassName

@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLCheckBox' match: anInvocation invokedClassName
+	^ 'BLCheckBox' asRegex matchesPrefix: anInvocation invokedClassName

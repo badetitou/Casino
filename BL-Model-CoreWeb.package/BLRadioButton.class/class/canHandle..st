@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLRadioButton' match: anInvocation invokedClassName
+	^ 'BLRadioButton' asRegex matchesPrefix: anInvocation invokedClassName

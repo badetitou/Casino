@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxColorPicker' match: anInvocation invokedClassName
+	^ 'BLTextBoxColorPicker' asRegex matchesPrefix: anInvocation invokedClassName

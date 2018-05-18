@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLImage|BLImageButton' matches: anInvocation invokedClassName
+	^ 'BLImage|BLImageButton|Image' asRegex matchesPrefix: anInvocation invokedClassName

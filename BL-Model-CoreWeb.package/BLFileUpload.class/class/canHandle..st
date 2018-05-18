@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFileUpload*' match: anInvocation invokedClassName
+	^ 'BLFileUpload*' asRegex matchesPrefix: anInvocation invokedClassName

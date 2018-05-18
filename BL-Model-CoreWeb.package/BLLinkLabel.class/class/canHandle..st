@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLLinkLabel' match: anInvocation invokedClassName
+	^ 'BLLinkLabel' asRegex matchesPrefix: anInvocation invokedClassName

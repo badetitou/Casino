@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFieldSetPanel' match: anInvocation invokedClassName
+	^ 'BLFieldSetPanel' asRegex matchesPrefix: anInvocation invokedClassName
