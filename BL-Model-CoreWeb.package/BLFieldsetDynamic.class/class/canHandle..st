@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFieldSetPanelDynamic|BLGroupBoxPanel' matches: anInvocation invokedClassName
+	^ ('BLFieldSetPanelDynamic|BLGroupBoxPanel' substrings: '|') includes: anInvocation invokedClassName

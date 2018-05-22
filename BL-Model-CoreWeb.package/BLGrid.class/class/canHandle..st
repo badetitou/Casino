@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLFlexTable|BLGrid' matches: anInvocation invokedClassName
+	^ ('BLFlexTable|BLGrid' substrings: '|') includes: anInvocation invokedClassName

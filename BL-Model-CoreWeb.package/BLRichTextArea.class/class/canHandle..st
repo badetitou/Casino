@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLRTFWithToolbar|BLRichTextArea|RichTextArea' matches: anInvocation invokedClassName
+	^ ('BLRTFWithToolbar|BLRichTextArea|RichTextArea' substrings: '|') includes: anInvocation invokedClassName

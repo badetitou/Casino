@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLPasswordBox|PasswordTextBox' matches: anInvocation invokedClassName
+	^ ('BLPasswordBox|PasswordTextBox' substrings: '|') includes: anInvocation invokedClassName

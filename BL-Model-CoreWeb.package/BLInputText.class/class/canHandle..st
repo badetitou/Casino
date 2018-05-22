@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBox|TextBox' = anInvocation invokedClassName
+	^ ('BLTextBox|TextBox' substrings: '|') includes: anInvocation invokedClassName

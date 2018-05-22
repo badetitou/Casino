@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLLabel|Label' matches: anInvocation invokedClassName
+	^ ('BLLabel|Label' substrings: '|') includes: anInvocation invokedClassName
