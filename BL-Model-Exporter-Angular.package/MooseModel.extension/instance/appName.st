@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 appName
-	^ 'GEN_UIDESK'
+	^ 'PHASE_INCUBATOR_HOME'

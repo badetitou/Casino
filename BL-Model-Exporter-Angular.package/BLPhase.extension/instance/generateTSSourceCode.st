@@ -63,4 +63,4 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
     public init(): void {
 
     }
-}', String crlf
+}' , String crlf

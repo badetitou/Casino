@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLVariableAttribute",
+	"category" : "BL-Model-CoreWeb-Attribute",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLModel",
+	"type" : "normal"
+}

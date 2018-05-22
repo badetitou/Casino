@@ -15,8 +15,7 @@ import {
 					[ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
 import { PhaseService } from ''../../../../../components/service/phase.service'';
-' ])
-		, self widgetsDependencies
+' ]) , self widgetsDependencies
 		,
 			'
 
@@ -39,6 +38,10 @@ export class ' , self componentName capitalized
 		, (self recursiveWidgets flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
+' , (self recursiveWidget flattened flatCollect: #getVariables)
+		,
+			'
+
     constructor('
 		,
 			(self collectPhaseCalled
@@ -57,7 +60,9 @@ export class ' , self componentName capitalized
     }
 
     public ngOnInit(): void {
-
+' , (self recursiveWidget flattened flatCollect: #getInitializations)
+		,
+			'
     }
 
     public ngOnDestroy(): void {
