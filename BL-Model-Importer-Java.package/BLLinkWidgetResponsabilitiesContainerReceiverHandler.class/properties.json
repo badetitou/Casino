@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLLinkWidgetResponsabilitiesHandler",
+	"category" : "BL-Model-Importer-Java",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLLinkWidgetResponsabilitiesContainerReceiverHandler",
+	"type" : "normal"
+}
