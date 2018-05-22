@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLImage|BLImageButton|Image' matches: anInvocation invokedClassName
+	^ ('BLImage|BLImageButton|Image' substrings: '|') includes: anInvocation invokedClassName

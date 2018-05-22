@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLCheckBox|CheckBox' matches: anInvocation invokedClassName
+	^ ('BLCheckBox|CheckBox' substrings: '|') includes: anInvocation invokedClassName

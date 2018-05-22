@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextBoxDate|BLTextBoxDatePicker' matches: anInvocation invokedClassName
+	^ ('BLTextBoxDate|BLTextBoxDatePicker' substrings: '|') includes: anInvocation invokedClassName

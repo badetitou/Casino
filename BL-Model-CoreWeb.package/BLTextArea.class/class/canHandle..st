@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLTextArea|TextArea' matches: anInvocation invokedClassName
+	^ ('BLTextArea|TextArea' substrings: '|') includes: anInvocation invokedClassName

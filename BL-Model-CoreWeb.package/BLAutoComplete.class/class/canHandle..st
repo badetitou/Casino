@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ 'BLDefaultQuickSearch|QuicksearchExempleREL' matches: anInvocation invokedClassName
+	^ ('BLDefaultQuickSearch|QuicksearchExempleREL' substrings: '|') includes: anInvocation invokedClassName
