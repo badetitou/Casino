@@ -3,4 +3,4 @@ widgetsDependenciesName
 	^ ''
 		,
 			(self widgetsDependencies 
-				flatCollect: [ :dependency | dependency moduleName , ',' , String crlf ])
+				flatCollect: [ :dependency | '        ', dependency moduleName , ',' , String crlf ])

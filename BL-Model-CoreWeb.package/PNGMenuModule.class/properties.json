@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "PrimeNGComponent",
+	"category" : "BL-Model-CoreWeb-Dependency",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "PNGMenuModule",
+	"type" : "normal"
+}
