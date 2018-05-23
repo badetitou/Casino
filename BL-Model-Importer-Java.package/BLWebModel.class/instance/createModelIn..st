@@ -12,9 +12,11 @@ createModelIn: aModel
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
 	self addLinkBetweenWidgets.
 	self addPPPToWidget.
-	self addWidgetAttributes.
-	self addOnClickAttribute.
 	self generateBLActionAppel.
 	self generateService.
 	self generateServiceAction.
+	"this last two should stay at the end"
+	self addWidgetAttributes.
+	self addOnClickAttribute.
+	self addWidgetDefaultAttributes.
 	self addListsToModel
