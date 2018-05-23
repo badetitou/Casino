@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	next := BLLinkWidgetResponsabilitiesContainerReceiverHandler new.
+	next := BLLinkWidgetResponsabilitiesParameterHandler new

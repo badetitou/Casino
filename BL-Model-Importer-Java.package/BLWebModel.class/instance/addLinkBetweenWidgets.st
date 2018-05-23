@@ -1,7 +1,6 @@
 adding
 addLinkBetweenWidgets
 	| responsabilityHandlerForUsages |
-	self halt.
 	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
 	self listOfWidgetContainer
 		do: [ :widgetContainer | 
