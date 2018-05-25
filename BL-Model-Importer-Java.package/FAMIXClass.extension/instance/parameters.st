@@ -1,6 +1,8 @@
 *BL-Model-Importer-Java
 parameters
-	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
-	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"
-	self flag: #todo.
-	^ {}
+	"I try to extract the initial parameter of an Anonymous class declaration"
+	| subString |
+	subString :=(self container sourceText
+		copyFrom: 1
+		to: (self container sourceText findString: self sourceText)) ifEmpty: [^ {}].
+	^ (subString copyFrom: (subString findLastOccurrenceOfString: 'new' startingAt: 1) to: subString size) extractParameters
