@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"text"
+		"text",
+		"value"
 	],
 	"name" : "BLInputText",
 	"type" : "normal"
