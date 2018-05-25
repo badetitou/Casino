@@ -1,10 +1,5 @@
 testing
 getDom
-	^ '<span class="ui-float-label">
-    <input id="float-' , self mooseID asString
+	^ '<input id="float-' , self mooseID asString , '" type="text" value="' , value
 		,
-			'" type="text" value="', value , '" pInputText> 
-    <label for="float-' , self mooseID asString , '">' , text
-		,
-			'</label>
-</span>'
+			'" placeholder="', text,'" pInputText>'
