@@ -2,4 +2,5 @@
 id
 	^ self variable isClass
 		ifTrue: [ self variable uniqueName ]
-		ifFalse: [ self variable name, self variable mooseID asString]
+		ifFalse: [
+			self variable name , self variable mooseID asString ]
