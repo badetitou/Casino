@@ -1,3 +1,5 @@
+"LOAD FAST"
+
 "Reset Work"
 MooseModel resetRoot.
 MooseModel resetMeta.
