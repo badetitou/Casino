@@ -1,7 +1,7 @@
 accessing
 basicRun
 	self modelKind new
-		xml: xml;
+		xml: (PPXmlParser parse: xml asFileReference contents);
 		sourceModel: sourceModel;
 		createModelIn: model.
 	model install
