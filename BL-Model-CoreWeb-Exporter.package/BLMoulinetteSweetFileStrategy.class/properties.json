@@ -2,12 +2,12 @@
 	"commentStamp" : "BenoitVerhaeghe 5/18/2018 09:54",
 	"super" : "BLMoulinetteStrategy",
 	"category" : "BL-Model-CoreWeb-Exporter",
-	"classinstvars" : [
-		"rootFolder"
-	],
+	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"rootFolder"
+	],
 	"name" : "BLMoulinetteSweetFileStrategy",
 	"type" : "normal"
 }
