@@ -1,0 +1,1 @@
+I return the class methods you give to me as the source code of thoses methods commented
