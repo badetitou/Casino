@@ -1,3 +1,3 @@
 accessing
 moulinetteStrategy
-	^ moulinetteStrategy ifNil: [ moulinetteStrategy := BLMoulinetteNullStrategy  ]
+	^ moulinetteStrategy ifNil: [ moulinetteStrategy := BLMoulinetteNullStrategy new ]
