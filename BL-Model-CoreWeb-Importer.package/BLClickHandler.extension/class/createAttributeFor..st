@@ -1,7 +1,6 @@
 *BL-Model-CoreWeb-Importer
 createAttributeFor: aFAMIXClass
-	^ self new
+	^ super createAttributeFor: aFAMIXClass ;
 		name: 'click';
 		attributeValue: 'clickOn' , aFAMIXClass uniqueName , '()';
-		oldMethod: aFAMIXClass;
 		yourself
