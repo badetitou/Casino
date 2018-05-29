@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLAction super: #FAMIXAssociation>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

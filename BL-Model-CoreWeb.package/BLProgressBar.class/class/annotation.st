@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLProgressBar super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

@@ -5,7 +5,7 @@ createWidgetFor: anInvocation
 	widget parameters
 		at: #src
 		put:
-			BLWebModel webRoot
+			BLWebModelJava webRoot
 				,
 					((anInvocation parameters
 						at: 1 ifAbsent: [ 'TODO' ]

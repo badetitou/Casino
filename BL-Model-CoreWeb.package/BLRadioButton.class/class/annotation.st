@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLRadioButton super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

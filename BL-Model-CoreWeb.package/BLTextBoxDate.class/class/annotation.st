@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLTextBoxDate super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLFieldsetDynamic super: #BLFieldset>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

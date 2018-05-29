@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLSlider super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self
