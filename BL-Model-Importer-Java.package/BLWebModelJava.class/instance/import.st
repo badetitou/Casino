@@ -1,4 +1,4 @@
-importing
+api
 import
 	self generatePhase.
 	self generatePageMetier.
@@ -18,4 +18,4 @@ import
 	self addWidgetAttributes.
 	self addOnClickAttribute.
 	self addWidgetDefaultAttributes.
-	self addListsToModel
+	self addListsToModel.
