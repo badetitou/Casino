@@ -1,3 +1,3 @@
 *BL-Fast-Java-Angular-Extensions
 angularString
-	^ self subclassResponsibility 
+	^ self variable angularString 
