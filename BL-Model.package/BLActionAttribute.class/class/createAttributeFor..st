@@ -1,6 +1,6 @@
 meta
 createAttributeFor: aFAMIXCLass
-	^ super
+	^ self new
 		name: aFAMIXCLass name;
 		attributeValue: aFAMIXCLass name;
 		oldMethod: aFAMIXCLass;
