@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "BenoitVerhaeghe 5/28/2018 11:39",
 	"super" : "BLMoulinetteStrategy",
-	"category" : "BL-Model-Exporter-Angular",
+	"category" : "BL-Model-Importer-Java",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
