@@ -1,6 +1,5 @@
-as yet unclassified
-createModelIn: aModel
-	model := aModel.
+importing
+import
 	self generatePhase.
 	self generatePageMetier.
 	self addLinkXmlUi.

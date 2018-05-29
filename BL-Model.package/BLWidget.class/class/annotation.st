@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLWidget super: #FAMIXEntity>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

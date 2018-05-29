@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLFileUpload super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

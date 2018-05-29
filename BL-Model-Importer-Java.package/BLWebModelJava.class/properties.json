@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "BenoitVerhaeghe 5/28/2018 17:13",
-	"super" : "Object",
+	"super" : "BLWebModel",
 	"category" : "BL-Model-Importer-Java",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -10,16 +10,14 @@
 		"phaseGroup",
 		"widgetGroup",
 		"actionGroup",
-		"model",
 		"listOfService",
 		"xml",
 		"cacheModelPhases",
-		"sourceModel",
 		"modelWidgetCache",
 		"xmlUiLink",
 		"xmlUiWidgetLink",
 		"listOfServiceAction"
 	],
-	"name" : "BLWebModel",
+	"name" : "BLWebModelJava",
 	"type" : "normal"
 }

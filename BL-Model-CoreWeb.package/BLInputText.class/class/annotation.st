@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLInputText super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

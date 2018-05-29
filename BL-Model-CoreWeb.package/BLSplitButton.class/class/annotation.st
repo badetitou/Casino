@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLColorPicker super: #BLWidget>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

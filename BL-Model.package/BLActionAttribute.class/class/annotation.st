@@ -1,5 +1,5 @@
 meta
 annotation
 	<MSEClass: #BLActionAttribute super: #BLAttribute>
-	<package: #BLWebModel>
+	<package: #BLWebModelJava>
 	^ self

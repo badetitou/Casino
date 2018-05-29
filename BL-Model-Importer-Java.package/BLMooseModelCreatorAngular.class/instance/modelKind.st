@@ -1,3 +1,3 @@
 accessing
 modelKind
-	^ BLWebModel
+	^ BLWebModelJava
