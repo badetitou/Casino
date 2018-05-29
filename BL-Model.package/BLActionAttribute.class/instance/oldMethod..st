@@ -1,3 +1,3 @@
 accessing
 oldMethod: anObject
-	oldMethod := anObject
+	oldMethod := self moulinetteStrategy convertFAMIXClassToTypescriptString:  anObject

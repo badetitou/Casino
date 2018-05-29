@@ -38,10 +38,7 @@ export class ' , self componentName capitalized
 		,
 			'
 
-    constructor('
-		,
-			(self collectPhaseCalled
-				ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ])
+    constructor(' , self importServicesForConstructor
 		,
 			') {
 '
@@ -64,7 +61,9 @@ export class ' , self componentName capitalized
 '
 		,
 			(self collectPhaseCalled
-				ifNotEmpty: [ String crlf, '    public openPhase(phase: Phase): void {
+				ifNotEmpty: [ String crlf
+						,
+							'    public openPhase(phase: Phase): void {
         this._desktopStateService.selectPhase(phase);
     }' ])
 		,
