@@ -1,3 +1,3 @@
-accessing
+model
 services: anObject
 	services := anObject 

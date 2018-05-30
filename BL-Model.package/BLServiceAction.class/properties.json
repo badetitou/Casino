@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"service"
+		"service",
+		"uses"
 	],
 	"name" : "BLServiceAction",
 	"type" : "normal"

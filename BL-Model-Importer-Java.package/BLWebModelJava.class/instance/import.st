@@ -18,4 +18,6 @@ import
 	self addWidgetAttributes.
 	self addOnClickAttribute.
 	self addWidgetDefaultAttributes.
+
 	self addListsToModel.
+		self addLinkBetweenServiceAndAttribute.
