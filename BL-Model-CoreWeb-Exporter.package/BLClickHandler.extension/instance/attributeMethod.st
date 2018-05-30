@@ -1,3 +1,10 @@
 *BL-Model-CoreWeb-Exporter
 attributeMethod
-	^ '// SHOULD BE RE DONE'
+	^ '/*
+	' , ('', (self oldMethod flatCollect: #angularString)
+		replaceAllRegex: 'onClick'
+		with:
+			self attributeValue)
+				,
+					'
+*/'
