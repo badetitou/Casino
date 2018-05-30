@@ -1,3 +1,3 @@
-as yet unclassified
+accessing
 getExternalDependency
-    ^ PNGTurboTable
+	^ {PNGTurboTable}

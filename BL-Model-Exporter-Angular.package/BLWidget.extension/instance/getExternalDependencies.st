@@ -1,5 +1,5 @@
 *BL-Model-Exporter-Angular
 getExternalDependencies
 	^ {self getExternalDependency.
-	self getExternalDependency internalDependencies}
+	self getExternalDependency collect: #internalDependencies}
 		flattened

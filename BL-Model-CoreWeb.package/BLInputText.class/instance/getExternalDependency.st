@@ -1,3 +1,3 @@
 accessing
 getExternalDependency
-	^ PNGInputText 
+	^ {PNGInputText}
