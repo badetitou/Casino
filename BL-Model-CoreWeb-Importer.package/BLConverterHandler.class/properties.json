@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "",
-	"super" : "PJASTNodeVisitor",
+	"commentStamp" : "BenoitVerhaeghe 5/30/2018 15:33",
+	"super" : "Object",
 	"category" : "BL-Model-CoreWeb-Importer",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"handler"
+		"next"
 	],
-	"name" : "BLConvertVisitor",
+	"name" : "BLConverterHandler",
 	"type" : "normal"
 }

@@ -1,0 +1,3 @@
+visiting
+visitMethodDeclarationNode: aMethodDeclarationNode
+	self visitNode: aMethodDeclarationNode body
