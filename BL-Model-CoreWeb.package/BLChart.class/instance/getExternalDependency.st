@@ -1,3 +1,3 @@
 accessing
 getExternalDependency
-	^ PNGChart
+	^ {PNGChart}
