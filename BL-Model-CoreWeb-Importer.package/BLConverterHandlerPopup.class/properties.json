@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLConverterHandler",
+	"category" : "BL-Model-CoreWeb-Importer",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLConverterHandlerPopup",
+	"type" : "normal"
+}
