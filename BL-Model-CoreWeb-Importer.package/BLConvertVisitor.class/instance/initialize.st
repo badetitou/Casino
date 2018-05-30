@@ -1,3 +1,3 @@
 visiting
 initialize
-	handler := BLConverterHandlerAttributeName new.
+	handler := BLConverterHandlerAttributeName new

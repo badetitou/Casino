@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"next"
+		"next",
+		"model"
 	],
 	"name" : "BLConverterHandler",
 	"type" : "normal"
