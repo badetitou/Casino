@@ -8,7 +8,7 @@
 		"moulinetteStrategy"
 	],
 	"instvars" : [
-		"oldMethod",
+		"oldClass",
 		"services"
 	],
 	"name" : "BLActionAttribute",

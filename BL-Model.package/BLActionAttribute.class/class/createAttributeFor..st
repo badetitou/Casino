@@ -1,8 +1,8 @@
 meta
 createAttributeFor: aFAMIXCLass
 	^ self new
-		source: aFAMIXCLass ;
+		source: aFAMIXCLass;
 		name: aFAMIXCLass name;
 		attributeValue: aFAMIXCLass name;
-		oldMethod: aFAMIXCLass;
+		oldClass: aFAMIXCLass;
 		yourself
