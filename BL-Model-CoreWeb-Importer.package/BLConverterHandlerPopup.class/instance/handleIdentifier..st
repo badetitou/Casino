@@ -1,4 +1,3 @@
 as yet unclassified
 handleIdentifier: anIndentifier
-	self flag: #todo.
-	self halt. 
+	(anIndentifier name = 'BLEventPopup') ifTrue: [ self halt. ] ifFalse: [ ]

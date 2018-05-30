@@ -2,4 +2,4 @@ visiting
 visitLocalVariableDeclarationStatementNode: aLocalVariableDeclarationStatementNode
 	self visitNode: aLocalVariableDeclarationStatementNode type.
 	aLocalVariableDeclarationStatementNode modifiers ifNotNil: [ self visitNodes: aLocalVariableDeclarationStatementNode modifiers ].
-	self visitNode: aLocalVariableDeclarationStatementNode declarators
+	aLocalVariableDeclarationStatementNode declarators do: [:each | self visitNode: each ]
