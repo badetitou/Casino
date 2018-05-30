@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 serviceVariableConstructorString
-	^ 'private _', self service mooseName uncapitalized, ': ', self service mooseName
+	^ 'private ', self service getVariableName, ': ', self service mooseName

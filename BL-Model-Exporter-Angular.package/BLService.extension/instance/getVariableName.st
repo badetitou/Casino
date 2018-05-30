@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 getVariableName
-	^ self mooseName uncapitalized
+	^ '_', self mooseName uncapitalized
