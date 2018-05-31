@@ -9,7 +9,7 @@
 	],
 	"instvars" : [
 		"oldClass",
-		"services"
+		"behaviors"
 	],
 	"name" : "BLActionAttribute",
 	"type" : "normal"

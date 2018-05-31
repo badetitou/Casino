@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:37",
-	"super" : "BLBehavior",
+	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:25",
+	"super" : "BLEntity",
 	"category" : "BL-Model",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"service"
+		"uses"
 	],
-	"name" : "BLServiceAction",
+	"name" : "BLBehavior",
 	"type" : "normal"
 }

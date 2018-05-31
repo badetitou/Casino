@@ -1,4 +1,4 @@
 *BL-Model
 allBLWidget
-	<navigation: 'BL Widget'>
+	<navigation: 'Sub-Widget'>
 	^ self allWithSubTypesOf: BLWidget

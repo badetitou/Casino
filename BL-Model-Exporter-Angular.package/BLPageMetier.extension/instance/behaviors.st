@@ -1,8 +1,8 @@
 *BL-Model-Exporter-Angular
-importServicesForConstructor
+behaviors
 	^ (self collectPhaseCalled
 		ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
 		ifEmpty: [ '' ])
 		,
-			(self calledServices
+			(self calledBehavior
 				flatCollect: [ :actionService | actionService serviceVariableConstructorString , ', ' ])

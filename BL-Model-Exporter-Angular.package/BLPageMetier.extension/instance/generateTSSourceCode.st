@@ -15,7 +15,7 @@ import {
 					[ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
 import { PhaseService } from ''../../../../../components/service/phase.service'';
-' ]) , self widgetsDependencies, self getServicesImportString
+' ]) , self widgetsDependencies, self getBehaviorImportString
 		,
 			'
 
@@ -38,11 +38,11 @@ export class ' , self componentName capitalized
 		, (self recursiveWidgets flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
-' , (self recursiveWidget flattened flatCollect: #getVariables)
+' , (self recursiveWidgets flattened flatCollect: #getVariables)
 		,
 			'
 
-    constructor(' , self importServicesForConstructor
+    constructor(' , self behaviors
 		,
 			') {
 '
@@ -56,7 +56,7 @@ export class ' , self componentName capitalized
     }
 
     public ngOnInit(): void {
-' , (self recursiveWidget flattened flatCollect: #getInitializations)
+' , (self recursiveWidgets flattened flatCollect: #getInitializations)
 		,
 			'
     }

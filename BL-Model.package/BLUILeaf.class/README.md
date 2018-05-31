@@ -1,0 +1,1 @@
+I am a widget that cannot contain any other widget

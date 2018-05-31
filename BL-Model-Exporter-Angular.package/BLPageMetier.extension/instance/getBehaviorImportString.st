@@ -1,8 +1,8 @@
 *BL-Model-Exporter-Angular
-getServicesImportString
+getBehaviorImportString
 	^ ''
 		,
-			(self calledServices
+			(self calledBehavior
 				flatCollect: [ :serviceAction | 
 					'import { ' , serviceAction service mooseName , ' } from ''' , self relativePathToHome
 						, serviceAction service getLocalPath , ''';' , String crlf ])
