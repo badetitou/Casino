@@ -1,0 +1,1 @@
+I represent the root container of an application or of a subproject of an application

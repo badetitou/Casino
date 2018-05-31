@@ -1,3 +1,5 @@
 *BL-Model
 allBLAction
-	^ self allBLPhase flatCollect: #actions
+	
+	<navigation: 'BL Actions'>
+	^ self allWithType: BLAction

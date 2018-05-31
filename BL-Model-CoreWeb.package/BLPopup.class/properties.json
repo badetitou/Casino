@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLBehavior",
+	"category" : "BL-Model-CoreWeb-Behavior",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLPopup",
+	"type" : "normal"
+}
