@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLServiceAction super: #BLBehavior>
+	<MSEClass: #BLBehavior super: #BLEntity>
 	<package: #BLWebModelJava>
 	^ self

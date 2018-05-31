@@ -1,6 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLPhase super: #FAMIXNamedEntity>
+	<MSEClass: #BLPhase super: #BLEntity>
 	<package: #BLWebModelJava>
 	^ self
-	

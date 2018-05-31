@@ -5,4 +5,4 @@ behaviors
 		ifEmpty: [ '' ])
 		,
 			(self calledBehavior
-				flatCollect: [ :actionService | actionService serviceVariableConstructorString , ', ' ])
+				flatCollect: [ :actionService | actionService initializeVariable , ', ' ])
