@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLService super: #FAMIXNamedEntity>
+	<MSEClass: #BLService super: #BLEntity>
 	<package: #BLWebModelJava>
 	^ self

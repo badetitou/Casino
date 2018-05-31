@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLPageMetier super: #FAMIXNamedEntity>
+	<MSEClass: #BLPageMetier super: #BLUIContainer>
 	<package: #BLWebModelJava>
 	^ self
