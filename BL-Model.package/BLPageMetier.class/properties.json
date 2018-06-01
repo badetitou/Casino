@@ -2,8 +2,6 @@
 	"classtraitcomposition" : "BLTWithPhases classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"#containerPhase",
-		"#metiers",
 		"#title"
 	],
 	"name" : "BLPageMetier",

@@ -1,3 +1,3 @@
 *BL-Model-Exporter
 container
-	^ containerPhase ifNotEmpty: [containerPhase at: 1] ifEmpty:  [ containerMetier ]
+	^ self phases ifNotEmpty: [ self phases at: 1] ifEmpty:  [ containerMetier ]
