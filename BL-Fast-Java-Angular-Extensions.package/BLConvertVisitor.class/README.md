@@ -1,0 +1,1 @@
+I am a visitor of a FAST Model... with me, you will be able to convert your code into another model and extract the @BLBehavior of source code
