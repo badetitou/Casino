@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "BLTPhase classTrait + BLTWithPageMetiers classTrait",
+	"classtraitcomposition" : "BLTWithActionAppels classTrait + BLTWithPageMetiers classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"#codePhase",
@@ -11,7 +11,7 @@
 	"name" : "BLPhase",
 	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:44",
 	"super" : "BLOriginedEntity",
-	"traitcomposition" : "BLTPhase + BLTWithPageMetiers",
+	"traitcomposition" : "BLTWithActionAppels + BLTWithPageMetiers",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

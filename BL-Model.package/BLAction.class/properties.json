@@ -1,14 +1,16 @@
 {
-	"commentStamp" : "",
-	"super" : "MooseEntity",
-	"category" : "BL-Model-Entities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "FmxNGTAssociation classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"appelant",
-		"call"
+		"#appelant",
+		"#call"
 	],
 	"name" : "BLAction",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "MooseEntity",
+	"traitcomposition" : "FmxNGTAssociation",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

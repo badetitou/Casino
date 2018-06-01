@@ -1,3 +1,5 @@
 accessing
-attributeValue: aString
-	attributeValue := aString
+attributeValue: anObject
+
+	<generated>
+	attributeValue := anObject

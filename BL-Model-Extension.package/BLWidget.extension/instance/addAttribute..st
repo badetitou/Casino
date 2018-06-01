@@ -1,3 +1,3 @@
 *BL-Model-Extension
 addAttribute: attribute
-	attributes add: attribute 
+	self attributes add: attribute 

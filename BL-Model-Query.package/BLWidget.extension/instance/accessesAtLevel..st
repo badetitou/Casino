@@ -2,4 +2,4 @@
 accessesAtLevel: aLevel
 	aLevel == 0
 		ifTrue: [ ^ nil ].
-	^ self actionsAppel collect: [ :a | a -> actionsAppel collect: #accessesAtLevel ]
+	^ self actionsAppel collect: [ :a | a -> self actionAppels collect: #accessesAtLevel ]
