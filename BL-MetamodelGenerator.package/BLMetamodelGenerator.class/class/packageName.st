@@ -1,3 +1,3 @@
 accessing
 packageName
-	^ #'BL-Model-Generated'
+	^ #'BL-Model'
