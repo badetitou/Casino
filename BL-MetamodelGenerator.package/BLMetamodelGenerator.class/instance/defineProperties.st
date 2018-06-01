@@ -1,6 +1,6 @@
 definition
 defineProperties
-	(entity property: #source type: #FAMIXEntity)
+	(entity property: #source type: #MooseEntity)
 		comment: 'The source of the element (from the importation)'.
 	(phase property: #codePhase type: #String)
 		comment: 'The unique code of the Phase'.
