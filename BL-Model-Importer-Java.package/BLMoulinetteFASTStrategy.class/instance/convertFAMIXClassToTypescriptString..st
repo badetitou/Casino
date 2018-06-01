@@ -1,3 +1,3 @@
 as yet unclassified
 convertFAMIXClassToTypescriptString: aFAMIXClass
-	^ (aFAMIXClass methods collect: [ :method | (self fastImporter parseTreeForSource: method sourceText) ]).
+	^ aFAMIXClass methods do: [:aFamixMethod | aFamixMethod generateFAST ]"collect: [ :method | self fastImporter parseTreeForSource: method sourceText ]"
