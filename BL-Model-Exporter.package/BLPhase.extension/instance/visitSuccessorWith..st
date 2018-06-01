@@ -1,5 +1,5 @@
 *BL-Model-Exporter
 visitSuccessorWith: anExporter
 	"to override"
-	self metiers do: [ :metier | anExporter visit: metier ]
-	
+
+	self pageMetiers do: [ :metier | anExporter visit: metier ]

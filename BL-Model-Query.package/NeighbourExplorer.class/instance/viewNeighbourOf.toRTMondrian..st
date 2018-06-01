@@ -4,7 +4,7 @@ viewNeighbourOf: aBLPhase toRTMondrian: b
 	b
 		nodes:
 			{{aBLPhase}.
-			aBLPhase metiers.
+			aBLPhase pageMetiers.
 			aBLPhase widgets.
 			(aBLPhase actions collect: #appelant) asSet} flatten.
 	b shape line

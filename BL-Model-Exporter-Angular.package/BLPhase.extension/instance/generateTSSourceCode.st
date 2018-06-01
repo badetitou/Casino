@@ -17,13 +17,8 @@ import { DesktopStateService } from ''../../../../../components/service/desktop-
 '
 		,
 			(self hasMultiplePageMetier
-				ifTrue:
-					[ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';'
-						, String crlf ]
-				ifFalse: [ '' ])
-		,
-			(self metiers
-				flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
+				ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ]
+				ifFalse: [ '' ]) , (self pageMetiers flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
 		,
 			'
 
@@ -41,9 +36,7 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
 				ifFalse: [ '' ])
 		,
 			(self hasMultiplePageMetier
-				ifTrue: [ self metiers
-						flatCollect:
-							[ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
+				ifTrue: [ self pageMetiers flatCollect: [ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
 				ifFalse: [ '' ])
 		,
 			'

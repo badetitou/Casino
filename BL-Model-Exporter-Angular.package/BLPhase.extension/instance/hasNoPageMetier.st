@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 hasNoPageMetier
-	^ (self metiers size) = 0
+	^ self pageMetiers isEmpty 

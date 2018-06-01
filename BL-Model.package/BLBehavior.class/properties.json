@@ -1,9 +1,7 @@
 {
 	"classtraitcomposition" : "BLTWithActionAttributes classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"#uses"
-	],
+	"instvars" : [ ],
 	"name" : "BLBehavior",
 	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:25",
 	"super" : "BLOriginedEntity",

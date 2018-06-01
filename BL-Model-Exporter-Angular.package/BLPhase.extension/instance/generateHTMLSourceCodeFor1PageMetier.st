@@ -6,7 +6,7 @@ generateHTMLSourceCodeFor1PageMetier
         </bl-phase-business-page-header>
 
         <bl-phase-business-page id="P1" title="Page 1">
-            ' , (self metiers at: 1) getTag
+            ' , (self pageMetiers at: 1) getTag
 		,
 			'
         </bl-phase-business-page>

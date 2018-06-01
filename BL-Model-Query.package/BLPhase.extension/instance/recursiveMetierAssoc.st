@@ -2,5 +2,5 @@
 recursiveMetierAssoc
 	| assocCollection od |
 	assocCollection := OrderedCollection new.
-	od := self metiers collect: #recursiveMetier.
+	od := self pageMetiers collect: #recursiveMetier.
 	^ assocCollection
