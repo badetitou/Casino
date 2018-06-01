@@ -1,0 +1,28 @@
+{
+	"commentStamp" : "BenoitVerhaeghe 3/7/2018 10:48",
+	"super" : "FamixMetamodelGenerator",
+	"category" : "BL-MetamodelGenerator",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"phase",
+		"pageMetier",
+		"widget",
+		"action",
+		"actionAsynchrone",
+		"actionAppel",
+		"service",
+		"entity",
+		"attribute",
+		"actionAttribute",
+		"normalAttribute",
+		"variableAttribute",
+		"serviceAction",
+		"uiContainer",
+		"uiLeaf",
+		"behavior"
+	],
+	"name" : "BLMetamodelGenerator",
+	"type" : "normal"
+}

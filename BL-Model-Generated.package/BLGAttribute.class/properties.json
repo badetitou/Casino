@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLGOriginedEntity",
+	"category" : "BL-Model-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLGAttribute",
+	"type" : "normal"
+}
