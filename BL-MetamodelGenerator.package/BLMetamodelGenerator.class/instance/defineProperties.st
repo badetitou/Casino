@@ -10,3 +10,5 @@ defineProperties
 		comment: 'The name of the class in Java'.
 	(actionAppel property: #oldClass type: #Object)
 		comment: 'The source code of the actions'.
+	(widget property: 'realClass' type: #MooseEntity)
+		comment: 'The type (class) of the widget'
