@@ -1,21 +1,23 @@
 {
-	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:39",
-	"super" : "BLEntity",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTWidget classTrait + BLTWithActionAppels classTrait + BLTWithAttributes classTrait + BLTWithPhases classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"realClass",
-		"constructor",
-		"containerMetier",
-		"actionsAppel",
-		"attributes",
-		"containerWidget",
-		"widgets",
-		"parameters",
-		"variable"
+		"#actionsAppel",
+		"#attributes",
+		"#constructor",
+		"#containerMetier",
+		"#containerWidget",
+		"#parameters",
+		"#realClass",
+		"#variable",
+		"#widgets"
 	],
 	"name" : "BLWidget",
-	"type" : "normal"
+	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:39",
+	"super" : "BLOriginedEntity",
+	"traitcomposition" : "BLTWidget + BLTWithActionAppels + BLTWithAttributes + BLTWithPhases",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

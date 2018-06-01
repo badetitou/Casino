@@ -1,14 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "BLUIContainer",
-	"category" : "BL-Model",
+	"category" : "BL-Model-Entities",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"containerPhase",
 		"metiers",
-		"title",
-		"containerPhase"
+		"title"
 	],
 	"name" : "BLPageMetier",
 	"type" : "normal"

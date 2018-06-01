@@ -8,3 +8,5 @@ defineProperties
 		comment: 'The short name of the codePhase'.
 	(phase property: #realClassName type: #String)
 		comment: 'The name of the class in Java'.
+	(actionAppel property: #oldClass type: #Object)
+		comment: 'The source code of the actions'.

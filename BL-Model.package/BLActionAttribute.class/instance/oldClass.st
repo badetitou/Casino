@@ -1,3 +1,3 @@
 accessing
 oldClass
-	^ oldClass
+	^ oldClass 

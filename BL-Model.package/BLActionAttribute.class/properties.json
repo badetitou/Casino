@@ -1,16 +1,17 @@
 {
-	"commentStamp" : "",
-	"super" : "BLAttribute",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTWithBehaviors classTrait",
 	"classvars" : [
-		"moulinetteStrategy"
+		"#moulinetteStrategy"
 	],
 	"instvars" : [
-		"oldClass",
-		"behaviors"
+		"#oldClass"
 	],
 	"name" : "BLActionAttribute",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BLAttribute",
+	"traitcomposition" : "BLTWithBehaviors",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

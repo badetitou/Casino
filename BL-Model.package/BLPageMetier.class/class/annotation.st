@@ -1,5 +1,8 @@
 meta
 annotation
-	<MSEClass: #BLPageMetier super: #BLUIContainer>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #PageMetier super: #BLUIContainer>
+	<package: #'BL-Model'>
+	<generated>
+	^self
