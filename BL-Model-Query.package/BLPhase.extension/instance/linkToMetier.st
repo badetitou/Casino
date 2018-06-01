@@ -1,3 +1,3 @@
 *BL-Model-Query
 linkToMetier
-	^ self metiers collect: [ :metier | self -> metier  ]
+	^ self pageMetiers collect: [ :metier | self -> metier ]

@@ -7,4 +7,4 @@ writeComponentsIn: phaseRoot withExporter: anExporter
 	indexRoot ensureCreateDirectory.
 	anExporter writeFile: indexRoot / self getTSName withCode: self generateTSSourceCode.
 	anExporter writeFile: indexRoot / self getHTMLName withCode: self generateHTMLSourceCode.
-	self metiers do: [ :metier | anExporter visit: metier ]
+	self pageMetiers do: [ :metier | anExporter visit: metier ]

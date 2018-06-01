@@ -1,11 +1,9 @@
 {
-	"classtraitcomposition" : "BLTPhase classTrait + BLTWithWidgets classTrait",
+	"classtraitcomposition" : "BLTPhase classTrait + BLTWithPageMetiers classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"#actions",
 		"#codePhase",
 		"#codeValue",
-		"#metiers",
 		"#realClassName",
 		"#subtitle",
 		"#title"
@@ -13,7 +11,7 @@
 	"name" : "BLPhase",
 	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:44",
 	"super" : "BLOriginedEntity",
-	"traitcomposition" : "BLTPhase + BLTWithWidgets",
+	"traitcomposition" : "BLTPhase + BLTWithPageMetiers",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

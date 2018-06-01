@@ -1,3 +1,3 @@
 *BL-Model-Exporter-Angular
 hasMultiplePageMetier
-	^ (self metiers size) > 1
+	^ self pageMetiers size > 1
