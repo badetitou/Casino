@@ -4,6 +4,7 @@ definePackages: spec
 		repository: 'https://github.com/badetitou/BL-ToolKit';
 		package: 'BL-Model';
 		package: 'BL-Model-FamixNGPatch';
+		package: 'BL-MetamodelGenerator' with: [ spec requires: #('BL-Model-FamixNGPatch') ];
 		package: 'BL-Model-Explorer';
 		package: 'BL-Model-Example' with: [ spec requires: #('BL-Model-CoreWeb') ];
 		package: 'BL-Model-Exporter' with: [ spec requires: #('BL-Model') ];
