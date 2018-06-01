@@ -1,4 +1,4 @@
 generator
 generatedTraitNames
 	<generated>
-	^ #(BLTPhase BLTWithPageMetiers)
+	^ #(BLTWithActionAppels BLTWithPageMetiers)

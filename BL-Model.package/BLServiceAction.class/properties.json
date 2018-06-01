@@ -1,9 +1,7 @@
 {
 	"classtraitcomposition" : "BLTServiceAction classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"#service"
-	],
+	"instvars" : [ ],
 	"name" : "BLServiceAction",
 	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:37",
 	"super" : "BLBehavior",

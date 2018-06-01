@@ -2,7 +2,7 @@
 	"classtraitcomposition" : "BLTWithWidgets classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"elements"
+		"#elements"
 	],
 	"name" : "BLUIContainer",
 	"commentStamp" : "",

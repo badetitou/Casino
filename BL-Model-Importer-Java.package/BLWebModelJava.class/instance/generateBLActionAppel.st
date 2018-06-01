@@ -4,5 +4,5 @@ generateBLActionAppel
 		do: [ :el | 
 			| action |
 			action := BLActionAppel new.
-			el key actionsAppel add: action.
-			el value ifNil: [ ] ifNotNil: [ el value actions add: action ] ]
+			el key actionAppels add: action.
+			el value ifNil: [ ] ifNotNil: [ el value actionAppels add: action ] ]

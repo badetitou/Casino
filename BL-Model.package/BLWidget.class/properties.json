@@ -2,15 +2,10 @@
 	"classtraitcomposition" : "BLTWidget classTrait + BLTWithActionAppels classTrait + BLTWithAttributes classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"#actionsAppel",
-		"#attributes",
 		"#constructor",
-		"#containerMetier",
-		"#containerWidget",
 		"#parameters",
 		"#realClass",
-		"#variable",
-		"#widgets"
+		"#variable"
 	],
 	"name" : "BLWidget",
 	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:39",

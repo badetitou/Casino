@@ -1,3 +1,3 @@
 testing
 canHandle: anInvocation
-	^ false
+	^ true

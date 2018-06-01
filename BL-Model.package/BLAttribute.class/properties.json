@@ -2,8 +2,7 @@
 	"classtraitcomposition" : "BLTAttribute classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"#attributeValue",
-		"#widget"
+		"#attributeValue"
 	],
 	"name" : "BLAttribute",
 	"commentStamp" : "",

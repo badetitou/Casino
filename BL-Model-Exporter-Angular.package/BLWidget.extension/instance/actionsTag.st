@@ -1,4 +1,4 @@
 *BL-Model-Exporter-Angular
 actionsTag
-	^ self actionsAppel
+	^ self actionAppels
 		flatCollect: [ :actionAppel | ' ', actionAppel getAngularRepresentation ]

@@ -11,4 +11,7 @@ defineProperties
 	(actionAppel property: #oldClass type: #Object)
 		comment: 'The source code of the actions'.
 	(widget property: 'realClass' type: #MooseEntity)
-		comment: 'The type (class) of the widget'
+		comment: 'The type (class) of the widget'.
+	(attribute property: 'attributeValue' type: #String)
+		comment: 'The literal value of the attribute'.
+	
