@@ -1,5 +1,8 @@
 meta
 annotation
-	<MSEClass: #BLPhase super: #BLEntity>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #Phase super: #BLOriginedEntity>
+	<package: #'BL-Model'>
+	<generated>
+	^self

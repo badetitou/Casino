@@ -1,0 +1,9 @@
+{
+	"commentStamp" : "",
+	"classinstvars" : [ ],
+	"category" : "BL-Model-Traits",
+	"instvars" : [
+		"#actionAppelOwner => FMOne type: #BLTWithActionAppels opposite: #actionAppels"
+	],
+	"name" : "BLTActionAppel"
+}

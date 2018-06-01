@@ -1,5 +1,8 @@
 meta
 annotation
-	<MSEClass: #BLWidget super: #BLEntity>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #Widget super: #BLOriginedEntity>
+	<package: #'BL-Model'>
+	<generated>
+	^self

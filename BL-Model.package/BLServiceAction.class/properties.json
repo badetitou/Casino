@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:37",
-	"super" : "BLBehavior",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTServiceAction classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"service"
+		"#service"
 	],
 	"name" : "BLServiceAction",
-	"type" : "normal"
+	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:37",
+	"super" : "BLBehavior",
+	"traitcomposition" : "BLTServiceAction",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

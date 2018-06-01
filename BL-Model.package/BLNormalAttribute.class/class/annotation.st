@@ -1,5 +1,8 @@
 meta
 annotation
-	<MSEClass: #BLNormalAttribute super: #BLAttribute>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #NormalAttribute super: #BLAttribute>
+	<package: #'BL-Model'>
+	<generated>
+	^self

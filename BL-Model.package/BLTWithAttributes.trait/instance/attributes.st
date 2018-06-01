@@ -1,0 +1,5 @@
+accessing
+attributes
+
+	<generated>
+	^ attributes

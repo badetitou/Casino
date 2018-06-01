@@ -1,5 +1,8 @@
-testing
+meta
 annotation
-	<MSEClass: #BLUIContainer super: #BLWidget>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #UIContainer super: #BLWidget>
+	<package: #'BL-Model'>
+	<generated>
+	^self

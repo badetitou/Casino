@@ -1,0 +1,4 @@
+generator
+generatedSlotNames
+	<generated>
+	^ #(attributes)

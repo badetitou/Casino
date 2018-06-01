@@ -1,19 +1,21 @@
 {
-	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:44",
-	"super" : "BLEntity",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTPhase classTrait + BLTWithWidgets classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"codePhase",
-		"codeValue",
-		"realClassName",
-		"metiers",
-		"actions",
-		"title",
-		"subtitle"
+		"#actions",
+		"#codePhase",
+		"#codeValue",
+		"#metiers",
+		"#realClassName",
+		"#subtitle",
+		"#title"
 	],
 	"name" : "BLPhase",
-	"type" : "normal"
+	"commentStamp" : "BenoitVerhaeghe 5/31/2018 14:44",
+	"super" : "BLOriginedEntity",
+	"traitcomposition" : "BLTPhase + BLTWithWidgets",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

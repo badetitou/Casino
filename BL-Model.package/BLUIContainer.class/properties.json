@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "BLWidget",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTWithWidgets classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"elements"
 	],
 	"name" : "BLUIContainer",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BLWidget",
+	"traitcomposition" : "BLTWithWidgets",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

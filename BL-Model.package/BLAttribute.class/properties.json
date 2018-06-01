@@ -1,14 +1,16 @@
 {
-	"commentStamp" : "",
-	"super" : "BLEntity",
-	"category" : "BL-Model",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classtraitcomposition" : "BLTAttribute classTrait",
 	"classvars" : [ ],
 	"instvars" : [
-		"attributeValue",
-		"widget"
+		"#attributeValue",
+		"#widget"
 	],
 	"name" : "BLAttribute",
-	"type" : "normal"
+	"commentStamp" : "",
+	"super" : "BLOriginedEntity",
+	"traitcomposition" : "BLTAttribute",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "BL-Model-Entities"
 }

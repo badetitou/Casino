@@ -1,5 +1,8 @@
 meta
 annotation
-	<MSEClass: #BLAction super: #FAMIXAssociation>
-	<package: #BLWebModelJava>
-	^ self
+
+	<generated>
+	<MSEClass: #Action super: #MooseEntity>
+	<package: #'BL-Model'>
+	<generated>
+	^self

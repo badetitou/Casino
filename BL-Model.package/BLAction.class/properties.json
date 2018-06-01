@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "FAMIXAssociation",
-	"category" : "BL-Model",
+	"super" : "MooseEntity",
+	"category" : "BL-Model-Entities",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"call",
-		"appelant"
+		"appelant",
+		"call"
 	],
 	"name" : "BLAction",
 	"type" : "normal"

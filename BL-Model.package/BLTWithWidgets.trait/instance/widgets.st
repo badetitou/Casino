@@ -1,0 +1,5 @@
+accessing
+widgets
+
+	<generated>
+	^ widgets

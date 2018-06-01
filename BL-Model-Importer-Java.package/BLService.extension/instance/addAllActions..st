@@ -1,3 +1,3 @@
 *BL-Model-Importer-Java
 addAllActions: aCollectionOfAction
-	self actions addAll: aCollectionOfAction 
+	self serviceActions addAll: aCollectionOfAction 
