@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLGUIContainer",
+	"category" : "BL-Model-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLGPageMetier",
+	"type" : "normal"
+}

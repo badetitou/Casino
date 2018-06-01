@@ -1,4 +1,4 @@
 initialization
 initialize
 	super initialize.
-	fastImporter := FASTJavaImporterVisitor new
+	"fastImporter := FASTJavaImporterVisitor new"

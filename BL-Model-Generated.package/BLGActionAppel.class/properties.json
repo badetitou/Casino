@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BLGAction",
+	"category" : "BL-Model-Generated-Entities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BLGActionAppel",
+	"type" : "normal"
+}
