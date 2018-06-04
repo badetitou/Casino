@@ -1,3 +1,3 @@
 accessing
 oldClass: anObject
-	oldClass := anObject 
+	oldClass := self moulinetteStrategy convertFAMIXClassToCodeMetierModel: anObject 

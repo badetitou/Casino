@@ -1,3 +1,3 @@
 as yet unclassified
-convertFAMIXClassToTypescriptString: aFAMIXClass
+convertCodeMetierModelTo: aFAMIXClass
 	^ aFAMIXClass "methods collect: [ :method | method" sourceText replaceAllRegex: '\*/' with: '//'", String crlf ]"
