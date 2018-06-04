@@ -1,3 +1,0 @@
-testing
-canHandle: anInvocation
-	^ false
