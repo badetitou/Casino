@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLFieldset super: #BLWidget>
-	<package: #BLWebModelJava>
+	<MSEClass: #Fieldset super: #BLUIContainer>
+	<package: #'BL-Model'>
 	^ self

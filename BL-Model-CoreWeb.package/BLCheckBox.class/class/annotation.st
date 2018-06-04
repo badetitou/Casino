@@ -1,5 +1,5 @@
 meta
 annotation
-	<MSEClass: #BLCheckBox super: #BLWidget>
-	<package: #BLWebModelJava>
+	<MSEClass: #CheckBox super: #BLWidget>
+	<package: #'BL-Model'>
 	^ self

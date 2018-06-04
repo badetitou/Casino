@@ -1,6 +1,5 @@
 *BL-Model-Query
 recursiveWidget
-	| assocCollection od |
-	assocCollection := OrderedCollection new.
+	| od |
 	od := (self pageMetiers collect: #recursiveMetier) flattened.
 	^ (od flatCollect: #recursiveWidget) flattened
