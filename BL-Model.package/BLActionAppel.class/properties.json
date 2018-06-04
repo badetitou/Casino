@@ -1,5 +1,5 @@
 {
-	"classtraitcomposition" : "BLTActionAppel classTrait + BLTWithPhases classTrait",
+	"classtraitcomposition" : "BLTActionAppel classTrait",
 	"classvars" : [ ],
 	"instvars" : [
 		"#oldClass"
@@ -7,7 +7,7 @@
 	"name" : "BLActionAppel",
 	"commentStamp" : "",
 	"super" : "BLAction",
-	"traitcomposition" : "BLTActionAppel + BLTWithPhases",
+	"traitcomposition" : "BLTActionAppel",
 	"type" : "normal",
 	"classinstvars" : [ ],
 	"pools" : [ ],

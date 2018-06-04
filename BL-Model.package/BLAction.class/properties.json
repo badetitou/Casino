@@ -1,10 +1,7 @@
 {
 	"classtraitcomposition" : "FmxNGTAssociation classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"#appelant",
-		"#call"
-	],
+	"instvars" : [ ],
 	"name" : "BLAction",
 	"commentStamp" : "",
 	"super" : "MooseEntity",
