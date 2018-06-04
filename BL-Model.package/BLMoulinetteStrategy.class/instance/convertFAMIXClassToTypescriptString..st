@@ -1,3 +1,0 @@
-as yet unclassified
-convertFAMIXClassToTypescriptString: aFAMIXClass
-	self subclassResponsibility

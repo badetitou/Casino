@@ -1,5 +1,5 @@
 as yet unclassified
-convertFAMIXClassToTypescriptString: aFAMIXClass
+convertFAMIXClassToCodeMetierModel: aFAMIXClass
 	| correspondingTSFile tsClassName rightBracketPos leftBracketPos contentLocalCache |  
 	correspondingTSFile := self rootFolder / (self computeTSFileNameFromFAMIXCLass: aFAMIXClass).
 	tsClassName := self computeTSClassNameFromFAMIXCLass: aFAMIXClass.

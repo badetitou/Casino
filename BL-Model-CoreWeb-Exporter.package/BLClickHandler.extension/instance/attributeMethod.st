@@ -3,9 +3,9 @@ attributeMethod
 	^ '/*
 	'
 		,
-			('' , (self oldClass flatCollect: #angularString)
+		"	('' , (self oldClass flatCollect: #angularString)
 				replaceAllRegex: 'onClick'
 				with: self attributeValue)
-		,
+		,"
 			'
 */'
