@@ -1,7 +1,7 @@
 accessing
-actionAppelOwner
+widget
 
 	<generated>
 	<container>
 
-	^ actionAppelOwner
+	^ widget
