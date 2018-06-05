@@ -1,3 +1,3 @@
 *BL-Model-CoreWeb-Exporter
 attributeValue
-	^ super attributeValue , self attributeOwner mooseID asString
+	^ super attributeValue , self attribute mooseID asString

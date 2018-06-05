@@ -1,6 +1,6 @@
 adding
 addPPPToWidget
-	(self listOfWidget select: [ :a | a widgetOwner isNil ])
+	(self listOfWidget select: [ :a | a widget isNil ])
 		do: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.

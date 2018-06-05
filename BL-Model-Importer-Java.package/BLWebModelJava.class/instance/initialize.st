@@ -6,3 +6,4 @@ initialize
 	widgetGroup := Dictionary new.
 	listOfService := OrderedCollection new.
 	listOfServiceAction := OrderedCollection new.
+	actionAppelGroup := OrderedCollection new.
