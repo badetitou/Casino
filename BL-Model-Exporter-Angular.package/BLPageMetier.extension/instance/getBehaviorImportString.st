@@ -4,5 +4,5 @@ getBehaviorImportString
 		,
 			(self calledBehavior
 				flatCollect: [ :serviceAction | 
-					'import { ' , serviceAction serviceActionOwner mooseName , ' } from ''' , self relativePathToHome
-						, serviceAction serviceActionOwner getLocalPath , ''';' , String crlf ])
+					'import { ' , serviceAction serviceAction mooseName , ' } from ''' , self relativePathToHome
+						, serviceAction serviceAction getLocalPath , ''';' , String crlf ])

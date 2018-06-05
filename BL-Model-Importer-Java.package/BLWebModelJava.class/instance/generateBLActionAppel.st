@@ -1,8 +1,9 @@
 as yet unclassified
 generateBLActionAppel
-	self linkFromWidgetActionAppel
-		do: [ :el | 
+	actionAppelGroup := self linkFromWidgetActionAppel
+		collect: [ :el | 
 			| action |
 			action := BLActionAppel new.
 			el key actionAppels add: action.
-			el value ifNil: [ ] ifNotNil: [ el value actionAppels add: action ] ]
+			el value ifNil: [  ] ifNotNil: [ action phase: el value  ].
+			action ]
