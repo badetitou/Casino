@@ -11,4 +11,4 @@ defineDependencies: spec
 		with: [ spec
 				versionString: #development;
 				loads: 'Headless';
-				repository: 'https://github.com/kursjan/petitparser2' ]
+				repository: 'github://kursjan/petitparser2' ]
