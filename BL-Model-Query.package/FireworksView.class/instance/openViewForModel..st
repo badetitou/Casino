@@ -1,4 +1,4 @@
-as yet unclassified
+view creation
 openViewForModel: aBLModel
 	| b |
 	b := RTMondrian new.
