@@ -20,4 +20,4 @@ import
 	self addWidgetDefaultAttributes.
 
 	self addListsToModel.
-		self addLinkBetweenServiceAndAttribute.
+	self addLinkBetweenServiceAndAttribute.

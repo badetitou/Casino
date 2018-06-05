@@ -1,6 +1,11 @@
 definition
 defineNewClassesHierarchy
 
+	action --|> #TAssociation.
+	entity --|> #TNamed.
+	entity --|> #TWithSourceAnchor.
+	
+
 	entity <|-- attribute.
 	entity <|-- behavior.
 	entity <|-- phase.
