@@ -1,7 +1,7 @@
 accessing
-attributeOwner
+serviceAction
 
 	<generated>
 	<container>
 
-	^ attributeOwner
+	^ serviceAction

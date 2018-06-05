@@ -1,4 +1,4 @@
 generator
 generatedSlotNames
 	<generated>
-	^ #(actionAppelOwner)
+	^ #(actionAppel phase)

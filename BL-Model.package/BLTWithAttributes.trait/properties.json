@@ -3,7 +3,7 @@
 	"classinstvars" : [ ],
 	"category" : "BL-Model-Traits",
 	"instvars" : [
-		"#attributes => FMMany type: #BLTAttribute opposite: #attributeOwner"
+		"#attributes => FMMany type: #BLTAttribute opposite: #attribute"
 	],
 	"name" : "BLTWithAttributes"
 }

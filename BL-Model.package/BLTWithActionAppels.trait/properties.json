@@ -3,7 +3,7 @@
 	"classinstvars" : [ ],
 	"category" : "BL-Model-Traits",
 	"instvars" : [
-		"#actionAppels => FMMany type: #BLTActionAppel opposite: #actionAppelOwner"
+		"#actionAppels => FMMany type: #BLTActionAppel opposite: #actionAppel"
 	],
 	"name" : "BLTWithActionAppels"
 }

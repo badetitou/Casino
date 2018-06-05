@@ -1,7 +1,7 @@
 accessing
-widgetOwner
+attribute
 
 	<generated>
 	<container>
 
-	^ widgetOwner
+	^ attribute
