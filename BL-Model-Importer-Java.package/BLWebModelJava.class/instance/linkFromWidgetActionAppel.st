@@ -3,7 +3,6 @@ linkFromWidgetActionAppel
 	" Miss 7
 	4 for dispatch -> ignore
 	3 for carousel"
-
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
 			| link |

@@ -8,7 +8,7 @@ defineProperties
 		comment: 'The short name of the codePhase'.
 	(phase property: #realClassName type: #String)
 		comment: 'The name of the class in Java'.
-	(actionAppel property: #oldClass type: #Object)
+	(actionAttribute property: #codeMetierModel type: #Object)
 		comment: 'The source code of the actions'.
 	(widget property: 'realClass' type: #MooseEntity)
 		comment: 'The type (class) of the widget'.

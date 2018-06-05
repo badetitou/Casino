@@ -4,6 +4,7 @@
 		"#moulinetteStrategy"
 	],
 	"instvars" : [
+		"#codeMetierModel",
 		"#oldClass"
 	],
 	"name" : "BLActionAttribute",

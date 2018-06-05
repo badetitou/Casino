@@ -1,9 +1,7 @@
 {
 	"classtraitcomposition" : "BLTActionAppel classTrait",
 	"classvars" : [ ],
-	"instvars" : [
-		"#oldClass"
-	],
+	"instvars" : [ ],
 	"name" : "BLActionAppel",
 	"commentStamp" : "",
 	"super" : "BLAction",

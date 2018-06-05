@@ -16,8 +16,5 @@ defineNewClasses
 	uiContainer := builder newClassNamed: #UIContainer.
 	pageMetier := builder newClassNamed: #PageMetier.
 	uiLeaf := builder newClassNamed: #UILeaf.
-	action --|> #TAssociation.
-	entity --|> #TNamed.
-	entity --|> #TWithSourceAnchor.
 	
 	
