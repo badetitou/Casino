@@ -1,3 +1,3 @@
-testing
+*BL-Model-Extension
 canHaveAttribute: blAttributeClass
-	^ false
+	^ true

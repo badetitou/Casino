@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "BenoitVerhaeghe 5/28/2018 11:40",
 	"super" : "BLMoulinetteStrategy",
-	"category" : "BL-Model-Entities",
+	"category" : "BL-Model-Extension",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

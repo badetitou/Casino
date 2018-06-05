@@ -1,3 +1,3 @@
-accessing
+*BL-Model-Extension
 canHaveAttribute: blAttributeClass
-	^ true
+	^ false
