@@ -1,4 +1,0 @@
-generator
-generatedSlotNames
-	<generated>
-	^ #(serviceAction)

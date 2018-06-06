@@ -1,3 +1,0 @@
-accessing
-getDom
-	^ '<' ,  self getListPropertiesAsString , ' />'

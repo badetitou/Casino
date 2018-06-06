@@ -1,3 +1,0 @@
-as yet unclassified
-convertFAMIXClassToCodeMetierModel: aFAMIXClass
-	self subclassResponsibility

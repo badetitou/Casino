@@ -1,3 +1,0 @@
-accessing
-modulePath
-	^ 'primeng/inputtext'

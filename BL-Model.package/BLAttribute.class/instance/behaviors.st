@@ -1,3 +1,0 @@
-accessing
-behaviors
-	^ Set new

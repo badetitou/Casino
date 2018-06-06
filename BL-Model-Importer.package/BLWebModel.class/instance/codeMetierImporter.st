@@ -1,3 +1,0 @@
-api
-codeMetierImporter
-	self subclassResponsibility 
