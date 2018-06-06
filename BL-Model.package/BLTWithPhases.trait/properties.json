@@ -1,9 +1,0 @@
-{
-	"commentStamp" : "",
-	"classinstvars" : [ ],
-	"category" : "BL-Model-Traits",
-	"instvars" : [
-		"#phases => FMMany type: #BLTWithPageMetiers opposite: #pageMetiers"
-	],
-	"name" : "BLTWithPhases"
-}

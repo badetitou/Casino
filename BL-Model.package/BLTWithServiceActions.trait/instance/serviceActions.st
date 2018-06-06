@@ -1,5 +1,0 @@
-accessing
-serviceActions
-
-	<generated>
-	^ serviceActions

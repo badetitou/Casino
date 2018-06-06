@@ -1,3 +1,0 @@
-color
-appColor
-	^ Color orange

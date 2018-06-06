@@ -1,3 +1,0 @@
-accessing
-constructor: theFAMIXInvocationOfTheInstanciation
-	constructor := theFAMIXInvocationOfTheInstanciation

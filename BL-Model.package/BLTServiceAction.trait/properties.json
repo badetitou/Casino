@@ -1,9 +1,0 @@
-{
-	"commentStamp" : "",
-	"classinstvars" : [ ],
-	"category" : "BL-Model-Traits",
-	"instvars" : [
-		"#serviceAction => FMOne type: #BLTWithServiceActions opposite: #serviceActions"
-	],
-	"name" : "BLTServiceAction"
-}

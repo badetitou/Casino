@@ -1,3 +1,0 @@
-accessing
-handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter
-	self subclassResponsibility

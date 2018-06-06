@@ -1,1 +1,0 @@
-I encapsulate a BLWidget and i add to it a intance variable "variable"

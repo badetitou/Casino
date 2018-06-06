@@ -1,3 +1,0 @@
-*ComponentAnalyser
-isDummy
-	^ true

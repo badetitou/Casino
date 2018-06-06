@@ -1,3 +1,0 @@
-initialization
-listOfPageMetier
-	^ pageMetierGroup

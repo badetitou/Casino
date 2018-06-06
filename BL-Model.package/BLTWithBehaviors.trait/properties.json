@@ -1,9 +1,0 @@
-{
-	"commentStamp" : "",
-	"classinstvars" : [ ],
-	"category" : "BL-Model-Traits",
-	"instvars" : [
-		"#behaviors => FMMany type: #BLTWithActionAttributes opposite: #actionAttributes"
-	],
-	"name" : "BLTWithBehaviors"
-}

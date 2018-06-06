@@ -1,3 +1,0 @@
-accessing
-blNamespace
-	^ 'fr::bl::*'
