@@ -1,9 +1,9 @@
 definition
 defineRelations
-	uiContainer <>-* widget.
-	widget <>-* actionAppel.
-	widget <>-* attribute.
-	 actionAppel *- phase.
-	phase *-* pageMetier.
-	service <>-* serviceAction.
-	actionAttribute *-* behavior 
+	(uiContainer <>-* widget) withNavigation.
+	(widget <>-* actionAppel) withNavigation.
+	(widget <>-* attribute) withNavigation.
+	(actionAppel *- phase) withNavigation.
+	(phase *-* pageMetier) withNavigation.
+	(service <>-* serviceAction) withNavigation.
+	(actionAttribute *-* behavior) withNavigation
