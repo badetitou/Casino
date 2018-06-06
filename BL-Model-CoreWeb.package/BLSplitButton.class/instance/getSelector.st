@@ -1,3 +1,0 @@
-accessing
-getSelector
-	^ 'p-splitButton'

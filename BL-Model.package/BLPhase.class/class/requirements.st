@@ -1,5 +1,0 @@
-meta
-requirements
-
-	<generated>
-	^ {  }

@@ -1,3 +1,0 @@
-accessing
-beta
-	^ 2

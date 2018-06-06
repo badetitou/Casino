@@ -1,9 +1,0 @@
-{
-	"commentStamp" : "",
-	"classinstvars" : [ ],
-	"category" : "BL-Model-Traits",
-	"instvars" : [
-		"#widgets => FMMany type: #BLTWidget opposite: #widgetOwner"
-	],
-	"name" : "BLTWithWidgets"
-}

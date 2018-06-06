@@ -1,3 +1,0 @@
-accessing
-gamma
-	^ 8

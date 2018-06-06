@@ -1,3 +1,0 @@
-initialization
-listOfWidget
-	^ widgetGroup

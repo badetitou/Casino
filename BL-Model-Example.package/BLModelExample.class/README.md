@@ -1,1 +1,0 @@
-You can use me to create little model to tests the application

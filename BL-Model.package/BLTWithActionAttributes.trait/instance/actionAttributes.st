@@ -1,5 +1,0 @@
-accessing
-actionAttributes
-
-	<generated>
-	^ actionAttributes

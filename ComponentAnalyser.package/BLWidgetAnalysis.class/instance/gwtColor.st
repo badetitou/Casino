@@ -1,3 +1,0 @@
-color
-gwtColor
-	^ Color blue
