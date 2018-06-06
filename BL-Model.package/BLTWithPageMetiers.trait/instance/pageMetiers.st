@@ -1,5 +1,0 @@
-accessing
-pageMetiers
-
-	<generated>
-	^ pageMetiers

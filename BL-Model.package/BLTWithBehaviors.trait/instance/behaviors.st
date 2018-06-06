@@ -1,5 +1,0 @@
-accessing
-behaviors
-
-	<generated>
-	^ behaviors

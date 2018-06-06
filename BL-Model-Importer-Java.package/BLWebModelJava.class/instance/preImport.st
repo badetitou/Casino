@@ -1,3 +1,0 @@
-api
-preImport
-	BLActionAttribute moulinetteStrategy: BLMoulinetteFASTStrategy new.

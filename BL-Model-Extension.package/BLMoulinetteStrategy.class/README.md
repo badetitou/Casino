@@ -1,1 +1,0 @@
-I am the strategy that convert a FAMIXMethod to a TypeScript String one

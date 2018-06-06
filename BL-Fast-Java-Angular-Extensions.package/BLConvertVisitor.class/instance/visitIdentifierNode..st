@@ -1,3 +1,0 @@
-visiting
-visitIdentifierNode: anIdentifierNode
-	self convertResponsabilitiesHandler handleIdentifier: anIdentifierNode 

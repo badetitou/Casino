@@ -1,3 +1,0 @@
-visiting
-convertResponsabilitiesHandler
-	^ handler

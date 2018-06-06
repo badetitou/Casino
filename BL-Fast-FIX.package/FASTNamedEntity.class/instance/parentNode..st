@@ -1,3 +1,0 @@
-accessing
-parentNode: aFamixNamedEntity
-	self parentBehaviouralEntity: aFamixNamedEntity
