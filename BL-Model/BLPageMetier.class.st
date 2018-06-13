@@ -22,7 +22,7 @@ BLPageMetier class >> annotation [
 { #category : #generator }
 BLPageMetier class >> generatedSlotNames [
 	<generated>
-	^ #()
+	^ #(title)
 ]
 
 { #category : #generator }
@@ -59,11 +59,17 @@ BLPageMetier >> recursiveWidgets [
 
 { #category : #accessing }
 BLPageMetier >> title [
+
 	<MSEProperty: #title type: #String>
+	<generated>
+	<MSEComment: 'The main title of the page metier'>
 	^ title
 ]
 
 { #category : #accessing }
 BLPageMetier >> title: anObject [
+
+	<generated>
 	title := anObject
+
 ]

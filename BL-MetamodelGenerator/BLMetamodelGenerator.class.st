@@ -99,6 +99,12 @@ BLMetamodelGenerator >> defineProperties [
 		comment: 'The unique code of the Phase'.
 	(phase property: #codeValue type: #String)
 		comment: 'The short name of the codePhase'.
+	(phase property: #title type: #String)
+		comment: 'The main title of the phase'.
+	(phase property: #subtitle type: #String)
+		comment: 'The subtitle of the phase'.
+	(pageMetier property: #title type: #String)
+		comment: 'The main title of the page metier'.
 	(phase property: #realClassName type: #String)
 		comment: 'The name of the class in Java'.
 	(actionAttribute property: #codeMetierModel type: #Object)
