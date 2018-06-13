@@ -68,13 +68,3 @@ BLAttribute >> attributeValue: anObject [
 BLAttribute >> behaviors [
 	^ Set new
 ]
-
-{ #category : #accessing }
-BLAttribute >> name [
-	^ name
-]
-
-{ #category : #accessing }
-BLAttribute >> name: aString [
-	name := aString 
-]

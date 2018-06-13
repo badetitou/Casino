@@ -29,7 +29,7 @@ BLPhase class >> annotation [
 { #category : #generator }
 BLPhase class >> generatedSlotNames [
 	<generated>
-	^ #(codePhase codeValue realClassName)
+	^ #(realClassName subtitle codeValue title codePhase)
 ]
 
 { #category : #generator }
@@ -116,22 +116,34 @@ BLPhase >> realClassName: anObject [
 
 { #category : #accessing }
 BLPhase >> subtitle [
+
 	<MSEProperty: #subtitle type: #String>
+	<generated>
+	<MSEComment: 'The subtitle of the phase'>
 	^ subtitle
 ]
 
 { #category : #accessing }
 BLPhase >> subtitle: anObject [
+
+	<generated>
 	subtitle := anObject
+
 ]
 
 { #category : #accessing }
 BLPhase >> title [
+
 	<MSEProperty: #title type: #String>
+	<generated>
+	<MSEComment: 'The main title of the phase'>
 	^ title
 ]
 
 { #category : #accessing }
 BLPhase >> title: anObject [
+
+	<generated>
 	title := anObject
+
 ]
