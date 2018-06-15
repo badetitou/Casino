@@ -39,11 +39,6 @@ BLUIContainer class >> requirements [
 	^ {  }
 ]
 
-{ #category : #model }
-BLUIContainer >> addWidget: aWidget [
-	widgets add: aWidget
-]
-
 { #category : #accessing }
 BLUIContainer >> attributesTag [
 	^ ((self attributes groupedBy: [ :attribut | attribut name ])
