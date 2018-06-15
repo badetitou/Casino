@@ -6,10 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 BLHorizontalParent class >> createAttributeFor: anInvocation [
-	^ self new
-		name: 'class';
-		attributeValue: 'ui-g';
-		yourself
+	^ BLGridElement createAttributeFor: nil
 ]
 
 { #category : #'instance creation' }
@@ -20,9 +17,4 @@ BLHorizontalParent class >> newFor: aWidgetInstance [
 		do:
 			[ :subWidget | subWidget addAttribute: (BLHorizontalChild new subpart: 12 / aWidgetInstance widgets size) ].
 	^ self createAttributeFor: nil
-]
-
-{ #category : #converting }
-BLHorizontalParent >> asString [
-	^ 'class="ui-g"'
 ]

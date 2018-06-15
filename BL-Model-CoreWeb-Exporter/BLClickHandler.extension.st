@@ -1,11 +1,6 @@
 Extension { #name : #BLClickHandler }
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
-BLClickHandler >> asString [
-	^ '(' , self name , ')="' , self attributeValue , '"'
-]
-
-{ #category : #'*BL-Model-CoreWeb-Exporter' }
 BLClickHandler >> attributeMethod [
 	^ '/*
 	'"

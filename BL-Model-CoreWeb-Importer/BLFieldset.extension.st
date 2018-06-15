@@ -10,7 +10,7 @@ BLFieldset class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters
-		at: #legend
+		at: #title
 		put:
 			(anInvocation parameters
 				at: 1

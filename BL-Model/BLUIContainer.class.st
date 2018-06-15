@@ -46,9 +46,13 @@ BLUIContainer >> addWidget: aWidget [
 
 { #category : #accessing }
 BLUIContainer >> attributesTag [
-	^ self attributes asOrderedCollection
-		flatCollect: [ :attribute | ' ' , attribute asString ]
-		
+	^ ((self attributes groupedBy: [ :attribut | attribut name ])
+		associationsCollect: [ :mapAttributeNameValues | 
+			' ' , mapAttributeNameValues key asString , '="'
+				,
+					((mapAttributeNameValues value
+						flatCollect: [ :attribute | attribute attributeValue asString , ' ' ]) removeLast; yourself)
+				, '"' ]) flatten
 ]
 
 { #category : #accessing }

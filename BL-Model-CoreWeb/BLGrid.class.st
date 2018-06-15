@@ -12,6 +12,14 @@ BLGrid class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
+BLGrid >> addDefaultAttribute [
+	"black magic... Can send nil
+	see BLHorizontalParent>>newFrom:for:"
+
+	self addAttribute: (BLGridElement newFor: self)
+]
+
+{ #category : #'as yet unclassified' }
 BLGrid >> canHaveAttribute: blAttributeClass [
 	^ blAttributeClass ~= BLEnable 
 ]
