@@ -1,7 +1,10 @@
 Class {
 	#name : #BLGrid,
 	#superclass : #BLUIContainer,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#instVars : [
+		'widgetPosition'
+	],
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }
@@ -20,24 +23,18 @@ BLGrid >> addDefaultAttribute [
 ]
 
 { #category : #'as yet unclassified' }
-BLGrid >> addWidget: aWidget [
-	self halt. 
-	widgets add: aWidget
-]
-
-{ #category : #'as yet unclassified' }
-BLGrid >> addWidget: aWidget withInvocationOfAdd: anInvocation [
-	self halt. 
-	
-	self addWidget: aWidget
-]
-
-{ #category : #'as yet unclassified' }
 BLGrid >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLEnable 
+	^ blAttributeClass ~= BLEnable
+	
 ]
 
 { #category : #'as yet unclassified' }
 BLGrid >> getSelector [
 	^ 'div'
+]
+
+{ #category : #'as yet unclassified' }
+BLGrid >> postImport [
+	((self privateState attributes asDictionary at: #widgetPosition ifAbsent: [{} asOrderedCollection]) groupedBy: [:el | el value at: 1]) do: [:collection | collection do: [ :el | el key addAttribute: (BLGridSubElement new subpart: 12/(collection size)) ] ].
+	
 ]
