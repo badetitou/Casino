@@ -8,12 +8,12 @@ BLClickHandler >> asString [
 { #category : #'*BL-Model-CoreWeb-Exporter' }
 BLClickHandler >> attributeMethod [
 	^ '/*
-	'
+	'"
 		,
 			('' , (self oldClass flatCollect: #angularString)
 				replaceAllRegex: 'onClick'
 				with: self attributeValue)
-		,
+		",
 			'
 */'
 ]
