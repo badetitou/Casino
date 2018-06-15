@@ -12,5 +12,5 @@ BLServiceAction >> exportCode [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLServiceAction >> initializeVariable [
-	^ 'private ' , self serviceAction getVariableName , ': ' , self serviceAction mooseName
+	^ 'private ' , self serviceActionOwner getVariableName , ': ' , self serviceActionOwner mooseName
 ]

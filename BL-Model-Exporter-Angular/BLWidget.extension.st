@@ -2,7 +2,7 @@ Extension { #name : #BLWidget }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> actionsTag [
-	^ self actionAppels
+	^ self actions
 		flatCollect: [ :actionAppel | ' ', actionAppel getAngularRepresentation ]
 ]
 
