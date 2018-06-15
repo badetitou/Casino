@@ -22,6 +22,7 @@ BLUIContainer class >> annotation [
 { #category : #generator }
 BLUIContainer class >> generatedSlotNames [
 	<generated>
+	'BLUIContainer class>>#generatedSlotNames'.
 	^ #()
 ]
 

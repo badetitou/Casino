@@ -17,6 +17,7 @@ BLVariableAttribute class >> annotation [
 { #category : #generator }
 BLVariableAttribute class >> generatedSlotNames [
 	<generated>
+	'BLVariableAttribute class>>#generatedSlotNames'.
 	^ #()
 ]
 

@@ -5,15 +5,15 @@ I can be everything in a User Interface (Button/Pannel/Text/Presenter)
 Class {
 	#name : #BLWidget,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTWidget + BLTWithActionAppels + BLTWithAttributes',
-	#classTraits : 'BLTWidget classTrait + BLTWithActionAppels classTrait + BLTWithAttributes classTrait',
+	#traits : 'BLTWidget + BLTWithActions + BLTWithAttributes',
+	#classTraits : 'BLTWidget classTrait + BLTWithActions classTrait + BLTWithAttributes classTrait',
 	#instVars : [
 		'#constructor',
 		'#parameters',
 		'#realClass',
 		'#variable'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -29,13 +29,14 @@ BLWidget class >> annotation [
 { #category : #generator }
 BLWidget class >> generatedSlotNames [
 	<generated>
+	'BLWidget class>>#generatedSlotNames'.
 	^ #(realClass)
 ]
 
 { #category : #generator }
 BLWidget class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWidget BLTWithActionAppels BLTWithAttributes)
+	^ #(BLTWidget BLTWithActions BLTWithAttributes)
 ]
 
 { #category : #meta }
@@ -46,12 +47,12 @@ BLWidget class >> requirements [
 ]
 
 { #category : #navigation }
-BLWidget >> actionAppelsGroup [
+BLWidget >> actionsGroup [
 
 	<generated>
-	<navigation: 'ActionAppels'>
+	<navigation: 'Actions'>
 	^ MooseGroup
-			withAll: (self actionAppels asSet)
+			withAll: (self actions asSet)
 ]
 
 { #category : #navigation }
@@ -86,10 +87,10 @@ BLWidget >> variable: anObject [
 ]
 
 { #category : #navigation }
-BLWidget >> widgetGroup [
+BLWidget >> widgetOwnerGroup [
 
 	<generated>
-	<navigation: 'Widget'>
+	<navigation: 'WidgetOwner'>
 	^ MooseGroup
-			with: (self widget)
+			with: (self widgetOwner)
 ]

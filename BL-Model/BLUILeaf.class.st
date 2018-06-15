@@ -28,6 +28,7 @@ BLUILeaf class >> canHandle: anInvocation [
 { #category : #generator }
 BLUILeaf class >> generatedSlotNames [
 	<generated>
+	'BLUILeaf class>>#generatedSlotNames'.
 	^ #()
 ]
 

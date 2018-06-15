@@ -1,6 +1,11 @@
 Extension { #name : #BLWidget }
 
 { #category : #'*BL-Model-Extension' }
+BLWidget >> addAction: anBLAction [
+	self actions add: anBLAction 
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLWidget >> addAttribute: attribute [
 	self attributes add: attribute 
 ]

@@ -21,7 +21,8 @@ BLTActionAppel classSide >> annotation [
 { #category : #generator }
 BLTActionAppel classSide >> generatedSlotNames [
 	<generated>
-	^ #(actionAppel phase)
+	'BLTActionAppel class>>#generatedSlotNames'.
+	^ #(actionAppelOwner)
 ]
 
 { #category : #generator }
@@ -31,33 +32,16 @@ BLTActionAppel classSide >> generatedTraitNames [
 ]
 
 { #category : #accessing }
-BLTActionAppel >> actionAppel [
+BLTActionAppel >> actionAppelOwner [
 
 	<generated>
-	<container>
-
-	^ actionAppel
+	^ actionAppelOwner
 ]
 
 { #category : #accessing }
-BLTActionAppel >> actionAppel: anObject [
+BLTActionAppel >> actionAppelOwner: anObject [
 
 	<generated>
-	actionAppel := anObject
-
-]
-
-{ #category : #accessing }
-BLTActionAppel >> phase [
-
-	<generated>
-	^ phase
-]
-
-{ #category : #accessing }
-BLTActionAppel >> phase: anObject [
-
-	<generated>
-	phase := anObject
+	actionAppelOwner := anObject
 
 ]

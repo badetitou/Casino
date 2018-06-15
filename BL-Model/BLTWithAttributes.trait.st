@@ -20,6 +20,7 @@ BLTWithAttributes classSide >> annotation [
 { #category : #generator }
 BLTWithAttributes classSide >> generatedSlotNames [
 	<generated>
+	'BLTWithAttributes class>>#generatedSlotNames'.
 	^ #(attributes)
 ]
 

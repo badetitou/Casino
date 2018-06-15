@@ -1,9 +1,9 @@
 Class {
 	#name : #BLAction,
 	#superclass : #MooseEntity,
-	#traits : 'FmxNGTAssociation',
-	#classTraits : 'FmxNGTAssociation classTrait',
-	#category : 'BL-Model-Entities'
+	#traits : 'BLTAction + FmxNGTAssociation',
+	#classTraits : 'BLTAction classTrait + FmxNGTAssociation classTrait',
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -19,13 +19,14 @@ BLAction class >> annotation [
 { #category : #generator }
 BLAction class >> generatedSlotNames [
 	<generated>
+	'BLAction class>>#generatedSlotNames'.
 	^ #()
 ]
 
 { #category : #generator }
 BLAction class >> generatedTraitNames [
 	<generated>
-	^ #(FmxNGTAssociation)
+	^ #(BLTAction FmxNGTAssociation)
 ]
 
 { #category : #meta }
@@ -40,4 +41,13 @@ BLAction class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #navigation }
+BLAction >> actionOwnerGroup [
+
+	<generated>
+	<navigation: 'ActionOwner'>
+	^ MooseGroup
+			with: (self actionOwner)
 ]

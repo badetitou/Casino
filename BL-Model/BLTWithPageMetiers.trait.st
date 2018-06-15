@@ -20,6 +20,7 @@ BLTWithPageMetiers classSide >> annotation [
 { #category : #generator }
 BLTWithPageMetiers classSide >> generatedSlotNames [
 	<generated>
+	'BLTWithPageMetiers class>>#generatedSlotNames'.
 	^ #(pageMetiers)
 ]
 

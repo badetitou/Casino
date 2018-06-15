@@ -22,6 +22,7 @@ BLAttribute class >> annotation [
 { #category : #generator }
 BLAttribute class >> generatedSlotNames [
 	<generated>
+	'BLAttribute class>>#generatedSlotNames'.
 	^ #(attributeValue)
 ]
 
@@ -39,12 +40,12 @@ BLAttribute class >> requirements [
 ]
 
 { #category : #navigation }
-BLAttribute >> attributeGroup [
+BLAttribute >> attributeOwnerGroup [
 
 	<generated>
-	<navigation: 'Attribute'>
+	<navigation: 'AttributeOwner'>
 	^ MooseGroup
-			with: (self attribute)
+			with: (self attributeOwner)
 ]
 
 { #category : #accessing }

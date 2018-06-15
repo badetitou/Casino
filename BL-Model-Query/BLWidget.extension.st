@@ -14,7 +14,7 @@ BLWidget >> color [
 
 { #category : #'*BL-Model-Query' }
 BLWidget >> outgoingElement [
-	^ {self actionsAppel collect: #value. self widgets} flatten
+	self subclassResponsibility 
 ]
 
 { #category : #'*BL-Model-Query' }

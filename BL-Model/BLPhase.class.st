@@ -29,6 +29,7 @@ BLPhase class >> annotation [
 { #category : #generator }
 BLPhase class >> generatedSlotNames [
 	<generated>
+	'BLPhase class>>#generatedSlotNames'.
 	^ #(realClassName subtitle codeValue title codePhase)
 ]
 

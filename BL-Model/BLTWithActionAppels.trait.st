@@ -20,6 +20,7 @@ BLTWithActionAppels classSide >> annotation [
 { #category : #generator }
 BLTWithActionAppels classSide >> generatedSlotNames [
 	<generated>
+	'BLTWithActionAppels class>>#generatedSlotNames'.
 	^ #(actionAppels)
 ]
 

@@ -19,6 +19,7 @@ BLActionAppel class >> annotation [
 { #category : #generator }
 BLActionAppel class >> generatedSlotNames [
 	<generated>
+	'BLActionAppel class>>#generatedSlotNames'.
 	^ #()
 ]
 
@@ -36,19 +37,10 @@ BLActionAppel class >> requirements [
 ]
 
 { #category : #navigation }
-BLActionAppel >> actionAppelGroup [
+BLActionAppel >> actionAppelOwnerGroup [
 
 	<generated>
-	<navigation: 'ActionAppel'>
+	<navigation: 'ActionAppelOwner'>
 	^ MooseGroup
-			with: (self actionAppel)
-]
-
-{ #category : #navigation }
-BLActionAppel >> phaseGroup [
-
-	<generated>
-	<navigation: 'Phase'>
-	^ MooseGroup
-			with: (self phase)
+			with: (self actionAppelOwner)
 ]

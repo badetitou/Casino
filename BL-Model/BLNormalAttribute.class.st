@@ -17,6 +17,7 @@ BLNormalAttribute class >> annotation [
 { #category : #generator }
 BLNormalAttribute class >> generatedSlotNames [
 	<generated>
+	'BLNormalAttribute class>>#generatedSlotNames'.
 	^ #()
 ]
 

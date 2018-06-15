@@ -20,6 +20,7 @@ BLTWithActionAttributes classSide >> annotation [
 { #category : #generator }
 BLTWithActionAttributes classSide >> generatedSlotNames [
 	<generated>
+	'BLTWithActionAttributes class>>#generatedSlotNames'.
 	^ #(actionAttributes)
 ]
 

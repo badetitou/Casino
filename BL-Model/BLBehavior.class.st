@@ -26,6 +26,7 @@ BLBehavior class >> annotation [
 { #category : #generator }
 BLBehavior class >> generatedSlotNames [
 	<generated>
+	'BLBehavior class>>#generatedSlotNames'.
 	^ #()
 ]
 
