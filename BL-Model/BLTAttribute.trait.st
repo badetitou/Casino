@@ -20,7 +20,8 @@ BLTAttribute classSide >> annotation [
 { #category : #generator }
 BLTAttribute classSide >> generatedSlotNames [
 	<generated>
-	^ #(attribute)
+	'BLTAttribute class>>#generatedSlotNames'.
+	^ #(attributeOwner)
 ]
 
 { #category : #generator }
@@ -30,18 +31,18 @@ BLTAttribute classSide >> generatedTraitNames [
 ]
 
 { #category : #accessing }
-BLTAttribute >> attribute [
+BLTAttribute >> attributeOwner [
 
 	<generated>
 	<container>
 
-	^ attribute
+	^ attributeOwner
 ]
 
 { #category : #accessing }
-BLTAttribute >> attribute: anObject [
+BLTAttribute >> attributeOwner: anObject [
 
 	<generated>
-	attribute := anObject
+	attributeOwner := anObject
 
 ]

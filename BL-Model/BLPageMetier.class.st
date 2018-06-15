@@ -22,6 +22,7 @@ BLPageMetier class >> annotation [
 { #category : #generator }
 BLPageMetier class >> generatedSlotNames [
 	<generated>
+	'BLPageMetier class>>#generatedSlotNames'.
 	^ #(title)
 ]
 

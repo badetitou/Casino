@@ -20,6 +20,7 @@ BLTWithPhases classSide >> annotation [
 { #category : #generator }
 BLTWithPhases classSide >> generatedSlotNames [
 	<generated>
+	'BLTWithPhases class>>#generatedSlotNames'.
 	^ #(phases)
 ]
 

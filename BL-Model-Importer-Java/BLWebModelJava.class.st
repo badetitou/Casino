@@ -147,7 +147,7 @@ BLWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 BLWebModelJava >> addPPPToWidget [
-	(self listOfWidget select: [ :a | a widget isNil ])
+	(self listOfWidget select: [ :a | a widgetOwner isNil ])
 		do: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
@@ -245,8 +245,8 @@ BLWebModelJava >> generateBLActionAppel [
 		collect: [ :el | 
 			| action |
 			action := BLActionAppel new.
-			el key actionAppels add: action.
-			el value ifNil: [  ] ifNotNil: [ action phase: el value  ].
+			el key addAction: action.
+			el value ifNil: [  ] ifNotNil: [ action actionAppelOwner: el value  ].
 			action ]
 ]
 

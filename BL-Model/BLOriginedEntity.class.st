@@ -22,6 +22,7 @@ BLOriginedEntity class >> annotation [
 { #category : #generator }
 BLOriginedEntity class >> generatedSlotNames [
 	<generated>
+	'BLOriginedEntity class>>#generatedSlotNames'.
 	^ #(source)
 ]
 

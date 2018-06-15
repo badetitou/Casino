@@ -18,7 +18,7 @@ BLWidget >> behaviors [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> container [
-	^ widget
+	^ self widgetOwner
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

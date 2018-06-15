@@ -22,6 +22,7 @@ BLServiceAction class >> annotation [
 { #category : #generator }
 BLServiceAction class >> generatedSlotNames [
 	<generated>
+	'BLServiceAction class>>#generatedSlotNames'.
 	^ #()
 ]
 
@@ -39,10 +40,10 @@ BLServiceAction class >> requirements [
 ]
 
 { #category : #navigation }
-BLServiceAction >> serviceActionGroup [
+BLServiceAction >> serviceActionOwnerGroup [
 
 	<generated>
-	<navigation: 'ServiceAction'>
+	<navigation: 'ServiceActionOwner'>
 	^ MooseGroup
-			with: (self serviceAction)
+			with: (self serviceActionOwner)
 ]

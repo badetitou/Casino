@@ -20,7 +20,8 @@ BLTWidget classSide >> annotation [
 { #category : #generator }
 BLTWidget classSide >> generatedSlotNames [
 	<generated>
-	^ #(widget)
+	'BLTWidget class>>#generatedSlotNames'.
+	^ #(widgetOwner)
 ]
 
 { #category : #generator }
@@ -30,18 +31,18 @@ BLTWidget classSide >> generatedTraitNames [
 ]
 
 { #category : #accessing }
-BLTWidget >> widget [
+BLTWidget >> widgetOwner [
 
 	<generated>
 	<container>
 
-	^ widget
+	^ widgetOwner
 ]
 
 { #category : #accessing }
-BLTWidget >> widget: anObject [
+BLTWidget >> widgetOwner: anObject [
 
 	<generated>
-	widget := anObject
+	widgetOwner := anObject
 
 ]

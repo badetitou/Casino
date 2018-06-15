@@ -36,6 +36,7 @@ BLActionAttribute class >> createAttributeFor: aFAMIXCLass [
 { #category : #generator }
 BLActionAttribute class >> generatedSlotNames [
 	<generated>
+	'BLActionAttribute class>>#generatedSlotNames'.
 	^ #(codeMetierModel)
 ]
 

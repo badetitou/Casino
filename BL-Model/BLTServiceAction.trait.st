@@ -20,7 +20,8 @@ BLTServiceAction classSide >> annotation [
 { #category : #generator }
 BLTServiceAction classSide >> generatedSlotNames [
 	<generated>
-	^ #(serviceAction)
+	'BLTServiceAction class>>#generatedSlotNames'.
+	^ #(serviceActionOwner)
 ]
 
 { #category : #generator }
@@ -30,18 +31,18 @@ BLTServiceAction classSide >> generatedTraitNames [
 ]
 
 { #category : #accessing }
-BLTServiceAction >> serviceAction [
+BLTServiceAction >> serviceActionOwner [
 
 	<generated>
 	<container>
 
-	^ serviceAction
+	^ serviceActionOwner
 ]
 
 { #category : #accessing }
-BLTServiceAction >> serviceAction: anObject [
+BLTServiceAction >> serviceActionOwner: anObject [
 
 	<generated>
-	serviceAction := anObject
+	serviceActionOwner := anObject
 
 ]

@@ -27,6 +27,7 @@ BLService class >> annotation [
 { #category : #generator }
 BLService class >> generatedSlotNames [
 	<generated>
+	'BLService class>>#generatedSlotNames'.
 	^ #()
 ]
 

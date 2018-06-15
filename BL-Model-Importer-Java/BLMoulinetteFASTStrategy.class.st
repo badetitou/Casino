@@ -13,7 +13,7 @@ Class {
 { #category : #'as yet unclassified' }
 BLMoulinetteFASTStrategy >> convertFAMIXClassToCodeMetierModel: aFAMIXClass [
 	^ aFAMIXClass methods
-		collect: [ :aFamixMethod |  self fastImporter parseTreeForSource: aFamixMethod  sourceText ].
+		collect: [ :aFamixMethod |  "self fastImporter parseTreeForSource: aFamixMethod  sourceText" ].
 ]
 
 { #category : #accessing }
@@ -29,5 +29,5 @@ BLMoulinetteFASTStrategy >> fastImporter: aFastImporter [
 { #category : #initialization }
 BLMoulinetteFASTStrategy >> initialize [
 	super initialize.
-	fastImporter := FASTJavaImporterVisitor new
+	"fastImporter := FASTJavaImporterVisitor new"
 ]
