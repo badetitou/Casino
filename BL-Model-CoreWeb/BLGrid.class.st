@@ -20,6 +20,19 @@ BLGrid >> addDefaultAttribute [
 ]
 
 { #category : #'as yet unclassified' }
+BLGrid >> addWidget: aWidget [
+	self halt. 
+	widgets add: aWidget
+]
+
+{ #category : #'as yet unclassified' }
+BLGrid >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+	self halt. 
+	
+	self addWidget: aWidget
+]
+
+{ #category : #'as yet unclassified' }
 BLGrid >> canHaveAttribute: blAttributeClass [
 	^ blAttributeClass ~= BLEnable 
 ]
