@@ -23,5 +23,5 @@ BLFieldset >> getExternalDependency [
 
 { #category : #'as yet unclassified' }
 BLFieldset >> getSelector [
-	^ 'p-fieldset'
+	^ 'bl-panel'
 ]

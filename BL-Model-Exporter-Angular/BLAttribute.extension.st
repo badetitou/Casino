@@ -6,11 +6,6 @@ BLAttribute >> = anotherAttribute [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLAttribute >> asString [
-	^ self leftToken  , self name , self rightToken ,'="' , self attributeValue , '"'
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLAttribute >> leftToken [
 	^ ''
 ]
