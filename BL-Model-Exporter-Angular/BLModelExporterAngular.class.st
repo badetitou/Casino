@@ -39,7 +39,7 @@ Class {
 { #category : #actions }
 BLModelExporterAngular class >> convertIfString: anObject [
 	anObject isString
-		ifTrue: [ ^ '"' , anObject protectQuote , '"' ].
+		ifTrue: [ ^ '"' , anObject , '"' ].
 	^ anObject 
 ]
 

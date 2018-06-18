@@ -1,7 +1,7 @@
 Class {
 	#name : #BLFieldset,
-	#superclass : #BLUIContainer,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#superclass : #BLPanel,
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }
