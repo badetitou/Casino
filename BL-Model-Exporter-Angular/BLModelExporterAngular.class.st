@@ -1,25 +1,19 @@
 "
+""LOAD FAST""
+
 ""Reset Work""
 MooseModel resetRoot.
 MooseModel resetMeta.
+BLMetamodelGenerator resetMetamodel.
+
 
 ""Generate BlApp""
-aw := AnalyseCommand new.
-""fileName := 'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'. ""
-fileName := 'D:\Developpement\mse\Copie-SourceAndDependencies\BLGRHGwt\src\fr\bl\GRH.module.xml'. 
-xml := aw getXmlFile: fileName.
-""mseFile := StandardFileStream fileNamed: 'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .""
-mseFile := StandardFileStream fileNamed: 'D:\Developpement\mse\verveinej\BLGRH.mse' .
-mooseModel := MooseModel importFromMSEStream: mseFile .
-""mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.""
-mooseModel rootFolder: 'D:\Developpement\mse\Copie-SourceAndDependencies'.
-
-""From BL-Model-Explorer""
-blApp := BLApplication new model: mooseModel; applicationXml: xml ; sourceApp: './Source/BLCoreIncubatorGwt/'; sourceCore: './Source/BLCore-6.1.4/'.
+mooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
+mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
 
 ""Generate Bl Model""
 model := MooseModel new name: 'Showroom'; yourself.
-BLMooseModelCreatorAngular runOn: model fromSourceModel: mooseModel and: xml.
+BLMooseModelCreatorAngular runOn: model fromSourceModel: mooseModel and:  'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
 BLGlobalView new openViewForModel: model.
 
@@ -28,12 +22,11 @@ MooseModel root add: model.
 
 model := BLModelExample generateModelWithTwoPhasesAndThreePageMetierAnd1Widget.
 BLModelExporterAngular export: model.
-
 "
 Class {
 	#name : #BLModelExporterAngular,
 	#superclass : #BLModelExporter,
-	#category : 'BL-Model-Exporter-Angular'
+	#category : #'BL-Model-Exporter-Angular'
 }
 
 { #category : #actions }

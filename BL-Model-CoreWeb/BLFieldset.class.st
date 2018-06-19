@@ -16,11 +16,6 @@ BLFieldset >> canHaveAttribute: blAttributeClass [
 	^ blAttributeClass ~= BLEnable
 ]
 
-{ #category : #accessing }
-BLFieldset >> getExternalDependency [
-	^ {PNGFieldset}
-]
-
 { #category : #'as yet unclassified' }
 BLFieldset >> getSelector [
 	^ 'bl-panel'

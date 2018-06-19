@@ -4,3 +4,8 @@ Extension { #name : #BLHorizontalChild }
 BLHorizontalChild >> attributeValue [
 	^ 'ui-g-', self subpart asString
 ]
+
+{ #category : #'*BL-Model-CoreWeb-Exporter' }
+BLHorizontalChild >> name [
+	^ 'class'
+]

@@ -8,7 +8,7 @@ Class {
 BLLinkWidgetResponsabilitiesParameterHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	((aCollectionOfUsages collect: #receiver thenSelect: [ :receiver | receiver class = FAMIXParameter ])
 		ifEmpty: [ false ]
-		ifNotEmpty: [ :collection | | parametersName  posUsages invocations variables |
+		ifNotEmpty: [ :collection | | parametersName invocations variables |
 			invocations := (collection flatCollect:  [ :parameter | parameter parentBehaviouralEntity incomingInvocations]).
 			parametersName := invocations flatCollect: #parameters.
 			variables := invocations collect: [ :callingMethod | callingMethod from findAttributeNamed: (parametersName at: 1).  ].
