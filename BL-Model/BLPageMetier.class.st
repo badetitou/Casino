@@ -1,12 +1,11 @@
 Class {
 	#name : #BLPageMetier,
 	#superclass : #BLUIContainer,
-	#traits : 'BLTWithPhases',
-	#classTraits : 'BLTWithPhases classTrait',
 	#instVars : [
+		'#phaseContainers => FMMany type: #BLPhase opposite: #pageMetiers',
 		'#title'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -23,13 +22,13 @@ BLPageMetier class >> annotation [
 BLPageMetier class >> generatedSlotNames [
 	<generated>
 	'BLPageMetier class>>#generatedSlotNames'.
-	^ #(title)
+	^ #(title phaseContainers)
 ]
 
 { #category : #generator }
 BLPageMetier class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithPhases)
+	^ #()
 ]
 
 { #category : #meta }
@@ -39,13 +38,19 @@ BLPageMetier class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLPageMetier >> phasesGroup [
+{ #category : #accessing }
+BLPageMetier >> phaseContainers [
 
 	<generated>
-	<navigation: 'Phases'>
-	^ MooseGroup
-			withAll: (self phases asSet)
+	^ phaseContainers
+]
+
+{ #category : #accessing }
+BLPageMetier >> phaseContainers: anObject [
+
+	<generated>
+	phaseContainers value: anObject
+
 ]
 
 { #category : #accessing }

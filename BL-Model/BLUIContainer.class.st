@@ -1,12 +1,11 @@
 Class {
 	#name : #BLUIContainer,
 	#superclass : #BLWidget,
-	#traits : 'BLTWithWidgets',
-	#classTraits : 'BLTWithWidgets classTrait',
 	#instVars : [
-		'#elements'
+		'#elements',
+		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -23,13 +22,13 @@ BLUIContainer class >> annotation [
 BLUIContainer class >> generatedSlotNames [
 	<generated>
 	'BLUIContainer class>>#generatedSlotNames'.
-	^ #()
+	^ #(widgets)
 ]
 
 { #category : #generator }
 BLUIContainer class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithWidgets)
+	^ #()
 ]
 
 { #category : #meta }
@@ -60,11 +59,17 @@ BLUIContainer >> elements: anObject [
 	elements := anObject
 ]
 
-{ #category : #navigation }
-BLUIContainer >> widgetsGroup [
+{ #category : #accessing }
+BLUIContainer >> widgets [
 
 	<generated>
-	<navigation: 'Widgets'>
-	^ MooseGroup
-			withAll: (self widgets asSet)
+	^ widgets
+]
+
+{ #category : #accessing }
+BLUIContainer >> widgets: anObject [
+
+	<generated>
+	widgets value: anObject
+
 ]

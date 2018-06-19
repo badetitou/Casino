@@ -1,9 +1,10 @@
 Class {
 	#name : #BLActionAppel,
 	#superclass : #BLAction,
-	#traits : 'BLTActionAppel',
-	#classTraits : 'BLTActionAppel classTrait',
-	#category : 'BL-Model-Entities'
+	#instVars : [
+		'#call => FMOne type: #BLPhase opposite: #actions'
+	],
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -20,13 +21,13 @@ BLActionAppel class >> annotation [
 BLActionAppel class >> generatedSlotNames [
 	<generated>
 	'BLActionAppel class>>#generatedSlotNames'.
-	^ #()
+	^ #(call)
 ]
 
 { #category : #generator }
 BLActionAppel class >> generatedTraitNames [
 	<generated>
-	^ #(BLTActionAppel)
+	^ #()
 ]
 
 { #category : #meta }
@@ -36,11 +37,17 @@ BLActionAppel class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLActionAppel >> actionAppelOwnerGroup [
+{ #category : #accessing }
+BLActionAppel >> call [
 
 	<generated>
-	<navigation: 'ActionAppelOwner'>
-	^ MooseGroup
-			with: (self actionAppelOwner)
+	^ call
+]
+
+{ #category : #accessing }
+BLActionAppel >> call: anObject [
+
+	<generated>
+	call := anObject
+
 ]

@@ -33,7 +33,7 @@ BLPageMetier >> calledBehavior [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPageMetier >> collectPhaseCalled [
-	^ (self recursiveWidgets flatCollect: [ :localWidget | localWidget actions collect: #actionAppelOwner ]) asSet asOrderedCollection 
+	^ (self recursiveWidgets flatCollect: [ :localWidget | localWidget actions collect: #call ]) asSet asOrderedCollection 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -154,8 +154,8 @@ BLPageMetier >> getBehaviorImportString [
 		,
 			(self calledBehavior
 				flatCollect: [ :serviceAction | 
-					'import { ' , serviceAction serviceActionOwner mooseName , ' } from ''' , self relativePathToHome
-						, serviceAction serviceActionOwner getLocalPath , ''';' , String crlf ])
+					'import { ' , serviceAction serviceOwner mooseName , ' } from ''' , self relativePathToHome
+						, serviceAction serviceOwner getLocalPath , ''';' , String crlf ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

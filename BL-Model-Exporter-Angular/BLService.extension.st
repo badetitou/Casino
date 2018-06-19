@@ -17,7 +17,7 @@ export class ' , self mooseName
     constructor(private http: HttpClient) {
     }
 
-' , (self serviceActions flatCollect: [ :action | action exportCode , String crlf ])
+' , (self actions flatCollect: [ :action | action exportCode , String crlf ])
 		,
 			'
 

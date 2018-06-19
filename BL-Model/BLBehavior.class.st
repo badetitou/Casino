@@ -8,9 +8,10 @@ The mechanism of a popup/async request/disabling staff/saveStaff/ etc..
 Class {
 	#name : #BLBehavior,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTWithActionAttributes',
-	#classTraits : 'BLTWithActionAttributes classTrait',
-	#category : 'BL-Model-Entities'
+	#instVars : [
+		'#actionAttributes => FMMany type: #BLActionAttribute opposite: #behaviors'
+	],
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -27,13 +28,13 @@ BLBehavior class >> annotation [
 BLBehavior class >> generatedSlotNames [
 	<generated>
 	'BLBehavior class>>#generatedSlotNames'.
-	^ #()
+	^ #(actionAttributes)
 ]
 
 { #category : #generator }
 BLBehavior class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithActionAttributes)
+	^ #()
 ]
 
 { #category : #meta }
@@ -43,11 +44,17 @@ BLBehavior class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLBehavior >> actionAttributesGroup [
+{ #category : #accessing }
+BLBehavior >> actionAttributes [
 
 	<generated>
-	<navigation: 'ActionAttributes'>
-	^ MooseGroup
-			withAll: (self actionAttributes asSet)
+	^ actionAttributes
+]
+
+{ #category : #accessing }
+BLBehavior >> actionAttributes: anObject [
+
+	<generated>
+	actionAttributes value: anObject
+
 ]

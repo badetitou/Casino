@@ -6,12 +6,10 @@ I represent a distant service (you need me if you want to make asynchronious cal
 Class {
 	#name : #BLService,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTWithServiceActions',
-	#classTraits : 'BLTWithServiceActions classTrait',
 	#instVars : [
-		'#actions'
+		'#actions => FMMany type: #BLServiceAction opposite: #serviceOwner'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -28,13 +26,13 @@ BLService class >> annotation [
 BLService class >> generatedSlotNames [
 	<generated>
 	'BLService class>>#generatedSlotNames'.
-	^ #()
+	^ #(actions)
 ]
 
 { #category : #generator }
 BLService class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithServiceActions)
+	^ #()
 ]
 
 { #category : #meta }
@@ -44,11 +42,17 @@ BLService class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLService >> serviceActionsGroup [
+{ #category : #accessing }
+BLService >> actions [
 
 	<generated>
-	<navigation: 'ServiceActions'>
-	^ MooseGroup
-			withAll: (self serviceActions asSet)
+	^ actions
+]
+
+{ #category : #accessing }
+BLService >> actions: anObject [
+
+	<generated>
+	actions value: anObject
+
 ]

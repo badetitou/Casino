@@ -1,12 +1,11 @@
 Class {
 	#name : #BLAttribute,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTAttribute',
-	#classTraits : 'BLTAttribute classTrait',
 	#instVars : [
-		'#attributeValue'
+		'#attributeValue',
+		'#widget => FMOne type: #BLWidget opposite: #attributes'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -23,13 +22,13 @@ BLAttribute class >> annotation [
 BLAttribute class >> generatedSlotNames [
 	<generated>
 	'BLAttribute class>>#generatedSlotNames'.
-	^ #(attributeValue)
+	^ #(widget attributeValue)
 ]
 
 { #category : #generator }
 BLAttribute class >> generatedTraitNames [
 	<generated>
-	^ #(BLTAttribute)
+	^ #()
 ]
 
 { #category : #meta }
@@ -37,15 +36,6 @@ BLAttribute class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #navigation }
-BLAttribute >> attributeOwnerGroup [
-
-	<generated>
-	<navigation: 'AttributeOwner'>
-	^ MooseGroup
-			with: (self attributeOwner)
 ]
 
 { #category : #accessing }
@@ -68,4 +58,21 @@ BLAttribute >> attributeValue: anObject [
 { #category : #accessing }
 BLAttribute >> behaviors [
 	^ Set new
+]
+
+{ #category : #accessing }
+BLAttribute >> widget [
+
+	<generated>
+	<container>
+
+	^ widget
+]
+
+{ #category : #accessing }
+BLAttribute >> widget: anObject [
+
+	<generated>
+	widget := anObject
+
 ]

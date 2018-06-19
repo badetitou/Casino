@@ -1,16 +1,15 @@
 Class {
 	#name : #BLActionAttribute,
 	#superclass : #BLAttribute,
-	#traits : 'BLTWithBehaviors',
-	#classTraits : 'BLTWithBehaviors classTrait',
 	#instVars : [
+		'#behaviors => FMMany type: #BLBehavior opposite: #actionAttributes',
 		'#codeMetierModel',
 		'#oldClass'
 	],
 	#classVars : [
 		'#moulinetteStrategy'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -37,13 +36,13 @@ BLActionAttribute class >> createAttributeFor: aFAMIXCLass [
 BLActionAttribute class >> generatedSlotNames [
 	<generated>
 	'BLActionAttribute class>>#generatedSlotNames'.
-	^ #(codeMetierModel)
+	^ #(codeMetierModel behaviors)
 ]
 
 { #category : #generator }
 BLActionAttribute class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithBehaviors)
+	^ #()
 ]
 
 { #category : #meta }
@@ -58,13 +57,19 @@ BLActionAttribute class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLActionAttribute >> behaviorsGroup [
+{ #category : #accessing }
+BLActionAttribute >> behaviors [
 
 	<generated>
-	<navigation: 'Behaviors'>
-	^ MooseGroup
-			withAll: (self behaviors asSet)
+	^ behaviors
+]
+
+{ #category : #accessing }
+BLActionAttribute >> behaviors: anObject [
+
+	<generated>
+	behaviors value: anObject
+
 ]
 
 { #category : #accessing }

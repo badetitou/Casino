@@ -147,7 +147,7 @@ BLWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 BLWebModelJava >> addPPPToWidget [
-	(self listOfWidget select: [ :a | a widgetOwner isNil ])
+	(self listOfWidget select: [ :a | a widgetContainer isNil ])
 		do: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
@@ -246,7 +246,7 @@ BLWebModelJava >> generateBLActionAppel [
 			| action |
 			action := BLActionAppel new.
 			el key addAction: action.
-			el value ifNil: [  ] ifNotNil: [ action actionAppelOwner: el value  ].
+			el value ifNil: [  ] ifNotNil: [ action call: el value  ].
 			action ]
 ]
 
@@ -287,7 +287,7 @@ BLWebModelJava >> generateServiceAction [
 			((self listOfService
 				collect: [ :service | 
 					service addAllActions: 
-					(self getListOfServiceActionForServiceClass: service source)]) collect: #serviceActions) flattened
+					(self getListOfServiceActionForServiceClass: service source)]) collect: #actions) flattened
 ]
 
 { #category : #'as yet unclassified' }
