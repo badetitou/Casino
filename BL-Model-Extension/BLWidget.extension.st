@@ -46,3 +46,8 @@ BLWidget >> realClass: aClass [
 BLWidget >> recursiveWidgets [
 	^ (self widgets , (self widgets collect: #recursiveWidgets))
 ]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> widgets [
+	^ { } asOrderedCollection 
+]

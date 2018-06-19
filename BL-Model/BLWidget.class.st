@@ -5,13 +5,14 @@ I can be everything in a User Interface (Button/Pannel/Text/Presenter)
 Class {
 	#name : #BLWidget,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTWidget + BLTWithActions + BLTWithAttributes',
-	#classTraits : 'BLTWidget classTrait + BLTWithActions classTrait + BLTWithAttributes classTrait',
 	#instVars : [
+		'#actions => FMMany type: #BLAction opposite: #caller',
+		'#attributes => FMMany type: #BLAttribute opposite: #widget',
 		'#constructor',
 		'#parameters',
 		'#realClass',
-		'#variable'
+		'#variable',
+		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -30,13 +31,13 @@ BLWidget class >> annotation [
 BLWidget class >> generatedSlotNames [
 	<generated>
 	'BLWidget class>>#generatedSlotNames'.
-	^ #(realClass)
+	^ #(actions attributes widgetContainer realClass)
 ]
 
 { #category : #generator }
 BLWidget class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWidget BLTWithActions BLTWithAttributes)
+	^ #()
 ]
 
 { #category : #meta }
@@ -46,22 +47,34 @@ BLWidget class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLWidget >> actionsGroup [
+{ #category : #accessing }
+BLWidget >> actions [
 
 	<generated>
-	<navigation: 'Actions'>
-	^ MooseGroup
-			withAll: (self actions asSet)
+	^ actions
 ]
 
-{ #category : #navigation }
-BLWidget >> attributesGroup [
+{ #category : #accessing }
+BLWidget >> actions: anObject [
 
 	<generated>
-	<navigation: 'Attributes'>
-	^ MooseGroup
-			withAll: (self attributes asSet)
+	actions value: anObject
+
+]
+
+{ #category : #accessing }
+BLWidget >> attributes [
+
+	<generated>
+	^ attributes
+]
+
+{ #category : #accessing }
+BLWidget >> attributes: anObject [
+
+	<generated>
+	attributes value: anObject
+
 ]
 
 { #category : #model }
@@ -86,11 +99,19 @@ BLWidget >> variable: anObject [
 	variable := anObject
 ]
 
-{ #category : #navigation }
-BLWidget >> widgetOwnerGroup [
+{ #category : #accessing }
+BLWidget >> widgetContainer [
 
 	<generated>
-	<navigation: 'WidgetOwner'>
-	^ MooseGroup
-			with: (self widgetOwner)
+	<container>
+
+	^ widgetContainer
+]
+
+{ #category : #accessing }
+BLWidget >> widgetContainer: anObject [
+
+	<generated>
+	widgetContainer := anObject
+
 ]

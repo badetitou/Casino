@@ -4,16 +4,16 @@ I represent the root container of an application or of a subproject of an applic
 Class {
 	#name : #BLPhase,
 	#superclass : #BLOriginedEntity,
-	#traits : 'BLTWithActionAppels + BLTWithPageMetiers',
-	#classTraits : 'BLTWithActionAppels classTrait + BLTWithPageMetiers classTrait',
 	#instVars : [
+		'#actions => FMMany type: #BLActionAppel opposite: #call',
 		'#codePhase',
 		'#codeValue',
+		'#pageMetiers => FMMany type: #BLPageMetier opposite: #phaseContainers',
 		'#realClassName',
 		'#subtitle',
 		'#title'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -30,13 +30,13 @@ BLPhase class >> annotation [
 BLPhase class >> generatedSlotNames [
 	<generated>
 	'BLPhase class>>#generatedSlotNames'.
-	^ #(realClassName subtitle codeValue title codePhase)
+	^ #(pageMetiers realClassName subtitle codeValue title actions codePhase)
 ]
 
 { #category : #generator }
 BLPhase class >> generatedTraitNames [
 	<generated>
-	^ #(BLTWithActionAppels BLTWithPageMetiers)
+	^ #()
 ]
 
 { #category : #meta }
@@ -46,13 +46,19 @@ BLPhase class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLPhase >> actionAppelsGroup [
+{ #category : #accessing }
+BLPhase >> actions [
 
 	<generated>
-	<navigation: 'ActionAppels'>
-	^ MooseGroup
-			withAll: (self actionAppels asSet)
+	^ actions
+]
+
+{ #category : #accessing }
+BLPhase >> actions: anObject [
+
+	<generated>
+	actions value: anObject
+
 ]
 
 { #category : #accessing }
@@ -89,13 +95,19 @@ BLPhase >> codeValue: anObject [
 
 ]
 
-{ #category : #navigation }
-BLPhase >> pageMetiersGroup [
+{ #category : #accessing }
+BLPhase >> pageMetiers [
 
 	<generated>
-	<navigation: 'PageMetiers'>
-	^ MooseGroup
-			withAll: (self pageMetiers asSet)
+	^ pageMetiers
+]
+
+{ #category : #accessing }
+BLPhase >> pageMetiers: anObject [
+
+	<generated>
+	pageMetiers value: anObject
+
 ]
 
 { #category : #accessing }

@@ -118,13 +118,14 @@ BLMetamodelGenerator >> defineProperties [
 
 { #category : #definition }
 BLMetamodelGenerator >> defineRelations [
-	(uiContainer <>-* widget) withNavigation.
-	(widget <>-* action) withNavigation.
-	(widget <>-* attribute) withNavigation.
-	(phase -* actionAppel) withNavigation.
-	(phase *-* pageMetier) withNavigation.
-	(service <>-* serviceAction) withNavigation.
-	(actionAttribute *-* behavior) withNavigation
+	((uiContainer property: #widgets) <>-* (widget property: #widgetContainer)) withNavigation.
+	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
+	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
+	((phase property: #actions) -* (actionAppel property: #call)) withNavigation.
+	((phase property: #pageMetiers) *-* (pageMetier property: #phaseContainers)) withNavigation.
+	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation.
+	((actionAttribute property: #behaviors) *-* (behavior property: #actionAttributes))
+		withNavigation
 ]
 
 { #category : #definition }

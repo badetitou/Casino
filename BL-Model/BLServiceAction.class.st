@@ -4,9 +4,10 @@ I represent the bahavior that make an asynchronious call to a distant service
 Class {
 	#name : #BLServiceAction,
 	#superclass : #BLBehavior,
-	#traits : 'BLTServiceAction',
-	#classTraits : 'BLTServiceAction classTrait',
-	#category : 'BL-Model-Entities'
+	#instVars : [
+		'#serviceOwner => FMOne type: #BLService opposite: #actions'
+	],
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -23,13 +24,13 @@ BLServiceAction class >> annotation [
 BLServiceAction class >> generatedSlotNames [
 	<generated>
 	'BLServiceAction class>>#generatedSlotNames'.
-	^ #()
+	^ #(serviceOwner)
 ]
 
 { #category : #generator }
 BLServiceAction class >> generatedTraitNames [
 	<generated>
-	^ #(BLTServiceAction)
+	^ #()
 ]
 
 { #category : #meta }
@@ -39,11 +40,19 @@ BLServiceAction class >> requirements [
 	^ {  }
 ]
 
-{ #category : #navigation }
-BLServiceAction >> serviceActionOwnerGroup [
+{ #category : #accessing }
+BLServiceAction >> serviceOwner [
 
 	<generated>
-	<navigation: 'ServiceActionOwner'>
-	^ MooseGroup
-			with: (self serviceActionOwner)
+	<container>
+
+	^ serviceOwner
+]
+
+{ #category : #accessing }
+BLServiceAction >> serviceOwner: anObject [
+
+	<generated>
+	serviceOwner := anObject
+
 ]
