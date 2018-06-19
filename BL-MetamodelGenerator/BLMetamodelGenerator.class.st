@@ -113,6 +113,9 @@ BLMetamodelGenerator >> defineProperties [
 		comment: 'The type (class) of the widget'.
 	(attribute property: 'attributeValue' type: #String)
 		comment: 'The literal value of the attribute'.
+	(attribute property: #oldClass type: #Object).
+	(uiLeaf property: #text type: #String).
+		
 	
 ]
 

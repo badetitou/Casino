@@ -54,16 +54,6 @@ BLPageMetier >> phaseContainers: anObject [
 ]
 
 { #category : #accessing }
-BLPageMetier >> recursiveMetiers [
-	^ (self metiers , (self metiers collect: #recursiveMetiers)) flattened
-]
-
-{ #category : #accessing }
-BLPageMetier >> recursiveWidgets [
-	^ (self widgets , (self widgets collect: #recursiveWidgets)) flattened
-]
-
-{ #category : #accessing }
 BLPageMetier >> title [
 
 	<MSEProperty: #title type: #String>

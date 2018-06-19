@@ -2,7 +2,6 @@ Class {
 	#name : #BLUIContainer,
 	#superclass : #BLWidget,
 	#instVars : [
-		'#elements',
 		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer'
 	],
 	#category : #'BL-Model-Entities'
@@ -36,27 +35,6 @@ BLUIContainer class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #accessing }
-BLUIContainer >> attributesTag [
-	^ ((self attributes groupedBy: [ :attribut | attribut name ])
-		associationsCollect: [ :mapAttributeNameValues | 
-			' ' , mapAttributeNameValues key asString , '="'
-				,
-					((mapAttributeNameValues value
-						flatCollect: [ :attribute | attribute attributeValue asString , ' ' ]) removeLast; yourself)
-				, '"' ]) flatten
-]
-
-{ #category : #accessing }
-BLUIContainer >> elements [
-	^ elements
-]
-
-{ #category : #accessing }
-BLUIContainer >> elements: anObject [
-	elements := anObject
 ]
 
 { #category : #accessing }
