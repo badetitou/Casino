@@ -3,11 +3,7 @@ Class {
 	#superclass : #BLAttribute,
 	#instVars : [
 		'#behaviors => FMMany type: #BLBehavior opposite: #actionAttributes',
-		'#codeMetierModel',
-		'#oldClass'
-	],
-	#classVars : [
-		'#moulinetteStrategy'
+		'#codeMetierModel'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -22,16 +18,6 @@ BLActionAttribute class >> annotation [
 	^self
 ]
 
-{ #category : #meta }
-BLActionAttribute class >> createAttributeFor: aFAMIXCLass [
-	^ self new
-		source: aFAMIXCLass;
-		name: aFAMIXCLass name;
-		attributeValue: aFAMIXCLass name;
-		oldClass: aFAMIXCLass;
-		yourself
-]
-
 { #category : #generator }
 BLActionAttribute class >> generatedSlotNames [
 	<generated>
@@ -43,11 +29,6 @@ BLActionAttribute class >> generatedSlotNames [
 BLActionAttribute class >> generatedTraitNames [
 	<generated>
 	^ #()
-]
-
-{ #category : #meta }
-BLActionAttribute class >> moulinetteStrategy: aMoulinetteStrategy [
-	moulinetteStrategy := aMoulinetteStrategy 
 ]
 
 { #category : #meta }
@@ -87,29 +68,4 @@ BLActionAttribute >> codeMetierModel: anObject [
 	<generated>
 	codeMetierModel := anObject
 
-]
-
-{ #category : #accessing }
-BLActionAttribute >> convertOldClass [
-	oldClass do: [ :pjMethod | "pjMethod acceptVisitor: (BLConvertVisitor new model: self mooseModel )" ]
-]
-
-{ #category : #accessing }
-BLActionAttribute >> moulinetteStrategy [
-	^ moulinetteStrategy ifNil: [ moulinetteStrategy := BLMoulinetteNullStrategy new ]
-]
-
-{ #category : #accessing }
-BLActionAttribute >> moulinetteStrategy: anObject [
-	moulinetteStrategy := anObject
-]
-
-{ #category : #accessing }
-BLActionAttribute >> oldClass [
-	^ oldClass 
-]
-
-{ #category : #accessing }
-BLActionAttribute >> oldClass: anObject [
-	oldClass := self moulinetteStrategy convertFAMIXClassToCodeMetierModel: anObject 
 ]

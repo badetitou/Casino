@@ -1,13 +1,10 @@
-"
-I am a widget that cannot contain any other widget
-"
 Class {
 	#name : #BLUILeaf,
 	#superclass : #BLWidget,
 	#instVars : [
 		'text'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }
@@ -20,16 +17,11 @@ BLUILeaf class >> annotation [
 	^self
 ]
 
-{ #category : #testing }
-BLUILeaf class >> canHandle: anInvocation [
-	^ false
-]
-
 { #category : #generator }
 BLUILeaf class >> generatedSlotNames [
 	<generated>
 	'BLUILeaf class>>#generatedSlotNames'.
-	^ #()
+	^ #(text)
 ]
 
 { #category : #generator }
@@ -46,21 +38,17 @@ BLUILeaf class >> requirements [
 ]
 
 { #category : #accessing }
-BLUILeaf >> getDom [
-	^ text
-]
-
-{ #category : #accessing }
-BLUILeaf >> recursiveWidgets [
-	^ {self}
-]
-
-{ #category : #accessing }
 BLUILeaf >> text [
+
+	<MSEProperty: #text type: #String>
+	<generated>
 	^ text
 ]
 
 { #category : #accessing }
 BLUILeaf >> text: anObject [
+
+	<generated>
 	text := anObject
+
 ]

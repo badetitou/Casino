@@ -1,6 +1,3 @@
-"
-I represent the bahavior that make an asynchronious call to a distant service 
-"
 Class {
 	#name : #BLServiceAction,
 	#superclass : #BLBehavior,

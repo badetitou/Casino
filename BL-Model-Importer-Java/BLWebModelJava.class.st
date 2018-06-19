@@ -595,13 +595,13 @@ BLWebModelJava >> moduleHomeName [
 
 { #category : #api }
 BLWebModelJava >> postImport [
-	self model allBLActionsAttribute do: [ :actionAttribute | actionAttribute convertOldClass ].
+	"self model allBLActionsAttribute do: [ :actionAttribute | actionAttribute convertOldClass ]."
 	self model allBLWidget do: [ :widget | widget postImport ]
 ]
 
 { #category : #api }
 BLWebModelJava >> preImport [
-	BLActionAttribute moulinetteStrategy: BLMoulinetteFASTStrategy new.
+	"BLActionAttribute moulinetteStrategy: BLMoulinetteFASTStrategy new."
 ]
 
 { #category : #private }

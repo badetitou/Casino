@@ -1,17 +1,10 @@
-"
-I represent a widget entity
-I can be everything in a User Interface (Button/Pannel/Text/Presenter)
-"
 Class {
 	#name : #BLWidget,
 	#superclass : #BLOriginedEntity,
 	#instVars : [
 		'#actions => FMMany type: #BLAction opposite: #caller',
 		'#attributes => FMMany type: #BLAttribute opposite: #widget',
-		'#constructor',
-		'#parameters',
 		'#realClass',
-		'#variable',
 		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
 	],
 	#category : #'BL-Model-Entities'
@@ -75,28 +68,6 @@ BLWidget >> attributes: anObject [
 	<generated>
 	attributes value: anObject
 
-]
-
-{ #category : #model }
-BLWidget >> constructor [
-	<MSEProperty: #constructor type: #Object>
-	^ constructor
-]
-
-{ #category : #model }
-BLWidget >> constructor: theFAMIXInvocationOfTheInstanciation [
-	constructor := theFAMIXInvocationOfTheInstanciation
-]
-
-{ #category : #accessing }
-BLWidget >> variable [
-	<MSEProperty: #variable type: #Object>
-	^ variable
-]
-
-{ #category : #accessing }
-BLWidget >> variable: anObject [
-	variable := anObject
 ]
 
 { #category : #accessing }

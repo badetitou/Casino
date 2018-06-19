@@ -3,6 +3,7 @@ Class {
 	#superclass : #BLOriginedEntity,
 	#instVars : [
 		'#attributeValue',
+		'#oldClass',
 		'#widget => FMOne type: #BLWidget opposite: #attributes'
 	],
 	#category : #'BL-Model-Entities'
@@ -22,7 +23,7 @@ BLAttribute class >> annotation [
 BLAttribute class >> generatedSlotNames [
 	<generated>
 	'BLAttribute class>>#generatedSlotNames'.
-	^ #(widget attributeValue)
+	^ #(widget oldClass attributeValue)
 ]
 
 { #category : #generator }
@@ -56,8 +57,19 @@ BLAttribute >> attributeValue: anObject [
 ]
 
 { #category : #accessing }
-BLAttribute >> behaviors [
-	^ Set new
+BLAttribute >> oldClass [
+
+	<MSEProperty: #oldClass type: #Object>
+	<generated>
+	^ oldClass
+]
+
+{ #category : #accessing }
+BLAttribute >> oldClass: anObject [
+
+	<generated>
+	oldClass := anObject
+
 ]
 
 { #category : #accessing }

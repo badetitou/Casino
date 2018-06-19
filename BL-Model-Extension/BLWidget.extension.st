@@ -16,19 +16,20 @@ BLWidget >> canHaveAttribute: blAttributeClass [
 ]
 
 { #category : #'*BL-Model-Extension' }
-BLWidget >> initialize [
-	super initialize.
-	parameters := Dictionary new
+BLWidget >> constructor [
+	<MSEProperty: #constructor type: #Object>
+	^ self privateState attributeAt: #constructor ifAbsent: nil
+]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> constructor: anObject [
+	self privateState attributeAt: #constructor put: anObject
 ]
 
 { #category : #'*BL-Model-Extension' }
 BLWidget >> parameters [
-	^ parameters
-]
-
-{ #category : #'*BL-Model-Extension' }
-BLWidget >> parameters: anObject [
-	parameters := anObject
+	<MSEProperty: #parameters type: #Object>
+	^ self privateState attributeAt: #parameters ifAbsentPut: [ Dictionary new ]
 ]
 
 { #category : #'*BL-Model-Extension' }
@@ -45,6 +46,17 @@ BLWidget >> realClass: aClass [
 { #category : #'*BL-Model-Extension' }
 BLWidget >> recursiveWidgets [
 	^ (self widgets , (self widgets collect: #recursiveWidgets))
+]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> variable [
+	<MSEProperty: #variable type: #Object>
+	^ self privateState attributeAt: #variable ifAbsent: nil
+]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> variable: anObject [
+	self privateState attributeAt: #variable put: anObject
 ]
 
 { #category : #'*BL-Model-Extension' }
