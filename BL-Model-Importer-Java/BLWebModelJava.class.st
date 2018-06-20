@@ -1,13 +1,19 @@
 "
 ""LOAD FAST""
+SmalltalkImage current garbageCollectMost .
 
 ""Reset Work""
 MooseModel resetRoot.
 MooseModel resetMeta.
+generator := BLMetamodelGenerator new.
+generator generate.
+BLMetamodelGenerator resetMetamodel.
+
 
 ""Generate BlApp""
-mseFile := StandardFileStream fileNamed: 'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' .
-mooseModel := MooseModel importFromMSEStream: mseFile .
+
+
+mooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
 mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
 
 ""Generate Bl Model""
@@ -37,7 +43,7 @@ Class {
 		'xmlUiWidgetLink',
 		'listOfServiceAction'
 	],
-	#category : 'BL-Model-Importer-Java'
+	#category : #'BL-Model-Importer-Java'
 }
 
 { #category : #'as yet unclassified' }
