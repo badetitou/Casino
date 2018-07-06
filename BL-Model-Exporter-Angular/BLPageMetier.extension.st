@@ -2,16 +2,7 @@ Extension { #name : #BLPageMetier }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPageMetier >> accept: anExporter [
-	| pageMetierRoot |
-	pageMetierRoot := (self container componentsRootFromExporter: anExporter) / self getFolderName.
-	[ pageMetierRoot ensureCreateDirectory ]
-		on: DirectoryExists
-		do: [  ].
-	"Write pageMetier.module.ts"
-	anExporter writeFile: pageMetierRoot / self getHTMLName withCode: self generateHTMLSourceCode.
-	"Write pageMetier.route.ts"
-	anExporter writeFile: pageMetierRoot / self getTSName withCode: self generateTSSourceCode.
-	self metiers do: [ :metier | metier accept: anExporter ]
+	anExporter visitBLPageMetier: self
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
