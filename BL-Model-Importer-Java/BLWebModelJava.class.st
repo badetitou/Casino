@@ -653,8 +653,13 @@ BLWebModelJava >> widgetConstructorsInvocation [
 ]
 
 { #category : #'as yet unclassified' }
+BLWebModelJava >> widgetFactoryInvocation [
+	^ (((self sourceModel allModelClasses select: [ :a | a name = 'FactoryBLLabel' ]) at: 1) methods select: [ :m | m name =  'create' ] thenCollect: #incomingInvocations) flatten
+]
+
+{ #category : #'as yet unclassified' }
 BLWebModelJava >> widgetInstance [
-	^ (self widgetConstructorsInvocation , self widgetAnonymousSubclasses
+	^ (self widgetConstructorsInvocation , self widgetAnonymousSubclasses, self widgetFactoryInvocation
 		reject: [ :invocationOrClass | 
 			(self widgetNamespace match: invocationOrClass from mooseName)
 				or: [ '*noname#super*' match: invocationOrClass asString ] ])

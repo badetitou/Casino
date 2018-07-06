@@ -2,7 +2,7 @@ Extension { #name : #BLLabel }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLLabel class >> canHandle: anInvocation [
-	^ ('BLLabel|Label' substrings: '|') includes: anInvocation invokedClassName
+	^ ('BLLabel|Label|FactoryBLLabel' substrings: '|') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
