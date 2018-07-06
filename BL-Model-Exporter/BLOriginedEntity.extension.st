@@ -2,9 +2,7 @@ Extension { #name : #BLOriginedEntity }
 
 { #category : #'*BL-Model-Exporter' }
 BLOriginedEntity >> accept: anExporter [
-	self prepareAcceptFor: anExporter.
-	self writeCodeWith: anExporter.
-	self visitSuccessorWith: anExporter 
+	anExporter visitBLOriginedEntity: self 
 
 ]
 

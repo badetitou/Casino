@@ -54,3 +54,20 @@ BLModelExporter >> serviceRoot [
 BLModelExporter >> visit: anElement [
 	anElement accept: self
 ]
+
+{ #category : #visiting }
+BLModelExporter >> visitBLOriginedEntity: anElement [
+	anElement prepareAcceptFor: self.
+	anElement writeCodeWith: self.
+	anElement visitSuccessorWith: self 
+]
+
+{ #category : #visiting }
+BLModelExporter >> visitBLPageMetier: aBLPageMetier [
+	self visitBLOriginedEntity: aBLPageMetier 
+]
+
+{ #category : #visiting }
+BLModelExporter >> visitBLPhase: aBLPhase [
+	self visitBLOriginedEntity: aBLPhase 
+]
