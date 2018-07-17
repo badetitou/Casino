@@ -8,7 +8,12 @@ BLPhase >> accessesAtLevel: aLevel [
 
 { #category : #'*BL-Model-Query' }
 BLPhase >> color [
-	^ self pageMetiers ifEmpty: [ Color yellow ] ifNotEmpty: [ Color blue ]
+	^ self pageMetiers ifEmpty: [ Color yellow ] ifNotEmpty: [ self class color ]
+]
+
+{ #category : #'*BL-Model-Query' }
+BLPhase class >> color [
+	^ Color blue
 ]
 
 { #category : #'*BL-Model-Query' }
