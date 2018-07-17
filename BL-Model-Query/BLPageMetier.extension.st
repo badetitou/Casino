@@ -8,7 +8,7 @@ BLPageMetier >> accessesAtLevel: aLevel [
 ]
 
 { #category : #'*BL-Model-Query' }
-BLPageMetier >> color [
+BLPageMetier class >> color [
 	^ Color red
 ]
 

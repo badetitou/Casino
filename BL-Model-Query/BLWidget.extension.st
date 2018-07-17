@@ -9,6 +9,11 @@ BLWidget >> accessesAtLevel: aLevel [
 
 { #category : #'*BL-Model-Query' }
 BLWidget >> color [
+	^ self class color
+]
+
+{ #category : #'*BL-Model-Query' }
+BLWidget class >> color [
 	^ Color green
 ]
 
