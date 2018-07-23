@@ -35,9 +35,12 @@ BaselineOfBLToolkit >> defineDependencies: spec [
 BaselineOfBLToolkit >> defineGroups: spec [
 	spec
 		group: 'default' with: #('core' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
+		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
 		group: 'core' with: #('BL-Model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
 		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
+		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
+		group: 'tests' with: #('bl-tests' 'default-tests');
 		group: 'pp' with: #('PetitParser' 'PetitParser2');
 		group: 'all' with: #('bl' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
@@ -58,11 +61,15 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-Importer' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-Importer-Java'
 			with: [ spec requires: #('PetitParser' 'BL-Model-Importer' 'BL-Model-Toolkit') ];
+		package: 'BL-Model-Importer-Java-Tests'
+			with: [ spec requires: #('BL-Model-Importer-Java') ];
 		package: 'BL-Model-Query';
 		package: 'BL-Model-CoreWeb' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-CoreWeb-Exporter'
 			with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Exporter-Angular') ];
 		package: 'BL-Model-CoreWeb-Importer'
 			with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
+		package: 'BL-Model-CoreWeb-Importer-Tests'
+			with: [ spec requires: #('BL-Model-CoreWeb-Importer') ];
 		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ]
 ]
