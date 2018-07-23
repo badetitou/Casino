@@ -42,7 +42,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
 		group: 'pp' with: #('PetitParser' 'PetitParser2');
-		group: 'all' with: #('bl' 'BL-Model-Query' 'BL-MetamodelGenerator')
+		group: 'all' with: #('bl' 'tests' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
 
 { #category : #baselines }
