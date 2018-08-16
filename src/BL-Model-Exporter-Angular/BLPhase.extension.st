@@ -27,7 +27,6 @@ BLPhase >> generateHTMLSourceCodeDependOfPageMetier [
 BLPhase >> generateHTMLSourceCodeFor1PageMetier [
 	^ '<bl-phase-business-page-container>
         <bl-phase-business-page-header>
-            header actions
         </bl-phase-business-page-header>
 
         <bl-phase-business-page id="P1" title="Page 1">
@@ -41,7 +40,7 @@ BLPhase >> generateHTMLSourceCodeFor1PageMetier [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
 	| text id |
-	id := 1.
+	id := 0.
 	text := '<bl-phase-business-pages-tab-container (tabSelected)="onTabSelected($event)">
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
@@ -51,8 +50,8 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
             </div>
         </bl-phase-business-pages-tab-header>'.
 	text := text
-		,
-			(self pageMetiers
+		, 
+			( self pageMetiers
 				flatCollect: [ :metier | 
 					id := id + 1.
 					'
