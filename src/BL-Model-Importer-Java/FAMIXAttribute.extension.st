@@ -3,7 +3,7 @@ Extension { #name : #FAMIXAttribute }
 { #category : #'*BL-Model-Importer-Java' }
 FAMIXAttribute >> allUsages [
 	| posUsages methods |
-	methods := self incomingAccesses select: #isRead thenCollect: #from.	"self parentType methods."
+	methods := self incomingAccesses collect: #from.	"self parentType methods."
 	posUsages := (methods select: [ :method | method hasSourceAnchor and: [ method isInstanciationInitializer not ] ])
 		flatCollect: [ :method | method sourceAnchor findAllOccurrencesOfVariableNamed: self name ].
 	^ ((posUsages
