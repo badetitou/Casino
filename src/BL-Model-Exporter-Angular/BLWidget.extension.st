@@ -24,12 +24,12 @@ BLWidget >> container [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> getDom [
 	^ '<' , self getListPropertiesAsString , '>'
-		,
+		, (('',
 			((self widgets asOrderedCollection
 				sort:
 					[ :widget1 :widget2 | widget1 source sourceAnchor startPos < widget2 source sourceAnchor startPos ])
 				flatCollect:
-					[ :widget | String crlf , widget getDom , String crlf ])
+					[ :widget | String crlf , widget getDom, String crlf ])) indentBy: 4)
 		, '</' , self getSelector , '>'
 ]
 
