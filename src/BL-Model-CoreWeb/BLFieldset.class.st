@@ -18,5 +18,5 @@ BLFieldset >> canHaveAttribute: blAttributeClass [
 
 { #category : #'as yet unclassified' }
 BLFieldset >> getSelector [
-	^ 'bl-panel'
+	^ 'bl-fieldset'
 ]

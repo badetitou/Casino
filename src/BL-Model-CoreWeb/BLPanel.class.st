@@ -18,5 +18,5 @@ BLPanel >> canHaveAttribute: blAttributeClass [
 
 { #category : #'as yet unclassified' }
 BLPanel >> getSelector [
-	^ 'div'
+	^ 'bl-panel'
 ]
