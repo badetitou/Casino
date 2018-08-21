@@ -25,9 +25,7 @@ BLWidget >> container [
 BLWidget >> getDom [
 	^ '<' , self getListPropertiesAsString , '>'
 		, (('',
-			((self widgets asOrderedCollection
-				sort:
-					[ :widget1 :widget2 | widget1 source sourceAnchor startPos < widget2 source sourceAnchor startPos ])
+			(( self sortedWidget)
 				flatCollect:
 					[ :widget | String crlf , widget getDom, String crlf ])) indentBy: 4)
 		, '</' , self getSelector , '>'
@@ -88,4 +86,12 @@ BLWidget >> parametersTag [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> relativePathToHome [
 	^ self container relativePathToHome , '../../'
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> sortedWidget [
+	^ self widgets asOrderedCollection
+		sort: [ :widget1 :widget2 | 
+			widget1 addingPosition 
+				< widget2 addingPosition  ]
 ]

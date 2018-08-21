@@ -1,6 +1,11 @@
 Extension { #name : #BLPageMetier }
 
 { #category : #'*BL-Model-Extension' }
+BLPageMetier >> addingPosition [
+	^ nil
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLPageMetier >> recursiveMetiers [
 	^ (self metiers , (self metiers collect: #recursiveMetiers)) flattened
 ]

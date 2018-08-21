@@ -75,7 +75,7 @@ BLWebModelJava >> addLinkBetweenWidgets [
 				ifTrue: [ widgetContainer
 						do: [ :widget | 
 							| containerInvocation |
-							containerInvocation := widget blWidget constructor container.
+							containerInvocation := widget blWidget source container.
 							[ containerInvocation isNotNil ]
 								whileTrue: [ self listOfWidgetContainer
 										at: containerInvocation receiver
@@ -636,7 +636,7 @@ BLWebModelJava >> searchCalledPhaseFromInvocation: invoc [
 
 { #category : #private }
 BLWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
-	^ (self listOfWidget select: [ :widget | widget constructor = anInvocation ]) at: 1 ifAbsent: [ ^nil ]
+	^ (self listOfWidget select: [ :widget | widget source = anInvocation ]) at: 1 ifAbsent: [ ^nil ]
 ]
 
 { #category : #'as yet unclassified' }

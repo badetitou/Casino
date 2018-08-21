@@ -12,11 +12,6 @@ BLCheckBox class >> annotation [
 ]
 
 { #category : #accessing }
-BLCheckBox >> getDom [
-	^ '<' ,  self getListPropertiesAsString , ' />'
-]
-
-{ #category : #accessing }
 BLCheckBox >> getSelector [
-	^ 'input'
+	^ 'bl-checkbox'
 ]
