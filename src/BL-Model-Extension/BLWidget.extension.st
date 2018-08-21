@@ -11,19 +11,19 @@ BLWidget >> addAttribute: attribute [
 ]
 
 { #category : #'*BL-Model-Extension' }
+BLWidget >> addingPosition [
+	<MSEProperty: #addingPosition type: #Object>
+	^ self privateState attributeAt: #addingPosition ifAbsent: (self source sourceAnchor startPos)
+]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> addingPosition: anObject [
+	self privateState attributeAt: #addingPosition put: anObject
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLWidget >> canHaveAttribute: blAttributeClass [
 	^ false
-]
-
-{ #category : #'*BL-Model-Extension' }
-BLWidget >> constructor [
-	<MSEProperty: #constructor type: #Object>
-	^ self privateState attributeAt: #constructor ifAbsent: nil
-]
-
-{ #category : #'*BL-Model-Extension' }
-BLWidget >> constructor: anObject [
-	self privateState attributeAt: #constructor put: anObject
 ]
 
 { #category : #'*BL-Model-Extension' }

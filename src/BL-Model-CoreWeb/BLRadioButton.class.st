@@ -12,11 +12,6 @@ BLRadioButton class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-BLRadioButton >> getDom [
-	^ '<' ,  self getListPropertiesAsString , ' />'
-]
-
-{ #category : #'as yet unclassified' }
 BLRadioButton >> getSelector [
-	^ 'input'
+	^ 'bl-radio-button'
 ]

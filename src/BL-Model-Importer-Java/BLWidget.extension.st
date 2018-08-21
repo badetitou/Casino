@@ -20,7 +20,6 @@ BLWidget >> createAttributeFrom: anInvocation [
 { #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> createWidgetFor: anInvocation [
 	^ self new
-		constructor: anInvocation;
 		realClass: anInvocation invokedClass;
 		name: anInvocation asString;
 		source: anInvocation;
