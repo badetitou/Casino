@@ -535,13 +535,14 @@ BLWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 
 { #category : #private }
 BLWebModelJava >> linkPageMetierToPageMetier [
-	^ ((self listOfPageMetier collect: #source), xmlUiLink keys 
+	^ ((self listOfPageMetier collect: #source) , xmlUiLink keys
 		flatCollect: [ :pageMetier | 
-			(pageMetier outgoingInvocations
-				reject: [ :invoc | 	invoc  signature matchesRegex: '.*this\(.*|.*super\(.*'   ]
-				thenCollect: [ :invoc |  invoc candidates at: 1 ])
-				select: [ :e | (e isConstructor and: [ self modelPageMetier includes: e parentType ]) ]
-				thenCollect: [ :e | (self getPageMetierFromClass: (pageMetier)) -> (self getPageMetierFromClass: (e parentType)) ] ] )select: [ :assoc | assoc key isNotNil ]
+			pageMetier incomingInstanciations
+				reject: [ :invoc | invoc signature matchesRegex: '.*this\(.*|.*super\(.*' ]
+				thenCollect: [ :invoc | 
+					(self getPageMetierFromClass: invoc from parentType)
+						-> (self getPageMetierFromClass: (invoc to at: 1) parentType) ] ])
+		select: [ :assoc | assoc key isNotNil ]
 ]
 
 { #category : #private }
