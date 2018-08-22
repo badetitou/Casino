@@ -68,9 +68,9 @@ BLWebModelJava >> addLinkBetweenWidgets [
 		do: [ :widgetContainer | 
 			(widgetContainer isCollection)
 				ifFalse: [ | usages |
-					usages := widgetContainer affectedActions allUsages reject: [:el | el receiver isNotNil and: [ el receiver name = 'content' and: [ el signature includesSubstring: 'setWidget' ] ] ].
+					usages := widgetContainer affectedActions allUsages reject: [:el | el receiver isNotNil and: [ (el receiver name includesSubstring: 'content')" and: [ (el signature includesSubstring: 'setWidget') or: [el signature includesSubstring: 'add']  ] "] ].
 					responsabilityHandlerForUsages handleAddLinkedFromVariable: usages to: widgetContainer withXmlui: xmlUiWidgetLink andImporter: self.
-					"self haltIf: [ usages isEmpty  ]"
+					"self haltIf: [ widgetContainer affectedActions name = 'mainVPanel'  ]."
 					]
 				ifTrue: [ widgetContainer
 						do: [ :widget | 
