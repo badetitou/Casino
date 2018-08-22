@@ -49,17 +49,6 @@ BLWidget >> recursiveWidgets [
 ]
 
 { #category : #'*BL-Model-Extension' }
-BLWidget >> variable [
-	<MSEProperty: #variable type: #Object>
-	^ self privateState attributeAt: #variable ifAbsent: nil
-]
-
-{ #category : #'*BL-Model-Extension' }
-BLWidget >> variable: anObject [
-	self privateState attributeAt: #variable put: anObject
-]
-
-{ #category : #'*BL-Model-Extension' }
 BLWidget >> widgets [
 	^ { } asOrderedCollection 
 ]

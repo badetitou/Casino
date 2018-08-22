@@ -8,6 +8,16 @@ BLWidget >> addDefaultAttribute [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+BLWidget >> affectedActions [
+	^ self privateState attributeAt: #affectedActions ifAbsent: nil
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
+BLWidget >> affectedActions: anObject [
+	self privateState attributeAt: #affectedActions put: anObject
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> canHandle: anInvocation [
 	^ true
 ]
@@ -36,4 +46,10 @@ BLWidget class >> newFor: anInvocation [
 	(self canHandle: anInvocation)
 		ifTrue: [ ^ self createWidgetFor: anInvocation ]
 		ifFalse: [ ^ nil ]
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
+BLWidget >> variable [
+	(self affectedActions isKindOf: FAMIXAccess) ifTrue: [ ^ self affectedActions variable ].
+	^ self affectedActions
 ]

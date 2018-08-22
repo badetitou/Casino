@@ -24,11 +24,6 @@ BLPhase >> computeTitle [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
-BLPhase >> relativePathToHome [
-	^ '../../'
-]
-
-{ #category : #'*BL-Model-Importer-Java' }
 BLPhase >> widgets [
 	self pageMetiers
 		ifEmpty: [ self pageMetiers
