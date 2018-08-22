@@ -38,6 +38,13 @@ FAMIXClass >> from [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+FAMIXClass >> incomingInstanciations [
+	^ (self methods
+		select: [ :method | method isConstructor or: [ method signature includesSubstring: method belongsTo name ] ]
+		thenCollect: #incomingInvocations) flattened
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 FAMIXClass >> invokedClass [
 	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
 	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"

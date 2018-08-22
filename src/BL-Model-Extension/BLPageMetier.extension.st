@@ -2,7 +2,7 @@ Extension { #name : #BLPageMetier }
 
 { #category : #'*BL-Model-Extension' }
 BLPageMetier >> addingPosition [
-	^ nil
+	^ self privateState attributeAt: #addingPosition ifAbsent: 0
 ]
 
 { #category : #'*BL-Model-Extension' }
