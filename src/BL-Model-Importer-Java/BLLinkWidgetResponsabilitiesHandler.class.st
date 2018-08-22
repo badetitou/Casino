@@ -14,7 +14,7 @@ BLLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd: 
 		select: [:assoc | assoc key isNotNil ])
 		ifNotEmpty: [ :founds | 
 			founds do: [ :found | 
-			found key blWidget addWidget: widgetContainer blWidget withInvocationOfAdd: found value].
+			found key addWidget: widgetContainer withInvocationOfAdd: found value].
 			^ true ].
 	^ false
 ]
@@ -25,7 +25,7 @@ BLLinkWidgetResponsabilitiesHandler >> addLinkedFromVariable: variables to: widg
 		collect: [ :var | theCurrentImporter listOfWidgetContainer at: var ifAbsent: [  ] ]
 		thenSelect: #isNotNil)
 		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found blWidget addWidget: widgetContainer blWidget ].
+			founds do: [ :found | found addWidget: widgetContainer ].
 			^ true ].
 	^ false
 ]

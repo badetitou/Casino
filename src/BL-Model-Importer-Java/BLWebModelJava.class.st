@@ -75,12 +75,12 @@ BLWebModelJava >> addLinkBetweenWidgets [
 				ifTrue: [ widgetContainer
 						do: [ :widget | 
 							| containerInvocation |
-							containerInvocation := widget blWidget source container.
+							containerInvocation := widget source container.
 							[ containerInvocation isNotNil ]
 								whileTrue: [ self listOfWidgetContainer
 										at: containerInvocation receiver
 										ifPresent: [ :found | 
-											found blWidget addWidget: widget blWidget.
+											found addWidget: widget.
 											containerInvocation := nil ]
 										ifAbsent: [ containerInvocation := containerInvocation container ] ] ] ] ]
 ]
@@ -117,7 +117,7 @@ BLWebModelJava >> addLinkXmlUiWidget [
 BLWebModelJava >> addLinkedFromVariable: variables to: widgetContainer [
 	(variables collect: [ :var | self listOfWidgetContainer at: var ifAbsent: [  ] ] thenSelect: #isNotNil)
 		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found blWidget addWidget: widgetContainer blWidget ].
+			founds do: [ :found | found addWidget: widgetContainer ].
 			^ true ].
 	^ false
 ]
@@ -146,7 +146,7 @@ BLWebModelJava >> addOnClickAttribute [
 					self listOfWidgetContainer
 						at: receiver
 						ifPresent: [ :found | 
-							found blWidget createAttributeFrom: class
+							found createAttributeFrom: class
 								 ]
 						ifAbsent: [  ] ] ]
 ]
@@ -259,8 +259,10 @@ BLWebModelJava >> generateBLActionAppel [
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generatePageMetier [
 	(sourceModel allModelClasses
-		select: [ :e | (e superclassHierarchy contains: [ :a | a name = 'IPageMetier' ]) and: [ ('*XMLUi' match: e name) not ] ])
-		do: [ :aPhase | self listOfPageMetier add: (self createPageMetierInModel: aPhase) ]
+		select: [ :e | 
+			(e superclassHierarchy contains: [ :a | a name = 'IPageMetier' ])
+				and: [ ('*XMLUi' match: e name) not ] ])
+		do: [ :aPageMetier| self listOfPageMetier add: (self createPageMetierInModel: aPageMetier) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -528,7 +530,7 @@ BLWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 				receiver
 		ifPresent: [ :widgetContainer | 
 			^ Association new
-				key: widgetContainer blWidget
+				key: widgetContainer
 				value: (self searchCalledPhaseFromInvocation: anInvocation) ]
 		ifAbsent: [ ^ nil ]
 ]
@@ -601,7 +603,7 @@ BLWebModelJava >> listOfServiceAction: anObject [
 
 { #category : #accessing }
 BLWebModelJava >> listOfWidget [
-	^ widgetGroup flattened collect: #blWidget
+	^ widgetGroup flattened
 ]
 
 { #category : #accessing }
@@ -705,10 +707,8 @@ BLWebModelJava >> widgetInstance [
 				or: [ '*noname#super*' match: invocationOrClass asString ] ])
 		collect: [ :invocation | 
 			| blWidget |
-			blWidget := BLWidgetContainer new.
-			blWidget blWidget: (BLWidget newFor: invocation).
+			blWidget := (BLWidget newFor: invocation).
 			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-			blWidget blWidget variable: blWidget variable.
 			blWidget ]
 ]
 
