@@ -378,27 +378,66 @@ BLWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 BLWebModelJava >> import [
-	self generatePhase.
-	self generatePageMetier.
-	self addLinkXmlUi.
-	self addLinkXmlUiWidget.
-	self addLinkForAbstractTabPhase.
-	self addLinkPhaseToPageMetier.
-	self addLinkPageMetierToPageMetier.
-	self generateWidget.
-	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
-	self addLinkBetweenWidgets.
-	self addPPPToWidget.
-	self generateBLActionAppel.
-	self generateService.
-	self generateServiceAction.
-	"this last two should stay at the end"
-	self addWidgetAttributes.
-	self addOnClickAttribute.
-	self addWidgetDefaultAttributes.
-
-	self addListsToModel.
-	self addLinkBetweenServiceAndAttribute.
+	'InitialLabel'
+		displayProgressFrom: 0
+		to: 18
+		during: [ :bar | 
+			bar current: 1.
+			bar label: 1 printString , '/' , 18 printString , ' generatePhase'.
+			self generatePhase.
+			bar current: 2.
+			bar label: 2 printString , '/' , 18 printString , ' generatePageMetier'.
+			self generatePageMetier.
+			bar current: 3.
+			bar label: 3 printString , '/' , 18 printString , ' addLinkXmlUi'.
+			self addLinkXmlUi.
+			bar current: 4.
+			bar label: 4 printString , '/' , 18 printString , ' generatePhase'.
+			self addLinkXmlUiWidget.
+			bar current: 5.
+			bar label: 5 printString , '/' , 18 printString , ' addLinkForAbstractTabPhase'.
+			self addLinkForAbstractTabPhase.
+			bar current: 6.
+			bar label: 6 printString , '/' , 18 printString , ' addLinkPhaseToPageMetier'.
+			self addLinkPhaseToPageMetier.
+			bar current: 7.
+			bar label: 7 printString , '/' , 18 printString , ' addLinkPageMetierToPageMetier'.
+			self addLinkPageMetierToPageMetier.
+			bar current: 8.
+			bar label: 8 printString , '/' , 18 printString , ' generateWidget'.
+			self generateWidget.
+			bar current: 9.
+			bar label: 9 printString , '/' , 18 printString , ' addLinkBetweenWidgets'.
+			"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
+			self addLinkBetweenWidgets.
+			bar current: 10.
+			bar label: 10 printString , '/' , 18 printString , ' addPPPToWidget'.
+			self addPPPToWidget.
+			bar current: 11.
+			bar label: 11 printString , '/' , 18 printString , ' generateBLActionAppel'.
+			self generateBLActionAppel.
+			bar current: 12.
+			bar label: 12 printString , '/' , 18 printString , ' generateService'.
+			self generateService.
+			bar current: 13.
+			bar label: 13 printString , '/' , 18 printString , ' generateServiceAction'.
+			self generateServiceAction.
+			bar current: 14.
+			bar label: 14 printString , '/' , 18 printString , ' addWidgetAttributes'.
+			"this last two should stay at the end"
+			self addWidgetAttributes.
+			bar current: 15.
+			bar label: 15 printString , '/' , 18 printString , ' addOnClickAttribute'.
+			self addOnClickAttribute.
+			bar current: 16.
+			bar label: 16 printString , '/' , 18 printString , ' addWidgetDefaultAttributes'.
+			self addWidgetDefaultAttributes.
+			bar current: 17.
+			bar label: 17 printString , '/' , 18 printString , ' addListsToModel'.
+			self addListsToModel.
+			bar current: 18.
+			bar label: 18 printString , '/' , 18 printString , ' addLinkBetweenServiceAndAttribute'.
+			self addLinkBetweenServiceAndAttribute ]
 ]
 
 { #category : #initialization }
