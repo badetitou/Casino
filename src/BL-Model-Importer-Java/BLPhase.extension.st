@@ -20,7 +20,7 @@ BLPhase >> computeSubtitle [
 { #category : #'*BL-Model-Importer-Java' }
 BLPhase >> computeTitle [
 	title := (((self source withSuperclassHierarchy flatCollect: #outgoingInvocations)
-		select: [ :invoc | 'setPhaseTitle(*' match: invoc signature ]) at: 1 ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
+		select: [ :invoc | 'setPhaseTitle\(.*|super\(.*' asRegex matches: invoc signature ]) at: 1 ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
