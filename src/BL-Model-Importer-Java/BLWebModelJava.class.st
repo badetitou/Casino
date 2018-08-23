@@ -63,26 +63,13 @@ BLWebModelJava >> addLinkBetweenServiceAndAttribute [
 { #category : #adding }
 BLWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
-	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
-	self listOfWidgetContainer
-		do: [ :widgetContainer | 
-			(widgetContainer isCollection)
-				ifFalse: [ | usages |
-					usages := widgetContainer affectedActions allUsages reject: [:el | el receiver isNotNil and: [ (el receiver name includesSubstring: 'content')" and: [ (el signature includesSubstring: 'setWidget') or: [el signature includesSubstring: 'add']  ] "] ].
-					responsabilityHandlerForUsages handleAddLinkedFromVariable: usages to: widgetContainer withXmlui: xmlUiWidgetLink andImporter: self.
-					"self haltIf: [ widgetContainer affectedActions name = 'mainVPanel'  ]."
-					]
-				ifTrue: [ widgetContainer
-						do: [ :widget | 
-							| containerInvocation |
-							containerInvocation := widget source container.
-							[ containerInvocation isNotNil ]
-								whileTrue: [ self listOfWidgetContainer
-										at: containerInvocation receiver
-										ifPresent: [ :found | 
-											found addWidget: widget.
-											containerInvocation := nil ]
-										ifAbsent: [ containerInvocation := containerInvocation container ] ] ] ] ]
+	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler
+		new.
+	self listOfWidget
+		do: [ :widget | 
+			self
+				addParentTo: widget
+				withHandlerForUsages: responsabilityHandlerForUsages	 ]
 ]
 
 { #category : #adding }
@@ -143,12 +130,10 @@ BLWebModelJava >> addOnClickAttribute [
 		do: [ :class | 
 			(class allUsages collect: #receiver)
 				do: [ :receiver | 
-					self listOfWidgetContainer
-						at: receiver
-						ifPresent: [ :found | 
+					(self widgetInVariable: receiver)
+						ifNotNil: [ :found | 
 							found createAttributeFrom: class
-								 ]
-						ifAbsent: [  ] ] ]
+								 ] ] ]
 ]
 
 { #category : #adding }
@@ -158,6 +143,28 @@ BLWebModelJava >> addPPPToWidget [
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
 			founds ifNotNil: [ founds do: [ :found | found addWidget: widget ] ] ]
+]
+
+{ #category : #adding }
+BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
+	^ widget affectedActions
+		ifNotNil: [ | usages |
+			usages := widget affectedActions allUsages
+				reject: [ :el | el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ] ].
+			responsabilityHandlerForUsages
+				handleAddLinkedFromVariable: usages
+				to: widget
+				withXmlui: xmlUiWidgetLink
+				andImporter: self ]
+		ifNil: [ | containerInvocation |
+			containerInvocation := widget source container.
+			[ containerInvocation isNotNil ]
+				whileTrue: [ | found |
+					found := self widgetInVariable: containerInvocation receiver.
+					found
+						ifNotNil: [ found addWidget: widget.
+							containerInvocation := nil ]
+						ifNil: [ containerInvocation := containerInvocation container ] ] ]
 ]
 
 { #category : #private }
@@ -300,12 +307,7 @@ BLWebModelJava >> generateServiceAction [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateWidget [
-	self listOfWidgetContainer at: #noVar put: OrderedCollection new.
-	self widgetInstance
-		do: [ :widget | 
-			widget affectedActions
-				ifNotNil: [ :key | self listOfWidgetContainer at: widget variable put: widget ]
-				ifNil: [ (self listOfWidgetContainer at: #noVar) add: widget ] ]
+	widgetGroup := self widgetInstance
 ]
 
 { #category : #'as yet unclassified' }
@@ -447,7 +449,6 @@ BLWebModelJava >> initialize [
 	super initialize.
 	pageMetierGroup := OrderedCollection new.
 	phaseGroup := OrderedCollection new.
-	widgetGroup := Dictionary new.
 	listOfService := OrderedCollection new.
 	listOfServiceAction := OrderedCollection new.
 	actionAppelGroup := OrderedCollection new.
@@ -521,18 +522,17 @@ BLWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
  
 	anInvocation from parentType isHandlerClass
 		ifFalse: [ ^ nil ].
-	self listOfWidgetContainer
-		at:
+	(self widgetInVariable:
 			((anInvocation from parentType container outgoingInvocations
 				select: [ :invoc | invoc sourceAnchor isNotNil and: [ 
 					invoc sourceAnchor startPos < anInvocation sourceAnchor startPos
 						and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]) at: 1 ifAbsent: [ ^ nil ])
-				receiver
-		ifPresent: [ :widgetContainer | 
+				receiver)
+		ifNotNil: [ :widgetContainer | 
 			^ Association new
 				key: widgetContainer
 				value: (self searchCalledPhaseFromInvocation: anInvocation) ]
-		ifAbsent: [ ^ nil ]
+		ifNil:  [ ^ nil ]
 ]
 
 { #category : #private }
@@ -603,11 +603,6 @@ BLWebModelJava >> listOfServiceAction: anObject [
 
 { #category : #accessing }
 BLWebModelJava >> listOfWidget [
-	^ widgetGroup flattened
-]
-
-{ #category : #accessing }
-BLWebModelJava >> listOfWidgetContainer [
 	^ widgetGroup
 ]
 
@@ -700,16 +695,22 @@ BLWebModelJava >> widgetFactoryInvocation [
 ]
 
 { #category : #'as yet unclassified' }
+BLWebModelJava >> widgetInVariable: aVariable [
+	aVariable ifNil: [ ^ nil ].
+	^ (self listOfWidget select: [:el | el variable = aVariable]) at: 1 ifAbsent: nil
+]
+
+{ #category : #accessing }
 BLWebModelJava >> widgetInstance [
-	^ (self widgetConstructorsInvocation , self widgetAnonymousSubclasses, self widgetFactoryInvocation
+	^ ((((self widgetConstructorsInvocation, self widgetAnonymousSubclasses, self widgetFactoryInvocation) asSet asOrderedCollection 
 		reject: [ :invocationOrClass | 
 			(self widgetNamespace match: invocationOrClass from mooseName)
-				or: [ '*noname#super*' match: invocationOrClass asString ] ])
-		collect: [ :invocation | 
+				or: [ '*noname#super*' match: invocationOrClass asString ] ]
+		thenCollect: [ :invocation | 
 			| blWidget |
 			blWidget := (BLWidget newFor: invocation).
 			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-			blWidget ]
+			blWidget ]) groupedBy: #affectedActions)  associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [:i | assoc value removeIndex: i ] ] ]) flattened
 ]
 
 { #category : #accessing }

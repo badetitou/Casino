@@ -9,6 +9,7 @@ BLWidget >> addDefaultAttribute [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLWidget >> affectedActions [
+	<MSEProperty: #affectedActions type: #Object>
 	^ self privateState attributeAt: #affectedActions ifAbsent: nil
 ]
 
