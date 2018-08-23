@@ -50,12 +50,13 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
             </div>
         </bl-phase-business-pages-tab-header>'.
 	text := text
-		, 
-			( self pageMetiers
+		,
+			(self sortedPageMetiers
 				flatCollect: [ :metier | 
 					id := id + 1.
 					'
-            <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title , '">	' , String crlf , '                ' , metier getTag , String crlf
+            <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title
+						, '">	' , String crlf , '                ' , metier getTag , String crlf
 						, '            </bl-phase-business-page-tab>' , String crlf ]).
 	text := text , '    </bl-phase-business-pages-tab-container>'.
 	^ text
@@ -279,6 +280,12 @@ BLPhase >> relativePathToHome [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> rootFromExporter: anExporter [
 	^ anExporter rootPhases / self name
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLPhase >> sortedPageMetiers [
+	^ self pageMetiers asOrderedCollection
+		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
