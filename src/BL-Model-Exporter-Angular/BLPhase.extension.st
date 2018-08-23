@@ -272,6 +272,11 @@ BLPhase >> hasNoPageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
+BLPhase >> relativePathToHome [
+	^ '../../'
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> rootFromExporter: anExporter [
 	^ anExporter rootPhases / self name
 ]

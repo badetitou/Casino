@@ -1,7 +1,7 @@
 Class {
 	#name : #BLVariableAttribute,
 	#superclass : #BLAttribute,
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }

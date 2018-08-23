@@ -63,13 +63,10 @@ BLWebModelJava >> addLinkBetweenServiceAndAttribute [
 { #category : #adding }
 BLWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
-	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler
-		new.
+	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
 	self listOfWidget
-		do: [ :widget | 
-			self
-				addParentTo: widget
-				withHandlerForUsages: responsabilityHandlerForUsages	 ]
+		do:
+			[ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
 ]
 
 { #category : #adding }
@@ -449,9 +446,10 @@ BLWebModelJava >> initialize [
 	super initialize.
 	pageMetierGroup := OrderedCollection new.
 	phaseGroup := OrderedCollection new.
+	widgetGroup := OrderedCollection new.
 	listOfService := OrderedCollection new.
 	listOfServiceAction := OrderedCollection new.
-	actionAppelGroup := OrderedCollection new.
+	actionAppelGroup := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -542,6 +540,8 @@ BLWebModelJava >> linkPageMetierToPageMetier [
 			pageMetier incomingInstanciations
 				reject: [ :invoc | invoc signature matchesRegex: '.*this\(.*|.*super\(.*' ]
 				thenCollect: [ :invoc | 
+					((self getPageMetierFromClass: (invoc to at: 1) parentType) at: 1)
+						affectedActions: ((self searchAffectationForInvocationOrAnonymousClass: invoc) ifNil: [invoc]).
 					(self getPageMetierFromClass: invoc from parentType)
 						-> (self getPageMetierFromClass: (invoc to at: 1) parentType) ] ])
 		select: [ :assoc | assoc key isNotNil ]
