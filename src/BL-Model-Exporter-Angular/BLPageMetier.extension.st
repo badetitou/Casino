@@ -201,7 +201,7 @@ BLPageMetier >> isPageMetier [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPageMetier >> metiers [
-	^ self widgets select: [ :widget | widget isPageMetier  ]
+	^ self sortedWidget select: [ :widget | widget isPageMetier  ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

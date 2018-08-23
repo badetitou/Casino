@@ -38,6 +38,11 @@ BLPageMetier class >> requirements [
 	^ {  }
 ]
 
+{ #category : #'as yet unclassified' }
+BLPageMetier >> idViewChild [
+	^ ''
+]
+
 { #category : #accessing }
 BLPageMetier >> phaseContainers [
 

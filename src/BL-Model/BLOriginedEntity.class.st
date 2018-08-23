@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'#source'
 	],
-	#category : 'BL-Model-Entities'
+	#category : #'BL-Model-Entities'
 }
 
 { #category : #meta }

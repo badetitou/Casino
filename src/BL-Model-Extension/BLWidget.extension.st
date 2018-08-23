@@ -13,7 +13,9 @@ BLWidget >> addAttribute: attribute [
 { #category : #'*BL-Model-Extension' }
 BLWidget >> addingPosition [
 	<MSEProperty: #addingPosition type: #Object>
-	^ self privateState attributeAt: #addingPosition ifAbsent: (self source sourceAnchor ifNil: [ 0 ] ifNotNil: [:sourceText | sourceText startPos ] )
+	^ self privateState
+		attributeAt: #addingPosition
+		ifAbsent: (self source sourceAnchor ifNil: [ 0 ] ifNotNil: [ :sourceText | sourceText startPos ])
 ]
 
 { #category : #'*BL-Model-Extension' }
