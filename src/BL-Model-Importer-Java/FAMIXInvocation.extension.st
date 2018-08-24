@@ -45,6 +45,11 @@ FAMIXInvocation >> invokedClassName [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+FAMIXInvocation >> isGetter [
+	^ self signature prefixMatchesRegex: 'get'.
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 FAMIXInvocation >> parameters [
 	^ signature extractParameters 
 ]
