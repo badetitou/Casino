@@ -149,7 +149,7 @@ BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandle
 			usages := widget affectedActions allUsages
 				reject: [ :el | (el receiver isNotNil and: [ (el receiver name includesSubstring: 'content') ]) or: [ el signature prefixMatchesRegex: 'remove' ] ].
 			responsabilityHandlerForUsages
-				handleAddLinkedFromVariable: usages
+				handleAddLinkedFromVariable: usages asOrderedCollection 
 				to: widget
 				withXmlui: xmlUiWidgetLink
 				andImporter: self ]
