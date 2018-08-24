@@ -14,11 +14,6 @@ BLWebModel class >> webRoot [
 	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/skins/e-sedit/'
 ]
 
-{ #category : #api }
-BLWebModel >> codeMetierImporter [
-	self subclassResponsibility 
-]
-
 { #category : #private }
 BLWebModel >> createModelIn: aModel [
 	model := aModel.

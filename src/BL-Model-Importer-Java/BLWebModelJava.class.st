@@ -197,11 +197,6 @@ BLWebModelJava >> applicationSource [
 	^  'BLCoreIncubatorGwt'
 ]
 
-{ #category : #api }
-BLWebModelJava >> codeMetierImporter [
-	^ FASTJavaImporterVisitor 
-]
-
 { #category : #adding }
 BLWebModelJava >> computeAllConstructorsLink [
 	^ (self sourceModel constructors
@@ -262,11 +257,11 @@ BLWebModelJava >> generateBLActionAppel [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generatePageMetier [
-	(sourceModel allModelClasses
+	pageMetierGroup := sourceModel allModelClasses
 		select: [ :e | 
 			(e superclassHierarchy contains: [ :a | a name = 'IPageMetier' ])
-				and: [ ('*XMLUi' match: e name) not ] ])
-		do: [ :aPageMetier| self listOfPageMetier add: (self createPageMetierInModel: aPageMetier) ]
+				and: [ ('*XMLUi' match: e name) not ] ]
+		thenCollect: [ :aPageMetier| self createPageMetierInModel: aPageMetier ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -278,18 +273,18 @@ BLWebModelJava >> generatePhase [
 	self listOfPhases: (self listOfPhases select: #isNotNil) 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BLWebModelJava >> generateService [
 	| interfaceService |
 	interfaceService := self sourceModel allTypes
 		select:
-			[ :e | (e superclassHierarchy contains: [ :a | a name = 'RemoteService' ]) and: e isInterface ].
+			[ :e | (e superclassHierarchy anySatisfy: [ :a | a name = 'RemoteService' ]) and: e isInterface ].
 	interfaceService
 		addAll:
 			((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ])
 				collect: #declaredType).
-	interfaceService
-		do: [ :aServiceClass | self listOfService add: (self createServiceFromClass: aServiceClass) ]
+	listOfService := interfaceService
+		collect: [ :aServiceClass | self createServiceFromClass: aServiceClass ]
 ]
 
 { #category : #'as yet unclassified' }
