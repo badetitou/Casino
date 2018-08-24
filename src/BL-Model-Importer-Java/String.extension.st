@@ -2,12 +2,10 @@ Extension { #name : #String }
 
 { #category : #'*BL-Model-Importer-Java' }
 String >> extractParameters [
-
 	^ ((self
 		copyFrom: (self findString: '(') + 1
 		to: (self findLastOccurrenceOfString: ')' startingAt: 1) - 1)
-		findTokens: ','
-		escapedBy: '"') collect: [ :string | string trim ]
+		findTokens: ',')  collect: [ :string | ((string trim withoutPrefix: '"') withoutSuffix: '"' ) ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
