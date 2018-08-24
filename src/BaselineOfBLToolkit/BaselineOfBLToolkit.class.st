@@ -52,7 +52,7 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model';
 		package: 'BL-Model-FamixNGPatch';
 		package: 'BL-Model-Extension';
-		package: 'BL-MetamodelGenerator' with: [ spec requires: #('BL-Model-FamixNGPatch') ];
+		package: 'BL-MetamodelGenerator' ;
 		package: 'BL-Model-Explorer';
 		package: 'BL-Model-Example' with: [ spec requires: #('BL-Model-CoreWeb') ];
 		package: 'BL-Model-Exporter' with: [ spec requires: #('BL-Model') ];
@@ -70,6 +70,6 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-CoreWeb-Importer'
 			with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
 		package: 'BL-Model-CoreWeb-Importer-Tests'
-			with: [ spec requires: #('BL-Model-CoreWeb-Importer') ];
+			with: [ spec requires: #('BL-Model-CoreWeb-Importer' 'BL-Model-Importer-Java-Tests') ];
 		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ]
 ]
