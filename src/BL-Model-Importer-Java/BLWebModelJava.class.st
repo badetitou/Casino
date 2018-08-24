@@ -147,7 +147,7 @@ BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandle
 	^ widget affectedActions
 		ifNotNil: [ | usages |
 			usages := widget affectedActions allUsages
-				reject: [ :el | el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ] ].
+				reject: [ :el | (el receiver isNotNil and: [ (el receiver name includesSubstring: 'content') ]) or: [ el signature prefixMatchesRegex: 'remove' ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages
 				to: widget
