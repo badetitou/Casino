@@ -299,7 +299,15 @@ BLWebModelJava >> generateServiceAction [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateWidget [
-	widgetGroup := self widgetInstance
+	widgetGroup := ((((self widgetConstructorsInvocation, self widgetAnonymousSubclasses, self widgetFactoryInvocation) asSet asOrderedCollection 
+		reject: [ :invocationOrClass | 
+			(self widgetNamespace match: invocationOrClass from mooseName)
+				or: [ '*noname#super*' match: invocationOrClass asString ] ]
+		thenCollect: [ :invocation | 
+			| blWidget |
+			blWidget := (BLWidget newFor: invocation).
+			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
+			blWidget ]) groupedBy: #affectedActions)  associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [:i | assoc value removeIndex: i ] ] ]) flattened
 ]
 
 { #category : #'as yet unclassified' }
@@ -693,19 +701,6 @@ BLWebModelJava >> widgetFactoryInvocation [
 BLWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
 	^ (self listOfWidget select: [:el | el variable = aVariable]) at: 1 ifAbsent: nil
-]
-
-{ #category : #accessing }
-BLWebModelJava >> widgetInstance [
-	^ ((((self widgetConstructorsInvocation, self widgetAnonymousSubclasses, self widgetFactoryInvocation) asSet asOrderedCollection 
-		reject: [ :invocationOrClass | 
-			(self widgetNamespace match: invocationOrClass from mooseName)
-				or: [ '*noname#super*' match: invocationOrClass asString ] ]
-		thenCollect: [ :invocation | 
-			| blWidget |
-			blWidget := (BLWidget newFor: invocation).
-			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-			blWidget ]) groupedBy: #affectedActions)  associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [:i | assoc value removeIndex: i ] ] ]) flattened
 ]
 
 { #category : #accessing }
