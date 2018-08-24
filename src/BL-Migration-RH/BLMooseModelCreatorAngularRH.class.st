@@ -12,9 +12,9 @@ BLMetamodelGenerator resetMetamodel.
 
 ""Generate BlApp""
 
-
-mooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\BLGRHV02\GRH.mse' asFileReference readStream.
-mooseModel rootFolder: 'D:\Developpement\mse\BLGRHV02\'.
+mooseModel := nil.
+mooseModel := MooseModel importFromMSEStream: 'D:\Developpement\mse\BLGRHV02\verveinej\BLGRH.mse' asFileReference readStream.
+mooseModel rootFolder: 'D:\Developpement\mse\BLGRHV02\verveinej'.
 
 ""Generate Bl Model""
 model := MooseModel new name: 'GRH'; yourself.
