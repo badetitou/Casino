@@ -382,7 +382,7 @@ BLWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 BLWebModelJava >> import [
-	'InitialLabel'
+	'prepare generatePhase'
 		displayProgressFrom: 0
 		to: 18
 		during: [ :bar | 
@@ -504,7 +504,6 @@ BLWebModelJava >> linkFromWidgetActionAppelCase1: anInvocation [
 	new Widget ( new blabla ( new bleble ( CP)))"
 
 	| found elContainer |
-	found := nil.
 	elContainer := anInvocation container.
 	elContainer ifNil: [ ^ nil ].
 	" case 1 "
