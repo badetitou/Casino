@@ -2,6 +2,9 @@ Extension { #name : #FAMIXInvocation }
 
 { #category : #'*BL-Model-Importer-Java' }
 FAMIXInvocation >> affectation [
+	| selfSourceAnchor |
+	"Bug de self sourceAnchor avec l'appli RH"
+	selfSourceAnchor := self sourceAnchor ifNotNil: [ self sourceAnchor ] ifNil: [ self from sourceAnchor ] .
 	^ ((self from localVariables select: [ :el | el sourceAnchor isNotNil ])
 		select: [ :localVariable | 
 			localVariable sourceAnchor startPos < self sourceAnchor startPos
