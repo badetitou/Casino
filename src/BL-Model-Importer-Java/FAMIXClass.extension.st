@@ -3,16 +3,18 @@ Extension { #name : #FAMIXClass }
 { #category : #'*BL-Model-Importer-Java' }
 FAMIXClass >> affectation [
 	"Compatibility with invocation for the creation of the widget"
+	| selfSourceAnchor |
+	selfSourceAnchor := self sourceAnchor ifNotNil: [ self sourceAnchor ] ifNil: [ self container sourceAnchor ] .
 
 	^ ((self container localVariables select: [ :el | el sourceAnchor isNotNil ])
 		select: [ :localVariable | 
-			localVariable sourceAnchor startPos < self sourceAnchor startPos
-				and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
+			localVariable sourceAnchor startPos < selfSourceAnchor startPos
+				and: [ localVariable sourceAnchor endPos > selfSourceAnchor endPos ] ])
 		at: 1
 		ifAbsent: [ ((self container accesses select: #isWrite)
 				select: [ :access | 
-					access sourceAnchor startPos < self sourceAnchor startPos
-						and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ]) 
+					access sourceAnchor startPos < selfSourceAnchor startPos
+						and: [ access sourceAnchor endPos + 5 > selfSourceAnchor startPos ] ]) 
 				at: 1 
 				ifAbsent: [  ^ self ] ] 
 ]
