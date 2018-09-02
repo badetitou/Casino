@@ -1,8 +1,8 @@
 Class {
 	#name : #BLOriginedEntity,
 	#superclass : #MooseEntity,
-	#traits : 'FmxNGTNamed + FmxNGTWithSourceAnchor',
-	#classTraits : 'FmxNGTNamed classTrait + FmxNGTWithSourceAnchor classTrait',
+	#traits : 'FamixTNamed + FamixTWithSourceAnchor',
+	#classTraits : 'FamixTNamed classTrait + FamixTWithSourceAnchor classTrait',
 	#instVars : [
 		'#source'
 	],
@@ -12,7 +12,6 @@ Class {
 { #category : #meta }
 BLOriginedEntity class >> annotation [
 
-	<generated>
 	<MSEClass: #OriginedEntity super: #MooseEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -29,7 +28,7 @@ BLOriginedEntity class >> generatedSlotNames [
 { #category : #generator }
 BLOriginedEntity class >> generatedTraitNames [
 	<generated>
-	^ #(FmxNGTNamed FmxNGTWithSourceAnchor)
+	^ #(FamixTNamed FamixTWithSourceAnchor)
 ]
 
 { #category : #meta }
@@ -44,6 +43,90 @@ BLOriginedEntity class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isAccess [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isAssociation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isAttribute [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isClass [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isFunction [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isInheritance [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isInvocation [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isMethod [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isNamespace [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isPackage [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isReference [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+BLOriginedEntity >> isType [
+
+	<generated>
+	^ false
 ]
 
 { #category : #accessing }

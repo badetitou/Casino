@@ -16,7 +16,6 @@ Class {
 { #category : #meta }
 BLPhase class >> annotation [
 
-	<generated>
 	<MSEClass: #Phase super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -56,6 +55,15 @@ BLPhase >> actions: anObject [
 	<generated>
 	actions value: anObject
 
+]
+
+{ #category : #navigation }
+BLPhase >> actionsGroup [
+
+	<generated>
+	<navigation: 'Actions'>
+	^ MooseGroup
+			withAll: (self actions asSet)
 ]
 
 { #category : #accessing }
@@ -105,6 +113,15 @@ BLPhase >> pageMetiers: anObject [
 	<generated>
 	pageMetiers value: anObject
 
+]
+
+{ #category : #navigation }
+BLPhase >> pageMetiersGroup [
+
+	<generated>
+	<navigation: 'PageMetiers'>
+	^ MooseGroup
+			withAll: (self pageMetiers asSet)
 ]
 
 { #category : #accessing }

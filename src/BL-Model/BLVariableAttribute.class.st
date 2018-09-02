@@ -7,7 +7,6 @@ Class {
 { #category : #meta }
 BLVariableAttribute class >> annotation [
 
-	<generated>
 	<MSEClass: #VariableAttribute super: #BLAttribute>
 	<package: #'BL-Model'>
 	<generated>

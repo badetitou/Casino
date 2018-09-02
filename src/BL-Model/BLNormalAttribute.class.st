@@ -7,7 +7,6 @@ Class {
 { #category : #meta }
 BLNormalAttribute class >> annotation [
 
-	<generated>
 	<MSEClass: #NormalAttribute super: #BLAttribute>
 	<package: #'BL-Model'>
 	<generated>

@@ -11,7 +11,6 @@ Class {
 { #category : #meta }
 BLActionAttribute class >> annotation [
 
-	<generated>
 	<MSEClass: #ActionAttribute super: #BLAttribute>
 	<package: #'BL-Model'>
 	<generated>
@@ -51,6 +50,15 @@ BLActionAttribute >> behaviors: anObject [
 	<generated>
 	behaviors value: anObject
 
+]
+
+{ #category : #navigation }
+BLActionAttribute >> behaviorsGroup [
+
+	<generated>
+	<navigation: 'Behaviors'>
+	^ MooseGroup
+			withAll: (self behaviors asSet)
 ]
 
 { #category : #accessing }

@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLService class >> annotation [
 
-	<generated>
 	<MSEClass: #Service super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -50,4 +49,13 @@ BLService >> actions: anObject [
 	<generated>
 	actions value: anObject
 
+]
+
+{ #category : #navigation }
+BLService >> actionsGroup [
+
+	<generated>
+	<navigation: 'Actions'>
+	^ MooseGroup
+			withAll: (self actions asSet)
 ]
