@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLBehavior class >> annotation [
 
-	<generated>
 	<MSEClass: #Behavior super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -50,4 +49,13 @@ BLBehavior >> actionAttributes: anObject [
 	<generated>
 	actionAttributes value: anObject
 
+]
+
+{ #category : #navigation }
+BLBehavior >> actionAttributesGroup [
+
+	<generated>
+	<navigation: 'ActionAttributes'>
+	^ MooseGroup
+			withAll: (self actionAttributes asSet)
 ]

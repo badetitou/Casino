@@ -12,7 +12,6 @@ Class {
 { #category : #meta }
 BLAttribute class >> annotation [
 
-	<generated>
 	<MSEClass: #Attribute super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -36,7 +35,7 @@ BLAttribute class >> generatedTraitNames [
 BLAttribute class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { BLAttribute }
 ]
 
 { #category : #accessing }
@@ -87,4 +86,13 @@ BLAttribute >> widget: anObject [
 	<generated>
 	widget := anObject
 
+]
+
+{ #category : #navigation }
+BLAttribute >> widgetGroup [
+
+	<generated>
+	<navigation: 'Widget'>
+	^ MooseGroup
+			with: (self widget)
 ]

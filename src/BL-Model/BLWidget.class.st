@@ -13,7 +13,6 @@ Class {
 { #category : #meta }
 BLWidget class >> annotation [
 
-	<generated>
 	<MSEClass: #Widget super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
@@ -37,7 +36,7 @@ BLWidget class >> generatedTraitNames [
 BLWidget class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { BLWidget }
 ]
 
 { #category : #accessing }
@@ -55,6 +54,15 @@ BLWidget >> actions: anObject [
 
 ]
 
+{ #category : #navigation }
+BLWidget >> actionsGroup [
+
+	<generated>
+	<navigation: 'Actions'>
+	^ MooseGroup
+			withAll: (self actions asSet)
+]
+
 { #category : #accessing }
 BLWidget >> attributes [
 
@@ -68,6 +76,15 @@ BLWidget >> attributes: anObject [
 	<generated>
 	attributes value: anObject
 
+]
+
+{ #category : #navigation }
+BLWidget >> attributesGroup [
+
+	<generated>
+	<navigation: 'Attributes'>
+	^ MooseGroup
+			withAll: (self attributes asSet)
 ]
 
 { #category : #accessing }
@@ -85,4 +102,13 @@ BLWidget >> widgetContainer: anObject [
 	<generated>
 	widgetContainer := anObject
 
+]
+
+{ #category : #navigation }
+BLWidget >> widgetContainerGroup [
+
+	<generated>
+	<navigation: 'WidgetContainer'>
+	^ MooseGroup
+			with: (self widgetContainer)
 ]

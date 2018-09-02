@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLActionAppel class >> annotation [
 
-	<generated>
 	<MSEClass: #ActionAppel super: #BLAction>
 	<package: #'BL-Model'>
 	<generated>
@@ -50,4 +49,13 @@ BLActionAppel >> call: anObject [
 	<generated>
 	call := anObject
 
+]
+
+{ #category : #navigation }
+BLActionAppel >> callGroup [
+
+	<generated>
+	<navigation: 'Call'>
+	^ MooseGroup
+			with: (self call)
 ]

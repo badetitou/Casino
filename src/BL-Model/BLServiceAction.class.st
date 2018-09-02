@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLServiceAction class >> annotation [
 
-	<generated>
 	<MSEClass: #ServiceAction super: #BLBehavior>
 	<package: #'BL-Model'>
 	<generated>
@@ -34,7 +33,7 @@ BLServiceAction class >> generatedTraitNames [
 BLServiceAction class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { BLServiceAction }
 ]
 
 { #category : #accessing }
@@ -52,4 +51,13 @@ BLServiceAction >> serviceOwner: anObject [
 	<generated>
 	serviceOwner := anObject
 
+]
+
+{ #category : #navigation }
+BLServiceAction >> serviceOwnerGroup [
+
+	<generated>
+	<navigation: 'ServiceOwner'>
+	^ MooseGroup
+			with: (self serviceOwner)
 ]

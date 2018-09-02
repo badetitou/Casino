@@ -11,7 +11,6 @@ Class {
 { #category : #meta }
 BLPageMetier class >> annotation [
 
-	<generated>
 	<MSEClass: #PageMetier super: #BLUIContainer>
 	<package: #'BL-Model'>
 	<generated>
@@ -56,6 +55,15 @@ BLPageMetier >> phaseContainers: anObject [
 	<generated>
 	phaseContainers value: anObject
 
+]
+
+{ #category : #navigation }
+BLPageMetier >> phaseContainersGroup [
+
+	<generated>
+	<navigation: 'PhaseContainers'>
+	^ MooseGroup
+			withAll: (self phaseContainers asSet)
 ]
 
 { #category : #accessing }

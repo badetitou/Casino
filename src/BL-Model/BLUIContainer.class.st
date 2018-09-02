@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLUIContainer class >> annotation [
 
-	<generated>
 	<MSEClass: #UIContainer super: #BLWidget>
 	<package: #'BL-Model'>
 	<generated>
@@ -50,4 +49,13 @@ BLUIContainer >> widgets: anObject [
 	<generated>
 	widgets value: anObject
 
+]
+
+{ #category : #navigation }
+BLUIContainer >> widgetsGroup [
+
+	<generated>
+	<navigation: 'Widgets'>
+	^ MooseGroup
+			withAll: (self widgets asSet)
 ]

@@ -10,7 +10,6 @@ Class {
 { #category : #meta }
 BLUILeaf class >> annotation [
 
-	<generated>
 	<MSEClass: #UILeaf super: #BLWidget>
 	<package: #'BL-Model'>
 	<generated>

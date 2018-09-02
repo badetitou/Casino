@@ -133,7 +133,7 @@ BLMetamodelGenerator >> defineRelations [
 
 { #category : #definition }
 BLMetamodelGenerator >> newBuilder [
-	^ FmxNGGenerator builderWithDefinitions
+	^ FamixGenerator builderWithDefinitions
 		doNotGenerateCurrent;
 		generator: self;
 		yourself
