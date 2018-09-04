@@ -41,7 +41,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
-		group: 'pp' with: #('PetitParser' 'PetitParser2');
+		group: 'pp' with: #('PetitParser');
 		group: 'all' with: #('bl' 'tests' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
 
