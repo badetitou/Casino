@@ -1,12 +1,12 @@
-Extension { #name : #BLCheckBox }
+Extension { #name : #BLUIInputCheckbox }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLCheckBox class >> canHandle: anInvocation [
+BLUIInputCheckbox class >> canHandle: anInvocation [
 	^ ('BLCheckBox|CheckBox' substrings: '|') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLCheckBox class >> createWidgetFor: anInvocation [
+BLUIInputCheckbox class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters at: #type put: 'checkbox'.

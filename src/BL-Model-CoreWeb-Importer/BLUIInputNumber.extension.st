@@ -1,12 +1,12 @@
-Extension { #name : #BLTextBoxNumber }
+Extension { #name : #BLUIInputNumber }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLTextBoxNumber class >> canHandle: anInvocation [
+BLUIInputNumber class >> canHandle: anInvocation [
 	^ 'BLTextBoxNumber' = anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLTextBoxNumber class >> createWidgetFor: anInvocation [
+BLUIInputNumber class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters at: #type put: 'number'.
