@@ -1,11 +1,6 @@
 Extension { #name : #BLPageMetier }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> accept: anExporter [
-	anExporter visitBLPageMetier: self
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLPageMetier >> behaviors [
 	^ (self collectPhaseCalled
 		ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]

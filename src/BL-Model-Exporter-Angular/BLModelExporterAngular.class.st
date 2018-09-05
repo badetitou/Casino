@@ -83,6 +83,24 @@ BLModelExporterAngular >> visitBLPhase: aBLPhase [
 	aBLPhase writeComponentsIn: phaseRoot withExporter: self
 ]
 
+{ #category : #visiting }
+BLModelExporterAngular >> visitMooseModel: aMooseModel [
+	| rootPhases rootComponents |
+	self root createDirectory.
+	"Write app.module.ts"
+	self writeFile: self root / aMooseModel  getModuleName withCode: aMooseModel  generateModuleSourceCode.
+	"Write app.route.ts"
+	self writeFile: self root / aMooseModel getRouteName withCode: aMooseModel generateRouteSourceCode.
+	"Write components"
+	rootComponents := self root / 'components' / 'index'.
+	rootComponents ensureCreateDirectory.
+	self writeFile: rootComponents / aMooseModel getHTMLName withCode: aMooseModel generateHTMLSourceCode.
+	self writeFile: rootComponents / aMooseModel getTSName withCode: aMooseModel generateTSSourceCode.
+	rootPhases := root / 'phases'.
+	rootPhases createDirectory.
+	(aMooseModel allBLPhase , aMooseModel allBLService) do: [ :rootElement | self visit: rootElement ]
+]
+
 { #category : #accessing }
 BLModelExporterAngular >> writeFile: aFileReference withCode: theSourceCode [
 	(aFileReference writeStream nextPutAll: theSourceCode) flush

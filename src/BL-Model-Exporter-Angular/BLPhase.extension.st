@@ -1,11 +1,6 @@
 Extension { #name : #BLPhase }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> accept: anExporter [
-	anExporter visitBLPhase: self
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> generateHTMLSourceCode [
 	^ '<bl-phase-container>
 	' , self generateHTMLSourceCodeDependOfPageMetier
