@@ -1,12 +1,12 @@
-Extension { #name : #BLRadioButton }
+Extension { #name : #BLUIInputRadio }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLRadioButton class >> canHandle: anInvocation [
+BLUIInputRadio class >> canHandle: anInvocation [
 	^ 'BLRadioButton' = anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLRadioButton class >> createWidgetFor: anInvocation [
+BLUIInputRadio class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters at: #type put: 'radio'.

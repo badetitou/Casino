@@ -7,12 +7,6 @@ MooseAbstractGroup >> allBLActionsAttribute [
 ]
 
 { #category : #'*BL-Model-CoreWeb' }
-MooseAbstractGroup >> allBLCheckBox [
-	<navigation: 'BL CheckBox'>
-	^ self allWithType: BLCheckBox
-]
-
-{ #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLFieldset [
 	<navigation: 'BL Fieldset'>
 	^ self allWithType: BLFieldset

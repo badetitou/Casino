@@ -1,6 +1,6 @@
-Extension { #name : #BLColorPicker }
+Extension { #name : #BLUIInputColor }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLColorPicker class >> canHandle: anInvocation [
+BLUIInputColor class >> canHandle: anInvocation [
 	^ 'BLTextBoxColorPicker' = anInvocation invokedClassName
 ]
