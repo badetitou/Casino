@@ -25,12 +25,6 @@ MooseAbstractGroup >> allBLInputText [
 ]
 
 { #category : #'*BL-Model-CoreWeb' }
-MooseAbstractGroup >> allBLLabel [
-	<navigation: 'BL Label'>
-	^ self allWithType: BLLabel
-]
-
-{ #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLLinkButton [
 	<navigation: 'BL Link Button'>
 	^ self allWithType: BLLinkButton
