@@ -71,3 +71,8 @@ BLModelExporter >> visitBLPageMetier: aBLPageMetier [
 BLModelExporter >> visitBLPhase: aBLPhase [
 	self visitBLOriginedEntity: aBLPhase 
 ]
+
+{ #category : #visiting }
+BLModelExporter >> visitMooseModel: aMooseModel [
+	self subclassResponsibility 
+]

@@ -93,24 +93,24 @@ BLModelExample class >> generateDemoLinkBetweenPhases [
 	pageMetier11 := BLPageMetier new name: #page1.
 	pageMetier12 := BLPageMetier new name: #page2.
 	pageMetier13 := BLPageMetier new name: #page3.
-	phase1 metiers add: pageMetier11.
-	phase1 metiers add: pageMetier12.
-	phase1 metiers add: pageMetier13.
+	phase1 pageMetiers add: pageMetier11.
+	phase1 pageMetiers add: pageMetier12.
+	phase1 pageMetiers add: pageMetier13.
 	home := BLPhase new
 		name: #home;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
 	pageMetierHome := BLPageMetier new name: #pageHome.
-	widget1 := BLLinkLabel new name: 'widget1'.
+	widget1 := SSInputText new name: 'widget1'.
 	widget1 attributes at: 'label' put: 'goPhase1'.
-	widget2 := BLLinkButton new name: 'widget2'.
+	widget2 := SSInputText new name: 'widget2'.
 	widget1 attributes at: 'label' put: 'goPhase2'.
-	home metiers add: pageMetierHome.
+	home pageMetiers add: pageMetierHome.
 	pageMetierHome widgets add: widget1.
 	pageMetierHome widgets add: widget2.
 	actionAppel := BLActionAppel new.
-	widget1 actionsAppel add: actionAppel.
+	widget1 actions add: actionAppel.
 	phase1 actions add: actionAppel.
 	model
 		addAll:
@@ -238,9 +238,9 @@ BLModelExample class >> generateModelWithTwoPhasesAndThreePageMetierAnd1Widget [
 	pageMetier21 := BLPageMetier new name: #PageMetier21.
 	pageMetier22 := BLPageMetier new name: #PageMetier22.
 	widget1 := BLWidget new name: #widget1.
-	phase1 metiers add: pageMetier11.
-	phase2 metiers add: pageMetier21.
-	phase2 metiers add: pageMetier22.
+	phase1 pageMetiers add: pageMetier11.
+	phase2 pageMetiers add: pageMetier21.
+	phase2 pageMetiers add: pageMetier22.
 	pageMetier22 widgets add: widget1.
 	model name: #generateModelWithTwoPhasesAndThreePageMetierAnd1Widget.
 	model add: phase1.
