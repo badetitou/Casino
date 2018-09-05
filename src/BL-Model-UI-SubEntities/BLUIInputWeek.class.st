@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputWeek class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputWeek>
+	<MSEClass: #BLUIInputWeek super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]

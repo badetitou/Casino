@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputCheckbox class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputCheckbox>
+	<MSEClass: #BLUIInputCheckbox super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]
