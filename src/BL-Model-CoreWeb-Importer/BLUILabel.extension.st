@@ -1,12 +1,17 @@
-Extension { #name : #BLLabel }
+Extension { #name : #BLUILabel }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLabel class >> canHandle: anInvocation [
+BLUILabel class >> canHandle: anInvocation [
 	^ ('BLLabel|Label|FactoryBLLabel' substrings: '|') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLabel class >> createWidgetFor: anInvocation [
+BLUILabel >> canHaveAttribute: blAttributeClass [
+	^ blAttributeClass ~= BLEnable
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
+BLUILabel class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget

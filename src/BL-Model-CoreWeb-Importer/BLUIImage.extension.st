@@ -1,12 +1,12 @@
-Extension { #name : #BLImage }
+Extension { #name : #BLUIImage }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLImage class >> canHandle: anInvocation [
+BLUIImage class >> canHandle: anInvocation [
 	^ ('BLImage|BLImageButton|Image' substrings: '|') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLImage class >> createWidgetFor: anInvocation [
+BLUIImage class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters
