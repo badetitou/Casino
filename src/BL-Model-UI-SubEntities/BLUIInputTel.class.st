@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputTel class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputTel>
+	<MSEClass: #BLUIInputTel super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]

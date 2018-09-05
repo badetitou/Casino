@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputPassword class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputPassword>
+	<MSEClass: #BLUIInputPassword super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]

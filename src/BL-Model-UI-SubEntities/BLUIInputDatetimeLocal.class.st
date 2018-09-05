@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputDatetimeLocal class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputDatetimeLocal>
+	<MSEClass: #BLUIInputDatetimeLocal super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]

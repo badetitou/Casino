@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputColor class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputColor>
+	<MSEClass: #BLUIInputColor super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]

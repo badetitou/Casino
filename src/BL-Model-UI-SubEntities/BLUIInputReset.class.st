@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIInputReset class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIInputReset>
+	<MSEClass: #BLUIInputReset super: #BLUIInput>
 	<package: #BLWebModelJava>
 	^ self
 ]
