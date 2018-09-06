@@ -2,7 +2,7 @@ Extension { #name : #BLUIImage }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIImage class >> canHandle: anInvocation [
-	^ ('BLImage|BLImageButton|Image' substrings: '|') includes: anInvocation invokedClassName
+	^ #('BLImage' 'BLImageButton' 'Image') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

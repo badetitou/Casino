@@ -2,7 +2,7 @@ Extension { #name : #BLTextBoxPeriode }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLTextBoxPeriode class >> canHandle: anInvocation [
-	^ ('BLTextBoxPeriode|BLTextBoxPeriodePicker' substrings: '|') includes: anInvocation invokedClassName
+	^ #('BLTextBoxPeriode' 'BLTextBoxPeriodePicker') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

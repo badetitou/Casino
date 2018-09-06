@@ -2,7 +2,7 @@ Extension { #name : #BLLinkButton }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLLinkButton class >> canHandle: anInvocation [
-	^ ('Button|BLLinkButton' substrings: '|') includes: anInvocation invokedClassName
+	^ #('Button' 'BLLinkButton') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

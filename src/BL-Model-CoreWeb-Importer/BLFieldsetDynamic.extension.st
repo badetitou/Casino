@@ -2,7 +2,7 @@ Extension { #name : #BLFieldsetDynamic }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLFieldsetDynamic class >> canHandle: anInvocation [
-	^ ('BLFieldSetPanelDynamic|BLGroupBoxPanel' substrings: '|') includes: anInvocation invokedClassName
+	^ #('BLFieldSetPanelDynamic' 'BLGroupBoxPanel') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
