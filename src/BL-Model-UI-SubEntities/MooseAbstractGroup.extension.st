@@ -9,7 +9,7 @@ MooseAbstractGroup >> allBLCheckBox [
 { #category : #'*BL-Model-UI-SubEntities' }
 MooseAbstractGroup >> allBLLabel [
 	<navigation: 'BLLabel'>
-	^ self allWithType: BLUILabel
+	^ self allWithType: BLUIParagraph
 ]
 
 { #category : #'*BL-Model-UI-SubEntities' }
