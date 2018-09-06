@@ -1,6 +1,6 @@
-Extension { #name : #BLSlider }
+Extension { #name : #BLUIInputRange }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLSlider class >> canHandle: anInvocation [
+BLUIInputRange class >> canHandle: anInvocation [
 	^ 'BLSliderBar' = anInvocation invokedClassName
 ]
