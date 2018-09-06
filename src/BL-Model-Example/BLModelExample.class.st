@@ -36,7 +36,7 @@ BLModelExample class >> generateDemo [
 		codeValue: #codeValue;
 		codePhase: #codePhase.
 	pageMetierHome := BLPageMetier new name: #pageHome.
-	widget1 := BLLinkLabel new name: 'widget1'.
+	widget1 := BLUILink new name: 'widget1'.
 	widget1 attributes at: 'label' put: 'goPhase1'.
 	widget2 := BLLinkButton new name: 'widget2'.
 	widget2 attributes at: 'label' put: 'goPhase2'.
