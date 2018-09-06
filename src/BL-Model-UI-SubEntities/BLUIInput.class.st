@@ -10,3 +10,8 @@ BLUIInput class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #testing }
+BLUIInput class >> canHandle: anInvocation [
+	^ false
+]

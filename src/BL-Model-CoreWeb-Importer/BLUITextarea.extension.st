@@ -1,6 +1,6 @@
-Extension { #name : #BLTextArea }
+Extension { #name : #BLUITextarea }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLTextArea class >> canHandle: anInvocation [
+BLUITextarea class >> canHandle: anInvocation [
 	^ ('BLTextArea|TextArea' substrings: '|') includes: anInvocation invokedClassName
 ]
