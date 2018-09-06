@@ -45,11 +45,6 @@ BLModelExporter >> root [
 	^ root
 ]
 
-{ #category : #run }
-BLModelExporter >> serviceRoot [
-	self subclassResponsibility 
-]
-
 { #category : #visiting }
 BLModelExporter >> visit: anElement [
 	anElement accept: self
