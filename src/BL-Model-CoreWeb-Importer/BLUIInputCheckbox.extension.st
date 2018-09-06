@@ -2,7 +2,7 @@ Extension { #name : #BLUIInputCheckbox }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIInputCheckbox class >> canHandle: anInvocation [
-	^ ('BLCheckBox|CheckBox' substrings: '|') includes: anInvocation invokedClassName
+	^ #('BLCheckBox' 'CheckBox') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

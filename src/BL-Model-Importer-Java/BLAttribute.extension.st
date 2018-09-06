@@ -26,7 +26,7 @@ BLAttribute class >> getAttributeValueFrom: anInvocation [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLAttribute class >> newFrom: anInvocation for: aWidgetInstance [
-	anInvocation isGetter ifTrue: [ ^ nil ].
+	"anInvocation isGetter ifTrue: [ ^ nil ]."
 	self subclasses
 		do: [ :subclass | 
 			| try |

@@ -2,7 +2,7 @@ Extension { #name : #BLInputText }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLInputText class >> canHandle: anInvocation [
-	^ ('BLTextBox|TextBox' substrings: '|') includes: anInvocation invokedClassName
+	^ #('BLTextBox' 'TextBox') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
