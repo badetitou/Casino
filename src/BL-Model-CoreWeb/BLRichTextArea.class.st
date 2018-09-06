@@ -10,13 +10,3 @@ BLRichTextArea class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
-
-{ #category : #accessing }
-BLRichTextArea >> getExternalDependency [
-	^ {PNGEditor}
-]
-
-{ #category : #'as yet unclassified' }
-BLRichTextArea >> getSelector [
-	^ 'p-editor'
-]
