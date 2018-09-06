@@ -1,12 +1,12 @@
-Extension { #name : #BLLinkLabel }
+Extension { #name : #BLUILink }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLinkLabel class >> canHandle: anInvocation [
+BLUILink class >> canHandle: anInvocation [
 	^ 'BLLinkLabel' = anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLinkLabel class >> createWidgetFor: anInvocation [
+BLUILink class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters

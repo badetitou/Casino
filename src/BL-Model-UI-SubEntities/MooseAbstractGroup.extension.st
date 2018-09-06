@@ -11,3 +11,9 @@ MooseAbstractGroup >> allBLLabel [
 	<navigation: 'BLLabel'>
 	^ self allWithType: BLUILabel
 ]
+
+{ #category : #'*BL-Model-UI-SubEntities' }
+MooseAbstractGroup >> allBLLinkLabel [
+	<navigation: 'BL Link'>
+	^ self allWithType: BLUILink
+]
