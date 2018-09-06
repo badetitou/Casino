@@ -1,6 +1,6 @@
-Extension { #name : #BLFileUpload }
+Extension { #name : #BLUIInputFile }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLFileUpload class >> canHandle: anInvocation [
+BLUIInputFile class >> canHandle: anInvocation [
 	^ 'BLFileUpload*|BLImageUploadPanel' asRegex matchesPrefix: anInvocation invokedClassName
 ]
