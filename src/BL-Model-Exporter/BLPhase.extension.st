@@ -2,7 +2,7 @@ Extension { #name : #BLPhase }
 
 { #category : #'*BL-Model-Exporter' }
 BLPhase >> accept: anExporter [
-	anExporter visitBLPhase: self
+	^ anExporter visitBLPhase: self
 ]
 
 { #category : #'*BL-Model-Exporter' }

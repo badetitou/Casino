@@ -2,7 +2,7 @@ Extension { #name : #BLPageMetier }
 
 { #category : #'*BL-Model-Exporter' }
 BLPageMetier >> accept: anExporter [
-	anExporter visitBLPageMetier: self
+	^ anExporter visitBLPageMetier: self
 ]
 
 { #category : #'*BL-Model-Exporter' }

@@ -10,3 +10,8 @@ BLUIInputTime class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputTime >> accept: anExporter [
+	^ anExporter visitBLUIInputTime: self
+]

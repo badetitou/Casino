@@ -10,3 +10,8 @@ BLUIHeading6 class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIHeading6 >> accept: anExporter [
+	^ anExporter visitBLUIHeading6: self
+]

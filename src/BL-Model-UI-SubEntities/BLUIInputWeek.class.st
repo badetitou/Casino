@@ -10,3 +10,8 @@ BLUIInputWeek class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputWeek >> accept: anExporter [
+	^ anExporter visitBLUIInputWeek: self
+]

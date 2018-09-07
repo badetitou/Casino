@@ -10,3 +10,8 @@ BLUITable class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUITable >> accept: anExporter [
+	^ anExporter visitBLUITable: self
+]

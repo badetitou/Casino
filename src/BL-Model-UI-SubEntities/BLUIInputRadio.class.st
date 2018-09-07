@@ -10,3 +10,8 @@ BLUIInputRadio class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputRadio >> accept: anExporter [
+	^ anExporter visitBLUIInputRadio: self
+]

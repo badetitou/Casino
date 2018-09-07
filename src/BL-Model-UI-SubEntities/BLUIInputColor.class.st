@@ -10,3 +10,8 @@ BLUIInputColor class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputColor >> accept: anExporter [
+	^ anExporter visitBLUIInputColor: self
+]

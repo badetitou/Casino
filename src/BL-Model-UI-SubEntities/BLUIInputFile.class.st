@@ -10,3 +10,8 @@ BLUIInputFile class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputFile >> accept: anExporter [
+	^ anExporter visitBLUIInputFile: self
+]
