@@ -7,5 +7,5 @@ BLUIContainer >> addWidget: aWidget [
 
 { #category : #'*BL-Model-Importer' }
 BLUIContainer class >> canHandle: anInvocation [
-	^ true
+	^ self = BLUIContainer
 ]
