@@ -47,7 +47,7 @@ BLModelExporter >> root [
 
 { #category : #visiting }
 BLModelExporter >> visit: anElement [
-	anElement accept: self
+	^ anElement accept: self
 ]
 
 { #category : #visiting }

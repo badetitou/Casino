@@ -6,6 +6,16 @@ BLPhase >> accept: anExporter [
 ]
 
 { #category : #'*BL-Model-Exporter' }
+BLPhase >> hasMultiplePageMetier [
+	^ self pageMetiers size > 1
+]
+
+{ #category : #'*BL-Model-Exporter' }
+BLPhase >> hasNoPageMetier [
+	^ self pageMetiers isEmpty 
+]
+
+{ #category : #'*BL-Model-Exporter' }
 BLPhase >> visitSuccessorWith: anExporter [
 	"to override"
 
