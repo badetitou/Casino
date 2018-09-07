@@ -258,16 +258,6 @@ BLPhase >> getTag [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> hasMultiplePageMetier [
-	^ self pageMetiers size > 1
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> hasNoPageMetier [
-	^ self pageMetiers isEmpty 
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> relativePathToHome [
 	^ '../../'
 ]
