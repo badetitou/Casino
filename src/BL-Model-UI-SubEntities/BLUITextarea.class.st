@@ -10,3 +10,8 @@ BLUITextarea class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUITextarea >> accept: anExporter [
+	^ anExporter visitBLUITextarea: self
+]

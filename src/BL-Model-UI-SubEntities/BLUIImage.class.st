@@ -10,3 +10,8 @@ BLUIImage class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIImage >> accept: anExporter [
+	^ anExporter visitBLUIImage: self
+]

@@ -15,3 +15,8 @@ BLUIInput class >> annotation [
 BLUIInput class >> canHandle: anInvocation [
 	^ false
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInput >> accept: anExporter [
+	^ anExporter visitBLUIInput: self
+]

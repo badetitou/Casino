@@ -10,3 +10,8 @@ BLUIList class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIList >> accept: anExporter [
+	^ anExporter visitBLUIList: self
+]

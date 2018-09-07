@@ -10,3 +10,8 @@ BLUIInputCheckbox class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputCheckbox >> accept: anExporter [
+	^ anExporter visitBLUIInputCheckbox: self
+]

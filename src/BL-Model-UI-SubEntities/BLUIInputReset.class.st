@@ -10,3 +10,8 @@ BLUIInputReset class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputReset >> accept: anExporter [
+	^ anExporter visitBLUIInputReset: self
+]

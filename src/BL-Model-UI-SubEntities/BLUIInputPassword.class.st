@@ -10,3 +10,8 @@ BLUIInputPassword class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIInputPassword >> accept: anExporter [
+	^ anExporter visitBLUIInputPassword: self
+]

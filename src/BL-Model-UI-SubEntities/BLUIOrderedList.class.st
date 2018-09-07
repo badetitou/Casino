@@ -10,3 +10,8 @@ BLUIOrderedList class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIOrderedList >> accept: anExporter [
+	^ anExporter visitBLUIOrderedList: self
+]

@@ -10,3 +10,8 @@ BLUIParagraph class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #'as yet unclassified' }
+BLUIParagraph >> accept: anExporter [
+	^ anExporter visitBLUIParagraph: self
+]
