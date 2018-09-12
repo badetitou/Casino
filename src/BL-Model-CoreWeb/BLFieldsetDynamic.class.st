@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLFieldsetDynamic class >> annotation [
-	<MSEClass: #BLFieldsetDynamic super: #BLFieldset>
+	<MSEClass: #BLFieldsetDynamic super: #BLPanel>
 	<package: #BLWebModelJava>
 	^ self
 ]

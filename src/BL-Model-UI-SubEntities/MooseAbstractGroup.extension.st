@@ -7,6 +7,12 @@ MooseAbstractGroup >> allBLCheckBox [
 ]
 
 { #category : #'*BL-Model-UI-SubEntities' }
+MooseAbstractGroup >> allBLFieldset [
+	<navigation: 'BL Fieldset'>
+	^ self allWithType: BLUIFieldset
+]
+
+{ #category : #'*BL-Model-UI-SubEntities' }
 MooseAbstractGroup >> allBLLabel [
 	<navigation: 'BLLabel'>
 	^ self allWithType: BLUIParagraph

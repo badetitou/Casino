@@ -68,6 +68,11 @@ BLModelExporter >> visitBLPhase: aBLPhase [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIFieldset: aBLUIFieldset [
+	^ self visitBLWidget: aBLUIFieldset
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading1: aBLUIHeading1 [
 	^ self visitBLWidget: aBLUIHeading1
 ]
@@ -208,6 +213,11 @@ BLModelExporter >> visitBLUIInputWeek: aBLUIInputWeek [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUILeaf: aBLUILeaf [
+	^ self visitBLWidget: aBLUILeaf
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUILink: aBLUILink [
 	^ self visitBLWidget: aBLUILink
 ]
@@ -220,6 +230,11 @@ BLModelExporter >> visitBLUIList: aBLUIList [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIOrderedList: aBLUIOrderedList [
 	^ self visitBLWidget: aBLUIOrderedList
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIPanel: aBLUIPanel [
+	^ self visitBLWidget: aBLUIPanel
 ]
 
 { #category : #'as yet unclassified' }

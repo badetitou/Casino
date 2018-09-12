@@ -7,12 +7,6 @@ MooseAbstractGroup >> allBLActionsAttribute [
 ]
 
 { #category : #'*BL-Model-CoreWeb' }
-MooseAbstractGroup >> allBLFieldset [
-	<navigation: 'BL Fieldset'>
-	^ self allWithType: BLFieldset
-]
-
-{ #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLInputText [
 	<navigation: 'BL Input Text'>
 	^ self allWithType: BLInputText

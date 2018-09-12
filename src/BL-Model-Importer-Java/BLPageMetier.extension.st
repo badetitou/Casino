@@ -4,7 +4,7 @@ Extension { #name : #BLPageMetier }
 BLPageMetier >> addingPosition [
 	^ self privateState
 		attributeAt: #addingPosition
-		ifAbsent: (self affectedActions sourceAnchor ifNil: [ 0 ] ifNotNil: [ :sourceText | sourceText startPos ])
+		ifAbsent: (self affectedActions ifNil: [ ^ 0] ifNotNil: [:affect | affect sourceAnchor ifNil: [ ^ 0 ] ifNotNil: [ :sourceText | sourceText startPos ] ])
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
