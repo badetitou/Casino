@@ -9,7 +9,7 @@ MooseAbstractGroup >> allBLActionsAttribute [
 { #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLInputText [
 	<navigation: 'BL Input Text'>
-	^ self allWithType: BLInputText
+	^ self allWithType: BLUIInput
 ]
 
 { #category : #'*BL-Model-CoreWeb' }
