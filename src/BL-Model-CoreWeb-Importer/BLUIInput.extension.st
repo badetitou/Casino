@@ -1,25 +1,25 @@
-Extension { #name : #BLInputText }
+Extension { #name : #BLUIInput }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLInputText class >> canHandle: anInvocation [
-	^ #('BLTextBox' 'TextBox') includes: anInvocation invokedClassName
+BLUIInput class >> canHandle: anInvocation [
+	^ false
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLInputText class >> createWidgetFor: anInvocation [
+BLUIInput class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget
 		text:
 			(anInvocation parameters
 				at: 1
-				ifAbsent: [ self flag: #todo.
+				ifAbsent: [
 					'TODO' ]).
 	widget
-		valueLabel:
+		value:
 			(anInvocation parameters
 				at: 4
-				ifAbsent: [ self flag: #todo.
+				ifAbsent: [
 					'' ]).
 	^ widget
 ]
