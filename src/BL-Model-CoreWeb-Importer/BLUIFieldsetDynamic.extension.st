@@ -1,14 +1,18 @@
-Extension { #name : #BLFieldsetDynamic }
+Extension { #name : #BLUIFieldsetDynamic }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLFieldsetDynamic class >> canHandle: anInvocation [
+BLUIFieldsetDynamic class >> canHandle: anInvocation [
 	^ #('BLFieldSetPanelDynamic' 'BLGroupBoxPanel') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLFieldsetDynamic class >> createWidgetFor: anInvocation [
-	"(BLToggleable createAttributeFor: self)
-	the usage of createAttributeFor: is black magic... We should not use createAttributeFor: but a specic new... But it's simpler for the comprenhension
+BLUIFieldsetDynamic >> canHaveAttribute: blAttributeClass [
+	^ blAttributeClass ~= BLEnable
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
+BLUIFieldsetDynamic class >> createWidgetFor: anInvocation [
+	"the usage of createAttributeFor: is black magic... We should not use createAttributeFor: but a specic new... But it's simpler for the comprenhension
 	"
 
 	| widget |

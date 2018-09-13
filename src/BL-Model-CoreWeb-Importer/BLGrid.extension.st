@@ -14,7 +14,7 @@ BLGrid >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLGrid class >> canHandle: anInvocation [
-	^ #('BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName
+	^ false
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

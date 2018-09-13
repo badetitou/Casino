@@ -73,6 +73,16 @@ BLModelExporter >> visitBLUIFieldset: aBLUIFieldset [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIFieldsetDynamic: aBLUIFieldsetDynamic [
+	^ self visitBLWidget: aBLUIFieldsetDynamic
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIGrid: aBLUIGrid [
+	^ self visitBLWidget: aBLUIGrid 
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading1: aBLUIHeading1 [
 	^ self visitBLWidget: aBLUIHeading1
 ]
