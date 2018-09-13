@@ -17,3 +17,12 @@ BLUIContainer >> generateDefaultClassAttribute [
 	ex: Adding a class to all the dom with the name of the widget"
 	^ BLAttribute new name: 'class'; attributeValue: ('ID-', self class name asString). 
 ]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLUIContainer >> postImport [
+	super postImport.
+	widgets :=  self widgets asOrderedCollection
+		sort: [ :widget1 :widget2 | 
+			widget1 addingPosition 
+				< widget2 addingPosition  ]
+]

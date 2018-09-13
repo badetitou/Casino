@@ -21,5 +21,5 @@ MooseAbstractGroup >> allBLLinkButton [
 { #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLPanel [
 	<navigation: 'BL Panel'>
-	^ self allWithType: BLPanel
+	^ self allWithType: BLUIPanel
 ]
