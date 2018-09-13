@@ -10,3 +10,8 @@ BLUIHorizontalPanel class >> annotation [
 	<package: #BLWebModelJava>
 	^ self
 ]
+
+{ #category : #visiting }
+BLUIHorizontalPanel >> accept: anExporter [
+	^ anExporter visitBLUIHorizontalPanel: self
+]

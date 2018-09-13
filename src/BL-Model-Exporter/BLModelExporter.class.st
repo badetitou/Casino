@@ -113,6 +113,11 @@ BLModelExporter >> visitBLUIHeading6: aBLUIHeading6 [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIHorizontalPanel: aBLUIHorizontalPanel [
+	^ self visitBLWidget: aBLUIHorizontalPanel
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIImage: aBLUIImage [
 	^ self visitBLWidget: aBLUIImage
 ]
