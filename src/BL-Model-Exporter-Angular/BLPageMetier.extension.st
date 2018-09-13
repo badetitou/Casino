@@ -195,11 +195,6 @@ BLPageMetier >> isPageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> metiers [
-	^ self sortedWidget select: [ :widget | widget isPageMetier  ]
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLPageMetier >> recursiveWidgetsWithoutMetiers [
 	^ (self widgetsNotPageMetier  , (self widgetsNotPageMetier  collect: #recursiveWidgets)) flattened
 ]
