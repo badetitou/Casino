@@ -25,7 +25,7 @@ BLWebModel >> createModelIn: aModel [
 
 { #category : #api }
 BLWebModel >> import [
-	
+	self subclassResponsibility 
 ]
 
 { #category : #accessing }
