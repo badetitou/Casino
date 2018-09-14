@@ -98,15 +98,6 @@ BLWebModelJava >> addLinkXmlUiWidget [
 ]
 
 { #category : #adding }
-BLWebModelJava >> addLinkedFromVariable: variables to: widgetContainer [
-	(variables collect: [ :var | self listOfWidgetContainer at: var ifAbsent: [  ] ] thenSelect: #isNotNil)
-		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found addWidget: widgetContainer ].
-			^ true ].
-	^ false
-]
-
-{ #category : #adding }
 BLWebModelJava >> addListsToModel [
 	model
 		addAll: self listOfPhases;
