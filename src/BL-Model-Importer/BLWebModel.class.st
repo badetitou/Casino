@@ -23,6 +23,16 @@ BLWebModel >> createModelIn: aModel [
 	
 ]
 
+{ #category : #accessing }
+BLWebModel >> factory [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+BLWebModel >> factoryCreateWidgetFrom: anObject [
+	^ self factory createWidgetFrom: anObject 
+]
+
 { #category : #api }
 BLWebModel >> import [
 	self subclassResponsibility 
