@@ -8,7 +8,8 @@ Class {
 		'#pageMetiers => FMMany type: #BLPageMetier opposite: #phaseContainers',
 		'#realClassName',
 		'#subtitle',
-		'#title'
+		'#title',
+		'#widgets => FMMany type: #BLWidget opposite: #page'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -26,7 +27,7 @@ BLPhase class >> annotation [
 BLPhase class >> generatedSlotNames [
 	<generated>
 	'BLPhase class>>#generatedSlotNames'.
-	^ #(pageMetiers realClassName subtitle codeValue title actions codePhase)
+	^ #(widgets pageMetiers realClassName subtitle codeValue title actions codePhase)
 ]
 
 { #category : #generator }
@@ -173,4 +174,28 @@ BLPhase >> title: anObject [
 	<generated>
 	title := anObject
 
+]
+
+{ #category : #accessing }
+BLPhase >> widgets [
+
+	<generated>
+	^ widgets
+]
+
+{ #category : #accessing }
+BLPhase >> widgets: anObject [
+
+	<generated>
+	widgets value: anObject
+
+]
+
+{ #category : #navigation }
+BLPhase >> widgetsGroup [
+
+	<generated>
+	<navigation: 'Widgets'>
+	^ MooseGroup
+			withAll: (self widgets asSet)
 ]

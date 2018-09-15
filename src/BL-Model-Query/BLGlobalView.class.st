@@ -1,7 +1,12 @@
+"
+""Model should be a BL UI Model""
+
+BLGlobalView new openViewForModel: model
+"
 Class {
 	#name : #BLGlobalView,
 	#superclass : #Object,
-	#category : 'BL-Model-Query-RoassalGlobal'
+	#category : #'BL-Model-Query-RoassalGlobal'
 }
 
 { #category : #'view creation' }
