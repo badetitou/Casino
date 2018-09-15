@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'#actions => FMMany type: #BLAction opposite: #caller',
 		'#attributes => FMMany type: #BLAttribute opposite: #widget',
+		'#page => FMOne type: #BLPhase opposite: #widgets',
 		'#realClass',
 		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
 	],
@@ -23,7 +24,7 @@ BLWidget class >> annotation [
 BLWidget class >> generatedSlotNames [
 	<generated>
 	'BLWidget class>>#generatedSlotNames'.
-	^ #(actions attributes widgetContainer realClass)
+	^ #(page realClass widgetContainer actions attributes)
 ]
 
 { #category : #generator }
@@ -85,6 +86,32 @@ BLWidget >> attributesGroup [
 	<navigation: 'Attributes'>
 	^ MooseGroup
 			withAll: (self attributes asSet)
+]
+
+{ #category : #accessing }
+BLWidget >> page [
+
+	<generated>
+	<container>
+
+	^ page
+]
+
+{ #category : #accessing }
+BLWidget >> page: anObject [
+
+	<generated>
+	page := anObject
+
+]
+
+{ #category : #navigation }
+BLWidget >> pageGroup [
+
+	<generated>
+	<navigation: 'Page'>
+	^ MooseGroup
+			with: (self page)
 ]
 
 { #category : #accessing }

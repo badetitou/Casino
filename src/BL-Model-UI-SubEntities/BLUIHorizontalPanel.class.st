@@ -11,11 +11,6 @@ BLUIHorizontalPanel class >> annotation [
 	^ self
 ]
 
-{ #category : #'as yet unclassified' }
-BLUIHorizontalPanel class >> specCanHandle: anInvocation [
-	^ anInvocation signature beginsWith: 'newRow:(Object)'
-]
-
 { #category : #visiting }
 BLUIHorizontalPanel >> accept: anExporter [
 	^ anExporter visitBLUIHorizontalPanel: self
