@@ -40,23 +40,23 @@ BLMetamodelGenerator class >> prefix [
 
 { #category : #accessing }
 BLMetamodelGenerator class >> resetMetamodel [
-
 	" self resetMetamodel"
 
 	| classes tower |
-
 	FMRelationSlot allSubInstancesDo: #resetMooseProperty.
-
-	classes := self packageName asPackage definedClasses
-		select: [ :each | each inheritsFrom: MooseEntity ].
-	classes addAll: BLOriginedEntity allSubclasses.
+	classes :=  MooseEntity allSubclasses.
 	classes addAll: (self packageName asPackage definedClasses select: #isTrait).
 	classes addAll: #'Famix-Traits' asPackage definedClasses.
-	{ Trait. 	Class. ClassDescription. Behavior. MooseModel. MooseAbstractGroup. MooseEntity. MooseGroup} 
-		do: [ :each | classes add: each ].
+	{Trait.
+	Class.
+	ClassDescription.
+	Behavior.
+	MooseModel.
+	MooseAbstractGroup.
+	MooseEntity.
+	MooseGroup} do: [ :each | classes add: each ].
 	tower := MooseModel metaBuilder: classes.
 	self metamodel: tower metamodel.
-	
 	^ metamodel
 ]
 
