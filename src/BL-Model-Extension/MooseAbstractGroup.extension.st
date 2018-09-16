@@ -14,12 +14,6 @@ MooseAbstractGroup >> allBLActionAppel [
 ]
 
 { #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLActionsAttribute [
-	<navigation: 'BL Actions Attribute'>
-	^ self allWithSubTypesOf: BLActionAttribute
-]
-
-{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLAttributes [
 	<navigation: 'BL Attributes'>
 	^ self allWithSubTypesOf: BLAttribute
