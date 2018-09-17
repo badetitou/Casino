@@ -13,8 +13,9 @@ BLPhase >> generateHTMLSourceCode [
 BLPhase >> generateHTMLSourceCodeDependOfPageMetier [
 	self hasMultiplePageMetier
 		ifTrue: [ ^ self generateHTMLSourceCodeForMultiplePageMetier ].
-	self hasNoPageMetier 
-		ifTrue: [ self flag: #todo. ^'TODO' ].
+	self hasNoPageMetier
+		ifTrue: [ 
+			^ self generateHTMLSourceCodeForNoPageMetier ].
 	^ self generateHTMLSourceCodeFor1PageMetier
 ]
 
@@ -55,6 +56,11 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
 						, '            </bl-phase-business-page-tab>' , String crlf ]).
 	text := text , '    </bl-phase-business-pages-tab-container>'.
 	^ text
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLPhase >> generateHTMLSourceCodeForNoPageMetier [
+	^ (self widgets flatCollect: [ :widget | widget getDom , String crlf ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -219,9 +225,9 @@ BLPhase >> getMetadata [
 	^ '{
     id: ''' , self name ,''',
     code: ''' , self name,''',
-    label: ''' , self title protectQuote ,''',
+    label: ''' , (self title ifNil: ['']) protectQuote ,''',
     link: ''' , self name,''',
-    subLabel: ''' , self subtitle protectQuote, ''',
+    subLabel: ''' , (self subtitle ifNil: ['']) protectQuote, ''',
     icon: ''address-book'',
     datas: {},
 }'

@@ -1,12 +1,12 @@
-Extension { #name : #BLLinkButton }
+Extension { #name : #BLUIInputButton }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLinkButton class >> canHandle: anInvocation [
+BLUIInputButton class >> canHandle: anInvocation [
 	^ #('Button' 'BLLinkButton') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLLinkButton class >> createWidgetFor: anInvocation [
+BLUIInputButton class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters
