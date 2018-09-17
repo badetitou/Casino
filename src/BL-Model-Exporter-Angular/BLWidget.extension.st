@@ -45,8 +45,7 @@ BLWidget >> getExternalDependency [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> getListPropertiesAsString [
-	^ self getSelector, self attributesTag , self actionsTag
-		, self parametersTag , self idTag.
+	^ self getSelector , self attributesTag , self actionsTag , self parametersTag , self idTag
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

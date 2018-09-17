@@ -21,6 +21,13 @@ BLUIInput >> accept: anExporter [
 ]
 
 { #category : #accessing }
+BLUIInput >> initialize [
+	super initialize.
+	value := ''.
+	text := ''
+]
+
+{ #category : #accessing }
 BLUIInput >> text [
 	^ text
 ]
