@@ -28,7 +28,7 @@ BLPhase >> linkToWidgets [
 
 { #category : #'*BL-Model-Query' }
 BLPhase >> outgoingElement [
-	^ self pageMetiers
+	^ self pageMetiers, self widgets
 ]
 
 { #category : #'*BL-Model-Query' }
