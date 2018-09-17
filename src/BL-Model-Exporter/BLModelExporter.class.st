@@ -288,6 +288,11 @@ BLModelExporter >> visitBLUITextarea: aBLUITextarea [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUITitle: aBLUITitle [
+	^ self visitBLAttribute: aBLUITitle
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
 	^ self visitBLWidget: aBLUIUnorderedList
 ]
