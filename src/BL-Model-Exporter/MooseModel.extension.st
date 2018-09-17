@@ -1,6 +1,11 @@
 Extension { #name : #MooseModel }
 
 { #category : #'*BL-Model-Exporter' }
+MooseModel >> accept: anExporter [
+	anExporter visitMooseModel: self
+]
+
+{ #category : #'*BL-Model-Exporter' }
 MooseModel >> prepareAcceptFor: anExporter [
 	"can be override"
 ]
