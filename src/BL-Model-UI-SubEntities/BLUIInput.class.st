@@ -2,11 +2,8 @@ Class {
 	#name : #BLUIInput,
 	#superclass : #BLUIContainer,
 	#instVars : [
-		'text',
 		'value',
-		'readonly',
-		'disabled',
-		'placeholder'
+		'text'
 	],
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
@@ -21,36 +18,6 @@ BLUIInput class >> annotation [
 { #category : #'as yet unclassified' }
 BLUIInput >> accept: anExporter [
 	^ anExporter visitBLUIInput: self
-]
-
-{ #category : #accessing }
-BLUIInput >> disabled [
-	^ disabled
-]
-
-{ #category : #accessing }
-BLUIInput >> disabled: anObject [
-	disabled := anObject
-]
-
-{ #category : #accessing }
-BLUIInput >> placeholder [
-	^ placeholder
-]
-
-{ #category : #accessing }
-BLUIInput >> placeholder: anObject [
-	placeholder := anObject
-]
-
-{ #category : #accessing }
-BLUIInput >> readonly [
-	^ readonly
-]
-
-{ #category : #accessing }
-BLUIInput >> readonly: anObject [
-	readonly := anObject
 ]
 
 { #category : #accessing }
