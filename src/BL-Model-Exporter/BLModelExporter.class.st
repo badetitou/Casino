@@ -50,6 +50,11 @@ BLModelExporter >> visit: anElement [
 	^ anElement accept: self
 ]
 
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLAttribute: aBLAttribute [
+	^ ''
+]
+
 { #category : #visiting }
 BLModelExporter >> visitBLOriginedEntity: anElement [
 	anElement prepareAcceptFor: self.
@@ -225,6 +230,11 @@ BLModelExporter >> visitBLUIInputUrl: aBLUIInputUrl [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInputWeek: aBLUIInputWeek [
 	^ self visitBLWidget: aBLUIInputWeek
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUILabel: aBLUILabel [
+	^ self visitBLAttribute: aBLUILabel
 ]
 
 { #category : #'as yet unclassified' }
