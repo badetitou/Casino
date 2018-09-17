@@ -1,12 +1,23 @@
-"
-The placeholder attribute specifies a hint that describes the expected value of an input field (a sample value or a short description of the format).
-
-The hint is displayed in the input field before the user enters a value.
-
-The placeholder attribute works with the following input types: text, search, url, tel, email, and password.
-"
 Class {
 	#name : #BLUIPlaceholder,
 	#superclass : #BLAttribute,
+	#instVars : [
+		'text'
+	],
 	#category : #'BL-Model-UI-SubEntities-Attributes'
 }
+
+{ #category : #accessing }
+BLUIPlaceholder >> accept: anExporter [
+	^ anExporter visitBLUIPlaceholder: self
+]
+
+{ #category : #accessing }
+BLUIPlaceholder >> text [
+	^ text
+]
+
+{ #category : #accessing }
+BLUIPlaceholder >> text: anObject [
+	text := anObject
+]

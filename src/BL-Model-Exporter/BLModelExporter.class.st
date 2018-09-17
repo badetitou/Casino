@@ -268,6 +268,11 @@ BLModelExporter >> visitBLUIParagraph: aBLUIParagraph [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIPlaceholder: aBLUIPlaceholder [
+	^ self visitBLAttribute: aBLUIPlaceholder
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUITable: aBLUITable [
 	^ self visitBLWidget: aBLUITable
 ]
@@ -280,6 +285,11 @@ BLModelExporter >> visitBLUITextarea: aBLUITextarea [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
 	^ self visitBLWidget: aBLUIUnorderedList
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIValue: aBLUIValue [
+	^ self visitBLAttribute: aBLUIValue
 ]
 
 { #category : #visiting }
