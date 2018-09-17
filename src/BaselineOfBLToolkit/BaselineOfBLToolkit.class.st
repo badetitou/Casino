@@ -34,7 +34,7 @@ BaselineOfBLToolkit >> defineDependencies: spec [
 { #category : #baselines }
 BaselineOfBLToolkit >> defineGroups: spec [
 	spec
-		group: 'default' with: #('core-extended' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
+		group: 'default' with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
 		group: 'core' with: #('BL-Model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension' 'BL-MetamodelGenerator');
