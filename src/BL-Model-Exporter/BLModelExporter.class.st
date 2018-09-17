@@ -72,6 +72,11 @@ BLModelExporter >> visitBLPhase: aBLPhase [
 	^ self visitBLOriginedEntity: aBLPhase 
 ]
 
+{ #category : #visiting }
+BLModelExporter >> visitBLUIDisabled: aBLUIDisabled [
+	^ self visitBLAttribute: aBLUIDisabled
+]
+
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIFieldset: aBLUIFieldset [
 	^ self visitBLWidget: aBLUIFieldset
