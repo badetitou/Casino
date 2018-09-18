@@ -15,3 +15,14 @@ BLUIGrid class >> annotation [
 BLUIGrid >> accept: anExporter [
 	^ anExporter visitBLUIGrid: self
 ]
+
+{ #category : #accesing }
+BLUIGrid >> atLevel: level [
+	^ self widgets select: [ :position | (position at: 1) = level ]
+]
+
+{ #category : #accesing }
+BLUIGrid >> maxLevel [
+	^ (self widgets collect: [:assoc | assoc key]) max
+	
+]

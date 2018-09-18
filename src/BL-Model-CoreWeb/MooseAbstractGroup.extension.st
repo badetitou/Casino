@@ -14,8 +14,8 @@ MooseAbstractGroup >> allBLInputText [
 
 { #category : #'*BL-Model-CoreWeb' }
 MooseAbstractGroup >> allBLLinkButton [
-	<navigation: 'BL Link Button'>
-	^ self allWithType: BLLinkButton
+	<navigation: 'BL Input Button'>
+	^ self allWithType: BLUIInputButton 
 ]
 
 { #category : #'*BL-Model-CoreWeb' }
