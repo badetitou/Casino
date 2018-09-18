@@ -263,6 +263,11 @@ BLModelExporter >> visitBLUIList: aBLUIList [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIName: aBLUIName [
+	^ self visitBLAttribute: aBLUIName
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIOrderedList: aBLUIOrderedList [
 	^ self visitBLUIContainer: aBLUIOrderedList
 ]
