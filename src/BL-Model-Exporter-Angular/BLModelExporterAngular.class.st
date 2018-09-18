@@ -105,13 +105,6 @@ BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
 ]
 
 { #category : #visiting }
-BLModelExporterAngular >> visitBLUIInput: aBLUIInput [
-	^ '<input id="float-' , aBLUIInput mooseID asString , '" type="text" value="' , aBLUIInput value1
-		,
-			'" placeholder="', aBLUIInput text,'" pInputText>'
-]
-
-{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
 	^ '<' ,  aBLUIInputNumber getListPropertiesAsString, ' />'
 ]
@@ -119,6 +112,13 @@ BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputPassword: aBLUIInputPassword [
 	^ '<' ,  aBLUIInputPassword getListPropertiesAsString , ' />'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputText: aBLUIInputText [
+	^  '<input id="float-' , aBLUIInputText mooseID asString , '" type="text" value="' , aBLUIInputText value1
+		,
+			'" placeholder="', aBLUIInputText text,'" pInputText>'
 ]
 
 { #category : #visiting }
