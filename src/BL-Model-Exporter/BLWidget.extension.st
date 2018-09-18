@@ -7,11 +7,6 @@ BLWidget >> accept: anExporter [
 ]
 
 { #category : #'*BL-Model-Exporter' }
-BLWidget >> exportCode [
-	^ ''
-]
-
-{ #category : #'*BL-Model-Exporter' }
 BLWidget >> getInitializations [
 	^ ''
 ]

@@ -64,12 +64,17 @@ BLModelExporter >> visitBLOriginedEntity: anElement [
 
 { #category : #visiting }
 BLModelExporter >> visitBLPageMetier: aBLPageMetier [
-	^ self visitBLOriginedEntity: aBLPageMetier 
+	^ self visitBLUIContainer: aBLPageMetier 
 ]
 
 { #category : #visiting }
 BLModelExporter >> visitBLPhase: aBLPhase [
 	^ self visitBLOriginedEntity: aBLPhase 
+]
+
+{ #category : #visiting }
+BLModelExporter >> visitBLUIContainer: aBLUIContainer [
+	^ self visitBLWidget: aBLUIContainer
 ]
 
 { #category : #visiting }
@@ -79,62 +84,62 @@ BLModelExporter >> visitBLUIDisabled: aBLUIDisabled [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIFieldset: aBLUIFieldset [
-	^ self visitBLWidget: aBLUIFieldset
+	^ self visitBLUIContainer: aBLUIFieldset
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIFieldsetDynamic: aBLUIFieldsetDynamic [
-	^ self visitBLWidget: aBLUIFieldsetDynamic
+	^ self visitBLUIContainer: aBLUIFieldsetDynamic
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIGrid: aBLUIGrid [
-	^ self visitBLWidget: aBLUIGrid 
+	^ self visitBLUIContainer: aBLUIGrid 
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading1: aBLUIHeading1 [
-	^ self visitBLWidget: aBLUIHeading1
+	^ self visitBLUIContainer: aBLUIHeading1
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading2: aBLUIHeading2 [
-	^ self visitBLWidget: aBLUIHeading2
+	^ self visitBLUIContainer: aBLUIHeading2
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading3: aBLUIHeading3 [
-	^ self visitBLWidget: aBLUIHeading3
+	^ self visitBLUIContainer: aBLUIHeading3
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading4: aBLUIHeading4 [
-	^ self visitBLWidget: aBLUIHeading4
+	^ self visitBLUIContainer: aBLUIHeading4
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading5: aBLUIHeading5 [
-	^ self visitBLWidget: aBLUIHeading5
+	^ self visitBLUIContainer: aBLUIHeading5
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHeading6: aBLUIHeading6 [
-	^ self visitBLWidget: aBLUIHeading6
+	^ self visitBLUIContainer: aBLUIHeading6
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIHorizontalPanel: aBLUIHorizontalPanel [
-	^ self visitBLWidget: aBLUIHorizontalPanel
+	^ self visitBLUIContainer: aBLUIHorizontalPanel
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIImage: aBLUIImage [
-	^ self visitBLWidget: aBLUIImage
+	^ self visitBLUIContainer: aBLUIImage
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInput: aBLUIInput [
-	^ self visitBLWidget: aBLUIInput
+	^ self visitBLUIContainer: aBLUIInput
 ]
 
 { #category : #'as yet unclassified' }
@@ -249,27 +254,27 @@ BLModelExporter >> visitBLUILeaf: aBLUILeaf [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUILink: aBLUILink [
-	^ self visitBLWidget: aBLUILink
+	^ self visitBLUIContainer: aBLUILink
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIList: aBLUIList [
-	^ self visitBLWidget: aBLUIList
+	^ self visitBLUIContainer: aBLUIList
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIOrderedList: aBLUIOrderedList [
-	^ self visitBLWidget: aBLUIOrderedList
+	^ self visitBLUIContainer: aBLUIOrderedList
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIPanel: aBLUIPanel [
-	^ self visitBLWidget: aBLUIPanel
+	^ self visitBLUIContainer: aBLUIPanel
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIParagraph: aBLUIParagraph [
-	^ self visitBLWidget: aBLUIParagraph
+	^ self visitBLUIContainer: aBLUIParagraph
 ]
 
 { #category : #'as yet unclassified' }
@@ -279,12 +284,12 @@ BLModelExporter >> visitBLUIPlaceholder: aBLUIPlaceholder [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUITable: aBLUITable [
-	^ self visitBLWidget: aBLUITable
+	^ self visitBLUIContainer: aBLUITable
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUITextarea: aBLUITextarea [
-	^ self visitBLWidget: aBLUITextarea
+	^ self visitBLUIContainer: aBLUITextarea
 ]
 
 { #category : #'as yet unclassified' }
@@ -294,7 +299,7 @@ BLModelExporter >> visitBLUITitle: aBLUITitle [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
-	^ self visitBLWidget: aBLUIUnorderedList
+	^ self visitBLUIContainer: aBLUIUnorderedList
 ]
 
 { #category : #'as yet unclassified' }
