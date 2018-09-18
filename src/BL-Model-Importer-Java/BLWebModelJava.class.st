@@ -46,7 +46,7 @@ Class {
 	#category : #'BL-Model-Importer-Java'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 BLWebModelJava class >> webRoot [
 	"I represent the root of URL"
 	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/skins/e-sedit/'

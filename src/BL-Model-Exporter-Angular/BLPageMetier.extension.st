@@ -28,7 +28,7 @@ BLPageMetier >> componentName [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> generateHTMLSourceCode [
+BLPageMetier >> generateHTMLSourceCodeWith: aVisitor [
 	| text |
 	text := ''.
 	self metiers
@@ -39,7 +39,7 @@ BLPageMetier >> generateHTMLSourceCode [
 							'    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>'
 								, String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>'
 								, String crlf ]) , '</bl-tabs>' , String crlf ].
-	text := text , (self sortedWidget flatCollect: [ :widget | widget getDom , String crlf ]).
+	text := text , ((self widgets select: [:widget | (widget isKindOf: BLPageMetier) not ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ]).
 	^ text
 ]
 
@@ -143,11 +143,6 @@ BLPageMetier >> getBehaviorImportString [
 				flatCollect: [ :serviceAction | 
 					'import { ' , serviceAction serviceOwner mooseName , ' } from ''' , self relativePathToHome
 						, serviceAction serviceOwner getLocalPath , ''';' , String crlf ])
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getDom [
-	^ ''
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

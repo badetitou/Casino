@@ -12,11 +12,6 @@ BLSplitButton class >> annotation [
 ]
 
 { #category : #accessing }
-BLSplitButton >> getDom [
-	^ '<' , self getListPropertiesAsString , '></' , self getSelector , '>'
-]
-
-{ #category : #accessing }
 BLSplitButton >> getExternalDependency [
 	^ {PNGSplitButton}
 ]
