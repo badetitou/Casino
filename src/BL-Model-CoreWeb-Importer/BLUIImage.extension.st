@@ -14,8 +14,8 @@ BLUIImage class >> createWidgetFor: anInvocation [
 		put:
 			BLWebModelJava webRoot
 				,
-					((anInvocation parameters
+					(((anInvocation parameters
 						at: 1 ifAbsent: [ 'TODO' ]
-						) replaceAllRegex: 'ConfigCSS.getSkinPath\(\).*\+' with: '') trim.
+						) replaceAllRegex: 'ConfigCSS.getSkinPath\(\).*\+' with: '') trim withoutPrefix: '"').
 	^ widget
 ]
