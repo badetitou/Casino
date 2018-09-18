@@ -76,6 +76,15 @@ BLStringTest >> testProtectedString [
 ]
 
 { #category : #tests }
+BLStringTest >> testStringWithComma [
+	| string |
+	string := 'setWidth("Pat,ate")'.
+	self assert: string extractParameters size equals: 1.
+	self assert: (string extractParameters at: 1) equals: 'Pat,ate'.
+
+]
+
+{ #category : #tests }
 BLStringTest >> testTwoEmptyString [
 	| string |
 	string := 'setWidth("","")'.
