@@ -1,6 +1,6 @@
 Extension { #name : #BLUIName }
 
-{ #category : #'*BL-Model-CoreWeb-Importer' }
+{ #category : #'*BL-Model-CoreWeb-Exporter' }
 BLUIName >> name [
 	^ 'name'
 ]
