@@ -9,12 +9,9 @@ BLUIInputButton class >> canHandle: anInvocation [
 BLUIInputButton class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget parameters
-		at: #label
-		put:
-			(anInvocation parameters
+	widget addAttribute: (BLUILabel new text: (anInvocation parameters
 				at: 1
 				ifAbsent: [ self flag: #todo.
-					'todo' ]).
+					'todo' ])).
 	^ widget
 ]
