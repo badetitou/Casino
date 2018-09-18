@@ -14,8 +14,12 @@ MooseAbstractGroup >> allBLFieldset [
 
 { #category : #'*BL-Model-UI-SubEntities' }
 MooseAbstractGroup >> allBLLabel [
-	<navigation: 'BLLabel'>
-	^ self allWithType: BLUIParagraph
+	<
+	navigation:
+		'BLParagraph'>
+	^ self
+		allWithType:
+			BLUIParagraph
 ]
 
 { #category : #'*BL-Model-UI-SubEntities' }
