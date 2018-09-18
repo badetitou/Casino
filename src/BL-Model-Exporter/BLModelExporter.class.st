@@ -72,6 +72,11 @@ BLModelExporter >> visitBLPhase: aBLPhase [
 	^ self visitBLOriginedEntity: aBLPhase 
 ]
 
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIClass: aBLUIClass [
+	^ self visitBLAttribute: aBLUIClass
+]
+
 { #category : #visiting }
 BLModelExporter >> visitBLUIContainer: aBLUIContainer [
 	^ self visitBLWidget: aBLUIContainer
