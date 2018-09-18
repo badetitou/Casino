@@ -1,11 +1,6 @@
 Extension { #name : #MooseModel }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-MooseModel >> accept: anExporter [
-	anExporter visitMooseModel: self
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 MooseModel >> appName [
 	^ 'PHASE_INCUBATOR_HOME'
 ]
