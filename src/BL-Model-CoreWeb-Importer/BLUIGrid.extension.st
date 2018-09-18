@@ -12,7 +12,7 @@ BLUIGrid >> addDefaultAttribute [
 BLUIGrid >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	| param |
 	param := anInvocation parameters.
-	(self privateState attributeAt: #widgetPosition ifAbsentPut: [ OrderedCollection new ])
+	(self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ])
 		add:
 			aWidget ->
 					{(param at: 1).
