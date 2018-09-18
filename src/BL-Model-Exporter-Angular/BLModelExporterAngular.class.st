@@ -57,17 +57,28 @@ BLModelExporterAngular >> serviceRoot [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLHTML: aBLHTML [
+	^ aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ]
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 	| pageMetierRoot |
-	pageMetierRoot := (aBLPageMetier container componentsRootFromExporter: self) / aBLPageMetier getFolderName.
+	pageMetierRoot := (aBLPageMetier container componentsRootFromExporter: self)
+		/ aBLPageMetier getFolderName.
 	[ pageMetierRoot ensureCreateDirectory ]
 		on: DirectoryExists
 		do: [  ].
 	"Write pageMetier.module.ts"
-	self writeFile: pageMetierRoot / aBLPageMetier getHTMLName withCode: aBLPageMetier generateHTMLSourceCode.
+	self
+		writeFile: pageMetierRoot / aBLPageMetier getHTMLName
+		withCode: (aBLPageMetier
+		generateHTMLSourceCodeWith: self).
 	"Write pageMetier.route.ts"
-	self writeFile: pageMetierRoot / aBLPageMetier getTSName withCode: aBLPageMetier generateTSSourceCode.
-	aBLPageMetier metiers do: [ :metier | metier accept: self ]
+	self
+		writeFile: pageMetierRoot / aBLPageMetier getTSName
+		withCode: aBLPageMetier generateTSSourceCode.
+	aBLPageMetier metiers do: [ :metier | self visit: metier ]
 ]
 
 { #category : #visiting }
@@ -81,6 +92,62 @@ BLModelExporterAngular >> visitBLPhase: aBLPhase [
 	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
 	"Write components"
 	aBLPhase writeComponentsIn: phaseRoot withExporter: self
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLSplitButton: aBLSplitButton [
+	^  '<' , aBLSplitButton getListPropertiesAsString , '></' , aBLSplitButton getSelector , '>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
+	^   '<' ,  aBLUIImage getListPropertiesAsString , ' />'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIInput: aBLUIInput [
+	^ '<input id="float-' , aBLUIInput mooseID asString , '" type="text" value="' , aBLUIInput value1
+		,
+			'" placeholder="', aBLUIInput text,'" pInputText>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
+	^ '<' ,  aBLUIInputNumber getListPropertiesAsString, ' />'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputPassword: aBLUIInputPassword [
+	^ '<' ,  aBLUIInputPassword getListPropertiesAsString , ' />'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUILabel: aBLUILabel [
+	^ aBLUILabel text
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
+	^ aBLUILeaf text
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
+	^ '<' , aBLUIParagraph getListPropertiesAsString , '>'
+		, (( aBLUIParagraph attributes select: [ :a | a isKindOf: BLUILabel])
+				flatCollect:
+					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
+		, '</' , aBLUIParagraph getSelector , '>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLWidget: aBLWidget [
+	^ '<' , aBLWidget getListPropertiesAsString , '>'
+		, (('',
+			(( aBLWidget widgets)
+				flatCollect:
+					[ :widget | String crlf , (self visit: widget), String crlf ])) indentBy: 4)
+		, '</' , aBLWidget getSelector , '>'
 ]
 
 { #category : #visiting }

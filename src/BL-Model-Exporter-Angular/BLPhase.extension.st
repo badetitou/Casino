@@ -1,21 +1,12 @@
 Extension { #name : #BLPhase }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCode [
-	^ '<bl-phase-container>
-	' , self generateHTMLSourceCodeDependOfPageMetier
-		,
-			'
-</bl-phase-container>'
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeDependOfPageMetier [
+BLPhase >> generateHTMLSourceCodeDependOfPageMetierWith: anExporter [
 	self hasMultiplePageMetier
 		ifTrue: [ ^ self generateHTMLSourceCodeForMultiplePageMetier ].
 	self hasNoPageMetier
 		ifTrue: [ 
-			^ self generateHTMLSourceCodeForNoPageMetier ].
+			^ self generateHTMLSourceCodeForNoPageMetierWith: anExporter  ].
 	^ self generateHTMLSourceCodeFor1PageMetier
 ]
 
@@ -59,8 +50,17 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeForNoPageMetier [
-	^ (self widgets flatCollect: [ :widget | widget getDom , String crlf ])
+BLPhase >> generateHTMLSourceCodeForNoPageMetierWith: anExporter [
+	^ (self widgets flatCollect: [ :widget | anExporter visit: widget , String crlf ])
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLPhase >> generateHTMLSourceCodeWith: anExporter [
+	^ '<bl-phase-container>
+	' , (self generateHTMLSourceCodeDependOfPageMetierWith: anExporter )
+		,
+			'
+</bl-phase-container>'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -311,6 +311,6 @@ BLPhase >> writeComponentsIn: phaseRoot withExporter: anExporter [
 	indexRoot := componentsRoot / 'index'.
 	indexRoot ensureCreateDirectory.
 	anExporter writeFile: indexRoot / self getTSName withCode: self generateTSSourceCode.
-	anExporter writeFile: indexRoot / self getHTMLName withCode: self generateHTMLSourceCode.
+	anExporter writeFile: indexRoot / self getHTMLName withCode: (self generateHTMLSourceCodeWith: anExporter) .
 	self pageMetiers do: [ :metier | anExporter visit: metier ]
 ]
