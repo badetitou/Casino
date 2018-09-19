@@ -1,11 +1,11 @@
-Extension { #name : #BLUITitle }
+Extension { #name : #BLUIValue }
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
-BLUITitle >> attributeValue [
+BLUIValue >> attributeValue [
 	^ self text
 ]
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
-BLUITitle >> name [
-	^ 'title'
+BLUIValue >> name [
+	^ 'value'
 ]
