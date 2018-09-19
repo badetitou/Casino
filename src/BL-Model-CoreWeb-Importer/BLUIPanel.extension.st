@@ -7,5 +7,5 @@ BLUIPanel class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIPanel >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLWidth and: [ blAttributeClass ~= BLEnable ]
+	^ blAttributeClass ~= BLUIWidth and: [ blAttributeClass ~= BLEnable ]
 ]
