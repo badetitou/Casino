@@ -18,11 +18,11 @@ BLUIGrid >> accept: anExporter [
 
 { #category : #accesing }
 BLUIGrid >> atLevel: level [
-	^ self widgets select: [ :position | (position at: 1) = level ]
+	^ (self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ]) select: [ :position | (position at: 1) = level ]
 ]
 
 { #category : #accesing }
 BLUIGrid >> maxLevel [
-	^ (self widgets collect: [:assoc | assoc key]) max
+	^ (((self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ]) collect: [:coord | coord at: 1]) ifEmpty: [ ^ 0 ] ifNotEmpty: [:col | col max])
 	
 ]

@@ -15,8 +15,8 @@ BLUIGrid >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	(self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ])
 		add:
 			aWidget ->
-					{(param at: 1).
-					(param at: 2)}.
+					{(param at: 1) asInteger ifNil: [0].
+					(param at: 2) asInteger}.
 	self addWidget: aWidget
 ]
 
@@ -40,6 +40,6 @@ BLUIGrid class >> createWidgetFor: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIGrid >> postImport [
 	super postImport.
-	((self privateState attributes asDictionary at: #widgetPosition ifAbsent: [{} asOrderedCollection]) groupedBy: [:el | el value at: 1]) do: [:collection | collection do: [ :el | el key addAttribute: (BLGridSubElement new subpart: 12/(collection size)) ] ].
-	
+	"((self privateState attributes asDictionary at: #widgetPosition ifAbsent: [{} asOrderedCollection]) groupedBy: [:el | el value at: 1]) do: [:collection | collection do: [ :el | el key addAttribute: (BLGridSubElement new subpart: 12/(collection size)) ] ].
+	"
 ]
