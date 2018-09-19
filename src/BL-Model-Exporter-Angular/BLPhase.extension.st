@@ -264,6 +264,12 @@ BLPhase >> getTag [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
+BLPhase >> postImport [
+	^ pageMetiers := self pageMetiers asOrderedCollection
+		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> relativePathToHome [
 	^ '../../'
 ]
