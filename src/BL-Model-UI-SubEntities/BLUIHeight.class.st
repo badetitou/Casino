@@ -4,5 +4,23 @@ Images in HTML have a set of size attributes, which specifies the width and heig
 Class {
 	#name : #BLUIHeight,
 	#superclass : #BLAttribute,
+	#instVars : [
+		'text'
+	],
 	#category : #'BL-Model-UI-SubEntities-Attributes'
 }
+
+{ #category : #accessing }
+BLUIHeight >> accept: anExporter [
+	^ anExporter visitBLUIHeight: self
+]
+
+{ #category : #accessing }
+BLUIHeight >> text [
+	^ text
+]
+
+{ #category : #accessing }
+BLUIHeight >> text: anObject [
+	text := anObject
+]

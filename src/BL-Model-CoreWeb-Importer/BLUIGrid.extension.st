@@ -27,7 +27,7 @@ BLUIGrid class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIGrid >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLWidth and: [ blAttributeClass ~= BLEnable ]
+	^ blAttributeClass ~= BLUIWidth and: [ blAttributeClass ~= BLEnable ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
