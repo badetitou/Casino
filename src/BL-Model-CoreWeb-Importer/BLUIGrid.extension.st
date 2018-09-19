@@ -40,6 +40,14 @@ BLUIGrid class >> createWidgetFor: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIGrid >> postImport [
 	super postImport.
-	"((self privateState attributes asDictionary at: #widgetPosition ifAbsent: [{} asOrderedCollection]) groupedBy: [:el | el value at: 1]) do: [:collection | collection do: [ :el | el key addAttribute: (BLGridSubElement new subpart: 12/(collection size)) ] ].
-	"
+	0 to: self widgets size do: [ :number | 
+		| subset |
+		(self atLevel: number)
+			ifEmpty: [ subset := 12 ]
+			ifNotEmpty: [ subset := 12 / (self atLevel: number) size.
+				subset := subset < 1
+					ifTrue: [ 1 ]
+					ifFalse: [ subset floor ].
+				(self atLevel: number) keys do: [ :widget | widget addAttribute: (BLGridSubElement new subpart: subset) ] ] ].
+	
 ]
