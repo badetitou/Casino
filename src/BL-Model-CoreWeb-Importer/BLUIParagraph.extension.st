@@ -2,7 +2,7 @@ Extension { #name : #BLUIParagraph }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIParagraph class >> canHandle: anInvocation [
-	^ #('BLLabel' 'Label' 'FactoryBLLabel') includes: anInvocation invokedClassName
+	^ #('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils') includes: anInvocation invokedClassName
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

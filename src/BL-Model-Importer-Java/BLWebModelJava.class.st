@@ -684,7 +684,7 @@ BLWebModelJava >> widgetConstructorsInvocation [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> widgetFactoryInvocation [
-	^ (((self sourceModel allModelClasses select: [ :a | a name = 'FactoryBLLabel' ]) at: 1) methods select: [ :m | m name =  'create' ] thenCollect: #incomingInvocations) flatten
+	^ (((self sourceModel allModelClasses select: [ :a | a name = 'FactoryBLLabel' or: [ a name = 'ComponentUtils' ] ]) flatCollect: #methods) select: [ :m | m name =  'create' or: [m name beginsWith: 'getLibelleItem' ] ] thenCollect: #incomingInvocations) flatten
 ]
 
 { #category : #'as yet unclassified' }
