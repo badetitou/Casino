@@ -51,7 +51,7 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPhase >> generateHTMLSourceCodeForNoPageMetierWith: anExporter [
-	^ (self widgets flatCollect: [ :widget | anExporter visit: widget , String crlf ])
+	^ (self widgets flatCollect: [ :widget | (anExporter visit: widget) , String crlf ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
