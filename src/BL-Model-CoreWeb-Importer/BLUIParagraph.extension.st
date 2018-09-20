@@ -1,6 +1,27 @@
 Extension { #name : #BLUIParagraph }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
+BLUIParagraph class >> attributeFor: widget fromComponentUtilsForInvocation: anInvocation [
+	widget attributes
+		add:
+			(BLUILabel new
+				text:
+					(anInvocation parameters at: 1 ifAbsent: [ '' ])
+						,
+							((anInvocation parameters at: 2 ifAbsent: [ '' ]) = 'true'
+								ifTrue: [ '*' ]
+								ifFalse: [ '' ])
+						,
+							((anInvocation parameters at: 5 ifAbsent: [ 'true' ]) = 'true'
+								ifTrue: [ ':' ]
+								ifFalse: [ '' ])).
+	widget
+		addAttribute:
+			(BLUIClass new
+				text: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.'))
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIParagraph class >> canHandle: anInvocation [
 	^ #('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils') includes: anInvocation invokedClassName
 ]
@@ -14,14 +35,9 @@ BLUIParagraph >> canHaveAttribute: blAttributeClass [
 BLUIParagraph class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget attributes
-		add:
-			(BLUILabel new
-				text:
-					(anInvocation parameters
-						at: 1
-						ifAbsent: [ self flag: #todo.
-							'TODO' ])).
-	widget addAttribute: (BLUIClass new text: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.')).
+	'ComponentUtils' = anInvocation invokedClassName
+		ifTrue: [ self attributeFor: widget fromComponentUtilsForInvocation: anInvocation ]
+		ifFalse: [ widget attributes add: (BLUILabel new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
+			widget addAttribute: (BLUIClass new text: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.')) ].
 	^ widget
 ]
