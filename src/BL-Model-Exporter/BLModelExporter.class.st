@@ -313,6 +313,11 @@ BLModelExporter >> visitBLUITitle: aBLUITitle [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUITree: aBLUITree [
+	^ self visitBLWidget: aBLUITree
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
 	^ self visitBLUIContainer: aBLUIUnorderedList
 ]
