@@ -361,8 +361,7 @@ BLWebModelJava >> getPhaseFromClass: aClass [
 { #category : #private }
 BLWebModelJava >> getPhaseNamed: aCodePhase [
 	^ (self listOfPhases select: [ :e | e codePhase = aCodePhase ])
-		ifEmpty: [ Transcript crLog: 'error for ' , aCodePhase.
-			^ nil ]
+		ifEmpty: [ ^ nil ]
 		ifNotEmpty: [ :a | a at: 1 ]
 ]
 
