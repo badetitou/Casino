@@ -22,6 +22,12 @@ BLUIGrid >> atLevel: level [
 ]
 
 { #category : #accesing }
+BLUIGrid >> atLevelSorted: level [
+	^ ((((self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ])
+		select: [ :position | (position at: 1) = level ]) associationsCollect: #yourself) sort: [ :a :b | a value last < b value last ]) collect: #key
+]
+
+{ #category : #accesing }
 BLUIGrid >> maxLevel [
 	^ (((self privateState attributeAt: #widgetPosition ifAbsentPut: [ Dictionary new ]) collect: [:coord | coord at: 1]) ifEmpty: [ ^ 0 ] ifNotEmpty: [:col | col max])
 	
