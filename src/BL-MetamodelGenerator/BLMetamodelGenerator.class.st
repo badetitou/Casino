@@ -9,8 +9,6 @@ Class {
 	#name : #BLMetamodelGenerator,
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
-		'phase',
-		'pageMetier',
 		'widget',
 		'action',
 		'actionAppel',
@@ -23,9 +21,11 @@ Class {
 		'serviceAction',
 		'uiContainer',
 		'uiLeaf',
-		'behavior'
+		'behavior',
+		'page',
+		'businessPage'
 	],
-	#category : 'BL-MetamodelGenerator'
+	#category : #'BL-MetamodelGenerator'
 }
 
 { #category : #accessing }
@@ -69,7 +69,6 @@ BLMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 BLMetamodelGenerator >> defineNewClasses [
-	
 	action := builder newClassNamed: #Action.
 	actionAppel := builder newClassNamed: #ActionAppel.
 	entity := builder newClassNamed: #OriginedEntity.
@@ -79,83 +78,59 @@ BLMetamodelGenerator >> defineNewClasses [
 	variableAttribute := builder newClassNamed: #VariableAttribute.
 	behavior := builder newClassNamed: #Behavior.
 	serviceAction := builder newClassNamed: #ServiceAction.
-	phase := builder newClassNamed: #Phase.
+	page := builder newClassNamed: #Page.
 	service := builder newClassNamed: #Service.
 	widget := builder newClassNamed: #Widget.
 	uiContainer := builder newClassNamed: #UIContainer.
-	pageMetier := builder newClassNamed: #PageMetier.
-	uiLeaf := builder newClassNamed: #UILeaf.
-	
-	
+	businessPage := builder newClassNamed: #BusinessPage.
+	uiLeaf := builder newClassNamed: #UILeaf
 ]
 
 { #category : #definition }
 BLMetamodelGenerator >> defineNewClassesHierarchy [
-
 	action --|> #TAssociation.
 	entity --|> #TNamed.
 	entity --|> #TWithSourceAnchor.
-	
-
 	entity <|-- attribute.
 	entity <|-- behavior.
-	entity <|-- phase.
 	entity <|-- service.
 	entity <|-- widget.
 	widget <|-- uiContainer.
 	widget <|-- uiLeaf.
-	uiContainer <|-- pageMetier.
+	uiContainer <|-- page.
+	uiContainer <|-- businessPage.
 	attribute <|-- variableAttribute.
 	attribute <|-- normalAttribute.
 	attribute <|-- actionAttribute.
 	behavior <|-- serviceAction.
-	action <|-- actionAppel.
-	
+	action <|-- actionAppel
 ]
 
 { #category : #definition }
 BLMetamodelGenerator >> defineProperties [
-	(entity property: #source type: #MooseEntity)
-		comment: 'The source of the element (from the importation)'.
-	(phase property: #codePhase type: #String)
-		comment: 'The unique code of the Phase'.
-	(phase property: #codeValue type: #String)
-		comment: 'The short name of the codePhase'.
-	(phase property: #title type: #String)
-		comment: 'The main title of the phase'.
-	(phase property: #subtitle type: #String)
-		comment: 'The subtitle of the phase'.
-	(pageMetier property: #title type: #String)
-		comment: 'The main title of the page metier'.
-	(phase property: #realClassName type: #String)
-		comment: 'The name of the class in Java'.
-	(actionAttribute property: #codeMetierModel type: #Object)
-		comment: 'The source code of the actions'.
-	(widget property: 'realClass' type: #MooseEntity)
-		comment: 'The type (class) of the widget'.
-	(attribute property: 'attributeValue' type: #String)
-		comment: 'The literal value of the attribute'.
-	(attribute property: #oldClass type: #Object).
-	(uiLeaf property: #text type: #String).
-		
-	
+	(entity property: #source type: #MooseEntity) comment: 'The source of the element (from the importation)'.
+	(page property: #codePhase type: #String) comment: 'The unique code of the Phase'.
+	(page property: #codeValue type: #String) comment: 'The short name of the codePhase'.
+	(page property: #title type: #String) comment: 'The main title of the phase'.
+	(page property: #subtitle type: #String) comment: 'The subtitle of the phase'.
+	(businessPage property: #title type: #String) comment: 'The main title of the page metier'.
+	(page property: #realClassName type: #String) comment: 'The name of the class in Java'.
+	(actionAttribute property: #codeMetierModel type: #Object) comment: 'The source code of the actions'.
+	(widget property: 'realClass' type: #MooseEntity) comment: 'The type (class) of the widget'.
+	(attribute property: 'attributeValue' type: #String) comment: 'The literal value of the attribute'.
+	attribute property: #oldClass type: #Object.
+	uiLeaf property: #text type: #String
 ]
 
 { #category : #definition }
 BLMetamodelGenerator >> defineRelations [
-	((uiContainer property: #widgets) <>-* (widget property: #widgetContainer))
-		withNavigation.
+	((uiContainer property: #widgets) <>-* (widget property: #widgetContainer)) withNavigation.
 	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
-	((phase property: #actions) -* (actionAppel property: #call)) withNavigation.
-	((phase property: #pageMetiers) *-* (pageMetier property: #phaseContainers))
-		withNavigation.
-	((phase property: #widgets) <>-* (widget property: #page))
-		withNavigation.
-	((service property: #actions) <>-* (serviceAction property: #serviceOwner))
-		withNavigation.
-	((actionAttribute property: #behaviors) *-* (behavior property: #actionAttributes))
-		withNavigation
+	((page property: #actions) -* (actionAppel property: #call)) withNavigation.
+	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
+	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation.
+	((actionAttribute property: #behaviors) *-* (behavior property: #actionAttributes)) withNavigation
 ]
 
 { #category : #definition }
