@@ -10,7 +10,7 @@ BLExplorerView >> legend: b [
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb left.
-	lb textSize: 30.
+	lb textSize: 5.
 	lb addText: 'Legende'.
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
@@ -24,7 +24,8 @@ BLExplorerView >> legend: b [
 BLExplorerView >> openViewForModel: aBLModel andPage: aPage [
 	| b |
 	b := RTExploraBuilder new.
-	b shape circle color: [ :cls | cls color ].
+	b shape circle color: [ :cls | cls color ];
+		withTextAbove: #name height: 1.
 	b
 		layout: [ RTClusterLayout new
 				horizontalGap: 1];
