@@ -298,6 +298,16 @@ BLModelExporter >> visitBLUIPlaceholder: aBLUIPlaceholder [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUITab: aBLUITab [
+	^ self visitBLUIContainer: aBLUITab
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUITabManager: aBLUITabManager [
+	^ self visitBLUIContainer: aBLUITabManager 
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUITable: aBLUITable [
 	^ self visitBLUIContainer: aBLUITable
 ]
