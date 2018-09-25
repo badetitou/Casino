@@ -1,18 +1,7 @@
 "
-""LOAD FAST""
 SmalltalkImage current garbageCollectMost .
 
-""Reset Work""
-MooseModel resetRoot.
-MooseModel resetMeta.
-generator := BLMetamodelGenerator new.
-generator generate.
-BLMetamodelGenerator resetMetamodel.
-
-
 ""Generate BlApp""
-
-
 mooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
 mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
 
