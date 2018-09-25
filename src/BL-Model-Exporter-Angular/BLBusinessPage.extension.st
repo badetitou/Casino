@@ -1,7 +1,7 @@
-Extension { #name : #BLPageMetier }
+Extension { #name : #BLBusinessPage }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> behaviors [
+BLBusinessPage >> behaviors [
 	^ (self collectPhaseCalled
 		ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
 		ifEmpty: [ '' ])
@@ -11,24 +11,24 @@ BLPageMetier >> behaviors [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> calledBehavior [
+BLBusinessPage >> calledBehavior [
 	^ (self recursiveWidgetsWithoutMetiers
 		collect: [ :widget | widget behaviors ]) flattened asSet
 		asOrderedCollection
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> collectPhaseCalled [
+BLBusinessPage >> collectPhaseCalled [
 	^ (self recursiveWidgets flatCollect: [ :localWidget | localWidget actions collect: #call ]) asSet asOrderedCollection 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> componentName [
+BLBusinessPage >> componentName [
 	^ (self getAcceptedName , 'Component') capitalized 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> generateHTMLSourceCodeWith: aVisitor [
+BLBusinessPage >> generateHTMLSourceCodeWith: aVisitor [
 	| text |
 	text := ''.
 	self metiers
@@ -39,12 +39,12 @@ BLPageMetier >> generateHTMLSourceCodeWith: aVisitor [
 							'    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>'
 								, String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>'
 								, String crlf ]) , '</bl-tabs>' , String crlf ].
-	text := text , ((self widgets select: [:widget | (widget isKindOf: BLPageMetier) not ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ]).
+	text := text , ((self widgets select: [:widget | (widget isKindOf: BLBusinessPage) not ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ]).
 	^ text
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> generateTSSourceCode [
+BLBusinessPage >> generateTSSourceCode [
 	^ '
 import {
     Component,
@@ -131,12 +131,12 @@ export class ' , self componentName capitalized
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getAcceptedName [
+BLBusinessPage >> getAcceptedName [
 	^ (self name splitOn: ':') last
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getBehaviorImportString [
+BLBusinessPage >> getBehaviorImportString [
 	^ ''
 		,
 			(self calledBehavior
@@ -146,61 +146,61 @@ BLPageMetier >> getBehaviorImportString [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getFolderName [
+BLBusinessPage >> getFolderName [
 	^ self getAcceptedName
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getHTMLName [
+BLBusinessPage >> getHTMLName [
 	^ self getAcceptedName  , '.component.html'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getLocalComponentPath [
+BLBusinessPage >> getLocalComponentPath [
 	" return pageMetierName/pageMetierName.component"
 
 	^ self getLocalPath , '/' , self getAcceptedName , '.component'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getLocalPath [
+BLBusinessPage >> getLocalPath [
 	" return   pageMetierName/pageMetierName.component"
 
 	^ (self container) getLocalPath , '/components/' , self getAcceptedName
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getSelector [
+BLBusinessPage >> getSelector [
 	^  (self container ) getSelector , '-' , self getAcceptedName
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getTSName [
+BLBusinessPage >> getTSName [
 	^ self getAcceptedName  , '.component.ts'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> getTag [
+BLBusinessPage >> getTag [
 	^ '<', self getSelector , '>', '</', self getSelector , '>'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> isPageMetier [
+BLBusinessPage >> isPageMetier [
 	^ true
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> recursiveWidgetsWithoutMetiers [
+BLBusinessPage >> recursiveWidgetsWithoutMetiers [
 	^ (self widgetsNotPageMetier  , (self widgetsNotPageMetier  collect: #recursiveWidgets)) flattened
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> rootFromExporter: anExporter [ 
+BLBusinessPage >> rootFromExporter: anExporter [ 
 	^ ((self container) componentsRootFromExporter: anExporter) /  (self getAcceptedName )
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> widgetsDependencies [
+BLBusinessPage >> widgetsDependencies [
 	^ ''
 		,
 			((self recursiveWidgets collect: #getExternalDependencies) flattened asSet asOrderedCollection
@@ -208,6 +208,6 @@ BLPageMetier >> widgetsDependencies [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPageMetier >> widgetsNotPageMetier [
+BLBusinessPage >> widgetsNotPageMetier [
 	^ self widgets reject: [ :widget | widget isPageMetier ]
 ]

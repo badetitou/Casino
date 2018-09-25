@@ -1,7 +1,7 @@
-Extension { #name : #BLPhase }
+Extension { #name : #BLPage }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeDependOfPageMetierWith: anExporter [
+BLPage >> generateHTMLSourceCodeDependOfPageMetierWith: anExporter [
 	self hasMultiplePageMetier
 		ifTrue: [ ^ self generateHTMLSourceCodeForMultiplePageMetier ].
 	self hasNoPageMetier
@@ -11,13 +11,13 @@ BLPhase >> generateHTMLSourceCodeDependOfPageMetierWith: anExporter [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeFor1PageMetier [
+BLPage >> generateHTMLSourceCodeFor1PageMetier [
 	^ '<bl-phase-business-page-container>
         <bl-phase-business-page-header>
         </bl-phase-business-page-header>
 
         <bl-phase-business-page id="P1" title="Page 1">
-            ' , (self pageMetiers at: 1) getTag
+            ' , (self businessPage at: 1) getTag
 		,
 			'
         </bl-phase-business-page>
@@ -25,7 +25,7 @@ BLPhase >> generateHTMLSourceCodeFor1PageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
+BLPage >> generateHTMLSourceCodeForMultiplePageMetier [
 	| text id |
 	id := 0.
 	text := '<bl-phase-business-pages-tab-container (tabSelected)="onTabSelected($event)">
@@ -50,12 +50,12 @@ BLPhase >> generateHTMLSourceCodeForMultiplePageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeForNoPageMetierWith: anExporter [
+BLPage >> generateHTMLSourceCodeForNoPageMetierWith: anExporter [
 	^ (self widgets flatCollect: [ :widget | (anExporter visit: widget) , String crlf ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateHTMLSourceCodeWith: anExporter [
+BLPage >> generateHTMLSourceCodeWith: anExporter [
 	^ '<bl-phase-container>
 	' , (self generateHTMLSourceCodeDependOfPageMetierWith: anExporter )
 		,
@@ -64,7 +64,7 @@ BLPhase >> generateHTMLSourceCodeWith: anExporter [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateModuleSourceCode [
+BLPage >> generateModuleSourceCode [
 	| text |
 	text := 'import { NgModule } from ''@angular/core'';
 import { CommonModule } from ''@angular/common'';
@@ -107,7 +107,7 @@ export class ' , self getModuleClassName , ' {}'.
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateRouteSourceCode [
+BLPage >> generateRouteSourceCode [
 	^ 'import { ModuleWithProviders } from ''@angular/core'';
 import { RouterModule, Routes } from ''@angular/router'';
 import { IndexComponent } from ''./components/index/index.component'';
@@ -123,7 +123,7 @@ export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> generateTSSourceCode [
+BLPage >> generateTSSourceCode [
 	^ 'import {
     Component,
     OnDestroy,
@@ -142,7 +142,7 @@ import { DesktopStateService } from ''../../../../../components/service/desktop-
 		,
 			(self hasMultiplePageMetier
 				ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ]
-				ifFalse: [ '' ]) , (self pageMetiers flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
+				ifFalse: [ '' ]) , (self businessPage flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
 		,
 			'
 
@@ -160,7 +160,7 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
 				ifFalse: [ '' ])
 		,
 			(self hasMultiplePageMetier
-				ifTrue: [ self pageMetiers flatCollect: [ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
+				ifTrue: [ self businessPage flatCollect: [ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
 				ifFalse: [ '' ])
 		,
 			'
@@ -184,32 +184,32 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getComponentsPageMetierListName [
+BLPage >> getComponentsPageMetierListName [
 	^ self recursiveMetiers flattened flatCollect: [ :metier | '    ', metier componentName, ',', String crlf ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getHTMLName [
+BLPage >> getHTMLName [
 	^ 'index.component.html'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getLocalComponentPath [
+BLPage >> getLocalComponentPath [
 	^ self getLocalPath  , '/' , self name , '.component'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getLocalModulePath [
+BLPage >> getLocalModulePath [
 	^ self name, '/' , self name , '.module#' , self getModuleClassName
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getLocalPath [
+BLPage >> getLocalPath [
 	^ ''
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getMetadata [
+BLPage >> getMetadata [
 	" asString :
 { 
     id: 'phase1_2',
@@ -234,59 +234,59 @@ BLPhase >> getMetadata [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getModuleClassName [
+BLPage >> getModuleClassName [
 	^ self name capitalized , 'Module'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getModuleName [
+BLPage >> getModuleName [
 	^ self name , '.module.ts'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getRouteName [
+BLPage >> getRouteName [
 	^ self name , '.route.ts'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getSelector [
+BLPage >> getSelector [
 	^ 'bl-' , self mooseModel name , '-' , self name
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getTSName [ 
+BLPage >> getTSName [ 
 	^ 'index.component.ts'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> getTag [
+BLPage >> getTag [
 	^ '<' , self getSelector , '>' , '</' , self getSelector , '>'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> postImport [
-	^ pageMetiers := self pageMetiers asOrderedCollection
+BLPage >> postImport [
+	^ businessPage := self businessPage asOrderedCollection
 		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> relativePathToHome [
+BLPage >> relativePathToHome [
 	^ '../../'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> rootFromExporter: anExporter [
+BLPage >> rootFromExporter: anExporter [
 	^ anExporter rootPhases / self name
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> sortedPageMetiers [
-	^ self pageMetiers asOrderedCollection
+BLPage >> sortedPageMetiers [
+	^ self businessPage asOrderedCollection
 		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> widgetsDependencies [
+BLPage >> widgetsDependencies [
 	"At the level of the Phase, we don't need recursive external import (for the module file)... It's only in the TS file"
 
 	^ ((self recursiveMetiers flatCollect: #recursiveWidgets) collect: #getExternalDependency)
@@ -294,7 +294,7 @@ BLPhase >> widgetsDependencies [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> widgetsDependenciesImportInstruction [
+BLPage >> widgetsDependenciesImportInstruction [
 	^ ''
 		,
 			(self widgetsDependencies
@@ -302,7 +302,7 @@ BLPhase >> widgetsDependenciesImportInstruction [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> widgetsDependenciesName [
+BLPage >> widgetsDependenciesName [
 	^ ''
 		,
 			(self widgetsDependencies 
@@ -310,7 +310,7 @@ BLPhase >> widgetsDependenciesName [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPhase >> writeComponentsIn: phaseRoot withExporter: anExporter [
+BLPage >> writeComponentsIn: phaseRoot withExporter: anExporter [
 	| componentsRoot indexRoot |
 	componentsRoot := self componentsRootFromExporter: anExporter.
 	componentsRoot ensureCreateDirectory.
@@ -318,5 +318,5 @@ BLPhase >> writeComponentsIn: phaseRoot withExporter: anExporter [
 	indexRoot ensureCreateDirectory.
 	anExporter writeFile: indexRoot / self getTSName withCode: self generateTSSourceCode.
 	anExporter writeFile: indexRoot / self getHTMLName withCode: (self generateHTMLSourceCodeWith: anExporter) .
-	self pageMetiers do: [ :metier | anExporter visit: metier ]
+	self businessPage do: [ :metier | anExporter visit: metier ]
 ]

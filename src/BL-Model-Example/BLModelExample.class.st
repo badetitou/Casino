@@ -12,30 +12,30 @@ BLModelExample class >> generateDemo [
 	| model phase2 pageMetier21 phase1 pageMetier11 pageMetier12 pageMetier13 home pageMetierHome widget1 widget2 widget3 widget4 widget5 actionAppel |
 	model := MooseModel new.
 	model name: 'demos'.
-	phase2 := BLPhase new
+	phase2 := BLPage new
 		name: #phase2;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier21 := BLPageMetier new name: #page1.
+	pageMetier21 := BLBusinessPage  new name: #page1.
 	phase2 metiers add: pageMetier21.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #phase1;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier11 := BLPageMetier new name: #page1.
-	pageMetier12 := BLPageMetier new name: #page2.
-	pageMetier13 := BLPageMetier new name: #page3.
+	pageMetier11 := BLBusinessPage new name: #page1.
+	pageMetier12 := BLBusinessPage new name: #page2.
+	pageMetier13 := BLBusinessPage new name: #page3.
 	phase1 metiers add: pageMetier11.
 	phase1 metiers add: pageMetier12.
 	phase1 metiers add: pageMetier13.
-	home := BLPhase new
+	home := BLPage new
 		name: #home;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetierHome := BLPageMetier new name: #pageHome.
+	pageMetierHome := BLBusinessPage new name: #pageHome.
 	widget1 := BLUIInputButton new name: 'widget1'.
 	widget1 attributes at: 'label' put: 'goPhase1'.
 	widget2 := BLUIInputButton new name: 'widget2'.
@@ -78,33 +78,33 @@ BLModelExample class >> generateDemoLinkBetweenPhases [
 	| model phase2 pageMetier21 phase1 pageMetier11 pageMetier12 pageMetier13 home pageMetierHome widget1 widget2 actionAppel |
 	model := MooseModel new.
 	model name: 'demos'.
-	phase2 := BLPhase new
+	phase2 := BLPage new
 		name: #phase2;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier21 := BLPageMetier new name: #page1.
+	pageMetier21 := BLBusinessPage new name: #page1.
 	phase2 metiers add: pageMetier21.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #phase1;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier11 := BLPageMetier new name: #page1.
-	pageMetier12 := BLPageMetier new name: #page2.
-	pageMetier13 := BLPageMetier new name: #page3.
+	pageMetier11 := BLBusinessPage new name: #page1.
+	pageMetier12 := BLBusinessPage new name: #page2.
+	pageMetier13 := BLBusinessPage new name: #page3.
 	phase1 pageMetiers add: pageMetier11.
 	phase1 pageMetiers add: pageMetier12.
 	phase1 pageMetiers add: pageMetier13.
-	home := BLPhase new
+	home := BLPage new
 		name: #home;
 		realClassName: #fr::bl::phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetierHome := BLPageMetier new name: #pageHome.
-	widget1 := SSInputText new name: 'widget1'.
+	pageMetierHome := BLBusinessPage new name: #pageHome.
+	widget1 := BLUIInputText new name: 'widget1'.
 	widget1 attributes at: 'label' put: 'goPhase1'.
-	widget2 := SSInputText new name: 'widget2'.
+	widget2 := BLUIInputText new name: 'widget2'.
 	widget1 attributes at: 'label' put: 'goPhase2'.
 	home pageMetiers add: pageMetierHome.
 	pageMetierHome widgets add: widget1.
@@ -134,7 +134,7 @@ BLModelExample class >> generateModelWithOnePhase [
 	model name: #generateModelWithOnePhase.
 	model
 		add:
-			(BLPhase new
+			(BLPage new
 				name: #Phase1;
 				realClassName: #fr::bl::Phase1;
 				codeValue: #codeValue;
@@ -146,12 +146,12 @@ BLModelExample class >> generateModelWithOnePhase [
 BLModelExample class >> generateModelWithOnePhaseWithPageMetierAndRecursiveWidget [
 	| model phase1 pageMetier11 widget1 widget11 widget12 |
 	model := MooseModel new.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #Phase1;
 		realClassName: #fr::bl::Phase1;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier11 := BLPageMetier new name: #PageMetier11.
+	pageMetier11 := BLBusinessPage new name: #PageMetier11.
 	widget1 := BLWidget new name: #widget1.
 	widget11 := BLWidget new name: #widget11.
 	widget12 := BLWidget new name: #widget12.
@@ -172,17 +172,17 @@ BLModelExample class >> generateModelWithOnePhaseWithPageMetierAndRecursiveWidge
 BLModelExample class >> generateModelWithTwoPhasesAndOnePageMetier [
 	| model phase1 phase2 pageMetier1 |
 	model := MooseModel new.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #Phase1;
 		realClassName: #fr::bl::Phase1;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	phase2 := BLPhase new
+	phase2 := BLPage new
 		name: #Phase2;
 		realClassName: #fr::bl::Phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier1 := BLPageMetier new name: #PageMetier1.
+	pageMetier1 := BLBusinessPage new name: #PageMetier1.
 	phase1 metiers add: pageMetier1.
 	model name: #generateModelWithTwoPhasesAndOnePageMetier.
 	model add: phase1.
@@ -195,19 +195,19 @@ BLModelExample class >> generateModelWithTwoPhasesAndOnePageMetier [
 BLModelExample class >> generateModelWithTwoPhasesAndThreePageMetier [
 	| model phase1 phase2 pageMetier11 pageMetier21 pageMetier22 |
 	model := MooseModel new.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #Phase1;
 		realClassName: #fr::bl::Phase1;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	phase2 := BLPhase new
+	phase2 := BLPage new
 		name: #Phase2;
 		realClassName: #fr::bl::Phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier11 := BLPageMetier new name: #PageMetier11.
-	pageMetier21 := BLPageMetier new name: #PageMetier21.
-	pageMetier22 := BLPageMetier new name: #PageMetier22.
+	pageMetier11 := BLBusinessPage new name: #PageMetier11.
+	pageMetier21 := BLBusinessPage new name: #PageMetier21.
+	pageMetier22 := BLBusinessPage new name: #PageMetier22.
 	phase1 metiers add: pageMetier11.
 	phase2 metiers add: pageMetier21.
 	phase2 metiers add: pageMetier22.
@@ -224,19 +224,19 @@ BLModelExample class >> generateModelWithTwoPhasesAndThreePageMetier [
 BLModelExample class >> generateModelWithTwoPhasesAndThreePageMetierAnd1Widget [
 	| model phase1 phase2 pageMetier11 pageMetier21 pageMetier22 widget1 |
 	model := MooseModel new.
-	phase1 := BLPhase new
+	phase1 := BLPage new
 		name: #Phase1;
 		realClassName: #fr::bl::Phase1;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	phase2 := BLPhase new
+	phase2 := BLPage new
 		name: #Phase2;
 		realClassName: #fr::bl::Phase2;
 		codeValue: #codeValue;
 		codePhase: #codePhase.
-	pageMetier11 := BLPageMetier new name: #PageMetier11.
-	pageMetier21 := BLPageMetier new name: #PageMetier21.
-	pageMetier22 := BLPageMetier new name: #PageMetier22.
+	pageMetier11 := BLBusinessPage new name: #PageMetier11.
+	pageMetier21 := BLBusinessPage new name: #PageMetier21.
+	pageMetier22 := BLBusinessPage new name: #PageMetier22.
 	widget1 := BLWidget new name: #widget1.
 	phase1 pageMetiers add: pageMetier11.
 	phase2 pageMetiers add: pageMetier21.
