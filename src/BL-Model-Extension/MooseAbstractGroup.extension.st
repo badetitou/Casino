@@ -28,13 +28,13 @@ MooseAbstractGroup >> allBLBehavior [
 { #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLPageMetier [
 	<navigation: 'BL Page Metier'>
-	^ self allWithType: BLPageMetier 
+	^ self allWithType: BLBusinessPage 
 ]
 
 { #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLPhase [
 	<navigation: 'BL Phase'>
-	^ self allWithType: BLPhase 
+	^ self allWithType: BLPage 
 ]
 
 { #category : #'*BL-Model-Extension' }

@@ -1,22 +1,22 @@
-Extension { #name : #BLPhase }
+Extension { #name : #BLPage }
 
 { #category : #'*BL-Model-Exporter' }
-BLPhase >> accept: anExporter [
+BLPage >> accept: anExporter [
 	^ anExporter visitBLPhase: self
 ]
 
 { #category : #'*BL-Model-Exporter' }
-BLPhase >> hasMultiplePageMetier [
-	^ self pageMetiers size > 1
+BLPage >> hasMultiplePageMetier [
+	^ self businessPage size > 1
 ]
 
 { #category : #'*BL-Model-Exporter' }
-BLPhase >> hasNoPageMetier [
-	^ self pageMetiers isEmpty 
+BLPage >> hasNoPageMetier [
+	^ self businessPage isEmpty 
 ]
 
 { #category : #'*BL-Model-Exporter' }
-BLPhase >> visitSuccessorWith: anExporter [
+BLPage >> visitSuccessorWith: anExporter [
 	"to override"
 
 	self pageMetiers do: [ :metier | anExporter visit: metier ]

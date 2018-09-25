@@ -2,7 +2,7 @@ Class {
 	#name : #BLActionAppel,
 	#superclass : #BLAction,
 	#instVars : [
-		'#call => FMOne type: #BLPhase opposite: #actions'
+		'#call => FMOne type: #BLPage opposite: #actions'
 	],
 	#category : #'BL-Model-Entities'
 }

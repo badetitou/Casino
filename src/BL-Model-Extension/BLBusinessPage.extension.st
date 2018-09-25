@@ -1,16 +1,16 @@
-Extension { #name : #BLPageMetier }
+Extension { #name : #BLBusinessPage }
 
 { #category : #'*BL-Model-Extension' }
-BLPageMetier >> metiers [
+BLBusinessPage >> metiers [
 	^ self widgets select: [ :widget | widget isPageMetier  ]
 ]
 
 { #category : #'*BL-Model-Extension' }
-BLPageMetier >> recursiveMetiers [
+BLBusinessPage >> recursiveMetiers [
 	^ (self metiers , (self metiers collect: #recursiveMetiers)) flattened
 ]
 
 { #category : #'*BL-Model-Extension' }
-BLPageMetier >> recursiveWidgets [
+BLBusinessPage >> recursiveWidgets [
 	^ (self widgets , (self widgets collect: #recursiveWidgets)) flattened
 ]
