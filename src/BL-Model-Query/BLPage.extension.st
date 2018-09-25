@@ -7,5 +7,5 @@ BLPage class >> color [
 
 { #category : #'*BL-Model-Query' }
 BLPage >> outgoingElement [
-	^ {self businessPage} flatten
+	^ {self businessPage. self widgets} flatten
 ]
