@@ -2,8 +2,8 @@ Class {
 	#name : #BLBusinessPage,
 	#superclass : #BLUIContainer,
 	#instVars : [
-		'#title',
-		'#pageContainers => FMMany type: #BLPage opposite: #businessPage'
+		'#pageContainers => FMMany type: #BLPage opposite: #businessPage',
+		'#title'
 	],
 	#category : #'BL-Model-Entities'
 }

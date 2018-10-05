@@ -10,7 +10,7 @@ BLUIHorizontalPanel >> addDefaultAttribute [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIHorizontalPanel class >> canHandle: anInvocation [
-	^ '.*HorizontalPanel' asRegex matchesPrefix: anInvocation invokedClassName
+	^ false
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

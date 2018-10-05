@@ -35,7 +35,7 @@ BLOriginedEntity class >> generatedTraitNames [
 BLOriginedEntity class >> metamodel [
 
 	<generated>
-	^ (self class environment at: #BLMetamodelGenerator) metamodel
+	^ (self class environment at: #BLLayoutMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }

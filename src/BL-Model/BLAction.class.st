@@ -35,7 +35,7 @@ BLAction class >> generatedTraitNames [
 BLAction class >> metamodel [
 
 	<generated>
-	^ (self class environment at: #BLMetamodelGenerator) metamodel
+	^ (self class environment at: #BLLayoutMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }
