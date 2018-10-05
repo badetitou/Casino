@@ -10,8 +10,3 @@ BLUIContainer >> addAllWidgets: aCollectionOfWidget [
 BLUIContainer >> addWidget: aWidget [
 	widgets add: aWidget
 ]
-
-{ #category : #'*BL-Model-Importer' }
-BLUIContainer class >> canHandle: anInvocation [
-	^ self = BLUIContainer
-]

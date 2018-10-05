@@ -1,6 +1,6 @@
 Class {
 	#name : #BLUIHeading2,
-	#superclass : #BLUIContainer,
+	#superclass : #BLUILeaf,
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
 
