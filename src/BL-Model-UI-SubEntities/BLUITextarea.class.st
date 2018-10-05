@@ -1,6 +1,6 @@
 Class {
 	#name : #BLUITextarea,
-	#superclass : #BLUIContainer,
+	#superclass : #BLUILeaf,
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
 

@@ -20,7 +20,7 @@ BLWidget >> affectedActions: anObject [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> canHandle: anInvocation [
-	^ true
+	^ false
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
@@ -38,6 +38,15 @@ BLWidget class >> createWidgetFor: anInvocation [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+BLWidget class >> defaultIfNotFoundFor: anInvocation [
+	^ BLUIContainer new
+		realClass: anInvocation invokedClass;
+		name: anInvocation asString;
+		source: anInvocation;
+		yourself
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> newFor: anInvocation [
 	self subclasses
 		do: [ :subclass | 
@@ -46,7 +55,7 @@ BLWidget class >> newFor: anInvocation [
 			try ifNotNil: [ ^ try ] ].
 	(self canHandle: anInvocation)
 		ifTrue: [ ^ self createWidgetFor: anInvocation ]
-		ifFalse: [ ^ nil ]
+		ifFalse: [ ^ self defaultIfNotFoundFor: anInvocation ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

@@ -1,9 +1,8 @@
 Class {
 	#name : #BLUIInput,
-	#superclass : #BLUIContainer,
+	#superclass : #BLUILeaf,
 	#instVars : [
-		'value',
-		'text'
+		'value'
 	],
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
