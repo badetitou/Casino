@@ -44,7 +44,7 @@ BLMetamodelGenerator class >> resetMetamodel [
 
 	| classes tower |
 	FMRelationSlot allSubInstancesDo: #resetMooseProperty.
-	classes :=  {BLOriginedEntity withAllSubclasses. BLAction withAllSubclasses} flatten.
+	classes :=  {BLOriginedEntity withAllSubclasses. BLAction withAllSubclasses} flatten asOrderedCollection.
 	classes addAll: (self packageName asPackage definedClasses select: #isTrait).
 	classes addAll: #'Famix-Traits' asPackage definedClasses.
 	{Trait.
