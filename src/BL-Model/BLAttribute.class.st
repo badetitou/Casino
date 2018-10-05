@@ -22,7 +22,7 @@ BLAttribute class >> annotation [
 BLAttribute class >> generatedSlotNames [
 	<generated>
 	'BLAttribute class>>#generatedSlotNames'.
-	^ #(widget oldClass attributeValue)
+	^ #(attributeValue oldClass widget)
 ]
 
 { #category : #generator }

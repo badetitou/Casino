@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'#actions => FMMany type: #BLAction opposite: #caller',
 		'#attributes => FMMany type: #BLAttribute opposite: #widget',
+		'#position => FMMany type: #BLPosition opposite: #widget',
 		'#realClass',
+		'#size => FMMany type: #BLSize opposite: #widget',
 		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
 	],
 	#category : #'BL-Model-Entities'
@@ -23,7 +25,7 @@ BLWidget class >> annotation [
 BLWidget class >> generatedSlotNames [
 	<generated>
 	'BLWidget class>>#generatedSlotNames'.
-	^ #(actions attributes widgetContainer realClass)
+	^ #(realClass widgetContainer actions attributes size position)
 ]
 
 { #category : #generator }
@@ -85,6 +87,54 @@ BLWidget >> attributesGroup [
 	<navigation: 'Attributes'>
 	^ MooseGroup
 			withAll: (self attributes asSet)
+]
+
+{ #category : #accessing }
+BLWidget >> position [
+
+	<generated>
+	^ position
+]
+
+{ #category : #accessing }
+BLWidget >> position: anObject [
+
+	<generated>
+	position value: anObject
+
+]
+
+{ #category : #navigation }
+BLWidget >> positionGroup [
+
+	<generated>
+	<navigation: 'Position'>
+	^ MooseGroup
+			withAll: (self position asSet)
+]
+
+{ #category : #accessing }
+BLWidget >> size [
+
+	<generated>
+	^ size
+]
+
+{ #category : #accessing }
+BLWidget >> size: anObject [
+
+	<generated>
+	size value: anObject
+
+]
+
+{ #category : #navigation }
+BLWidget >> sizeGroup [
+
+	<generated>
+	<navigation: 'Size'>
+	^ MooseGroup
+			withAll: (self size asSet)
 ]
 
 { #category : #accessing }

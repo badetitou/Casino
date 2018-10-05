@@ -2,12 +2,12 @@ Class {
 	#name : #BLPage,
 	#superclass : #BLUIContainer,
 	#instVars : [
+		'#businessPage => FMMany type: #BLBusinessPage opposite: #pageContainers',
+		'#codePhase',
+		'#codeValue',
 		'#realClassName',
 		'#subtitle',
-		'#codeValue',
-		'#businessPage => FMMany type: #BLBusinessPage opposite: #pageContainers',
-		'#title',
-		'#codePhase'
+		'#title'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -25,7 +25,7 @@ BLPage class >> annotation [
 BLPage class >> generatedSlotNames [
 	<generated>
 	'BLPage class>>#generatedSlotNames'.
-	^ #(realClassName subtitle codeValue businessPage title actions codePhase)
+	^ #(codePhase codeValue title subtitle realClassName actions businessPage)
 ]
 
 { #category : #generator }

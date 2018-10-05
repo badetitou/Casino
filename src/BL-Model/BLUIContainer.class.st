@@ -2,6 +2,7 @@ Class {
 	#name : #BLUIContainer,
 	#superclass : #BLWidget,
 	#instVars : [
+		'#layout => FMOne type: #BLLayout opposite: #container',
 		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer'
 	],
 	#category : #'BL-Model-Entities'
@@ -20,7 +21,7 @@ BLUIContainer class >> annotation [
 BLUIContainer class >> generatedSlotNames [
 	<generated>
 	'BLUIContainer class>>#generatedSlotNames'.
-	^ #(widgets)
+	^ #(widgets layout)
 ]
 
 { #category : #generator }
@@ -34,6 +35,30 @@ BLUIContainer class >> requirements [
 
 	<generated>
 	^ {  }
+]
+
+{ #category : #accessing }
+BLUIContainer >> layout [
+
+	<generated>
+	^ layout
+]
+
+{ #category : #accessing }
+BLUIContainer >> layout: anObject [
+
+	<generated>
+	layout := anObject
+
+]
+
+{ #category : #navigation }
+BLUIContainer >> layoutGroup [
+
+	<generated>
+	<navigation: 'Layout'>
+	^ MooseGroup
+			with: (self layout)
 ]
 
 { #category : #accessing }
