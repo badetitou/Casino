@@ -68,6 +68,7 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 	absolutePosition --|> position.
 	relativePosition --|> position.
 	alignement --|> position.
+	cell --|> uiContainer.
 ]
 
 { #category : #definition }
