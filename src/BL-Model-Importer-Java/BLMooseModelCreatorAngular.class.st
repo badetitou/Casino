@@ -45,7 +45,6 @@ BLMooseModelCreatorAngular >> basicRun [
 		xml: (PPXmlParser parse: xml asFileReference contents);
 		sourceModel: sourceModel;
 		createModelIn: model.
-	model install
 ]
 
 { #category : #accessing }
