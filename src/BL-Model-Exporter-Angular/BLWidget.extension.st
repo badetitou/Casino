@@ -18,7 +18,7 @@ BLWidget >> behaviors [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> container [
-	^ self widgetOwner
+	^ self widgetContainer
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -55,9 +55,9 @@ BLWidget >> idTag [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> idViewChild [
-	^ self variable
-		ifNil: [ '' ]
-		ifNotNil: [ '    @ViewChild(''' , self id , ''', { read: ViewContainerRef }) ' , self id
+	^ (self variable isNil or: [ self variable isInvocation ])
+		ifTrue: [ '' ]
+		ifFalse: [ '    @ViewChild(''' , self id , ''', { read: ViewContainerRef }) ' , self id
 				, ': ViewContainerRef;' , String crlf ]
 ]
 

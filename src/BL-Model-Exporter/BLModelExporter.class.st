@@ -144,12 +144,12 @@ BLModelExporter >> visitBLUIHorizontalPanel: aBLUIHorizontalPanel [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIImage: aBLUIImage [
-	^ self visitBLUIContainer: aBLUIImage
+	^ self visitBLUILeaf: aBLUIImage
 ]
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInput: aBLUIInput [
-	^ self visitBLUIContainer: aBLUIInput
+	^ self visitBLUILeaf: aBLUIInput
 ]
 
 { #category : #'as yet unclassified' }
@@ -264,7 +264,7 @@ BLModelExporter >> visitBLUILeaf: aBLUILeaf [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUILink: aBLUILink [
-	^ self visitBLUIContainer: aBLUILink
+	^ self visitBLUILeaf: aBLUILink
 ]
 
 { #category : #'as yet unclassified' }
@@ -289,7 +289,7 @@ BLModelExporter >> visitBLUIPanel: aBLUIPanel [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIParagraph: aBLUIParagraph [
-	^ self visitBLUIContainer: aBLUIParagraph
+	^ self visitBLUILeaf: aBLUIParagraph
 ]
 
 { #category : #'as yet unclassified' }
@@ -314,7 +314,7 @@ BLModelExporter >> visitBLUITable: aBLUITable [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUITextarea: aBLUITextarea [
-	^ self visitBLUIContainer: aBLUITextarea
+	^ self visitBLUILeaf: aBLUITextarea
 ]
 
 { #category : #'as yet unclassified' }

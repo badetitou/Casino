@@ -100,6 +100,16 @@ BLModelExporterAngular >> visitBLSplitButton: aBLSplitButton [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
+	^ '<' , aBLUIContainer getListPropertiesAsString , '>'
+		, (('',
+			(( {aBLUIContainer widgets.aBLUIContainer layout ifNotNil: [:a | a cell flatCollect: #widgets] ifNil: [{}]} flatten)
+				flatCollect:
+					[ :widget | String crlf , (self visit: widget), String crlf ])) indentBy: 4)
+		, '</' , aBLUIContainer getSelector , '>'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
 	^   '<' ,  aBLUIImage getListPropertiesAsString , ' />'
 ]
@@ -128,7 +138,11 @@ BLModelExporterAngular >> visitBLUILabel: aBLUILabel [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
-	^ aBLUILeaf text
+		^ '<' , aBLUILeaf getListPropertiesAsString , '>'
+		, (( aBLUILeaf attributes select: [ :a | a isKindOf: BLUILabel])
+				flatCollect:
+					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
+		, '</' , aBLUILeaf getSelector , '>'
 ]
 
 { #category : #visiting }

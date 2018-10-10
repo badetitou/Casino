@@ -2,9 +2,9 @@ Extension { #name : #BLUIContainer }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLUIContainer >> attributesTag [
-	^ (({self attributes. {self generateDefaultClassAttribute} } flatten groupedBy: [ :attribut | attribut name ])
-		associationsCollect: [ :mapAttributeNameValues | 
-			' ' , mapAttributeNameValues key asString , '="'
+	^ (({self attributes. {self generateDefaultClassAttribute} } flatten)
+		collect: [ :mapAttributeNameValues | 
+			' ' , mapAttributeNameValues name , '="'
 				,
 					((mapAttributeNameValues value asOrderedCollection
 						flatCollect: [ :attribute | attribute attributeValue asString , ' ' ]) removeLast; yourself)
