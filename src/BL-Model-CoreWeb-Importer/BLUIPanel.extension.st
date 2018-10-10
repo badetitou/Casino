@@ -1,8 +1,18 @@
 Extension { #name : #BLUIPanel }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
+BLUIPanel >> addWidget: aWidget [
+	self layout addWidget: aWidget withInvocationOfAdd: nil 
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
+BLUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+	self layout addWidget: aWidget withInvocationOfAdd: anInvocation 
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIPanel class >> canHandle: anInvocation [
-	^ '.*Panel' asRegex matchesPrefix: anInvocation invokedClassName
+	^ ('.*Panel' asRegex matchesPrefix: anInvocation invokedClassName) or: [ #('BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
