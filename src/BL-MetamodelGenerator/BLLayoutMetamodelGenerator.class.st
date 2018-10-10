@@ -21,7 +21,7 @@ BLLayoutMetamodelGenerator class >> resetMetamodel [
 
 	| classes tower |
 	FMRelationSlot allSubInstancesDo: #resetMooseProperty.
-	classes :=  {BLOriginedEntity withAllSubclasses. BLAction withAllSubclasses} flatten asSet.
+	classes :=  {BLOriginedEntity withAllSubclasses. BLAction withAllSubclasses.} flatten asSet.
 	classes addAll: #'BL-Model' asPackage definedClasses.
 	classes addAll: (self packageName asPackage definedClasses select: #isTrait).
 	classes addAll: #'Famix-Traits' asPackage definedClasses.
@@ -69,6 +69,7 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 	relativePosition --|> position.
 	alignement --|> position.
 	cell --|> uiContainer.
+	layout --|> entity.
 ]
 
 { #category : #definition }

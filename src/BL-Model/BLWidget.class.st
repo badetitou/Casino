@@ -2,12 +2,12 @@ Class {
 	#name : #BLWidget,
 	#superclass : #BLOriginedEntity,
 	#instVars : [
+		'#realClass',
+		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets',
 		'#actions => FMMany type: #BLAction opposite: #caller',
 		'#attributes => FMMany type: #BLAttribute opposite: #widget',
-		'#position => FMMany type: #BLPosition opposite: #widget',
-		'#realClass',
 		'#size => FMMany type: #BLSize opposite: #widget',
-		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
+		'#position => FMMany type: #BLPosition opposite: #widget'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -111,6 +111,23 @@ BLWidget >> positionGroup [
 	<navigation: 'Position'>
 	^ MooseGroup
 			withAll: (self position asSet)
+]
+
+{ #category : #accessing }
+BLWidget >> realClass [
+
+	<MSEProperty: #realClass type: #MooseEntity>
+	<generated>
+	<MSEComment: 'The type (class) of the widget'>
+	^ realClass
+]
+
+{ #category : #accessing }
+BLWidget >> realClass: anObject [
+
+	<generated>
+	realClass := anObject
+
 ]
 
 { #category : #accessing }

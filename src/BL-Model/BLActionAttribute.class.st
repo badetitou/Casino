@@ -2,8 +2,8 @@ Class {
 	#name : #BLActionAttribute,
 	#superclass : #BLAttribute,
 	#instVars : [
-		'#behaviors => FMMany type: #BLBehavior opposite: #actionAttributes',
-		'#codeMetierModel'
+		'#codeMetierModel',
+		'#behaviors => FMMany type: #BLBehavior opposite: #actionAttributes'
 	],
 	#category : #'BL-Model-Entities'
 }
