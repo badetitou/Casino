@@ -1,6 +1,6 @@
 Class {
 	#name : #BLLayout,
-	#superclass : #MooseEntity,
+	#superclass : #BLOriginedEntity,
 	#instVars : [
 		'#cell => FMMany type: #BLCell opposite: #layoutOwner',
 		'#container => FMOne type: #BLUIContainer opposite: #layout'
@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 BLLayout class >> annotation [
 
-	<MSEClass: #Layout super: #MooseEntity>
+	<MSEClass: #Layout super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
 	^self
@@ -28,13 +28,6 @@ BLLayout class >> generatedSlotNames [
 BLLayout class >> generatedTraitNames [
 	<generated>
 	^ #()
-]
-
-{ #category : #meta }
-BLLayout class >> metamodel [
-
-	<generated>
-	^ (self class environment at: #BLLayoutMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }
@@ -92,88 +85,4 @@ BLLayout >> containerGroup [
 	<navigation: 'Container'>
 	^ MooseGroup
 			with: (self container)
-]
-
-{ #category : #testing }
-BLLayout >> isAccess [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isAssociation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isFunction [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isInheritance [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isInvocation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isNamespace [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isPackage [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isReference [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLLayout >> isType [
-
-	<generated>
-	^ false
 ]

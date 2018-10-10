@@ -1,6 +1,6 @@
 Class {
 	#name : #BLCell,
-	#superclass : #MooseEntity,
+	#superclass : #BLUIContainer,
 	#instVars : [
 		'#layoutOwner => FMOne type: #BLLayout opposite: #cell'
 	],
@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 BLCell class >> annotation [
 
-	<MSEClass: #Cell super: #MooseEntity>
+	<MSEClass: #Cell super: #BLUIContainer>
 	<package: #'BL-Model'>
 	<generated>
 	^self
@@ -30,101 +30,10 @@ BLCell class >> generatedTraitNames [
 ]
 
 { #category : #meta }
-BLCell class >> metamodel [
-
-	<generated>
-	^ (self class environment at: #BLLayoutMetamodelGenerator) metamodel
-]
-
-{ #category : #meta }
 BLCell class >> requirements [
 
 	<generated>
 	^ { BLLayout }
-]
-
-{ #category : #testing }
-BLCell >> isAccess [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isAssociation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isFunction [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isInheritance [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isInvocation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isNamespace [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isPackage [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isReference [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLCell >> isType [
-
-	<generated>
-	^ false
 ]
 
 { #category : #accessing }

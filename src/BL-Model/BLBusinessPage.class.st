@@ -2,8 +2,8 @@ Class {
 	#name : #BLBusinessPage,
 	#superclass : #BLUIContainer,
 	#instVars : [
-		'#pageContainers => FMMany type: #BLPage opposite: #businessPage',
-		'#title'
+		'#title',
+		'#pageContainers => FMMany type: #BLPage opposite: #businessPage'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -35,11 +35,6 @@ BLBusinessPage class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #'as yet unclassified' }
-BLBusinessPage >> idViewChild [
-	^ ''
 ]
 
 { #category : #accessing }
