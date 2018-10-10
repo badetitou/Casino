@@ -7,7 +7,7 @@ BLLayout class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLLayout class >> createCoreLayoutFor: anInvocation [
-	^ BLUIHorizontalLayout new.
+	^ self new
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
@@ -15,7 +15,7 @@ BLLayout class >> newCoreLayoutFor: anInvocation [
 	self subclasses
 		do: [ :subclass | 
 			| try |
-			try := subclass newFor: anInvocation.
+			try := subclass newCoreLayoutFor: anInvocation.
 			try ifNotNil: [ ^ try ] ].
 	(self canHandle: anInvocation)
 		ifTrue: [ ^ self createCoreLayoutFor: anInvocation ]

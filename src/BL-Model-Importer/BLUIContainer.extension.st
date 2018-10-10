@@ -10,3 +10,9 @@ BLUIContainer >> addAllWidgets: aCollectionOfWidget [
 BLUIContainer >> addWidget: aWidget [
 	widgets add: aWidget
 ]
+
+{ #category : #'*BL-Model-Importer' }
+BLUIContainer >> computeSelfAttributes [
+	^ self layout ifNil: [ super computeSelfAttributes ] ifNotNil: [:lay | ^ {super computeSelfAttributes. lay getLayoutAttribute} ]
+
+]

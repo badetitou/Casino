@@ -24,7 +24,7 @@ BLUIPanel >> canHaveAttribute: blAttributeClass [
 BLUIPanel class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget layout: (BLLayout createCoreLayoutFor: anInvocation).
+	widget layout: (BLLayout newCoreLayoutFor: anInvocation).
 	widget addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
 	(anInvocation parameters size >= 2)
 		ifTrue: [ widget addAttribute: (BLUIWidth new text: (anInvocation parameters at: 2) )].
