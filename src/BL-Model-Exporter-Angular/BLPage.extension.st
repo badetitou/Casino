@@ -264,12 +264,6 @@ BLPage >> getTag [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPage >> postImport [
-	^ businessPage := self businessPage asOrderedCollection
-		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 BLPage >> relativePathToHome [
 	^ '../../'
 ]

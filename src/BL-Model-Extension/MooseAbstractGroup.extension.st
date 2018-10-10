@@ -26,6 +26,12 @@ MooseAbstractGroup >> allBLBehavior [
 ]
 
 { #category : #'*BL-Model-Extension' }
+MooseAbstractGroup >> allBLLayout [
+	<navigation: 'Sub-Layout'>
+	^ self allWithSubTypesOf: BLLayout
+]
+
+{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLPageMetier [
 	<navigation: 'BL Page Metier'>
 	^ self allWithType: BLBusinessPage 
