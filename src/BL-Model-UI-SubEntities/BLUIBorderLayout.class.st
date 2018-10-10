@@ -1,5 +1,5 @@
 Class {
-	#name : #BLUIDockLayout,
+	#name : #BLUIBorderLayout,
 	#superclass : #BLLayout,
 	#category : #'BL-Model-UI-SubEntities-Layout'
 }
