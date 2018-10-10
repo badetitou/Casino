@@ -114,23 +114,6 @@ BLWidget >> positionGroup [
 ]
 
 { #category : #accessing }
-BLWidget >> realClass [
-
-	<MSEProperty: #realClass type: #MooseEntity>
-	<generated>
-	<MSEComment: 'The type (class) of the widget'>
-	^ realClass
-]
-
-{ #category : #accessing }
-BLWidget >> realClass: anObject [
-
-	<generated>
-	realClass := anObject
-
-]
-
-{ #category : #accessing }
 BLWidget >> size [
 
 	<generated>
