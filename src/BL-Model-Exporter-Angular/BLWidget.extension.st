@@ -8,7 +8,13 @@ BLWidget >> actionsTag [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> attributesTag [
-	^ ''
+	^ ((self computeSelfAttributes flattened groupedBy: #name) asDictionary 
+		associationsCollect: [ :mapAttributeNameValues | 
+			' ' , mapAttributeNameValues key , '="'
+				,
+					((mapAttributeNameValues value asOrderedCollection
+						flatCollect: [ :attribute | attribute attributeValue asString , ' ' ]) removeLast; yourself)
+				, '"' ]) flatten
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -17,8 +23,25 @@ BLWidget >> behaviors [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> computeSelfAttributes [
+	^ {self attributes. {self generateDefaultClassAttribute}. self containedElementAttribute }
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> containedElementAttribute [
+	^ self container ifNil: [ {  } ] ifNotNil: [ :a | a hierarchalAttributes ]
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> container [
 	^ self widgetContainer
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> generateDefaultClassAttribute [
+	"Use me to add a Attribute to all the widget during the exportation
+	ex: Adding a class to all the dom with the name of the widget"
+	^ BLAttribute new name: 'class'; attributeValue: ('ID-', self class name asString). 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -41,6 +64,11 @@ BLWidget >> getListPropertiesAsString [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> getSelector [
 	^ 'div'
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> hierarchalAttributes [ 
+	^ {  }
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
