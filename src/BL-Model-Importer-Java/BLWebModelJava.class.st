@@ -621,6 +621,7 @@ BLWebModelJava >> moduleHomeName [
 BLWebModelJava >> postImport [
 	"self model allBLActionsAttribute do: [ :actionAttribute | actionAttribute convertOldClass ]."
 	self model allBLWidget do: [ :widget | widget postImport ].
+	self model allBLLayout do: [ :widget | widget postImport ].
 	self model allBLPhase do: [ :phase | phase postImport ]
 ]
 

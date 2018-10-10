@@ -4,3 +4,8 @@ Extension { #name : #BLLayout }
 BLLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	cell add: (BLCell new addWidget: aWidget; yourself)
 ]
+
+{ #category : #'*BL-Model-Importer-Java' }
+BLLayout >> postImport [
+	"If we need to order some of the cell"
+]
