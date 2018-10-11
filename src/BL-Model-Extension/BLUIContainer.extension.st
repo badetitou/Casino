@@ -4,3 +4,10 @@ Extension { #name : #BLUIContainer }
 BLUIContainer >> canHaveAttribute: blAttributeClass [
 	^ true
 ]
+
+{ #category : #'*BL-Model-Extension' }
+BLUIContainer >> recursiveWidgets [
+	| widgs |
+	widgs := (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widgets ] ifNil: [{}])) flattened.
+	^ (widgs, (widgs collect: #recursiveWidgets)) flattened
+]
