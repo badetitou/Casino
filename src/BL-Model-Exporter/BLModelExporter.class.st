@@ -56,6 +56,11 @@ BLModelExporter >> visitBLAttribute: aBLAttribute [
 ]
 
 { #category : #visiting }
+BLModelExporter >> visitBLLayout: aBLLayout [
+	^ self
+]
+
+{ #category : #visiting }
 BLModelExporter >> visitBLOriginedEntity: anElement [
 	anElement prepareAcceptFor: self.
 	anElement writeCodeWith: self.
@@ -100,6 +105,11 @@ BLModelExporter >> visitBLUIFieldsetDynamic: aBLUIFieldsetDynamic [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIGrid: aBLUIGrid [
 	^ self visitBLUIContainer: aBLUIGrid 
+]
+
+{ #category : #visiting }
+BLModelExporter >> visitBLUIGridLayout: aBLUIGridLayout [
+	^ self visitBLLayout: aBLUIGridLayout
 ]
 
 { #category : #'as yet unclassified' }

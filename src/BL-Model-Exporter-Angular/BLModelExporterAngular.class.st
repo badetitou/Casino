@@ -62,6 +62,18 @@ BLModelExporterAngular >> visitBLHTML: aBLHTML [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLLayout: aBLLayout [
+	^ '<' , aBLLayout container getListPropertiesAsString , '>'
+		,
+			(''
+				,
+					({aBLLayout container widgets.
+					(aBLLayout cell flatCollect: #widgets)} flatten
+						flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+				indentBy: 4) , '</' , aBLLayout container getSelector , '>'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 	| pageMetierRoot |
 	pageMetierRoot := (aBLPageMetier container componentsRootFromExporter: self)
@@ -101,12 +113,33 @@ BLModelExporterAngular >> visitBLSplitButton: aBLSplitButton [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
-	^ '<' , aBLUIContainer getListPropertiesAsString , '>'
-		, (('',
-			(( {aBLUIContainer widgets.aBLUIContainer layout ifNotNil: [:a | a cell flatCollect: #widgets] ifNil: [{}]} flatten)
-				flatCollect:
-					[ :widget | String crlf , (self visit: widget), String crlf ])) indentBy: 4)
-		, '</' , aBLUIContainer getSelector , '>'
+	^ aBLUIContainer layout
+		ifNotNil: [ :layout | self visit: layout ]
+		ifNil: [ '<' , aBLUIContainer getListPropertiesAsString , '>'
+				,
+					(''
+						,
+							(aBLUIContainer widgets
+								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+						indentBy: 4) , '</' , aBLUIContainer getSelector , '>' ]
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
+	^ '<' , aBLUIGridLayout container getListPropertiesAsString , '>'
+		,
+			((0 to: aBLUIGridLayout cell size)
+				flatCollect: [ :number | 
+					| subset |
+					(aBLUIGridLayout atLevel: number)
+						ifEmpty: [ subset := 12 ]
+						ifNotEmpty: [ subset := 12 / (aBLUIGridLayout atLevel: number) size.
+							subset := subset < 1
+								ifTrue: [ 1 ]
+								ifFalse: [ subset floor ] ].
+					((aBLUIGridLayout atLevelSorted: number) flatCollect: #widgets)
+						flatCollect: [ :widget | "indentBy: 4" String crlf , (self visit: widget) , String crlf ] ])
+		, '</' , aBLUIGridLayout container getSelector , '>'
 ]
 
 { #category : #visiting }

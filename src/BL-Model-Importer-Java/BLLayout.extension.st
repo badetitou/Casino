@@ -11,6 +11,11 @@ BLLayout >> childAttribute [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+BLLayout >> childAttributeFor: aCell [
+	^ self childAttribute
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 BLLayout >> getLayoutAttribute [
 	^ BLUIClass new text: 'ui-g'
 ]
