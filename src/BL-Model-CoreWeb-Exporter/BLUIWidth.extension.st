@@ -2,10 +2,10 @@ Extension { #name : #BLUIWidth }
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
 BLUIWidth >> attributeValue [
-	^ self text
+	^ 'width: ', self text, ';'
 ]
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
 BLUIWidth >> name [
-	^ 'width'
+	^ 'style'
 ]
