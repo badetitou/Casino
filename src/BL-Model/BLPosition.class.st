@@ -1,9 +1,6 @@
 Class {
 	#name : #BLPosition,
 	#superclass : #MooseEntity,
-	#instVars : [
-		'#widget => FMOne type: #BLWidget opposite: #position'
-	],
 	#category : #'BL-Model-Entities'
 }
 
@@ -20,7 +17,7 @@ BLPosition class >> annotation [
 BLPosition class >> generatedSlotNames [
 	<generated>
 	'BLPosition class>>#generatedSlotNames'.
-	^ #(widget)
+	^ #()
 ]
 
 { #category : #generator }
@@ -40,7 +37,7 @@ BLPosition class >> metamodel [
 BLPosition class >> requirements [
 
 	<generated>
-	^ { BLWidget }
+	^ {  }
 ]
 
 { #category : #testing }
@@ -125,30 +122,4 @@ BLPosition >> isType [
 
 	<generated>
 	^ false
-]
-
-{ #category : #accessing }
-BLPosition >> widget [
-
-	<generated>
-	<container>
-
-	^ widget
-]
-
-{ #category : #accessing }
-BLPosition >> widget: anObject [
-
-	<generated>
-	widget := anObject
-
-]
-
-{ #category : #navigation }
-BLPosition >> widgetGroup [
-
-	<generated>
-	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
 ]

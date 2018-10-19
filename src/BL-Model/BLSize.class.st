@@ -1,9 +1,6 @@
 Class {
 	#name : #BLSize,
 	#superclass : #MooseEntity,
-	#instVars : [
-		'#widget => FMOne type: #BLWidget opposite: #size'
-	],
 	#category : #'BL-Model-Entities'
 }
 
@@ -20,7 +17,7 @@ BLSize class >> annotation [
 BLSize class >> generatedSlotNames [
 	<generated>
 	'BLSize class>>#generatedSlotNames'.
-	^ #(widget)
+	^ #()
 ]
 
 { #category : #generator }
@@ -40,7 +37,7 @@ BLSize class >> metamodel [
 BLSize class >> requirements [
 
 	<generated>
-	^ { BLWidget }
+	^ {  }
 ]
 
 { #category : #testing }
@@ -125,30 +122,4 @@ BLSize >> isType [
 
 	<generated>
 	^ false
-]
-
-{ #category : #accessing }
-BLSize >> widget [
-
-	<generated>
-	<container>
-
-	^ widget
-]
-
-{ #category : #accessing }
-BLSize >> widget: anObject [
-
-	<generated>
-	widget := anObject
-
-]
-
-{ #category : #navigation }
-BLSize >> widgetGroup [
-
-	<generated>
-	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
 ]
