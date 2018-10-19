@@ -125,7 +125,7 @@ BLMetamodelGenerator >> defineRelations [
 	((uiContainer property: #widgets) <>-* (widget property: #widgetContainer)) withNavigation.
 	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
-	((page property: #actions) -* (actionAppel property: #call)) withNavigation.
+	((page property: #caller) -* (actionAppel property: #call)) withNavigation.
 	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
 	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation.
 	((actionAttribute property: #behaviors) *-* (behavior property: #actionAttributes)) withNavigation

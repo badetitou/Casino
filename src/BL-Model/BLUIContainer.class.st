@@ -2,8 +2,8 @@ Class {
 	#name : #BLUIContainer,
 	#superclass : #BLWidget,
 	#instVars : [
-		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer',
-		'#layout => FMOne type: #BLLayout opposite: #container'
+		'#layout => FMOne type: #BLLayout opposite: #container',
+		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer'
 	],
 	#category : #'BL-Model-Entities'
 }

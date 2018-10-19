@@ -2,12 +2,13 @@ Class {
 	#name : #BLPage,
 	#superclass : #BLUIContainer,
 	#instVars : [
+		'#businessPage => FMMany type: #BLBusinessPage opposite: #pageContainers',
+		'#caller => FMMany type: #BLActionAppel opposite: #call',
 		'#codePhase',
 		'#codeValue',
-		'#title',
-		'#subtitle',
 		'#realClassName',
-		'#businessPage => FMMany type: #BLBusinessPage opposite: #pageContainers'
+		'#subtitle',
+		'#title'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -25,7 +26,7 @@ BLPage class >> annotation [
 BLPage class >> generatedSlotNames [
 	<generated>
 	'BLPage class>>#generatedSlotNames'.
-	^ #(codePhase codeValue title subtitle realClassName actions businessPage)
+	^ #(codePhase codeValue title subtitle realClassName caller businessPage)
 ]
 
 { #category : #generator }
@@ -39,30 +40,6 @@ BLPage class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #accessing }
-BLPage >> actions [
-
-	<generated>
-	^ actions
-]
-
-{ #category : #accessing }
-BLPage >> actions: anObject [
-
-	<generated>
-	actions value: anObject
-
-]
-
-{ #category : #navigation }
-BLPage >> actionsGroup [
-
-	<generated>
-	<navigation: 'Actions'>
-	^ MooseGroup
-			withAll: (self actions asSet)
 ]
 
 { #category : #accessing }
@@ -87,6 +64,30 @@ BLPage >> businessPageGroup [
 	<navigation: 'BusinessPage'>
 	^ MooseGroup
 			withAll: (self businessPage asSet)
+]
+
+{ #category : #accessing }
+BLPage >> caller [
+
+	<generated>
+	^ caller
+]
+
+{ #category : #accessing }
+BLPage >> caller: anObject [
+
+	<generated>
+	caller value: anObject
+
+]
+
+{ #category : #navigation }
+BLPage >> callerGroup [
+
+	<generated>
+	<navigation: 'Caller'>
+	^ MooseGroup
+			withAll: (self caller asSet)
 ]
 
 { #category : #accessing }
