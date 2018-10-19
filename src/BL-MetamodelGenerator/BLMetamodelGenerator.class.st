@@ -74,7 +74,6 @@ BLMetamodelGenerator >> defineNewClasses [
 	entity := builder newClassNamed: #OriginedEntity.
 	attribute := builder newClassNamed: #Attribute.
 	actionAttribute := builder newClassNamed: #ActionAttribute.
-	normalAttribute := builder newClassNamed: #NormalAttribute.
 	variableAttribute := builder newClassNamed: #VariableAttribute.
 	behavior := builder newClassNamed: #Behavior.
 	serviceAction := builder newClassNamed: #ServiceAction.
