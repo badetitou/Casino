@@ -16,8 +16,8 @@ BLCalendarShowIcon class >> createAttributeFor: anInvocation [
 BLCalendarShowIcon class >> newFor: aWidgetInstance [
 	"black magic... can receive nil as anInvocation see BLHorizontalPanel>>addDefaultAttribute"
 
-	aWidgetInstance widgets
+	"aWidgetInstance widgets
 		do:
-			[ :subWidget | subWidget addAttribute: (BLHorizontalChild new subpart: 12 / aWidgetInstance widgets size) ].
+			[ :subWidget | subWidget addAttribute: (BLHorizontalChild new subpart: 12 / aWidgetInstance widgets size) ]."
 	^ self createAttributeFor: nil
 ]

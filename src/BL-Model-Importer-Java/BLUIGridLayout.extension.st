@@ -5,6 +5,7 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	| tmpCell|
 	anInvocation ifNil: [ super addWidget: aWidget withInvocationOfAdd: anInvocation ] ifNotNil: [ :invoc | | param |
 		param := invoc parameters.
+			self halt. 
 	tmpCell := (BLCell new addWidget: aWidget; yourself).
 	(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		add:

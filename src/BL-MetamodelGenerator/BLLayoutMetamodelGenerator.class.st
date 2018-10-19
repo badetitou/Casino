@@ -1,3 +1,8 @@
+"
+| generator |
+generator := BLLayoutMetamodelGenerator new generate.
+BLLayoutMetamodelGenerator resetMetamodel.
+"
 Class {
 	#name : #BLLayoutMetamodelGenerator,
 	#superclass : #BLMetamodelGenerator,
@@ -10,7 +15,16 @@ Class {
 		'position',
 		'absolutePosition',
 		'relativePosition',
-		'alignement'
+		'alignement',
+		'northAlignement',
+		'northEastAlignement',
+		'eastAlignement',
+		'southEastAlignement',
+		'southAlignement',
+		'southWestAlignement',
+		'westAlignement',
+		'northWestAlignement',
+		'centerAlignement'
 	],
 	#category : #'BL-MetamodelGenerator'
 }
@@ -47,6 +61,7 @@ BLLayoutMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 BLLayoutMetamodelGenerator >> defineNewClasses [
+	"Main class"
 	super defineNewClasses.
 	layout := builder newClassNamed: #Layout.
 	cell := builder newClassNamed: #Cell.
@@ -57,11 +72,23 @@ BLLayoutMetamodelGenerator >> defineNewClasses [
 	absolutePosition := builder newClassNamed: #AbsolutePosition.
 	relativePosition := builder newClassNamed: #RelativePosition.
 	alignement := builder newClassNamed: #Alignement.
-	
+
+	"sub alignement"
+	northAlignement := builder newClassNamed: #NorthAlignement.
+	northEastAlignement := builder newClassNamed: #NorthEastAlignement.
+	eastAlignement := builder newClassNamed: #EastAlignement.
+	southEastAlignement := builder newClassNamed: #SouthEastAlignement.
+	southAlignement := builder newClassNamed: #SouthAlignement.
+	southWestAlignement := builder newClassNamed: #SouthWestAlignement.
+	westAlignement := builder newClassNamed: #WestAlignement.
+	northWestAlignement := builder newClassNamed: #NorthWestAlignement.
+	centerAlignement := builder newClassNamed: #CenterAlignement
 ]
 
 { #category : #definition }
 BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
+	"main hierarchy"
+
 	super defineNewClassesHierarchy.
 	absoluteSize --|> size.
 	relativeSize --|> size.
@@ -70,11 +97,22 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 	alignement --|> position.
 	cell --|> uiContainer.
 	layout --|> entity.
+
+	"alignement type hierarchy"
+	northAlignement --|> alignement.
+	northEastAlignement --|> alignement.
+	eastAlignement --|> alignement.
+	southEastAlignement --|> alignement.
+	southAlignement --|> alignement.
+	southWestAlignement --|> alignement.
+	westAlignement --|> alignement.
+	northWestAlignement --|> alignement.
+	centerAlignement --|> alignement
 ]
 
 { #category : #definition }
 BLLayoutMetamodelGenerator >> defineProperties [
-	super defineProperties 
+	super defineProperties.
 ]
 
 { #category : #definition }
