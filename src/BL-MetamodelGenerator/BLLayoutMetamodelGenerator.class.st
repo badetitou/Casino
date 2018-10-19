@@ -113,6 +113,8 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 { #category : #definition }
 BLLayoutMetamodelGenerator >> defineProperties [
 	super defineProperties.
+	(widget property: #size type: #BLSize) comment: 'The size of the widget'.
+	(widget property: #position type: #BLPosition) comment: 'The alignement of the widget'.
 ]
 
 { #category : #definition }
@@ -120,8 +122,6 @@ BLLayoutMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	((cell property: #layoutOwner) *-<> (layout property: #cell)) withNavigation.
 	((layout property: #container) -<> (uiContainer property: #layout)) withNavigation.
-	((size property: #widget) *-<> (widget property: #size)) withNavigation.
-	((position property: #widget) *-<> (widget property: #position)) withNavigation.
 ]
 
 { #category : #definition }
