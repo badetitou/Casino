@@ -6,12 +6,28 @@ Class {
 
 { #category : #tests }
 BLAlignementCreationTest >> testCenter [
-	self error
+	| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_CENTER'
+		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
+	self assert: createdElement class equals: BLCenterAlignement.
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: nil
+		andVertical: nil.
+	self assert: createdElement equals: nil
 ]
 
 { #category : #tests }
 BLAlignementCreationTest >> testEast [
-	self error
+	| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
+		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
+	self assert: createdElement class equals: BLEastAlignement.
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
+		andVertical: nil.
+	self assert: createdElement class equals: BLEastAlignement
 ]
 
 { #category : #tests }
@@ -29,12 +45,20 @@ BLAlignementCreationTest >> testNorth [
 
 { #category : #tests }
 BLAlignementCreationTest >> testNorthEast [
-	self error
+		| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
+		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
+	self assert: createdElement class equals: BLNorthEastAlignement.
 ]
 
 { #category : #tests }
 BLAlignementCreationTest >> testNorthWest [
-	self error
+		| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
+		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
+	self assert: createdElement class equals: BLNorthWestAlignement
 ]
 
 { #category : #tests }
@@ -52,15 +76,31 @@ BLAlignementCreationTest >> testSouth [
 
 { #category : #tests }
 BLAlignementCreationTest >> testSouthEast [
-	self error
+	| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
+		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
+	self assert: createdElement class equals: BLSouthEastAlignement
 ]
 
 { #category : #tests }
 BLAlignementCreationTest >> testSouthWest [
-	self error
+		| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
+		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
+	self assert: createdElement class equals: BLSouthWestAlignement.
 ]
 
 { #category : #tests }
 BLAlignementCreationTest >> testWest [
-	self error.
+	| createdElement |
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
+		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
+	self assert: createdElement class equals: BLWestAlignement.
+	createdElement := BLAlignement
+		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
+		andVertical: nil.
+	self assert: createdElement class equals: BLWestAlignement
 ]
