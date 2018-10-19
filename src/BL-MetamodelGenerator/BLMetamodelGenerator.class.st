@@ -99,7 +99,6 @@ BLMetamodelGenerator >> defineNewClassesHierarchy [
 	uiContainer <|-- page.
 	uiContainer <|-- businessPage.
 	attribute <|-- variableAttribute.
-	attribute <|-- normalAttribute.
 	attribute <|-- actionAttribute.
 	behavior <|-- serviceAction.
 	action <|-- actionAppel
