@@ -1,6 +1,6 @@
 Class {
 	#name : #BLCell,
-	#superclass : #BLOriginedEntity,
+	#superclass : #BLWidget,
 	#instVars : [
 		'#layout => FMOne type: #BLWidget opposite: #cellOwner',
 		'#layoutOwner => FMOne type: #BLLayout opposite: #cell'
@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 BLCell class >> annotation [
 
-	<MSEClass: #Cell super: #BLOriginedEntity>
+	<MSEClass: #Cell super: #BLWidget>
 	<package: #'BL-Model'>
 	<generated>
 	^self

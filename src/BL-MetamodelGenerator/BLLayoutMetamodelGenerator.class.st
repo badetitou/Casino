@@ -95,7 +95,7 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 	absolutePosition --|> position.
 	relativePosition --|> position.
 	alignement --|> position.
-	cell --|> entity.
+	cell --|> widget.
 	layout --|> entity.
 
 	"alignement type hierarchy"
