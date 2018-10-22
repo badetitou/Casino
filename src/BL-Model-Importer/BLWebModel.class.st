@@ -3,15 +3,21 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'sourceModel'
+		'sourceModel',
+		'factory'
 	],
-	#category : 'BL-Model-Importer'
+	#category : #'BL-Model-Importer'
 }
 
 { #category : #accessing }
 BLWebModel class >> webRoot [
 	"I represent the root of URL"
 	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/skins/e-sedit/'
+]
+
+{ #category : #accessing }
+BLWebModel >> createFactory [
+	self subclassResponsibility 
 ]
 
 { #category : #private }
@@ -25,7 +31,7 @@ BLWebModel >> createModelIn: aModel [
 
 { #category : #accessing }
 BLWebModel >> factory [
-	self subclassResponsibility
+	^ factory
 ]
 
 { #category : #accessing }
@@ -55,7 +61,7 @@ BLWebModel >> postImport [
 
 { #category : #api }
 BLWebModel >> preImport [
-	
+	self createFactory
 ]
 
 { #category : #accessing }

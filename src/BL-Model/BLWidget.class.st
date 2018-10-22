@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'#actions => FMMany type: #BLAction opposite: #caller',
 		'#attributes => FMMany type: #BLAttribute opposite: #widget',
-		'#cellOwner => FMOne type: #BLCell opposite: #layout',
+		'#cellOwner => FMOne type: #BLCell opposite: #widget',
 		'#position',
 		'#realClass',
 		'#size',

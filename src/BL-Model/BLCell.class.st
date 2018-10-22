@@ -2,8 +2,8 @@ Class {
 	#name : #BLCell,
 	#superclass : #BLWidget,
 	#instVars : [
-		'#layout => FMOne type: #BLWidget opposite: #cellOwner',
-		'#layoutOwner => FMOne type: #BLLayout opposite: #cell'
+		'#layoutOwner => FMOne type: #BLLayout opposite: #cell',
+		'#widget => FMOne type: #BLWidget opposite: #cellOwner'
 	],
 	#category : #'BL-Model-Entities'
 }
@@ -21,7 +21,7 @@ BLCell class >> annotation [
 BLCell class >> generatedSlotNames [
 	<generated>
 	'BLCell class>>#generatedSlotNames'.
-	^ #(layoutOwner layout)
+	^ #(layoutOwner widget)
 ]
 
 { #category : #generator }
@@ -35,30 +35,6 @@ BLCell class >> requirements [
 
 	<generated>
 	^ { BLLayout }
-]
-
-{ #category : #accessing }
-BLCell >> layout [
-
-	<generated>
-	^ layout
-]
-
-{ #category : #accessing }
-BLCell >> layout: anObject [
-
-	<generated>
-	layout := anObject
-
-]
-
-{ #category : #navigation }
-BLCell >> layoutGroup [
-
-	<generated>
-	<navigation: 'Layout'>
-	^ MooseGroup
-			with: (self layout)
 ]
 
 { #category : #accessing }
@@ -85,4 +61,28 @@ BLCell >> layoutOwnerGroup [
 	<navigation: 'LayoutOwner'>
 	^ MooseGroup
 			with: (self layoutOwner)
+]
+
+{ #category : #accessing }
+BLCell >> widget [
+
+	<generated>
+	^ widget
+]
+
+{ #category : #accessing }
+BLCell >> widget: anObject [
+
+	<generated>
+	widget := anObject
+
+]
+
+{ #category : #navigation }
+BLCell >> widgetGroup [
+
+	<generated>
+	<navigation: 'Widget'>
+	^ MooseGroup
+			with: (self widget)
 ]
