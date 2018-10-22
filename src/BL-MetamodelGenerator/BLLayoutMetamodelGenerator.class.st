@@ -95,7 +95,7 @@ BLLayoutMetamodelGenerator >> defineNewClassesHierarchy [
 	absolutePosition --|> position.
 	relativePosition --|> position.
 	alignement --|> position.
-	cell --|> uiContainer.
+	cell --|> entity.
 	layout --|> entity.
 
 	"alignement type hierarchy"
@@ -122,6 +122,7 @@ BLLayoutMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	((cell property: #layoutOwner) *-<> (layout property: #cell)) withNavigation.
 	((layout property: #container) -<> (uiContainer property: #layout)) withNavigation.
+	((cell property: #layout) - (widget property: #cellOwner)) withNavigation.
 ]
 
 { #category : #definition }

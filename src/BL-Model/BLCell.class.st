@@ -1,7 +1,8 @@
 Class {
 	#name : #BLCell,
-	#superclass : #BLUIContainer,
+	#superclass : #BLOriginedEntity,
 	#instVars : [
+		'#layout => FMOne type: #BLWidget opposite: #cellOwner',
 		'#layoutOwner => FMOne type: #BLLayout opposite: #cell'
 	],
 	#category : #'BL-Model-Entities'
@@ -10,7 +11,7 @@ Class {
 { #category : #meta }
 BLCell class >> annotation [
 
-	<MSEClass: #Cell super: #BLUIContainer>
+	<MSEClass: #Cell super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
 	^self
@@ -20,7 +21,7 @@ BLCell class >> annotation [
 BLCell class >> generatedSlotNames [
 	<generated>
 	'BLCell class>>#generatedSlotNames'.
-	^ #(layoutOwner)
+	^ #(layoutOwner layout)
 ]
 
 { #category : #generator }
@@ -34,6 +35,30 @@ BLCell class >> requirements [
 
 	<generated>
 	^ { BLLayout }
+]
+
+{ #category : #accessing }
+BLCell >> layout [
+
+	<generated>
+	^ layout
+]
+
+{ #category : #accessing }
+BLCell >> layout: anObject [
+
+	<generated>
+	layout := anObject
+
+]
+
+{ #category : #navigation }
+BLCell >> layoutGroup [
+
+	<generated>
+	<navigation: 'Layout'>
+	^ MooseGroup
+			with: (self layout)
 ]
 
 { #category : #accessing }
