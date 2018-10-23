@@ -55,6 +55,11 @@ BLModelExporter >> visitBLAttribute: aBLAttribute [
 	^ ''
 ]
 
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLCell: aBLCell [
+	^ self visitBLWidget: aBLCell
+]
+
 { #category : #visiting }
 BLModelExporter >> visitBLLayout: aBLLayout [
 	^ self
@@ -68,13 +73,13 @@ BLModelExporter >> visitBLOriginedEntity: anElement [
 ]
 
 { #category : #visiting }
-BLModelExporter >> visitBLPageMetier: aBLPageMetier [
-	^ self visitBLUIContainer: aBLPageMetier 
+BLModelExporter >> visitBLPage: aBLPage [
+	^ self visitBLOriginedEntity: aBLPage
 ]
 
 { #category : #visiting }
-BLModelExporter >> visitBLPhase: aBLPhase [
-	^ self visitBLOriginedEntity: aBLPhase 
+BLModelExporter >> visitBLPageMetier: aBLPageMetier [
+	^ self visitBLUIContainer: aBLPageMetier 
 ]
 
 { #category : #'as yet unclassified' }
@@ -148,8 +153,8 @@ BLModelExporter >> visitBLUIHeight: aBLUIHeight [
 ]
 
 { #category : #'as yet unclassified' }
-BLModelExporter >> visitBLUIHorizontalPanel: aBLUIHorizontalPanel [
-	^ self visitBLUIContainer: aBLUIHorizontalPanel
+BLModelExporter >> visitBLUIHorizontalLayout: aBLUIHorizontalLayout [
+	^ self visitBLLayout: aBLUIHorizontalLayout
 ]
 
 { #category : #'as yet unclassified' }
@@ -345,6 +350,11 @@ BLModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIValue: aBLUIValue [
 	^ self visitBLAttribute: aBLUIValue
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIVerticalLayout: aBLUIVerticalLayout [
+	^ self visitBLLayout: aBLUIVerticalLayout
 ]
 
 { #category : #'as yet unclassified' }
