@@ -107,11 +107,6 @@ BLModelExporter >> visitBLUIFieldsetDynamic: aBLUIFieldsetDynamic [
 	^ self visitBLUIContainer: aBLUIFieldsetDynamic
 ]
 
-{ #category : #'as yet unclassified' }
-BLModelExporter >> visitBLUIGrid: aBLUIGrid [
-	^ self visitBLUIContainer: aBLUIGrid 
-]
-
 { #category : #visiting }
 BLModelExporter >> visitBLUIGridLayout: aBLUIGridLayout [
 	^ self visitBLLayout: aBLUIGridLayout
