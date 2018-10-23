@@ -1,12 +1,12 @@
 Class {
 	#name : #BLUIInputPassword,
-	#superclass : #BLUIInput,
+	#superclass : #BLUIInputText,
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 BLUIInputPassword class >> annotation [
-	<MSEClass: #BLUIInputPassword super: #BLUIInput>
+	<MSEClass: #BLUIInputPassword super: #BLUIInputText>
 	<package: #BLWebModelJava>
 	^ self
 ]

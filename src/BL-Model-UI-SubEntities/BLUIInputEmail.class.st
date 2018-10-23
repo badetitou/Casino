@@ -1,12 +1,12 @@
 Class {
 	#name : #BLUIInputEmail,
-	#superclass : #BLUIInput,
+	#superclass : #BLUIInputText,
 	#category : #'BL-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 BLUIInputEmail class >> annotation [
-	<MSEClass: #BLUIInputEmail super: #BLUIInput>
+	<MSEClass: #BLUIInputEmail super: #BLUIInputText>
 	<package: #BLWebModelJava>
 	^ self
 ]
