@@ -63,6 +63,13 @@ MooseAbstractGroup >> allBLUiContainer [
 ]
 
 { #category : #'*BL-Model-Extension' }
+MooseAbstractGroup >> allBLUiPanel [
+	
+	<navigation: 'BL UiPanel'>
+	^ self allWithSubTypesOf: BLUIPanel 
+]
+
+{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLWidget [
 	<navigation: 'Sub-Widget'>
 	^ self allWithSubTypesOf: BLWidget

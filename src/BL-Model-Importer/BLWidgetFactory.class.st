@@ -9,22 +9,12 @@ Class {
 
 { #category : #factory }
 BLWidgetFactory >> createAttributeFrom: anObject [
-	^ model add: (BLAttribute perform: self factoryMethodForAttribute withArguments: {anObject}).
+	^ BLAttribute perform: self factoryMethodForAttribute withArguments: {anObject}.
 ]
 
 { #category : #factory }
 BLWidgetFactory >> createWidgetFrom: anObject [
-	^ model add: (BLWidget perform: self factoryMethod withArguments: {anObject}).
-]
-
-{ #category : #accesing }
-BLWidgetFactory >> factoryMethod [
-	^ self subclassResponsibility
-]
-
-{ #category : #accesing }
-BLWidgetFactory >> factoryMethodForAttribute [
-	^ self subclassResponsibility
+	^ (BLWidget perform: self factoryMethod withArguments: {anObject}).
 ]
 
 { #category : #accessing }
