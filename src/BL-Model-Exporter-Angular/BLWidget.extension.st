@@ -34,7 +34,7 @@ BLWidget >> containedElementAttribute [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> container [
-	^ self widgetContainer
+	^ self cellOwner ifNil: [ self widgetContainer ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
