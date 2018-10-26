@@ -2,10 +2,10 @@ Extension { #name : #BLUIHeight }
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
 BLUIHeight >> attributeValue [
-	^ 'height: ', self text, ';'
+	^ self text
 ]
 
 { #category : #'*BL-Model-CoreWeb-Exporter' }
 BLUIHeight >> name [
-	^ 'style'
+	^ 'height'
 ]
