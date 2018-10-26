@@ -10,7 +10,7 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 			"widget on the grid"
 			param := invoc parameters.
 			tmpCell := BLCell new
-				addWidget: aWidget;
+				widget: aWidget;
 				yourself.
 			(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 				add:

@@ -57,6 +57,11 @@ BLModelExporterAngular >> serviceRoot [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLCell: aBLCell [
+	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLHTML: aBLHTML [
 	^ aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ]
 ]
@@ -68,7 +73,7 @@ BLModelExporterAngular >> visitBLLayout: aBLLayout [
 			(''
 				,
 					({aBLLayout container widgets.
-					(aBLLayout cell flatCollect: #widgets)} flatten
+					(aBLLayout cell)} flatten
 						flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
 				indentBy: 4) , '</' , aBLLayout container getSelector , '>'
 ]
@@ -137,8 +142,8 @@ BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
 							subset := subset < 1
 								ifTrue: [ 1 ]
 								ifFalse: [ subset floor ] ].
-					((aBLUIGridLayout atLevelSorted: number) flatCollect: #widgets)
-						flatCollect: [ :widget | "indentBy: 4" String crlf , (self visit: widget) , String crlf ] ])
+					((aBLUIGridLayout atLevelSorted: number) reject: #isNil )
+						flatCollect: [ :cell | "indentBy: 4" String crlf , (self visit: cell) , String crlf ] ])
 		, '</' , aBLUIGridLayout container getSelector , '>'
 ]
 
@@ -176,6 +181,19 @@ BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
 				flatCollect:
 					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
 		, '</' , aBLUILeaf getSelector , '>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIPanel: aBLUIPanel [
+	^ aBLUIPanel layout
+		ifNotNil: [ :layout | self visit: layout ]
+		ifNil: [ '<' , aBLUIPanel getListPropertiesAsString , '>'
+				,
+					(''
+						,
+							(aBLUIPanel widgets
+								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+						indentBy: 4) , '</' , aBLUIPanel getSelector , '>' ]
 ]
 
 { #category : #visiting }

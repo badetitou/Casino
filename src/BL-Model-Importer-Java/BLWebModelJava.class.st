@@ -118,7 +118,7 @@ BLWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 BLWebModelJava >> addPPPToWidget [
-	(self listOfWidget select: [ :a | a widgetContainer isNil ])
+	(self listOfWidget select: [ :a | a widgetContainer isNil and: [ a cellOwner isNil ] ])
 		do: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
@@ -347,7 +347,7 @@ BLWebModelJava >> getPhaseClassFrom: realClassName [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> getPhaseFromClass: aClass [
-	^ self getFromSource: self listOfPhases  forClass: aClass
+	^ self getFromSource: self listOfPhases forClass: aClass
 ]
 
 { #category : #private }
