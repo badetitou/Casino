@@ -2,7 +2,7 @@ Extension { #name : #BLUIPanel }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIPanel >> addWidget: aWidget [
-	self layout addWidget: aWidget withInvocationOfAdd: nil 
+	self layout addWidget: aWidget withInvocationOfAdd: nil.
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
