@@ -2,7 +2,7 @@ Extension { #name : #BLUIVerticalLayout }
 
 { #category : #'*BL-Model-Importer-Java' }
 BLUIVerticalLayout >> childAttribute [
-	^ BLUIClass new text: 'ui-g-12'
+	^ BLUIClass new text: 'p-col-12'
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

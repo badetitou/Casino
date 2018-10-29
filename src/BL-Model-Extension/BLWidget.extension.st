@@ -51,6 +51,11 @@ BLWidget >> recursiveWidgets [
 ]
 
 { #category : #'*BL-Model-Extension' }
+BLWidget >> subWidgets [
+	^ self widgets
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLWidget >> widgets [
 	^ { } asOrderedCollection 
 ]

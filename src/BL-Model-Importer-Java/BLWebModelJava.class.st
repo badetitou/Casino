@@ -96,6 +96,8 @@ BLWebModelJava >> addListsToModel [
 		addAll: self listOfServiceAction;
 		addAll: self listOfActionAppel;
 		addAll: (self listOfWidget flatCollect: #attributes);
+		addAll: (self listOfWidget collect: #position thenReject: #isNil);
+		addAll: (self listOfWidget collect: #size thenReject: #isNil);
 		addAll:
 			((self listOfWidget
 				select: [ :a | (a isKindOf: BLUIContainer) and: [ a layout isNotNil ] ])

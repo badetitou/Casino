@@ -17,7 +17,7 @@ BLLayout >> childAttributeFor: aCell [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLLayout >> getLayoutAttribute [
-	^ BLUIClass new text: 'ui-g'
+	^ BLUIClass new text: 'p-grid'
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
