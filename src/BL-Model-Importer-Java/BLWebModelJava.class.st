@@ -111,7 +111,7 @@ BLWebModelJava >> addOnClickAttribute [
 			(class allUsages collect: #receiver)
 				do: [ :receiver | 
 					(self widgetInVariable: receiver)
-						ifNotNil: [ :found | 
+						ifNotNil: [ :found |
 							found createAttributeFrom: class
 								 ] ] ]
 ]
@@ -161,7 +161,7 @@ BLWebModelJava >> addWidgetAttributes [
 			(self listOfWidget select: [ :widget | widget variable isNotNil ])
 				do: [ :widget | 
 					widget variable receivingInvocations
-						do: [ :invoc | widget createAttributeFrom: invoc ] ]
+						do: [ :invoc | self factory createAttributeFromInvocation: invoc for: widget ] ]
 ]
 
 { #category : #adding }
@@ -635,9 +635,10 @@ BLWebModelJava >> widgetAnonymousSubclasses [
 { #category : #'as yet unclassified' }
 BLWebModelJava >> widgetConstructorsInvocation [
 	^ (self modelWidget
-		collect: [ :widget | (widget methods select: [:method | method isConstructor or: [
-							method signature includesSubstring: method belongsTo name] ] thenCollect: #incomingInvocations ) ])
-		flattened
+		collect: [ :widget |
+			widget methods
+				select: [ :method | method isConstructor or: [ method signature includesSubstring: method belongsTo name ] ]
+				thenCollect: #incomingInvocations ]) flattened
 ]
 
 { #category : #'as yet unclassified' }

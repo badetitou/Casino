@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #factory }
+BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
+	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
+]
+
+{ #category : #factory }
 BLWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
 	^ BLBusinessPage new
 		name: aFAMIXClass mooseName;

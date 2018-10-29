@@ -29,6 +29,11 @@ BLWidget >> createAttributeFrom: anInvocation [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+BLWidget >> createAttributeFromAngularInvocation: anInvocationinvoc withImporter: anImporter [
+	^ BLAttribute newFrom: anInvocationinvoc for: self withImporter: anImporter
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> createWidgetFor: anInvocation [
 	^ self new
 		realClass: anInvocation invokedClass;

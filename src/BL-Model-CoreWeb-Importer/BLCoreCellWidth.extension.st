@@ -6,7 +6,7 @@ BLCoreCellWidth class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLCoreCellWidth class >> createAttributeFrom: anInvocation for: aWidgetInstance [
+BLCoreCellWidth class >> createAttributeFrom: anInvocation for: aWidgetInstance withImporter: anImporter [
 	(anInvocation from localVariables select: [:localVariable | localVariable name = (anInvocation parameters at: 1)]) ifNotEmpty: [:correspondingVariable | correspondingVariable first ].
-	self halt. 
+
 ]
