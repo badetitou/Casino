@@ -2,19 +2,30 @@ Class {
 	#name : #BLWidgetFactory,
 	#superclass : #Object,
 	#instVars : [
-		'model'
+		'model',
+		'importer'
 	],
 	#category : #'BL-Model-Importer'
 }
 
 { #category : #factory }
 BLWidgetFactory >> createAttributeFrom: anObject [
-	^ BLAttribute perform: self factoryMethodForAttribute withArguments: {anObject}.
+	^ self subclassResponsibility
 ]
 
 { #category : #factory }
 BLWidgetFactory >> createWidgetFrom: anObject [
-	^ (BLWidget perform: self factoryMethod withArguments: {anObject}).
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+BLWidgetFactory >> importer [
+	^ importer
+]
+
+{ #category : #accessing }
+BLWidgetFactory >> importer: anObject [
+	importer := anObject
 ]
 
 { #category : #accessing }

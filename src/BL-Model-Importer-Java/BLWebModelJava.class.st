@@ -191,34 +191,9 @@ BLWebModelJava >> computeAllConstructorsLink [
 		flatten
 ]
 
-{ #category : #'as yet unclassified' }
-BLWebModelJava >> createPageMetierInModel: aPageMetier [
-	^ BLBusinessPage new
-		name: aPageMetier mooseName;
-		sourceAnchor: aPageMetier sourceAnchor;
-		source: aPageMetier;
-		computeTitle 
-]
-
-{ #category : #'as yet unclassified' }
-BLWebModelJava >> createPhaseInModel: xmlElement [
-	| blPhase |
-	blPhase := BLPage new
-		realClassName:
-			((xmlElement attributeAt: #className)
-				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
-				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue:
-							[ ((self sourceModel allModelClasses select: [ :e | (e superInheritances collect: [ :a | a to name ]) includes: 'HomePhaseController' ]) at: 1) mooseName ]
-						ifFalse: [ ^ nil ] ]);
-		codePhase: (xmlElement attributeAt: #codePhase);
-		codeValue: (xmlElement attributeAt: #codeValue);
-		name: (xmlElement attributeAt: #codeValue).
-	blPhase
-		source: (self getClassNamed: blPhase realClassName);
-		computeTitle;
-		computeSubtitle.
-	^ blPhase
+{ #category : #accessing }
+BLWebModelJava >> createFactory [
+	factory := BLWidgetFactoryAngular new model: model; importer: self; yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -238,7 +213,7 @@ BLWebModelJava >> generatePageMetier [
 		select: [ :e | 
 			(e superclassHierarchy contains: [ :a | a name = 'IPageMetier' ])
 				and: [ ('*XMLUi' match: e name) not ] ]
-		thenCollect: [ :aPageMetier| self createPageMetierInModel: aPageMetier ]
+		thenCollect: [ :aPageMetier| self factory createBusinessPageFromFAMIXClass: aPageMetier ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -246,7 +221,7 @@ BLWebModelJava >> generatePhase [
 	xml
 		nodesDo: [ :aXmlNode | 
 			(aXmlNode isElement and: [ aXmlNode name localName = 'phase' ])
-				ifTrue: [ self listOfPhases add: (self createPhaseInModel: aXmlNode) ] ].
+				ifTrue: [ self listOfPhases add: (self factory createPageFromXMLElement: aXmlNode) ] ].
 	self listOfPhases: (self listOfPhases select: #isNotNil) 
 ]
 
@@ -609,11 +584,6 @@ BLWebModelJava >> modelWidgetInstances [
 	^ self listOfWidget collect: #source
 ]
 
-{ #category : #accessing }
-BLWebModelJava >> moduleHomeName [
-	^ 'BL_HOME_PHASE_MODULE'
-]
-
 { #category : #api }
 BLWebModelJava >> postImport [
 	"self model allBLActionsAttribute do: [ :actionAttribute | actionAttribute convertOldClass ]."
@@ -624,6 +594,7 @@ BLWebModelJava >> postImport [
 
 { #category : #api }
 BLWebModelJava >> preImport [
+	super preImport
 	"BLActionAttribute moulinetteStrategy: BLMoulinetteFASTStrategy new."
 ]
 
@@ -671,7 +642,10 @@ BLWebModelJava >> widgetConstructorsInvocation [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> widgetFactoryInvocation [
-	^ (((self sourceModel allModelClasses select: [ :a | a name = 'FactoryBLLabel' or: [ a name = 'ComponentUtils' ] ]) flatCollect: #methods) select: [ :m | m name =  'create' or: [m name beginsWith: 'getLibelleItem' ] ] thenCollect: #incomingInvocations) flatten
+	^ (((self sourceModel allModelClasses select: [ :a | a name = 'FactoryBLLabel' or: [ a name = 'ComponentUtils' ] ])
+		flatCollect: #methods)
+		select: [ :m | m name = 'create' or: [ m name beginsWith: 'getLibelleItem' ] ]
+		thenCollect: #incomingInvocations) flatten
 ]
 
 { #category : #'as yet unclassified' }
