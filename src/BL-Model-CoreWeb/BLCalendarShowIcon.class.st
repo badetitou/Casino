@@ -5,10 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-BLCalendarShowIcon class >> createAttributeFor: anInvocation [
+BLCalendarShowIcon class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		name: 'showIcon';
 		attributeValue: 'true';
+		widget: aWidgetInstance;
 		yourself
 ]
 
@@ -19,5 +20,6 @@ BLCalendarShowIcon class >> newFor: aWidgetInstance [
 	"aWidgetInstance widgets
 		do:
 			[ :subWidget | subWidget addAttribute: (BLHorizontalChild new subpart: 12 / aWidgetInstance widgets size) ]."
-	^ self createAttributeFor: nil
+
+	^ self createAttributeFrom: nil for: aWidgetInstance
 ]

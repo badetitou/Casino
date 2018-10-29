@@ -222,12 +222,6 @@ BLWebModelJava >> createPhaseInModel: xmlElement [
 ]
 
 { #category : #'as yet unclassified' }
-BLWebModelJava >> createServiceFromClass: aServiceClass [
-	^ BLService newFor: aServiceClass
-		
-]
-
-{ #category : #'as yet unclassified' }
 BLWebModelJava >> generateBLActionAppel [
 	actionAppelGroup := self linkFromWidgetActionAppel
 		collect: [ :el | 
@@ -267,7 +261,7 @@ BLWebModelJava >> generateService [
 			((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ])
 				collect: #declaredType).
 	listOfService := interfaceService
-		collect: [ :aServiceClass | self createServiceFromClass: aServiceClass ]
+		collect: [ :aServiceClass | BLService newFor: aServiceClass ]
 ]
 
 { #category : #'as yet unclassified' }

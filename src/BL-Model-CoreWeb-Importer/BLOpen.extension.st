@@ -6,9 +6,11 @@ BLOpen class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLOpen class >> createAttributeFor: anInvocation [
+BLOpen class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		name: anInvocation attributeName;
 		attributeValue: (self getAttributeValueFrom: anInvocation);
+		widget: aWidgetInstance;
 		yourself
+
 ]

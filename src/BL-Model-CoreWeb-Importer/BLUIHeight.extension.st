@@ -6,8 +6,10 @@ BLUIHeight class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLUIHeight class >> createAttributeFor: anInvocation [
+BLUIHeight class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		text: (self getAttributeValueFrom: anInvocation);
+		widget: aWidgetInstance;
 		yourself
+
 ]

@@ -6,9 +6,11 @@ BLToggleable class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLToggleable class >> createAttributeFor: anInvocation [
+BLToggleable class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		name: 'toggleable';
 		attributeValue: 'true';
+		widget: aWidgetInstance;
 		yourself
+
 ]

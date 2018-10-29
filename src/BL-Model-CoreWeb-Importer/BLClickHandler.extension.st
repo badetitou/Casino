@@ -6,9 +6,10 @@ BLClickHandler class >> canHandle: aFAMIXClass [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLClickHandler class >> createAttributeFor: aFAMIXClass [
-	^ (super createAttributeFor: aFAMIXClass)
+BLClickHandler class >> createAttributeFrom: aFAMIXClass for: aWidgetInstance [
+	^ (super createAttributeFrom: aFAMIXClass for: aWidgetInstance)
 		name: 'click';
 		attributeValue: 'clickOn' , aFAMIXClass uniqueName;
+		widget: aWidgetInstance;
 		yourself
 ]

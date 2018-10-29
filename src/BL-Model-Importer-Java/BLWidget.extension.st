@@ -25,7 +25,7 @@ BLWidget class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLWidget >> createAttributeFrom: anInvocation [
-	^ (BLAttribute newFrom: anInvocation for: self) ifNotNil: [ :attribute | self addAttribute: attribute. attribute  ]
+	^ BLAttribute newFrom: anInvocation for: self
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

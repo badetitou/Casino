@@ -6,8 +6,9 @@ BLUITitle class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLUITitle class >> createAttributeFor: anInvocation [
+BLUITitle class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		text: (self getAttributeValueFrom: anInvocation);
+		widget: aWidgetInstance;
 		yourself
 ]

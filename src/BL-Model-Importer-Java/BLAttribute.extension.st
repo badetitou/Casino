@@ -11,11 +11,12 @@ BLAttribute class >> canHandle: anInvocation for: aWidgetInstance [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
-BLAttribute class >> createAttributeFor: anInvocation [
+BLAttribute class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		source: anInvocation ;
 		name: anInvocation attributeName;
 		attributeValue: (self getAttributeValueFrom: anInvocation);
+		widget: aWidgetInstance;
 		yourself
 ]
 
@@ -31,8 +32,8 @@ BLAttribute class >> newFrom: anInvocation for: aWidgetInstance [
 		do: [ :subclass | 
 			| try |
 			try := subclass newFrom: anInvocation for: aWidgetInstance .
-			try ifNotNil: [ ^ try ] ].
+			try ifNotNil: [ ^ try] ].
 	(self canHandle: anInvocation for: aWidgetInstance )
-		ifTrue: [ ^ self createAttributeFor: anInvocation ]
+		ifTrue: [ ^ self createAttributeFrom: anInvocation for: aWidgetInstance ]
 		ifFalse: [ ^ nil ]
 ]

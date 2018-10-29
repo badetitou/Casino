@@ -16,6 +16,6 @@ BLSplitButton class >> createWidgetFor: anInvocation [
 				at: 1
 				ifAbsent: [ self flag: #todo.
 					'todo' ]).
-	widget addAttribute: (BLModel createAttributeFor: self).
+	BLModel createAttributeFrom: nil for: widget.
 	^ widget
 ]

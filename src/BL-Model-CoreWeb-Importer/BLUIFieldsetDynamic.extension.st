@@ -18,7 +18,7 @@ BLUIFieldsetDynamic class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
-	widget addAttribute: (BLToggleable createAttributeFor: self).
+	BLToggleable createAttributeFrom: nil for: widget.
 	widget parameters
 		at: #legend
 		put:

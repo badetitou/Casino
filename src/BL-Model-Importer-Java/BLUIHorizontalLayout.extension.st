@@ -3,11 +3,11 @@ Extension { #name : #BLUIHorizontalLayout }
 { #category : #'*BL-Model-Importer-Java' }
 BLUIHorizontalLayout >> childAttribute [
 	| subset |
-	subset := 12 / (self cell) size.
+	"subset := 12 / (self cell) size.
 				subset := subset < 1
 					ifTrue: [ 1 ]
-					ifFalse: [ subset floor ].
-	^ BLUIClass new text: 'ui-g-', (subset asString )
+					ifFalse: [ subset floor ]."
+	^ {}"BLUIClass new text: 'ui-g-1'"", (subset asString )"
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
