@@ -20,7 +20,7 @@ BLWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
 
 { #category : #factory }
 BLWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
-		| blPhase |
+	| blPhase |
 	blPhase := BLPage new
 		realClassName:
 			((xmlElement attributeAt: #className)

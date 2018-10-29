@@ -1,5 +1,5 @@
 Class {
 	#name : #BLCoreCellWidth,
-	#superclass : #BLActionAttribute,
+	#superclass : #BLAttribute,
 	#category : #'BL-Model-CoreWeb-Attribute'
 }
