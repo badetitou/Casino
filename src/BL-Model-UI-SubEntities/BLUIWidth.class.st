@@ -14,6 +14,7 @@ BLUIWidth >> accept: anExporter [
 
 { #category : #accessing }
 BLUIWidth >> text [
+	<MSEProperty: #width type: #String>
 	^ text
 ]
 
