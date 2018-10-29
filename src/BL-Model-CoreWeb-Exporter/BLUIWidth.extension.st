@@ -4,8 +4,3 @@ Extension { #name : #BLUIWidth }
 BLUIWidth >> attributeValue [
 	^ self text
 ]
-
-{ #category : #'*BL-Model-CoreWeb-Exporter' }
-BLUIWidth >> name [
-	^ 'width'
-]

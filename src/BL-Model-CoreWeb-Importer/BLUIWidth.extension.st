@@ -8,6 +8,7 @@ BLUIWidth class >> canHandle: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIWidth class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
+		name: 'width';
 		text: (self getAttributeValueFrom: anInvocation);
 		widget: aWidgetInstance;
 		yourself
