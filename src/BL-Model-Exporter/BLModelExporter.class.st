@@ -189,7 +189,9 @@ BLModelExporter >> visitBLUIInputDatetimeLocal: aBLUIInputDatetimeLocal [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInputEmail: aBLUIInputEmail [
-	^ self visitBLUIInput: aBLUIInputEmail
+	^ self
+		visitBLUIInputText:
+			aBLUIInputEmail
 ]
 
 { #category : #'as yet unclassified' }
@@ -209,7 +211,9 @@ BLModelExporter >> visitBLUIInputNumber: aBLUIInputNumber [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInputPassword: aBLUIInputPassword [
-	^ self visitBLUIInput: aBLUIInputPassword
+	^ self
+		visitBLUIInputText:
+			aBLUIInputPassword
 ]
 
 { #category : #'as yet unclassified' }

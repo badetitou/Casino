@@ -153,6 +153,11 @@ BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputDate: aBLUIInputDate [
+	^ '<' ,  aBLUIInputDate getListPropertiesAsString, ' />'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
 	^ '<' ,  aBLUIInputNumber getListPropertiesAsString, ' />'
 ]

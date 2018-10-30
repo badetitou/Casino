@@ -4,3 +4,8 @@ Extension { #name : #BLUIInput }
 BLUIInput >> getExternalDependency [
 	^ {PNGInputText}
 ]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLUIInput >> getSelector [
+	^ 'input'
+]
