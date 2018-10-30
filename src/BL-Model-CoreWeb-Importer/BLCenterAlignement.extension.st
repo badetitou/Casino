@@ -1,6 +1,11 @@
 Extension { #name : #BLCenterAlignement }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
+BLCenterAlignement >> angularValue [
+	^ 'text-align: center;'
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
 BLCenterAlignement class >> generateWithHorizontal: horizontal [
 	^ horizontal = 'HasHorizontalAlignment.ALIGN_LEFT'
 		ifTrue: [ BLWestAlignement new ]

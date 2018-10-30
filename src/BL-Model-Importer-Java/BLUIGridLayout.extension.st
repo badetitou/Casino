@@ -35,5 +35,5 @@ BLUIGridLayout >> childAttributeFor: aCell [
 	subset := subset < 1
 		ifTrue: [ 1 ]
 		ifFalse: [ subset floor ].
-	^ BLUIClass new text: 'ui-g-' , subset asString
+	^ BLUIClass new text: 'p-col-' , subset asString
 ]

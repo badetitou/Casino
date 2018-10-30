@@ -24,7 +24,7 @@ BLWidget >> behaviors [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> computeSelfAttributes [
-	^ {self attributes. {self generateDefaultClassAttribute}. self containedElementAttribute }
+	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute }
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -58,7 +58,12 @@ BLWidget >> getExternalDependency [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> getListPropertiesAsString [
-	^ self getSelector , self attributesTag , self actionsTag , self parametersTag , self idTag
+	^ self getSelector , self attributesTag, self actionsTag , self parametersTag , self idTag
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLWidget >> getPositionAttribute [
+	^ self position ifNotNil: [ BLUIStyle new name: 'style'; attributeValue: self position angularValue; yourself ] ifNil: [ {  } ]
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
