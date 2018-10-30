@@ -16,11 +16,6 @@ BLLayout >> childAttributeFor: aCell [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
-BLLayout >> getLayoutAttribute [
-	^ BLUIClass new text: 'p-grid'
-]
-
-{ #category : #'*BL-Model-Importer-Java' }
 BLLayout >> postImport [
 	"If we need to order some of the cell"
 ]

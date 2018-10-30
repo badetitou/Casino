@@ -1,6 +1,11 @@
 Extension { #name : #BLCenterAlignement }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
+BLCenterAlignement >> angularHorizontalAlignement [
+	^ 'p-justify-around'
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
 BLCenterAlignement >> angularValue [
 	^ 'text-align: center;'
 ]
