@@ -6,6 +6,11 @@ BLRichTextArea >> getExternalDependency [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
+BLRichTextArea >> getPositionAttribute [
+	^ {  }
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
 BLRichTextArea >> getSelector [
 	^ 'p-editor'
 ]
