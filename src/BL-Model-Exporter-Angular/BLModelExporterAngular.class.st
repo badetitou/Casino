@@ -74,8 +74,8 @@ BLModelExporterAngular >> visitBLLayout: aBLLayout [
 				,
 					({aBLLayout container widgets.
 					(aBLLayout cell)} flatten
-						flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
-				indentBy: 4) , '</' , aBLLayout container getSelector , '>'
+						flatCollect: [ :widget | String crlf , (self visit: widget) ])
+				indentBy: 4) , String crlf, '</' , aBLLayout container getSelector , '>'
 ]
 
 { #category : #visiting }
@@ -126,7 +126,7 @@ BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 						,
 							(aBLUIContainer widgets
 								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
-						indentBy: 4) , '</' , aBLUIContainer getSelector , '>' ]
+						indentBy: 4), String crlf, '</' , aBLUIContainer getSelector , '>' ]
 ]
 
 { #category : #visiting }
@@ -197,8 +197,8 @@ BLModelExporterAngular >> visitBLUIPanel: aBLUIPanel [
 					(''
 						,
 							(aBLUIPanel widgets
-								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
-						indentBy: 4) , '</' , aBLUIPanel getSelector , '>' ]
+								flatCollect: [ :widget | String crlf , (self visit: widget) ])
+						indentBy: 4) , String crlf, '</' , aBLUIPanel getSelector , '>' ]
 ]
 
 { #category : #visiting }
@@ -206,7 +206,7 @@ BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
 	^ '<' , aBLUIParagraph getListPropertiesAsString , '>'
 		, (( aBLUIParagraph attributes select: [ :a | a isKindOf: BLUILabel])
 				flatCollect:
-					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
+					[ :attribute | String crlf , ((self visit: attribute ) indentBy: 4), String crlf ]) 
 		, '</' , aBLUIParagraph getSelector , '>'
 ]
 
