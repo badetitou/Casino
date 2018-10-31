@@ -12,11 +12,14 @@ BLUIFieldsetDynamic >> canHaveAttribute: blAttributeClass [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIFieldsetDynamic class >> createWidgetFor: anInvocation [
-	"the usage of createAttributeFor: is black magic... We should not use createAttributeFor: but a specic new... But it's simpler for the comprenhension
-	"
+	"We don't use super call because the java constructor is different"
 
 	| widget |
-	widget := super createWidgetFor: anInvocation.
+	widget := self new
+		realClass: anInvocation invokedClass;
+		name: anInvocation asString;
+		source: anInvocation;
+		yourself.
 	widget addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
 	BLToggleable createAttributeFrom: nil for: widget.
 	widget parameters
@@ -26,5 +29,6 @@ BLUIFieldsetDynamic class >> createWidgetFor: anInvocation [
 				at: 1
 				ifAbsent: [ self flag: #todo.
 					'todo' ]).
+	widget layout: (BLLayout newCoreLayoutFor: anInvocation).
 	^ widget
 ]
