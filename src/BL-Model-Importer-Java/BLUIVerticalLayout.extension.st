@@ -11,5 +11,5 @@ BLUIVerticalLayout >> postImport [
 	cell := (self cell asOrderedCollection reject: [ :a | a widget isNil ])
 		sort: [ :cell1 :cell2 | 
 			cell1 widget addingPosition 
-				< cell2 widget addingPosition  ]
+				< cell2 widget addingPosition ]
 ]
