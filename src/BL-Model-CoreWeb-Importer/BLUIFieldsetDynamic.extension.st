@@ -7,7 +7,7 @@ BLUIFieldsetDynamic class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIFieldsetDynamic >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLEnable
+	^ blAttributeClass ~= BLUIDisabled
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

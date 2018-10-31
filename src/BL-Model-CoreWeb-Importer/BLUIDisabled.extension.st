@@ -1,6 +1,6 @@
-Extension { #name : #BLEnable }
+Extension { #name : #BLUIDisabled }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLEnable class >> canHandle: anInvocation [
+BLUIDisabled class >> canHandle: anInvocation [
 	^ anInvocation isInvocation and: [ anInvocation attributeName = 'enabled' ]
 ]

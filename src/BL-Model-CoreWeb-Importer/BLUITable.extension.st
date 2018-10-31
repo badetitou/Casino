@@ -7,5 +7,5 @@ BLUITable class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUITable >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLEnable
+	^ blAttributeClass ~= BLUIDisabled
 ]

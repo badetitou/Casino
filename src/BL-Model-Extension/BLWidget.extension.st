@@ -25,7 +25,7 @@ BLWidget >> addingPosition: anObject [
 
 { #category : #'*BL-Model-Extension' }
 BLWidget >> canHaveAttribute: blAttributeClass [
-	^ false
+	^ true
 ]
 
 { #category : #'*BL-Model-Extension' }
