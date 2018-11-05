@@ -158,6 +158,16 @@ BLModelExporterAngular >> visitBLUIInputDate: aBLUIInputDate [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputMonth: aBLUIInputMonth [
+	^ '<'
+		,
+			aBLUIInputMonth
+				getListPropertiesAsString
+		,
+			' />'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
 	^ '<' ,  aBLUIInputNumber getListPropertiesAsString, ' />'
 ]
@@ -172,6 +182,11 @@ BLModelExporterAngular >> visitBLUIInputText: aBLUIInputText [
 	^  '<input id="float-' , aBLUIInputText mooseID asString , '" type="text" value="' , aBLUIInputText value1
 		,
 			'" placeholder="', aBLUIInputText text,'" pInputText>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputTime: aBLUIInputTime [
+	^ '<' , aBLUIInputTime getListPropertiesAsString , ' />'
 ]
 
 { #category : #visiting }
@@ -208,6 +223,11 @@ BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
 				flatCollect:
 					[ :attribute | String crlf , ((self visit: attribute ) indentBy: 4), String crlf ]) 
 		, '</' , aBLUIParagraph getSelector , '>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUISelect: aBLUISelect [
+	^ '<' , aBLUISelect getListPropertiesAsString , '>', String crlf , '</' , aBLUISelect getSelector , '>' 
 ]
 
 { #category : #visiting }
