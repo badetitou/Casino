@@ -7,13 +7,13 @@ BLWidget >> actionsTag [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLWidget >> attributesTag [
+BLWidget >> attributesTagWith: anExporter [
 	^ ((self computeSelfAttributes flattened groupedBy: #name) asDictionary 
 		associationsCollect: [ :mapAttributeNameValues | 
 			' ' , mapAttributeNameValues key , '="'
 				,
 					((mapAttributeNameValues value asOrderedCollection
-						flatCollect: [ :attribute | attribute attributeValue asString , ' ' ]) removeLast; yourself)
+						flatCollect: [ :attribute | (anExporter visit: attribute), ' ' ]) removeLast; yourself)
 				, '"' ]) flatten
 ]
 
@@ -57,8 +57,8 @@ BLWidget >> getExternalDependency [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLWidget >> getListPropertiesAsString [
-	^ self getSelector , self attributesTag, self actionsTag , self parametersTag , self idTag
+BLWidget >> getListPropertiesAsStringWith: anExporter [
+	^ self getSelector , (self attributesTagWith: anExporter) , self actionsTag , self parametersTag , self idTag
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

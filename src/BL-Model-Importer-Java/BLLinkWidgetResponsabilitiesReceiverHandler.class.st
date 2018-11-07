@@ -6,7 +6,7 @@ Class {
 
 { #category : #initialization }
 BLLinkWidgetResponsabilitiesReceiverHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	"Giving the receiver and the invocation (it's usefull for a widget to know the invocation sometimes. example : For the grid to determine the position of an element."
+	self haltIf: [ widgetContainer name = 'a FAMIXInvocation #noname#BLFieldSetPanelDynamic("Styles d''étiquettes") (Invocation)' ].
 	(self addLinkedFromMapVariableInvocationOfAdd: (aCollectionOfUsages collect: [:el | el receiver -> el ]) to: widgetContainer in: theCurrentImporter)
 		ifFalse: [ self next handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter ]
 ]

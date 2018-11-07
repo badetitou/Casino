@@ -137,7 +137,7 @@ BLWebModelJava >> addPPPToWidget [
 BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
 	^ widget affectedActions
 		ifNotNil: [ | usages |
-			usages := widget affectedActions allUsages
+			usages := {widget affectedActions allUsages.widget affectedActions allUsages collect: [ :el | el allContainers  ]} flattened
 				reject: [ :el | (el receiver isNotNil and: [ (el receiver name includesSubstring: 'content') ]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection 
@@ -150,7 +150,7 @@ BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandle
 				whileTrue: [ | found |
 					found := self widgetInVariable: containerInvocation receiver.
 					found
-						ifNotNil: [ found addWidget: widget.
+						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation.
 							containerInvocation := nil ]
 						ifNil: [ containerInvocation := containerInvocation container ] ] ]
 ]

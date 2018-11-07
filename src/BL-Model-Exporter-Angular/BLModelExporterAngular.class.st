@@ -41,6 +41,11 @@ BLModelExporterAngular >> prepareExport [
 	root := (FileSystem disk workingDirectory / model name) asFileReference.
 ]
 
+{ #category : #api }
+BLModelExporterAngular >> protectString: aString [
+	^ aString copyReplaceAll: '"' with: '&quot;' 
+]
+
 { #category : #accessing }
 BLModelExporterAngular >> root [
 	^ root
@@ -57,6 +62,11 @@ BLModelExporterAngular >> serviceRoot [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLAttribute: aBLAttribute [
+	^ aBLAttribute attributeValue asString
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLCell: aBLCell [
 	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
 ]
@@ -68,7 +78,7 @@ BLModelExporterAngular >> visitBLHTML: aBLHTML [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLLayout: aBLLayout [
-	^ '<' , aBLLayout container getListPropertiesAsString , '>'
+	^ '<' , (aBLLayout container getListPropertiesAsStringWith: self) , '>'
 		,
 			(''
 				,
@@ -113,14 +123,14 @@ BLModelExporterAngular >> visitBLPhase: aBLPhase [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLSplitButton: aBLSplitButton [
-	^  '<' , aBLSplitButton getListPropertiesAsString , '></' , aBLSplitButton getSelector , '>'
+	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 	^ aBLUIContainer layout
 		ifNotNil: [ :layout | self visit: layout ]
-		ifNil: [ '<' , aBLUIContainer getListPropertiesAsString , '>'
+		ifNil: [ '<' , (aBLUIContainer getListPropertiesAsStringWith: self) , '>'
 				,
 					(''
 						,
@@ -131,7 +141,7 @@ BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
-	^ '<' , aBLUIGridLayout container getListPropertiesAsString , '>'
+	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>'
 		,
 			((0 to: aBLUIGridLayout cell size)
 				flatCollect: [ :number | 
@@ -142,39 +152,39 @@ BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
 							subset := subset < 1
 								ifTrue: [ 1 ]
 								ifFalse: [ subset floor ] ].
-					((aBLUIGridLayout atLevelSorted: number) reject: #isNil )
-						flatCollect: [ :cell | "indentBy: 4" String crlf , (self visit: cell) , String crlf ] ])
-		, '</' , aBLUIGridLayout container getSelector , '>'
+					((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
+						flatCollect: [ :cell | "indentBy: 4" String crlf , (self visit: cell) , String crlf ] ]) , '</'
+		, aBLUIGridLayout container getSelector , '>'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
-	^   '<' ,  aBLUIImage getListPropertiesAsString , ' />'
+	^   '<' ,  (aBLUIImage getListPropertiesAsStringWith: self) , ' />'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputDate: aBLUIInputDate [
-	^ '<' ,  aBLUIInputDate getListPropertiesAsString, ' />'
+	^ '<' ,  (aBLUIInputDate getListPropertiesAsStringWith: self), ' />'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputMonth: aBLUIInputMonth [
 	^ '<'
 		,
-			aBLUIInputMonth
-				getListPropertiesAsString
+			(aBLUIInputMonth
+				getListPropertiesAsStringWith: self)
 		,
 			' />'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputNumber: aBLUIInputNumber [
-	^ '<' ,  aBLUIInputNumber getListPropertiesAsString, ' />'
+	^ '<' ,  (aBLUIInputNumber getListPropertiesAsStringWith: self), ' />'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputPassword: aBLUIInputPassword [
-	^ '<' ,  aBLUIInputPassword getListPropertiesAsString , ' />'
+	^ '<' ,  (aBLUIInputPassword getListPropertiesAsStringWith: self) , ' />'
 ]
 
 { #category : #visiting }
@@ -186,17 +196,17 @@ BLModelExporterAngular >> visitBLUIInputText: aBLUIInputText [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputTime: aBLUIInputTime [
-	^ '<' , aBLUIInputTime getListPropertiesAsString , ' />'
+	^ '<' , (aBLUIInputTime getListPropertiesAsStringWith: self) , ' />'
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUILabel: aBLUILabel [
-	^ aBLUILabel text
+	^ self protectString: aBLUILabel text
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
-		^ '<' , aBLUILeaf getListPropertiesAsString , '>'
+		^ '<' , (aBLUILeaf getListPropertiesAsStringWith: self) , '>'
 		, (( aBLUILeaf attributes select: [ :a | a isKindOf: BLUILabel])
 				flatCollect:
 					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
@@ -207,7 +217,7 @@ BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
 BLModelExporterAngular >> visitBLUIPanel: aBLUIPanel [
 	^ aBLUIPanel layout
 		ifNotNil: [ :layout | self visit: layout ]
-		ifNil: [ '<' , aBLUIPanel getListPropertiesAsString , '>'
+		ifNil: [ '<' , (aBLUIPanel getListPropertiesAsStringWith: self) , '>'
 				,
 					(''
 						,
@@ -218,7 +228,7 @@ BLModelExporterAngular >> visitBLUIPanel: aBLUIPanel [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
-	^ '<' , aBLUIParagraph getListPropertiesAsString , '>'
+	^ '<' , (aBLUIParagraph getListPropertiesAsStringWith: self) , '>'
 		, (( aBLUIParagraph attributes select: [ :a | a isKindOf: BLUILabel])
 				flatCollect:
 					[ :attribute | String crlf , ((self visit: attribute ) indentBy: 4), String crlf ]) 
@@ -226,13 +236,18 @@ BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIPlaceholder: aBLUIPlaceholder [
+	^ self protectString: aBLUIPlaceholder text
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUISelect: aBLUISelect [
-	^ '<' , aBLUISelect getListPropertiesAsString , '>', String crlf , '</' , aBLUISelect getSelector , '>' 
+	^ '<' , (aBLUISelect getListPropertiesAsStringWith: self) , '>', String crlf , '</' , aBLUISelect getSelector , '>' 
 ]
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLWidget: aBLWidget [
-	^ '<' , aBLWidget getListPropertiesAsString , '>'
+	^ '<' , (aBLWidget getListPropertiesAsStringWith: self) , '>'
 		, (('',
 			(( aBLWidget widgets)
 				flatCollect:

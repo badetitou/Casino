@@ -16,7 +16,7 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 				add:
 					tmpCell
 						->
-							{((param at: 1) asInteger ifNil: [ 0 ]).	"row"
+							{((param at: 1) asInteger ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"(((param at: 2) asInteger) = 1) ifTrue: [ self maxLevel] ifFalse: [self maxLevel + 1] ] ).	"row"
 							(param at: 2) asInteger}.	"column"
 
 			"alignement of the widget"
@@ -25,7 +25,7 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 						ifTrue: [ BLAlignement createAlignementWithHorizontal: (param at: 4) andVertical: (param at: 5 ifAbsent: [ nil ]) ]
 						ifFalse: [ BLAlignement createAlignementWithHorizontal: (param at: 5 ifAbsent: [ nil ]) andVertical: (param at: 4) ] ]
 				ifFalse: [ nil ]).
-			cell add: tmpCell ]
+	  	cell add: tmpCell ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

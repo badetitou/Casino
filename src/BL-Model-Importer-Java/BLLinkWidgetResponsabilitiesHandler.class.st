@@ -9,12 +9,10 @@ Class {
 
 { #category : #accessing }
 BLLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd: mapVariableInvocationOfAdd to: widgetContainer in: theCurrentImporter [
-	((mapVariableInvocationOfAdd
-		collect: [ :VariableInvocationOfAdd | (theCurrentImporter widgetInVariable: VariableInvocationOfAdd key) -> VariableInvocationOfAdd value ])
-		select: [:assoc | assoc key isNotNil ])
+	((mapVariableInvocationOfAdd collect: [ :VariableInvocationOfAdd | (theCurrentImporter widgetInVariable: VariableInvocationOfAdd key) -> VariableInvocationOfAdd value ])
+		select: [ :assoc | assoc key isNotNil ])
 		ifNotEmpty: [ :founds | 
-			founds do: [ :found | 
-			found key addWidget: widgetContainer withInvocationOfAdd: found value].
+			founds do: [ :found | found key addWidget: widgetContainer withInvocationOfAdd: found value ].
 			^ true ].
 	^ false
 ]

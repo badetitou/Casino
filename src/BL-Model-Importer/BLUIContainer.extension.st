@@ -8,7 +8,7 @@ BLUIContainer >> addAllWidgets: aCollectionOfWidget [
 
 { #category : #'*BL-Model-Importer' }
 BLUIContainer >> addWidget: aWidget [
-	self layout ifNotNil: [ self layout addWidget: aWidget ] ifNil: [ widgets add: aWidget ]
+	self layout ifNotNil: [ self layout addWidget: aWidget withInvocationOfAdd: nil ] ifNil: [ widgets add: aWidget ]
 ]
 
 { #category : #'*BL-Model-Importer' }
