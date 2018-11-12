@@ -142,19 +142,14 @@ BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
 	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>'
-		,
-			((0 to: aBLUIGridLayout cell size)
+		, '<tbody>',
+			((0 to: aBLUIGridLayout maxLevel)
 				flatCollect: [ :number | 
-					| subset |
-					(aBLUIGridLayout atLevel: number)
-						ifEmpty: [ subset := 12 ]
-						ifNotEmpty: [ subset := 12 / (aBLUIGridLayout atLevel: number) size.
-							subset := subset < 1
-								ifTrue: [ 1 ]
-								ifFalse: [ subset floor ] ].
-					((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
-						flatCollect: [ :cell | "indentBy: 4" String crlf , (self visit: cell) , String crlf ] ]) , '</'
-		, aBLUIGridLayout container getSelector , '>'
+					'<tr>'
+						,
+							(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
+								flatCollect: [ :cell | String crlf , '<td>' , ((self visit: cell) indentBy: 4) , '</td>' , String crlf ]) ])
+		, '</tr>' , String crlf,'</tbody>', '</' , aBLUIGridLayout container getSelector , '>'
 ]
 
 { #category : #visiting }

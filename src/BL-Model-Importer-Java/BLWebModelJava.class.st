@@ -165,11 +165,13 @@ BLWebModelJava >> addTo: aSourcedCollection from: anotherSourcedCollection in: t
 
 { #category : #adding }
 BLWebModelJava >> addWidgetAttributes [
-
-			(self listOfWidget select: [ :widget | widget variable isNotNil ])
-				do: [ :widget | 
-					widget variable receivingInvocations
-						do: [ :invoc | self factory createAttributeFromInvocation: invoc for: widget ] ]
+	(self listOfWidget select: [ :widget | widget variable isNotNil ])
+		do: [ :widget | 
+			widget variable receivingInvocations
+				do: [ :invoc | 
+					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil ])
+						ifTrue: [ self factory createAttributeFromInvocation: invoc previous for: widget ]
+						ifFalse: [ self factory createAttributeFromInvocation: invoc for: widget ] ] ]
 ]
 
 { #category : #adding }

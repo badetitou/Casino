@@ -20,6 +20,18 @@ BLLayout >> childAttributeFor: aCell [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+BLLayout >> getSelector [
+	"must be implemented if specific selector is used"
+	^ 'bl-panel'
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 BLLayout >> postImport [
 	"If we need to order some of the cell"
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
+BLLayout >> specificSelector [
+	"if we want to override the selector of our container"
+	^ false
 ]

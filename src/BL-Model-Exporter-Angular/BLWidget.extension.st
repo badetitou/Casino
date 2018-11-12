@@ -8,13 +8,14 @@ BLWidget >> actionsTag [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> attributesTagWith: anExporter [
-	^ ((self computeSelfAttributes flattened groupedBy: #name) asDictionary 
+	^ ((self computeSelfAttributes flattened groupedBy: #name) asDictionary
 		associationsCollect: [ :mapAttributeNameValues | 
 			' ' , mapAttributeNameValues key , '="'
 				,
 					((mapAttributeNameValues value asOrderedCollection
-						flatCollect: [ :attribute | (anExporter visit: attribute), ' ' ]) removeLast; yourself)
-				, '"' ]) flatten
+						flatCollect: [ :attribute | (anExporter visit: attribute) , ' ' ])
+						removeLast;
+						yourself) , '"' ]) flatten
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -24,7 +25,7 @@ BLWidget >> behaviors [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> computeSelfAttributes [
-	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute }
+	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

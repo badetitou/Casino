@@ -12,7 +12,8 @@ BLUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIPanel class >> canHandle: anInvocation [
-	^ ('.*Panel' asRegex matchesPrefix: anInvocation invokedClassName) or: [ #('BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName ]
+	^ ('.*Panel' asRegex matchesPrefix: anInvocation invokedClassName)
+		or: [ #('FlexTable' 'BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
@@ -28,4 +29,11 @@ BLUIPanel class >> createWidgetFor: anInvocation [
 	(anInvocation parameters size >= 2)
 		ifTrue: [ widget addAttribute: (BLUIWidth new name: 'width'; text: (anInvocation parameters at: 2) )].
 	^ widget
+]
+
+{ #category : #'*BL-Model-CoreWeb-Importer' }
+BLUIPanel >> getSelector [
+	^ (self layout isNotNil and: [ self layout specificSelector ])
+		ifTrue: [ self layout getSelector ]
+		ifFalse: [ 'bl-panel' ]
 ]
