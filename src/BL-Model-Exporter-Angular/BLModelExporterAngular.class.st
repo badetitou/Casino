@@ -141,15 +141,17 @@ BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
-	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>'
-		, '<tbody>',
+	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>' , '<tbody>'
+		,
 			((0 to: aBLUIGridLayout maxLevel)
 				flatCollect: [ :number | 
 					'<tr>'
 						,
 							(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
-								flatCollect: [ :cell | String crlf , '<td>' , ((self visit: cell) indentBy: 4) , '</td>' , String crlf ]) ])
-		, '</tr>' , String crlf,'</tbody>', '</' , aBLUIGridLayout container getSelector , '>'
+								flatCollect: [ :cell | 
+									String crlf , '<td ' , (aBLUIGridLayout tdAttributeForCell: cell) , '>'
+										, ((self visit: cell) indentBy: 4) , '</td>' , String crlf ]) ]) , '</tr>'
+		, String crlf , '</tbody>' , '</' , aBLUIGridLayout container getSelector , '>'
 ]
 
 { #category : #visiting }

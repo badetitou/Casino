@@ -52,18 +52,6 @@ BLUIGridLayout >> determineXandYfrom: theParametersAsAnArray [
 ]
 
 { #category : #'as yet unclassified' }
-BLUIGridLayout >> getVerticalSpanBeginningAtX: aXPosition [
-	^ ((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
-		select: [ :position | (position at: 1) = aXPosition ])
-]
-
-{ #category : #'as yet unclassified' }
-BLUIGridLayout >> hasVerticalSpanBeginningAtX: aXPosition [
-	^ ((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
-		select: [ :position | (position at: 1) = aXPosition ]) isNotEmpty
-]
-
-{ #category : #'as yet unclassified' }
 BLUIGridLayout >> maxLevel [
 	^ ((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) collect: [ :coord | coord at: 1 ])
 		ifEmpty: [ ^ 0 ]
