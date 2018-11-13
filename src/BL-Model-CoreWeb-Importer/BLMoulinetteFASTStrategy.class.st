@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'fastImporter'
 	],
-	#category : 'BL-Model-Importer-Java'
+	#category : #'BL-Model-CoreWeb-Importer'
 }
 
 { #category : #'as yet unclassified' }

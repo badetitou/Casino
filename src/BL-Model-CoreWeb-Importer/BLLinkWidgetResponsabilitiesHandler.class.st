@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'next'
 	],
-	#category : 'BL-Model-Importer-Java'
+	#category : #'BL-Model-CoreWeb-Importer'
 }
 
 { #category : #accessing }

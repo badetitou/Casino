@@ -5,7 +5,7 @@ Class {
 		'xml',
 		'sourceModel'
 	],
-	#category : 'BL-Model-Importer-Java'
+	#category : #'BL-Model-CoreWeb-Importer'
 }
 
 { #category : #running }

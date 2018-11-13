@@ -32,7 +32,7 @@ Class {
 		'xmlUiWidgetLink',
 		'listOfServiceAction'
 	],
-	#category : #'BL-Model-Importer-Java'
+	#category : #'BL-Model-CoreWeb-Importer'
 }
 
 { #category : #accessing }

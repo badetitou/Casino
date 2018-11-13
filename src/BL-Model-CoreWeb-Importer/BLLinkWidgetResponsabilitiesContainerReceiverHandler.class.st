@@ -1,7 +1,7 @@
 Class {
 	#name : #BLLinkWidgetResponsabilitiesContainerReceiverHandler,
 	#superclass : #BLLinkWidgetResponsabilitiesHandler,
-	#category : 'BL-Model-Importer-Java'
+	#category : #'BL-Model-CoreWeb-Importer'
 }
 
 { #category : #initialization }

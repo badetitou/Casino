@@ -32,3 +32,8 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 						ifFalse: [ nil ]).
 			cell add: tmpCell ]
 ]
+
+{ #category : #'*BL-Model-Importer-Java' }
+BLUIGridLayout >> getLayoutAttribute [
+	^ {}
+]
