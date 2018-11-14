@@ -48,12 +48,6 @@ MooseAbstractGroup >> allBLPageMetier [
 ]
 
 { #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLPhase [
-	<navigation: 'BL Phase'>
-	^ self allWithType: BLPage 
-]
-
-{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLService [
 	<navigation: 'BL Service'>
 	^ self allWithType: BLService 

@@ -7,5 +7,5 @@ BLUILeaf >> accept: anExporter [
 
 { #category : #'*BL-Model-Query' }
 BLUILeaf >> outgoingElement [
-	^ (self actionAppels collect: #value)
+	^ (self actions collect: #value)
 ]
