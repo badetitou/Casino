@@ -38,7 +38,8 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
 		group: 'core' with: #('BL-Model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension' 'BL-MetamodelGenerator');
-		group: 'core-extented' with: #('core' 'BL-Model-UI-SubEntities');
+		group: 'core-extented' with: #('core' 'BL-Model-Query');
+		group: 'query' with: #('core-extented' 'BL-Model-UI-SubEntities');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
 		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
@@ -62,7 +63,7 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-Importer' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-Importer-Java' with: [ spec requires: #('BL-Model-Importer' 'BL-Model-Toolkit') ];
 		package: 'BL-Model-Importer-Java-Tests' with: [ spec requires: #('BL-Model-Importer-Java') ];
-		package: 'BL-Model-Query';
+		package: 'BL-Model-Query' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-UI-SubEntities' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-CoreWeb' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-CoreWeb-Exporter' with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Exporter-Angular') ];
