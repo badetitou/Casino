@@ -14,6 +14,7 @@ BLExplorerView >> legend: b [
 	lb addText: 'Legende'.
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
+	lb addColor: BLUIContainer color text: 'Widget'.
 	lb addColor: BLBusinessPage color text: 'Page Metier'.
 	lb addLineColor: Color gray text: 'Contain'.
 	lb addLineColor: Color blue text: 'Link action'.
@@ -27,8 +28,7 @@ BLExplorerView >> openViewForModel: aBLModel andPage: aPage [
 	b shape circle color: [ :cls | cls color ];
 		withTextAbove: #name height: 1.
 	b
-		layout: [ RTClusterLayout new
-				horizontalGap: 1];
+		layout: [ RTClusterLayout new];
 		onClickExplore: [ :cls | cls outgoingElement ];
 		withPopup;
 		dragChildren;

@@ -14,7 +14,7 @@ BLWidget >> color [
 
 { #category : #'*BL-Model-Query' }
 BLWidget class >> color [
-	^ Color green
+	^ Color yellow
 ]
 
 { #category : #'*BL-Model-Query' }
