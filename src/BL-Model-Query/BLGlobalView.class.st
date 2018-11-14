@@ -15,7 +15,6 @@ BLGlobalView >> legend: b [
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb left.
-	lb textSize: 30.
 	lb addText: 'Legende'.
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
