@@ -6,3 +6,12 @@ BLLayout >> addWidget: aWidget [
 	^ aWidget
 	
 ]
+
+{ #category : #'*BL-Model-Importer' }
+BLLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+	cell
+		add:
+			(BLCell new
+				widget: aWidget;
+				yourself)
+]

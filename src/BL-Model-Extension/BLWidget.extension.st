@@ -29,6 +29,11 @@ BLWidget >> canHaveAttribute: blAttributeClass [
 ]
 
 { #category : #'*BL-Model-Extension' }
+BLWidget >> isContainer [
+	^ false
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLWidget >> parameters [
 	<MSEProperty: #parameters type: #Object>
 	^ self privateState attributeAt: #parameters ifAbsentPut: [ Dictionary new ]

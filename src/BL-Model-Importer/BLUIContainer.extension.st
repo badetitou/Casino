@@ -12,6 +12,12 @@ BLUIContainer >> addWidget: aWidget [
 ]
 
 { #category : #'*BL-Model-Importer' }
+BLUIContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+	aWidget addingPosition: anInvocation sourceAnchor startPos.
+	self addWidget: aWidget
+]
+
+{ #category : #'*BL-Model-Importer' }
 BLUIContainer >> computeSelfAttributes [
 	^ self layout ifNil: [ super computeSelfAttributes ] ifNotNil: [:lay | ^ {super computeSelfAttributes. lay getLayoutAttribute} ]
 
