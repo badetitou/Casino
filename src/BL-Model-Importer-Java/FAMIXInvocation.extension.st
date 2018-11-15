@@ -23,6 +23,15 @@ FAMIXInvocation >> affectation [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+FAMIXInvocation >> allContainers [
+	^ self container
+		ifNotNil: [ :container | 
+			{self container.
+			container allContainers} flattened ]
+		ifNil: [ {} ]
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 FAMIXInvocation >> attributeName [
 	^ (signature copyFrom: 4 to: ((signature findString: '(') - 1)) asLowercase.
 ]

@@ -89,6 +89,19 @@ BLModelExporterAngular >> visitBLLayout: aBLLayout [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLPage: aBLPhase [
+	| phaseRoot |
+	phaseRoot := aBLPhase rootFromExporter: self.
+	phaseRoot ensureCreateDirectory.
+	"Write phase.module.ts"
+	self writeFile: phaseRoot / aBLPhase getModuleName withCode: aBLPhase generateModuleSourceCode.
+	"Write phase.route.ts"
+	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
+	"Write components"
+	aBLPhase writeComponentsIn: phaseRoot withExporter: self
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 	| pageMetierRoot |
 	pageMetierRoot := (aBLPageMetier container componentsRootFromExporter: self)
@@ -106,19 +119,6 @@ BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 		writeFile: pageMetierRoot / aBLPageMetier getTSName
 		withCode: aBLPageMetier generateTSSourceCode.
 	aBLPageMetier metiers do: [ :metier | self visit: metier ]
-]
-
-{ #category : #visiting }
-BLModelExporterAngular >> visitBLPhase: aBLPhase [
-	| phaseRoot |
-	phaseRoot := aBLPhase rootFromExporter: self.
-	phaseRoot ensureCreateDirectory.
-	"Write phase.module.ts"
-	self writeFile: phaseRoot / aBLPhase getModuleName withCode: aBLPhase generateModuleSourceCode.
-	"Write phase.route.ts"
-	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
-	"Write components"
-	aBLPhase writeComponentsIn: phaseRoot withExporter: self
 ]
 
 { #category : #visiting }
@@ -267,7 +267,7 @@ BLModelExporterAngular >> visitMooseModel: aMooseModel [
 	self writeFile: rootComponents / aMooseModel getTSName withCode: aMooseModel generateTSSourceCode.
 	rootPhases := root / 'phases'.
 	rootPhases createDirectory.
-	(aMooseModel allBLPhase , aMooseModel allBLService) do: [ :rootElement | self visit: rootElement ]
+	(aMooseModel allBLPage , aMooseModel allBLService) do: [ :rootElement | self visit: rootElement ]
 ]
 
 { #category : #accessing }

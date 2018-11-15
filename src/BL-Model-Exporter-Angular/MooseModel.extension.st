@@ -32,7 +32,7 @@ import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
 ,'
 
 export const phases: Phase[] = [
-' , (self allBLPhase flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
+' , (self allBLPage flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
 		,
 			'
 ];
@@ -74,7 +74,7 @@ const routes: Routes = [
 	{ path: ''desktop'', component: IndexComponent, children: [' , String crlf.
 	text := text
 		,
-			(self allBLPhase
+			(self allBLPage
 				flatCollect: [ :phase | 
 					'		{ path: ''' , phase name , ''', loadChildren: ''./phases/' , phase getLocalModulePath
 						, '''},' , String crlf ]).
