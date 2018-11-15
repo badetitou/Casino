@@ -37,9 +37,9 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'default' with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
-		group: 'core' with: #('BL-Model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension' 'BL-MetamodelGenerator');
-		group: 'core-extented' with: #('core' 'BL-Model-Query');
-		group: 'query' with: #('core-extented' 'BL-Model-UI-SubEntities');
+		group: 'core' with: #('model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
+		group: 'core-extented' with: #('core' 'BL-Model-Query' 'BL-Model-UI-SubEntities');
+		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
 		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
