@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #tests }
+BLStringTest >> testComplexeThing [
+	| string |
+	string := '("NIVEAU1LIST -> " + BLLabel.NIVEAU1LIST, BLLabel.NIVEAU1LIST)'.
+	self assert: string extractParameters size equals: 2.
+	self assert: (string extractParameters at: 2) equals: 'BLLabel.NIVEAU1LIST'
+]
+
+{ #category : #tests }
 BLStringTest >> testOneBooleanFalse [
 	| string |
 	string := 'setWidth(false)'.
