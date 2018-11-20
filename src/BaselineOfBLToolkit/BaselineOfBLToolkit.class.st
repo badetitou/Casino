@@ -21,14 +21,8 @@ BaselineOfBLToolkit >> defineDependencies: spec [
 		configuration: 'PetitParser'
 		with: [ spec
 				versionString: #development;
-				loads: 'Parser';
+				loads: 'PetitXml';
 				repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
-	spec
-		configuration: 'PetitParser2'
-		with: [ spec
-				versionString: #development;
-				loads: 'Headless';
-				repository: 'github://kursjan/petitparser2' ]
 ]
 
 { #category : #baselines }
