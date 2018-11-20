@@ -17,28 +17,34 @@ BaselineOfBLToolkit >> baseline: spec [
 
 { #category : #baselines }
 BaselineOfBLToolkit >> defineDependencies: spec [
-	spec
+	spec package: 'PetitXml' with: [
+      spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
+    spec import: 'PetitXml'.
+	"spec
 		configuration: 'PetitParser'
 		with: [ spec
-				versionString: #development;
-				loads: 'PetitXml';
-				repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
+				loads: 'Parser';
+				repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ]"
 ]
 
 { #category : #baselines }
 BaselineOfBLToolkit >> defineGroups: spec [
 	spec
-		group: 'default' with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
+		group: 'default'
+			with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
-		group: 'core' with: #('model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
+		group: 'core'
+			with: #('model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
 		group: 'core-extented' with: #('core' 'BL-Model-Query' 'BL-Model-UI-SubEntities');
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
-		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
+		group: 'bl'
+			with:
+			#('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
-		group: 'pp' with: #('PetitParser');
+		group: 'pp' with: #('PetitXml');
 		group: 'all' with: #('bl' 'tests' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
 
@@ -61,7 +67,7 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-UI-SubEntities' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-CoreWeb' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-CoreWeb-Exporter' with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Exporter-Angular') ];
-		package: 'BL-Model-CoreWeb-Importer' with: [ spec requires: #('PetitParser' 'BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
+		package: 'BL-Model-CoreWeb-Importer' with: [ spec requires: #('pp' 'BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
 		package: 'BL-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('BL-Model-CoreWeb-Importer' 'BL-Model-Importer-Java-Tests') ];
 		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ]
 ]
