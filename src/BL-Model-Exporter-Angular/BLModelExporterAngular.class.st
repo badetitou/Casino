@@ -160,6 +160,11 @@ BLModelExporterAngular >> visitBLUIImage: aBLUIImage [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputColor: aBLUIInputColor [
+	^ '<' ,  (aBLUIInputColor getListPropertiesAsStringWith: self), ' />'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputDate: aBLUIInputDate [
 	^ '<' ,  (aBLUIInputDate getListPropertiesAsStringWith: self), ' />'
 ]
