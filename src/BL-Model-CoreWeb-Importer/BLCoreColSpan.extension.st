@@ -7,6 +7,6 @@ BLCoreColSpan class >> canHandle: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLCoreColSpan class >> createAttributeFrom: anInvocation for: aWidgetInstance withImporter: anImporter [
-	^ aWidgetInstance layout cellX: (anInvocation parameters first) Y: (anInvocation parameters second) horizontalSpan: (anInvocation parameters third)
+	^ aWidgetInstance layout at: anInvocation setHorizontalSpan: (anInvocation parameters third)
 	
 ]

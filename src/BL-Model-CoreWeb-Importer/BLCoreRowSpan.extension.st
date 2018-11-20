@@ -8,7 +8,5 @@ BLCoreRowSpan class >> canHandle: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLCoreRowSpan class >> createAttributeFrom: anInvocation for: aWidgetInstance withImporter: anImporter [
 	^ aWidgetInstance layout
-		cellX: anInvocation parameters first
-		Y: anInvocation parameters second
-		verticalSpan: anInvocation parameters third
+		at: anInvocation setVerticalSpan: anInvocation parameters third
 ]

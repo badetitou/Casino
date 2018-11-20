@@ -149,8 +149,8 @@ BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
 						,
 							(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
 								flatCollect: [ :cell | 
-									String crlf , '<td ' , (aBLUIGridLayout tdAttributeForCell: cell) , '>'
-										, ((self visit: cell) indentBy: 4) , '</td>' , String crlf ]) ]) , '</tr>'
+									(String crlf , '<td' , ((aBLUIGridLayout tdAttributeForCell: cell) , '>', String crlf ,
+										 ((self visit: cell) indentBy: 4) , String crlf,'</td>') indentBy: 4) , String crlf ]) ]) , '</tr>'
 		, String crlf , '</tbody>' , '</' , aBLUIGridLayout container getSelector , '>'
 ]
 
