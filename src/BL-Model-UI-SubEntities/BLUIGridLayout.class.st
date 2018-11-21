@@ -35,24 +35,33 @@ BLUIGridLayout >> atLevelSorted: level [
 BLUIGridLayout >> determineXandYfrom: theParametersAsAnArray [
 	"add tmp variable understanding"
 
-	^ {(theParametersAsAnArray at: 1) asInteger
+	^ {((theParametersAsAnArray at: 1) asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| xValue |
 			((theParametersAsAnArray at: 1) includesSubstring: 'getRowCount')
 				ifTrue: [ xValue := self maxLevel + 1 ].
 			((theParametersAsAnArray at: 1) beginsWith: '++')
 				ifTrue: [ xValue := self maxLevel + 1.
-					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((theParametersAsAnArray at: 1) removePrefix: '++') put: xValue ].
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: ((theParametersAsAnArray at: 1) removePrefix: '++')
+						put: xValue ].
 			((theParametersAsAnArray at: 1) endsWith: '++')
 				ifTrue: [ xValue := self maxLevel.
-					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((theParametersAsAnArray at: 1) removeSuffix: '++') put: xValue + 1 ].
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: ((theParametersAsAnArray at: 1) removeSuffix: '++')
+						put: xValue + 1 ].
 			xValue
-				ifNil: [ xValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (theParametersAsAnArray at: 1) ifAbsentPut: [ 0 ].
-					xValue = 0 ifTrue: [ xValue := self maxLevel ] ].
+				ifNil: [ xValue := (self privateState
+						attributeAt: #addGridVariable
+						ifAbsentPut: [ Dictionary new ])
+						at: (theParametersAsAnArray at: 1)
+						ifAbsentPut: [ 0 ].
+					xValue = 0
+						ifTrue: [ xValue := self maxLevel ] ].
 			xValue ifNil: [ xValue := self maxLevel ].
 			theParametersAsAnArray at: 1 put: xValue ]
-		ifNotNil: [ theParametersAsAnArray at: 1 put: (theParametersAsAnArray at: 1) asInteger ].	"row"
-	theParametersAsAnArray at: 2 put: (theParametersAsAnArray at: 2) asInteger}	"column"
+		ifNotNil: [ theParametersAsAnArray at: 1 put: (theParametersAsAnArray at: 1) asInteger ]).	"row"
+	(theParametersAsAnArray at: 2 put: ((theParametersAsAnArray at: 2) asInteger ifNil: [0]))}	"column"
 ]
 
 { #category : #'as yet unclassified' }

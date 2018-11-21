@@ -2,7 +2,7 @@ Extension { #name : #BLUIHeight }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIHeight class >> canHandle: anInvocation [
-	^ anInvocation isInvocation and: [ anInvocation attributeName = 'height' ]
+	^ anInvocation isInvocation and: [ anInvocation signature beginsWith: 'setHeight' ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

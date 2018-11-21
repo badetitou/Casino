@@ -2,7 +2,7 @@ Extension { #name : #BLUITitle }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUITitle class >> canHandle: anInvocation [
-	^ anInvocation isInvocation and: [ anInvocation attributeName = 'title' ]
+	^ anInvocation isInvocation and: [ anInvocation signature beginsWith: 'setTitle' ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }

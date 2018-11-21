@@ -73,7 +73,7 @@ BLModelExporterAngular >> visitBLCell: aBLCell [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLHTML: aBLHTML [
-	^ aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ]
+	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
 ]
 
 { #category : #visiting }
@@ -262,7 +262,7 @@ BLModelExporterAngular >> visitMooseModel: aMooseModel [
 	| rootPhases rootComponents |
 	self root createDirectory.
 	"Write app.module.ts"
-	self writeFile: self root / aMooseModel  getModuleName withCode: aMooseModel  generateModuleSourceCode.
+	self writeFile: self root / aMooseModel getModuleName withCode: aMooseModel  generateModuleSourceCode.
 	"Write app.route.ts"
 	self writeFile: self root / aMooseModel getRouteName withCode: aMooseModel generateRouteSourceCode.
 	"Write components"

@@ -81,7 +81,7 @@ export class ' , self componentName capitalized
 		,
 			(self collectPhaseCalled
 				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (self recursiveWidgets flatCollect: [ :widget | widget idViewChild ])
+		, (self recursiveWidgets asSet asOrderedCollection flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
 ' , (self recursiveWidgets flattened flatCollect: #getVariables)
