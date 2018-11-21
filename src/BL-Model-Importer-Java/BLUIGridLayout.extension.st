@@ -4,16 +4,16 @@ Extension { #name : #BLUIGridLayout }
 BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	| tmpCell |
 	anInvocation
-		ifNil: [ super addWidget: aWidget withInvocationOfAdd: anInvocation ]
-		ifNotNil: [ :invoc | 
+		ifNil: [ super addWidget: aWidget ]
+		ifNotNil: [ 
 			| param |
+			anInvocation ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].
 			"widget on the grid"
-			param := invoc parameters.
+			param := anInvocation parameters.
 			tmpCell := BLCell new
 				widget: aWidget;
 				yourself.
-			(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
-				add: tmpCell -> "(self determineXandYfrom:" param")".
+			(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) add: tmpCell -> param.	"(self determineXandYfrom:"	")"
 
 
 			"alignement of the widget"
