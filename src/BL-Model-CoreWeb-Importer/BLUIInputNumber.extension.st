@@ -12,11 +12,11 @@ BLUIInputNumber class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 	widget parameters at: #type put: 'number'.
 	'BLTextBoxAnnee' = anInvocation invokedClassName
-		ifTrue: [ widget
+		ifTrue: [ anInvocation parameters ifNotEmpty: [widget
 				addAttribute:
 					(BLUIValue new
 						text: (anInvocation parameters at: 1);
-						yourself).
+						yourself) ]
 			].
 					(#('BLTextBoxNumber' 'BLTextBoxAnnee') includes: anInvocation invokedClassName) ifTrue: [ widget
 				addAttribute:
