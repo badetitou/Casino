@@ -28,7 +28,7 @@ import { ComponentsModule } from ''../components/components.module'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
 ',
-(self allBLService flatCollect: [ :service | 'import { ', service name, ' } from ''./', service getLocalPath ,''';', String crlf  ] ) 
+(self allBLService flatCollect: [ :service | 'import { ', service uniqueName, ' } from ''./', service getLocalPath ,''';', String crlf  ] ) 
 ,'
 
 export const phases: Phase[] = [

@@ -58,9 +58,9 @@ import {
 		,
 			(self collectPhaseCalled
 				ifNotEmpty:
-					[ 'import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
-import { Phase } from ''../../../../../components/service/model/phase/phase.model'';
-import { PhaseService } from ''../../../../../components/service/phase.service'';
+					[ 'import { DesktopStateService } from ''', (self relativePathToHome), 'components/service/desktop-state.service'';
+import { Phase } from ''', (self relativePathToHome), 'components/service/model/phase/phase.model'';
+import { PhaseService } from ''', (self relativePathToHome), 'components/service/phase.service'';
 ' ]) , self widgetsDependencies, self getBehaviorImportString
 		,
 			'
@@ -142,7 +142,7 @@ BLBusinessPage >> getBehaviorImportString [
 		,
 			(self calledBehavior
 				flatCollect: [ :serviceAction | 
-					'import { ' , serviceAction serviceOwner mooseName , ' } from ''' , self relativePathToHome
+					'import { ' , serviceAction serviceOwner uniqueName , ' } from ''' , self relativePathToHome
 						, serviceAction serviceOwner getLocalPath , ''';' , String crlf ])
 ]
 

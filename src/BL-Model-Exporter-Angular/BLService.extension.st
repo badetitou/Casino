@@ -10,7 +10,7 @@ import { of } from ''rxjs/observable/of'';
 import { HttpClient, HttpHeaders } from ''@angular/common/http'';
 
 @Injectable()
-export class ' , self mooseName
+export class ' , self uniqueName
 		,
 			' {
 
@@ -31,7 +31,7 @@ BLService >> getLocalPath [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLService >> getServiceName [
-	^ self mooseName , '.service'
+	^ self uniqueName , '.service'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -41,7 +41,7 @@ BLService >> getTSName [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLService >> getVariableName [
-	^ '_', self mooseName uncapitalized
+	^ '_', self uniqueName uncapitalized
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -54,6 +54,11 @@ BLService >> prepareAcceptFor: anExporter [
 	"be sure create service directory"
 
 	anExporter serviceRoot ensureCreateDirectory
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLService >> uniqueName [
+	^ self mooseName, self mooseID asString 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
