@@ -32,11 +32,43 @@ BLUIGridLayout >> atLevelSorted: level [
 ]
 
 { #category : #'as yet unclassified' }
+BLUIGridLayout >> determineXFrom: aXValue [	
+	^ (aXValue asInteger
+		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
+			| xValue |
+			(aXValue includesSubstring: 'getRowCount')
+				ifTrue: [ xValue := self maxLevel + 1 ].
+			(aXValue beginsWith: '++')
+				ifTrue: [ xValue := self maxLevel + 1.
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: (aXValue removePrefix: '++')
+						put: xValue ].
+			(aXValue endsWith: '++')
+				ifTrue: [ xValue := self maxLevel.
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: (aXValue removeSuffix: '++')
+						put: xValue + 1 ].
+			xValue
+				ifNil: [ xValue := (self privateState
+						attributeAt: #addGridVariable
+						ifAbsentPut: [ Dictionary new ])
+						at: aXValue
+						ifAbsentPut: [ 0 ].
+					xValue = 0
+						ifTrue: [ xValue := self maxLevel ] ].
+			xValue ifNil: [ xValue := self maxLevel ].
+			^ xValue ]
+		ifNotNil: [ ^ aXValue asInteger ])
+]
+
+{ #category : #'as yet unclassified' }
 BLUIGridLayout >> determineXandYfrom: theParametersAsAnArray [
 	"add tmp variable understanding"
 
-	^ {((theParametersAsAnArray at: 1) asInteger
-		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
+	^ {theParametersAsAnArray at: 1 put: (self determineXFrom: (theParametersAsAnArray at: 1)). theParametersAsAnArray at: 2 put: (self determineYFrom: (theParametersAsAnArray at: 2))}.
+	
+	"{((theParametersAsAnArray at: 1) asInteger
+		ifNil: [ ""in case of setWidget(row,0).. Then setWidget(row++,1)""
 			| xValue |
 			((theParametersAsAnArray at: 1) includesSubstring: 'getRowCount')
 				ifTrue: [ xValue := self maxLevel + 1 ].
@@ -60,8 +92,38 @@ BLUIGridLayout >> determineXandYfrom: theParametersAsAnArray [
 						ifTrue: [ xValue := self maxLevel ] ].
 			xValue ifNil: [ xValue := self maxLevel ].
 			theParametersAsAnArray at: 1 put: xValue ]
-		ifNotNil: [ theParametersAsAnArray at: 1 put: (theParametersAsAnArray at: 1) asInteger ]).	"row"
-	(theParametersAsAnArray at: 2 put: ((theParametersAsAnArray at: 2) asInteger ifNil: [0]))}	"column"
+		ifNotNil: [ theParametersAsAnArray at: 1 put: (theParametersAsAnArray at: 1) asInteger ]).	
+	(theParametersAsAnArray at: 2 put: ((theParametersAsAnArray at: 2) asInteger ifNil: [0]))}	"
+]
+
+{ #category : #'as yet unclassified' }
+BLUIGridLayout >> determineYFrom: aYValue [	
+	^ (aYValue asInteger
+		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
+			| yValue |
+			(aYValue includesSubstring: 'getCellCount')
+				ifTrue: [ yValue := (self atLevel: aYValue parameters first asInteger) size ].
+			(aYValue beginsWith: '++')
+				ifTrue: [ yValue := self maxLevel + 1.
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: (aYValue removePrefix: '++')
+						put: yValue ].
+			(aYValue endsWith: '++')
+				ifTrue: [ yValue := self maxLevel.
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+						at: (aYValue removeSuffix: '++')
+						put: yValue + 1 ].
+			yValue
+				ifNil: [ yValue := (self privateState
+						attributeAt: #addGridVariable
+						ifAbsentPut: [ Dictionary new ])
+						at: aYValue
+						ifAbsentPut: [ 0 ].
+					yValue = 0
+						ifTrue: [ yValue := (self atLevel: self maxLevel) size ] ].
+			yValue ifNil: [ yValue := (self atLevel: self maxLevel) size ].
+			^ yValue ]
+		ifNotNil: [ ^ aYValue asInteger ])
 ]
 
 { #category : #'as yet unclassified' }
