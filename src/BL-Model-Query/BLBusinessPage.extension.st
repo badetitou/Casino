@@ -36,8 +36,3 @@ BLBusinessPage >> recursiveWidget [
 	(self widgets collect: #recursiveWidget).
 	(self metiers collect: #recursiveWidget)}
 ]
-
-{ #category : #'*BL-Model-Query' }
-BLBusinessPage >> relativePathToHome [
-	^ self container relativePathToHome , '../../'
-]

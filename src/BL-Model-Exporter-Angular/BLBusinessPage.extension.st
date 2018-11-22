@@ -58,9 +58,9 @@ import {
 		,
 			(self collectPhaseCalled
 				ifNotEmpty:
-					[ 'import { DesktopStateService } from ''', (self relativePathToHome), 'components/service/desktop-state.service'';
-import { Phase } from ''', (self relativePathToHome), 'components/service/model/phase/phase.model'';
-import { PhaseService } from ''', (self relativePathToHome), 'components/service/phase.service'';
+					[ 'import { DesktopStateService } from ''../', (self relativePathToHome), 'components/service/desktop-state.service'';
+import { Phase } from ''../', (self relativePathToHome), 'components/service/model/phase/phase.model'';
+import { PhaseService } from ''../', (self relativePathToHome), 'components/service/phase.service'';
 ' ]) , self widgetsDependencies, self getBehaviorImportString
 		,
 			'
@@ -122,9 +122,9 @@ export class ' , self componentName capitalized
 			'
 
 '
-		,
+		",
 			((self recursiveWidgets flatCollect: #attributes)
-				flatCollect: [ :attribute | attribute attributeMethod ])
+				flatCollect: [ :attribute | attribute attributeMethod ])"
 		,
 			'
 }

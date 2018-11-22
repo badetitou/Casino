@@ -55,7 +55,7 @@ export const phases: Phase[] = [
         IndexComponent
     ],
     providers: [
-', (self allBLService flatCollect: [:service | '        ', service name, ',', String crlf]),
+', (self allBLService flatCollect: [:service | '        ', service uniqueName, ',', String crlf]),
         '        { provide: PHASES, useValue: phases } as Provider
     ]
 })
