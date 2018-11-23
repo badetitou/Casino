@@ -2,7 +2,8 @@ Extension { #name : #BLUIFieldsetDynamic }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIFieldsetDynamic class >> canHandle: anInvocation [
-	^ #('BLFieldSetPanelDynamic' 'BLGroupBoxPanel') includes: anInvocation invokedClassName
+	self flag: 'We can remove this class'.
+	^ false
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
@@ -20,15 +21,8 @@ BLUIFieldsetDynamic class >> createWidgetFor: anInvocation [
 		name: anInvocation asString;
 		source: anInvocation;
 		yourself.
-	widget addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
-	BLToggleable createAttributeFrom: nil for: widget.
-	widget parameters
-		at: #legend
-		put:
-			(anInvocation parameters
-				at: 1
-				ifAbsent: [ self flag: #todo.
-					'todo' ]).
+	widget
+		addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
 	widget layout: (BLLayout newCoreLayoutFor: anInvocation).
 	^ widget
 ]
