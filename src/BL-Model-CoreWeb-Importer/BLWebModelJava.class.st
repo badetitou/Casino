@@ -67,7 +67,12 @@ BLWebModelJava >> addLinkBetweenWidgets [
 
 { #category : #adding }
 BLWebModelJava >> addLinkForAbstractTabPhase [
-	self linkForAbstractTabPhase do: [ :assoc | (self getPhaseFromClass: assoc key) do: [ :phase | (self getPageMetierFromClass: assoc value) do: [ :pageMetier | phase businessPage add: pageMetier ] ] ]
+	self linkForAbstractTabPhase
+		do: [ :assoc | 
+			(self getPhaseFromClass: assoc key)
+				do: [ :phase | (self getPageMetierFromClass: assoc value) do: [ :pageMetier | phase businessPage add: pageMetier ] ] ]
+		displayingProgress: [ :assoc | 'compute ' , assoc name ]
+		every: 1000
 ]
 
 { #category : #adding }
@@ -597,7 +602,8 @@ BLWebModelJava >> modelPageMetier [
 
 { #category : #private }
 BLWebModelJava >> modelPhases [
-	^ self listOfPhases collect: #source
+	"support the C/S Phase (see application RH)"
+	^ self listOfPhases collect: #source thenReject: #isNil 
 ]
 
 { #category : #accessing }
