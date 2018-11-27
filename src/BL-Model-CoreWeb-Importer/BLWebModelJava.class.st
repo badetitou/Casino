@@ -43,10 +43,16 @@ BLWebModelJava class >> webRoot [
 
 { #category : #adding }
 BLWebModelJava >> addLinkBetweenServiceAndAttribute [
-	self listOfServiceAction do: [ :serviceAction | 
-		| classContainer |
-		classContainer := serviceAction source incomingInvocations collect: [ :invocation | invocation from belongsTo ].
-		(self model allBLActionsAttribute select: [:action | classContainer includes: action source  ]) do: [ :action | action addBehavior: serviceAction  ] ]
+	self listOfServiceAction
+		do: [ :serviceAction | 
+			| classContainer |
+			classContainer := serviceAction source incomingInvocations
+				collect: [ :invocation | invocation from belongsTo ].
+			(self model allBLActionsAttribute
+				select: [ :action | classContainer includes: action source ])
+				do: [ :action | action addBehavior: serviceAction ] ]
+		displayingProgress: [ :serviceAction | 'for ' , serviceAction asString ]
+		every: 1000
 ]
 
 { #category : #adding }
@@ -55,7 +61,7 @@ BLWebModelJava >> addLinkBetweenWidgets [
 	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
 	self listOfWidget
 		do: [ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
-		displayingProgress: [ :widget | 'compute ' , widget asString ]
+		displayingProgress: [ :widget | 'compute ' , widget class name ]
 		every: 1000
 ]
 
@@ -173,11 +179,23 @@ BLWebModelJava >> addWidgetAttributes [
 					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil ])
 						ifTrue: [ self factory createAttributeFromInvocation: invoc previous for: widget ]
 						ifFalse: [ self factory createAttributeFromInvocation: invoc for: widget ] ] ]
+		displayingProgress:
+			[ :widget | 
+			'compute attribute of '
+				,
+					widget
+						asString ]
+		every: 1000
 ]
 
 { #category : #adding }
 BLWebModelJava >> addWidgetDefaultAttributes [
-	self listOfWidget do: #addDefaultAttribute
+	self
+		listOfWidget
+		do:
+			#addDefaultAttribute
+		displayingProgress: [ :widget | 'DefaultAttribute for ' , widget asString ]
+		every: 1000
 ]
 
 { #category : #'as yet unclassified' }
