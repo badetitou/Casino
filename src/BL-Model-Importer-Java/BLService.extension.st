@@ -2,7 +2,7 @@ Extension { #name : #BLService }
 
 { #category : #'*BL-Model-Importer-Java' }
 BLService >> addAllActions: aCollectionOfAction [
-	self actions addAll: aCollectionOfAction 
+	^ self actions addAll: aCollectionOfAction
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

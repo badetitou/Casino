@@ -54,8 +54,9 @@ BLWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
 	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
 	self listOfWidget
-		do:
-			[ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
+		do: [ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
+		displayingProgress: [ :widget | 'compute ' , widget asString ]
+		every: 1000
 ]
 
 { #category : #adding }
@@ -251,12 +252,14 @@ BLWebModelJava >> generateService [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateServiceAction [
-	self listOfServiceAction
+
+	self listOfService  do: [ :e | self listOfServiceAction addAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)) ]
+   	displayingProgress: [ :e | 'compute ' , e asString ] every: 1000.
+	"self listOfServiceAction 
 		addAll:
 			((self listOfService
-				collect: [ :service | 
-					service addAllActions: 
-					(self getListOfServiceActionForServiceClass: service source)]) collect: #actions) flattened
+				collect: [ :service | service addAllActions: (self getListOfServiceActionForServiceClass: service source) ])
+				collect: #actions) flattened"
 ]
 
 { #category : #'as yet unclassified' }
