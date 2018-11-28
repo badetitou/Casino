@@ -19,6 +19,7 @@ BLGlobalView >> legend: b [
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
 	lb addColor: BLBusinessPage color text: 'Page Metier'.
+	lb addColor: BLLayout color text: 'Layout'.
 	lb addLineColor: Color gray text: 'Contain'.
 	lb addLineColor: Color blue text: 'Link action'.
 	lb build
@@ -29,7 +30,7 @@ BLGlobalView >> openViewForModel: aBLModel [
 	| b |
 	b := RTMondrian new.
 	b shape circle color: [ :cl | cl color ].
-	b nodes: (aBLModel allBLWidget , aBLModel allBLService) asSet asOrderedCollection.
+	b nodes: (aBLModel allBLWidget , aBLModel allBLService, aBLModel allBLLayout) asSet asOrderedCollection.
 	(b shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.

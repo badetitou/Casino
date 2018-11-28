@@ -26,6 +26,12 @@ MooseAbstractGroup >> allBLBehavior [
 ]
 
 { #category : #'*BL-Model-Extension' }
+MooseAbstractGroup >> allBLCell [
+	<navigation: 'BL Cell'>
+	^ self allWithType: BLCell 
+]
+
+{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLLayout [
 	<navigation: 'Sub-Layout'>
 	^ self allWithSubTypesOf: BLLayout

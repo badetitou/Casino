@@ -19,7 +19,7 @@ BLWidget class >> color [
 
 { #category : #'*BL-Model-Query' }
 BLWidget >> outgoingElement [
-	self subclassResponsibility 
+	^ { self widgets }
 ]
 
 { #category : #'*BL-Model-Query' }
