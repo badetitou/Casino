@@ -84,3 +84,10 @@ MooseAbstractGroup >> allBLWidget [
 	<navigation: 'Sub-Widget'>
 	^ self allWithSubTypesOf: BLWidget
 ]
+
+{ #category : #'*BL-Model-Extension' }
+MooseAbstractGroup >> allBLWidgetExceptPage [
+	<navigation: 'Sub-Widget ExceptPage'>
+	^ (self allWithSubTypesOf: BLWidget)
+		reject: [ :el | (el isKindOf: BLPage) or: [ el isKindOf: BLBusinessPage ] ]
+]

@@ -11,5 +11,5 @@ BLLinkWidgetResponsabilitiesXmluiHandler >> handleAddLinkedFromVariable: aCollec
 		ifPresent: [ :listOfWidgetClass | 
 			listOfWidgetClass
 				do:
-					[ :widgetClass | (theCurrentImporter listOfWidget select: [ :widget | widget realClass = widgetClass ]) do: [ :widget | widget addWidget: widgetContainer ] ] ]
+					[ :widgetClass | (theCurrentImporter model allBLWidgetExceptPage select: [ :widget | widget realClass = widgetClass ]) do: [ :widget | widget addWidget: widgetContainer ] ] ]
 ]

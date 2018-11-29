@@ -21,12 +21,10 @@ Class {
 	#name : #BLWebModelJava,
 	#superclass : #BLWebModel,
 	#instVars : [
-		'widgetGroup',
 		'xml',
-		'modelWidgetCache',
 		'xmlUiLink',
-		'xmlUiWidgetLink',
-		'listOfServiceAction'
+		'modelWidgetCache',
+		'xmlUiWidgetLink'
 	],
 	#category : #'BL-Model-CoreWeb-Importer'
 }
@@ -39,13 +37,11 @@ BLWebModelJava class >> webRoot [
 
 { #category : #adding }
 BLWebModelJava >> addLinkBetweenServiceAndAttribute [
-	self listOfServiceAction
+	self model allBLServiceAction
 		do: [ :serviceAction | 
 			| classContainer |
-			classContainer := serviceAction source incomingInvocations
-				collect: [ :invocation | invocation from belongsTo ].
-			(self model allBLActionsAttribute
-				select: [ :action | classContainer includes: action source ])
+			classContainer := serviceAction source incomingInvocations collect: [ :invocation | invocation from belongsTo ].
+			(self model allBLActionsAttribute select: [ :action | classContainer includes: action source ])
 				do: [ :action | action addBehavior: serviceAction ] ]
 		displayingProgress: [ :serviceAction | 'for ' , serviceAction asString ]
 		every: 1000
@@ -55,7 +51,7 @@ BLWebModelJava >> addLinkBetweenServiceAndAttribute [
 BLWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
 	responsabilityHandlerForUsages := BLLinkWidgetResponsabilitiesReceiverHandler new.
-	self listOfWidget
+	self model allBLWidgetExceptPage
 		do: [ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
 		displayingProgress: [ :widget | 'compute ' , widget class name ]
 		every: 1000
@@ -97,13 +93,11 @@ BLWebModelJava >> addLinkXmlUiWidget [
 { #category : #adding }
 BLWebModelJava >> addListsToModel [
 	model
-		silentlyAddAll: self listOfWidget;
-		silentlyAddAll: self listOfServiceAction;
-		silentlyAddAll: (self listOfWidget flatCollect: #attributes);
-		silentlyAddAll: (self listOfWidget collect: #position thenReject: #isNil);
-		silentlyAddAll: (self listOfWidget collect: #size thenReject: #isNil);
+		silentlyAddAll: (self model allBLWidgetExceptPage flatCollect: #attributes);
+		silentlyAddAll: (self model allBLWidgetExceptPage collect: #position thenReject: #isNil);
+		silentlyAddAll: (self model allBLWidgetExceptPage collect: #size thenReject: #isNil);
 		silentlyAddAll:
-			((self listOfWidget
+			((self model allBLWidgetExceptPage
 				select: [ :a | (a isKindOf: BLUIContainer) and: [ a layout isNotNil ] ])
 				flatCollect: [ :a | 
 					{a layout.
@@ -130,7 +124,7 @@ BLWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 BLWebModelJava >> addPPPToWidget [
-	(self listOfWidget select: [ :a | a widgetContainer isNil and: [ a cellOwner isNil ] ])
+	(self model allBLWidgetExceptPage select: [ :a | a widgetContainer isNil and: [ a cellOwner isNil ] ])
 		do: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
@@ -169,7 +163,7 @@ BLWebModelJava >> addTo: aSourcedCollection from: anotherSourcedCollection in: t
 
 { #category : #adding }
 BLWebModelJava >> addWidgetAttributes [
-	(self listOfWidget select: [ :widget | widget variable isNotNil ])
+	(self model allBLWidgetExceptPage select: [ :widget | widget variable isNotNil ])
 		do: [ :widget | 
 			widget variable receivingInvocations
 				do: [ :invoc | 
@@ -188,7 +182,7 @@ BLWebModelJava >> addWidgetAttributes [
 { #category : #adding }
 BLWebModelJava >> addWidgetDefaultAttributes [
 	self
-		listOfWidget
+		model allBLWidgetExceptPage
 		do:
 			#addDefaultAttribute
 		displayingProgress: [ :widget | 'DefaultAttribute for ' , widget asString ]
@@ -263,8 +257,7 @@ BLWebModelJava >> generateService [
 BLWebModelJava >> generateServiceAction [
 	self model allBLService
 		do: [ :e | 
-			self listOfServiceAction
-				addAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)) ]
+			self model silentlyAddAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)) ]
 		displayingProgress: [ :e | 'compute ' , e asString ]
 		every: 1000
 	"self listOfServiceAction 
@@ -276,15 +269,13 @@ BLWebModelJava >> generateServiceAction [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateWidget [
-	widgetGroup := ((((self widgetConstructorsInvocation, self widgetAnonymousSubclasses, self widgetFactoryInvocation) asSet asOrderedCollection 
-		reject: [ :invocationOrClass | 
-			(self widgetNamespace match: invocationOrClass from mooseName)
-				or: [ '*noname#super*' match: invocationOrClass asString ] ]
+	self model silentlyAddAll: ((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet asOrderedCollection
+		reject: [ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ]
 		thenCollect: [ :invocation | 
 			| blWidget |
-			blWidget := (BLWidget newFor: invocation).
+			blWidget := BLWidget newFor: invocation.
 			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-			blWidget ]) groupedBy: #affectedActions)  associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [:i | assoc value removeIndex: i ] ] ]) flattened
+			blWidget ]) groupedBy: #affectedActions) associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ]) flattened
 ]
 
 { #category : #'as yet unclassified' }
@@ -420,13 +411,6 @@ BLWebModelJava >> import [
 			self addLinkBetweenServiceAndAttribute ]
 ]
 
-{ #category : #initialization }
-BLWebModelJava >> initialize [
-	super initialize.
-	widgetGroup := OrderedCollection new.
-	listOfServiceAction := OrderedCollection new.
-]
-
 { #category : #accessing }
 BLWebModelJava >> isElementFromApplication: e [
 	^ e sourceAnchor isNotNil and: [('*' , self applicationSource , '*' match: e sourceAnchor fileName)]
@@ -536,21 +520,6 @@ BLWebModelJava >> linkXmlUiWidget [
 ]
 
 { #category : #accessing }
-BLWebModelJava >> listOfServiceAction [
-	^ listOfServiceAction
-]
-
-{ #category : #accessing }
-BLWebModelJava >> listOfServiceAction: anObject [
-	listOfServiceAction := anObject
-]
-
-{ #category : #accessing }
-BLWebModelJava >> listOfWidget [
-	^ widgetGroup
-]
-
-{ #category : #accessing }
 BLWebModelJava >> modelPageMetier [
 	^ self model allBLPageMetier collect: #source
 ]
@@ -573,7 +542,7 @@ BLWebModelJava >> modelWidget [
 
 { #category : #private }
 BLWebModelJava >> modelWidgetInstances [
-	^ self listOfWidget collect: #source
+	^ self model allBLWidget collect: #source
 ]
 
 { #category : #api }
@@ -616,7 +585,7 @@ BLWebModelJava >> searchCalledPhaseFromInvocation: invoc [
 
 { #category : #private }
 BLWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
-	^ (self listOfWidget select: [ :widget | widget source = anInvocation ]) at: 1 ifAbsent: [ ^nil ]
+	^ (self model allBLWidget select: [ :widget | widget source = anInvocation ]) at: 1 ifAbsent: [ ^ nil ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -648,7 +617,7 @@ BLWebModelJava >> widgetFactoryInvocation [
 { #category : #'as yet unclassified' }
 BLWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
-	^ (self listOfWidget select: [:el | el variable = aVariable]) at: 1 ifAbsent: nil
+	^ (self model allBLWidget select: [ :el | el variable = aVariable ]) at: 1 ifAbsent: nil
 ]
 
 { #category : #accessing }
