@@ -11,11 +11,11 @@ BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
 
 { #category : #factory }
 BLWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
-	^ BLBusinessPage new
+	self model silentlyAdd: (BLBusinessPage new
 		name: aFAMIXClass mooseName;
 		sourceAnchor: aFAMIXClass sourceAnchor;
 		source: aFAMIXClass;
-		computeTitle 
+		computeTitle) 
 ]
 
 { #category : #factory }
@@ -33,13 +33,22 @@ BLWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue);
 		name: (xmlElement attributeAt: #codeValue).
-	^ blPhase realClassName = 'STUB C/S'
+	model silentlyAdd: (blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
 				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
 				computeSubtitle.
-			blPhase ]
+			blPhase ])
+]
+
+{ #category : #factory }
+BLWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
+	self model silentlyAdd: (BLService new
+		name: aServiceClass name;
+		source: aServiceClass;
+		yourself)
+	
 ]
 
 { #category : #factory }
