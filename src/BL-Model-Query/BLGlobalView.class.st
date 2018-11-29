@@ -42,7 +42,7 @@ BLGlobalView >> openViewForModel: aBLModel [
 				ifFalse: [ Color gray ] ]) shape head
 		baseSize: 5.0;
 		size: 8.
-	b edges useAssociations: (aBLModel allBLWidget collect: #allAssociations) flatten.
+	b edges useAssociations: {(aBLModel allBLWidget collect: #allAssociations). aBLModel allBLLayout collect: #allAssociations} flattened.
 	b layout force strength: 0.4.
 	b view pushBackEdges.
 	self legend: b.
