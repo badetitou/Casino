@@ -22,7 +22,6 @@ Class {
 	#superclass : #BLWebModel,
 	#instVars : [
 		'widgetGroup',
-		'actionAppelGroup',
 		'xml',
 		'modelWidgetCache',
 		'xmlUiLink',
@@ -100,7 +99,6 @@ BLWebModelJava >> addListsToModel [
 	model
 		silentlyAddAll: self listOfWidget;
 		silentlyAddAll: self listOfServiceAction;
-		silentlyAddAll: self listOfActionAppel;
 		silentlyAddAll: (self listOfWidget flatCollect: #attributes);
 		silentlyAddAll: (self listOfWidget collect: #position thenReject: #isNil);
 		silentlyAddAll: (self listOfWidget collect: #size thenReject: #isNil);
@@ -226,13 +224,13 @@ BLWebModelJava >> createFactory [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateBLActionAppel [
-	actionAppelGroup := self linkFromWidgetActionAppel
+	self model silentlyAddAll: (self linkFromWidgetActionAppel
 		collect: [ :el | 
 			| action |
 			action := BLActionAppel new.
 			el key addAction: action.
-			el value ifNil: [  ] ifNotNil: [ action call: el value  ].
-			action ]
+			el value ifNil: [  ] ifNotNil: [ action call: el value ].
+			action ])
 ]
 
 { #category : #'as yet unclassified' }
@@ -427,7 +425,6 @@ BLWebModelJava >> initialize [
 	super initialize.
 	widgetGroup := OrderedCollection new.
 	listOfServiceAction := OrderedCollection new.
-	actionAppelGroup := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -536,11 +533,6 @@ BLWebModelJava >> linkXmlUiWidget [
 	^ {self modelWidget} flatten
 		select: [ :a | '*XMLUi' match: a superclass mooseName ]
 		thenCollect: [ :a | Association new key: a  value: a superclass]
-]
-
-{ #category : #accessing }
-BLWebModelJava >> listOfActionAppel [
-	^ actionAppelGroup 
 ]
 
 { #category : #accessing }
