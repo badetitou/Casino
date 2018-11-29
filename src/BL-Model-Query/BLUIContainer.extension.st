@@ -7,5 +7,5 @@ BLUIContainer class >> color [
 
 { #category : #'*BL-Model-Query' }
 BLUIContainer >> outgoingElement [
-	^ {self actions collect: #call. self widgets} flatten
+	^ {self actions collect: #call. self widgets. {self layout ifNil: [ {} ]} }
 ]
