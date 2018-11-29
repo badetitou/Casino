@@ -75,8 +75,11 @@ BLWebModelJava >> addLinkPageMetierToPageMetier [
 
 { #category : #adding }
 BLWebModelJava >> addLinkPhaseToPageMetier [
-	(self computeAllConstructorsLink collect: [ :a | (self getPhaseFromClass: a key) -> (self getPageMetierFromClass: a value) ] thenSelect: [ :a | a key isNotNil and: [ a value isNotNil ] ])
-		do: [ :assoc | self addTo: assoc key from: assoc value in: #businessPage	"assoc key do: [ :from | from metiers add: assoc value ]" ]
+	(self computeAllConstructorsLink
+		collect: [ :a | (self getPhaseFromClass: a key) -> (self getPageMetierFromClass: a value) ]
+		thenSelect: [ :a | a key isNotNil and: [ a value isNotNil ] ])
+		do:
+			[ :assoc | self addTo: assoc key from: assoc value in: #businessPage]
 ]
 
 { #category : #adding }
@@ -203,15 +206,13 @@ BLWebModelJava >> createFactory [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateBLActionAppel [
-	
-			(self linkFromWidgetActionAppel
-				do: [ :el | 
-					| action |
-					action := BLActionAppel new.
-					el key addAction: action.
-					el value ifNil: [  ] ifNotNil: [ action call: el value ].
-					self model
-		silentlyAdd: action ])
+	self linkFromWidgetActionAppel
+		do: [ :el | 
+			| action |
+			action := BLActionAppel new.
+			el key addAction: action.
+			el value ifNil: [  ] ifNotNil: [ action call: el value ].
+			self model silentlyAdd: action ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -258,14 +259,6 @@ BLWebModelJava >> generateWidget [
 ]
 
 { #category : #'as yet unclassified' }
-BLWebModelJava >> getAsyncClassFrom: aServiceClass. [
-	^ (aServiceClass types asOrderedCollection 
-		at: 1	ifAbsent: [ ^ {} ]) attributes
-				collect: #declaredType
-				thenSelect: [ :class | aServiceClass name , '*' match: class name ] 
-]
-
-{ #category : #'as yet unclassified' }
 BLWebModelJava >> getClassNamed: aClassName [
 	^ (self sourceModel allModelClasses select: [ :a | a mooseName = aClassName ]) at: 1
 ]
@@ -301,12 +294,6 @@ BLWebModelJava >> getPhaseCallInvocations [
 		select:
 			[ :a | '*ConstantsPhase' match: a mooseName ])
 		at: 1) methods collect: #incomingInvocations) flatten
-]
-
-{ #category : #private }
-BLWebModelJava >> getPhaseClassFrom: realClassName [
-	realClassName ifNil: [ ^self ].
-	^ (self sourceModel allClasses select: [ :e | realClassName = e mooseName ]) at: 1
 ]
 
 { #category : #'as yet unclassified' }
