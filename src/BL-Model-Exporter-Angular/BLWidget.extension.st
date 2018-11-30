@@ -2,7 +2,7 @@ Extension { #name : #BLWidget }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> actionsTag [
-	^ self actions
+	^ (self actions reject: [ :action | action call isNil ])
 		flatCollect: [ :actionAppel | ' ', actionAppel getAngularRepresentation ]
 ]
 
@@ -79,7 +79,7 @@ BLWidget >> hierarchalAttributes [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> id [
-	^ self variable uniqueName
+	^ self variable name, self mooseID asString
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
