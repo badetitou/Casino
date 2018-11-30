@@ -79,7 +79,7 @@ BLWidget >> hierarchalAttributes [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> id [
-	^ self variable name, self mooseID asString
+	^ self variable shortName, self mooseID asString
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

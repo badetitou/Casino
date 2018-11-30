@@ -12,5 +12,5 @@ BLBusinessPage >> recursiveMetiers [
 
 { #category : #'*BL-Model-Extension' }
 BLBusinessPage >> recursiveWidgets [
-	^ (self widgets , (self widgets collect: #recursiveWidgets)) flattened
+	^ (self widgets , (self widgets collect: #recursiveWidgets))
 ]

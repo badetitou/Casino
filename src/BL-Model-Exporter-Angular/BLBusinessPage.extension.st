@@ -20,7 +20,7 @@ BLBusinessPage >> calledBehavior [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> collectPhaseCalled [
 	
-	^ (self recursiveWidgets flatCollect: [ :localWidget | localWidget actions collect: #call thenSelect: #isNotNil  ]) asSet asOrderedCollection
+	^ (self recursiveWidgets flattened flatCollect: [ :localWidget | localWidget actions collect: #call thenSelect: #isNotNil  ]) asSet asOrderedCollection
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -81,7 +81,7 @@ export class ' , self componentName capitalized
 		,
 			(self collectPhaseCalled
 				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (self recursiveWidgets asSet asOrderedCollection flatCollect: [ :widget | widget idViewChild ])
+		, (self recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
 ' , (self recursiveWidgets flattened flatCollect: #getVariables)
@@ -204,7 +204,7 @@ BLBusinessPage >> rootFromExporter: anExporter [
 BLBusinessPage >> widgetsDependencies [
 	^ ''
 		,
-			((self recursiveWidgets collect: #getExternalDependencies) flattened asSet asOrderedCollection
+			((self recursiveWidgets flattened collect: #getExternalDependencies) flattened asSet asOrderedCollection
 				flatCollect: [ :dependency | dependency importString , String crlf ])
 ]
 

@@ -13,8 +13,8 @@ BLUIContainer >> isContainer [
 { #category : #'*BL-Model-Extension' }
 BLUIContainer >> recursiveWidgets [
 	| widgs |
-	widgs := (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [{}])) flattened.
-	^ (widgs, (widgs collect: #recursiveWidgets)) flattened
+	widgs := (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [{}])).
+	^ (widgs, (widgs collect: #recursiveWidgets))
 ]
 
 { #category : #'*BL-Model-Extension' }
