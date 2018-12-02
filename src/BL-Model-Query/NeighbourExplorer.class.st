@@ -58,6 +58,27 @@ Class {
 }
 
 { #category : #accessing }
+NeighbourExplorer >> buildLegend: legend [
+]
+
+{ #category : #accessing }
+NeighbourExplorer >> legend: b [
+	| lb |
+	lb := RTLegendBuilder new.
+	lb view: b view.
+	lb left.
+	lb onDemand: 'Legende'.
+	lb addColor: BLPage color text: 'Phase'.
+	lb addColor: BLWidget color text: 'Widget'.
+	lb addColor: BLUIContainer color text: 'BLUIContainer'.
+	lb addColor: BLBusinessPage color text: 'Page Metier'.
+	lb addColor: BLLayout color text: 'Layout'.
+	lb addLineColor: Color gray text: 'Contain'.
+	lb addLineColor: Color blue text: 'Link action'.
+	lb build
+]
+
+{ #category : #accessing }
 NeighbourExplorer >> model [
 	^ model
 ]
@@ -113,5 +134,6 @@ NeighbourExplorer >> viewNeighbourOf: aBLPhase toRTMondrian: b [
 				flattened.
 	b layout horizontalTree.
 	b view elements when: TRMouseClick do: [ :evt | evt element model inspect ].
+	self legend: b.
 	^ b
 ]

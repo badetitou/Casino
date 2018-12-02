@@ -15,9 +15,10 @@ BLGlobalView >> legend: b [
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb left.
-	lb addText: 'Legende'.
+	lb onDemand: 'Legende'.
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
+	lb addColor: BLUIContainer color text: 'BLUIContainer'.
 	lb addColor: BLBusinessPage color text: 'Page Metier'.
 	lb addColor: BLLayout color text: 'Layout'.
 	lb addLineColor: Color gray text: 'Contain'.

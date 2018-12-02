@@ -10,12 +10,12 @@ BLExplorerView >> legend: b [
 	lb := RTLegendBuilder new.
 	lb view: b view.
 	lb left.
-	lb textSize: 5.
-	lb addText: 'Legende'.
+	lb onDemand: 'Legende'.
 	lb addColor: BLPage color text: 'Phase'.
 	lb addColor: BLWidget color text: 'Widget'.
-	lb addColor: BLUIContainer color text: 'Widget'.
+	lb addColor: BLUIContainer color text: 'BLUIContainer'.
 	lb addColor: BLBusinessPage color text: 'Page Metier'.
+	lb addColor: BLLayout color text: 'Layout'.
 	lb addLineColor: Color gray text: 'Contain'.
 	lb addLineColor: Color blue text: 'Link action'.
 	lb build
