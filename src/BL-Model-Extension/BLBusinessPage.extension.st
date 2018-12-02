@@ -6,6 +6,11 @@ BLBusinessPage >> metiers [
 ]
 
 { #category : #'*BL-Model-Extension' }
+BLBusinessPage >> recursiveElements [
+	^ (self widgets , (self widgets collect: #recursiveElements))
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLBusinessPage >> recursiveMetiers [
 	^ (self metiers , (self metiers collect: #recursiveMetiers)) flattened
 ]

@@ -29,10 +29,3 @@ BLBusinessPage >> recursiveMetierNodes [
 	^ {self.
 	(self metiers flatCollect: #recursiveMetier)} flattened
 ]
-
-{ #category : #'*BL-Model-Query' }
-BLBusinessPage >> recursiveWidget [
-	^ {self.
-	(self widgets collect: #recursiveWidget).
-	(self metiers collect: #recursiveWidget)}
-]

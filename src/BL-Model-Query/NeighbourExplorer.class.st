@@ -57,15 +57,6 @@ Class {
 	#category : 'BL-Model-Query-Neighbour'
 }
 
-{ #category : #'view creation' }
-NeighbourExplorer >> computeColorForAssociation: assoc [
-	"model allBLAction
-		do: [ :action | 
-			(action key = assoc key and: [ action value = assoc value ])
-				ifTrue: [ ^ action color ] ]."
-	^ Color gray
-]
-
 { #category : #accessing }
 NeighbourExplorer >> model [
 	^ model
@@ -85,7 +76,6 @@ NeighbourExplorer >> openGlamour [
 					r
 						column: #index;
 						column: #neighbour ].
-			t row: [ :r | r column: #details ].
 			t transmit
 				to: #index;
 				andShow: [ :composite | 
@@ -99,16 +89,9 @@ NeighbourExplorer >> openGlamour [
 					composite roassal2
 						title: 'Neighbour';
 						initializeView: [ RTMondrian new ];
-						painting: [ :view :aBLPhase | self viewNeighbourOf: aBLPhase toRTMondrian: view ] ].
-			t transmit
-				from: #neighbour;
-				to: #details;
-				andShow: [ :composite | 
-					composite text
-						title: 'Details';
-						display: [ :blEl | blEl sourceAnchor ifNil: ['TODO '] ifNotNil: #sourceText ] ]  ];
+						painting: [ :view :aBLPhase | self viewNeighbourOf: aBLPhase toRTMondrian: view ] ] ];
 		title: 'Neighbour Explorer';
-		openOn: self model allBLPhase
+		openOn: self model allBLPage
 ]
 
 { #category : #'view creation' }
@@ -117,18 +100,18 @@ NeighbourExplorer >> viewNeighbourOf: aBLPhase toRTMondrian: b [
 	b
 		nodes:
 			{{aBLPhase}.
-			aBLPhase pageMetiers.
-			aBLPhase widgets.
-			(aBLPhase actions collect: #appelant) asSet} flatten.
+			aBLPhase businessPage.
+			(aBLPhase businessPage collect: #recursiveElements)} flattened.
 	b shape line
 		arrowedLine;
-		withBorderAttachPoint;
-		color: [ :assoc | self computeColorForAssociation: assoc ].
+		withBorderAttachPoint.
 	b edges
 		useAssociations:
-			{aBLPhase linkToMetier.
-			aBLPhase linkToWidgets.
-			aBLPhase actions} flatten.
+			{aBLPhase allAssociations.
+			(aBLPhase businessPage collect: #allAssociations).
+			((aBLPhase businessPage collect: #recursiveElements) flattened collect: #allAssociations)}
+				flattened.
 	b layout horizontalTree.
+	b view elements when: TRMouseClick do: [ :evt | evt element model inspect ].
 	^ b
 ]

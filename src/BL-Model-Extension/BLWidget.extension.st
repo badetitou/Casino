@@ -34,6 +34,11 @@ BLWidget >> isContainer [
 ]
 
 { #category : #'*BL-Model-Extension' }
+BLWidget >> isWidget [ 
+	^ true
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLWidget >> parameters [
 	<MSEProperty: #parameters type: #Object>
 	^ self privateState attributeAt: #parameters ifAbsentPut: [ Dictionary new ]
@@ -48,6 +53,11 @@ BLWidget >> realClass [
 { #category : #'*BL-Model-Extension' }
 BLWidget >> realClass: aClass [
 	realClass := aClass
+]
+
+{ #category : #'*BL-Model-Extension' }
+BLWidget >> recursiveElements [
+	^ (self widgets , (self widgets collect: #recursiveElements))
 ]
 
 { #category : #'*BL-Model-Extension' }

@@ -21,9 +21,3 @@ BLWidget class >> color [
 BLWidget >> outgoingElement [
 	^ { self widgets }
 ]
-
-{ #category : #'*BL-Model-Query' }
-BLWidget >> recursiveWidget [
-	^ {self.
-	(self widgets collect: #recursiveWidget)}
-]
