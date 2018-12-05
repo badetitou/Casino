@@ -30,18 +30,14 @@ BLBusinessPage >> componentName [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> generateHTMLSourceCodeWith: aVisitor [
-	| text |
-	text := ''.
-	self metiers
-		ifNotEmpty: [ text := text , '<bl-tabs>' , String crlf
+	^ (self metiers
+		ifNotEmpty: [ '<bl-tabs>' , String crlf
 				,
 					(self metiers
-						flatCollect: [ :metier | 
-							'    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>'
-								, String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>'
-								, String crlf ]) , '</bl-tabs>' , String crlf ].
-	text := text , ((self widgets select: [:widget | (widget isKindOf: BLBusinessPage) not ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ]).
-	^ text
+						flatCollect:
+							[ :metier | '    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>' , String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>' , String crlf ]) , '</bl-tabs>'
+				, String crlf ]
+		ifEmpty: [ '' ]) , ((self widgets reject: [ :widget | widget isPageMetier ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

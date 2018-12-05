@@ -28,10 +28,10 @@ BLPage >> generateHTMLSourceCodeFor1PageMetier [
 BLPage >> generateHTMLSourceCodeForMultiplePageMetier [
 	| text id |
 	id := 0.
-	text := '<bl-phase-business-pages-tab-container (tabSelected)="onTabSelected($event)">
+	text := '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
-                <div class="cursor-pointer" (click)="save()">
+                <div class="cursor-pointer"> <!-- (click)="save()" -->
                     <bl-icon icon="save"></bl-icon>
                 </div>
             </div>
@@ -42,9 +42,8 @@ BLPage >> generateHTMLSourceCodeForMultiplePageMetier [
 				flatCollect: [ :metier | 
 					id := id + 1.
 					'
-            <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title
-						, '">	' , String crlf , '                ' , metier getTag , String crlf
-						, '            </bl-phase-business-page-tab>' , String crlf ]).
+            <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title , '">	' , String crlf
+						, '                ' , metier getTag , String crlf , '            </bl-phase-business-page-tab>' , String crlf ]).
 	text := text , '    </bl-phase-business-pages-tab-container>'.
 	^ text
 ]
