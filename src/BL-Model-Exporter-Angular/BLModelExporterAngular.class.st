@@ -56,7 +56,7 @@ BLModelExporterAngular >> prepareExport [
 
 { #category : #api }
 BLModelExporterAngular >> protectString: aString [
-	^ aString copyReplaceAll: '"' with: '&quot;' 
+	^ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' 
 ]
 
 { #category : #accessing }
@@ -111,7 +111,6 @@ BLModelExporterAngular >> visitBLPage: aBLPhase [
 	"Write phase.route.ts"
 	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
 	"Write components"
-	
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
@@ -139,7 +138,7 @@ BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 	aBLPageMetier metiers
 		do: [ :metier | 
 			self class new
-				currentPath: pageMetierRoot / 'components' / aBLPageMetier getFolderName;
+				currentPath: pageMetierRoot / 'components' / metier getFolderName;
 				visit: metier ]
 ]
 

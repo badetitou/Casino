@@ -24,7 +24,7 @@ BLSplitButton >> getInitializations [
 '
 		,
 			(self widgets
-				flatCollect: [ :widget | '            {label: ''' , (widget parameters at: #label) , '''},' , String crlf ])
+				flatCollect: [ :widget | '            {label: ''' , ((widget attributes select: [:a | a isKindOf: BLUILabel]) first) attributeValue , '''},' , String crlf ])
 		,
 			'
         ];'
