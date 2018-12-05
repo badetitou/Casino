@@ -105,8 +105,3 @@ BLWidget >> parametersTag [
 	^ (self parameters
 		associationsCollect: [ :attr | ' ', attr key , '=' , (BLModelExporterAngular convertIfString: attr value) ]) flatten
 ]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLWidget >> relativePathToHome [
-	^ self container relativePathToHome , '../../'
-]

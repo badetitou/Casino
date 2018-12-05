@@ -45,7 +45,7 @@ BLBusinessPage >> generateHTMLSourceCodeWith: aVisitor [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLBusinessPage >> generateTSSourceCode [
+BLBusinessPage >> generateTSSourceCodeWith: anExporter [
 	^ '
 import {
     Component,
@@ -57,11 +57,10 @@ import {
 '
 		,
 			(self collectPhaseCalled
-				ifNotEmpty:
-					[ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
+				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
 import { Phase } from ''app/components/service/model/phase/phase.model'';
 import { PhaseService } from ''app/components/service/phase.service'';
-' ]) , self widgetsDependencies, self getBehaviorImportString
+' ]) , self widgetsDependencies , self getBehaviorImportString
 		,
 			'
 
@@ -77,11 +76,7 @@ export class ' , self componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
 
-'
-		,
-			(self collectPhaseCalled
-				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (self recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
+' , (self collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]) , (self recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
 ' , (self recursiveWidgets flattened flatCollect: #getVariables)
@@ -91,12 +86,7 @@ export class ' , self componentName capitalized
     constructor(' , self behaviors
 		,
 			') {
-'
-		,
-			(self collectPhaseCalled
-				flatCollect: [ :phase | 
-					'        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');'
-						, String crlf ])
+' , (self collectPhaseCalled flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
 		,
 			'
     }
@@ -122,13 +112,13 @@ export class ' , self componentName capitalized
 			'
 
 '
-		",
-			((self recursiveWidgets flatCollect: #attributes)
-				flatCollect: [ :attribute | attribute attributeMethod ])"
 		,
 			'
 }
 '
+	",
+			((self recursiveWidgets flatCollect: #attributes)
+				flatCollect: [ :attribute | attribute attributeMethod ])"
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -156,6 +146,22 @@ BLBusinessPage >> getFolderName [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> getHTMLName [
 	^ self getAcceptedName  , '.component.html'
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLBusinessPage >> getImportStringAndSubBusinessPageImportStringWithLocalPath: aLocalPath [
+	^ (self getImportStringWithLocalPath: aLocalPath) , String crlf
+		,
+			(self metiers
+				flatCollect: [ :businessPage | 
+					businessPage
+						getImportStringAndSubBusinessPageImportStringWithLocalPath: aLocalPath , '/components/' , self getAcceptedName ])
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLBusinessPage >> getImportStringWithLocalPath: aLocalPath [
+	^ 'import { ' , self componentName , ' } from ''' , aLocalPath , '/components/'
+		, self getAcceptedName , '/' , self getAcceptedName , '.component'';'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

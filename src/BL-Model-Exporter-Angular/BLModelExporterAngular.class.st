@@ -107,10 +107,11 @@ BLModelExporterAngular >> visitBLPage: aBLPhase [
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	self writeFile: phaseRoot / aBLPhase getModuleName withCode: aBLPhase generateModuleSourceCode.
+	self writeFile: phaseRoot / aBLPhase getModuleName withCode: (aBLPhase generateModuleSourceCodeWith: self).
 	"Write phase.route.ts"
 	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
 	"Write components"
+	
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
@@ -134,7 +135,7 @@ BLModelExporterAngular >> visitBLPageMetier: aBLPageMetier [
 	"Write pageMetier.module.ts"
 	self writeFile: pageMetierRoot / aBLPageMetier getHTMLName withCode: (aBLPageMetier generateHTMLSourceCodeWith: self).
 	"Write pageMetier.route.ts"
-	self writeFile: pageMetierRoot / aBLPageMetier getTSName withCode: aBLPageMetier generateTSSourceCode.
+	self writeFile: pageMetierRoot / aBLPageMetier getTSName withCode: (aBLPageMetier generateTSSourceCodeWith: self).
 	aBLPageMetier metiers
 		do: [ :metier | 
 			self class new

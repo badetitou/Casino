@@ -64,21 +64,13 @@ BLPage >> generateHTMLSourceCodeWith: anExporter [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPage >> generateModuleSourceCode [
-	| text |
-	text := 'import { NgModule } from ''@angular/core'';
+BLPage >> generateModuleSourceCodeWith: anExporter [
+	^ 'import { NgModule } from ''@angular/core'';
 import { CommonModule } from ''@angular/common'';
 import { ComponentsModule } from ''../../../components/components.module'';
 import { IndexComponent } from ''./components/index/index.component'';
-import { PHASE_ROUTES } from ''./' , self name , '.route'';' , String crlf
-		, self widgetsDependenciesImportInstruction.
-	text := text
-		,
-			(self recursiveMetiers flattened
-				flatCollect: [ :metier | 
-					'import { ' , metier componentName , ' } from ''.' , metier getLocalComponentPath , ''';'
-						, String crlf ]).
-	text := text
+import { PHASE_ROUTES } from ''./' , self name , '.route'';' , String crlf , self widgetsDependenciesImportInstruction
+		, (self businessPage flatCollect: [ :aBusinessPage | aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ])
 		,
 			'
 export const COMPONENTS: any[] = [
@@ -95,15 +87,16 @@ export const COMPONENTS: any[] = [
     imports: [
         CommonModule,
         PHASE_ROUTES,
-',  self widgetsDependenciesName, '
+' , self widgetsDependenciesName
+		,
+			'
         ComponentsModule
     ],
     entryComponents: [
         IndexComponent
     ]
 })
-export class ' , self getModuleClassName , ' {}'.
-	^ text , String crlf
+export class ' , self getModuleClassName , ' {}' , String crlf
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -119,7 +112,7 @@ const routes: Routes = [
 ];
 
 export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
-', String crlf
+'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -261,11 +254,6 @@ BLPage >> getTSName [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPage >> getTag [
 	^ '<' , self getSelector , '>' , '</' , self getSelector , '>'
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLPage >> relativePathToHome [
-	^ '../../'
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
