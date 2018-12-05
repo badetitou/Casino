@@ -302,15 +302,3 @@ BLPage >> widgetsDependenciesName [
 			(self widgetsDependencies 
 				flatCollect: [ :dependency | '        ', dependency moduleName , ',' , String crlf ])
 ]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
-BLPage >> writeComponentsIn: phaseRoot withExporter: anExporter [
-	| componentsRoot indexRoot |
-	componentsRoot := self componentsRootFromExporter: anExporter.
-	componentsRoot ensureCreateDirectory.
-	indexRoot := componentsRoot / 'index'.
-	indexRoot ensureCreateDirectory.
-	anExporter writeFile: indexRoot / self getTSName withCode: self generateTSSourceCode.
-	anExporter writeFile: indexRoot / self getHTMLName withCode: (self generateHTMLSourceCodeWith: anExporter) .
-	self businessPage do: [ :metier | anExporter visit: metier ]
-]

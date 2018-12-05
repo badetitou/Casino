@@ -9,3 +9,8 @@ BLBusinessPage >> accept: anExporter [
 BLBusinessPage >> container [
 	^ self pageContainers ifNotEmpty: [ self pageContainers at: 1] ifEmpty:  [ self widgetContainer ]
 ]
+
+{ #category : #'*BL-Model-Exporter' }
+BLBusinessPage >> containers [
+	^ self pageContainers ifNotEmpty: [ self pageContainers ] ifEmpty: [ {super container} ]
+]

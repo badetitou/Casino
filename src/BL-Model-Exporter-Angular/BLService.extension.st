@@ -50,6 +50,11 @@ BLService >> importString [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
+BLService >> initializeVariable [
+	^ 'private ' , self getVariableName , ': ' , self uniqueName
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
 BLService >> prepareAcceptFor: anExporter [
 	"be sure create service directory"
 

@@ -3,18 +3,18 @@ Extension { #name : #BLBusinessPage }
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> behaviors [
 	^ (self collectPhaseCalled
-		ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
+		ifNotEmpty:
+			[ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
 		ifEmpty: [ '' ])
 		,
-			(self calledBehavior
-				flatCollect: [ :actionService | actionService initializeVariable , ', ' ])
+			((self calledBehavior collect: #serviceOwner) removeDuplicates
+				flatCollect: [ :aService | aService initializeVariable , ', ' ])
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> calledBehavior [
 	^ (self recursiveWidgetsWithoutMetiers
-		collect: [ :widget | widget behaviors ]) flattened asSet
-		asOrderedCollection
+		collect: [ :widget | widget behaviors ]) flattened asOrderedCollection removeDuplicates
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -138,12 +138,14 @@ BLBusinessPage >> getAcceptedName [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> getBehaviorImportString [
+	"*BL-Model-Exporter-Angular"
+
 	^ ''
 		,
-			(self calledBehavior
-				flatCollect: [ :serviceAction | 
-					'import { ' , serviceAction serviceOwner uniqueName , ' } from ''app/', self mooseModel name, '/', 
-						serviceAction serviceOwner getLocalPath , ''';' , String crlf ])
+			((self calledBehavior collect: #serviceOwner) removeDuplicates
+				flatCollect: [ :aService | 
+					'import { ' , aService uniqueName , ' } from ''app/' , self mooseModel name , '/'
+						, aService getLocalPath , ''';' , String crlf ]) 
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
