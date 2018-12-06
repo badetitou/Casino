@@ -35,8 +35,8 @@ BLBusinessPage >> generateHTMLSourceCodeWith: aVisitor [
 				,
 					(self metiers
 						flatCollect:
-							[ :metier | '    <bl-tab title=' , (BLModelExporterAngular convertIfString: metier title) , '>' , String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>' , String crlf ]) , '</bl-tabs>'
-				, String crlf ]
+							[ :metier | '    <bl-tab title=' , (BLModelExporterAngular convertIfString: (aVisitor protectString: metier title)) , '>' , String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>' , String crlf ])
+				, '</bl-tabs>' , String crlf ]
 		ifEmpty: [ '' ]) , ((self widgets reject: [ :widget | widget isPageMetier ]) flatCollect: [ :widget | (aVisitor visit: widget) , String crlf ])
 ]
 
