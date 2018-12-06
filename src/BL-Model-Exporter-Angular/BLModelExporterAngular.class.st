@@ -76,7 +76,7 @@ BLModelExporterAngular >> serviceRoot [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLAttribute: aBLAttribute [
-	^ aBLAttribute attributeValue asString
+	^ self protectString: aBLAttribute attributeValue asString
 ]
 
 { #category : #visiting }
@@ -173,6 +173,11 @@ BLModelExporterAngular >> visitBLUIGridLayout: aBLUIGridLayout [
 									(String crlf , '<td' , ((aBLUIGridLayout tdAttributeForCell: cell) , '>', String crlf ,
 										 ((self visit: cell) indentBy: 4) , String crlf,'</td>') indentBy: 4) , String crlf ]) , '</tr>' ]) ,
 		 String crlf , '</tbody>' , '</' , aBLUIGridLayout container getSelector , '>'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIHeight: aBLUIHeight [
+	^ self protectString: aBLUIHeight attributeValue 
 ]
 
 { #category : #visiting }
@@ -276,6 +281,11 @@ BLModelExporterAngular >> visitBLUISelect: aBLUISelect [
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUITitle: aBLUITitle [
 	^ self protectString: aBLUITitle attributeValue 
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIWidth: aBLUIWidth [
+	^ self protectString: aBLUIWidth attributeValue 
 ]
 
 { #category : #visiting }

@@ -59,7 +59,8 @@ BLWidget >> getExternalDependency [
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> getListPropertiesAsStringWith: anExporter [
-	^ self getSelector , (self attributesTagWith: anExporter) , self actionsTag , self parametersTag , self idTag
+	^ self getSelector , (self attributesTagWith: anExporter) , self actionsTag
+		, (self parametersTagWith: anExporter) , self idTag
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -101,7 +102,8 @@ BLWidget >> isPageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLWidget >> parametersTag [
+BLWidget >> parametersTagWith: anExporter [
 	^ (self parameters
-		associationsCollect: [ :attr | ' ', attr key , '=' , (BLModelExporterAngular convertIfString: attr value) ]) flatten
+		associationsCollect: [ :attr | ' ' , attr key , '=' , (BLModelExporterAngular convertIfString: (anExporter protectString: attr value)) ])
+		flatten
 ]

@@ -2,12 +2,19 @@ Extension { #name : #BLPage }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLPage >> generateHTMLSourceCodeDependOfPageMetierWith: anExporter [
-	self hasMultiplePageMetier
-		ifTrue: [ ^ self generateHTMLSourceCodeForMultiplePageMetier ].
-	self hasNoPageMetier
-		ifTrue: [ 
-			^ self generateHTMLSourceCodeForNoPageMetierWith: anExporter  ].
-	^ self generateHTMLSourceCodeFor1PageMetier
+	self
+		hasMultiplePageMetier
+		ifTrue:
+			[ ^ self
+				generateHTMLSourceCodeForMultiplePageMetierWith: anExporter ].
+	self
+		hasNoPageMetier
+		ifTrue:
+			[ ^ self
+				generateHTMLSourceCodeForNoPageMetierWith:
+					anExporter ].
+	^ self
+		generateHTMLSourceCodeFor1PageMetier
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
@@ -25,7 +32,7 @@ BLPage >> generateHTMLSourceCodeFor1PageMetier [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLPage >> generateHTMLSourceCodeForMultiplePageMetier [
+BLPage >> generateHTMLSourceCodeForMultiplePageMetierWith: anExporter [
 	| text id |
 	id := 0.
 	text := '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
@@ -42,8 +49,8 @@ BLPage >> generateHTMLSourceCodeForMultiplePageMetier [
 				flatCollect: [ :metier | 
 					id := id + 1.
 					'
-            <bl-phase-business-page-tab id="P' , id asString , '" title="' , metier title , '">	' , String crlf
-						, '                ' , metier getTag , String crlf , '            </bl-phase-business-page-tab>' , String crlf ]).
+            <bl-phase-business-page-tab id="P' , id asString , '" title="' , ( anExporter protectString:metier title) , '">	' , String crlf , '                ' , metier getTag , String crlf , '            </bl-phase-business-page-tab>'
+						, String crlf ]).
 	text := text , '    </bl-phase-business-pages-tab-container>'.
 	^ text
 ]
