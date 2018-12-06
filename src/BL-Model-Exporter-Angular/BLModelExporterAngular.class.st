@@ -274,6 +274,11 @@ BLModelExporterAngular >> visitBLUISelect: aBLUISelect [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUITitle: aBLUITitle [
+	^ self protectString: aBLUITitle attributeValue 
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLWidget: aBLWidget [
 	^ '<' , (aBLWidget getListPropertiesAsStringWith: self) , '>'
 		, (('',
