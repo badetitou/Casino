@@ -2,20 +2,14 @@
 SmalltalkImage current garbageCollectMost .
 
 ""Generate BlApp""
-mooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
-mooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
+gwtMooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
 
 ""Generate Bl Model""
-model := MooseModel new name: 'Showroom'; yourself.
-BLMooseModelCreatorAngular runOn: model fromSourceModel: mooseModel and:  'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+gwtModel := MooseModel new name: 'Showroom'; yourself.
+BLMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
-BLGlobalView new openViewForModel: model.
-
-""Add Model to moose panel""
-MooseModel root add: model.
-
-model := BLModelExample generateModelWithTwoPhasesAndThreePageMetierAnd1Widget.
-BLModelExporterAngular export: model.
+BLModelExporterAngular export: gwtModel.
 "
 Class {
 	#name : #BLWebModelJava,
@@ -249,13 +243,20 @@ BLWebModelJava >> generateServiceAction [
 
 { #category : #'as yet unclassified' }
 BLWebModelJava >> generateWidget [
-	self model silentlyAddAll: ((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet asOrderedCollection
-		reject: [ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ]
-		thenCollect: [ :invocation | 
-			| blWidget |
-			blWidget := BLWidget newFor: invocation.
-			blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-			blWidget ]) groupedBy: #affectedActions) associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ]) flattened
+	self model
+		silentlyAddAll:
+			((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
+				asOrderedCollection
+				reject:
+					[ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ]
+				thenCollect: [ :invocation | 
+					| blWidget |
+					blWidget := BLWidget newFor: invocation.
+					blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
+					blWidget affectedActions ifNotNil: [ :affectedAction | blWidget name: affectedAction name ]. blWidget ])
+				groupedBy: #affectedActions)
+				associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ])
+				flattened
 ]
 
 { #category : #'as yet unclassified' }

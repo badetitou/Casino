@@ -37,7 +37,6 @@ BLWidget >> createAttributeFromAngularInvocation: anInvocation withImporter: anI
 BLWidget class >> createWidgetFor: anInvocation [
 	^ self new
 		realClass: anInvocation invokedClass;
-		name: anInvocation asString;
 		source: anInvocation;
 		yourself
 ]
