@@ -237,6 +237,11 @@ BLModelExporterAngular >> visitBLUILeaf: aBLUILeaf [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIName: aBLUIName [
+	^ self protectString: aBLUIName attributeValue 
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIPanel: aBLUIPanel [
 	^ aBLUIPanel layout
 		ifNotNil: [ :layout | self visit: layout ]
