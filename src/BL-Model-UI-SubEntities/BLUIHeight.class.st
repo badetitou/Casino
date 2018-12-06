@@ -14,13 +14,3 @@ Class {
 BLUIHeight >> accept: anExporter [
 	^ anExporter visitBLUIHeight: self
 ]
-
-{ #category : #accessing }
-BLUIHeight >> text [
-	^ text
-]
-
-{ #category : #accessing }
-BLUIHeight >> text: anObject [
-	text := anObject
-]
