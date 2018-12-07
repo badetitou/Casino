@@ -11,11 +11,13 @@ BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
 
 { #category : #factory }
 BLWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
-	self model silentlyAdd: (BLBusinessPage new
-		name: aFAMIXClass mooseName;
-		sourceAnchor: aFAMIXClass sourceAnchor;
-		source: aFAMIXClass;
-		computeTitle) 
+	self model
+		silentlyAdd:
+			(BLBusinessPage new
+				name: aFAMIXClass name;
+				sourceAnchor: aFAMIXClass sourceAnchor;
+				source: aFAMIXClass;
+				computeTitle)
 ]
 
 { #category : #factory }

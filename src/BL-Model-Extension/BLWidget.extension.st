@@ -40,7 +40,7 @@ BLWidget >> isWidget [
 
 { #category : #'*BL-Model-Extension' }
 BLWidget >> name [
-	^ name ifNil: [ 'widget', self mooseID asString  ] 
+	^ (name ifNil: [ 'widget' ])  , self mooseID asString
 ]
 
 { #category : #'*BL-Model-Extension' }
