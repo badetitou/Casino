@@ -245,17 +245,21 @@ BLWebModelJava >> generateServiceAction [
 BLWebModelJava >> generateWidget [
 	self model
 		silentlyAddAll:
-			((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
-				asOrderedCollection
-				reject:
-					[ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ]
+			((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses
+				, self widgetFactoryInvocation) asSet asOrderedCollection
+				reject: [ :invocationOrClass | 
+					(self widgetNamespace match: invocationOrClass from mooseName)
+						or: [ '*noname#super*' match: invocationOrClass asString ] ]
 				thenCollect: [ :invocation | 
 					| blWidget |
 					blWidget := BLWidget newFor: invocation.
-					blWidget affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
-					blWidget affectedActions ifNotNil: [ :affectedAction | blWidget name: affectedAction name ]. blWidget ])
-				groupedBy: #affectedActions)
-				associationsDo: [ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ])
+					blWidget
+						affectedActions: (self searchAffectationForInvocationOrAnonymousClass: invocation).
+					(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ])
+						ifTrue: [ blWidget name: blWidget affectedActions name ].
+					blWidget ]) groupedBy: #affectedActions)
+				associationsDo:
+					[ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ])
 				flattened
 ]
 

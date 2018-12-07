@@ -45,7 +45,6 @@ BLWidget class >> createWidgetFor: anInvocation [
 BLWidget class >> defaultIfNotFoundFor: anInvocation [
 	^ BLUIContainer new
 		realClass: anInvocation invokedClass;
-		name: anInvocation asString;
 		source: anInvocation;
 		yourself
 ]
