@@ -99,7 +99,7 @@ BLModelExporter >> visitBLUIDisabled: aBLUIDisabled [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIFieldset: aBLUIFieldset [
-	^ self visitBLUIContainer: aBLUIFieldset
+	^ self visitBLUIPanel: aBLUIFieldset
 ]
 
 { #category : #visiting }
