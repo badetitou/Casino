@@ -83,6 +83,18 @@ BLModelExporter >> visitBLPageMetier: aBLPageMetier [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIAbsoluteHeight: aBLUIAbsoluteHeight [
+	^ self
+		visitBLUIHeight:
+			aBLUIAbsoluteHeight
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIAbsoluteWidth: aBLUIAbsoluteWidth [
+	^ self visitBLUIWidth: aBLUIAbsoluteWidth
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIClass: aBLUIClass [
 	^ self visitBLAttribute: aBLUIClass
 ]
@@ -306,6 +318,18 @@ BLModelExporter >> visitBLUIParagraph: aBLUIParagraph [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIPlaceholder: aBLUIPlaceholder [
 	^ self visitBLAttribute: aBLUIPlaceholder
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIRelativeHeight: aBLUIRelativeHeight [
+	^ self
+		visitBLUIHeight:
+			aBLUIRelativeHeight
+]
+
+{ #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIRelativeWidth: aBLUIRelativeWidth [
+	^ self visitBLUIWidth: aBLUIRelativeWidth
 ]
 
 { #category : #'as yet unclassified' }
