@@ -334,7 +334,7 @@ BLModelExporter >> visitBLUIRelativeWidth: aBLUIRelativeWidth [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUISelect: aBLUISelect [
-	^ self visitBLUIContainer: aBLUISelect
+	^ self visitBLUILeaf: aBLUISelect
 ]
 
 { #category : #'as yet unclassified' }
