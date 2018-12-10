@@ -7,7 +7,7 @@ BLBusinessPage >> accept: anExporter [
 
 { #category : #'*BL-Model-Exporter' }
 BLBusinessPage >> container [
-	^ self pageContainers ifNotEmpty: [ self pageContainers at: 1] ifEmpty:  [ self widgetContainer ]
+	^ self pageContainers ifNotEmpty: [ self pageContainers at: 1] ifEmpty:  [ self widgetContainer ifNil: [ self cellOwner ] ]
 ]
 
 { #category : #'*BL-Model-Exporter' }

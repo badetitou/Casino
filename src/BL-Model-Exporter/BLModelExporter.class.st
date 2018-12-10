@@ -278,7 +278,9 @@ BLModelExporter >> visitBLUILink: aBLUILink [
 
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIList: aBLUIList [
-	^ self visitBLUIContainer: aBLUIList
+	^ self
+		visitBLUILeaf:
+			aBLUIList
 ]
 
 { #category : #'as yet unclassified' }

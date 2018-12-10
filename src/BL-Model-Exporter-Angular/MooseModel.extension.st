@@ -1,11 +1,6 @@
 Extension { #name : #MooseModel }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-MooseModel >> appName [
-	^ 'PHASE_INCUBATOR_HOME'
-]
-
-{ #category : #'*BL-Model-Exporter-Angular' }
 MooseModel >> generateHTMLSourceCode [
 	^ '<bl-layout>
     <bl-desktop [homePhase]="phaseHome"></bl-desktop>
@@ -102,7 +97,7 @@ export class IndexComponent implements OnInit {
     public phaseHome: Phase;
 
     constructor(private _phaseService: PhaseService) {
-        this.phaseHome = this._phaseService.getPhase(''', self appName, ''');
+        this.phaseHome = this._phaseService.getPhase(''PHASE_INCUBATOR_HOME'');
     }
 
     public ngOnInit(): void {
