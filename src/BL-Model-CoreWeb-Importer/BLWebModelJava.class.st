@@ -135,14 +135,6 @@ BLWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandle
 						ifNil: [ containerInvocation := containerInvocation container ] ] ]
 ]
 
-{ #category : #private }
-BLWebModelJava >> addTo: aSourcedCollection from: anotherSourcedCollection in: theSelectorOfTheCollection [
-	aSourcedCollection
-		do: [ :source1 | 
-			anotherSourcedCollection
-				do: [ :source2 | (theSelectorOfTheCollection value: source1 ) add: source2 ] ]
-]
-
 { #category : #adding }
 BLWebModelJava >> addWidgetAttributes [
 	(self model allBLWidgetExceptPage select: [ :widget | widget variable isNotNil ])
