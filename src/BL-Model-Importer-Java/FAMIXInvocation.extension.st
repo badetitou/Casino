@@ -2,12 +2,9 @@ Extension { #name : #FAMIXInvocation }
 
 { #category : #'*BL-Model-Importer-Java' }
 FAMIXInvocation >> affectation [
-	| selfSourceAnchor |
-	"Bug de self sourceAnchor avec l'appli RH"
-	selfSourceAnchor := self sourceAnchor ifNotNil: [ self sourceAnchor ] ifNil: [ self from sourceAnchor ].
 	"in the case of
 			TreeItemCopie service3 = new TreeItemCopie(new BLLabel(""SRHA - Service RH - Absences""));
-	The BLLabel affectation must not be serivice3 (it is wrong)
+	The BLLabel affectation must not be service3 (it is wrong)
 "
 	self container ifNotNil: [ ^ nil ].
 	^ ((self from localVariables select: [ :el | el sourceAnchor isNotNil ])

@@ -4,7 +4,7 @@ Class {
 	#category : #'BL-Model-CoreWeb-Importer'
 }
 
-{ #category : #accessing }
+{ #category : #handlers }
 BLLinkWidgetResponsabilitiesXmluiHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	xmluiLinkTable
 		at: ((widgetContainer source from atScope: FAMIXClass) at: 1)

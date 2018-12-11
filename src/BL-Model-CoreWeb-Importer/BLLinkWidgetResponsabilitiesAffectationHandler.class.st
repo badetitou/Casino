@@ -4,7 +4,7 @@ Class {
 	#category : #'BL-Model-CoreWeb-Importer'
 }
 
-{ #category : #initialization }
+{ #category : #handlers }
 BLLinkWidgetResponsabilitiesAffectationHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	(self
 		addLinkedFromVariable: (aCollectionOfUsages collect: #affectation)

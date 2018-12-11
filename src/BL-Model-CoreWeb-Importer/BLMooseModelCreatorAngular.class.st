@@ -9,16 +9,6 @@ Class {
 }
 
 { #category : #running }
-BLMooseModelCreatorAngular class >> runOn: aModel from: aBlApplication with: xml [
-	^ self new
-		model: aModel;
-		blApplication: aBlApplication;
-		xml: xml;
-		basicRun;
-		model
-]
-
-{ #category : #running }
 BLMooseModelCreatorAngular class >> runOn: aModel from: aBlApplication with: xml sourceModel: sourceModel [
 	^ self new
 		model: aModel;
@@ -39,7 +29,7 @@ BLMooseModelCreatorAngular class >> runOn: aModel fromSourceModel: sourceModel a
 		model
 ]
 
-{ #category : #accessing }
+{ #category : #run }
 BLMooseModelCreatorAngular >> basicRun [
 	self modelKind new
 		xml: (PPXmlParser parse: xml asFileReference contents);

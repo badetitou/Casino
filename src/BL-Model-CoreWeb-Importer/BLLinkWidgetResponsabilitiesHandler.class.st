@@ -28,7 +28,7 @@ BLLinkWidgetResponsabilitiesHandler >> addLinkedFromVariable: variables to: widg
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #handlers }
 BLLinkWidgetResponsabilitiesHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	self subclassResponsibility
 ]

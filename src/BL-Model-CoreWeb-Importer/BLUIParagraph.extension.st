@@ -34,7 +34,7 @@ BLUIParagraph class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 	'ComponentUtils' = anInvocation invokedClassName
 		ifTrue: [ self attributeFor: widget fromComponentUtilsForInvocation: anInvocation ]
-		ifFalse: [ widget attributes add: (BLUILabel new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
+		ifFalse: [ widget addAttribute: (BLUILabel new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
 			widget
 				addAttribute:
 					(BLUIClass new

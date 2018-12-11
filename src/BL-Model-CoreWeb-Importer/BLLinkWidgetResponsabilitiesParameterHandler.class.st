@@ -4,7 +4,7 @@ Class {
 	#category : #'BL-Model-CoreWeb-Importer'
 }
 
-{ #category : #initialization }
+{ #category : #handlers }
 BLLinkWidgetResponsabilitiesParameterHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	((aCollectionOfUsages collect: #receiver thenSelect: [ :receiver | receiver class = FAMIXParameter ])
 		ifEmpty: [ false ]

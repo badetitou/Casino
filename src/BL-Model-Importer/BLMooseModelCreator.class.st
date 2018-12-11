@@ -27,7 +27,7 @@ BLMooseModelCreator class >> runOn: aModel from: aBlApplication with: xml [
 		model
 ]
 
-{ #category : #accessing }
+{ #category : #run }
 BLMooseModelCreator >> basicRun [
 	self modelKind new createModelIn: model.
 ]

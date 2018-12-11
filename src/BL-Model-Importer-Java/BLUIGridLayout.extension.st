@@ -4,7 +4,7 @@ Extension { #name : #BLUIGridLayout }
 BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 	| tmpCell |
 	anInvocation
-		ifNil: [ super addWidget: aWidget ]
+		ifNil: [ self addWidget: aWidget ]
 		ifNotNil: [ 
 			| param |
 			anInvocation ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].

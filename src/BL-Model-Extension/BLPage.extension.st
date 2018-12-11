@@ -1,6 +1,11 @@
 Extension { #name : #BLPage }
 
 { #category : #'*BL-Model-Extension' }
+BLPage >> addBusinessPage: aBusinessPage [
+	self businessPage add: aBusinessPage
+]
+
+{ #category : #'*BL-Model-Extension' }
 BLPage >> name [
 	^ name 
 ]

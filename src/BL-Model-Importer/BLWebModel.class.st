@@ -15,7 +15,7 @@ BLWebModel class >> webRoot [
 	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/skins/e-sedit/'
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 BLWebModel >> createFactory [
 	self subclassResponsibility 
 ]

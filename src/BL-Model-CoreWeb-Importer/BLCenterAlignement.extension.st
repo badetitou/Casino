@@ -16,5 +16,7 @@ BLCenterAlignement class >> generateWithHorizontal: horizontal [
 		ifTrue: [ BLWestAlignement new ]
 		ifFalse: [ horizontal = 'HasHorizontalAlignment.ALIGN_RIGHT'
 				ifTrue: [ BLEastAlignement new ]
-				ifFalse: [ horizontal isNil ifTrue: [ nil ] ifFalse: [ BLCenterAlignement new ] ] ]
+				ifFalse: [ horizontal isNil
+						ifTrue: [ nil ]
+						ifFalse: [ self new ] ] ]
 ]
