@@ -9,6 +9,8 @@ BLUIInputDate class >> canHandle: anInvocation [
 BLUIInputDate class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
+	widget
+		addAttribute: (BLUIPlaceholder new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
 	widget parameters at: #type put: 'date'.
 	^ widget
 ]

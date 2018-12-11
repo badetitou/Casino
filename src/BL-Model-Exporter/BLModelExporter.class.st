@@ -95,6 +95,13 @@ BLModelExporter >> visitBLUIAbsoluteWidth: aBLUIAbsoluteWidth [
 ]
 
 { #category : #'as yet unclassified' }
+BLModelExporter >> visitBLUIButton: aBLUIButton [
+	^ self
+		visitBLUILeaf:
+			aBLUIButton
+]
+
+{ #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIClass: aBLUIClass [
 	^ self visitBLAttribute: aBLUIClass
 ]
@@ -167,11 +174,6 @@ BLModelExporter >> visitBLUIImage: aBLUIImage [
 { #category : #'as yet unclassified' }
 BLModelExporter >> visitBLUIInput: aBLUIInput [
 	^ self visitBLUILeaf: aBLUIInput
-]
-
-{ #category : #'as yet unclassified' }
-BLModelExporter >> visitBLUIInputButton: aBLUIInputButton [
-	^ self visitBLUIInput: aBLUIInputButton
 ]
 
 { #category : #'as yet unclassified' }
