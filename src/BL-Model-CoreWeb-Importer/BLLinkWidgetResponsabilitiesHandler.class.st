@@ -21,7 +21,7 @@ BLLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd: 
 BLLinkWidgetResponsabilitiesHandler >> addLinkedFromVariable: variables to: widgetContainer in: theCurrentImporter [
 	(variables
 		collect: [ :var | theCurrentImporter widgetInVariable: var ]
-		thenSelect: #isNotNil)
+		thenSelect: #isNotNil) removeDuplicates
 		ifNotEmpty: [ :founds | 
 			founds do: [ :found | found addWidget: widgetContainer ].
 			^ true ].
