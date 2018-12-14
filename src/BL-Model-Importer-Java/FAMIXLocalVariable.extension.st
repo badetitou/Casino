@@ -5,6 +5,7 @@ FAMIXLocalVariable >> allUsages [
 	"All the invocations the localVariable involved"
 
 	| posUsages |
+	self incomingAccesses. 
 	posUsages := self parentBehaviouralEntity sourceAnchor
 		findAllOccurrencesOfVariableNamed: self name.
 	^ (((posUsages

@@ -276,7 +276,7 @@ BLWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
 	| listOfSubAsyncClass |
 	listOfSubAsyncClass := {} "self getAsyncClassFrom: aServiceClass".
-	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor sourceText isEmpty "reject method from src/target/... In source"]
+	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor isNil or: [ method sourceAnchor sourceText isEmpty "reject method from src/target/... In source"] ]
 		thenCollect: [ :method | BLServiceAction newFor: method ]
 ]
 
@@ -527,13 +527,9 @@ BLWebModelJava >> modelWidgetInstances [
 
 { #category : #api }
 BLWebModelJava >> postImport [
-	"self model allBLActionsAttribute do: [ :actionAttribute | actionAttribute convertOldClass ]."
-
-	self model allBLWidget do: [ :widget | widget postImport ].
-	(self model allBLWidget
-		select: [ :widget | (widget isContainer) and: [ widget layout isNotNil ] ])
-		do: [ :widget | widget layout postImport ].
-	self model allBLPage do: [ :phase | phase postImport ]
+	self model allBLWidget do: #postImport.
+	self model allBLLayout do: #postImport.
+	self model allBLPage do: #postImport
 ]
 
 { #category : #private }
