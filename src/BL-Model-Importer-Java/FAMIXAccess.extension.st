@@ -1,14 +1,14 @@
 Extension { #name : #FAMIXAccess }
 
 { #category : #'*BL-Model-Importer-Java' }
-FAMIXAccess >> allUsages [
-	| posUsages |
+FAMIXAccess >> allUsages [ 
+	^ self from allUsages ifEmpty: [ | posUsages | 
 	posUsages := self from sourceAnchor findAllOccurrencesOfVariableNamed: self variable name.
-	^ (posUsages
+	(posUsages
 		flatCollect: [ :usage | 
 			(self from queryAllOutgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
 				select: [ :out | out sourceAnchor intervalAsCharPos rangeIncludes: usage  ] ])
-		reject: [ :invoc | invoc receiver = self variable ]
+		reject: [ :invoc | invoc receiver = self variable ] ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
