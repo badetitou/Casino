@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfBLToolkit,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfBLToolkit'
+	#category : #BaselineOfBLToolkit
 }
 
 { #category : #baselines }
@@ -42,6 +42,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'bl'
 			with:
 			#('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
+		group: 'rh'	with: #('bl' 'BL-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
 		group: 'pp' with: #('PetitXml');
@@ -69,5 +70,6 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-CoreWeb-Exporter' with: [ spec requires: #('BL-Model-CoreWeb' 'BL-Model-Exporter-Angular') ];
 		package: 'BL-Model-CoreWeb-Importer' with: [ spec requires: #('pp' 'BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
 		package: 'BL-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('BL-Model-CoreWeb-Importer' 'BL-Model-Importer-Java-Tests') ];
-		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ]
+		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ];
+		package: 'BL-Migration-RH' with: [ spec requires: #('BL-Model-CoreWeb-Importer') ]
 ]
