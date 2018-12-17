@@ -9,8 +9,6 @@ BLUIButton class >> canHandle: anInvocation [
 BLUIButton class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget addAttribute: (BLUILabel new text: (anInvocation parameters
-				at: 1
-				ifAbsent: [ '' ])).
+	widget addAttribute: (BLUILabel new attributeValue: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
 	^ widget
 ]

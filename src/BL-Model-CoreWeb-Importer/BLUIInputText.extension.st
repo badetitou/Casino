@@ -11,7 +11,7 @@ BLUIInputText class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 
 	widget
-		addAttribute: (BLUIPlaceholder new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
+		addAttribute: (BLUIPlaceholder new attributeValue: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
 	
 	^ widget
 ]

@@ -3,12 +3,12 @@ Extension { #name : #BLUIHorizontalLayout }
 { #category : #'*BL-Model-Importer-Java' }
 BLUIHorizontalLayout >> childAttribute [
 	| subset |
-	(self container attributes select: [ :a | a isKindOf: BLUIWidth ]) ifEmpty: [ ^ {  } ] .
-	subset := 12 / (self cell) size.
-				subset := subset < 1
-					ifTrue: [ 1 ]
-					ifFalse: [ subset floor ].
-	^ BLUIClass new text: 'p-col-', (subset asString )
+	(self container attributes select: [ :a | a isKindOf: BLUIWidth ]) ifEmpty: [ ^ {} ].
+	subset := 12 / self cell size.
+	subset := subset < 1
+		ifTrue: [ 1 ]
+		ifFalse: [ subset floor ].
+	^ BLUIClass new attributeValue: 'p-col-' , subset asString
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

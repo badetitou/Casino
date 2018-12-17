@@ -9,7 +9,7 @@ BLUIWidth class >> canHandle: anInvocation [
 BLUIWidth class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
 		name: 'width';
-		text: (self getAttributeValueFrom: anInvocation);
+		attributeValue: (self getAttributeValueFrom: anInvocation);
 		widget: aWidgetInstance;
 		yourself
 ]

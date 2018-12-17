@@ -239,7 +239,7 @@ BLModelExporterAngular >> visitBLUIInputTime: aBLUIInputTime [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUILabel: aBLUILabel [
-	^ self protectString: aBLUILabel text
+	^ self protectString: aBLUILabel attributeValue
 ]
 
 { #category : #visiting }
@@ -280,7 +280,7 @@ BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
 
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIPlaceholder: aBLUIPlaceholder [
-	^ self protectString: aBLUIPlaceholder text
+	^ self protectString: aBLUIPlaceholder attributeValue
 ]
 
 { #category : #visiting }

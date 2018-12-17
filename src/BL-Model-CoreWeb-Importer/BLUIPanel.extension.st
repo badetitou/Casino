@@ -22,7 +22,7 @@ BLUIPanel class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 	widget layout: (BLLayout newCoreLayoutFor: anInvocation).
 	(anInvocation parameters size >= 2)
-		ifTrue: [ widget addAttribute: (BLUIWidth new name: 'width'; text: (anInvocation parameters at: 2) )].
+		ifTrue: [ widget addAttribute: (BLUIWidth new name: 'width'; attributeValue: (anInvocation parameters at: 2) )].
 	^ widget
 ]
 

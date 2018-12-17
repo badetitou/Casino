@@ -10,8 +10,8 @@ BLUIInputRadio class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget parameters at: #type put: 'radio'.
-	widget addAttribute: (BLUIName new nameValue: (anInvocation parameters at: 1 ifAbsent: [ self flag: #todo. 'todo' ])).
-	widget addAttribute: (BLUILabel new text: (anInvocation parameters	at: 2	ifAbsent: [ self flag: #todo. 'todo' ])).
+	widget addAttribute: (BLUIName new attributeValue: (anInvocation parameters at: 1 ifAbsent: [ self flag: #todo. 'todo' ])).
+	widget addAttribute: (BLUILabel new attributeValue: (anInvocation parameters	at: 2	ifAbsent: [ self flag: #todo. 'todo' ])).
 	widget parameters at: #labelPosition put: (anInvocation parameters at: 5 ifAbsent: [ '0' ]).
 	^ widget
 ]

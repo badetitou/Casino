@@ -5,7 +5,7 @@ BLUIParagraph class >> attributeFor: widget fromComponentUtilsForInvocation: anI
 	widget
 		addAttribute:
 			(BLUILabel new
-				text:
+				attributeValue:
 					(anInvocation parameters at: 1 ifAbsent: [ '' ])
 						,
 							((anInvocation parameters at: 2 ifAbsent: [ '' ]) = 'true'
@@ -15,7 +15,10 @@ BLUIParagraph class >> attributeFor: widget fromComponentUtilsForInvocation: anI
 							((anInvocation parameters at: 5 ifAbsent: [ 'true' ]) = 'true'
 								ifTrue: [ ':' ]
 								ifFalse: [ '' ])).
-	widget addAttribute: (BLUIClass new text: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.'))
+	widget
+		addAttribute:
+			(BLUIClass new
+				attributeValue: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.'))
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
@@ -34,15 +37,17 @@ BLUIParagraph class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 	'ComponentUtils' = anInvocation invokedClassName
 		ifTrue: [ self attributeFor: widget fromComponentUtilsForInvocation: anInvocation ]
-		ifFalse: [ widget addAttribute: (BLUILabel new text: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
+		ifFalse: [ widget
+				addAttribute: (BLUILabel new attributeValue: (anInvocation parameters at: 1 ifAbsent: [ '' ])).
 			widget
 				addAttribute:
 					(BLUIClass new
-						text:
+						attributeValue:
 							((anInvocation parameters size = 2
 								ifTrue: [ ((anInvocation parameters at: 2) prefixMatchesRegex: 'BLLabel\..*')
 										ifTrue: [ anInvocation parameters at: 2 ]
 										ifFalse: [ 'NIVEAU2' ] ]
-								ifFalse: [ anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ]) removePrefix: 'BLLabel.')) ].
+								ifFalse: [ anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ])
+								removePrefix: 'BLLabel.')) ].
 	^ widget
 ]

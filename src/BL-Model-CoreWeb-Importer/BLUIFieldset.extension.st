@@ -10,7 +10,7 @@ BLUIFieldset class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget
-		addAttribute: (BLUITitle new text: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
+		addAttribute: (BLUITitle new attributeValue: (anInvocation parameters at: 1 ifAbsent: [ 'todo' ])).
 	
 	((anInvocation invokedClass withSuperclassHierarchy collect: #invokedClassName)
 		includes: 'BLFieldSetPanelDynamic')

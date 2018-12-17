@@ -16,7 +16,7 @@ BLUIInputTime class >> createWidgetFor: anInvocation [
 				ifTrue: [ widget
 						addAttribute:
 							(BLUIValue new
-								text:
+								attributeValue:
 									(anInvocation parameters
 										at: 4;
 										yourself)) ] ].

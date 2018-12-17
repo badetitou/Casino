@@ -10,6 +10,6 @@ BLUIInput class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
 	widget
-		addAttribute: (BLUIValue new text: (anInvocation parameters at: 4 ifAbsent: [ '' ])).
+		addAttribute: (BLUIValue new attributeValue: (anInvocation parameters at: 4 ifAbsent: [ '' ])).
 	^ widget
 ]

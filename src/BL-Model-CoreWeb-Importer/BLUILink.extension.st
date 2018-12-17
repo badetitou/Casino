@@ -12,7 +12,7 @@ BLUILink class >> createWidgetFor: anInvocation [
 	widget
 		addAttribute:
 			(BLUILabel new
-				text:
+				attributeValue:
 					(anInvocation parameters ifNotEmpty: [ :parameters | parameters first ] ifEmpty: [ 'todo' ])).
 	^ widget
 ]
