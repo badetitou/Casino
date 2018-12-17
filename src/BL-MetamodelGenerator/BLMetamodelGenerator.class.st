@@ -71,18 +71,18 @@ BLMetamodelGenerator >> defineClasses [
 BLMetamodelGenerator >> defineNewClasses [
 	action := builder newClassNamed: #Action.
 	actionAppel := builder newClassNamed: #ActionAppel.
-	entity := builder newClassNamed: #OriginedEntity.
-	attribute := builder newClassNamed: #Attribute.
-	actionAttribute := builder newClassNamed: #ActionAttribute.
-	variableAttribute := builder newClassNamed: #VariableAttribute.
-	behavior := builder newClassNamed: #Behavior.
+	entity := builder newClassNamed: #OriginedEntity comment: 'Root entity of the meta-model'.
+	attribute := builder newClassNamed: #Attribute comment: 'I represent a characteritic that can be add to a Widget'.
+	actionAttribute := builder newClassNamed: #ActionAttribute comment: 'I will be removed soon'.
+	variableAttribute := builder newClassNamed: #VariableAttribute comment: 'I will be removed soon'.
+	behavior := builder newClassNamed: #Behavior comment: 'I do the link between this meta-model and the behavioral model (and so the code executed when an event occur)'.
 	serviceAction := builder newClassNamed: #ServiceAction.
-	page := builder newClassNamed: #Page.
+	page := builder newClassNamed: #Page comment: 'I represent the root of the user interface (A Windows, a web page)'.
 	service := builder newClassNamed: #Service.
-	widget := builder newClassNamed: #Widget.
-	uiContainer := builder newClassNamed: #UIContainer.
-	businessPage := builder newClassNamed: #BusinessPage.
-	uiLeaf := builder newClassNamed: #UILeaf
+	widget := builder newClassNamed: #Widget comment: 'I''m the main block of the user interface. Everything in a user interface is a widget with attributes'.
+	uiContainer := builder newClassNamed: #UIContainer comment: 'I''m a widget which can contain other widget (like a panel, a sub-"web page/window", a composite button)'.
+	businessPage := builder newClassNamed: #BusinessPage comment: 'I''m specific to Berger-Levrault (company). Do not use me if you don''t know what you''re doing.'.
+	uiLeaf := builder newClassNamed: #UILeaf comment: 'I reprensent a widget without sub-widget (like a paragraph, a text, a simple button, ...)'
 ]
 
 { #category : #definition }
