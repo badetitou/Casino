@@ -8,6 +8,7 @@ BLUIHeight class >> canHandle: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIHeight class >> createAttributeFrom: anInvocation for: aWidgetInstance [
 	^ self new
+		name: 'height';
 		attributeValue: (self getAttributeValueFrom: anInvocation);
 		widget: aWidgetInstance;
 		yourself

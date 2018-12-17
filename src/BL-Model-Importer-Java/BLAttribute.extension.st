@@ -27,7 +27,7 @@ BLAttribute class >> createAttributeFrom: anInvocation for: aWidgetInstance with
 
 { #category : #'*BL-Model-Importer-Java' }
 BLAttribute class >> getAttributeValueFrom: anInvocation [
-	^ anInvocation parameters at: 1
+	^ anInvocation parameters first
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

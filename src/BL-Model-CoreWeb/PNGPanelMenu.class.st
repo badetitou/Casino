@@ -1,7 +1,7 @@
 Class {
 	#name : #PNGPanelMenu,
 	#superclass : #PrimeNGComponent,
-	#category : 'BL-Model-CoreWeb-Dependency'
+	#category : #'BL-Model-CoreWeb-Dependency'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ I return the class methods you give to me as the source code of thoses methods c
 Class {
 	#name : #BLMoulinetteNullStrategy,
 	#superclass : #BLMoulinetteStrategy,
-	#category : 'BL-Model-Extension'
+	#category : #'BL-Model-Extension'
 }
 
 { #category : #'as yet unclassified' }

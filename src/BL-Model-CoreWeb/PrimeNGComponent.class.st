@@ -1,7 +1,7 @@
 Class {
 	#name : #PrimeNGComponent,
 	#superclass : #WidgetDependency,
-	#category : 'BL-Model-CoreWeb-Dependency'
+	#category : #'BL-Model-CoreWeb-Dependency'
 }
 
 { #category : #'as yet unclassified' }

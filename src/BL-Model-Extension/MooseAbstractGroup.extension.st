@@ -14,6 +14,12 @@ MooseAbstractGroup >> allBLActionAppel [
 ]
 
 { #category : #'*BL-Model-Extension' }
+MooseAbstractGroup >> allBLActionsAttribute [
+	<navigation: 'BL Actions Attribute'>
+	^ self allWithSubTypesOf: BLActionAttribute
+]
+
+{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLAttributes [
 	<navigation: 'BL Attributes'>
 	^ self allWithSubTypesOf: BLAttribute
@@ -70,13 +76,6 @@ MooseAbstractGroup >> allBLUiContainer [
 	
 	<navigation: 'BL UiContainer'>
 	^ self allWithType: BLUIContainer 
-]
-
-{ #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLUiPanel [
-	
-	<navigation: 'BL UiPanel'>
-	^ self allWithSubTypesOf: BLUIPanel 
 ]
 
 { #category : #'*BL-Model-Extension' }

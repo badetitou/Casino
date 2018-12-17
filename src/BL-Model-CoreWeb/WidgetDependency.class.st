@@ -1,7 +1,7 @@
 Class {
 	#name : #WidgetDependency,
 	#superclass : #Object,
-	#category : 'BL-Model-CoreWeb-Dependency'
+	#category : #'BL-Model-CoreWeb-Dependency'
 }
 
 { #category : #'as yet unclassified' }

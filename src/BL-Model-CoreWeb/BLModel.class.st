@@ -1,5 +1,5 @@
 Class {
 	#name : #BLModel,
 	#superclass : #BLVariableAttribute,
-	#category : 'BL-Model-CoreWeb-Attribute'
+	#category : #'BL-Model-CoreWeb-Attribute'
 }

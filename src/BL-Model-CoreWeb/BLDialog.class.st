@@ -1,7 +1,7 @@
 Class {
 	#name : #BLDialog,
 	#superclass : #BLUIContainer,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }

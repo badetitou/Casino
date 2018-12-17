@@ -26,5 +26,5 @@ BLModelExporterAngularBLRHSpecific export: model.
 Class {
 	#name : #BLModelExporterAngularBLRHSpecific,
 	#superclass : #BLModelExporterAngular,
-	#category : 'BL-Model-CoreWeb-Exporter'
+	#category : #'BL-Model-CoreWeb-Exporter'
 }

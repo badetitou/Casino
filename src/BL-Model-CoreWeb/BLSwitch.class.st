@@ -1,7 +1,7 @@
 Class {
 	#name : #BLSwitch,
 	#superclass : #BLInput,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }

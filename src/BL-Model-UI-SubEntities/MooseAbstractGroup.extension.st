@@ -23,7 +23,26 @@ MooseAbstractGroup >> allBLLabel [
 ]
 
 { #category : #'*BL-Model-UI-SubEntities' }
+MooseAbstractGroup >> allBLLinkButton [
+	<navigation: 'BL Button'>
+	^ self allWithType: BLUIButton
+]
+
+{ #category : #'*BL-Model-UI-SubEntities' }
 MooseAbstractGroup >> allBLLinkLabel [
 	<navigation: 'BL Link'>
 	^ self allWithType: BLUILink
+]
+
+{ #category : #'*BL-Model-UI-SubEntities' }
+MooseAbstractGroup >> allBLPanel [
+	<navigation: 'BL Panel'>
+	^ self allWithType: BLUIPanel
+]
+
+{ #category : #'*BL-Model-UI-SubEntities' }
+MooseAbstractGroup >> allBLUiPanel [
+	
+	<navigation: 'BL UiPanel'>
+	^ self allWithSubTypesOf: BLUIPanel 
 ]

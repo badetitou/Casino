@@ -1,7 +1,7 @@
 Class {
 	#name : #BLChart,
 	#superclass : #BLUIContainer,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }

@@ -1,5 +1,5 @@
 Class {
 	#name : #BLClickHandler,
 	#superclass : #BLActionAttribute,
-	#category : 'BL-Model-CoreWeb-Attribute'
+	#category : #'BL-Model-CoreWeb-Attribute'
 }

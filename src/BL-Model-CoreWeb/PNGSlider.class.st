@@ -1,7 +1,7 @@
 Class {
 	#name : #PNGSlider,
 	#superclass : #PrimeNGComponent,
-	#category : 'BL-Model-CoreWeb-Dependency'
+	#category : #'BL-Model-CoreWeb-Dependency'
 }
 
 { #category : #accessing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #BLRichTextArea,
 	#superclass : #BLInput,
-	#category : 'BL-Model-CoreWeb-Widget'
+	#category : #'BL-Model-CoreWeb-Widget'
 }
 
 { #category : #meta }

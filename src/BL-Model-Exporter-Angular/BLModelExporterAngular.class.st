@@ -148,6 +148,16 @@ BLModelExporterAngular >> visitBLSplitButton: aBLSplitButton [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIAbsoluteHeight: aBLUIAbsoluteHeight [
+	^ self protectString: aBLUIAbsoluteHeight attributeValue, 'px'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIAbsoluteWidth: aBLUIAbsoluteWidth [
+	^ self protectString: aBLUIAbsoluteWidth attributeValue , 'px'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIContainer: aBLUIContainer [
 	^ aBLUIContainer layout
 		ifNotNil: [ :layout | self visit: layout ]
@@ -271,6 +281,16 @@ BLModelExporterAngular >> visitBLUIParagraph: aBLUIParagraph [
 { #category : #visiting }
 BLModelExporterAngular >> visitBLUIPlaceholder: aBLUIPlaceholder [
 	^ self protectString: aBLUIPlaceholder text
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIRelativeHeight: aBLUIRelativeHeight [
+	^ self protectString: aBLUIRelativeHeight attributeValue , '%'
+]
+
+{ #category : #visiting }
+BLModelExporterAngular >> visitBLUIRelativeWidth: aBLUIRelativeWidth [
+	^ self protectString: aBLUIRelativeWidth attributeValue , '%'
 ]
 
 { #category : #visiting }

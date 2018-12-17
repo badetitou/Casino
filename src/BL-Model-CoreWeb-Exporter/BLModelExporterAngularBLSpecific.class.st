@@ -38,5 +38,5 @@ BLModelExporterAngularBLSpecific export: model.
 Class {
 	#name : #BLModelExporterAngularBLSpecific,
 	#superclass : #BLModelExporterAngular,
-	#category : 'BL-Model-CoreWeb-Exporter'
+	#category : #'BL-Model-CoreWeb-Exporter'
 }

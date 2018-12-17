@@ -1,7 +1,7 @@
 Class {
 	#name : #BLCalendarShowIcon,
 	#superclass : #BLVariableAttribute,
-	#category : 'BL-Model-CoreWeb-Attribute'
+	#category : #'BL-Model-CoreWeb-Attribute'
 }
 
 { #category : #'as yet unclassified' }
