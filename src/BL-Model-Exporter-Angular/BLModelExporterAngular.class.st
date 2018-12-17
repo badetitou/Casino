@@ -206,6 +206,11 @@ BLModelExporterAngular >> visitBLUIInputDate: aBLUIInputDate [
 ]
 
 { #category : #visiting }
+BLModelExporterAngular >> visitBLUIInputFile: aBLUIInputFile [
+	^ '<' , (aBLUIInputFile getListPropertiesAsStringWith: self) , ' />'
+]
+
+{ #category : #visiting }
 BLModelExporterAngular >> visitBLUIInputMonth: aBLUIInputMonth [
 	^ '<'
 		,

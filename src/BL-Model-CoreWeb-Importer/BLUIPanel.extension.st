@@ -7,8 +7,10 @@ BLUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIPanel class >> canHandle: anInvocation [
-	^ ('.*Panel' asRegex matchesPrefix: anInvocation invokedClassName)
-		or: [ #('FlexTable' 'BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName ]
+	^ 'BLImageUploadPanel' ~= anInvocation invokedClassName
+		and: [ 'BLFileUploadPanel' ~= anInvocation invokedClassName
+				and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: anInvocation invokedClassName)
+						or: [ ('.*Panel' asRegex matchesPrefix: anInvocation invokedClassName) ] ] ]
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
