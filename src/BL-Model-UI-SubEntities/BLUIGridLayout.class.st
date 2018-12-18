@@ -41,11 +41,8 @@ BLUIGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation
 			"widget.setWidget(widget.getRowCount(), ..)"
 			(aXValue includesSubstring: 'getRowCount')
 				ifTrue: [ ^ self maxLevel + 1 ].
-			"self halt."
 			"determine current var value"
-			currentXValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
-				at: ((aXValue removePrefix: '++') removeSuffix: '++')
-				ifAbsent: [ nil ].
+			currentXValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((aXValue removePrefix: '++') removeSuffix: '++') ifAbsent: [ nil ].
 			"If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
 			Else, we'll say it's the max level (but we do not have arguments)"
 			currentXValue
@@ -53,9 +50,8 @@ BLUIGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation
 						ifNotEmpty: [ :localVariable | 
 							| positions |
 							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
-							currentXValue := currentXValue  + (positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ]) size.
-							 ]
-					 ]
+							currentXValue := currentXValue
+								+ (positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ]) size ] ]
 				ifNil: [ currentXValue := self maxLevel ].
 			"widget.setWidget(++var, ..)"
 			(aXValue beginsWith: '++')
@@ -83,21 +79,39 @@ BLUIGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 	aYValue := anInvocation parameters second.
 	^ aYValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
-			| yValue |
+			| currentYValue |
 			(aYValue includesSubstring: 'getCellCount')
 				ifTrue: [ ^ (self atLevel: aYValue parameters first asInteger) size ].
+
+			"determine current var value"
+			currentYValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((aYValue removePrefix: '++') removeSuffix: '++') ifAbsent: [ nil ].
+
+			"If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
+			Else, we'll say it's the max level (but we do not have arguments)"
+			currentYValue
+				ifNotNil: [ (anInvocation from localVariables select: [ :localVariable | localVariable name = ((aYValue removePrefix: '++') removeSuffix: '++') ])
+						ifNotEmpty: [ :localVariable | 
+							| positions |
+							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
+							currentYValue := currentYValue
+								+ (positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ]) size ] ]
+				ifNil: [ currentYValue := (self atLevel: self maxLevel) size ].
+
+
+			"widget.setWidget(++var, ..)"
 			(aYValue beginsWith: '++')
-				ifTrue: [ yValue := self maxLevel + 1.
-					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removePrefix: '++') put: yValue ].
-			(aYValue endsWith: '++')
-				ifTrue: [ yValue := self maxLevel.
-					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removeSuffix: '++') put: yValue + 1 ].
-			yValue
+				ifTrue: [ currentYValue := currentYValue + 1.
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removePrefix: '++') put: currentYValue ]
+				ifFalse: [ (aYValue endsWith: '++')
+						ifTrue: [ 
+							(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removeSuffix: '++') put: currentYValue + 1 ]
+						ifFalse: [ (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aYValue put: currentYValue ] ].
+			"	yValue
 				ifNil: [ yValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aYValue ifAbsentPut: [ 0 ].
 					yValue = 0
 						ifTrue: [ yValue := (self atLevel: self maxLevel) size ] ].
-			yValue ifNil: [ yValue := (self atLevel: self maxLevel) size ].
-			^ yValue ]
+			yValue ifNil: [ yValue := (self atLevel: self maxLevel) size ]."
+			^ currentYValue ]
 		ifNotNil: [ ^ aYValue asInteger ]
 ]
 
