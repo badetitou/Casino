@@ -1,13 +1,13 @@
 "
-SmalltalkImage current garbageCollectMost .
+SmalltalkImage current garbageCollect.
 
 ""Generate BlApp""
-gwtMooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Users\benoit.verhaeghe\Documents\PFE\'.
+gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ2\KitchenL.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ2'.
 
 ""Generate Bl Model""
 gwtModel := MooseModel new name: 'Showroom'; yourself.
-BLMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Users\benoit.verhaeghe\Documents\PFE\Source\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+BLMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
 BLModelExporterAngular export: gwtModel.
 "
