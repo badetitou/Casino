@@ -17,7 +17,7 @@ BLUIGridLayout >> tdAttributeForCell: aCell [
 	cellPosition := ((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) at: aCell).
 	^ ''
 		,
-			(((self privateState attributeAt: #cellVerticalSpan ifAbsentPut: [ Dictionary new ]) select: [ :param | param first = cellPosition first and: [ param second = cellPosition second ] ]) flatCollect: [ :verticalSpan | ' rowspan="' , verticalSpan third asString , '" ' ])
+			(((self privateState attributeAt: #cellVerticalSpan ifAbsentPut: [ Dictionary new ]) select: [ :param | param first = cellPosition first and: [ param second = cellPosition second ] ]) keys flatCollect: [ :verticalSpan | ' rowspan="' , verticalSpan parameters third , '" ' ])
 		,
-			(((self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ]) select: [ :param | param first = cellPosition first and: [ param second = cellPosition second ] ]) flatCollect: [ :verticalSpan | ' colspan="' , verticalSpan third asString , '" ' ])
+			(((self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ]) select: [ :param | param first = cellPosition first and: [ param second = cellPosition second ] ]) keys flatCollect: [ :verticalSpan | ' colspan="' , verticalSpan parameters third , '" ' ])
 ]

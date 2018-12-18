@@ -527,9 +527,27 @@ BLWebModelJava >> modelWidgetInstances [
 
 { #category : #api }
 BLWebModelJava >> postImport [
-	self model allBLWidget do: #postImport.
-	self model allBLLayout do: #postImport.
-	self model allBLPage do: #postImport
+	| currentStep maxStep |
+	currentStep := 0.
+	maxStep := 3.
+	'PostImport'
+		displayProgressFrom: 0
+		to: maxStep
+		during: [ :bar | 
+			currentStep := currentStep + 1.
+			bar current: currentStep.
+			bar label: currentStep printString , '/' , maxStep printString , ' for widgets'.
+			self model allBLWidget do: #postImport displayingProgress: [:wid | 'post import widgets : ', wid name asString ].
+			currentStep := currentStep + 1.
+			bar current: currentStep.
+			bar label: currentStep printString , '/' , maxStep printString , ' for layouts'.
+			self model allBLLayout do: #postImport displayingProgress: [:wid | 'post import layout : ', wid name asString ].
+			currentStep := currentStep + 1.
+			bar current: currentStep.
+			bar label: currentStep printString , '/' , maxStep printString , ' for pages'.
+			self model allBLPage do: #postImport displayingProgress: [:wid | 'post import page : ', wid name asString ].
+	].
+	
 ]
 
 { #category : #private }
