@@ -71,7 +71,7 @@ BLUIGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation
 										or: [ (anInvocation from sourceAnchor copyFrom: val to: val + localVariable first name size - 1 + 2)
 												= (localVariable first name , '++') ])
 										ifTrue: [ currentXValue := currentXValue + 1 ]
-										ifFalse: [ "self halt."] ] ] ]
+										ifFalse: [ self haltIf: [localVariable first incomingAccesses anySatisfy: [:access | access sourceAnchor startPos = val] ] ] ] ] ]
 				ifNil: [ currentXValue := self maxLevel ].
 			"widget.setWidget(++var, ..)"
 			(aXValue beginsWith: '++')
@@ -118,8 +118,16 @@ BLUIGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 						ifNotEmpty: [ :localVariable | 
 							| positions |
 							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
-							currentYValue := currentYValue
-								+ (positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ]) size ] ]
+							positions := positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
+							positions
+								do: [ :val | 
+									"if the usage is something like ++var or var++, we increment the currentXValue"
+									((anInvocation from sourceAnchor copyFrom: val - 2 to: val + localVariable first name size - 1) = ('++' , localVariable first name)
+										or: [ (anInvocation from sourceAnchor copyFrom: val to: val + localVariable first name size - 1 + 2) = (localVariable first name , '++') ])
+										ifTrue: [ currentYValue := currentYValue + 1 ]
+										ifFalse: [ self
+												haltIf: [ localVariable first incomingAccesses
+														anySatisfy: [ :access | access sourceAnchor startPos = val ] ] ] ] ] ]
 				ifNil: [ currentYValue := (self atLevel: self maxLevel) size ].
 
 
@@ -128,8 +136,7 @@ BLUIGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 				ifTrue: [ currentYValue := currentYValue + 1.
 					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removePrefix: '++') put: currentYValue ]
 				ifFalse: [ (aYValue endsWith: '++')
-						ifTrue: [ 
-							(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removeSuffix: '++') put: currentYValue + 1 ]
+						ifTrue: [ (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aYValue removeSuffix: '++') put: currentYValue + 1 ]
 						ifFalse: [ (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aYValue put: currentYValue ] ].
 			"	yValue
 				ifNil: [ yValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aYValue ifAbsentPut: [ 0 ].
