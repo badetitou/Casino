@@ -9,8 +9,8 @@ String >> extractParameters [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
-String >> findAllOccurrencesOfVariableNamed: substring [ 
-	^ (('([^\w]?)',substring,'[^\w]') asRegex matchingRangesIn: self) collect: [:a | a first ].
+String >> findAllOccurrencesOfVariableNamed: substring [
+	^ (('([^\w]?)',substring,'[^\w]') asRegex matchingRangesIn: self) collect: [:a | a second ].
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
@@ -65,4 +65,24 @@ String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [
 	token := ts contents.
 	(tokens isEmpty and: [ token isEmpty ]) ifFalse: [ tokens add: token ].
 	^ tokens
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
+String >> removeComment [
+	
+	^ self replaceAllRegex: ('//[[:graph:] ]*') withMultiples: ' '
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
+String >> replaceAllRegex: aRegexString withMultiples: anotherSubstring [
+	| tempString aCollection |
+	tempString := self.
+	aCollection := aRegexString asRegex matchesIn: tempString.
+	aCollection
+		do: [ :subString | 
+			| replaceString |
+			replaceString := ''.
+			1 to: subString size do: [:number |  replaceString := replaceString , anotherSubstring ].
+			tempString := tempString copyReplaceAll: subString with: replaceString ].
+	^ tempString
 ]
