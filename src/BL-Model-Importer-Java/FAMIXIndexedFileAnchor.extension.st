@@ -10,7 +10,6 @@ FAMIXIndexedFileAnchor >> copyFrom: aStartPos to: anEndPos [
 { #category : #'*BL-Model-Importer-Java' }
 FAMIXIndexedFileAnchor >> findAllOccurrencesOfVariableNamed: aString [
 	"the name of the variable. Cannot be surrounded by other 'word character' (else we can grep others variables)"
-	self halt. 
 	^ (self
 		sourceText
 		removeComment
