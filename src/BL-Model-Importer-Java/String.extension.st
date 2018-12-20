@@ -10,7 +10,8 @@ String >> extractParameters [
 
 { #category : #'*BL-Model-Importer-Java' }
 String >> findAllOccurrencesOfVariableNamed: substring [
-	^ (('([^\w]?)',substring,'[^\w]') asRegex matchingRangesIn: self) collect: [:a | a second ].
+	^ (('([^\w])' , substring , '[^\w]') asRegex matchingRangesIn: self)
+		collect: [ :a | a second ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
