@@ -9,7 +9,7 @@ Class {
 
 { #category : #meta }
 BLUIInput class >> annotation [
-	<MSEClass: #BLUIInput super: #BLUIContainer>
+	<MSEClass: #BLUIInput super: #BLUILeaf>
 	<package: #BLWebModelJava>
 	^ self
 ]
