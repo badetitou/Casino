@@ -15,6 +15,24 @@ String >> findAllOccurrencesOfVariableNamed: substring [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+String >> findNext: aCharacter for: startIndex [
+	"assume (self at: startIndex) is ${.  Find the matching $}, allowing parentheses to nest."
+
+	| pos nestLevel |
+	pos := startIndex + 1.
+	nestLevel := 0.
+	[ pos <= self size ]
+		whileTrue: [ ((self at: pos) = ${ or: [ (self at: pos) = $( ])
+				ifTrue: [ nestLevel := nestLevel + 1 ].
+			((self at: pos) = $} or: [ (self at: pos) = $) ])
+				ifTrue: [ nestLevel := nestLevel - 1 ].
+			((self at: pos) = aCharacter and: [nestLevel = 0])
+				ifTrue: [ ^ pos ].
+			pos := pos + 1 ].
+	^ self size + 1
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [ 
 	"Answer a collection of Strings separated by the delimiters, where  
 	delimiters is a Character or collection of characters. Two delimiters in a  

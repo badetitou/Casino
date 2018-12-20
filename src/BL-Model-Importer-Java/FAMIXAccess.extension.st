@@ -14,6 +14,11 @@ FAMIXAccess >> allUsages [
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
+FAMIXAccess >> endAffectationPos [
+	^ self from sourceAnchor completeText findNext: $; for: self sourceAnchor startPos
+]
+
+{ #category : #'*BL-Model-Importer-Java' }
 FAMIXAccess >> isReturned [
 	^ self from declaredType isNotNil and: [self from declaredType isPrimitiveType not and: [((self from accesses asOrderedCollection select: [:access | access sourceAnchor isNotNil]) sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ]) last = self]]
 ]
