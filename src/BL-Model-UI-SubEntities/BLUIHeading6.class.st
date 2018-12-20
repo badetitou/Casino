@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIHeading6 class >> annotation [
-	<MSEClass: #BLUIHeading6 super: #BLUIContainer>
+	<MSEClass: #BLUIHeading6 super: #BLUILeaf>
 	<package: #BLWebModelJava>
 	^ self
 ]

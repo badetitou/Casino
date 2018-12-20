@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUILink class >> annotation [
-	<MSEClass: #BLUILink super: #BLUIContainer>
+	<MSEClass: #BLUILink super: #BLUILeaf>
 	<package: #BLWebModelJava>
 	^ self
 ]

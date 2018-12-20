@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUIParagraph class >> annotation [
-	<MSEClass: #BLUIParagraph super: #BLUIContainer>
+	<MSEClass: #BLUIParagraph super: #BLUILeaf>
 	<package: #BLWebModelJava>
 	^ self
 ]

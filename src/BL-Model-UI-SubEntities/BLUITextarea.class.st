@@ -6,7 +6,7 @@ Class {
 
 { #category : #meta }
 BLUITextarea class >> annotation [
-	<MSEClass: #BLUITextarea super: #BLUIContainer>
+	<MSEClass: #BLUITextarea super: #BLUILeaf>
 	<package: #BLWebModelJava>
 	^ self
 ]
