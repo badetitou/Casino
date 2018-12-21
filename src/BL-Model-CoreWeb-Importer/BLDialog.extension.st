@@ -8,13 +8,19 @@ BLDialog class >> canHandle: anInvocation [
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLDialog class >> createWidgetFor: anInvocation [
 	| widget |
-	widget := super createWidgetFor: anInvocation.
-	widget parameters
-		at: #header
+	widget := super
+		createWidgetFor:
+			anInvocation.
+	widget
+		parameters
+		at:
+			#header
 		put:
-			(anInvocation parameters
+			(anInvocation
+				parameters
 				at: 1
-				ifAbsent: [ self flag: #todo.
+				ifAbsent:
+					[ 
 					'todo' ]).
 	^ widget
 ]

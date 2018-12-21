@@ -27,9 +27,9 @@ BLUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLUIGridLayout >> extractAddingPosition: anAssocWidgetArrayOrArrayValue [
-	^ anAssocWidgetArrayOrArrayValue key isInvocation
-		ifTrue: [ anAssocWidgetArrayOrArrayValue key sourceAnchor ifNil: [0] ifNotNil: [:sourceText | sourceText startPos ] ]
-		ifFalse: [ anAssocWidgetArrayOrArrayValue key widget ifNotNil: [ :widget | widget addingPosition ] ifNil: [ anAssocWidgetArrayOrArrayValue value sourceAnchor startPos ] ]
+	^  anAssocWidgetArrayOrArrayValue value sourceAnchor
+				ifNil: [ 0 ]
+				ifNotNil: [ :sourceText | sourceText startPos ] 
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
@@ -40,23 +40,32 @@ BLUIGridLayout >> getLayoutAttribute [
 { #category : #'*BL-Model-Importer-Java' }
 BLUIGridLayout >> postImport [
 	"try to dispose the elements by looking the addMethod position and the call of the met getNumberOfRow"
+
 	| sortedAssociations |
 	sortedAssociations := self sortedAssociations.
-	sortedAssociations ifNotEmpty: [ 
-		| currentInvocation previousInvocations |
-		currentInvocation := sortedAssociations first value.
-		sortedAssociations first value: (self determineXandYfrom: currentInvocation andPrevious: nil).
-		previousInvocations := currentInvocation.
-	2 to: sortedAssociations size do: 
-		[ :index | 
-			currentInvocation := (sortedAssociations at: index) value.
-			(sortedAssociations at: index) value: (self determineXandYfrom: currentInvocation andPrevious: previousInvocations).
-			previousInvocations := currentInvocation ]]
+	sortedAssociations
+		ifNotEmpty: [ | currentInvocation previousInvocations |
+			currentInvocation := sortedAssociations first value.
+			sortedAssociations first
+				value: (self determineXandYfrom: currentInvocation andPrevious: nil).
+			previousInvocations := currentInvocation.
+			2 to: sortedAssociations size do: [ :index | 
+				currentInvocation := (sortedAssociations at: index) value.
+				(sortedAssociations at: index)
+					value: (self determineXandYfrom: currentInvocation andPrevious: previousInvocations).
+				previousInvocations := currentInvocation ] ].
+	"add the attribute to the widgets"
+	(self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
+		associations
+		do:
+			[ :assoc | (self atPositionX: assoc value first Y: assoc value second) do: [ :widget | widget   addAttribute: assoc key ] ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
 BLUIGridLayout >> sortedAssociations [
 	^ {(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
+		associations.
+(self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
 		associations.
 	(self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ])
 		associations.

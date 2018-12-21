@@ -11,7 +11,7 @@ BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
 
 { #category : #factory }
 BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc forCellOf: widget [
-	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
+	^ (BLAttribute newFrom: invoc for: nil withImporter: self) ifNotNil: [:attribute | widget layout at: invoc setAttribute: attribute  ]
 ]
 
 { #category : #factory }

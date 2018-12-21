@@ -10,8 +10,15 @@ BLUIGridLayout >> accept: anExporter [
 ]
 
 { #category : #'as yet unclassified' }
+BLUIGridLayout >> at: anInvocation setAttribute: attribute [
+	^ (self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
+		add: attribute -> anInvocation
+]
+
+{ #category : #'as yet unclassified' }
 BLUIGridLayout >> at: anInvocation setHorizontalSpan: span [
-	^ (self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ]) add: anInvocation -> anInvocation
+	^ (self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ])
+		add: anInvocation -> anInvocation
 ]
 
 { #category : #'as yet unclassified' }
@@ -29,6 +36,15 @@ BLUIGridLayout >> atLevelSorted: level [
 	^ ((((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		select: [ :position | (position at: 1) = level ]) associationsCollect: #yourself) sort: [ :a :b | a value second < b value second ])
 		collect: #key
+]
+
+{ #category : #'as yet unclassified' }
+BLUIGridLayout >> atPositionX: anX Y: anY [
+	^ (self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
+		associations
+		select:
+			[ :assoc | assoc value isArray and: [ assoc value first = anX and: [ assoc value second = anY ] ] ]
+		thenCollect: #key
 ]
 
 { #category : #'as yet unclassified' }

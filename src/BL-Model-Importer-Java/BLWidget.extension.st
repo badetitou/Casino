@@ -36,7 +36,10 @@ BLWidget >> createAttributeFromAngularInvocation: anInvocation withImporter: anI
 { #category : #'*BL-Model-Importer-Java' }
 BLWidget class >> createWidgetFor: anInvocation [
 	^ self new
-		realClass: anInvocation invokedClass;
+		realClass:
+			((#(#FactoryBLLabel #ComponentUtils) includes: anInvocation invokedClassName)
+				ifTrue: [ nil ]
+				ifFalse: [ anInvocation invokedClass ]);
 		source: anInvocation;
 		yourself
 ]

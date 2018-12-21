@@ -6,7 +6,10 @@ BLCoreRowSpan class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLCoreRowSpan class >> createAttributeFrom: anInvocation for: aWidgetInstance withImporter: anImporter [
-	^ aWidgetInstance layout
-		at: anInvocation setVerticalSpan: anInvocation parameters third
+BLCoreRowSpan class >> createAttributeFrom: anInvocation for: aWidgetInstance [
+	^ self new
+		source: anInvocation;
+		attributeValue: (anInvocation parameters third);
+		widget: aWidgetInstance;
+		yourself
 ]
