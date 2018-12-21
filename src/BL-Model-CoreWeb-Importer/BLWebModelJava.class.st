@@ -609,7 +609,7 @@ BLWebModelJava >> widgetFactoryInvocation [
 { #category : #accessing }
 BLWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
-	^ (self model allBLWidget select: [ :el | el variable = aVariable ]) at: 1 ifAbsent: nil
+	^ (self model allBLWidget select: [ :el | ( el variable = aVariable ) or: [ aVariable typeScope = el realClass ] ]) at: 1 ifAbsent: nil
 ]
 
 { #category : #accessing }

@@ -18,7 +18,8 @@ BLCoreCellWidth class >> createAttributeFrom: anInvocation for: aWidgetInstance 
 		widgetInVariable:
 			((anInvocation from localVariables
 				select: [ :localVariable | localVariable name = (anInvocation parameters at: 1) ])
-				ifNotEmpty: [ :correspondingVariable | correspondingVariable first ]))
+				ifNotEmpty: [ :correspondingVariable | correspondingVariable first ]
+				ifEmpty: [nil]))
 		ifNotNil: [:widget | ^ BLUIWidth new
 				name: 'cellwidth';
 				attributeValue: (anInvocation parameters at: 2);
