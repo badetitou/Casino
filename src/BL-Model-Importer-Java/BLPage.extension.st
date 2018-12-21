@@ -2,8 +2,24 @@ Extension { #name : #BLPage }
 
 { #category : #'*BL-Model-Importer-Java' }
 BLPage >> computeSubtitle [
-	subtitle := (((self source withSuperclassHierarchy flatCollect: #outgoingInvocations)
-		select: [ :invoc | 'setPhaseSubtitle(*' match: invoc signature ]) at: 1 ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
+	subtitle := (((self
+		source
+		withSuperclassHierarchy
+		flatCollect:
+			#outgoingInvocations)
+		select:
+			[ :invoc | 
+			invoc
+						signature beginsWith: 
+			'setPhaseSubtitle('
+					 ])
+		at: 1
+		ifAbsent:
+			[ ^ '' ])
+		parameters
+		at: 1
+		ifAbsent:
+			[ '' ]
 ]
 
 { #category : #'*BL-Model-Importer-Java' }
