@@ -10,6 +10,11 @@ BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
 ]
 
 { #category : #factory }
+BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc forCellOf: widget [
+	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
+]
+
+{ #category : #factory }
 BLWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
 	self model
 		silentlyAdd:

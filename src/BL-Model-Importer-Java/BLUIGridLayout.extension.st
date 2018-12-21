@@ -56,9 +56,13 @@ BLUIGridLayout >> postImport [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLUIGridLayout >> sortedAssociations [
-	^ {((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) associations "select: [ :assoc | assoc key widget isNotNil ]" ).
-	(self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ]) associations.
-	(self privateState attributeAt: #cellVerticalSpan ifAbsentPut: [ Dictionary new ]) associations} flatten
-		sort:
-			[ :assocWidgetArrayOrArrayValue1 :assocWidgetArrayOrArrayValue2 | (self extractAddingPosition: assocWidgetArrayOrArrayValue1) < (self extractAddingPosition: assocWidgetArrayOrArrayValue2) ]
+	^ {(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
+		associations.
+	(self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ])
+		associations.
+	(self privateState attributeAt: #cellVerticalSpan ifAbsentPut: [ Dictionary new ])
+		associations} flatten
+		sort: [ :assocWidgetArrayOrArrayValue1 :assocWidgetArrayOrArrayValue2 | 
+			(self extractAddingPosition: assocWidgetArrayOrArrayValue1)
+				< (self extractAddingPosition: assocWidgetArrayOrArrayValue2) ]
 ]

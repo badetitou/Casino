@@ -1,11 +1,6 @@
 Extension { #name : #BLUIContainer }
 
 { #category : #'*BL-Model-Extension' }
-BLUIContainer >> canHaveAttribute: blAttributeClass [
-	^ true
-]
-
-{ #category : #'*BL-Model-Extension' }
 BLUIContainer >> isContainer [
 	^ true
 ]

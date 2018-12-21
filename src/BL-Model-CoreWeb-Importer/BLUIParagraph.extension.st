@@ -27,11 +27,6 @@ BLUIParagraph class >> canHandle: anInvocation [
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLUIParagraph >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLUIDisabled
-]
-
-{ #category : #'*BL-Model-CoreWeb-Importer' }
 BLUIParagraph class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.

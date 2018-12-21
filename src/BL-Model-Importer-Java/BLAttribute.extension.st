@@ -7,7 +7,7 @@ BLAttribute class >> canHandle: aFAMIXElement [
 
 { #category : #'*BL-Model-Importer-Java' }
 BLAttribute class >> canHandle: anInvocation for: aWidgetInstance [
-	^ (aWidgetInstance canHaveAttribute: self) and: [ self canHandle: anInvocation ]
+	^  self canHandle: anInvocation 
 ]
 
 { #category : #'*BL-Model-Importer-Java' }

@@ -24,11 +24,6 @@ BLWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*BL-Model-Extension' }
-BLWidget >> canHaveAttribute: blAttributeClass [
-	^ true
-]
-
-{ #category : #'*BL-Model-Extension' }
 BLWidget >> isContainer [
 	^ false
 ]

@@ -142,14 +142,9 @@ BLWebModelJava >> addWidgetAttributes [
 			widget variable receivingInvocations
 				do: [ :invoc | 
 					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil ])
-						ifTrue: [ self factory createAttributeFromInvocation: invoc previous for: widget ]
+						ifTrue: [ self factory createAttributeFromInvocation: invoc previous forCellOf: widget ]
 						ifFalse: [ self factory createAttributeFromInvocation: invoc for: widget ] ] ]
-		displayingProgress:
-			[ :widget | 
-			'compute attribute of '
-				,
-					widget
-						asString ]
+		displayingProgress: [ :widget | 'compute attribute of ' , widget asString ]
 		every: 1000
 ]
 

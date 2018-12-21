@@ -4,8 +4,3 @@ Extension { #name : #BLUITable }
 BLUITable class >> canHandle: anInvocation [
 	^ #('BLTableList') includes: anInvocation invokedClassName
 ]
-
-{ #category : #'*BL-Model-CoreWeb-Importer' }
-BLUITable >> canHaveAttribute: blAttributeClass [
-	^ blAttributeClass ~= BLUIDisabled
-]
