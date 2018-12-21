@@ -16,17 +16,6 @@ BLUIGridLayout >> at: anInvocation setAttribute: attribute [
 ]
 
 { #category : #'as yet unclassified' }
-BLUIGridLayout >> at: anInvocation setHorizontalSpan: span [
-	^ (self privateState attributeAt: #cellHorizontalSpan ifAbsentPut: [ Dictionary new ])
-		add: anInvocation -> anInvocation
-]
-
-{ #category : #'as yet unclassified' }
-BLUIGridLayout >> at: anInvocation setVerticalSpan: span [
-	^ (self privateState attributeAt: #cellVerticalSpan ifAbsentPut: [ Dictionary new ]) add: anInvocation -> anInvocation
-]
-
-{ #category : #'as yet unclassified' }
 BLUIGridLayout >> atLevel: level [
 	^ (self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) select: [ :position | position isArray and: [ (position first) = level ] ]
 ]
