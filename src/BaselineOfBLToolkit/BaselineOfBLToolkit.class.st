@@ -19,10 +19,11 @@ BaselineOfBLToolkit >> baseline: spec [
 BaselineOfBLToolkit >> defineDependencies: spec [
 	spec
 		baseline: 'FAST'
-		with: [
-			spec
+		with: [ spec
 				loads: 'SmaCC';
-				repository: 'github://moosetechnology/FAST:master/src' ]
+				repository: 'github://moosetechnology/FAST:master/src' ].
+			spec package: 'PetitXml' with: [		spec
+      spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
 ]
 
 { #category : #baselines }
@@ -40,6 +41,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'rh' with: #('bl' 'BL-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
+		group: 'pp' with: #('PetitXml');
 		group: 'all' with: #('bl' 'tests' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
 
