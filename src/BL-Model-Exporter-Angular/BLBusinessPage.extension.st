@@ -20,7 +20,7 @@ BLBusinessPage >> calledBehavior [
 { #category : #'*BL-Model-Exporter-Angular' }
 BLBusinessPage >> collectPhaseCalled [
 	
-	^ (self recursiveWidgets flattened flatCollect: [ :localWidget | localWidget actions collect: #call thenSelect: #isNotNil  ]) asSet asOrderedCollection
+	^ (self recursiveWidgets flattened flatCollect: [ :localWidget | (localWidget actions select: #isActionAppel thenCollect: #call) select: #isNotNil  ]) asSet asOrderedCollection
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }

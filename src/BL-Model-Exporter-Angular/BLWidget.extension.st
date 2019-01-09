@@ -2,7 +2,7 @@ Extension { #name : #BLWidget }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLWidget >> actionsTag [
-	^ (self actions reject: [ :action | action call isNil ])
+	^ (self actions reject: [ :action | (action isKindOf: BLActionAppel) not or: [ action call isNil ] ])
 		flatCollect: [ :actionAppel | ' ', actionAppel getAngularRepresentation ]
 ]
 
