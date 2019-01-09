@@ -17,35 +17,29 @@ BaselineOfBLToolkit >> baseline: spec [
 
 { #category : #baselines }
 BaselineOfBLToolkit >> defineDependencies: spec [
-	spec package: 'PetitXml' with: [
-      spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
-    spec import: 'PetitXml'.
-	"spec
-		configuration: 'PetitParser'
-		with: [ spec
-				loads: 'Parser';
-				repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ]"
+	spec
+		baseline: 'FAST'
+		with: [
+			spec
+				loads: 'SmaCC';
+				repository: 'github://moosetechnology/FAST:master/src' ]
 ]
 
 { #category : #baselines }
 BaselineOfBLToolkit >> defineGroups: spec [
 	spec
-		group: 'default'
-			with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
+		group: 'default' with: #('core-extented' 'BL-Model-Exporter-Angular' 'BL-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'BL-Model-Importer-Java-Tests');
 		group: 'model' with: #('BL-MetamodelGenerator' 'BL-Model');
-		group: 'core'
-			with: #('model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
+		group: 'core' with: #('model' 'BL-Model-Exporter' 'BL-Model-Importer' 'BL-Model-Extension');
 		group: 'core-extented' with: #('core' 'BL-Model-Query' 'BL-Model-UI-SubEntities');
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
-		group: 'bl'
-			with:
-			#('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
-		group: 'rh'	with: #('bl' 'BL-Migration-RH');
+		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
+		group: 'fast-bl' with: #('bl' 'CSN-UIFASTBinding');
+		group: 'rh' with: #('bl' 'BL-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
-		group: 'pp' with: #('PetitXml');
 		group: 'all' with: #('bl' 'tests' 'BL-Model-Query' 'BL-MetamodelGenerator')
 ]
 
@@ -71,5 +65,6 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-CoreWeb-Importer' with: [ spec requires: #('pp' 'BL-Model-CoreWeb' 'BL-Model-Importer-Java') ];
 		package: 'BL-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('BL-Model-CoreWeb-Importer' 'BL-Model-Importer-Java-Tests') ];
 		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ];
-		package: 'BL-Migration-RH' with: [ spec requires: #('BL-Model-CoreWeb-Importer') ]
+		package: 'BL-Migration-RH' with: [ spec requires: #('BL-Model-CoreWeb-Importer') ];
+		package: 'CSN-UIFASTBinding' with: [ spec requires: #('BL-Model' 'FAST') ]
 ]
