@@ -23,7 +23,8 @@ Class {
 		'behavior',
 		'page',
 		'businessPage',
-		'actionService'
+		'actionService',
+		'serviceAPI'
 	],
 	#category : #'BL-MetamodelGenerator'
 }
@@ -77,6 +78,7 @@ BLMetamodelGenerator >> defineNewClasses [
 	actionService := builder newClassNamed: #ActionService comment: 'I reprensent a call to a distant service'.
 	page := builder newClassNamed: #Page comment: 'I represent the root of the user interface (A Windows, a web page)'.
 	service := builder newClassNamed: #Service.
+	serviceAPI := builder newClassNamed: #ServiceAPI.
 	widget := builder newClassNamed: #Widget comment: 'I''m the main block of the user interface. Everything in a user interface is a widget with attributes'.
 	uiContainer := builder newClassNamed: #UIContainer comment: 'I''m a widget which can contain other widget (like a panel, a sub-"web page/window", a composite button)'.
 	businessPage := builder newClassNamed: #BusinessPage comment: 'I''m specific to Berger-Levrault (company). Do not use me if you don''t know what you''re doing.'.
@@ -90,7 +92,7 @@ BLMetamodelGenerator >> defineNewClassesHierarchy [
 	entity --|> #TWithSourceAnchor.
 	entity <|-- action.
 	entity <|-- attribute.
-	entity <|-- behavior.
+	entity <|-- serviceAPI.
 	entity <|-- service.
 	entity <|-- widget.
 	widget <|-- uiContainer.
@@ -124,7 +126,7 @@ BLMetamodelGenerator >> defineRelations [
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
 	((page property: #caller) -* (actionAppel property: #call)) withNavigation.
 	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
-	((service property: #actions) <>-* (actionService property: #serviceOwner)) withNavigation
+	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)) withNavigation
 ]
 
 { #category : #definition }

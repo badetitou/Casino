@@ -1,3 +1,6 @@
+"
+I do the link between UI and Behavioural meta-model (and I represent some specials other behavior)
+"
 Class {
 	#name : #BLAction,
 	#superclass : #BLOriginedEntity,

@@ -1,7 +1,7 @@
-Extension { #name : #BLServiceAction }
+Extension { #name : #BLServiceAPI }
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLServiceAction >> exportCode [
+BLServiceAPI >> exportCode [
 	^ '    public ' , self name, self mooseID asString 
 		,
 			'(): Observable<Object> {
@@ -11,6 +11,6 @@ BLServiceAction >> exportCode [
 ]
 
 { #category : #'*BL-Model-Exporter-Angular' }
-BLServiceAction >> initializeVariable [
+BLServiceAPI >> initializeVariable [
 	^ 'private ' , self serviceOwner getVariableName , ': ' , self serviceOwner uniqueName
 ]

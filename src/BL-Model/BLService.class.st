@@ -2,7 +2,7 @@ Class {
 	#name : #BLService,
 	#superclass : #BLOriginedEntity,
 	#instVars : [
-		'#actions => FMMany type: #BLServiceAction opposite: #serviceOwner'
+		'#actions => FMMany type: #BLServiceAPI opposite: #serviceOwner'
 	],
 	#category : #'BL-Model-Entities'
 }

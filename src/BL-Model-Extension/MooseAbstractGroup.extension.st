@@ -54,9 +54,9 @@ MooseAbstractGroup >> allBLService [
 ]
 
 { #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLServiceAction [
-	<navigation: 'BL Service Action'>
-	^ self allWithType: BLServiceAction
+MooseAbstractGroup >> allBLServiceAPI [
+	<navigation: 'BLServiceAPI'>
+	^ self allWithSubTypesOf: BLServiceAPI
 ]
 
 { #category : #'*BL-Model-Extension' }

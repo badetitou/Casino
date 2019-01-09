@@ -25,14 +25,17 @@ Class {
 
 { #category : #adding }
 BLWebModelJava >> addLinkBetweenServiceAndAttribute [
-	self model allBLServiceAction
+
+	self flag: 'This part was never really correct -> why binding an action with a call to the API -> we should create the Behavioural model and then reify to the call
+		between the Behavioural model and the Business one (or whatever contains this information)'.
+"	self model allBLServiceAPI 
 		do: [ :serviceAction | 
 			| classContainer |
 			classContainer := serviceAction source incomingInvocations collect: [ :invocation | invocation from belongsTo ].
 			(self model allBLAction select: [ :action | classContainer includes: action source ])
 				do: [ :action | action addBehavior: serviceAction ] ]
 		displayingProgress: [ :serviceAction | 'for ' , serviceAction asString ]
-		every: 1000
+		every: 1000"
 ]
 
 { #category : #adding }
@@ -274,7 +277,7 @@ BLWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 	| listOfSubAsyncClass |
 	listOfSubAsyncClass := {} "self getAsyncClassFrom: aServiceClass".
 	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor isNil or: [ method sourceAnchor sourceText isEmpty "reject method from src/target/... In source"] ]
-		thenCollect: [ :method | BLServiceAction newFor: method ]
+		thenCollect: [ :method | BLServiceAPI newFor: method ]
 ]
 
 { #category : #accessing }

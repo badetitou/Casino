@@ -1,6 +1,6 @@
 Class {
-	#name : #BLServiceAction,
-	#superclass : #BLBehavior,
+	#name : #BLServiceAPI,
+	#superclass : #BLOriginedEntity,
 	#instVars : [
 		'#serviceOwner => FMOne type: #BLService opposite: #actions'
 	],
@@ -8,36 +8,36 @@ Class {
 }
 
 { #category : #meta }
-BLServiceAction class >> annotation [
+BLServiceAPI class >> annotation [
 
-	<MSEClass: #ServiceAction super: #BLBehavior>
+	<MSEClass: #ServiceAPI super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #generator }
-BLServiceAction class >> generatedSlotNames [
+BLServiceAPI class >> generatedSlotNames [
 	<generated>
-	'BLServiceAction class>>#generatedSlotNames'.
+	'BLServiceAPI class>>#generatedSlotNames'.
 	^ #(serviceOwner)
 ]
 
 { #category : #generator }
-BLServiceAction class >> generatedTraitNames [
+BLServiceAPI class >> generatedTraitNames [
 	<generated>
 	^ #()
 ]
 
 { #category : #meta }
-BLServiceAction class >> requirements [
+BLServiceAPI class >> requirements [
 
 	<generated>
 	^ { BLService }
 ]
 
 { #category : #accessing }
-BLServiceAction >> belongsTo [
+BLServiceAPI >> belongsTo [
 
 	<generated>
 	^ self serviceOwner
@@ -45,7 +45,7 @@ BLServiceAction >> belongsTo [
 ]
 
 { #category : #accessing }
-BLServiceAction >> belongsTo: anObject [
+BLServiceAPI >> belongsTo: anObject [
 
 	<generated>
 	self serviceOwner: anObject
@@ -53,7 +53,7 @@ BLServiceAction >> belongsTo: anObject [
 ]
 
 { #category : #accessing }
-BLServiceAction >> serviceOwner [
+BLServiceAPI >> serviceOwner [
 
 	<generated>
 	<container>
@@ -62,7 +62,7 @@ BLServiceAction >> serviceOwner [
 ]
 
 { #category : #accessing }
-BLServiceAction >> serviceOwner: anObject [
+BLServiceAPI >> serviceOwner: anObject [
 
 	<generated>
 	serviceOwner := anObject
@@ -70,7 +70,7 @@ BLServiceAction >> serviceOwner: anObject [
 ]
 
 { #category : #navigation }
-BLServiceAction >> serviceOwnerGroup [
+BLServiceAPI >> serviceOwnerGroup [
 
 	<generated>
 	<navigation: 'ServiceOwner'>

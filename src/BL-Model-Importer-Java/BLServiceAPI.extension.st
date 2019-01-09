@@ -1,7 +1,7 @@
-Extension { #name : #BLServiceAction }
+Extension { #name : #BLServiceAPI }
 
 { #category : #'*BL-Model-Importer-Java' }
-BLServiceAction class >> newFor: aFAMIXMethod [
+BLServiceAPI class >> newFor: aFAMIXMethod [
 	^ self new
 		name: aFAMIXMethod name;
 		source: aFAMIXMethod;
