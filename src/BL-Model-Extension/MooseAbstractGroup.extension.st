@@ -20,12 +20,6 @@ MooseAbstractGroup >> allBLAttributes [
 ]
 
 { #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLBehavior [
-	<navigation: 'Sub-Behavior'>
-	^ self allWithSubTypesOf: BLBehavior
-]
-
-{ #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLCell [
 	<navigation: 'BL Cell'>
 	^ self allWithType: BLCell 

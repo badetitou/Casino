@@ -5,13 +5,19 @@ Class {
 }
 
 { #category : #factory }
-BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc for: widget [
+BLWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
+	^ (BLAction newFrom: aClass for: widget withImporter: self) ifNotNil: [ :action | self model silentlyAdd: action ]
+]
+
+{ #category : #factory }
+BLWidgetFactoryAngular >> createAttributeFrom: invoc for: widget [
 	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
 ]
 
 { #category : #factory }
-BLWidgetFactoryAngular >> createAttributeFromInvocation: invoc forCellOf: widget [
-	^ (BLAttribute newFrom: invoc for: nil withImporter: self) ifNotNil: [:attribute | widget layout at: invoc setAttribute: attribute  ]
+BLWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
+	^ (BLAttribute newFrom: invoc for: nil withImporter: self)
+		ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
 ]
 
 { #category : #factory }

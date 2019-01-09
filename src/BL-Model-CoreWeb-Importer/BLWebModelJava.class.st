@@ -29,7 +29,7 @@ BLWebModelJava >> addLinkBetweenServiceAndAttribute [
 		do: [ :serviceAction | 
 			| classContainer |
 			classContainer := serviceAction source incomingInvocations collect: [ :invocation | invocation from belongsTo ].
-			(self model allBLActionsAttribute select: [ :action | classContainer includes: action source ])
+			(self model allBLAction select: [ :action | classContainer includes: action source ])
 				do: [ :action | action addBehavior: serviceAction ] ]
 		displayingProgress: [ :serviceAction | 'for ' , serviceAction asString ]
 		every: 1000
@@ -101,7 +101,9 @@ BLWebModelJava >> addListsToModel [
 BLWebModelJava >> addOnClickAttribute [
 	((self sourceModel allClasses select: [ :c | 'ClickHandler' match: c name ]) at: 1) subclassHierarchy
 		select: [ :class | self isElementFromApplication: class ]
-		thenDo: [ :class | (class allUsages collect: #receiver) do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | found createAttributeFrom: class ] ] ]
+		thenDo: [ :class | 
+			(class allUsages collect: #receiver)
+				do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ]
 ]
 
 { #category : #adding }
@@ -142,8 +144,8 @@ BLWebModelJava >> addWidgetAttributes [
 			widget variable receivingInvocations
 				do: [ :invoc | 
 					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil ])
-						ifTrue: [ self factory createAttributeFromInvocation: invoc previous forCellOf: widget ]
-						ifFalse: [ self factory createAttributeFromInvocation: invoc for: widget ] ] ]
+						ifTrue: [ self factory createAttributeFrom: invoc previous forCellOf: widget ]
+						ifFalse: [ self factory createAttributeFrom: invoc for: widget ] ] ]
 		displayingProgress: [ :widget | 'compute attribute of ' , widget asString ]
 		every: 1000
 ]

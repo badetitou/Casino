@@ -2,14 +2,12 @@ Extension { #name : #BLClickHandler }
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
 BLClickHandler class >> canHandle: aFAMIXClass [
-	^ aFAMIXClass isClass and: [ aFAMIXClass name includesSubstring: 'ClickHandler' ]
+	^ aFAMIXClass name includesSubstring: 'ClickHandler'
 ]
 
 { #category : #'*BL-Model-CoreWeb-Importer' }
-BLClickHandler class >> createAttributeFrom: aFAMIXClass for: aWidgetInstance [
-	^ (super createAttributeFrom: aFAMIXClass for: aWidgetInstance)
+BLClickHandler class >> createActionFrom: aClass for: aWidgetInstance withImporter: anImporter [
+	^ (super createActionFrom: aClass for: aWidgetInstance withImporter: anImporter)
 		name: 'click';
-		attributeValue: 'clickOn' , aFAMIXClass uniqueName;
-		widget: aWidgetInstance;
 		yourself
 ]

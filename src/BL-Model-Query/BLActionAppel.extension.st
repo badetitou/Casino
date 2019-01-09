@@ -4,3 +4,8 @@ Extension { #name : #BLActionAppel }
 BLActionAppel >> color [
 	^ Color blue
 ]
+
+{ #category : #'*BL-Model-Query' }
+BLActionAppel >> value [
+	^ self next
+]

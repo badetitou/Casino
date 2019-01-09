@@ -18,12 +18,12 @@ Class {
 		'actionAttribute',
 		'normalAttribute',
 		'variableAttribute',
-		'serviceAction',
 		'uiContainer',
 		'uiLeaf',
 		'behavior',
 		'page',
-		'businessPage'
+		'businessPage',
+		'actionService'
 	],
 	#category : #'BL-MetamodelGenerator'
 }
@@ -69,13 +69,12 @@ BLMetamodelGenerator >> defineClasses [
 
 { #category : #definition }
 BLMetamodelGenerator >> defineNewClasses [
-	action := builder newClassNamed: #Action.
+	action := builder newClassNamed: #Action comment: 'I do the link between UI and Behavioural meta-model (and I represent some specials other behavior)'.
 	actionAppel := builder newClassNamed: #ActionAppel.
 	entity := builder newClassNamed: #OriginedEntity comment: 'Root entity of the meta-model'.
 	attribute := builder newClassNamed: #Attribute comment: 'I represent a characteritic that can be add to a Widget'.
 	variableAttribute := builder newClassNamed: #VariableAttribute comment: 'I will be removed soon'.
-	behavior := builder newClassNamed: #Behavior comment: 'I do the link between this meta-model and the behavioral model (and so the code executed when an event occur)'.
-	serviceAction := builder newClassNamed: #ServiceAction.
+	actionService := builder newClassNamed: #ActionService comment: 'I reprensent a call to a distant service'.
 	page := builder newClassNamed: #Page comment: 'I represent the root of the user interface (A Windows, a web page)'.
 	service := builder newClassNamed: #Service.
 	widget := builder newClassNamed: #Widget comment: 'I''m the main block of the user interface. Everything in a user interface is a widget with attributes'.
@@ -86,7 +85,7 @@ BLMetamodelGenerator >> defineNewClasses [
 
 { #category : #definition }
 BLMetamodelGenerator >> defineNewClassesHierarchy [
-	action --|> #TAssociation.
+	actionAppel --|> #TAssociation.
 	entity --|> #TNamed.
 	entity --|> #TWithSourceAnchor.
 	entity <|-- action.
@@ -99,7 +98,7 @@ BLMetamodelGenerator >> defineNewClassesHierarchy [
 	uiContainer <|-- page.
 	uiContainer <|-- businessPage.
 	attribute <|-- variableAttribute.
-	behavior <|-- serviceAction.
+	action <|-- actionService.
 	action <|-- actionAppel
 ]
 
@@ -125,7 +124,7 @@ BLMetamodelGenerator >> defineRelations [
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
 	((page property: #caller) -* (actionAppel property: #call)) withNavigation.
 	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
-	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation
+	((service property: #actions) <>-* (actionService property: #serviceOwner)) withNavigation
 ]
 
 { #category : #definition }

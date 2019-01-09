@@ -1,6 +1,8 @@
 Class {
 	#name : #BLActionAppel,
 	#superclass : #BLAction,
+	#traits : 'FamixTAssociation',
+	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
 		'#call => FMOne type: #BLPage opposite: #caller'
 	],
@@ -26,7 +28,7 @@ BLActionAppel class >> generatedSlotNames [
 { #category : #generator }
 BLActionAppel class >> generatedTraitNames [
 	<generated>
-	^ #()
+	^ #(FamixTAssociation)
 ]
 
 { #category : #meta }
