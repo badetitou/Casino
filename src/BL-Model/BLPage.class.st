@@ -1,3 +1,6 @@
+"
+I represent the root of the user interface (A Windows, a web page)
+"
 Class {
 	#name : #BLPage,
 	#superclass : #BLUIContainer,
@@ -26,7 +29,7 @@ BLPage class >> annotation [
 BLPage class >> generatedSlotNames [
 	<generated>
 	'BLPage class>>#generatedSlotNames'.
-	^ #(codePhase codeValue title subtitle realClassName caller businessPage)
+	^ #(businessPage caller codePhase codeValue realClassName subtitle title)
 ]
 
 { #category : #generator }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BLAction,
-	#superclass : #MooseEntity,
+	#superclass : #BLOriginedEntity,
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 BLAction class >> annotation [
 
-	<MSEClass: #Action super: #MooseEntity>
+	<MSEClass: #Action super: #BLOriginedEntity>
 	<package: #'BL-Model'>
 	<generated>
 	^self
@@ -32,17 +32,26 @@ BLAction class >> generatedTraitNames [
 ]
 
 { #category : #meta }
-BLAction class >> metamodel [
-
-	<generated>
-	^ (self class environment at: #BLLayoutMetamodelGenerator) metamodel
-]
-
-{ #category : #meta }
 BLAction class >> requirements [
 
 	<generated>
-	^ { BLAction }
+	^ { BLWidget }
+]
+
+{ #category : #accessing }
+BLAction >> belongsTo [
+
+	<generated>
+	^ self caller
+
+]
+
+{ #category : #accessing }
+BLAction >> belongsTo: anObject [
+
+	<generated>
+	self caller: anObject
+
 ]
 
 { #category : #accessing }
@@ -69,81 +78,4 @@ BLAction >> callerGroup [
 	<navigation: 'Caller'>
 	^ MooseGroup
 			with: (self caller)
-]
-
-{ #category : #testing }
-BLAction >> isAccess [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isFunction [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isInheritance [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isInvocation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isNamespace [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isPackage [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isReference [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-BLAction >> isType [
-
-	<generated>
-	^ false
 ]

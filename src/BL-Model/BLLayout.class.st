@@ -38,6 +38,22 @@ BLLayout class >> requirements [
 ]
 
 { #category : #accessing }
+BLLayout >> belongsTo [
+
+	<generated>
+	^ self container
+
+]
+
+{ #category : #accessing }
+BLLayout >> belongsTo: anObject [
+
+	<generated>
+	self container: anObject
+
+]
+
+{ #category : #accessing }
 BLLayout >> cell [
 
 	<generated>

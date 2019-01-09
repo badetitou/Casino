@@ -1,3 +1,6 @@
+"
+I reprensent a widget without sub-widget (like a paragraph, a text, a simple button, ...)
+"
 Class {
 	#name : #BLUILeaf,
 	#superclass : #BLWidget,

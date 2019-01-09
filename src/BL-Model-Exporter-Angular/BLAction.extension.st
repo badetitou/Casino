@@ -2,5 +2,16 @@ Extension { #name : #BLAction }
 
 { #category : #'*BL-Model-Exporter-Angular' }
 BLAction >> getAngularRepresentation [
-	self subclassResponsibility 
+	^ '/*
+*/'
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLAction >> leftToken [
+	^ '('
+]
+
+{ #category : #'*BL-Model-Exporter-Angular' }
+BLAction >> rightToken [
+	^ ')'
 ]

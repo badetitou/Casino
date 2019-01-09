@@ -1,3 +1,6 @@
+"
+I represent a characteritic that can be add to a Widget
+"
 Class {
 	#name : #BLAttribute,
 	#superclass : #BLOriginedEntity,
@@ -35,7 +38,7 @@ BLAttribute class >> generatedTraitNames [
 BLAttribute class >> requirements [
 
 	<generated>
-	^ { BLAttribute }
+	^ { BLWidget }
 ]
 
 { #category : #accessing }
@@ -52,6 +55,22 @@ BLAttribute >> attributeValue: anObject [
 
 	<generated>
 	attributeValue := anObject
+
+]
+
+{ #category : #accessing }
+BLAttribute >> belongsTo [
+
+	<generated>
+	^ self widget
+
+]
+
+{ #category : #accessing }
+BLAttribute >> belongsTo: anObject [
+
+	<generated>
+	self widget: anObject
 
 ]
 

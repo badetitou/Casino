@@ -1,3 +1,6 @@
+"
+Root entity of the meta-model
+"
 Class {
 	#name : #BLOriginedEntity,
 	#superclass : #MooseEntity,

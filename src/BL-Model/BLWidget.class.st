@@ -1,3 +1,6 @@
+"
+I'm the main block of the user interface. Everything in a user interface is a widget with attributes
+"
 Class {
 	#name : #BLWidget,
 	#superclass : #BLOriginedEntity,
@@ -26,7 +29,7 @@ BLWidget class >> annotation [
 BLWidget class >> generatedSlotNames [
 	<generated>
 	'BLWidget class>>#generatedSlotNames'.
-	^ #(realClass size position widgetContainer actions attributes cellOwner)
+	^ #(actions attributes cellOwner position realClass size widgetContainer)
 ]
 
 { #category : #generator }
@@ -39,7 +42,7 @@ BLWidget class >> generatedTraitNames [
 BLWidget class >> requirements [
 
 	<generated>
-	^ { BLWidget }
+	^ { BLUIContainer }
 ]
 
 { #category : #accessing }
@@ -88,6 +91,22 @@ BLWidget >> attributesGroup [
 	<navigation: 'Attributes'>
 	^ MooseGroup
 			withAll: (self attributes asSet)
+]
+
+{ #category : #accessing }
+BLWidget >> belongsTo [
+
+	<generated>
+	^ self widgetContainer
+
+]
+
+{ #category : #accessing }
+BLWidget >> belongsTo: anObject [
+
+	<generated>
+	self widgetContainer: anObject
+
 ]
 
 { #category : #accessing }

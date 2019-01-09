@@ -38,6 +38,22 @@ BLCell class >> requirements [
 ]
 
 { #category : #accessing }
+BLCell >> belongsTo [
+
+	<generated>
+	^ self layoutOwner
+
+]
+
+{ #category : #accessing }
+BLCell >> belongsTo: anObject [
+
+	<generated>
+	self layoutOwner: anObject
+
+]
+
+{ #category : #accessing }
 BLCell >> layoutOwner [
 
 	<generated>

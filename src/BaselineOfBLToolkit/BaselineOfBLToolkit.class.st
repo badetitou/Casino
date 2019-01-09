@@ -35,7 +35,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'core-extented' with: #('core' 'BL-Model-Query' 'BL-Model-UI-SubEntities');
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
-		group: 'bl' with: #('default' 'BL-Model-Example' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
+		group: 'bl' with: #('default' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
 		group: 'fast-bl' with: #('bl' 'CSN-UIFASTBinding');
 		group: 'rh' with: #('bl' 'BL-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
@@ -53,7 +53,6 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-Extension';
 		package: 'BL-MetamodelGenerator';
 		package: 'BL-Model-Explorer';
-		package: 'BL-Model-Example' with: [ spec requires: #('BL-Model-CoreWeb') ];
 		package: 'BL-Model-Exporter' with: [ spec requires: #('BL-Model') ];
 		package: 'BL-Model-Exporter-Angular' with: [ spec requires: #('BL-Model-Exporter' 'BL-Model-Toolkit') ];
 		package: 'BL-Model-Importer' with: [ spec requires: #('BL-Model') ];

@@ -73,7 +73,6 @@ BLMetamodelGenerator >> defineNewClasses [
 	actionAppel := builder newClassNamed: #ActionAppel.
 	entity := builder newClassNamed: #OriginedEntity comment: 'Root entity of the meta-model'.
 	attribute := builder newClassNamed: #Attribute comment: 'I represent a characteritic that can be add to a Widget'.
-	actionAttribute := builder newClassNamed: #ActionAttribute comment: 'I will be removed soon'.
 	variableAttribute := builder newClassNamed: #VariableAttribute comment: 'I will be removed soon'.
 	behavior := builder newClassNamed: #Behavior comment: 'I do the link between this meta-model and the behavioral model (and so the code executed when an event occur)'.
 	serviceAction := builder newClassNamed: #ServiceAction.
@@ -90,6 +89,7 @@ BLMetamodelGenerator >> defineNewClassesHierarchy [
 	action --|> #TAssociation.
 	entity --|> #TNamed.
 	entity --|> #TWithSourceAnchor.
+	entity <|-- action.
 	entity <|-- attribute.
 	entity <|-- behavior.
 	entity <|-- service.
@@ -99,7 +99,6 @@ BLMetamodelGenerator >> defineNewClassesHierarchy [
 	uiContainer <|-- page.
 	uiContainer <|-- businessPage.
 	attribute <|-- variableAttribute.
-	attribute <|-- actionAttribute.
 	behavior <|-- serviceAction.
 	action <|-- actionAppel
 ]
@@ -113,7 +112,6 @@ BLMetamodelGenerator >> defineProperties [
 	(page property: #subtitle type: #String) comment: 'The subtitle of the phase'.
 	(businessPage property: #title type: #String) comment: 'The main title of the page metier'.
 	(page property: #realClassName type: #String) comment: 'The name of the class in Java'.
-	(actionAttribute property: #codeMetierModel type: #Object) comment: 'The source code of the actions'.
 	(widget property: 'realClass' type: #MooseEntity) comment: 'The type (class) of the widget'.
 	(attribute property: 'attributeValue' type: #String) comment: 'The literal value of the attribute'.
 	attribute property: #oldClass type: #Object.
@@ -127,8 +125,7 @@ BLMetamodelGenerator >> defineRelations [
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
 	((page property: #caller) -* (actionAppel property: #call)) withNavigation.
 	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
-	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation.
-	((actionAttribute property: #behaviors) *-* (behavior property: #actionAttributes)) withNavigation
+	((service property: #actions) <>-* (serviceAction property: #serviceOwner)) withNavigation
 ]
 
 { #category : #definition }

@@ -1,3 +1,6 @@
+"
+I'm specific to Berger-Levrault (company). Do not use me if you don't know what you're doing.
+"
 Class {
 	#name : #BLBusinessPage,
 	#superclass : #BLUIContainer,
@@ -21,7 +24,7 @@ BLBusinessPage class >> annotation [
 BLBusinessPage class >> generatedSlotNames [
 	<generated>
 	'BLBusinessPage class>>#generatedSlotNames'.
-	^ #(title pageContainers)
+	^ #(pageContainers title)
 ]
 
 { #category : #generator }

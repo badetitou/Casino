@@ -4,19 +4,13 @@ Extension { #name : #MooseAbstractGroup }
 MooseAbstractGroup >> allBLAction [
 	
 	<navigation: 'BL Actions'>
-	^ self allWithType: BLAction
+	^ self allWithSubTypesOf: BLAction
 ]
 
 { #category : #'*BL-Model-Extension' }
 MooseAbstractGroup >> allBLActionAppel [
 	<navigation: 'BLActionAppel'>
 	^ self allWithSubTypesOf: BLActionAppel 
-]
-
-{ #category : #'*BL-Model-Extension' }
-MooseAbstractGroup >> allBLActionsAttribute [
-	<navigation: 'BL Actions Attribute'>
-	^ self allWithSubTypesOf: BLActionAttribute
 ]
 
 { #category : #'*BL-Model-Extension' }

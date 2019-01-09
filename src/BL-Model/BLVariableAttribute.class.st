@@ -1,3 +1,6 @@
+"
+I will be removed soon
+"
 Class {
 	#name : #BLVariableAttribute,
 	#superclass : #BLAttribute,

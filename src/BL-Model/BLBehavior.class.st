@@ -1,9 +1,9 @@
+"
+I do the link between this meta-model and the behavioral model (and so the code executed when an event occur)
+"
 Class {
 	#name : #BLBehavior,
 	#superclass : #BLOriginedEntity,
-	#instVars : [
-		'#actionAttributes => FMMany type: #BLActionAttribute opposite: #behaviors'
-	],
 	#category : #'BL-Model-Entities'
 }
 
@@ -20,7 +20,7 @@ BLBehavior class >> annotation [
 BLBehavior class >> generatedSlotNames [
 	<generated>
 	'BLBehavior class>>#generatedSlotNames'.
-	^ #(actionAttributes)
+	^ #()
 ]
 
 { #category : #generator }
@@ -34,28 +34,4 @@ BLBehavior class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #accessing }
-BLBehavior >> actionAttributes [
-
-	<generated>
-	^ actionAttributes
-]
-
-{ #category : #accessing }
-BLBehavior >> actionAttributes: anObject [
-
-	<generated>
-	actionAttributes value: anObject
-
-]
-
-{ #category : #navigation }
-BLBehavior >> actionAttributesGroup [
-
-	<generated>
-	<navigation: 'ActionAttributes'>
-	^ MooseGroup
-			withAll: (self actionAttributes asSet)
 ]

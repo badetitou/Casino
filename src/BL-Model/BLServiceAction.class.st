@@ -33,7 +33,23 @@ BLServiceAction class >> generatedTraitNames [
 BLServiceAction class >> requirements [
 
 	<generated>
-	^ { BLServiceAction }
+	^ { BLService }
+]
+
+{ #category : #accessing }
+BLServiceAction >> belongsTo [
+
+	<generated>
+	^ self serviceOwner
+
+]
+
+{ #category : #accessing }
+BLServiceAction >> belongsTo: anObject [
+
+	<generated>
+	self serviceOwner: anObject
+
 ]
 
 { #category : #accessing }

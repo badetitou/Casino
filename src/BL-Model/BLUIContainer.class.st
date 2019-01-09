@@ -1,3 +1,6 @@
+"
+I'm a widget which can contain other widget (like a panel, a sub-""web page/window"", a composite button)
+"
 Class {
 	#name : #BLUIContainer,
 	#superclass : #BLWidget,
@@ -21,7 +24,7 @@ BLUIContainer class >> annotation [
 BLUIContainer class >> generatedSlotNames [
 	<generated>
 	'BLUIContainer class>>#generatedSlotNames'.
-	^ #(widgets layout)
+	^ #(layout widgets)
 ]
 
 { #category : #generator }
