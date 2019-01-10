@@ -36,7 +36,7 @@ BaselineOfBLToolkit >> defineGroups: spec [
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'BL-Model-Importer-Java');
 		group: 'bl' with: #('default' 'BL-Model-CoreWeb' 'BL-Model-CoreWeb-Exporter' 'BL-Model-CoreWeb-Importer');
-		group: 'fast-bl' with: #('bl' 'CSN-UIFASTBinding');
+		group: 'fast-bl' with: #('bl' 'CSN-UIFASTBinding' 'CSN-Behaviour-Model-Importer-Java');
 		group: 'rh' with: #('bl' 'BL-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'BL-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
@@ -66,5 +66,7 @@ BaselineOfBLToolkit >> definePackages: spec [
 		package: 'BL-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('BL-Model-CoreWeb-Importer' 'BL-Model-Importer-Java-Tests') ];
 		package: 'BL-Model-Toolkit' with: [ spec requires: #('BL-Model-CoreWeb') ];
 		package: 'BL-Migration-RH' with: [ spec requires: #('BL-Model-CoreWeb-Importer') ];
-		package: 'CSN-UIFASTBinding' with: [ spec requires: #('BL-Model' 'FAST') ]
+		package: 'CSN-UIFASTBinding' with: [ spec requires: #('BL-Model' 'FAST') ];
+		package: 'CSN-Behaviour-Model-Importer' with: [ spec requires: #('FAST') ];
+		package: 'CSN-Behaviour-Model-Importer-Java' with: [ spec requires: #('CSN-Behaviour-Model-Importer' 'FAST') ]
 ]
