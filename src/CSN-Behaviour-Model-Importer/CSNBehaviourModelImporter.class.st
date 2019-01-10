@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'behaviouralModel',
 		'uiModel',
-		'sourceCodeModel'
+		'sourceCodeModel',
+		'parser'
 	],
 	#category : #'CSN-Behaviour-Model-Importer'
 }
@@ -21,7 +22,19 @@ CSNBehaviourModelImporter >> behaviouralModel: anObject [
 
 { #category : #accessing }
 CSNBehaviourModelImporter >> generateBehaviouralModel [
-	self subclassResponsibility 
+	"I should return the generated model (normally 'behaviouralModel')"
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+CSNBehaviourModelImporter >> parser [
+	"please initialize me"
+	^ parser
+]
+
+{ #category : #accessing }
+CSNBehaviourModelImporter >> parser: aParser [
+	parser := aParser
 ]
 
 { #category : #accessing }
