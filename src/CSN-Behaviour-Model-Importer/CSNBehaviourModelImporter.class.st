@@ -2,23 +2,12 @@ Class {
 	#name : #CSNBehaviourModelImporter,
 	#superclass : #Object,
 	#instVars : [
-		'behaviouralModel',
 		'uiModel',
 		'sourceCodeModel',
 		'parser'
 	],
 	#category : #'CSN-Behaviour-Model-Importer'
 }
-
-{ #category : #accessing }
-CSNBehaviourModelImporter >> behaviouralModel [
-	^ behaviouralModel
-]
-
-{ #category : #accessing }
-CSNBehaviourModelImporter >> behaviouralModel: anObject [
-	behaviouralModel := anObject
-]
 
 { #category : #accessing }
 CSNBehaviourModelImporter >> generateBehaviouralModel [
