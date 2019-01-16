@@ -24,7 +24,7 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaAssignementExpression: aFASTJav
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
-	^ '<', (self clone accept: aFASTJavaCastExpression type), '> ', (self clone accept: aFASTJavaCastExpression expression)
+	^ '(<', (self clone accept: aFASTJavaCastExpression type), '> ', (self clone accept: aFASTJavaCastExpression expression), ')'
 ]
 
 { #category : #generated }
@@ -90,6 +90,11 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMeth
 	^ (aFASTJavaMethodInvocation receiver ifNotNil: [ :receiver | (self clone accept: receiver), '.' ] ifNil: [ '' ])
 		, aFASTJavaMethodInvocation name , '('
 		, (', ' join: (aFASTJavaMethodInvocation arguments collect: [ :argument | self clone accept: argument ])) , ')'
+]
+
+{ #category : #generated }
+CSNBehaviourModelExporterAngular >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
+	^ 'new ', (super visitFASTJavaNewExpression: aFASTJavaNewExpression)
 ]
 
 { #category : #generated }
