@@ -29,12 +29,13 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaCastExpression: aFASTJavaCastEx
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
-	^ 'catch (', (aFASTJavaCatchPartStatement parameters flatCollect: [:parameter | (self clone accept: parameter), ','] ), ') ' , (self clone accept: aFASTJavaCatchPartStatement body)
+	^ 'catch (' , (', ' join:(aFASTJavaCatchPartStatement parameters collect: [ :parameter | (self clone accept: parameter) ]))
+		, ') ' , (self clone accept: aFASTJavaCatchPartStatement body)
 ]
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
-	^ (self clone accept: aFASTJavaClassProperty type), '.'
+	^ (self clone accept: aFASTJavaClassProperty type) , '.', aFASTJavaClassProperty fieldName
 ]
 
 { #category : #generated }
@@ -48,6 +49,11 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaEls
 ]
 
 { #category : #generated }
+CSNBehaviourModelExporterAngular >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
+	^ aFASTJavaFieldAccess fieldName
+]
+
+{ #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	^ aFASTJavaIdentifier name
 ]
@@ -55,8 +61,9 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	| text |
-	text := 'if (', (self clone accept: aFASTJavaIfStatement condition) , ')', (self clone accept: aFASTJavaIfStatement thenPart).
-	aFASTJavaIfStatement elsePart ifNotNil: [ text := text , 'else ', (self clone accept: aFASTJavaIfStatement elsePart) ].
+	text := 'if (' , (self clone accept: aFASTJavaIfStatement condition) , ')', String crlf
+		, (self clone accept: aFASTJavaIfStatement thenPart).
+	aFASTJavaIfStatement elsePart ifNotNil: [ text := text , 'else ' , (self clone accept: aFASTJavaIfStatement elsePart) ].
 	^ text
 ]
 
@@ -68,15 +75,21 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaInfixOperation: aFASTJavaInfixO
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
-	^ aFASTJavaMethodEntity name, '(', (aFASTJavaMethodEntity parameters flatCollect: [:parameter | (self clone accept: parameter), ',' ]), ') { 
-	', (aFASTJavaMethodEntity statements flatCollect: [ :statement | (self clone accept: statement) ]), '
-	}'.
+	^ aFASTJavaMethodEntity name , '('
+		, (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self clone accept: parameter ]))
+		,
+			') { 
+' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self clone accept: statement) indentBy: 4 ]))
+		,
+			'
+}'
 ]
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
-	^  (aFASTJavaMethodInvocation receiver ifNotNil: [ :receiver | (self clone accept: receiver) ] ifNil: [ '' ]), 
-	  aFASTJavaMethodInvocation name, '(', (aFASTJavaMethodInvocation arguments flatCollect: [:argument | (self clone accept: argument)]),')'
+	^ (aFASTJavaMethodInvocation receiver ifNotNil: [ :receiver | (self clone accept: receiver), '.' ] ifNil: [ '' ])
+		, aFASTJavaMethodInvocation name , '('
+		, (', ' join: (aFASTJavaMethodInvocation arguments collect: [ :argument | self clone accept: argument ])) , ')'
 ]
 
 { #category : #generated }
@@ -106,10 +119,11 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaThenPartStatement: aFASTJavaThe
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
-	^ 'try {
-	', (self clone accept: aFASTJavaTryCatchStatement try), '}
-	',
-	(aFASTJavaTryCatchStatement catches flatCollect: [:catch | self clone accept: catch])
+	^ 'try 
+	' , (self clone accept: aFASTJavaTryCatchStatement try)
+		,
+			'
+	' , (aFASTJavaTryCatchStatement catches flatCollect: [ :catch | self clone accept: catch ])
 ]
 
 { #category : #generated }
@@ -118,13 +132,29 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaTryPartStatement: aFASTJavaTryP
 ]
 
 { #category : #generated }
+CSNBehaviourModelExporterAngular >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
+	^ aFASTJavaUnaryExpression isPrefixedUnaryExpression
+		ifTrue: [ aFASTJavaUnaryExpression operator
+				, (self clone accept: aFASTJavaUnaryExpression expression) ]
+		ifFalse: [ (self clone accept: aFASTJavaUnaryExpression expression)
+				, aFASTJavaUnaryExpression operator ]
+]
+
+{ #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
-	^ 'let ', (aFASTJavaVarDeclStatement declarators flatCollect: [ :declarator | (self clone accept: declarator) , ' ' ]), ';'.
+	^ 'let '
+		,
+			(aFASTJavaVarDeclStatement declarators
+				flatCollect: [ :declarator | (self clone accept: declarator) , ' ' ]) , ';'
 ]
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
 	^ (self clone accept: aFASTJavaVariableDeclarator variable)
+		,
+			(aFASTJavaVariableDeclarator expression
+				ifNil: [ '' ]
+				ifNotNil: [ ' = ', (self clone accept: aFASTJavaVariableDeclarator expression) ])
 ]
 
 { #category : #generated }
@@ -144,10 +174,12 @@ CSNBehaviourModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTStatement: aFASTStatement [
-	^ '', (aFASTStatement childrenNode flatCollect: [:child | self clone accept: aFASTStatement child])
+	^ '', (aFASTStatement childrenNode flatCollect: [:child | self clone accept: child])
 ]
 
 { #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock [
-	^ ' {', String crlf,( aFASTStatementBlock statements flatCollect: [ :statement | (self clone accept: statement) , String crlf  ]) , '}', String crlf
+	^ ' {' , String crlf
+		, (aFASTStatementBlock statements flatCollect: [ :statement | ((self clone accept: statement) indentBy: 4) , String crlf ])
+		, '}' , String crlf
 ]
