@@ -20,7 +20,7 @@ BaselineOfBLToolkit >> defineDependencies: spec [
 	spec
 		baseline: 'FAST'
 		with: [ spec
-				loads: 'smacc';
+				loads: #('smacc' 'visitor');
 				repository: 'github://moosetechnology/FAST:master/src' ].
 	spec package: 'PetitXml' with: [ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ]
 ]
