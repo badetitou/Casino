@@ -1,5 +1,9 @@
 "
-behaviouralModel do: [ :model | model allFASTJavaMethodEntity first accept: CSNBehaviourModelExporterAngular new ].
+behaviouralModel := CSNBehaviourModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; generateBehaviouralModel.
+
+behaviouralModel collect: [ :model | model allFASTJavaMethodEntity first ui source sourceText  ].
+behaviouralModel collect: [ :model | CSNBehaviourModelExporterAngular new accept: model allFASTJavaMethodEntity first  ].
+behaviouralModel collect: [ :model | String crlf join: (model allFASTJavaMethodEntity collect: [:method | (CSNBehaviourModelExporterAngular new accept: method) ]) ]. 
 "
 Class {
 	#name : #CSNBehaviourModelExporterAngular,
