@@ -17,6 +17,11 @@ CSNBehaviourModelExporterAngular >> visitFASTBooleanLiteral: aFASTBooleanLiteral
 ]
 
 { #category : #generated }
+CSNBehaviourModelExporterAngular >> visitFASTEntity: aFASTEntity [
+	^ self error: 'You need to implement a visitor because we must not export an ''Entity'''
+]
+
+{ #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTExpressionStatement: aFASTExpressionStatement [
 	^ ( self clone accept: aFASTExpressionStatement expression) , ';'
 ]
