@@ -97,6 +97,14 @@ CSNBehaviourModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMeth
 ]
 
 { #category : #generated }
+CSNBehaviourModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
+ 	^ (super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression), ' {
+',
+	(String crlf join: ( aFASTJavaNewClassExpression methods collect: [ :method | (self clone accept: method) indentBy: 4 ] )), ' 
+}'
+]
+
+{ #category : #generated }
 CSNBehaviourModelExporterAngular >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
 	^ 'new ', (super visitFASTJavaNewExpression: aFASTJavaNewExpression)
 ]
