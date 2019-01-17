@@ -12,8 +12,8 @@ CSNBehaviourModelImporterJava >> generateBehaviouralModel [
 		do: [ :action | 
 			self parser model: FASTMooseModel new.
 			models add: (self parser model).
-			action
-				behaviour: ((self parser parseCodeMethodString: action source methods first sourceText) allFASTJavaMethodEntity select: [ :method | method parentNode isNil ]) first. ]
+			(self parser parseCodeMethodString: action source methods first sourceText) allFASTJavaMethodEntity do: [ :behavior |  action
+				addBehavior: behavior ] ]
 		displayingProgress: [ :action | 'compute behavioural code of ' , action caller name ]
 		every: 10.
 	^ models

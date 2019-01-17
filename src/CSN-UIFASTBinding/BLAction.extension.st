@@ -1,14 +1,23 @@
 Extension { #name : #BLAction }
 
-{ #category : #'*CSN-UIFASTBinding' }
-BLAction >> behaviour [
-	<MSEProperty: #behaviour type: #Object>
-	<subordinate>
-	^ self privateState attributeAt: #behaviour ifAbsent: [  ]
+{ #category : #'*CSN-UIFASTBinding-accessing' }
+BLAction >> addBehavior: aFASTJavaMethod [
+
+	self behavior add: aFASTJavaMethod 
 ]
 
-{ #category : #'*CSN-UIFASTBinding' }
-BLAction >> behaviour: anObject [
-	self privateState attributeAt: #behaviour put: anObject.
-	anObject ui: self
+{ #category : #'*CSN-UIFASTBinding-accessing' }
+BLAction >> behavior [
+
+	<generated>
+	<MSEProperty: #behavior type: #Object>
+	<package: #'CSN-UIFASTBinding'>
+	^ self privateState attributeAt: #behavior ifAbsentPut: [ FMMultivalueLink on: self opposite: #ui: ]
+]
+
+{ #category : #'*CSN-UIFASTBinding-accessing' }
+BLAction >> behavior: anObject [
+
+	<generated>
+	self behavior value: anObject
 ]
