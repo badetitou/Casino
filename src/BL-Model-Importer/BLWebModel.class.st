@@ -17,7 +17,6 @@ BLWebModel class >> webRoot [
 
 { #category : #initialization }
 BLWebModel >> createFactory [
-	self subclassResponsibility 
 ]
 
 { #category : #private }
