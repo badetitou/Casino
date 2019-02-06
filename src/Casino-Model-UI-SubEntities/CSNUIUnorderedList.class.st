@@ -13,5 +13,5 @@ CSNUIUnorderedList class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIUnorderedList >> accept: anExporter [
-	^ anExporter visitBLUIUnorderedList: self
+	^ anExporter visitUIUnorderedList: self
 ]

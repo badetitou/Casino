@@ -8,7 +8,7 @@ Class {
 CSNAbsolutePosition class >> annotation [
 
 	<MSEClass: #AbsolutePosition super: #CSNPosition>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNAbsolutePosition class >> annotation [
 { #category : #generator }
 CSNAbsolutePosition class >> generatedSlotNames [
 	<generated>
-	'BLAbsolutePosition class>>#generatedSlotNames'.
+	'CSNAbsolutePosition class>>#generatedSlotNames'.
 	^ #()
 ]
 

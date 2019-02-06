@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIName >> accept: anExporter [
-	^ anExporter visitBLUIName: self
+	^ anExporter visitUIName: self
 ]

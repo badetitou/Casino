@@ -11,7 +11,7 @@ Class {
 CSNVariableAttribute class >> annotation [
 
 	<MSEClass: #VariableAttribute super: #CSNAttribute>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -19,7 +19,7 @@ CSNVariableAttribute class >> annotation [
 { #category : #generator }
 CSNVariableAttribute class >> generatedSlotNames [
 	<generated>
-	'BLVariableAttribute class>>#generatedSlotNames'.
+	'CSNVariableAttribute class>>#generatedSlotNames'.
 	^ #()
 ]
 

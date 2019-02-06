@@ -1,11 +1,11 @@
 Extension { #name : #CSNModelExporter }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNModelExporter >> visitBLHTML: aBLHTML [
-	^ self visitBLUIContainer: aBLHTML
+CSNModelExporter >> visitHTML: aBLHTML [
+	^ self visitUIContainer: aBLHTML
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNModelExporter >> visitBLSplitButton: aBLHTML [
-	^ self visitBLUIContainer: aBLHTML
+CSNModelExporter >> visitSplitButton: aBLHTML [
+	^ self visitUIContainer: aBLHTML
 ]

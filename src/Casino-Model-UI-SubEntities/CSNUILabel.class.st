@@ -10,5 +10,5 @@ Class {
 
 { #category : #accessing }
 CSNUILabel >> accept: anExporter [
-	^ anExporter visitBLUILabel: self
+	^ anExporter visitUILabel: self
 ]

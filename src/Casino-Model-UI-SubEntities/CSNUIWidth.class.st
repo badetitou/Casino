@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIWidth >> accept: anExporter [
-	^ anExporter visitBLUIWidth: self
+	^ anExporter visitUIWidth: self
 ]

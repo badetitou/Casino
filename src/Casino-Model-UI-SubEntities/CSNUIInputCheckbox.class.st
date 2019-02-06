@@ -13,5 +13,5 @@ CSNUIInputCheckbox class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputCheckbox >> accept: anExporter [
-	^ anExporter visitBLUIInputCheckbox: self
+	^ anExporter visitUIInputCheckbox: self
 ]

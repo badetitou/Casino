@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 CSNUIDisabled >> accept: anExporter [
-	^ anExporter visitBLUIDisabled: self
+	^ anExporter visitUIDisabled: self
 ]
 
 { #category : #accessing }

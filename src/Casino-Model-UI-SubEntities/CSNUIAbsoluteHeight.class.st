@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIAbsoluteHeight >> accept: anExporter [
-	^ anExporter visitBLUIAbsoluteHeight: self
+	^ anExporter visitUIAbsoluteHeight: self
 ]

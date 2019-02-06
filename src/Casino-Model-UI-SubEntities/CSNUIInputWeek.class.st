@@ -13,5 +13,5 @@ CSNUIInputWeek class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputWeek >> accept: anExporter [
-	^ anExporter visitBLUIInputWeek: self
+	^ anExporter visitUIInputWeek: self
 ]

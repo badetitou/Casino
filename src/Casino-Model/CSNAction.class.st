@@ -5,7 +5,7 @@ Class {
 	#name : #CSNAction,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#caller => FMOne type: #BLWidget opposite: #actions'
+		'#caller => FMOne type: #CSNWidget opposite: #actions'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -14,7 +14,7 @@ Class {
 CSNAction class >> annotation [
 
 	<MSEClass: #Action super: #CSNOriginedEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -22,7 +22,7 @@ CSNAction class >> annotation [
 { #category : #generator }
 CSNAction class >> generatedSlotNames [
 	<generated>
-	'BLAction class>>#generatedSlotNames'.
+	'CSNAction class>>#generatedSlotNames'.
 	^ #(caller)
 ]
 

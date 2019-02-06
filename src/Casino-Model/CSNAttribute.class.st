@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'#attributeValue',
 		'#oldClass',
-		'#widget => FMOne type: #BLWidget opposite: #attributes'
+		'#widget => FMOne type: #CSNWidget opposite: #attributes'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -16,7 +16,7 @@ Class {
 CSNAttribute class >> annotation [
 
 	<MSEClass: #Attribute super: #CSNOriginedEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -24,7 +24,7 @@ CSNAttribute class >> annotation [
 { #category : #generator }
 CSNAttribute class >> generatedSlotNames [
 	<generated>
-	'BLAttribute class>>#generatedSlotNames'.
+	'CSNAttribute class>>#generatedSlotNames'.
 	^ #(attributeValue oldClass widget)
 ]
 

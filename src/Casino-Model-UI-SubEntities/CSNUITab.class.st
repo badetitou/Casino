@@ -13,5 +13,5 @@ Class {
 
 { #category : #visiting }
 CSNUITab >> accept: anExporter [
-	^ anExporter visitBLUITab: self
+	^ anExporter visitUITab: self
 ]

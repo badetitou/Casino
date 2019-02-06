@@ -13,5 +13,5 @@ CSNUIInputPassword class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputPassword >> accept: anExporter [
-	^ anExporter visitBLUIInputPassword: self
+	^ anExporter visitUIInputPassword: self
 ]

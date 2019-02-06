@@ -51,350 +51,350 @@ CSNModelExporter >> visit: anElement [
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLAttribute: aBLAttribute [
+CSNModelExporter >> visitAttribute: aBLAttribute [
 	^ ''
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLCell: aBLCell [
-	^ self visitBLWidget: aBLCell
+CSNModelExporter >> visitCell: aBLCell [
+	^ self visitWidget: aBLCell
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLLayout: aBLLayout [
+CSNModelExporter >> visitLayout: aBLLayout [
 	^ self
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLOriginedEntity: anElement [
+CSNModelExporter >> visitMooseModel: aMooseModel [
+	self subclassResponsibility 
+]
+
+{ #category : #visiting }
+CSNModelExporter >> visitOriginedEntity: anElement [
 	anElement prepareAcceptFor: self.
 	anElement writeCodeWith: self.
 	anElement visitSuccessorWith: self 
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLPage: aBLPage [
-	^ self visitBLOriginedEntity: aBLPage
+CSNModelExporter >> visitPage: aBLPage [
+	^ self visitOriginedEntity: aBLPage
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLPageMetier: aBLPageMetier [
-	^ self visitBLUIContainer: aBLPageMetier 
+CSNModelExporter >> visitPageMetier: aBLPageMetier [
+	^ self visitUIContainer: aBLPageMetier 
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIAbsoluteHeight: aBLUIAbsoluteHeight [
+CSNModelExporter >> visitUIAbsoluteHeight: aBLUIAbsoluteHeight [
 	^ self
-		visitBLUIHeight:
+		visitUIHeight:
 			aBLUIAbsoluteHeight
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIAbsoluteWidth: aBLUIAbsoluteWidth [
-	^ self visitBLUIWidth: aBLUIAbsoluteWidth
+CSNModelExporter >> visitUIAbsoluteWidth: aBLUIAbsoluteWidth [
+	^ self visitUIWidth: aBLUIAbsoluteWidth
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIButton: aBLUIButton [
+CSNModelExporter >> visitUIButton: aBLUIButton [
 	^ self
-		visitBLUILeaf:
+		visitUILeaf:
 			aBLUIButton
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIClass: aBLUIClass [
-	^ self visitBLAttribute: aBLUIClass
+CSNModelExporter >> visitUIClass: aBLUIClass [
+	^ self visitAttribute: aBLUIClass
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLUIContainer: aBLUIContainer [
-	^ self visitBLWidget: aBLUIContainer
+CSNModelExporter >> visitUIContainer: aBLUIContainer [
+	^ self visitWidget: aBLUIContainer
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLUIDisabled: aBLUIDisabled [
-	^ self visitBLAttribute: aBLUIDisabled
+CSNModelExporter >> visitUIDisabled: aBLUIDisabled [
+	^ self visitAttribute: aBLUIDisabled
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIFieldset: aBLUIFieldset [
-	^ self visitBLUIPanel: aBLUIFieldset
+CSNModelExporter >> visitUIFieldset: aBLUIFieldset [
+	^ self visitUIPanel: aBLUIFieldset
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLUIGridLayout: aBLUIGridLayout [
-	^ self visitBLLayout: aBLUIGridLayout
+CSNModelExporter >> visitUIGridLayout: aBLUIGridLayout [
+	^ self visitLayout: aBLUIGridLayout
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading1: aBLUIHeading1 [
-	^ self visitBLUIContainer: aBLUIHeading1
+CSNModelExporter >> visitUIHeading1: aBLUIHeading1 [
+	^ self visitUIContainer: aBLUIHeading1
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading2: aBLUIHeading2 [
-	^ self visitBLUIContainer: aBLUIHeading2
+CSNModelExporter >> visitUIHeading2: aBLUIHeading2 [
+	^ self visitUIContainer: aBLUIHeading2
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading3: aBLUIHeading3 [
-	^ self visitBLUIContainer: aBLUIHeading3
+CSNModelExporter >> visitUIHeading3: aBLUIHeading3 [
+	^ self visitUIContainer: aBLUIHeading3
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading4: aBLUIHeading4 [
-	^ self visitBLUIContainer: aBLUIHeading4
+CSNModelExporter >> visitUIHeading4: aBLUIHeading4 [
+	^ self visitUIContainer: aBLUIHeading4
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading5: aBLUIHeading5 [
-	^ self visitBLUIContainer: aBLUIHeading5
+CSNModelExporter >> visitUIHeading5: aBLUIHeading5 [
+	^ self visitUIContainer: aBLUIHeading5
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeading6: aBLUIHeading6 [
-	^ self visitBLUIContainer: aBLUIHeading6
+CSNModelExporter >> visitUIHeading6: aBLUIHeading6 [
+	^ self visitUIContainer: aBLUIHeading6
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHeight: aBLUIHeight [
-	^ self visitBLAttribute: aBLUIHeight
+CSNModelExporter >> visitUIHeight: aBLUIHeight [
+	^ self visitAttribute: aBLUIHeight
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIHorizontalLayout: aBLUIHorizontalLayout [
-	^ self visitBLLayout: aBLUIHorizontalLayout
+CSNModelExporter >> visitUIHorizontalLayout: aBLUIHorizontalLayout [
+	^ self visitLayout: aBLUIHorizontalLayout
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIImage: aBLUIImage [
-	^ self visitBLUILeaf: aBLUIImage
+CSNModelExporter >> visitUIImage: aBLUIImage [
+	^ self visitUILeaf: aBLUIImage
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInput: aBLUIInput [
-	^ self visitBLUILeaf: aBLUIInput
+CSNModelExporter >> visitUIInput: aBLUIInput [
+	^ self visitUILeaf: aBLUIInput
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputCheckbox: aBLUIInputCheckbox [
-	^ self visitBLUIInput: aBLUIInputCheckbox
+CSNModelExporter >> visitUIInputCheckbox: aBLUIInputCheckbox [
+	^ self visitUIInput: aBLUIInputCheckbox
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputColor: aBLUIInputColor [
-	^ self visitBLUIInput: aBLUIInputColor
+CSNModelExporter >> visitUIInputColor: aBLUIInputColor [
+	^ self visitUIInput: aBLUIInputColor
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputDate: aBLUIInputDate [
-	^ self visitBLUIInput: aBLUIInputDate
+CSNModelExporter >> visitUIInputDate: aBLUIInputDate [
+	^ self visitUIInput: aBLUIInputDate
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputDatetimeLocal: aBLUIInputDatetimeLocal [
-	^ self visitBLUIInput: aBLUIInputDatetimeLocal
+CSNModelExporter >> visitUIInputDatetimeLocal: aBLUIInputDatetimeLocal [
+	^ self visitUIInput: aBLUIInputDatetimeLocal
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputEmail: aBLUIInputEmail [
+CSNModelExporter >> visitUIInputEmail: aBLUIInputEmail [
 	^ self
-		visitBLUIInputText:
+		visitUIInputText:
 			aBLUIInputEmail
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputFile: aBLUIInputFile [
-	^ self visitBLUIInput: aBLUIInputFile
+CSNModelExporter >> visitUIInputFile: aBLUIInputFile [
+	^ self visitUIInput: aBLUIInputFile
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputMonth: aBLUIInputMonth [
-	^ self visitBLUIInput: aBLUIInputMonth
+CSNModelExporter >> visitUIInputMonth: aBLUIInputMonth [
+	^ self visitUIInput: aBLUIInputMonth
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputNumber: aBLUIInputNumber [
-	^ self visitBLUIInput: aBLUIInputNumber
+CSNModelExporter >> visitUIInputNumber: aBLUIInputNumber [
+	^ self visitUIInput: aBLUIInputNumber
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputPassword: aBLUIInputPassword [
+CSNModelExporter >> visitUIInputPassword: aBLUIInputPassword [
 	^ self
-		visitBLUIInputText:
+		visitUIInputText:
 			aBLUIInputPassword
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputRadio: aBLUIInputRadio [
-	^ self visitBLUIInput: aBLUIInputRadio
+CSNModelExporter >> visitUIInputRadio: aBLUIInputRadio [
+	^ self visitUIInput: aBLUIInputRadio
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputRange: aBLUIInputRange [
-	^ self visitBLUIInput: aBLUIInputRange
+CSNModelExporter >> visitUIInputRange: aBLUIInputRange [
+	^ self visitUIInput: aBLUIInputRange
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputReset: aBLUIInputReset [
-	^ self visitBLUIInput: aBLUIInputReset
+CSNModelExporter >> visitUIInputReset: aBLUIInputReset [
+	^ self visitUIInput: aBLUIInputReset
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputSearch: aBLUIInputSearch [
-	^ self visitBLUIInput: aBLUIInputSearch
+CSNModelExporter >> visitUIInputSearch: aBLUIInputSearch [
+	^ self visitUIInput: aBLUIInputSearch
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputSubmit: aBLUIInputSubmit [
-	^ self visitBLUIInput: aBLUIInputSubmit
+CSNModelExporter >> visitUIInputSubmit: aBLUIInputSubmit [
+	^ self visitUIInput: aBLUIInputSubmit
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputTel: aBLUIInputTel [
-	^ self visitBLUIInput: aBLUIInputTel
+CSNModelExporter >> visitUIInputTel: aBLUIInputTel [
+	^ self visitUIInput: aBLUIInputTel
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputText: aBLUIInputText [
-	^ self visitBLUIInput: aBLUIInputText
+CSNModelExporter >> visitUIInputText: aBLUIInputText [
+	^ self visitUIInput: aBLUIInputText
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputTime: aBLUIInputTime [
-	^ self visitBLUIInput: aBLUIInputTime
+CSNModelExporter >> visitUIInputTime: aBLUIInputTime [
+	^ self visitUIInput: aBLUIInputTime
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputUrl: aBLUIInputUrl [
-	^ self visitBLUIInput: aBLUIInputUrl
+CSNModelExporter >> visitUIInputUrl: aBLUIInputUrl [
+	^ self visitUIInput: aBLUIInputUrl
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIInputWeek: aBLUIInputWeek [
-	^ self visitBLUIInput: aBLUIInputWeek
+CSNModelExporter >> visitUIInputWeek: aBLUIInputWeek [
+	^ self visitUIInput: aBLUIInputWeek
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUILabel: aBLUILabel [
-	^ self visitBLAttribute: aBLUILabel
+CSNModelExporter >> visitUILabel: aBLUILabel [
+	^ self visitAttribute: aBLUILabel
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUILeaf: aBLUILeaf [
-	^ self visitBLWidget: aBLUILeaf
+CSNModelExporter >> visitUILeaf: aBLUILeaf [
+	^ self visitWidget: aBLUILeaf
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUILink: aBLUILink [
-	^ self visitBLUILeaf: aBLUILink
+CSNModelExporter >> visitUILink: aBLUILink [
+	^ self visitUILeaf: aBLUILink
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIList: aBLUIList [
+CSNModelExporter >> visitUIList: aBLUIList [
 	^ self
-		visitBLUILeaf:
+		visitUILeaf:
 			aBLUIList
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIName: aBLUIName [
-	^ self visitBLAttribute: aBLUIName
+CSNModelExporter >> visitUIName: aBLUIName [
+	^ self visitAttribute: aBLUIName
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIOrderedList: aBLUIOrderedList [
-	^ self visitBLUIList: aBLUIOrderedList
+CSNModelExporter >> visitUIOrderedList: aBLUIOrderedList [
+	^ self visitUIList: aBLUIOrderedList
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIPanel: aBLUIPanel [
-	^ self visitBLUIContainer: aBLUIPanel
+CSNModelExporter >> visitUIPanel: aBLUIPanel [
+	^ self visitUIContainer: aBLUIPanel
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIParagraph: aBLUIParagraph [
-	^ self visitBLUILeaf: aBLUIParagraph
+CSNModelExporter >> visitUIParagraph: aBLUIParagraph [
+	^ self visitUILeaf: aBLUIParagraph
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIPlaceholder: aBLUIPlaceholder [
-	^ self visitBLAttribute: aBLUIPlaceholder
+CSNModelExporter >> visitUIPlaceholder: aBLUIPlaceholder [
+	^ self visitAttribute: aBLUIPlaceholder
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIRelativeHeight: aBLUIRelativeHeight [
+CSNModelExporter >> visitUIRelativeHeight: aBLUIRelativeHeight [
 	^ self
-		visitBLUIHeight:
+		visitUIHeight:
 			aBLUIRelativeHeight
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIRelativeWidth: aBLUIRelativeWidth [
-	^ self visitBLUIWidth: aBLUIRelativeWidth
+CSNModelExporter >> visitUIRelativeWidth: aBLUIRelativeWidth [
+	^ self visitUIWidth: aBLUIRelativeWidth
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUISelect: aBLUISelect [
-	^ self visitBLUILeaf: aBLUISelect
+CSNModelExporter >> visitUISelect: aBLUISelect [
+	^ self visitUILeaf: aBLUISelect
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITab: aBLUITab [
-	^ self visitBLUIContainer: aBLUITab
+CSNModelExporter >> visitUITab: aBLUITab [
+	^ self visitUIContainer: aBLUITab
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITabManager: aBLUITabManager [
-	^ self visitBLUIContainer: aBLUITabManager 
+CSNModelExporter >> visitUITabManager: aBLUITabManager [
+	^ self visitUIContainer: aBLUITabManager 
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITable: aBLUITable [
-	^ self visitBLUIContainer: aBLUITable
+CSNModelExporter >> visitUITable: aBLUITable [
+	^ self visitUIContainer: aBLUITable
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITextarea: aBLUITextarea [
-	^ self visitBLUILeaf: aBLUITextarea
+CSNModelExporter >> visitUITextarea: aBLUITextarea [
+	^ self visitUILeaf: aBLUITextarea
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITitle: aBLUITitle [
-	^ self visitBLAttribute: aBLUITitle
+CSNModelExporter >> visitUITitle: aBLUITitle [
+	^ self visitAttribute: aBLUITitle
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUITree: aBLUITree [
-	^ self visitBLWidget: aBLUITree
+CSNModelExporter >> visitUITree: aBLUITree [
+	^ self visitWidget: aBLUITree
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIUnorderedList: aBLUIUnorderedList [
-	^ self visitBLUIList: aBLUIUnorderedList
+CSNModelExporter >> visitUIUnorderedList: aBLUIUnorderedList [
+	^ self visitUIList: aBLUIUnorderedList
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIValue: aBLUIValue [
-	^ self visitBLAttribute: aBLUIValue
+CSNModelExporter >> visitUIValue: aBLUIValue [
+	^ self visitAttribute: aBLUIValue
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIVerticalLayout: aBLUIVerticalLayout [
-	^ self visitBLLayout: aBLUIVerticalLayout
+CSNModelExporter >> visitUIVerticalLayout: aBLUIVerticalLayout [
+	^ self visitLayout: aBLUIVerticalLayout
 ]
 
 { #category : #'as yet unclassified' }
-CSNModelExporter >> visitBLUIWidth: aBLUIWidth [
-	^ self visitBLAttribute: aBLUIWidth
+CSNModelExporter >> visitUIWidth: aBLUIWidth [
+	^ self visitAttribute: aBLUIWidth
 ]
 
 { #category : #visiting }
-CSNModelExporter >> visitBLWidget: aBLPhase [
-	^ self visitBLOriginedEntity: aBLPhase 
-]
-
-{ #category : #visiting }
-CSNModelExporter >> visitMooseModel: aMooseModel [
-	self subclassResponsibility 
+CSNModelExporter >> visitWidget: aBLPhase [
+	^ self visitOriginedEntity: aBLPhase 
 ]

@@ -13,5 +13,5 @@ CSNUITable class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUITable >> accept: anExporter [
-	^ anExporter visitBLUITable: self
+	^ anExporter visitUITable: self
 ]

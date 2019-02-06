@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIPlaceholder >> accept: anExporter [
-	^ anExporter visitBLUIPlaceholder: self
+	^ anExporter visitUIPlaceholder: self
 ]

@@ -8,7 +8,7 @@ Class {
 CSNRelativeSize class >> annotation [
 
 	<MSEClass: #RelativeSize super: #CSNSize>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNRelativeSize class >> annotation [
 { #category : #generator }
 CSNRelativeSize class >> generatedSlotNames [
 	<generated>
-	'BLRelativeSize class>>#generatedSlotNames'.
+	'CSNRelativeSize class>>#generatedSlotNames'.
 	^ #()
 ]
 

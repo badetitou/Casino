@@ -13,5 +13,5 @@ CSNUIInputEmail class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputEmail >> accept: anExporter [
-	^ anExporter visitBLUIInputEmail: self
+	^ anExporter visitUIInputEmail: self
 ]

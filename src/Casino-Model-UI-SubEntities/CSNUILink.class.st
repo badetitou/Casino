@@ -13,5 +13,5 @@ CSNUILink class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUILink >> accept: anExporter [
-	^ anExporter visitBLUILink: self
+	^ anExporter visitUILink: self
 ]

@@ -8,7 +8,7 @@ Class {
 CSNAlignement class >> annotation [
 
 	<MSEClass: #Alignement super: #CSNPosition>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNAlignement class >> annotation [
 { #category : #generator }
 CSNAlignement class >> generatedSlotNames [
 	<generated>
-	'BLAlignement class>>#generatedSlotNames'.
+	'CSNAlignement class>>#generatedSlotNames'.
 	^ #()
 ]
 

@@ -13,5 +13,5 @@ CSNUIInputSubmit class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputSubmit >> accept: anExporter [
-	^ anExporter visitBLUIInputSubmit: self
+	^ anExporter visitUIInputSubmit: self
 ]

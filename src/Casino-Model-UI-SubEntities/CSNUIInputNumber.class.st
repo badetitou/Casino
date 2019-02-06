@@ -13,5 +13,5 @@ CSNUIInputNumber class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputNumber >> accept: anExporter [
-	^ anExporter visitBLUIInputNumber: self
+	^ anExporter visitUIInputNumber: self
 ]

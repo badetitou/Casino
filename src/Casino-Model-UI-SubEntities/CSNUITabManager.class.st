@@ -6,5 +6,5 @@ Class {
 
 { #category : #visiting }
 CSNUITabManager >> accept: anExporter [
-	^ anExporter visitBLUITabManager: self
+	^ anExporter visitUITabManager: self
 ]

@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIRelativeHeight >> accept: anExporter [
-	^ anExporter visitBLUIRelativeHeight: self
+	^ anExporter visitUIRelativeHeight: self
 ]

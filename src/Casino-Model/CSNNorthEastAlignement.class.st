@@ -8,7 +8,7 @@ Class {
 CSNNorthEastAlignement class >> annotation [
 
 	<MSEClass: #NorthEastAlignement super: #CSNAlignement>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNNorthEastAlignement class >> annotation [
 { #category : #generator }
 CSNNorthEastAlignement class >> generatedSlotNames [
 	<generated>
-	'BLNorthEastAlignement class>>#generatedSlotNames'.
+	'CSNNorthEastAlignement class>>#generatedSlotNames'.
 	^ #()
 ]
 

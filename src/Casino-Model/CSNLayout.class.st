@@ -2,8 +2,8 @@ Class {
 	#name : #CSNLayout,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#cell => FMMany type: #BLCell opposite: #layoutOwner',
-		'#container => FMOne type: #BLUIContainer opposite: #layout'
+		'#cell => FMMany type: #CSNCell opposite: #layoutOwner',
+		'#container => FMOne type: #CSNUIContainer opposite: #layout'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -12,7 +12,7 @@ Class {
 CSNLayout class >> annotation [
 
 	<MSEClass: #Layout super: #CSNOriginedEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -20,7 +20,7 @@ CSNLayout class >> annotation [
 { #category : #generator }
 CSNLayout class >> generatedSlotNames [
 	<generated>
-	'BLLayout class>>#generatedSlotNames'.
+	'CSNLayout class>>#generatedSlotNames'.
 	^ #(cell container)
 ]
 

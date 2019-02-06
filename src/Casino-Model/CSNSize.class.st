@@ -8,7 +8,7 @@ Class {
 CSNSize class >> annotation [
 
 	<MSEClass: #Size super: #MooseEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNSize class >> annotation [
 { #category : #generator }
 CSNSize class >> generatedSlotNames [
 	<generated>
-	'BLSize class>>#generatedSlotNames'.
+	'CSNSize class>>#generatedSlotNames'.
 	^ #()
 ]
 

@@ -8,7 +8,7 @@ Class {
 CSNAbsoluteSize class >> annotation [
 
 	<MSEClass: #AbsoluteSize super: #CSNSize>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNAbsoluteSize class >> annotation [
 { #category : #generator }
 CSNAbsoluteSize class >> generatedSlotNames [
 	<generated>
-	'BLAbsoluteSize class>>#generatedSlotNames'.
+	'CSNAbsoluteSize class>>#generatedSlotNames'.
 	^ #()
 ]
 

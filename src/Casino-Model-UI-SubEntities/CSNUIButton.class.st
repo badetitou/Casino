@@ -14,5 +14,5 @@ CSNUIButton class >> annotation [
 { #category : #'as yet unclassified' }
 CSNUIButton >> accept: anExporter [
 	^ anExporter
-		visitBLUIButton: self
+		visitUIButton: self
 ]

@@ -13,5 +13,5 @@ CSNUIList class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIList >> accept: anExporter [
-	^ anExporter visitBLUIList: self
+	^ anExporter visitUIList: self
 ]

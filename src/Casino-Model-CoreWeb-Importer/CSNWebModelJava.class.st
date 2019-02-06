@@ -7,9 +7,9 @@ gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ2'.
 
 ""Generate Bl Model""
 gwtModel := MooseModel new name: 'Showroom'; yourself.
-BLMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
-BLModelExporterAngular export: gwtModel.
+CSNModelExporterAngular export: gwtModel.
 "
 Class {
 	#name : #CSNWebModelJava,

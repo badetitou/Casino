@@ -11,7 +11,7 @@ Class {
 CSNActionService class >> annotation [
 
 	<MSEClass: #ActionService super: #CSNAction>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -19,7 +19,7 @@ CSNActionService class >> annotation [
 { #category : #generator }
 CSNActionService class >> generatedSlotNames [
 	<generated>
-	'BLActionService class>>#generatedSlotNames'.
+	'CSNActionService class>>#generatedSlotNames'.
 	^ #()
 ]
 

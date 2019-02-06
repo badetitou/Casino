@@ -2,7 +2,7 @@ Extension { #name : #CSNOriginedEntity }
 
 { #category : #'*Casino-Model-Exporter' }
 CSNOriginedEntity >> accept: anExporter [
-	^ anExporter visitBLOriginedEntity: self 
+	^ anExporter visitOriginedEntity: self 
 
 ]
 

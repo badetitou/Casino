@@ -6,7 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 CSNUIGridLayout >> accept: anExporter [
-	^ anExporter visitBLUIGridLayout: self
+	^ anExporter visitUIGridLayout: self
 ]
 
 { #category : #'as yet unclassified' }

@@ -2,7 +2,7 @@ Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Exporter' }
 CSNWidget >> accept: anExporter [
-	^ anExporter visitBLWidget: self 
+	^ anExporter visitWidget: self 
 
 ]
 

@@ -13,5 +13,5 @@ CSNUIHeading1 class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIHeading1 >> accept: anExporter [
-	^ anExporter visitBLUIHeading1: self
+	^ anExporter visitUIHeading1: self
 ]

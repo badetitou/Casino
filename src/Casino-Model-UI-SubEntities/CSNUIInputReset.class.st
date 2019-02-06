@@ -13,5 +13,5 @@ CSNUIInputReset class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputReset >> accept: anExporter [
-	^ anExporter visitBLUIInputReset: self
+	^ anExporter visitUIInputReset: self
 ]

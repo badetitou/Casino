@@ -4,7 +4,7 @@ Class {
 	#traits : 'FamixTAssociation',
 	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
-		'#call => FMOne type: #BLPage opposite: #caller'
+		'#call => FMOne type: #CSNPage opposite: #caller'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -13,7 +13,7 @@ Class {
 CSNActionAppel class >> annotation [
 
 	<MSEClass: #ActionAppel super: #CSNAction>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -21,7 +21,7 @@ CSNActionAppel class >> annotation [
 { #category : #generator }
 CSNActionAppel class >> generatedSlotNames [
 	<generated>
-	'BLActionAppel class>>#generatedSlotNames'.
+	'CSNActionAppel class>>#generatedSlotNames'.
 	^ #(call)
 ]
 

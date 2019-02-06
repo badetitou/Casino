@@ -12,5 +12,5 @@ Class {
 
 { #category : #accessing }
 CSNUIHeight >> accept: anExporter [
-	^ anExporter visitBLUIHeight: self
+	^ anExporter visitUIHeight: self
 ]

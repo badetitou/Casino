@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIValue >> accept: anExporter [
-	^ anExporter visitBLUIValue: self
+	^ anExporter visitUIValue: self
 ]

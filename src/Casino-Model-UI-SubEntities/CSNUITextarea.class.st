@@ -13,5 +13,5 @@ CSNUITextarea class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUITextarea >> accept: anExporter [
-	^ anExporter visitBLUITextarea: self
+	^ anExporter visitUITextarea: self
 ]

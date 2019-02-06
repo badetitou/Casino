@@ -6,5 +6,5 @@ Class {
 
 { #category : #visiting }
 CSNUITree >> accept: anExporter [
-	^ anExporter visitBLUITree: self
+	^ anExporter visitUITree: self
 ]

@@ -5,8 +5,8 @@ Class {
 	#name : #CSNPage,
 	#superclass : #CSNUIContainer,
 	#instVars : [
-		'#businessPage => FMMany type: #BLBusinessPage opposite: #pageContainers',
-		'#caller => FMMany type: #BLActionAppel opposite: #call',
+		'#businessPage => FMMany type: #CSNBusinessPage opposite: #pageContainers',
+		'#caller => FMMany type: #CSNActionAppel opposite: #call',
 		'#codePhase',
 		'#codeValue',
 		'#realClassName',
@@ -20,7 +20,7 @@ Class {
 CSNPage class >> annotation [
 
 	<MSEClass: #Page super: #CSNUIContainer>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -28,7 +28,7 @@ CSNPage class >> annotation [
 { #category : #generator }
 CSNPage class >> generatedSlotNames [
 	<generated>
-	'BLPage class>>#generatedSlotNames'.
+	'CSNPage class>>#generatedSlotNames'.
 	^ #(businessPage caller codePhase codeValue realClassName subtitle title)
 ]
 

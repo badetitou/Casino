@@ -14,7 +14,7 @@ Class {
 CSNUILeaf class >> annotation [
 
 	<MSEClass: #UILeaf super: #CSNWidget>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -22,7 +22,7 @@ CSNUILeaf class >> annotation [
 { #category : #generator }
 CSNUILeaf class >> generatedSlotNames [
 	<generated>
-	'BLUILeaf class>>#generatedSlotNames'.
+	'CSNUILeaf class>>#generatedSlotNames'.
 	^ #(text)
 ]
 

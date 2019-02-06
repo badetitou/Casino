@@ -13,5 +13,5 @@ CSNUIPanel class >> annotation [
 
 { #category : #visiting }
 CSNUIPanel >> accept: anExporter [
-	^ anExporter visitBLUIPanel: self
+	^ anExporter visitUIPanel: self
 ]

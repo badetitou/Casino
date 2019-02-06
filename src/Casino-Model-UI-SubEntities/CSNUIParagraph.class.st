@@ -13,5 +13,5 @@ CSNUIParagraph class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIParagraph >> accept: anExporter [
-	^ anExporter visitBLUIParagraph: self
+	^ anExporter visitUIParagraph: self
 ]

@@ -11,5 +11,5 @@ Class {
 
 { #category : #accessing }
 CSNUITitle >> accept: anExporter [
-	^ anExporter visitBLUITitle: self
+	^ anExporter visitUITitle: self
 ]

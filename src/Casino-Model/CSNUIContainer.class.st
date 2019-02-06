@@ -5,8 +5,8 @@ Class {
 	#name : #CSNUIContainer,
 	#superclass : #CSNWidget,
 	#instVars : [
-		'#layout => FMOne type: #BLLayout opposite: #container',
-		'#widgets => FMMany type: #BLWidget opposite: #widgetContainer'
+		'#layout => FMOne type: #CSNLayout opposite: #container',
+		'#widgets => FMMany type: #CSNWidget opposite: #widgetContainer'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -15,7 +15,7 @@ Class {
 CSNUIContainer class >> annotation [
 
 	<MSEClass: #UIContainer super: #CSNWidget>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -23,7 +23,7 @@ CSNUIContainer class >> annotation [
 { #category : #generator }
 CSNUIContainer class >> generatedSlotNames [
 	<generated>
-	'BLUIContainer class>>#generatedSlotNames'.
+	'CSNUIContainer class>>#generatedSlotNames'.
 	^ #(layout widgets)
 ]
 

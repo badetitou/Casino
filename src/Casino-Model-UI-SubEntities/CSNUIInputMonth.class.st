@@ -13,5 +13,5 @@ CSNUIInputMonth class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputMonth >> accept: anExporter [
-	^ anExporter visitBLUIInputMonth: self
+	^ anExporter visitUIInputMonth: self
 ]

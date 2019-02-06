@@ -13,5 +13,5 @@ CSNUIInputColor class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIInputColor >> accept: anExporter [
-	^ anExporter visitBLUIInputColor: self
+	^ anExporter visitUIInputColor: self
 ]

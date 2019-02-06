@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIAbsoluteWidth >> accept: anExporter [
-	^ anExporter visitBLUIAbsoluteWidth: self
+	^ anExporter visitUIAbsoluteWidth: self
 ]

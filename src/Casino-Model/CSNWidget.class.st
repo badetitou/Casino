@@ -5,13 +5,13 @@ Class {
 	#name : #CSNWidget,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#actions => FMMany type: #BLAction opposite: #caller',
-		'#attributes => FMMany type: #BLAttribute opposite: #widget',
-		'#cellOwner => FMOne type: #BLCell opposite: #widget',
+		'#actions => FMMany type: #CSNAction opposite: #caller',
+		'#attributes => FMMany type: #CSNAttribute opposite: #widget',
+		'#cellOwner => FMOne type: #CSNCell opposite: #widget',
 		'#position',
 		'#realClass',
 		'#size',
-		'#widgetContainer => FMOne type: #BLUIContainer opposite: #widgets'
+		'#widgetContainer => FMOne type: #CSNUIContainer opposite: #widgets'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -20,7 +20,7 @@ Class {
 CSNWidget class >> annotation [
 
 	<MSEClass: #Widget super: #CSNOriginedEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -28,7 +28,7 @@ CSNWidget class >> annotation [
 { #category : #generator }
 CSNWidget class >> generatedSlotNames [
 	<generated>
-	'BLWidget class>>#generatedSlotNames'.
+	'CSNWidget class>>#generatedSlotNames'.
 	^ #(actions attributes cellOwner position realClass size widgetContainer)
 ]
 

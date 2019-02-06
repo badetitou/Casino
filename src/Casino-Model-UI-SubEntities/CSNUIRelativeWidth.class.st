@@ -6,5 +6,5 @@ Class {
 
 { #category : #accessing }
 CSNUIRelativeWidth >> accept: anExporter [
-	^ anExporter visitBLUIRelativeWidth: self
+	^ anExporter visitUIRelativeWidth: self
 ]

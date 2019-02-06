@@ -8,7 +8,7 @@ Class {
 CSNRelativePosition class >> annotation [
 
 	<MSEClass: #RelativePosition super: #CSNPosition>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -16,7 +16,7 @@ CSNRelativePosition class >> annotation [
 { #category : #generator }
 CSNRelativePosition class >> generatedSlotNames [
 	<generated>
-	'BLRelativePosition class>>#generatedSlotNames'.
+	'CSNRelativePosition class>>#generatedSlotNames'.
 	^ #()
 ]
 

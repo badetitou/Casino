@@ -6,5 +6,5 @@ Class {
 
 { #category : #visiting }
 CSNUIHorizontalLayout >> accept: anExporter [
-	^ anExporter visitBLUIHorizontalLayout: self
+	^ anExporter visitUIHorizontalLayout: self
 ]

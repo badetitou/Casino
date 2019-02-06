@@ -16,7 +16,7 @@ Class {
 CSNOriginedEntity class >> annotation [
 
 	<MSEClass: #OriginedEntity super: #MooseEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -24,7 +24,7 @@ CSNOriginedEntity class >> annotation [
 { #category : #generator }
 CSNOriginedEntity class >> generatedSlotNames [
 	<generated>
-	'BLOriginedEntity class>>#generatedSlotNames'.
+	'CSNOriginedEntity class>>#generatedSlotNames'.
 	^ #(source)
 ]
 

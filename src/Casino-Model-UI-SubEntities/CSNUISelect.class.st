@@ -13,5 +13,5 @@ CSNUISelect class >> annotation [
 
 { #category : #visiting }
 CSNUISelect >> accept: anExporter [
-	^ anExporter visitBLUISelect: self
+	^ anExporter visitUISelect: self
 ]

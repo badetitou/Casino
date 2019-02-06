@@ -2,7 +2,7 @@ Class {
 	#name : #CSNService,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#actions => FMMany type: #BLServiceAPI opposite: #serviceOwner'
+		'#actions => FMMany type: #CSNServiceAPI opposite: #serviceOwner'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -11,7 +11,7 @@ Class {
 CSNService class >> annotation [
 
 	<MSEClass: #Service super: #CSNOriginedEntity>
-	<package: #'BL-Model'>
+	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
@@ -19,7 +19,7 @@ CSNService class >> annotation [
 { #category : #generator }
 CSNService class >> generatedSlotNames [
 	<generated>
-	'BLService class>>#generatedSlotNames'.
+	'CSNService class>>#generatedSlotNames'.
 	^ #(actions)
 ]
 

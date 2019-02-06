@@ -13,5 +13,5 @@ CSNUIImage class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUIImage >> accept: anExporter [
-	^ anExporter visitBLUIImage: self
+	^ anExporter visitUIImage: self
 ]
