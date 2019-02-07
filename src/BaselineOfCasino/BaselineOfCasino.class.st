@@ -68,6 +68,10 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FAST') ];
 		package: 'CSN-UIFASTBindingGenerator' with: [ spec requires: #('Casino-Model' 'FAST') ];
+		
+		
+		"behavior"
+		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FAST') ];
 		package: 'CSN-Behaviour-Model-Importer' with: [ spec requires: #('FAST') ];
 		package: 'CSN-Behaviour-Model-Importer-Java' with: [ spec requires: #('CSN-Behaviour-Model-Importer' 'FAST') ]
 ]
