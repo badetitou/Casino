@@ -36,7 +36,7 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
-		group: 'fast-bl' with: #('bl' 'Casino-Bind-UIBehavior-Generator' 'CSN-Behaviour-Model-Importer-Java');
+		group: 'fast-bl' with: #('bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'CSN-Behaviour-Model-Importer-Java');
 		group: 'rh' with: #('bl' 'Casino-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
