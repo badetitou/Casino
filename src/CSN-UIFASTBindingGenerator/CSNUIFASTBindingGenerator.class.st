@@ -33,13 +33,13 @@ CSNUIFASTBindingGenerator class >> prefix [
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
 
-	^ { FASTJavaMetamodelGenerator. BLLayoutMetamodelGenerator }
+	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator }
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineClasses [
 	super defineClasses.
-	action := self remoteEntity: #Action withPrefix: #BL.
+	action := self remoteEntity: #Action withPrefix: #CSN.
 	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #FAST 
 ]
 

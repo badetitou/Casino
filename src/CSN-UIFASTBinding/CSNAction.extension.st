@@ -1,13 +1,7 @@
-Extension { #name : #BLAction }
+Extension { #name : #CSNAction }
 
 { #category : #'*CSN-UIFASTBinding-accessing' }
-BLAction >> addBehavior: aFASTJavaMethod [
-
-	self behavior add: aFASTJavaMethod 
-]
-
-{ #category : #'*CSN-UIFASTBinding-accessing' }
-BLAction >> behavior [
+CSNAction >> behavior [
 
 	<generated>
 	<MSEProperty: #behavior type: #Object>
@@ -16,7 +10,7 @@ BLAction >> behavior [
 ]
 
 { #category : #'*CSN-UIFASTBinding-accessing' }
-BLAction >> behavior: anObject [
+CSNAction >> behavior: anObject [
 
 	<generated>
 	self behavior value: anObject
