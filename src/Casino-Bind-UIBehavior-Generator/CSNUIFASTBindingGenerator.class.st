@@ -5,7 +5,7 @@ Class {
 		'action',
 		'javaMethod'
 	],
-	#category : #'CSN-UIFASTBindingGenerator'
+	#category : #'Casino-Bind-UIBehavior-Generator'
 }
 
 { #category : #accessing }
@@ -20,27 +20,27 @@ CSNUIFASTBindingGenerator class >> modifyMetamodel: aMetamodel [
 CSNUIFASTBindingGenerator class >> packageName [
 
 	<ignoreForCoverage>
-	^ 'CSN-UIFASTBinding'
+	^ 'Casino-Bind-UIBehavior'
 ]
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> prefix [
 
 	<ignoreForCoverage>
-	^ #CSNUIFAST
+	^ #CSN
 ]
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
 
-	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator }
+	^ { CSNBehaviorModelGenerator. CSNLayoutMetamodelGenerator }
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineClasses [
 	super defineClasses.
 	action := self remoteEntity: #Action withPrefix: #CSN.
-	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #FAST 
+	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #CSNB 
 ]
 
 { #category : #definition }
