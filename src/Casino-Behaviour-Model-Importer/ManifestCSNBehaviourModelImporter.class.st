@@ -7,5 +7,5 @@
 Class {
 	#name : #ManifestCSNBehaviourModelImporter,
 	#superclass : #PackageManifest,
-	#category : #'CSN-Behaviour-Model-Importer'
+	#category : #'Casino-Behaviour-Model-Importer'
 }

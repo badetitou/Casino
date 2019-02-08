@@ -1,7 +1,7 @@
 Class {
 	#name : #CSNBehaviourModelImporterJava,
 	#superclass : #CSNBehaviourModelImporter,
-	#category : #'CSN-Behaviour-Model-Importer-Java'
+	#category : #'Casino-Behaviour-Model-Importer-Java'
 }
 
 { #category : #accessing }

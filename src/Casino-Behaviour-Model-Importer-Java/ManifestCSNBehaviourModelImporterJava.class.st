@@ -7,5 +7,5 @@ behaviouralModel := CSNBehaviourModelImporterJava new behaviouralModel: MooseMod
 Class {
 	#name : #ManifestCSNBehaviourModelImporterJava,
 	#superclass : #PackageManifest,
-	#category : #'CSN-Behaviour-Model-Importer-Java'
+	#category : #'Casino-Behaviour-Model-Importer-Java'
 }
