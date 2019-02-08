@@ -27,25 +27,26 @@ CSNUIFASTBindingGenerator class >> packageName [
 CSNUIFASTBindingGenerator class >> prefix [
 
 	<ignoreForCoverage>
-	^ #CSN
+	^ #CSNBind
 ]
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
 
-	^ { CSNBehaviorModelGenerator. CSNLayoutMetamodelGenerator }
+	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator }
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineClasses [
 	super defineClasses.
 	action := self remoteEntity: #Action withPrefix: #CSN.
-	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #CSNB 
+	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #FAST 
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineRelations [
-	(action property: #behavior) -* (javaMethod property: #ui)
+	super defineRelations.
+	(action property: #behavior) -* (javaMethod property: #ui).
 ]
 
 { #category : #definition }
