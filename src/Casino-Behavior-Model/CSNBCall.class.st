@@ -5,7 +5,7 @@ Since I'm abstract, I should not be instanciate (but, it is a reasonnable soluti
 "
 Class {
 	#name : #CSNBCall,
-	#superclass : #CSNBExpression,
+	#superclass : #FASTExpression,
 	#instVars : [
 		'distantService',
 		'onFailure',
@@ -17,7 +17,7 @@ Class {
 { #category : #meta }
 CSNBCall class >> annotation [
 
-	<MSEClass: #Call super: #CSNBExpression>
+	<MSEClass: #Call super: #FASTExpression>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -63,7 +63,7 @@ CSNBCall >> distantService: anObject [
 { #category : #accessing }
 CSNBCall >> onFailure [
 
-	<MSEProperty: #onFailure type: #CSNBStatement>
+	<MSEProperty: #onFailure type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ko'''>
 	^ onFailure
@@ -80,7 +80,7 @@ CSNBCall >> onFailure: anObject [
 { #category : #accessing }
 CSNBCall >> onSuccess [
 
-	<MSEProperty: #onSuccess type: #CSNBStatement>
+	<MSEProperty: #onSuccess type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ok'''>
 	^ onSuccess

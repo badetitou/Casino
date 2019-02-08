@@ -3,14 +3,14 @@ I represent a special call that lead to the navigation to another page of the ap
 "
 Class {
 	#name : #CSNBNavigation,
-	#superclass : #CSNBExpression,
+	#superclass : #FASTExpression,
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBNavigation class >> annotation [
 
-	<MSEClass: #Navigation super: #CSNBExpression>
+	<MSEClass: #Navigation super: #FASTExpression>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self

@@ -1,14 +1,23 @@
 Class {
 	#name : #CSNBehaviorModelGenerator,
-	#superclass : #FASTMetamodelGenerator,
+	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'navigation',
 		'call',
 		'asynchroneCall',
-		'synchroneCall'
+		'synchroneCall',
+		'expression'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
+
+{ #category : #accessing }
+CSNBehaviorModelGenerator class >> modifyMetamodel: aMetamodel [
+
+	super modifyMetamodel: aMetamodel.
+	
+	self fixRemoteMetamodelRelationsIn: aMetamodel.
+]
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> packageName [
@@ -19,6 +28,11 @@ CSNBehaviorModelGenerator class >> packageName [
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> prefix [
 	^ #CSNB
+]
+
+{ #category : #accessing }
+CSNBehaviorModelGenerator class >> submetamodels [
+	^ { FASTMetamodelGenerator }
 ]
 
 { #category : #definition }
@@ -52,6 +66,7 @@ CSNBehaviorModelGenerator >> defineClasses [
 	call := builder newClassNamed: #Call comment: self commentForCall.
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
+	expression := self remoteEntity: #Expression withPrefix: #FAST.
 ]
 
 { #category : #definition }
@@ -70,7 +85,7 @@ CSNBehaviorModelGenerator >> defineProperties [
 	(call property: #distantService type: #String) comment: 'The link to service I call'.
 	
 	"because we do not want to break the container thing".
-	(call property: #onSuccess type: #CSNBStatement) comment: 'The statement executed if the call return ''ok'''.
+	(call property: #onSuccess type: #FASTStatement) comment: 'The statement executed if the call return ''ok'''.
 	
-	(call property: #onFailure type: #CSNBStatement) comment: 'The statement executed if the call return ''ko'''
+	(call property: #onFailure type: #FASTStatement) comment: 'The statement executed if the call return ''ko'''
 ]
