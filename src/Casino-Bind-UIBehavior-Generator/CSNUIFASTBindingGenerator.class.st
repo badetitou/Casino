@@ -48,18 +48,3 @@ CSNUIFASTBindingGenerator >> defineRelations [
 	super defineRelations.
 	(action property: #behavior) -* (javaMethod property: #ui).
 ]
-
-{ #category : #definition }
-CSNUIFASTBindingGenerator >> newBuilder [
-
-	| mqBuilder |
-
-	mqBuilder := FamixMooseQueryGenerator builderWithDefinitions.
-
-	self adoptBuilder: mqBuilder.
-
-	^ mqBuilder
-		doNotGenerateCurrent;
-		generator: self;
-		yourself.
-]
