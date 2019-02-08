@@ -16,7 +16,7 @@ CSNBehaviourModelImporterJava >> generateBehaviouralModel [
 			action source methods
 				do: [ :aFamixMethod | self parser parseCodeMethodString: aFamixMethod sourceText ].
 			self parser model allFASTJavaMethodEntity select: [ :method | method parentNode isNil ]
-				thenDo: [ :behavior | action addBehavior: behavior ] ]
+				thenDo: [ :behavior | action behavior add: behavior ] ]
 		displayingProgress: [ :action | 'compute behavioural code of ' , action caller name ]
 		every: 10.
 	^ models
