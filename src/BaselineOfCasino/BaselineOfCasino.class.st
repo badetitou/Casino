@@ -36,7 +36,7 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'query' with: #('core-extented');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
-		group: 'fast-bl' with: #('bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'CSN-Behaviour-Model-Importer-Java');
+		group: 'fast-bl' with: #('bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behaviour-Model-Importer-Java');
 		group: 'rh' with: #('bl' 'Casino-Migration-RH');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests');
@@ -71,8 +71,8 @@ BaselineOfCasino >> definePackages: spec [
 		"behavior"
 		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FAST') ];
 		package: 'Casino-Behavior-Model' with: [ spec requires: #('FAST') ];
-		package: 'CSN-Behaviour-Model-Importer' with: [ spec requires: #('FAST') ];
-		package: 'CSN-Behaviour-Model-Importer-Java' with: [ spec requires: #('CSN-Behaviour-Model-Importer' 'FAST') ];
+		package: 'Casino-Behaviour-Model-Importer' with: [ spec requires: #('FAST') ];
+		package: 'Casino-Behaviour-Model-Importer-Java' with: [ spec requires: #('Casino-Behaviour-Model-Importer' 'FAST') ];
 		
 		"binding"
 		package: 'Casino-Bind-UIBehavior-Generator' with: [ spec requires: #('Casino-Model' 'FAST') ]
