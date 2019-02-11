@@ -5,7 +5,7 @@
 behaviouralModel := CSNBehaviourModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; generateBehaviouralModel.
 "
 Class {
-	#name : #ManifestCSNBehaviourModelImporterJava,
+	#name : #ManifestCSNBehaviorModelImporterJava,
 	#superclass : #PackageManifest,
 	#category : #'Casino-Behaviour-Model-Importer-Java'
 }

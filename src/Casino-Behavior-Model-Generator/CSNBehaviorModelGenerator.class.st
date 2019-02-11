@@ -6,7 +6,8 @@ Class {
 		'call',
 		'asynchroneCall',
 		'synchroneCall',
-		'expression'
+		'expression',
+		'popUp'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -54,6 +55,11 @@ CSNBehaviorModelGenerator >> commentForNavigation [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForPopUp [
+	^ 'I represent a call which will create a pop up with the data as inside it (it corresponds most of the time to a String, but it can change)'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForSynchroneCall [
 	
 	^  'I represent an Synchrone call (normal call) to a distant service'
@@ -66,6 +72,7 @@ CSNBehaviorModelGenerator >> defineClasses [
 	call := builder newClassNamed: #Call comment: self commentForCall.
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
+	popUp  := builder newClassNamed: #PopUp comment: self commentForPopUp.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
 ]
 
@@ -76,6 +83,7 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	call --|> expression.
 	asynchroneCall --|> call.
 	synchroneCall --|> call.
+	popUp --|> expression
 ]
 
 { #category : #definition }
@@ -86,6 +94,6 @@ CSNBehaviorModelGenerator >> defineProperties [
 	
 	"because we do not want to break the container thing".
 	(call property: #onSuccess type: #FASTStatement) comment: 'The statement executed if the call return ''ok'''.
-	
-	(call property: #onFailure type: #FASTStatement) comment: 'The statement executed if the call return ''ko'''
+	(call property: #onFailure type: #FASTStatement) comment: 'The statement executed if the call return ''ko'''.
+	(popUp property: #data type: #FASTStatement) comment: 'The data that will be displayed in the popUp'.
 ]
