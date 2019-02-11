@@ -8,7 +8,7 @@ behaviouralModel collect: [ :model | String crlf join: (model allFASTJavaMethodE
 Class {
 	#name : #CSNBehaviourModelExporterAngular,
 	#superclass : #CSNBehaviourModelExporter,
-	#category : #'CSN-Behaviour-Model-Exporter-Angular'
+	#category : #'Casino-Behavior-Model-Exporter-Angular'
 }
 
 { #category : #generated }

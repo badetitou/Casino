@@ -1,5 +1,5 @@
 Class {
 	#name : #CSNBehaviourModelExporter,
 	#superclass : #FASTVisitor,
-	#category : #'CSN-Behaviour-Model-Exporter'
+	#category : #'Casino-Behavior-Model-Exporter'
 }
