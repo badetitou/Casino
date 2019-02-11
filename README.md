@@ -1,4 +1,8 @@
 # Casino
+
+Master: [![Build Pass](https://travis-ci.org/badetitou/Casino.svg?branch=master)](https://travis-ci.org/badetitou/Casino)
+
+
 This repository contains the main packages of Casino.
 It includes:
 
