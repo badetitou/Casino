@@ -1,0 +1,10 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Casino',
+      #directory : 'src',
+      #load : [ 'tests' ],
+      #platforms : [ #pharo ]
+    }
+  ]
+}
