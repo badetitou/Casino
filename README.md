@@ -1,6 +1,5 @@
-# BL-ToolKit
-
-This repository contains the main packages of BL-Toolkit.
+# Casino
+This repository contains the main packages of Casino.
 It includes:
 
 - A meta-model to represent web site
