@@ -18,6 +18,7 @@ CSNBehaviorPatternNavigation >> run [
 			navigation := self newNavigation.
 			identifier parentNode parentNode parentNode childrenNode add: navigation.
 			navigation arguments addAll: (identifier parentNode parentNode arguments).
+			identifier parentNode parentNode parentNode childrenNode remove: identifier parentNode parentNode.
 			self model silentlyRemoveAll: { identifier parentNode parentNode.identifier parentNode. identifier }
 			].
 ]

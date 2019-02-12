@@ -101,6 +101,20 @@ CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParent [
 ]
 
 { #category : #tests }
+CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParentChildren [
+
+	self assert: (model allWithType: CSNBNavigation) anyOne parentNode childrenNode anyOne equals: (model allWithType: CSNBNavigation) anyOne
+	
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParentChildrenSize [
+
+	self assert: (model allWithType: CSNBNavigation) anyOne parentNode childrenNode size equals: 1
+	
+]
+
+{ #category : #tests }
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationType [
 
 	self assert: (model allWithType: CSNBNavigation) size equals: 1

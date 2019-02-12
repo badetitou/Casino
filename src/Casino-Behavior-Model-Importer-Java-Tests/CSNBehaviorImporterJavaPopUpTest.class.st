@@ -37,8 +37,19 @@ CSNBehaviorImporterJavaPopUpTest >> testImportPopUpFinalSize [
 
 { #category : #tests }
 CSNBehaviorImporterJavaPopUpTest >> testImportPopUpParent [
-
 	self assert: model allCSNBPopUp anyOne parentNode equals: model allFASTExpressionStatement anyOne
+	
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaPopUpTest >> testImportPopUpParentChildren [
+	self assert: model allCSNBPopUp anyOne parentNode childrenNode anyOne equals: model allCSNBPopUp anyOne
+	
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaPopUpTest >> testImportPopUpParentChildrenSize [
+	self assert: model allCSNBPopUp anyOne parentNode childrenNode size equals: 1
 	
 ]
 
