@@ -1,7 +1,7 @@
 Class {
 	#name : #CSNBehaviorModelImporterJava,
 	#superclass : #CSNBehaviorModelImporter,
-	#category : #'Casino-Behaviour-Model-Importer-Java'
+	#category : #'Casino-Behavior-Model-Importer-Java'
 }
 
 { #category : #accessing }
@@ -13,7 +13,7 @@ CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 CSNBehaviorModelImporterJava >> generateBehaviouralModel [
 	| models |
 	models := self generateFASTModels.
-	models do: [ :model | self convertFastToBehavioral: model ] displayingProgress: [:model | 'Converting ' , model asString ].
+	models do: [ :model | self convertFastToBehavioral: model. self halt ] displayingProgress: [:model | 'Converting ' , model asString ].
 	^ models
 ]
 

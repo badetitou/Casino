@@ -1,12 +1,12 @@
 Class {
 	#name : #CSNBehaviorPatternPopUp,
 	#superclass : #CSNBehaviorPattern,
-	#category : #'Casino-Behaviour-Model-Importer-Java-Pattern'
+	#category : #'Casino-Behavior-Model-Importer-Java-Pattern'
 }
 
 { #category : #running }
 CSNBehaviorPatternPopUp >> newPopUp [
-	^ self model add: CSNBPopUp new
+	^ self model silentlyAdd: CSNBPopUp new
 ]
 
 { #category : #running }

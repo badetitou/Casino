@@ -6,7 +6,7 @@ Class {
 		'sourceCodeModel',
 		'parser'
 	],
-	#category : #'Casino-Behaviour-Model-Importer'
+	#category : #'Casino-Behavior-Model-Importer'
 }
 
 { #category : #accessing }
