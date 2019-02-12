@@ -104,6 +104,8 @@ CSNBehaviorModelGenerator >> defineProperties [
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
+	(navigation property: #arguments)
+		-* (expression property: #navigation).
 	(navigation property: #page) *- (page property: #navigations).
-	(navigation property: #arguments) -* ((expression property: #parentNode) container)
+	
 ]

@@ -13,7 +13,7 @@ CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 CSNBehaviorModelImporterJava >> generateBehaviouralModel [
 	| models |
 	models := self generateFASTModels.
-	models do: [ :model | self convertFastToBehavioral: model. self halt ] displayingProgress: [:model | 'Converting ' , model asString ].
+	models do: [ :model | self convertFastToBehavioral: model ] displayingProgress: [:model | 'Converting ' , model asString ].
 	^ models
 ]
 
@@ -46,6 +46,7 @@ CSNBehaviorModelImporterJava >> newBehavioralModel [
 			(MooseModel
 				metamodelComposedOf:
 					{FASTJavaMetamodelGenerator metamodel.
-					CSNBehaviorModelGenerator metamodel});
+					CSNBehaviorModelGenerator metamodel.
+					CSNLayoutMetamodelGenerator metamodel});
 		yourself
 ]

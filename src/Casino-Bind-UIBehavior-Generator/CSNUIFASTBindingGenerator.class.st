@@ -18,7 +18,6 @@ CSNUIFASTBindingGenerator class >> modifyMetamodel: aMetamodel [
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> packageName [
-
 	<ignoreForCoverage>
 	^ 'Casino-Bind-UIBehavior'
 ]

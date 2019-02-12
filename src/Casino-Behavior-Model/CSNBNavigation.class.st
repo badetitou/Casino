@@ -41,7 +41,7 @@ CSNBNavigation >> arguments [
 
 	<generated>
 	<MSEProperty: #arguments type: #Object>
-	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #parentNode: ]
+	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
 { #category : #accessing }
