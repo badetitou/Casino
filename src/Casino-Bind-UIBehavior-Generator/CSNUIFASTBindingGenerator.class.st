@@ -3,7 +3,9 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'action',
-		'javaMethod'
+		'javaMethod',
+		'navigation',
+		'page'
 	],
 	#category : #'Casino-Bind-UIBehavior-Generator'
 }
@@ -32,18 +34,21 @@ CSNUIFASTBindingGenerator class >> prefix [
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
 
-	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator }
+	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator. CSNBehaviorModelGenerator }
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineClasses [
 	super defineClasses.
 	action := self remoteEntity: #Action withPrefix: #CSN.
-	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #FAST 
+	javaMethod := self remoteEntity: #JavaMethodEntity withPrefix: #FAST.
+	navigation := self remoteEntity: #Navigation withPrefix: #CSNB.
+	page := self remoteEntity: #Page withPrefix: #CSN.
 ]
 
 { #category : #definition }
 CSNUIFASTBindingGenerator >> defineRelations [
 	super defineRelations.
 	(action property: #behavior) -* (javaMethod property: #ui).
+	(navigation property: #page) *- (page property: #navigations).
 ]

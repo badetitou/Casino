@@ -41,6 +41,7 @@ CSNBNavigation >> arguments [
 
 	<generated>
 	<MSEProperty: #arguments type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
@@ -49,19 +50,4 @@ CSNBNavigation >> arguments: anObject [
 
 	<generated>
 	self arguments value: anObject
-]
-
-{ #category : #accessing }
-CSNBNavigation >> page [
-
-	<generated>
-	<MSEProperty: #page type: #Object>
-	^ self privateState attributeAt: #page ifAbsent: [ nil ]
-]
-
-{ #category : #accessing }
-CSNBNavigation >> page: anObject [
-
-	<generated>
-	self privateState attributeAt: #page put: (FMMultivalueLink on: self update: #navigations from: self page to: anObject).
 ]

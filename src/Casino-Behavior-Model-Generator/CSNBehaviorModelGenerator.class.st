@@ -34,7 +34,7 @@ CSNBehaviorModelGenerator class >> prefix [
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator. CSNLayoutMetamodelGenerator }
+	^ { FASTMetamodelGenerator }
 ]
 
 { #category : #definition }
@@ -74,9 +74,7 @@ CSNBehaviorModelGenerator >> defineClasses [
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
-	expression := self remoteEntity: #Expression withPrefix: #FAST.
-	page := self remoteEntity: #Page withPrefix: #CSN.
-	
+	expression := self remoteEntity: #Expression withPrefix: #FAST
 ]
 
 { #category : #definition }
@@ -105,7 +103,6 @@ CSNBehaviorModelGenerator >> defineProperties [
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
 	(navigation property: #arguments)
-		-* (expression property: #navigation).
-	(navigation property: #page) *- (page property: #navigations).
+		-* (expression property: #navigation)
 	
 ]

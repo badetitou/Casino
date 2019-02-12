@@ -83,7 +83,7 @@ CSNBehaviorImporterJavaNavigationTest >> setUp [
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationArgumentsSize [
 	self
 		assert: (model allWithType: CSNBNavigation) anyOne arguments size
-		equals: 3
+		equals: 4
 ]
 
 { #category : #tests }
