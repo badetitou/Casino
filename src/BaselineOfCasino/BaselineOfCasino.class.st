@@ -74,7 +74,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
 		package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FAST') ];
 		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Casino-Behavior-Model-Importer') ];
-		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behaviour-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
+		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
 		
 		"binding"
 		package: 'Casino-Bind-UIBehavior' with: [ spec requires: #('Casino-Model' 'FAST') ];
