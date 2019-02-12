@@ -7,7 +7,8 @@ Class {
 		'asynchroneCall',
 		'synchroneCall',
 		'expression',
-		'popUp'
+		'popUp',
+		'page'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -33,7 +34,7 @@ CSNBehaviorModelGenerator class >> prefix [
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator }
+	^ { FASTMetamodelGenerator. CSNLayoutMetamodelGenerator }
 ]
 
 { #category : #definition }
@@ -72,8 +73,10 @@ CSNBehaviorModelGenerator >> defineClasses [
 	call := builder newClassNamed: #Call comment: self commentForCall.
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
-	popUp  := builder newClassNamed: #PopUp comment: self commentForPopUp.
+	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
+	page := self remoteEntity: #Page withPrefix: #CSN.
+	
 ]
 
 { #category : #definition }
@@ -96,4 +99,11 @@ CSNBehaviorModelGenerator >> defineProperties [
 	(call property: #onSuccess type: #FASTStatement) comment: 'The statement executed if the call return ''ok'''.
 	(call property: #onFailure type: #FASTStatement) comment: 'The statement executed if the call return ''ko'''.
 	(popUp property: #data type: #FASTStatement) comment: 'The data that will be displayed in the popUp'.
+]
+
+{ #category : #definition }
+CSNBehaviorModelGenerator >> defineRelations [
+	super defineRelations.
+	(navigation property: #page) *- (page property: #navigations).
+	(navigation property: #arguments) -* ((expression property: #parentNode) container)
 ]

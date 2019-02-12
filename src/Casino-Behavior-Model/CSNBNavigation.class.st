@@ -35,3 +35,33 @@ CSNBNavigation class >> requirements [
 	<generated>
 	^ {  }
 ]
+
+{ #category : #accessing }
+CSNBNavigation >> arguments [
+
+	<generated>
+	<MSEProperty: #arguments type: #Object>
+	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #parentNode: ]
+]
+
+{ #category : #accessing }
+CSNBNavigation >> arguments: anObject [
+
+	<generated>
+	self arguments value: anObject
+]
+
+{ #category : #accessing }
+CSNBNavigation >> page [
+
+	<generated>
+	<MSEProperty: #page type: #Object>
+	^ self privateState attributeAt: #page ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+CSNBNavigation >> page: anObject [
+
+	<generated>
+	self privateState attributeAt: #page put: (FMMultivalueLink on: self update: #navigations from: self page to: anObject).
+]
