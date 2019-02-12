@@ -80,10 +80,10 @@ CSNBehaviorImporterJavaNavigationTest >> setUp [
 ]
 
 { #category : #tests }
-CSNBehaviorImporterJavaNavigationTest >> testImportNavigationData [
+CSNBehaviorImporterJavaNavigationTest >> testImportNavigationArgumentsSize [
 	self
-		assert: model allCSNBPopUp anyOne data
-		equals: (model allWithType: FASTJavaStringLiteral) anyOne
+		assert: (model allWithType: CSNBNavigation) anyOne arguments size
+		equals: 3
 ]
 
 { #category : #tests }
@@ -96,7 +96,7 @@ CSNBehaviorImporterJavaNavigationTest >> testImportNavigationFinalSize [
 { #category : #tests }
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParent [
 
-	self assert: model allCSNBPopUp anyOne parentNode equals: model allFASTExpressionStatement anyOne
+	self assert: (model allWithType: CSNBNavigation) anyOne parentNode equals: model allFASTExpressionStatement anyOne
 	
 ]
 

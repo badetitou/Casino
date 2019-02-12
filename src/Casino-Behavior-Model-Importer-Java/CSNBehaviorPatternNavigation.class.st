@@ -14,9 +14,11 @@ CSNBehaviorPatternNavigation >> run [
 	self model allFASTJavaIdentifier 
 		select: [ :identifier | (identifier name = 'Workspace') and: [ identifier parentNode isNotNil and: [ identifier parentNode name = 'getPhaseManager' 
 					and: [ identifier parentNode parentNode isNotNil and: [ identifier parentNode parentNode name = 'displayPhase' and: [ identifier parentNode parentNode class = FASTJavaMethodInvocation ] ]]] ] ] 
-		thenDo: [:identifier | | navigation |
+		thenDo: [:identifier | | navigation page |
 			navigation := self newNavigation.
-			navigation arguments addAll: (identifier parentNode parentNode arguments).
+			identifier parentNode parentNode parentNode childrenNode add: navigation.
+			page := identifier parentNode parentNode arguments at: 1.
+			navigation arguments addAll: (identifier parentNode parentNode arguments allButFirst: 1).
 			self model silentlyRemoveAll: { identifier parentNode parentNode.identifier parentNode. identifier }
 			].
 ]
