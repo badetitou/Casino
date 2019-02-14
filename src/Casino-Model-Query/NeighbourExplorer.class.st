@@ -112,7 +112,7 @@ NeighbourExplorer >> openGlamour [
 						initializeView: [ RTMondrian new ];
 						painting: [ :view :aBLPhase | self viewNeighbourOf: aBLPhase toRTMondrian: view ] ] ];
 		title: 'Neighbour Explorer';
-		openOn: self model allBLPage
+		openOn: self model allCSNPage
 ]
 
 { #category : #'view creation' }

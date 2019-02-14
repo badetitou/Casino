@@ -23,11 +23,11 @@ import { ComponentsModule } from ''../components/components.module'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
 ',
-(self allBLService flatCollect: [ :service | 'import { ', service uniqueName, ' } from ''./', service getLocalPath ,''';', String crlf  ] ) 
+(self allCSNService flatCollect: [ :service | 'import { ', service uniqueName, ' } from ''./', service getLocalPath ,''';', String crlf  ] ) 
 ,'
 
 export const phases: Phase[] = [
-' , (self allBLPage flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
+' , (self allCSNPage flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
 		,
 			'
 ];
@@ -50,7 +50,7 @@ export const phases: Phase[] = [
         IndexComponent
     ],
     providers: [
-', (self allBLService flatCollect: [:service | '        ', service uniqueName, ',', String crlf]),
+', (self allCSNService flatCollect: [:service | '        ', service uniqueName, ',', String crlf]),
         '        { provide: PHASES, useValue: phases } as Provider
     ]
 })
@@ -69,7 +69,7 @@ const routes: Routes = [
 	{ path: ''desktop'', component: IndexComponent, children: [' , String crlf.
 	text := text
 		,
-			(self allBLPage
+			(self allCSNPage
 				flatCollect: [ :phase | 
 					'		{ path: ''' , phase name , ''', loadChildren: ''./phases/' , phase getLocalModulePath
 						, '''},' , String crlf ]).

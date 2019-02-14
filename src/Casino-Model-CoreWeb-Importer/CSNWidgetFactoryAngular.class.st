@@ -11,7 +11,7 @@ CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createAttributeFrom: invoc for: widget [
-	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
+	^ widget createAttributeFromAngularInvocation: invoc withImporter: self uiModel
 ]
 
 { #category : #factory }
@@ -39,7 +39,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
 				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ ((self importer sourceModel allModelClasses
+						ifTrue: [ ((self uiModel sourceModel allModelClasses
 								select: [ :e | (e superInheritances collect: [ :a | a to name ]) includes: 'HomePhaseController' ])
 								at: 1) mooseName ]
 						ifFalse: [ 'STUB C/S' ] ]);
@@ -49,7 +49,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 	model silentlyAdd: (blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
-				source: (self importer getClassNamed: blPhase realClassName);
+				source: (self uiModel getClassNamed: blPhase realClassName);
 				computeTitle;
 				computeSubtitle.
 			blPhase ])

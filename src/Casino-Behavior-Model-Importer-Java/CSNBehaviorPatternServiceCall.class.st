@@ -16,6 +16,17 @@ CSNBehaviorPatternServiceCall >> newSynchroneCall [
 
 { #category : #running }
 CSNBehaviorPatternServiceCall >> run [
-	self todo: #todo.
-	self error.
+	(self model allWithType: FASTNamedEntity)
+		select: [ :namedEntity | 
+			(self uiModel allCSNService
+				select: [ :service | service name = namedEntity name ])
+				ifEmpty: [ false ]
+				ifNotEmpty: [ :service | (service first actions collect: #name) includes: namedEntity parentNode parentNode parentNode name ] ]	
+		thenDo: [:namedEntity | | asynchroneCall |
+			asynchroneCall := self newAsynchroneCall.
+			self halt.
+			namedEntity parentNode parentNode childrenNode add: asynchroneCall.
+			namedEntity parentNode parentNode childrenNode remove: namedEntity parentNode.
+			self model removeAll: { namedEntity. namedEntity parentNode. namedEntity parentNode parentNode. namedEntity parentNode parentNode parentNode }
+			]
 ]

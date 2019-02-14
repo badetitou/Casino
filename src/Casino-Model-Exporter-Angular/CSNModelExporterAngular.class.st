@@ -116,12 +116,12 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 	self writeFile: rootComponents / aMooseModel getTSName withCode: aMooseModel generateTSSourceCode.
 	rootPhases := root / 'phases'.
 	rootPhases createDirectory.
-	aMooseModel allBLPage
+	aMooseModel allCSNPage
 		do: [ :aPage | 
 			self class new
 				currentPath: self rootPhases / aPage name;
 				visit: aPage ].
-	aMooseModel allBLService do: [ :rootElement | self visit: rootElement ]
+	aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]
 ]
 
 { #category : #visiting }

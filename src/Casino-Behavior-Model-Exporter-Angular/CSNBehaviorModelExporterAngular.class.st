@@ -1,5 +1,5 @@
 "
-behaviouralModel := CSNBehaviourModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; generateBehaviouralModel.
+behaviouralModel := CSNBehaviorModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; generateBehaviouralModel.
 
 behaviouralModel collect: [ :model | model allFASTJavaMethodEntity first ui source sourceText  ].
 behaviouralModel collect: [ :model | CSNBehaviourModelExporterAngular new accept: model allFASTJavaMethodEntity first  ].

@@ -19,7 +19,7 @@ CSNBehaviorModelImporterJava >> generateBehaviouralModel [
 
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> generateFASTModels [
-	^ (self uiModel allBLAction
+	^ (self uiModel allCSNAction
 		select:
 			[ :action | action isActionService not and: [ action isActionAppel not ] ])
 		collect: [ :action | 

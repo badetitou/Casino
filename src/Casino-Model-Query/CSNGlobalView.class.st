@@ -31,7 +31,7 @@ CSNGlobalView >> openViewForModel: aBLModel [
 	| b |
 	b := RTMondrian new.
 	b shape circle color: [ :cl | cl color ].
-	b nodes: (aBLModel allBLWidget , aBLModel allBLService, aBLModel allBLLayout) asSet asOrderedCollection.
+	b nodes: (aBLModel allCSNWidget , aBLModel allCSNService, aBLModel allCSNLayout) asSet asOrderedCollection.
 	(b shape line arrowedLine headOffset: 1.0) shape head
 		baseSize: 5.0;
 		size: 8.
@@ -43,7 +43,7 @@ CSNGlobalView >> openViewForModel: aBLModel [
 				ifFalse: [ Color gray ] ]) shape head
 		baseSize: 5.0;
 		size: 8.
-	b edges useAssociations: {(aBLModel allBLWidget collect: #allAssociations). aBLModel allBLLayout collect: #allAssociations} flattened.
+	b edges useAssociations: {(aBLModel allCSNWidget collect: #allAssociations). aBLModel allCSNLayout collect: #allAssociations} flattened.
 	b layout force strength: 0.4.
 	b view pushBackEdges.
 	self legend: b.

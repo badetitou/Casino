@@ -3,19 +3,24 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'modelImporter'
+		'uiModel'
 	],
 	#category : #'Casino-Behavior-Model-Importer'
 }
 
 { #category : #'instance creation' }
 CSNBehaviorPattern class >> on: model [
-	^ self new model: model
+	^ self on: model fromUiModel: nil
 ]
 
 { #category : #'instance creation' }
 CSNBehaviorPattern class >> on: model from: aBehavioralModelImporter [
-	^ self new model: model; modelImporter: aBehavioralModelImporter 
+	^ self on: model fromUiModel: aBehavioralModelImporter uiModel
+]
+
+{ #category : #'instance creation' }
+CSNBehaviorPattern class >> on: model fromUiModel: aUiModel [
+	^ self new model: model; uiModel: aUiModel 
 ]
 
 { #category : #accessing }
@@ -28,17 +33,17 @@ CSNBehaviorPattern >> model: anObject [
 	model := anObject
 ]
 
-{ #category : #accessing }
-CSNBehaviorPattern >> modelImporter [
-	^ modelImporter
-]
-
-{ #category : #accessing }
-CSNBehaviorPattern >> modelImporter: anObject [
-	modelImporter := anObject
-]
-
 { #category : #running }
 CSNBehaviorPattern >> run [
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+CSNBehaviorPattern >> uiModel [
+	^ uiModel
+]
+
+{ #category : #accessing }
+CSNBehaviorPattern >> uiModel: anObject [
+	uiModel := anObject
 ]
