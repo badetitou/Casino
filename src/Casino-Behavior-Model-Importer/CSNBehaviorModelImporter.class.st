@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #accessing }
-CSNBehaviorModelImporter >> generateBehaviouralModel [
+CSNBehaviorModelImporter >> generateBehavioralModel [
 	"I should return the generated model (normally 'behaviouralModel')"
 	self subclassResponsibility
 ]

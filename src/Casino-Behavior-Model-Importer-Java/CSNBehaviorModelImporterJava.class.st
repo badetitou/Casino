@@ -10,7 +10,7 @@ CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 ]
 
 { #category : #accessing }
-CSNBehaviorModelImporterJava >> generateBehaviouralModel [
+CSNBehaviorModelImporterJava >> generateBehavioralModel [
 	| models |
 	models := self generateFASTModels.
 	models do: [ :model | self convertFastToBehavioral: model ] displayingProgress: [:model | 'Converting ' , model asString ].
