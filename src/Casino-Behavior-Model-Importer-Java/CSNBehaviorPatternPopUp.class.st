@@ -17,6 +17,6 @@ CSNBehaviorPatternPopUp >> run [
 			popUp := self newPopUp data: identifier parentNode arguments first.
 			identifier parentNode parentNode childrenNode add: popUp.
 			identifier parentNode parentNode childrenNode remove: identifier parentNode.
-			self model removeAll: { identifier parentNode. identifier }
+			self model silentlyRemoveAll: { identifier parentNode. identifier }
 			].
 ]
