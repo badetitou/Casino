@@ -41,7 +41,12 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'ui-bl' with: #('bl' 'tests' 'Casino-Model-Query' 'Casino-MetamodelGenerator');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
 		group: 'behavior' with: #('ui-bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Bind-UIBehavior' 'Casino-Behavior-Model');
-		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests')
+		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests');
+		
+		"bl"
+		group: 'behavior-bl' with: #('behavior-importer-java' 'behavior-exporter-angular');
+		group: 'behavior-importer-java' with: #('behavior' 'Casino-Behavior-Model-Importer-Java');
+		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-Angular')
 ]
 
 { #category : #baselines }
@@ -68,13 +73,19 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FAST') ];
 		
-		"behavior"
+		"behavior-core"
 		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FAST') ];
 		package: 'Casino-Behavior-Model' with: [ spec requires: #('FAST') ];
+		package: 'Casino-Behavior-Visitor' with: [ spec requires: #('Casino-Behavior-Model') ];
 		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
+		"behavior-importer"
 		package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FAST') ];
 		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Casino-Behavior-Model-Importer') ];
 		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
+		"behavior-exporter"
+		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Behavior-Model' 'Casino-Behavior-Visitor') ];
+		package: 'Casino-Behavior-Model-Exporter-Angular' with: [ spec requires: #('Casino-Behavior-Model-Exporter') ];
+		
 		
 		"binding"
 		package: 'Casino-Bind-UIBehavior' with: [ spec requires: #('Casino-Model' 'FAST') ];

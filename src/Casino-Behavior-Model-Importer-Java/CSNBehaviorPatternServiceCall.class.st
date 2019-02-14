@@ -42,7 +42,7 @@ CSNBehaviorPatternServiceCall >> run [
 					namedEntity parentNode parentNode parentNode.
 					namedEntity parentNode parentNode.
 					namedEntity parentNode.
-					namedEntity.					}.
+					namedEntity.	}.
 			namedEntity parentNode parentNode parentNode parentNode childrenNode remove: namedEntity parentNode parentNode parentNode.
 			namedEntity parentNode parentNode childrenNode remove: namedEntity parentNode.
 			]
