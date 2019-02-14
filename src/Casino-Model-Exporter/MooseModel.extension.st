@@ -12,7 +12,7 @@ MooseModel >> prepareAcceptFor: anExporter [
 
 { #category : #'*Casino-Model-Exporter' }
 MooseModel >> visitSuccessorWith: anExporter [
-	self allBLPhase do: [ :phase | anExporter visit: phase ]
+	self allCSNPage do: [ :phase | anExporter visit: phase ]
 ]
 
 { #category : #'*Casino-Model-Exporter' }

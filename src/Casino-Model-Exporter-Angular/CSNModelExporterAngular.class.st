@@ -49,6 +49,421 @@ CSNModelExporterAngular >> currentPath: anObject [
 	currentPath := anObject
 ]
 
+{ #category : #visiting }
+CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSNPage [
+		aCSNPage
+		hasMultiplePageMetier
+		ifTrue:
+			[ ^ self
+				generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage ].
+	aCSNPage
+		hasNoPageMetier
+		ifTrue:
+			[ ^ self
+				generateHTMLSourceCodeForNoPageMetierForPage:
+					aCSNPage ].
+	^ self
+		generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
+^ '<bl-phase-business-page-container>
+        <bl-phase-business-page-header>
+        </bl-phase-business-page-header>
+
+        <bl-phase-business-page id="P1" title="Page 1">
+            ' , aCSNPage businessPage anyOne getTag
+		,
+			'
+        </bl-phase-business-page>
+    </bl-phase-business-page-container>'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
+	^ (aBLPageMetier metiers
+		ifNotEmpty: [ '<bl-tabs>' , String crlf
+				,
+					(aBLPageMetier metiers
+						flatCollect:
+							[ :metier | '    <bl-tab title=' , (self class convertIfString: (self protectString: metier title)) , '>' , String crlf , '        ' , metier getTag , String crlf , '    </bl-tab>' , String crlf ])
+				, '</bl-tabs>' , String crlf ]
+		ifEmpty: [ '' ]) , ((aBLPageMetier widgets reject: [ :widget | widget isPageMetier ]) flatCollect: [ :widget | (self visit: widget) , String crlf ])
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
+	^ '<bl-layout>
+    <bl-desktop [homePhase]="phaseHome"></bl-desktop>
+</bl-layout>'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage [
+	| text id |
+	id := 0.
+	text := '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
+        <bl-phase-business-pages-tab-header>
+            <div class="save-action">
+                <div class="cursor-pointer"> <!-- (click)="save()" -->
+                    <bl-icon icon="save"></bl-icon>
+                </div>
+            </div>
+        </bl-phase-business-pages-tab-header>'.
+	text := text
+		,
+			(aCSNPage sortedPageMetiers
+				flatCollect: [ :metier | 
+					id := id + 1.
+					'
+            <bl-phase-business-page-tab id="P' , id asString
+						, '" title="' , (self protectString: metier title) , '">	'
+						, String crlf , '                ' , metier getTag , String crlf
+						, '            </bl-phase-business-page-tab>' , String crlf ]).
+	text := text , '    </bl-phase-business-pages-tab-container>'.
+	^ text
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage [
+	^ aCSNPage widgets
+		flatCollect: [ :widget | (self visit: widget) , String crlf ]
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
+	^ '<bl-phase-container>
+	' , (self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase )
+		,
+			'
+</bl-phase-container>'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateModuleSourceCodeForModel: aModel [
+	^ 'import { NgModule, Provider } from ''@angular/core'';
+import { BrowserModule } from ''@angular/platform-browser'';
+import { FormsModule } from ''@angular/forms'';
+import { BrowserAnimationsModule } from ''@angular/platform-browser/animations'';
+import { ToastrModule } from ''ngx-toastr'';
+
+import { DEMOS_ROUTES } from ''./' , aModel name
+		,
+			'.routing'';
+import { IndexComponent } from ''./components/index/index.component'';
+import { ComponentsModule } from ''../components/components.module'';
+import { TranslateModule } from ''@ngx-translate/core'';
+import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
+'
+		,
+			(aModel allCSNService
+				flatCollect: [ :service | 
+					'import { ' , service uniqueName , ' } from ''./'
+						, service getLocalPath , ''';' , String crlf ])
+		,
+			'
+
+export const phases: Phase[] = [
+'
+		,
+			(aModel allCSNPage
+				flatCollect: [ :blPhase | blPhase getMetadata , ',' , String crlf ])
+		,
+			'
+];
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ComponentsModule.forRoot(),
+        ToastrModule.forRoot({
+            positionClass: ''toast-bottom-right''
+        }),
+
+        DEMOS_ROUTES,
+
+        TranslateModule
+    ],
+    declarations: [
+        IndexComponent
+    ],
+    providers: [
+'
+		,
+			(aModel allCSNService
+				flatCollect: [ :service | '        ' , service uniqueName , ',' , String crlf ])
+		,
+			'        { provide: PHASES, useValue: phases } as Provider
+    ]
+})
+export class ' , aModel name capitalized , 'Module { }'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
+	^ 'import { NgModule } from ''@angular/core'';
+import { CommonModule } from ''@angular/common'';
+import { ComponentsModule } from ''../../../components/components.module'';
+import { IndexComponent } from ''./components/index/index.component'';
+import { PHASE_ROUTES } from ''./' , aCSNPage name , '.route'';'
+		, String crlf , aCSNPage widgetsDependenciesImportInstruction
+		,
+			(aCSNPage businessPage
+				flatCollect: [ :aBusinessPage | 
+					aBusinessPage
+						getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ])
+		,
+			'
+export const COMPONENTS: any[] = [
+    IndexComponent,
+' , aCSNPage getComponentsPageMetierListName
+		,
+			'
+];
+
+@NgModule({
+    declarations: [
+        COMPONENTS
+    ],
+    imports: [
+        CommonModule,
+        PHASE_ROUTES,
+' , aCSNPage widgetsDependenciesName
+		,
+			'
+        ComponentsModule
+    ],
+    entryComponents: [
+        IndexComponent
+    ]
+})
+export class ' , aCSNPage getModuleClassName , ' {}' , String crlf
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateRouteSourceCode [
+	^ 'import { ModuleWithProviders } from ''@angular/core'';
+import { RouterModule, Routes } from ''@angular/router'';
+import { IndexComponent } from ''./components/index/index.component'';
+
+const routes: Routes = [
+    {
+        path: '''', component: IndexComponent
+    }
+];
+
+export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
+'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateRouteSourceCodeForModel: aModel [
+	| text |
+	text := 'import { ModuleWithProviders } from ''@angular/core'';
+import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
+import { IndexComponent } from ''./components/index/index.component'';
+
+const routes: Routes = [
+	{ path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
+	{ path: ''desktop'', component: IndexComponent, children: ['
+		, String crlf.
+	text := text
+		,
+			(aModel allCSNPage
+				flatCollect: [ :phase | 
+					'		{ path: ''' , phase name , ''', loadChildren: ''./phases/'
+						, phase getLocalModulePath , '''},' , String crlf ]).
+	text := text
+		,
+			']}
+];
+export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: false });'.
+	^ text
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateRouteSourceCodeForPage [
+	^ 'import { ModuleWithProviders } from ''@angular/core'';
+import { RouterModule, Routes } from ''@angular/router'';
+import { IndexComponent } from ''./components/index/index.component'';
+
+const routes: Routes = [
+    {
+        path: '''', component: IndexComponent
+    }
+];
+
+export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
+'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
+	^ '
+import {
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewContainerRef
+} from ''@angular/core'';
+'
+		,
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
+import { Phase } from ''app/components/service/model/phase/phase.model'';
+import { PhaseService } from ''app/components/service/phase.service'';
+' ]) , aBLPageMetier widgetsDependencies , aBLPageMetier getBehaviorImportString
+		,
+			'
+
+@Component({
+    selector: ''' , aBLPageMetier getSelector
+		,
+			''',
+    templateUrl: ''./' , aBLPageMetier getHTMLName
+		,
+			'''
+})
+export class ' , aBLPageMetier componentName capitalized
+		,
+			' implements OnInit, OnDestroy {
+
+' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]) , (aBLPageMetier recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
+		,
+			'
+' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
+		,
+			'
+
+    constructor(' , aBLPageMetier behaviors
+		,
+			') {
+' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
+		,
+			'
+    }
+
+    public ngOnInit(): void {
+' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations)
+		,
+			'
+    }
+
+    public ngOnDestroy(): void {
+
+    }
+'
+		,
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty: [ String crlf
+						,
+							'    public openPhase(phase: Phase): void {
+        this._desktopStateService.selectPhase(phase);
+    }' ])
+		,
+			'
+
+'
+		,
+			'
+}
+'
+	",
+			((self recursiveWidgets flatCollect: #attributes)
+				flatCollect: [ :attribute | attribute attributeMethod ])"
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateTSSourceCodeForModel: aModel [
+	^ 'import { Component, OnInit } from ''@angular/core'';
+import { Phase } from ''../../../components/service/model/phase/phase.model'';
+
+import { PhaseService } from ''../../../components/service/phase.service'';
+
+@Component({
+    selector: ''app-index'',
+    templateUrl: ''./index.component.html''
+})
+export class IndexComponent implements OnInit {
+
+    public phaseHome: Phase;
+
+    constructor(private _phaseService: PhaseService) {
+        this.phaseHome = this._phaseService.getPhase(''PHASE_INCUBATOR_HOME'');
+    }
+
+    public ngOnInit(): void {
+
+    }
+}
+'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
+	^ 'import {
+    Component,
+    OnDestroy,
+    OnInit'
+		,
+			(aCSNPage hasMultiplePageMetier
+				ifTrue: [ ', ViewChild' ]
+				ifFalse: [ '' ])
+		,
+			'
+} from ''@angular/core'';
+import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
+import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
+import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
+'
+		,
+			(aCSNPage hasMultiplePageMetier
+				ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ]
+				ifFalse: [ '' ]) , (aCSNPage businessPage flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
+		,
+			'
+
+
+@Component({
+    templateUrl: ''./index.component.html''
+})
+export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
+
+'
+		,
+			(aCSNPage hasMultiplePageMetier
+				ifTrue: [ '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
+' , String crlf ]
+				ifFalse: [ '' ])
+		,
+			(aCSNPage hasMultiplePageMetier
+				ifTrue: [ aCSNPage businessPage flatCollect: [ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
+				ifFalse: [ '' ])
+		,
+			'
+
+    constructor(protected phaseService: DesktopStateService) {
+        super(phaseService);
+    }
+
+    public ngOnInit(): void {
+
+    }
+
+    public ngOnDestroy(): void {
+
+    }
+
+    public init(): void {
+
+    }
+}' , String crlf
+]
+
 { #category : #api }
 CSNModelExporterAngular >> prepareExport [
 	root := (FileSystem disk workingDirectory / model name) asFileReference.
@@ -106,14 +521,22 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 	| rootPhases rootComponents |
 	self root createDirectory.
 	"Write app.module.ts"
-	self writeFile: self root / aMooseModel getModuleName withCode: aMooseModel generateModuleSourceCode.
+	self
+		writeFile: self root / aMooseModel getModuleName
+		withCode: (self generateModuleSourceCodeForModel: aMooseModel).
 	"Write app.route.ts"
-	self writeFile: self root / aMooseModel getRouteName withCode: aMooseModel generateRouteSourceCode.
+	self
+		writeFile: self root / aMooseModel getRouteName
+		withCode: (self generateRouteSourceCodeForModel: aMooseModel).
 	"Write components"
 	rootComponents := self root / 'components' / 'index'.
 	rootComponents ensureCreateDirectory.
-	self writeFile: rootComponents / aMooseModel getHTMLName withCode: aMooseModel generateHTMLSourceCode.
-	self writeFile: rootComponents / aMooseModel getTSName withCode: aMooseModel generateTSSourceCode.
+	self
+		writeFile: rootComponents / aMooseModel getHTMLName
+		withCode: (self generateHTMLSourceCodeForModel: aMooseModel).
+	self
+		writeFile: rootComponents / aMooseModel getTSName
+		withCode: (self generateTSSourceCodeForModel: aMooseModel).
 	rootPhases := root / 'phases'.
 	rootPhases createDirectory.
 	aMooseModel allCSNPage
@@ -121,7 +544,8 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 			self class new
 				currentPath: self rootPhases / aPage name;
 				visit: aPage ].
-	aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]
+	aMooseModel allCSNService
+		do: [ :rootElement | self visit: rootElement ]
 ]
 
 { #category : #visiting }
@@ -130,16 +554,24 @@ CSNModelExporterAngular >> visitPage: aBLPhase [
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	self writeFile: phaseRoot / aBLPhase getModuleName withCode: (aBLPhase generateModuleSourceCodeWith: self).
+	self
+		writeFile: phaseRoot / aBLPhase getModuleName
+		withCode: (self generateModuleSourceCodeForPage: aBLPhase).
 	"Write phase.route.ts"
-	self writeFile: phaseRoot / aBLPhase getRouteName withCode: aBLPhase generateRouteSourceCode.
+	self
+		writeFile: phaseRoot / aBLPhase getRouteName
+		withCode: self generateRouteSourceCodeForPage.
 	"Write components"
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
 	indexRoot ensureCreateDirectory.
-	self writeFile: indexRoot / aBLPhase getTSName withCode: aBLPhase generateTSSourceCode.
-	self writeFile: indexRoot / aBLPhase getHTMLName withCode: (aBLPhase generateHTMLSourceCodeWith: self).
+	self
+		writeFile: indexRoot / aBLPhase getTSName
+		withCode: (self generateTSSourceCodeForPage: aBLPhase).
+	self
+		writeFile: indexRoot / aBLPhase getHTMLName
+		withCode: (self generateHTMLSourceCodeForPage: aBLPhase).
 	aBLPhase businessPage
 		do: [ :metier | 
 			self class new
@@ -155,9 +587,9 @@ CSNModelExporterAngular >> visitPageMetier: aBLPageMetier [
 		on: DirectoryExists
 		do: [  ].
 	"Write pageMetier.module.ts"
-	self writeFile: pageMetierRoot / aBLPageMetier getHTMLName withCode: (aBLPageMetier generateHTMLSourceCodeWith: self).
+	self writeFile: pageMetierRoot / aBLPageMetier getHTMLName withCode: (self generateHTMLSourceCodeForBusinessPage: aBLPageMetier).
 	"Write pageMetier.route.ts"
-	self writeFile: pageMetierRoot / aBLPageMetier getTSName withCode: (aBLPageMetier generateTSSourceCodeWith: self).
+	self writeFile: pageMetierRoot / aBLPageMetier getTSName withCode: (self generateTSSourceCodeForBusinessPage: aBLPageMetier).
 	aBLPageMetier metiers
 		do: [ :metier | 
 			self class new
