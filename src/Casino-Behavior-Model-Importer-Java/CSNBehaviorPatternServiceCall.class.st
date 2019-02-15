@@ -29,12 +29,12 @@ CSNBehaviorPatternServiceCall >> run [
 			| asynchroneCall |
 			asynchroneCall := self newAsynchroneCall.
 			asynchroneCall parentNode: namedEntity parentNode parentNode parentNode parentNode.
-			(namedEntity parentNode parentNode parentNode arguments anyOne methods select: [ :m | m name = 'onSuccess' ])
+			namedEntity parentNode parentNode parentNode arguments detect: [ :arg | arg class = FASTJavaNewClassExpression ] ifFound: [:newClass | (newClass methods select: [ :m | m name = 'onSuccess' ])
 				ifNotEmpty:
-					[ :successMethodInCollection | asynchroneCall onSuccess: successMethodInCollection first. successMethodInCollection first parentNode: asynchroneCall ].
-			(namedEntity parentNode parentNode parentNode arguments anyOne methods select: [ :m | m name = 'onFailure' ])
+					[ :successMethodInCollection | asynchroneCall onSuccess: successMethodInCollection first. successMethodInCollection first parentNode: asynchroneCall ] ] .
+			namedEntity parentNode parentNode parentNode arguments detect: [ :arg | arg class = FASTJavaNewClassExpression ] ifFound: [:newClass | (newClass methods select: [ :m | m name = 'onFailure' ])
 				ifNotEmpty:
-					[ :faillureMethodInCollection | asynchroneCall onFailure: faillureMethodInCollection first. faillureMethodInCollection first parentNode: asynchroneCall ].
+					[ :faillureMethodInCollection | asynchroneCall onFailure: faillureMethodInCollection first. faillureMethodInCollection first parentNode: asynchroneCall ] ].
 			asynchroneCall distantService: namedEntity name.
 			self model
 				removeAll:

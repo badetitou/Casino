@@ -12,6 +12,20 @@ Class {
 }
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitCall: aCall [
+	^ 'call' , aCall distantService , '{' , String crlf
+		,
+			(aCall onSuccess
+				ifNil: [ '' ]
+				ifNotNil: [ :success | (self clone accept: success) , String crlf ])
+		,
+			(aCall onFailure
+				ifNil: [ '' ]
+				ifNotNil: [ :failure | (self clone accept: failure) , String crlf ])
+		, '}'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTBooleanLiteral: aFASTBooleanLiteral [
 	^ aFASTBooleanLiteral value
 ]
