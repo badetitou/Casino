@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
-	CSNBehaviorPattern subclassesDo: [ :patternClass | (patternClass on: model) run ]
+	CSNBehaviorPattern subclassesDo: [ :patternClass | (patternClass on: model fromUiModel: self uiModel) run ]
 ]
 
 { #category : #accessing }
