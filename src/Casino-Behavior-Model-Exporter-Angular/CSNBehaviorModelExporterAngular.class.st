@@ -23,7 +23,7 @@ CSNBehaviorModelExporterAngular >> visitFASTEntity: aFASTEntity [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTExpressionStatement: aFASTExpressionStatement [
-	^ ( self clone accept: aFASTExpressionStatement expression) , ';'
+	^ (self clone accept: aFASTExpressionStatement expression) , ';'
 ]
 
 { #category : #generated }
@@ -204,4 +204,14 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 	^ ' {' , String crlf
 		, (aFASTStatementBlock statements flatCollect: [ :statement | ((self clone accept: statement) indentBy: 4) , String crlf ])
 		, '}' , String crlf
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitNavigation: aNavigation [
+	^ 'openPhase(''ToDo'')'
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitPopUp: aPopUp [
+	^ '"aPopUp."'
 ]
