@@ -228,5 +228,5 @@ CSNBehaviorModelExporterAngular >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitPopUp: aPopUp [
-	^ '"aPopUp."'
+	^ String streamContents: [:stream | stream << 'alert(' << (self clone accept: aPopUp data) << ')' ]
 ]

@@ -58,7 +58,6 @@ CSNBehaviorModelImporterJava >> newBehavioralModel [
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> resetUIAndGenerateBehavioralModel [
 	self uiModel allCSNAction
-		do: [ :actions | 
-			actions behavior removeAll ].
+		do: [ :action | action behavior removeAll ].
 	^ self generateBehavioralModel
 ]
