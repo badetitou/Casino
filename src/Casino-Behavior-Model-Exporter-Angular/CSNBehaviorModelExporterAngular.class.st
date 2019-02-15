@@ -5,10 +5,9 @@ behaviouralModel collect: [ :model | model allFASTJavaMethodEntity first ui sour
 behaviouralModel collect: [ :model | CSNBehaviourModelExporterAngular new accept: model allFASTJavaMethodEntity first  ].
 behaviouralModel collect: [ :model | String crlf join: (model allFASTJavaMethodEntity collect: [:method | (CSNBehaviourModelExporterAngular new accept: method) ]) ]. 
 "
-Trait {
+Class {
 	#name : #CSNBehaviorModelExporterAngular,
-	#traits : 'CSNBehaviorModelExporter',
-	#classTraits : 'CSNBehaviorModelExporter classTrait',
+	#superclass : #CSNBehaviorModelExporter,
 	#category : #'Casino-Behavior-Model-Exporter-Angular'
 }
 
