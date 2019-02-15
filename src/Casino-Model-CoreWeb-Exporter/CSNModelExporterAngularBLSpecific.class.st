@@ -59,10 +59,12 @@ import {
 '
 		,
 			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
+				ifNotEmpty:
+					[ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
 import { Phase } from ''app/components/service/model/phase/phase.model'';
 import { PhaseService } from ''app/components/service/phase.service'';
-' ]) , aBLPageMetier widgetsDependencies , aBLPageMetier getBehaviorImportString
+' ]) , aBLPageMetier widgetsDependencies
+		, aBLPageMetier getBehaviorImportString
 		,
 			'
 
@@ -78,23 +80,38 @@ export class ' , aBLPageMetier componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
 
-' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]) , (aBLPageMetier recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
+'
+		,
+			(aBLPageMetier collectPhaseCalled
+				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
+		,
+			(aBLPageMetier recursiveWidgets flattened
+				flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
-' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
+'
+		, (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
 		,
 			'
 
     constructor(' , aBLPageMetier behaviors
 		,
 			') {
-' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
+'
+		,
+			(aBLPageMetier collectPhaseCalled
+				flatCollect: [ :phase | 
+					'        this.' , phase name , ' = this._phaseService.getPhase('''
+						, phase name , ''');' , String crlf ])
 		,
 			'
     }
 
     public ngOnInit(): void {
-' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations)
+'
+		,
+			(aBLPageMetier recursiveWidgets flattened
+				flatCollect: #getInitializations)
 		,
 			'
     }
@@ -114,9 +131,16 @@ export class ' , aBLPageMetier componentName capitalized
 			'
 
 '
-	,
-			( ((aBLPageMetier recursiveWidgets flattened flatCollect: [:widget | widget actions ]) select: [:action | action behavior isNotEmpty])
-				flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod |  '/*', String crlf, (self behaviorModelExporter export: behaveMethod), '*/', String crlf   ]]), 
+		,
+			(((aBLPageMetier recursiveWidgets flattened
+				flatCollect: [ :widget | widget actions ])
+				select: [ :action | action behavior isNotEmpty ])
+				flatCollect: [ :action | 
+					action behavior
+						flatCollect: [ :behaveMethod | 
+							'/*' , String crlf , (self behaviorModelExporter export: behaveMethod)
+								, '*/' , String crlf ] ])
+		,
 			'
 }
 '

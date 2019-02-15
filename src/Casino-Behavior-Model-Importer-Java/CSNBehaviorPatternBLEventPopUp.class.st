@@ -7,7 +7,7 @@ Class {
 { #category : #running }
 CSNBehaviorPatternBLEventPopUp >> run [
 	self model allFASTJavaIdentifier 
-		select: [ :identifier | (identifier name = 'BLEventPopup') and: [ identifier parentNode isNotNil ] ] 
+		select: [ :identifier | (identifier name = 'BLEventPopup') and: [ identifier parentNode isNotNil and: [ identifier parentNode arguments isNotEmpty ] ] ] 
 		thenDo: [:identifier | | popUp |
 			popUp := self newPopUp data: identifier parentNode arguments first.
 			identifier parentNode parentNode childrenNode add: popUp.

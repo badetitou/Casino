@@ -6,14 +6,18 @@ Class {
 
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
-	CSNBehaviorPattern subclassesDo: [ :patternClass | (patternClass on: model fromUiModel: self uiModel) run ]
+	CSNBehaviorPattern
+		allSubclassesDo:
+			[ :patternClass | (patternClass on: model fromUiModel: self uiModel) run ]
 ]
 
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> generateBehavioralModel [
 	| models |
 	models := self generateFASTModels.
-	models do: [ :model | self convertFastToBehavioral: model ] displayingProgress: [:model | 'Converting ' , model asString ].
+	models
+		do: [ :model | self convertFastToBehavioral: model ]
+		displayingProgress: [ :model | 'Converting ' , model asString ].
 	^ models
 ]
 
@@ -49,4 +53,12 @@ CSNBehaviorModelImporterJava >> newBehavioralModel [
 					CSNBehaviorModelGenerator metamodel.
 					CSNLayoutMetamodelGenerator metamodel});
 		yourself
+]
+
+{ #category : #accessing }
+CSNBehaviorModelImporterJava >> resetUIAndGenerateBehavioralModel [
+	self uiModel allCSNAction
+		do: [ :actions | 
+			actions behavior removeAll ].
+	^ self generateBehavioralModel
 ]
