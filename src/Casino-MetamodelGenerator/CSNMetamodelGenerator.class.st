@@ -63,13 +63,7 @@ CSNMetamodelGenerator class >> resetMetamodel [
 
 { #category : #definition }
 CSNMetamodelGenerator >> defineClasses [
-	self defineNewClasses.
-	self defineNewClassesHierarchy.
-	
-]
-
-{ #category : #definition }
-CSNMetamodelGenerator >> defineNewClasses [
+	super defineClasses.
 	action := builder newClassNamed: #Action comment: 'I do the link between UI and Behavioural meta-model (and I represent some specials other behavior)'.
 	actionAppel := builder newClassNamed: #ActionAppel.
 	entity := builder newClassNamed: #OriginedEntity comment: 'Root entity of the meta-model'.
@@ -86,7 +80,8 @@ CSNMetamodelGenerator >> defineNewClasses [
 ]
 
 { #category : #definition }
-CSNMetamodelGenerator >> defineNewClassesHierarchy [
+CSNMetamodelGenerator >> defineHierarchy [
+	super defineHierarchy.
 	actionAppel --|> #TAssociation.
 	entity --|> #TNamed.
 	entity --|> #TWithSourceAnchor.
@@ -124,7 +119,7 @@ CSNMetamodelGenerator >> defineRelations [
 	((uiContainer property: #widgets) <>-* (widget property: #widgetContainer)) withNavigation.
 	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
-	((page property: #caller) -* (actionAppel property: #call)) withNavigation.
+	((page property: #caller) <>-* (actionAppel property: #call)) withNavigation.
 	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
 	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)) withNavigation
 ]

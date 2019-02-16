@@ -35,13 +35,31 @@ CSNActionAppel class >> generatedTraitNames [
 CSNActionAppel class >> requirements [
 
 	<generated>
-	^ {  }
+	^ { CSNPage }
+]
+
+{ #category : #accessing }
+CSNActionAppel >> belongsTo [
+
+	<generated>
+	^ self call
+
+]
+
+{ #category : #accessing }
+CSNActionAppel >> belongsTo: anObject [
+
+	<generated>
+	self call: anObject
+
 ]
 
 { #category : #accessing }
 CSNActionAppel >> call [
 
 	<generated>
+	<container>
+
 	^ call
 ]
 

@@ -54,15 +54,8 @@ CSNLayoutMetamodelGenerator class >> resetMetamodel [
 
 { #category : #definition }
 CSNLayoutMetamodelGenerator >> defineClasses [
-	self defineNewClasses.
-	self defineNewClassesHierarchy.
-	
-]
-
-{ #category : #definition }
-CSNLayoutMetamodelGenerator >> defineNewClasses [
 	"Main class"
-	super defineNewClasses.
+	super defineClasses.
 	layout := builder newClassNamed: #Layout.
 	cell := builder newClassNamed: #Cell.
 	size := builder newClassNamed: #Size.
@@ -86,10 +79,10 @@ CSNLayoutMetamodelGenerator >> defineNewClasses [
 ]
 
 { #category : #definition }
-CSNLayoutMetamodelGenerator >> defineNewClassesHierarchy [
+CSNLayoutMetamodelGenerator >> defineHierarchy [
 	"main hierarchy"
 
-	super defineNewClassesHierarchy.
+	super defineHierarchy.
 	absoluteSize --|> size.
 	relativeSize --|> size.
 	absolutePosition --|> position.
