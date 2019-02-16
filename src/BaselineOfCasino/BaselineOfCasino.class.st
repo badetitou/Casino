@@ -22,7 +22,13 @@ BaselineOfCasino >> defineDependencies: spec [
 		with: [ spec
 				loads: #('smacc' 'visitor');
 				repository: 'github://moosetechnology/FAST:master/src' ].
-	spec package: 'PetitXml' with: [ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ]
+	spec
+		package: 'PetitXml'
+		with:
+			[ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
+		spec
+    	baseline: 'Telescope'
+    	with: [ spec repository: 'github://TelescopeSt/Telescope:v2.x.x/src' ]
 ]
 
 { #category : #baselines }
@@ -32,13 +38,13 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests');
 		group: 'model' with: #('Casino-MetamodelGenerator' 'Casino-Model');
 		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer' 'Casino-Model-Extension');
-		group: 'core-extented' with: #('core' 'Casino-Model-Query' 'Casino-Model-UI-SubEntities');
-		group: 'query' with: #('core-extented');
+		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities');
+		group: 'query' with: #('Casino-Model-Query');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests');
 		group: 'rh' with: #('bl' 'Casino-Migration-RH');
-		group: 'ui-bl' with: #('bl' 'tests' 'Casino-Model-Query' 'Casino-MetamodelGenerator');
+		group: 'ui-bl' with: #('bl' 'tests' 'Casino-MetamodelGenerator');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
 		group: 'behavior' with: #('ui-bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Bind-UIBehavior' 'Casino-Behavior-Model');
 		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests');
@@ -63,7 +69,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
-		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model') ];
+		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'Telescope') ];
 		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-CoreWeb' 'Casino-Model-Exporter-Angular') ];
