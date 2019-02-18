@@ -51,19 +51,13 @@ CSNModelExporterAngular >> currentPath: anObject [
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSNPage [
-		aCSNPage
-		hasMultiplePageMetier
+	aCSNPage hasMultiplePageMetier
 		ifTrue:
-			[ ^ self
-				generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage ].
-	aCSNPage
-		hasNoPageMetier
+			[ ^ self generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage ].
+	aCSNPage hasNoPageMetier
 		ifTrue:
-			[ ^ self
-				generateHTMLSourceCodeForNoPageMetierForPage:
-					aCSNPage ].
-	^ self
-		generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
+			[ ^ self generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage ].
+	^ self generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 ]
 
 { #category : #visiting }

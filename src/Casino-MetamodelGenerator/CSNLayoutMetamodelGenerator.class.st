@@ -35,9 +35,11 @@ CSNLayoutMetamodelGenerator class >> resetMetamodel [
 
 	| classes tower |
 	FMRelationSlot allSubInstancesDo: #resetMooseProperty.
-	classes :=  {CSNOriginedEntity withAllSubclasses. CSNAction withAllSubclasses.} flatten asSet.
+	classes := {CSNOriginedEntity withAllSubclasses.
+	CSNAction withAllSubclasses} flatten asSet.
 	classes addAll: #'Casino-Model' asPackage definedClasses.
-	classes addAll: (self packageName asPackage definedClasses select: #isTrait).
+	classes
+		addAll: (self packageName asPackage definedClasses select: #isTrait).
 	classes addAll: #'Famix-Traits' asPackage definedClasses.
 	{Trait.
 	Class.

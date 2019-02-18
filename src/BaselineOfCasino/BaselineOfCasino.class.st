@@ -55,7 +55,7 @@ BaselineOfCasino >> defineGroups: spec [
 		"bl"
 		group: 'behavior-bl' with: #('behavior-importer-java' 'behavior-exporter-angular');
 		group: 'behavior-importer-java' with: #('behavior' 'Casino-Behavior-Model-Importer-Java');
-		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-Angular')
+		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb')
 ]
 
 { #category : #baselines }
@@ -94,6 +94,7 @@ BaselineOfCasino >> definePackages: spec [
 		"behavior-exporter"
 		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
 		package: 'Casino-Behavior-Model-Exporter-Angular' with: [ spec requires: #('Casino-Behavior-Model-Exporter') ];
+		package: 'Casino-Behavior-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Behavior-Model-Exporter-Angular') ];
 		
 		
 		"binding"

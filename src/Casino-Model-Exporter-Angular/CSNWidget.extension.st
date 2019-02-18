@@ -2,8 +2,8 @@ Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> actionsTag [
-	^ (self actions reject: [ :action | (action isKindOf: CSNActionAppel) not or: [ action call isNil ] ])
-		flatCollect: [ :actionAppel | ' ', actionAppel getAngularRepresentation ]
+	^ self actions
+		flatCollect: [ :actionAppel | ' ' , actionAppel getAngularRepresentation ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -59,8 +59,8 @@ CSNWidget >> getExternalDependency [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
-	^ self getSelector , (self attributesTagWith: anExporter) , self actionsTag
-		, (self parametersTagWith: anExporter) , self idTag
+	^ self getSelector , (self attributesTagWith: anExporter)
+		, self actionsTag , (self parametersTagWith: anExporter) , self idTag
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

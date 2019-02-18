@@ -6,7 +6,11 @@ gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveine
 gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ2'.
 
 ""Generate Bl Model""
-gwtModel := MooseModel new name: 'Showroom'; yourself.
+gwtModel := MooseModel new name: 'Showroom';
+	metamodel:
+			(MooseModel
+				metamodelComposedOf:
+					{.CSNLayoutMetamodelGenerator metamodel}); yourself.
 CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
 CSNModelExporterAngular export: gwtModel.
