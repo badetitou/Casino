@@ -1,10 +1,28 @@
 Class {
 	#name : #CSNBehaviorModelImporterJava,
 	#superclass : #CSNBehaviorModelImporter,
+	#instVars : [
+		'carrefourBinder'
+	],
 	#category : #'Casino-Behavior-Model-Importer-Java'
 }
 
+{ #category : #run }
+CSNBehaviorModelImporterJava >> bindWithUIModel: model [
+	self carrefourBinder bindFastModel: model fromFamixMethodEntity: (model allWithType: FASTJavaMethodEntity)
+]
+
 { #category : #accessing }
+CSNBehaviorModelImporterJava >> carrefourBinder [
+	^ carrefourBinder
+]
+
+{ #category : #accessing }
+CSNBehaviorModelImporterJava >> carrefourBinder: anObject [
+	carrefourBinder := anObject
+]
+
+{ #category : #run }
 CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 	CSNBehaviorPattern
 		allSubclassesDo:
@@ -12,34 +30,47 @@ CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 ]
 
 { #category : #accessing }
+CSNBehaviorModelImporterJava >> convertibleActions [
+	"We only convert these actions"
+	^ self uiModel allCSNAction
+		select:
+			[ :action | action isActionService not and: [ action isActionAppel not ] ]
+]
+
+{ #category : #api }
 CSNBehaviorModelImporterJava >> generateBehavioralModel [
 	| models |
-	models := self generateFASTModels.
+	models := OrderedCollection new.
+	self convertibleActions
+		do: [ :action | models add: (self generateFASTModelFor: action) ]
+		displayingProgress: [ :action | 'Generate AST for ' , action asString ].
 	models
 		do: [ :model | self convertFastToBehavioral: model ]
 		displayingProgress: [ :model | 'Converting ' , model asString ].
 	^ models
 ]
 
-{ #category : #accessing }
-CSNBehaviorModelImporterJava >> generateFASTModels [
-	^ (self uiModel allCSNAction
-		select:
-			[ :action | action isActionService not and: [ action isActionAppel not ] ])
-		collect: [ :action | 
-			self parser model: self newBehavioralModel.
-			action source methods
-				do:
-					[ :aFamixMethod | self parser parseCodeMethodString: aFamixMethod sourceText ].
-			self parser model allFASTJavaMethodEntity
-				select: [ :method | method parentNode isNil ]
-				thenDo: [ :behavior | action behavior add: behavior ].
-			self parser model ]
+{ #category : #run }
+CSNBehaviorModelImporterJava >> generateFASTModelFor: action [
+	"Compute the FAST model for action and bind it to the Famix model"
+
+	self parser model: self newBehavioralModel.
+	action source methods
+		do:
+			[ :aFamixMethod | "Create the FAST model" self parser parseCodeMethodString: aFamixMethod sourceText ].
+	self carrefourBinder
+		bindFastModel: self parser model
+		fromFamixMethodEntity: action source methods first.
+	self parser model allFASTJavaMethodEntity
+		select: [ :method | method parentNode isNil ]
+		thenDo: [ :behavior | action behavior add: behavior ].
+	^ self parser model
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CSNBehaviorModelImporterJava >> initialize [
-	"The default importer which creates a FAST model is the one of SmaCC"
+	super initialize.
+	self carrefourBinder: CRFBinderVisitor new.
 	self parser: JavaSmaCCProgramNodeImporterVisitor new
 ]
 
@@ -55,7 +86,7 @@ CSNBehaviorModelImporterJava >> newBehavioralModel [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 CSNBehaviorModelImporterJava >> resetUIAndGenerateBehavioralModel [
 	self uiModel allCSNAction
 		do: [ :action | action behavior removeAll ].

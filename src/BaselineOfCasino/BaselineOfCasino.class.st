@@ -26,9 +26,12 @@ BaselineOfCasino >> defineDependencies: spec [
 		package: 'PetitXml'
 		with:
 			[ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
-		spec
-    	baseline: 'Telescope'
-    	with: [ spec repository: 'github://TelescopeSt/Telescope:v2.x.x/src' ]
+	spec
+		baseline: 'Telescope'
+		with: [ spec repository: 'github://TelescopeSt/Telescope:v2.x.x/src' ].
+	spec
+		baseline: 'Carrefour'
+		with: [ spec repository: 'github://badetitou/Carrefour/src' ]
 ]
 
 { #category : #baselines }
@@ -86,7 +89,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
 		"behavior-importer"
 		package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FAST') ];
-		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Casino-Behavior-Model-Importer') ];
+		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Carrefour' 'Casino-Behavior-Model-Importer') ];
 		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
 		"behavior-exporter"
 		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
