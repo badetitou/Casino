@@ -43,7 +43,7 @@ Class {
 
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> behaviorModelExporter [
-	^ CSNBehaviorModelExporterAngular
+	^ CSNBehaviorModelExporterCoreWeb
 ]
 
 { #category : #generate }

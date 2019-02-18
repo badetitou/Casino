@@ -2,7 +2,7 @@
 ""I contain an importer for the behavioural code.""
 ""I also linked the behavioural model to the UI model.""
 
-behavioralModel := CSNBehaviorModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; generateBehavioralModel.
+behavioralModel := CSNBehaviorModelImporterJava new uiModel: gwtModel; sourceCodeModel: gwtMooseModel; resetUIAndGenerateBehavioralModel.
 "
 Class {
 	#name : #ManifestCSNBehaviorModelImporterJava,
