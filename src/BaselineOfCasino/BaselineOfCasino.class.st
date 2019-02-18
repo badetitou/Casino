@@ -75,7 +75,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'Telescope') ];
 		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model') ];
-		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-CoreWeb' 'Casino-Model-Exporter-Angular') ];
+		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('PetitXml' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
 		package: 'Casino-Model-Toolkit' with: [ spec requires: #('Casino-Model-CoreWeb') ];
