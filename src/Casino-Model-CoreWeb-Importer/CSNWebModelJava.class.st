@@ -13,7 +13,7 @@ gwtModel := MooseModel new name: 'Showroom';
 					{.CSNLayoutMetamodelGenerator metamodel}); yourself.
 CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
-CSNModelExporterAngular export: gwtModel.
+CSNModelExporterAngularBLSpecific export: gwtModel.
 "
 Class {
 	#name : #CSNWebModelJava,
