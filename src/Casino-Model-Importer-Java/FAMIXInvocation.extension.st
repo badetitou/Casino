@@ -8,7 +8,7 @@ FAMIXInvocation >> affectation [
 "
 
 	self container ifNotNil: [ ^ nil ].
-	self from sourceAnchor ifNotNil: [(self from generateFastAndBind). 
+	self from sourceAnchor ifNotNil: [(self from generateFastIfNotDoneAndBind). 
 	^ self fast parentNode variable famixVariable.].
 	^ ((self from localVariables
 		select: [ :el | el sourceAnchor isNotNil ])
