@@ -21,7 +21,7 @@ CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	| newClass invoc success fail namedEntity methodInvoc1 classProperty expression |
 	expression := FASTExpressionStatement new.
 	invoc := FASTJavaMethodInvocation new name: 'generateError'; yourself.
-	newClass := FASTJavaNewClassExpression new name: 'AsyncCallClass'; yourself.
+	newClass := FASTJavaNewClassExpression new type: 'AsyncCallClass'; yourself.
 	invoc addArgument: newClass.
 	success := FASTJavaMethodEntity new name: 'onSuccess'; yourself.
 	fail := FASTJavaMethodEntity new name: 'onFailure'; yourself.

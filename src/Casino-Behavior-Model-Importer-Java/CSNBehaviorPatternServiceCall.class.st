@@ -28,22 +28,31 @@ CSNBehaviorPatternServiceCall >> run [
 		thenDo: [ :namedEntity | 
 			| asynchroneCall |
 			asynchroneCall := self newAsynchroneCall.
-			asynchroneCall parentNode: namedEntity parentNode parentNode parentNode parentNode.
-			namedEntity parentNode parentNode parentNode arguments detect: [ :arg | arg class = FASTJavaNewClassExpression ] ifFound: [:newClass | (newClass methods select: [ :m | m name = 'onSuccess' ])
-				ifNotEmpty:
-					[ :successMethodInCollection | asynchroneCall onSuccess: successMethodInCollection first. successMethodInCollection first parentNode: asynchroneCall ] ] .
-			namedEntity parentNode parentNode parentNode arguments detect: [ :arg | arg class = FASTJavaNewClassExpression ] ifFound: [:newClass | (newClass methods select: [ :m | m name = 'onFailure' ])
-				ifNotEmpty:
-					[ :faillureMethodInCollection | asynchroneCall onFailure: faillureMethodInCollection first. faillureMethodInCollection first parentNode: asynchroneCall ] ].
+			asynchroneCall
+				parentNode: namedEntity parentNode parentNode parentNode parentNode.
+			namedEntity parentNode parentNode parentNode arguments
+				detect: [ :arg | arg class = FASTJavaNewClassExpression ]
+				ifFound: [ :newClass |
+					(newClass methods select: [ :m | m childrenNode first name = 'onSuccess' ])
+						ifNotEmpty: [ :successMethodInCollection | 
+							asynchroneCall onSuccess: successMethodInCollection first.
+							successMethodInCollection first parentNode: asynchroneCall ] ].
+			namedEntity parentNode parentNode parentNode arguments
+				detect: [ :arg | arg class = FASTJavaNewClassExpression ]
+				ifFound: [ :newClass | 
+					(newClass methods select: [ :m | m childrenNode first name = 'onFailure' ])
+						ifNotEmpty: [ :faillureMethodInCollection | 
+							asynchroneCall onFailure: faillureMethodInCollection first.
+							faillureMethodInCollection first parentNode: asynchroneCall ] ].
 			asynchroneCall distantService: namedEntity name.
 			self model
 				removeAll:
-					{
-					namedEntity parentNode parentNode parentNode.
+					{namedEntity parentNode parentNode parentNode.
 					namedEntity parentNode parentNode.
 					namedEntity parentNode.
-					namedEntity.	}.
-			namedEntity parentNode parentNode parentNode parentNode childrenNode remove: namedEntity parentNode parentNode parentNode.
-			namedEntity parentNode parentNode childrenNode remove: namedEntity parentNode.
-			]
+					namedEntity}.
+			namedEntity parentNode parentNode parentNode parentNode
+				childrenNode remove: namedEntity parentNode parentNode parentNode.
+			namedEntity parentNode parentNode childrenNode
+				remove: namedEntity parentNode ]
 ]
