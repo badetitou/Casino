@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNBehaviorModelExporter,
-	#superclass : #FASTVisitor,
+	#superclass : #FASTJavaVisitor,
 	#category : #'Casino-Behavior-Model-Exporter'
 }
 
