@@ -18,7 +18,7 @@ BaselineOfCasino >> baseline: spec [
 { #category : #baselines }
 BaselineOfCasino >> defineDependencies: spec [
 	spec
-		baseline: 'FAST-Java'
+		baseline: 'FASTJava'
 		with: [ spec
 				loads: #('smacc' 'visitor');
 				repository: 'github://moosetechnology/FAST-Java:master/src' ].
@@ -80,15 +80,15 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
 		package: 'Casino-Model-Toolkit' with: [ spec requires: #('Casino-Model-CoreWeb') ];
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
-		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FAST-Java') ];
+		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
 		
 		"behavior-core"
-		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FAST-Java') ];
-		package: 'Casino-Behavior-Model' with: [ spec requires: #('FAST-Java') ];
+		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FASTJava') ];
+		package: 'Casino-Behavior-Model' with: [ spec requires: #('FASTJava') ];
 		package: 'Casino-Behavior-Model-Visitor' with: [ spec requires: #('Casino-Behavior-Model') ];
 		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
 		"behavior-importer"
-		package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FAST-Java') ];
+		package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FASTJava') ];
 		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Carrefour' 'Casino-Behavior-Model-Importer') ];
 		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
 		"behavior-exporter"
@@ -98,6 +98,6 @@ BaselineOfCasino >> definePackages: spec [
 		
 		
 		"binding"
-		package: 'Casino-Bind-UIBehavior' with: [ spec requires: #('Casino-Model' 'FAST-Java') ];
-		package: 'Casino-Bind-UIBehavior-Generator' with: [ spec requires: #('Casino-Model' 'FAST-Java') ]
+		package: 'Casino-Bind-UIBehavior' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
+		package: 'Casino-Bind-UIBehavior-Generator' with: [ spec requires: #('Casino-Model' 'FASTJava') ]
 ]
