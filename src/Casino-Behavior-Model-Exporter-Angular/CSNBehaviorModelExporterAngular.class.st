@@ -126,7 +126,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNew
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
-	^ 'new ', (super visitFASTJavaNewExpression: aFASTJavaNewExpression)
+	^ 'new ', (self accept: aFASTJavaNewExpression type), '(', (aFASTJavaNewExpression arguments flatCollect: [:arg | (self accept: arg), ',']), ')'
 ]
 
 { #category : #generated }
@@ -142,6 +142,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOperationLeftOperand: aFASTJavaO
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaOperationRightOperand: aFASTJavaOperationRightOperand [ 
 	^ aFASTJavaOperationRightOperand childrenNode flatCollect: [:child | self clone accept: child ]
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
+	^ (self accept: aFASTJavaOuterThis type) ,'this'
 ]
 
 { #category : #generated }
