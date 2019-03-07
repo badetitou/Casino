@@ -90,8 +90,6 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineProperties [
 	super defineProperties.
-	self flag: 'This is a temporary property... I should be replace in the futur by a link to the business model'.
-	(call property: #distantService type: #String) comment: 'The link to service I call'.
 	
 	"because we do not want to break the container thing".
 	(call property: #onSuccess type: #FASTStatement) comment: 'The statement executed if the call return ''ok'''.
@@ -103,6 +101,5 @@ CSNBehaviorModelGenerator >> defineProperties [
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
 	(navigation property: #arguments)
-		-* (expression property: #navigation)
-	
+		-* (expression property: #navigation).
 ]

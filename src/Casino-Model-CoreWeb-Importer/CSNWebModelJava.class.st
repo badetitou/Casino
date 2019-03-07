@@ -239,24 +239,21 @@ CSNWebModelJava >> generateServiceAction [
 
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
-	self model
-		silentlyAddAll:
-			((((self widgetConstructorsInvocation , self widgetAnonymousSubclasses
-				, self widgetFactoryInvocation) asSet asOrderedCollection
-				reject: [ :invocationOrClass | 
-					(self widgetNamespace match: invocationOrClass from mooseName)
-						or: [ '*noname#super*' match: invocationOrClass asString ] ]
-				thenCollect: [ :invocation | 
-					| blWidget |
-					blWidget := CSNWidget newFor: invocation.
-					blWidget
-						affectedActions: (invocation affectation).
-					(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ])
-						ifTrue: [ blWidget name: blWidget affectedActions name ].
-					blWidget ]) groupedBy: #affectedActions)
-				associationsDo:
-					[ :assoc | assoc key ifNotNil: [ 2 to: assoc value size do: [ :i | assoc value removeIndex: i ] ] ])
-				flattened
+	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses
+		, self widgetFactoryInvocation) asSet asOrderedCollection
+		reject: [ :invocationOrClass | 
+			(self widgetNamespace match: invocationOrClass from mooseName)
+				or: [ '*noname#super*' match: invocationOrClass asString ] ])
+		do: [ :invocation | 
+			| blWidget |
+			blWidget := CSNWidget newFor: invocation.
+			blWidget affectedActions: invocation affectation.
+			(blWidget affectedActions isNotNil
+				and: [ blWidget affectedActions isInvocation not ])
+				ifTrue: [ blWidget name: blWidget affectedActions name ].
+			self model silentlyAdd: blWidget ]
+		displayingProgress: [ :invoc | 'Generate widget : ' , invoc asString ]
+		every: 100
 ]
 
 { #category : #accessing }

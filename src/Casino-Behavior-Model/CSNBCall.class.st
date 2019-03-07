@@ -7,7 +7,6 @@ Class {
 	#name : #CSNBCall,
 	#superclass : #FASTExpression,
 	#instVars : [
-		'distantService',
 		'onFailure',
 		'onSuccess'
 	],
@@ -27,7 +26,7 @@ CSNBCall class >> annotation [
 CSNBCall class >> generatedSlotNames [
 	<generated>
 	'CSNBCall class>>#generatedSlotNames'.
-	^ #(distantService onFailure onSuccess)
+	^ #(onFailure onSuccess)
 ]
 
 { #category : #generator }
@@ -41,23 +40,6 @@ CSNBCall class >> requirements [
 
 	<generated>
 	^ {  }
-]
-
-{ #category : #accessing }
-CSNBCall >> distantService [
-
-	<MSEProperty: #distantService type: #String>
-	<generated>
-	<MSEComment: 'The link to service I call'>
-	^ distantService
-]
-
-{ #category : #accessing }
-CSNBCall >> distantService: anObject [
-
-	<generated>
-	distantService := anObject
-
 ]
 
 { #category : #accessing }

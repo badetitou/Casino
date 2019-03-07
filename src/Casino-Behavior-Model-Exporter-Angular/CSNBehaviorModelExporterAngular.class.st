@@ -14,7 +14,7 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
-	^ 'call' , aCall distantService , '{' , String crlf
+	^ 'call ' , aCall distantService serviceOwner uniqueName, '.', aCall distantService uniqueName , '{' , String crlf
 		,
 			(aCall onSuccess
 				ifNil: [ '' ]
