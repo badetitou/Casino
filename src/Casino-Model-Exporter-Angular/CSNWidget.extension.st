@@ -80,7 +80,7 @@ CSNWidget >> hierarchalAttributes [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> id [
-	^ self variable shortName, self mooseID asString
+	^ self variable uniqueName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

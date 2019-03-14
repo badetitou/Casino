@@ -99,10 +99,9 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaInfixOperation: aFASTJavaInfixOp
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
-	^ aFASTJavaMethodEntity name , '('
-		, (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self clone accept: parameter ]))
+	^ aFASTJavaMethodEntity name , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self clone accept: parameter ]))
 		,
-			') { 
+			') {
 ' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self clone accept: statement) indentBy: 4 ]))
 		,
 			'
@@ -211,7 +210,7 @@ CSNBehaviorModelExporterAngular >> visitFASTLiteral: aFASTLiteral [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
-	^ aFASTNamedEntity name
+	^ aFASTNamedEntity famixVariable ifNil: [ aFASTNamedEntity name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
 ]
 
 { #category : #generated }
