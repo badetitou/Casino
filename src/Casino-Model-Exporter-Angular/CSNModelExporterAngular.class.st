@@ -621,7 +621,7 @@ CSNModelExporterAngular >> visitUIContainer: aBLUIContainer [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitUIGridLayout: aBLUIGridLayout [
-	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>' , '<tbody>'
+	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>' , '<tbody>', String crlf
 		,
 			((0 to: aBLUIGridLayout maxLevel)
 				flatCollect: [ :number | 
@@ -633,7 +633,7 @@ CSNModelExporterAngular >> visitUIGridLayout: aBLUIGridLayout [
 										,
 											((cell attributesTagWith: self) , '>' , String crlf
 												, ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4)
-										, String crlf ]) , '</tr>' ]) , String crlf , '</tbody>' , '</'
+										, String crlf ]) , '</tr>' , String crlf]) , '</tbody>' , '</'
 		, aBLUIGridLayout container getSelector , '>'
 ]
 
