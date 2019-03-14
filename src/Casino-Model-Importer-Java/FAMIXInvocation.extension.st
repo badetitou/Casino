@@ -7,9 +7,9 @@ FAMIXInvocation >> affectation [
 	The BLLabel affectation must not be service3 (it is wrong)
 "
 
-	"self container ifNotNil: [ ^ nil ].
-	self from sourceAnchor ifNotNil: [(self from generateFastIfNotDoneAndBind). 
-	^ self fast atScope: FASTJavaAssignementExpression variable famixVariable.]."
+	self container ifNotNil: [ ^ nil ].
+	self from sourceAnchor ifNotNil: [ (self from generateFastIfNotDoneAndBind). 
+	 (self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [:aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable. ] ].
 	^ ((self from localVariables
 		select: [ :el | el sourceAnchor isNotNil ])
 		select: [ :localVariable | 
