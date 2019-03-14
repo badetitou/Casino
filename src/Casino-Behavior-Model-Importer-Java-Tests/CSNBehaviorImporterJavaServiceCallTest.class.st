@@ -25,6 +25,7 @@ CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	invoc addArgument: newClass.
 	success := FASTJavaMethodEntity new name: 'onSuccess'; yourself.
 	fail := FASTJavaMethodEntity new name: 'onFailure'; yourself.
+	model silentlyAddAll: {newClass. success. fail}.
 	newClass addMethod: success.
 	newClass addMethod: fail.
 	namedEntity := FASTNamedEntity new name: 'IGwtServiceIncubator'; yourself.
@@ -37,7 +38,7 @@ CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	classProperty type: namedEntity.
 	namedEntity parentNode: classProperty.
 	invoc parentNode: expression.
-	model silentlyAddAll: { newClass. invoc. success. fail. namedEntity. methodInvoc1. classProperty. expression  }
+	model silentlyAddAll: { invoc. namedEntity. methodInvoc1. classProperty. expression  }
 ]
 
 { #category : #running }

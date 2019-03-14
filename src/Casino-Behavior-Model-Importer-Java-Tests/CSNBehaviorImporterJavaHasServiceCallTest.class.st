@@ -60,5 +60,5 @@ CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneType [
 { #category : #tests }
 CSNBehaviorImporterJavaHasServiceCallTest >> testImportServiceCallFinalSize [
 	self
-		assert: model size equals: 5
+		assert: model size equals: 7
 ]
