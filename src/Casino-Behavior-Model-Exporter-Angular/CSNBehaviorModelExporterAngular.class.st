@@ -14,15 +14,15 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
-	^ 'call ' , aCall distantService serviceOwner uniqueName, '.', aCall distantService uniqueName , '{' , String crlf
+	^ aCall distantService serviceOwner uniqueName uncapitalized, '.', aCall distantService uniqueName , '(){' , String crlf
 		,
 			(aCall onSuccess
 				ifNil: [ '' ]
-				ifNotNil: [ :success | (self clone accept: success) , String crlf ])
+				ifNotNil: [ :success | 'data => ', (self clone accept: success childrenNode first statementBlock) , ',', String crlf ])
 		,
 			(aCall onFailure
 				ifNil: [ '' ]
-				ifNotNil: [ :failure | (self clone accept: failure) , String crlf ])
+				ifNotNil: [ :failure | 'err => ', (self clone accept: failure childrenNode first statementBlock) , ',', String crlf  ])
 		, '}'
 ]
 
@@ -111,7 +111,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
 	^ (aFASTJavaMethodInvocation receiver ifNotNil: [ :receiver | (self clone accept: receiver), '.' ] ifNil: [ '' ])
-		, aFASTJavaMethodInvocation name , '('
+		, aFASTJavaMethodInvocation uniqueName , '('
 		, (', ' join: (aFASTJavaMethodInvocation arguments collect: [ :argument | self clone accept: argument ])) , ')'
 ]
 

@@ -31,7 +31,7 @@ CSNBehaviorPatternNavigation >> run [
 { #category : #running }
 CSNBehaviorPatternNavigation >> tryComputePagefor: navigation from: identifier [
 	self uiModel ifNil: [ ^ false ].
-	^ (self uiModel allCSNPage select: [ :page | page codePhase = identifier belongsTo famix previous fast name])
+	^ (self uiModel allCSNPage select: [ :page | (identifier parentNode parentNode arguments first allToScope: FASTJavaMethodInvocation) anySatisfy: [:possibleInvocation |possibleInvocation name = page codePhase ] ])
 		ifNotEmpty: [ :page |navigation page: page anyOne. true ]
-		ifEmpty: [ false ]
+		ifEmpty: [  false ]
 ]
