@@ -2,7 +2,8 @@ Class {
 	#name : #CSNService,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#actions => FMMany type: #CSNServiceAPI opposite: #serviceOwner'
+		'#actions => FMMany type: #CSNServiceAPI opposite: #serviceOwner',
+		'#targetPoint'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -20,7 +21,7 @@ CSNService class >> annotation [
 CSNService class >> generatedSlotNames [
 	<generated>
 	'CSNService class>>#generatedSlotNames'.
-	^ #(actions)
+	^ #(actions targetPoint)
 ]
 
 { #category : #generator }
@@ -58,4 +59,21 @@ CSNService >> actionsGroup [
 	<navigation: 'Actions'>
 	^ MooseGroup
 			withAll: (self actions asSet)
+]
+
+{ #category : #accessing }
+CSNService >> targetPoint [
+
+	<MSEProperty: #targetPoint type: #String>
+	<generated>
+	<MSEComment: 'The url of the distant service'>
+	^ targetPoint
+]
+
+{ #category : #accessing }
+CSNService >> targetPoint: anObject [
+
+	<generated>
+	targetPoint := anObject
+
 ]

@@ -227,7 +227,7 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitNavigation: aNavigation [
-	^ 'openPhase(''', (aNavigation arguments ifNotEmpty: [ :args | args flatCollect: [ :arg | (self clone accept: arg), ',' ] ] ifEmpty:  ['']), ''')'
+	^ 'this.openPhase(''', (aNavigation arguments ifNotEmpty: [ :args | args flatCollect: [ :arg | (self clone accept: arg), ',' ] ] ifEmpty:  ['']), ''')'
 ]
 
 { #category : #generated }

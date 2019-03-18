@@ -12,7 +12,13 @@ Class {
 { #category : #accessing }
 CSNWebModel class >> webRoot [
 	"I represent the root of URL"
-	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/skins/e-sedit/'
+	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/'
+]
+
+{ #category : #accessing }
+CSNWebModel class >> webSkinRoot [
+	"I represent the root of URL"
+	^ self webRoot , 'skins/e-sedit/'
 ]
 
 { #category : #initialization }

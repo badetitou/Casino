@@ -17,5 +17,5 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
-	^ 'openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
+	^ 'this.openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
 ]

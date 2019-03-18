@@ -13,7 +13,7 @@ CSNUIImage class >> createWidgetFor: anInvocation [
 		addAttribute:
 			
 					(CSNUISrc new
-						attributeValue: CSNWebModelJava webRoot
+						attributeValue: CSNWebModelJava webSkinRoot
 				,
 							('BLDocButton' = anInvocation invokedClassName
 								ifTrue: [ 'images/boutons/bt_aide_fs.gif' ]
