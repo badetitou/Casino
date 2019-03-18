@@ -2,15 +2,15 @@
 SmalltalkImage current garbageCollect.
 
 ""Generate BlApp""
-gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ2\KitchenL.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ2'.
+gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ4\KitchenGWT.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ4'.
 
 ""Generate Bl Model""
 gwtModel := MooseModel new name: 'Showroom';
 	metamodel:
 			(MooseModel
 				metamodelComposedOf:
-					{.CSNLayoutMetamodelGenerator metamodel}); yourself.
+					{CSNLayoutMetamodelGenerator metamodel}); yourself.
 CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
 CSNModelExporterAngularBLSpecific export: gwtModel.
