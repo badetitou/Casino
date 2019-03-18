@@ -43,7 +43,7 @@ CSNBehaviorModelImporterJava >> generateBehavioralModel [
 	| models |
 	models := OrderedCollection new.
 	self convertibleActions
-		do: [ :action | models add: (self generateFASTModelFor: action) ]
+		do: [ :action | models addAll: (self generateFASTModelFor: action) ]
 		displayingProgress: [ :action | 'Generate AST for ' , action asString ].
 	models
 		do: [ :model | self convertFastToBehavioral: model ]
@@ -55,17 +55,17 @@ CSNBehaviorModelImporterJava >> generateBehavioralModel [
 CSNBehaviorModelImporterJava >> generateFASTModelFor: action [
 	"Compute the FAST model for action and bind it to the Famix model"
 
-	self parser model: self newBehavioralModel.
+	| models |
+	models := OrderedCollection new.
 	action source methods
-		do:
-			[ :aFamixMethod | "Create the FAST model" self parser parseCodeMethodString: aFamixMethod sourceText ].
-	self carrefourBinder
-		bindFastModel: self parser model
-		fromFamixMethodEntity: action source methods first.
-	self parser model allFASTJavaMethodEntity
-		select: [ :method | method parentNode isNil ]
-		thenDo: [ :behavior | action behavior add: behavior ].
-	^ self parser model
+		do: [ :aFamixMethod | 
+			"Create the FAST model"
+			self parser model: self newBehavioralModel.
+			self parser parseCodeMethodString: aFamixMethod sourceText.
+			self carrefourBinder bindFastModel: self parser model fromFamixMethodEntity: aFamixMethod.
+			self parser model allFASTJavaMethodEntity select: [ :method | method parentNode isNil ] thenDo: [ :behavior | action behavior add: behavior ].
+			models add: self parser model ].
+	^ models
 ]
 
 { #category : #initialization }
