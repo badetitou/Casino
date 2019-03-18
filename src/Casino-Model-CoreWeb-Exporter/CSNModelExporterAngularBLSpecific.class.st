@@ -85,8 +85,8 @@ export class ' , aBLPageMetier componentName capitalized
 			(aBLPageMetier collectPhaseCalled
 				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
 		,
-			(aBLPageMetier recursiveWidgets flattened
-				flatCollect: [ :widget | widget idViewChild ])
+			(((aBLPageMetier recursiveWidgets flattened
+				collect: [ :widget | widget idViewChild ]) asOrderedCollection removeDuplicates) flatten)
 		,
 			'
 '
