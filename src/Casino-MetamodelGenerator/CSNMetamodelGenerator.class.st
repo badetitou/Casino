@@ -111,7 +111,8 @@ CSNMetamodelGenerator >> defineProperties [
 	(widget property: 'realClass' type: #MooseEntity) comment: 'The type (class) of the widget'.
 	(attribute property: 'attributeValue' type: #String) comment: 'The literal value of the attribute'.
 	attribute property: #oldClass type: #Object.
-	uiLeaf property: #text type: #String
+	uiLeaf property: #text type: #String.
+	(service property: #targetPoint type: #String) comment: 'The url of the distant service'.
 ]
 
 { #category : #definition }
