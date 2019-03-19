@@ -1,17 +1,6 @@
 Extension { #name : #CSNBusinessPage }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> behaviors [
-	^ (self collectPhaseCalled
-		ifNotEmpty:
-			[ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
-		ifEmpty: [ '' ])
-		",
-			((self calledBehavior collect: #serviceOwner) removeDuplicates
-				flatCollect: [ :aService | aService initializeVariable , ', ' ])"
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> calledBehavior [
 	^ (self recursiveWidgetsWithoutMetiers
 		collect: [ :widget | widget actions ]) flattened asOrderedCollection removeDuplicates
@@ -36,9 +25,8 @@ CSNBusinessPage >> getAcceptedName [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getBehaviorImportString [
 	"*BL-Model-Exporter-Angular"
+
 	^ ''
-		,
-			(String crlf join: (self calledBehavior collect: [:behavior | behavior importString]) flattened asOrderedCollection removeDuplicates)
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

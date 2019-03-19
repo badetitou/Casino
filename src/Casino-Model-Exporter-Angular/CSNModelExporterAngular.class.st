@@ -310,8 +310,7 @@ import {
 				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
 import { Phase } from ''app/components/service/model/phase/phase.model'';
 import { PhaseService } from ''app/components/service/phase.service'';
-' ]) , aBLPageMetier widgetsDependencies , aBLPageMetier getBehaviorImportString
-		,
+' ]) , aBLPageMetier widgetsDependencies , 
 			'
 
 @Component({
@@ -326,7 +325,8 @@ export class ' , aBLPageMetier componentName capitalized
 		,
 			' implements OnInit, OnDestroy {
 
-' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]) , (aBLPageMetier recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
+' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
+		, (aBLPageMetier recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
 		,
 			'
 ' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
@@ -460,17 +460,12 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
 
 { #category : #api }
 CSNModelExporterAngular >> prepareExport [
-	root := (FileSystem disk workingDirectory / model name) asFileReference.
+	context := CSNContext new root: (FileSystem disk workingDirectory / model name) asFileReference; yourself.
 ]
 
 { #category : #api }
 CSNModelExporterAngular >> protectString: aString [
 	^ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' 
-]
-
-{ #category : #accessing }
-CSNModelExporterAngular >> root [
-	^ root
 ]
 
 { #category : #accessing }
@@ -531,11 +526,11 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 	self
 		writeFile: rootComponents / aMooseModel getTSName
 		withCode: (self generateTSSourceCodeForModel: aMooseModel).
-	rootPhases := root / 'phases'.
+	rootPhases := self root / 'phases'.
 	rootPhases createDirectory.
 	aMooseModel allCSNPage
 		do: [ :aPage | 
-			self class new
+			self clone
 				currentPath: self rootPhases / aPage name;
 				visit: aPage ].
 	aMooseModel allCSNService
@@ -568,7 +563,7 @@ CSNModelExporterAngular >> visitPage: aBLPhase [
 		withCode: (self generateHTMLSourceCodeForPage: aBLPhase).
 	aBLPhase businessPage
 		do: [ :metier | 
-			self class new
+			self clone
 				currentPath: componentsRoot / metier getAcceptedName;
 				visit: metier ]
 ]

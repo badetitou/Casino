@@ -44,16 +44,6 @@ CSNService >> getVariableName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNService >> importString [
-	
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNService >> initializeVariable [
-	^ 'private ' , self getVariableName , ': ' , self uniqueName
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNService >> prepareAcceptFor: anExporter [
 	"be sure create service directory"
 

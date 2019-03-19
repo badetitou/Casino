@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'root'
+		'context'
 	],
 	#category : #'Casino-Model-Exporter'
 }
@@ -11,6 +11,11 @@ Class {
 { #category : #actions }
 CSNModelExporter class >> export: aBLMooseModel [
 	self new model: aBLMooseModel; export
+]
+
+{ #category : #accessing }
+CSNModelExporter >> context [
+	^ context
 ]
 
 { #category : #run }
@@ -42,12 +47,27 @@ CSNModelExporter >> prepareExport [
 
 { #category : #accessing }
 CSNModelExporter >> root [
-	^ root
+	^ self context root
 ]
 
 { #category : #visiting }
 CSNModelExporter >> visit: anElement [
 	^ anElement accept: self
+]
+
+{ #category : #'as yet unclassified' }
+CSNModelExporter >> visitAction: anAction [
+	^ self visitOriginedEntity: anAction
+]
+
+{ #category : #'as yet unclassified' }
+CSNModelExporter >> visitActionAppel: anActionAppel [
+	^ self visitAction: anActionAppel
+]
+
+{ #category : #'as yet unclassified' }
+CSNModelExporter >> visitActionService: anActionService [
+	^ self visitAction: anActionService
 ]
 
 { #category : #'as yet unclassified' }

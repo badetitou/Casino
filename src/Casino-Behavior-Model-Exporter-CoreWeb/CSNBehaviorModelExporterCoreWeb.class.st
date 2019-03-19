@@ -19,3 +19,8 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
 	^ 'this.openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
 ]
+
+{ #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
+	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << ((self clone accept: aPopUp data) copyReplaceAll: '''' with: '\''') << ')' ]
+]

@@ -14,16 +14,9 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
-	^ aCall distantService serviceOwner uniqueName uncapitalized, '.', aCall distantService uniqueName , '(){' , String crlf
-		,
-			(aCall onSuccess
-				ifNil: [ '' ]
-				ifNotNil: [ :success | 'data => ', (self clone accept: success childrenNode first statementBlock) , ',', String crlf ])
-		,
-			(aCall onFailure
-				ifNil: [ '' ]
-				ifNotNil: [ :failure | 'err => ', (self clone accept: failure childrenNode first statementBlock) , ',', String crlf  ])
-		, '}'
+	^ 'this.', aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '(){' , String crlf
+		, (aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success childrenNode first statementBlock) , ',' , String crlf ])
+		, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'err => ' , (self clone accept: failure childrenNode first statementBlock) , ',' , String crlf ]) , '}'
 ]
 
 { #category : #generated }

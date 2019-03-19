@@ -11,11 +11,6 @@ CSNServiceAPI >> exportCode [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNServiceAPI >> initializeVariable [
-	^ 'private ' , self serviceOwner getVariableName , ': ' , self serviceOwner uniqueName
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> uniqueName [
 	^ self name, self mooseID asString
 ]
