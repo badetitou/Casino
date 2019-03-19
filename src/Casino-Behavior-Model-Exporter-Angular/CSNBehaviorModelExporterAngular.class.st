@@ -17,7 +17,7 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 	^ 'this.' , aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '().subscribe(' , String crlf
 		,
 			((aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success childrenNode first statementBlock) , ',' , String crlf ])
-				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self clone accept: failure childrenNode first statementBlock) , String crlf ]) indentBy: 4) , ')'
+				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self clone accept: failure childrenNode first statementBlock) ]) indentBy: 4) , String crlf, ')'
 ]
 
 { #category : #generated }
@@ -79,8 +79,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
 	| text |
-	text := 'if (' , (self clone accept: aFASTJavaIfStatement condition) , ')', String crlf
-		, (self clone accept: aFASTJavaIfStatement thenPart).
+	text := 'if (' , (self clone accept: aFASTJavaIfStatement condition) , ')' , (self clone accept: aFASTJavaIfStatement thenPart).
 	aFASTJavaIfStatement elsePart ifNotNil: [ text := text , 'else ' , (self clone accept: aFASTJavaIfStatement elsePart) ].
 	^ text
 ]
@@ -154,11 +153,9 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaThenPartStatement: aFASTJavaThen
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
-	^ 'try 
-	' , (self clone accept: aFASTJavaTryCatchStatement try)
+	^ 'try ' , (self clone accept: aFASTJavaTryCatchStatement try)
 		,
-			'
-	' , (aFASTJavaTryCatchStatement catches flatCollect: [ :catch | self clone accept: catch ])
+		(aFASTJavaTryCatchStatement catches flatCollect: [ :catch | self clone accept: catch ])
 ]
 
 { #category : #generated }
