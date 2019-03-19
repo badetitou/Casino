@@ -6,15 +6,15 @@ CSNBusinessPage >> behaviors [
 		ifNotEmpty:
 			[ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]
 		ifEmpty: [ '' ])
-		,
+		",
 			((self calledBehavior collect: #serviceOwner) removeDuplicates
-				flatCollect: [ :aService | aService initializeVariable , ', ' ])
+				flatCollect: [ :aService | aService initializeVariable , ', ' ])"
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> calledBehavior [
 	^ (self recursiveWidgetsWithoutMetiers
-		collect: [ :widget | widget behaviors ]) flattened asOrderedCollection removeDuplicates
+		collect: [ :widget | widget actions ]) flattened asOrderedCollection removeDuplicates
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -36,13 +36,9 @@ CSNBusinessPage >> getAcceptedName [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getBehaviorImportString [
 	"*BL-Model-Exporter-Angular"
-
 	^ ''
 		,
-			((self calledBehavior collect: #serviceOwner) removeDuplicates
-				flatCollect: [ :aService | 
-					'import { ' , aService uniqueName , ' } from ''app/' , self mooseModel name , '/'
-						, aService getLocalPath , ''';' , String crlf ]) 
+			(String crlf join: (self calledBehavior collect: [:behavior | behavior importString]) flattened asOrderedCollection removeDuplicates)
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
