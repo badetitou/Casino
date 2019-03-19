@@ -14,9 +14,10 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
-	^ 'this.', aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '(){' , String crlf
-		, (aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success childrenNode first statementBlock) , ',' , String crlf ])
-		, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'err => ' , (self clone accept: failure childrenNode first statementBlock) , ',' , String crlf ]) , '}'
+	^ 'this.' , aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '().subscribe(' , String crlf
+		,
+			((aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success childrenNode first statementBlock) , ',' , String crlf ])
+				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self clone accept: failure childrenNode first statementBlock) , String crlf ]) indentBy: 4) , ')'
 ]
 
 { #category : #generated }
@@ -143,7 +144,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
-	^ '''', aFASTJavaStringLiteral value, ''''
+	^ '''' , (aFASTJavaStringLiteral value copyReplaceAll: '''' with: '\''' ) , ''''
 ]
 
 { #category : #generated }

@@ -22,5 +22,5 @@ CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
-	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << ((self clone accept: aPopUp data) copyReplaceAll: '''' with: '\''') << ')' ]
+	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << (self clone accept: aPopUp data) << ')' ]
 ]
