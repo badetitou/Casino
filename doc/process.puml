@@ -1,0 +1,44 @@
+@startuml
+| UI |
+start
+:mooseModel]
+fork
+    fork 
+        :generatePage;
+        :uiModelPage]
+    fork again
+        :generateBusinessPage;
+        :uiModelBusinessPage]
+    fork end
+:addLinksXMLUIPage;
+:addLinkForAbstractTabPhase;
+:addLinkPhaseToPageMetier;
+:addLinkPageMetierToPageMetier;
+:linkPageBusinessPage;
+:LinkBusinessPageBusinessPage;
+fork again
+    :generateWidget;
+    :addLinkXmlUIWiget;
+    :uiModelWidget]
+    fork
+        :addLinkWidgets;
+        :uiModelLinkedWidgets]
+    fork again
+        :generateActionAppel;
+    fork again
+        :addGenericAttributeToWidget;
+    fork again
+        :addOnClickAttribute;
+    fork again
+        :addDefaultAttribute;
+    end fork
+    :modelWithFullInformationOfUI]
+fork again
+    :generateService;
+    :generateServiceAction;
+    :uiWithServices]
+end fork
+:linkPagesWidgets;
+:addListToModel;
+stop
+@enduml
