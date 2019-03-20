@@ -26,4 +26,4 @@ The current meta-model is
 
 ## Process
 
-![Process](http://www.plantuml.com/plantuml/uml/1S713SCm20NGLTe5pBtNJa8mQf1iiE2Zhf_ttkQoUchdUjt0gGzHyd_y37TVNPeI3dKCYKqNJuKXchvSva6R2veqG-XaY5QDqtiz)
+![Process](http://www.plantuml.com/plantuml/png/1S713SCm20NGLTe5pBtNJa8mQf1iiE2Zhf_ttkQoUchdUjt0gGzHyd_y37TVNPeI3dKCYKqNJuKXchvSva6R2veqG-XaY5QDqtiz)
