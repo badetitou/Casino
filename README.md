@@ -23,3 +23,7 @@ In Iceberg, BaselineOfBLToolkit load.
 The current meta-model is
 
 ![Meta Model V4](./doc/images/ModelV4.png)
+
+## Process
+
+![Process](http://www.plantuml.com/plantuml/uml/1S713SCm20NGLTe5pBtNJa8mQf1iiE2Zhf_ttkQoUchdUjt0gGzHyd_y37TVNPeI3dKCYKqNJuKXchvSva6R2veqG-XaY5QDqtiz)
