@@ -621,15 +621,18 @@ CSNModelExporterAngular >> visitUIGridLayout: aBLUIGridLayout [
 			'>
 	<tbody>' , String crlf
 		,
-			('', ((0 to: aBLUIGridLayout maxLevel)
-				flatCollect: [ :number | 
-					'<tr>'
-						,
-							(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
-								flatCollect: [ :cell | (String crlf , '<td' , ((cell attributesTagWith: self) , '>' , String crlf , ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4) , String crlf ])
-						, '</tr>' , String crlf ]) indentBy: 8)
+			(''
+				,
+					((0 to: aBLUIGridLayout maxLevel)
+						flatCollect: [ :number | 
+							'<tr>'
+								,
+									(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
+										flatCollect: [ :cell | (String crlf , '<td' , ((cell attributesTagWith: self) , '>' , String crlf , ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4) , String crlf ])
+								, '</tr>' , String crlf ]) indentBy: 8)
 		,
-			'    </tbody>
+			'
+    </tbody>
 </' , aBLUIGridLayout container getSelector , '>'
 ]
 
@@ -697,11 +700,8 @@ CSNModelExporterAngular >> visitUILabel: aBLUILabel [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitUILeaf: aBLUILeaf [
-		^ '<' , (aBLUILeaf getListPropertiesAsStringWith: self) , '>'
-		, (( aBLUILeaf attributes select: [ :a | a isKindOf: CSNUILabel])
-				flatCollect:
-					[ :attribute | String crlf , (self visit: attribute ), String crlf ]) 
-		, '</' , aBLUILeaf getSelector , '>'
+	^ '<' , (aBLUILeaf getListPropertiesAsStringWith: self) , '>'
+		, ((aBLUILeaf attributes select: [ :a | a isKindOf: CSNUILabel ]) flatCollect: [ :attribute | String crlf , ((self visit: attribute) indentBy: 4) , String crlf ]) , '</' , aBLUILeaf getSelector , '>'
 ]
 
 { #category : #visiting }
