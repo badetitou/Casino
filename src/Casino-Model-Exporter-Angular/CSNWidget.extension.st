@@ -87,8 +87,7 @@ CSNWidget >> idTag [
 CSNWidget >> idViewChild [
 	^ (self variable isNil or: [ self variable isInvocation ])
 		ifTrue: [ '' ]
-		ifFalse: [ '    @ViewChild(''' , self id , ''', { read: ViewContainerRef }) ' , self id
-				, ': ViewContainerRef;' , String crlf ]
+		ifFalse: [ '    @ViewChild(''' , self id , ''') ' , self id , ': ElementRef;' , String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

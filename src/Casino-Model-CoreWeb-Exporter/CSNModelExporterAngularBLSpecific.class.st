@@ -63,8 +63,9 @@ import {
     Component,
     OnDestroy,
     OnInit,
-    ViewChild,
-    ViewContainerRef
+    ElementRef,
+    Renderer2,
+    ViewChild
 } from ''@angular/core'';
 '
 		,
@@ -97,7 +98,8 @@ export class ' , aBLPageMetier componentName capitalized
 		,
 			'
 
-    constructor(' , (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ])
+    constructor(private renderer: Renderer2,'
+		, (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ])
 		,
 			(', '
 				join: (aBLPageMetier calledBehavior flatCollect: [ :behavior | self behaviorInitializeVariableExporter export: behavior withContext: self context ]) flattened asOrderedCollection removeDuplicates)
@@ -129,7 +131,10 @@ export class ' , aBLPageMetier componentName capitalized
 			'
 
 '
-		, ('', (aBLPageMetier calledBehavior flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ]) indentBy: 4)
+		,
+			(''
+				, (aBLPageMetier calledBehavior flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ])
+				indentBy: 4)
 		,
 			'
 }
