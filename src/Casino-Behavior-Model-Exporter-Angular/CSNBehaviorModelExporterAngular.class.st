@@ -73,7 +73,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaFieldAccess: aFASTJavaFieldAcces
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
-	^ aFASTJavaIdentifier name
+	^ aFASTJavaIdentifier famixVariable ifNil: [ aFASTJavaIdentifier name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
 ]
 
 { #category : #generated }
