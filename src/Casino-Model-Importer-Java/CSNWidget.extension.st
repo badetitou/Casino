@@ -66,6 +66,8 @@ CSNWidget class >> newFor: anInvocation [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> variable [
-	(self affectedActions isKindOf: FAMIXAccess) ifTrue: [ ^ self affectedActions variable ].
+	(self affectedActions isKindOf: FAMIXAccess)
+		ifTrue: [ 
+			^ self affectedActions variable ].
 	^ self affectedActions
 ]

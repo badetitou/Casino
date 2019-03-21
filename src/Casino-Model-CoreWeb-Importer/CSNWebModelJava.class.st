@@ -28,21 +28,6 @@ Class {
 }
 
 { #category : #adding }
-CSNWebModelJava >> addLinkBetweenServiceAndAttribute [
-
-	self flag: 'This part was never really correct -> why binding an action with a call to the API -> we should create the Behavioural model and then reify to the call
-		between the Behavioural model and the Business one (or whatever contains this information)'.
-"	self model allBLServiceAPI 
-		do: [ :serviceAction | 
-			| classContainer |
-			classContainer := serviceAction source incomingInvocations collect: [ :invocation | invocation from belongsTo ].
-			(self model allBLAction select: [ :action | classContainer includes: action source ])
-				do: [ :action | action addBehavior: serviceAction ] ]
-		displayingProgress: [ :serviceAction | 'for ' , serviceAction asString ]
-		every: 1000"
-]
-
-{ #category : #adding }
 CSNWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
@@ -313,9 +298,9 @@ CSNWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 CSNWebModelJava >> import [
-	| currentStep maxStep|
+	| currentStep maxStep |
 	currentStep := 0.
-	maxStep := 17.
+	maxStep := 16.
 	'prepare generatePhase'
 		displayProgressFrom: 0
 		to: maxStep
@@ -385,11 +370,7 @@ CSNWebModelJava >> import [
 			currentStep := currentStep + 1.
 			bar current: currentStep.
 			bar label: currentStep printString , '/' , maxStep printString , ' addListsToModel'.
-			self addListsToModel.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkBetweenServiceAndAttribute'.
-			self addLinkBetweenServiceAndAttribute ]
+			self addListsToModel ]
 ]
 
 { #category : #accessing }
