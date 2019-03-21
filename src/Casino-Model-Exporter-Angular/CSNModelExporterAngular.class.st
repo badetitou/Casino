@@ -616,20 +616,21 @@ CSNModelExporterAngular >> visitUIContainer: aBLUIContainer [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitUIGridLayout: aBLUIGridLayout [
-	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self) , '>' , '<tbody>', String crlf
+	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self)
 		,
-			((0 to: aBLUIGridLayout maxLevel)
+			'>
+	<tbody>' , String crlf
+		,
+			('', ((0 to: aBLUIGridLayout maxLevel)
 				flatCollect: [ :number | 
 					'<tr>'
 						,
 							(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
-								flatCollect: [ :cell | 
-									(String crlf , '<td'
-										,
-											((cell attributesTagWith: self) , '>' , String crlf
-												, ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4)
-										, String crlf ]) , '</tr>' , String crlf]) , '</tbody>' , '</'
-		, aBLUIGridLayout container getSelector , '>'
+								flatCollect: [ :cell | (String crlf , '<td' , ((cell attributesTagWith: self) , '>' , String crlf , ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4) , String crlf ])
+						, '</tr>' , String crlf ]) indentBy: 8)
+		,
+			'    </tbody>
+</' , aBLUIGridLayout container getSelector , '>'
 ]
 
 { #category : #visiting }
