@@ -2,8 +2,8 @@
 SmalltalkImage current garbageCollect.
 
 ""Generate BlApp""
-gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ4\KitchenGWT.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ4'.
+gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ5\KitchenGWT.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ5'.
 
 ""Generate Bl Model""
 gwtModel := MooseModel new name: 'Showroom';
