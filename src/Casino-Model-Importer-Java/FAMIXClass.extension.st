@@ -4,6 +4,11 @@ Extension { #name : #FAMIXClass }
 FAMIXClass >> affectation [
 	"Compatibility with invocation for the creation of the widget"
 
+	(self isAnonymousClass and: [ self typeContainer hasSourceAnchor ])
+		ifTrue: [ ((self allAtScope: FAMIXMethod) sort: [ :method1 :method2 | method1 sourceAnchor startPos < method2 sourceAnchor startPos ]) first generateFastIfNotDoneAndBind.
+			(self fastDeclaration first atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ]
+		ifFalse: [ 
+
 	| selfSourceAnchor |
 	selfSourceAnchor := self sourceAnchor ifNotNil: [ self sourceAnchor ] ifNil: [ self container sourceAnchor ].
 	^ ((self container localVariables select: [ :el | el sourceAnchor isNotNil ])
@@ -11,7 +16,7 @@ FAMIXClass >> affectation [
 		at: 1
 		ifAbsent: [ ((self container accesses select: #isWrite) select: [ :access | access sourceAnchor startPos < selfSourceAnchor startPos and: [ access endAffectationPos > selfSourceAnchor endPos ] ])
 				at: 1
-				ifAbsent: [ ^ self ] ]
+				ifAbsent: [ ^ self ] ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

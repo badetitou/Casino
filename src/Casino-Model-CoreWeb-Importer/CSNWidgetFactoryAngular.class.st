@@ -26,7 +26,6 @@ CSNWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
 		silentlyAdd:
 			(CSNBusinessPage new
 				name: aFAMIXClass name;
-				sourceAnchor: aFAMIXClass sourceAnchor;
 				source: aFAMIXClass;
 				computeTitle)
 ]
