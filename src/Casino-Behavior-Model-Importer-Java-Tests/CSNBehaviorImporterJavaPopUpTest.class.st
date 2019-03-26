@@ -11,11 +11,10 @@ CSNBehaviorImporterJavaPopUpTest >> setUp [
 	window := FASTJavaIdentifier new name: 'Window'; yourself.
 	alert := FASTJavaMethodInvocation new name: 'alert';yourself.
 	arg := FASTJavaStringLiteral new.
-	alert addArgument: arg.
+	alert arguments add: arg.
 	expression := FASTExpressionStatement new.
 	alert receiver: window.
-	window parentNode: alert.
-	expression childrenNode add: alert.
+	expression expression: alert.
 	
 	model silentlyAddAll: { window. alert. expression. arg }.
 	(CSNBehaviorPatternPopUp on: model) run.

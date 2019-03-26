@@ -15,17 +15,11 @@ CSNBehaviorImporterJavaBLErrBoxPopUpTest >> setUp [
 		name: 'alert';
 		yourself.
 	arg := FASTJavaStringLiteral new.
-	alert addArgument: arg.
+	alert arguments add: arg.
 	expression := FASTExpressionStatement new.
 	alert receiver: window.
-	window parentNode: alert.
-	expression childrenNode add: alert.
-	model
-		silentlyAddAll:
-			{window.
-			alert.
-			expression.
-			arg}.
+	expression expression: alert.
+	model silentlyAddAll: {window . alert . expression . arg}.
 	(CSNBehaviorPatternBLErrBoxPopUp on: model) run
 ]
 

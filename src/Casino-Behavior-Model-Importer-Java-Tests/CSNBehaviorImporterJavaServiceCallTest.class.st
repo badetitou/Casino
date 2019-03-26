@@ -18,26 +18,24 @@ CSNBehaviorImporterJavaServiceCallTest class >> isAbstract [
 { #category : #running }
 CSNBehaviorImporterJavaServiceCallTest >> createModel [
 
-	| newClass invoc success fail namedEntity methodInvoc1 classProperty expression |
+	| newClass invoc success fail namedEntity methodInvoc1 classProperty expression type |
 	expression := FASTExpressionStatement new.
 	invoc := FASTJavaMethodInvocation new name: 'generateError'; yourself.
-	newClass := FASTJavaNewClassExpression new type: 'AsyncCallClass'; yourself.
-	invoc addArgument: newClass.
+	type := FASTVariableExpression new name: 'AsyncCallClass'; yourself.
+	newClass := FASTJavaNewClassExpression new type: type; yourself.
+	invoc arguments add: newClass.
 	success := FASTJavaMethodEntity new name: 'onSuccess'; yourself.
 	fail := FASTJavaMethodEntity new name: 'onFailure'; yourself.
-	model silentlyAddAll: {newClass. success. fail}.
-	newClass addMethod: success.
-	newClass addMethod: fail.
-	namedEntity := FASTNamedEntity new name: 'IGwtServiceIncubator'; yourself.
+	model silentlyAddAll: {newClass. success. fail. type.}.
+	newClass declarations add: success.
+	newClass declarations add: fail.
+	namedEntity := FASTVariableExpression new name: 'IGwtServiceIncubator'; yourself.
 	methodInvoc1 := FASTJavaMethodInvocation new name: 'getInsctance'; yourself.
 	invoc receiver: methodInvoc1.
-	methodInvoc1 parentNode: invoc. 
 	classProperty := FASTJavaClassProperty new.
 	methodInvoc1 receiver: classProperty.
-	classProperty parentNode: methodInvoc1. 
 	classProperty type: namedEntity.
-	namedEntity parentNode: classProperty.
-	invoc parentNode: expression.
+	expression expression: invoc.
 	model silentlyAddAll: { invoc. namedEntity. methodInvoc1. classProperty. expression  }
 ]
 

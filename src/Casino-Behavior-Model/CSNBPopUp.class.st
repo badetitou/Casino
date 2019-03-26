@@ -4,9 +4,6 @@ I represent a call which will create a pop up with the data as inside it (it cor
 Class {
 	#name : #CSNBPopUp,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'data'
-	],
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
@@ -23,7 +20,7 @@ CSNBPopUp class >> annotation [
 CSNBPopUp class >> generatedSlotNames [
 	<generated>
 	'CSNBPopUp class>>#generatedSlotNames'.
-	^ #(data)
+	^ #()
 ]
 
 { #category : #generator }
@@ -42,16 +39,26 @@ CSNBPopUp class >> requirements [
 { #category : #accessing }
 CSNBPopUp >> data [
 
-	<MSEProperty: #data type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The data that will be displayed in the popUp'>
-	^ data
+	<MSEProperty: #data type: #Object>
+	^ self privateState attributeAt: #data ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBPopUp >> data: anObject [
 
 	<generated>
-	data := anObject
+	(self privateState attributeAt: #data ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #data put: anObject.
+	anObject carrefourPopUpOwner: self
+]
 
+{ #category : #navigation }
+CSNBPopUp >> dataGroup [
+
+	<generated>
+	<navigation: 'Data'>
+	^ MooseGroup
+			with: (self data)
 ]

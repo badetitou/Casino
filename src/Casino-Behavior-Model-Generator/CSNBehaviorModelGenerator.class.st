@@ -8,7 +8,9 @@ Class {
 		'synchroneCall',
 		'expression',
 		'popUp',
-		'page'
+		'page',
+		'fastBehaviouralEntity',
+		'statement'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -74,7 +76,9 @@ CSNBehaviorModelGenerator >> defineClasses [
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
-	expression := self remoteEntity: #Expression withPrefix: #FAST
+	expression := self remoteEntity: #Expression withPrefix: #FAST.
+	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
+	statement := self remoteEntity: #Statement withPrefix: #FAST
 ]
 
 { #category : #definition }
@@ -90,16 +94,14 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineProperties [
 	super defineProperties.
-	
-	"because we do not want to break the container thing".
-	(call property: #onSuccess type: #FASTStatement) comment: 'The statement executed if the call return ''ok'''.
-	(call property: #onFailure type: #FASTStatement) comment: 'The statement executed if the call return ''ko'''.
-	(popUp property: #data type: #FASTStatement) comment: 'The data that will be displayed in the popUp'.
 ]
 
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
-	(navigation property: #arguments)
-		-* (expression property: #navigation).
+	((navigation property: #arguments) <>-* (expression property: #navigation)) withoutPrimaryContainer.
+		
+	(((call property: #onSuccess ) comment: 'The statement executed if the call return ''ok''') <>- (fastBehaviouralEntity property: #carrefourOnSuccessOwner)) withoutPrimaryContainer.
+	(((call property: #onFailure ) comment: 'The statement executed if the call return ''ko''') <>- (fastBehaviouralEntity property: #carrefourOnFailureOwner)) withoutPrimaryContainer.
+	(((popUp property: #data ) comment: 'The data that will be displayed in the popUp') <>- (expression property: #carrefourPopUpOwner)) withoutPrimaryContainer.
 ]

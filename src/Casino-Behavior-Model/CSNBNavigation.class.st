@@ -51,3 +51,12 @@ CSNBNavigation >> arguments: anObject [
 	<generated>
 	self arguments value: anObject
 ]
+
+{ #category : #navigation }
+CSNBNavigation >> argumentsGroup [
+
+	<generated>
+	<navigation: 'Arguments'>
+	^ MooseGroup
+			withAll: (self arguments asSet)
+]

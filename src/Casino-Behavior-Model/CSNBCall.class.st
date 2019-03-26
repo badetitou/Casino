@@ -6,10 +6,6 @@ Since I'm abstract, I should not be instanciate (but, it is a reasonnable soluti
 Class {
 	#name : #CSNBCall,
 	#superclass : #FASTExpression,
-	#instVars : [
-		'onFailure',
-		'onSuccess'
-	],
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
@@ -26,7 +22,7 @@ CSNBCall class >> annotation [
 CSNBCall class >> generatedSlotNames [
 	<generated>
 	'CSNBCall class>>#generatedSlotNames'.
-	^ #(onFailure onSuccess)
+	^ #()
 ]
 
 { #category : #generator }
@@ -45,33 +41,55 @@ CSNBCall class >> requirements [
 { #category : #accessing }
 CSNBCall >> onFailure [
 
-	<MSEProperty: #onFailure type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ko'''>
-	^ onFailure
+	<MSEProperty: #onFailure type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
+	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBCall >> onFailure: anObject [
 
 	<generated>
-	onFailure := anObject
+	(self privateState attributeAt: #onFailure ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #onFailure put: anObject.
+	anObject carrefourOnFailureOwner: self
+]
 
+{ #category : #navigation }
+CSNBCall >> onFailureGroup [
+
+	<generated>
+	<navigation: 'OnFailure'>
+	^ MooseGroup
+			with: (self onFailure)
 ]
 
 { #category : #accessing }
 CSNBCall >> onSuccess [
 
-	<MSEProperty: #onSuccess type: #FASTStatement>
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ok'''>
-	^ onSuccess
+	<MSEProperty: #onSuccess type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
+	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBCall >> onSuccess: anObject [
 
 	<generated>
-	onSuccess := anObject
+	(self privateState attributeAt: #onSuccess ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	self privateState attributeAt: #onSuccess put: anObject.
+	anObject carrefourOnSuccessOwner: self
+]
 
+{ #category : #navigation }
+CSNBCall >> onSuccessGroup [
+
+	<generated>
+	<navigation: 'OnSuccess'>
+	^ MooseGroup
+			with: (self onSuccess)
 ]
