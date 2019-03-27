@@ -7,16 +7,13 @@ Class {
 { #category : #running }
 CSNBehaviorPatternBLErrBoxPopUp >> run [
 	self model allFASTJavaIdentifier
-		select: [ :identifier | 
-			identifier name = 'BLErrBox'
-				and: [ identifier parentNode isNotNil
-						and: [ identifier parentNode arguments isNotEmpty ] ] ]
+		select: [ :identifier | identifier name = 'BLErrBox' and: [ identifier parentNode isNotNil and: [ identifier parentNode arguments isNotEmpty ] ] ]
 		thenDo: [ :identifier | 
-			| popUp |
-			popUp := self newPopUp data: identifier parentNode arguments first.
+			| popUp data |
+			popUp := self newPopUp.
 			identifier parentNode parentNode expression: popUp.
-			self model
-				removeAll:
-					{identifier parentNode.
-					identifier} ]
+			data := identifier parentNode arguments first.
+			data removeAllPotentialParentNode.
+			popUp data: data.
+			self model removeAll: {identifier parentNode . identifier} ]
 ]

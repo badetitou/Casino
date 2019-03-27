@@ -217,6 +217,11 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTVariableExpression: aFASTVariableExpression [
+	^ aFASTVariableExpression famixVariable ifNil: [ aFASTVariableExpression name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitNavigation: aNavigation [
 	^ 'this.openPhase(''', (aNavigation arguments ifNotEmpty: [ :args | args flatCollect: [ :arg | (self clone accept: arg), ',' ] ] ifEmpty:  ['']), ''')'
 ]

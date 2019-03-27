@@ -24,6 +24,11 @@ CSNBehaviorImporterJavaBLErrBoxPopUpTest >> setUp [
 ]
 
 { #category : #tests }
+CSNBehaviorImporterJavaBLErrBoxPopUpTest >> testImportPopUpChildParent [
+	self assert: model allCSNBPopUp anyOne childrenNode anyOne parentNode equals: model allCSNBPopUp anyOne
+]
+
+{ #category : #tests }
 CSNBehaviorImporterJavaBLErrBoxPopUpTest >> testImportPopUpData [
 	self
 		assert: model allCSNBPopUp anyOne data

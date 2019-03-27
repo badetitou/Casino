@@ -7,10 +7,13 @@ Class {
 { #category : #running }
 CSNBehaviorPatternBLEventPopUp >> run [
 	self model allFASTJavaIdentifier asOrderedCollection
-		select: [ :identifier | (identifier name = 'BLEventPopup') and: [ identifier parentNode isNotNil and: [ identifier parentNode arguments isNotEmpty ] ] ] 
-		thenDo: [:identifier | | popUp |
-			popUp := self newPopUp data: identifier parentNode arguments first.
+		select: [ :identifier | identifier name = 'BLEventPopup' and: [ identifier parentNode isNotNil and: [ identifier parentNode arguments isNotEmpty ] ] ]
+		thenDo: [ :identifier | 
+			| popUp data |
+			popUp := self newPopUp.
 			identifier parentNode parentNode expression: popUp.
-			self model removeAll: { identifier parentNode. identifier }
-			].
+			data := identifier parentNode arguments first.
+			data removeAllPotentialParentNode.
+			popUp data: data.
+			self model removeAll: {identifier parentNode . identifier} ]
 ]

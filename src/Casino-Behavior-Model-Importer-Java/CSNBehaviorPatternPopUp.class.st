@@ -13,9 +13,12 @@ CSNBehaviorPatternPopUp >> newPopUp [
 CSNBehaviorPatternPopUp >> run [
 	self model allFASTJavaIdentifier 
 		select: [ :identifier | (identifier name = 'Window') and: [ identifier parentNode isNotNil and: [ identifier parentNode name = 'alert' ] ] ] 
-		thenDo: [:identifier | | popUp |
-			popUp := self newPopUp data: identifier parentNode arguments first.
+		thenDo: [:identifier | | popUp data |
+			popUp := self newPopUp.
 			identifier parentNode parentNode expression: popUp.
+			data := identifier parentNode arguments first.
+			data removeAllPotentialParentNode.
+			popUp data: data.
 			self model silentlyRemoveAll: { identifier parentNode. identifier }
 			].
 ]

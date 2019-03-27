@@ -16,6 +16,12 @@ CSNBehaviorImporterJavaHasServiceCallTest >> createUiModel [
 ]
 
 { #category : #tests }
+CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneFaillureParent [
+	self
+		assert: (model allWithType: CSNBAsynchroneCall) anyOne onFailure parentNode equals: (model allWithType: CSNBAsynchroneCall) anyOne
+]
+
+{ #category : #tests }
 CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneHasFaillure [
 	self
 		assert: (model allWithType: CSNBAsynchroneCall) anyOne onFailure isNotNil
@@ -49,6 +55,12 @@ CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneParentChildren 
 	self
 		assert: (model allWithType: CSNBAsynchroneCall) anyOne
 		equals: (model allWithType: FASTExpressionStatement) anyOne childrenNode anyOne
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneSuccessParent [
+	self
+		assert: (model allWithType: CSNBAsynchroneCall) anyOne onSuccess parentNode equals: (model allWithType: CSNBAsynchroneCall) anyOne
 ]
 
 { #category : #tests }
