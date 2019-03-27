@@ -92,11 +92,6 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 ]
 
 { #category : #definition }
-CSNBehaviorModelGenerator >> defineProperties [
-	super defineProperties.
-]
-
-{ #category : #definition }
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
 	((navigation property: #arguments) <>-* (expression property: #navigation)) withoutPrimaryContainer.

@@ -16,8 +16,8 @@ Class {
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
 	^ 'this.' , aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '().subscribe(' , String crlf
 		,
-			((aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success childrenNode first statementBlock) , ',' , String crlf ])
-				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self clone accept: failure childrenNode first statementBlock) ]) indentBy: 4) , String crlf, ')'
+			((aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self clone accept: success statementBlock) , ',' , String crlf ])
+				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self clone accept: failure statementBlock) ]) indentBy: 4) , String crlf, ')'
 ]
 
 { #category : #generated }
@@ -47,7 +47,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaCastExpression: aFASTJavaCastExp
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
-	^ 'catch (' , (', ' join:(aFASTJavaCatchPartStatement parameters collect: [ :parameter | (self clone accept: parameter) ]))
+	^ 'catch (' , (', ' join:(aFASTJavaCatchPartStatement parameter ifNotNil: [ :parameter | (self clone accept: parameter) ]))
 		, ') ' , (self clone accept: aFASTJavaCatchPartStatement body)
 ]
 
@@ -112,7 +112,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
  	^ (super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression), ' {
 ',
-	(String crlf join: ( aFASTJavaNewClassExpression methods collect: [ :method | (self clone accept: method) indentBy: 4 ] )), ' 
+	(String crlf join: ( aFASTJavaNewClassExpression declarations collect: [ :method | (self clone accept: method) indentBy: 4 ] )), ' 
 }'
 ]
 

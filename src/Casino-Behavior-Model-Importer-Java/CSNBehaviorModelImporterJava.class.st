@@ -103,6 +103,7 @@ CSNBehaviorModelImporterJava >> resetNeededMetamodels [
 
 { #category : #api }
 CSNBehaviorModelImporterJava >> resetUIAndGenerateBehavioralModel [
+	self resetNeededMetamodels.
 	self uiModel allCSNAction
 		do: [ :action | action behavior removeAll ].
 	^ self generateBehavioralModel

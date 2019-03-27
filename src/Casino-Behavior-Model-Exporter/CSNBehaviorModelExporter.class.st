@@ -21,17 +21,17 @@ CSNBehaviorModelExporter >> visitAsynchroneCall: aCall [
 
 { #category : #visitor }
 CSNBehaviorModelExporter >> visitCall: aCall [
-	^ self subclassResponsibility
+	^ self visitFASTExpression: aCall
 ]
 
 { #category : #visitor }
 CSNBehaviorModelExporter >> visitNavigation: aNavigation [
-	^ self subclassResponsibility
+	^ self visitFASTExpression: aNavigation
 ]
 
 { #category : #visitor }
 CSNBehaviorModelExporter >> visitPopUp: aPopUp [
-	^ self subclassResponsibility
+	^ self visitFASTExpression: aPopUp
 ]
 
 { #category : #visitor }

@@ -532,7 +532,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 		do: [ :aPage | 
 			self clone
 				currentPath: self rootPhases / aPage name;
-				visit: aPage ].
+				visit: aPage ] displayingProgress: [:page | 'export page: ', page codePhase].
 	aMooseModel allCSNService
 		do: [ :rootElement | self visit: rootElement ]
 ]
