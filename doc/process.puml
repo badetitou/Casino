@@ -30,12 +30,12 @@ fork again
     fork again
         :addDefaultAttribute;
     end fork
-    :modelWithFullInformationOfUI]
 fork again
     :generateService;
     :generateServiceAction;
     :uiWithServices]
 end fork
+:modelWithFullInformationOfUI]
 :linkPagesWidgets;
 :addListToModel;
 stop
