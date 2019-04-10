@@ -12,10 +12,8 @@ fork
     fork end
 :addLinksXMLUIPage;
 :addLinkForAbstractTabPhase;
-:addLinkPhaseToPageMetier;
-:addLinkPageMetierToPageMetier;
 :linkPageBusinessPage;
-:LinkBusinessPageBusinessPage;
+:linkBusinessPageBusinessPage;
 fork again
     :generateWidget;
     :addLinkXmlUIWiget;
