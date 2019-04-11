@@ -4,8 +4,8 @@ Root entity of the meta-model
 Class {
 	#name : #CSNOriginedEntity,
 	#superclass : #MooseEntity,
-	#traits : 'FamixTNamed + FamixTWithSourceAnchor',
-	#classTraits : 'FamixTNamed classTrait + FamixTWithSourceAnchor classTrait',
+	#traits : 'FamixTNamed + FamixTWithSourceAnchor + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamed classTrait + FamixTWithSourceAnchor classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#source'
 	],
@@ -31,7 +31,7 @@ CSNOriginedEntity class >> generatedSlotNames [
 { #category : #generator }
 CSNOriginedEntity class >> generatedTraitNames [
 	<generated>
-	^ #(FamixTNamed FamixTWithSourceAnchor)
+	^ #(FamixTNamed FamixTWithSourceAnchor TEntityMetaLevelDependency)
 ]
 
 { #category : #meta }

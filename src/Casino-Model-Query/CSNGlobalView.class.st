@@ -7,9 +7,9 @@ Class {
 { #category : #'as yet unclassified' }
 CSNGlobalView class >> generalViewForModel: aGUIModel [
 	| visu |
-	visu := TLTreeExplorer fromEntities: aGUIModel allCSNWidget.
+	visu := TLTreeExplorer fromEntities: {aGUIModel allCSNCell.aGUIModel allCSNWidget. aGUIModel allCSNLayout} flattened.
 	visu labelForSelector: #asString.
-	visu connectFollowingProperty: #belongsTo.
+	visu connectFollowingProperty: [:el | (el parents) asOrderedCollection at: 1 ifAbsent: nil].
 	^ visu
 ]
 

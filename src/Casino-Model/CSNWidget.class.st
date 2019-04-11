@@ -42,7 +42,7 @@ CSNWidget class >> generatedTraitNames [
 CSNWidget class >> requirements [
 
 	<generated>
-	^ { CSNUIContainer }
+	^ { CSNCell. CSNUIContainer }
 ]
 
 { #category : #accessing }
@@ -113,6 +113,8 @@ CSNWidget >> belongsTo: anObject [
 CSNWidget >> cellOwner [
 
 	<generated>
+	<container>
+
 	^ cellOwner
 ]
 

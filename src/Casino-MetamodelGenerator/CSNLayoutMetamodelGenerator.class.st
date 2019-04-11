@@ -117,12 +117,12 @@ CSNLayoutMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	((cell property: #layoutOwner) *-<> (layout property: #cell)) withNavigation.
 	((layout property: #container) -<> (uiContainer property: #layout)) withNavigation.
-	((cell property: #widget) - (widget property: #cellOwner)) withNavigation.
+	((cell property: #widget) <>- (widget property: #cellOwner)) withNavigation; withoutPrimaryContainer.
 ]
 
 { #category : #definition }
 CSNLayoutMetamodelGenerator >> newBuilder [
-	^ FamixGenerator builderWithDefinitions
+	^ self builderWithStandardTraits
 		doNotGenerateCurrent;
 		generator: self;
 		yourself

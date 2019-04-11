@@ -85,6 +85,7 @@ CSNMetamodelGenerator >> defineHierarchy [
 	actionAppel --|> #TAssociation.
 	entity --|> #TNamed.
 	entity --|> #TWithSourceAnchor.
+	entity --|> #TEntityMetaLevelDependency.
 	entity <|-- action.
 	entity <|-- attribute.
 	entity <|-- serviceAPI.
@@ -127,7 +128,7 @@ CSNMetamodelGenerator >> defineRelations [
 
 { #category : #definition }
 CSNMetamodelGenerator >> newBuilder [
-	^ FamixGenerator builderWithDefinitions
+	^ self builderWithStandardTraits
 		doNotGenerateCurrent;
 		generator: self;
 		yourself
