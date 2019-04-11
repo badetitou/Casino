@@ -22,16 +22,9 @@ BaselineOfCasino >> defineDependencies: spec [
 		with: [ spec
 				loads: #('smacc' 'visitor');
 				repository: 'github://moosetechnology/FAST-Java:master/src' ].
-	spec
-		package: 'PetitXml'
-		with:
-			[ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
-	spec
-		baseline: 'Telescope'
-		with: [ spec repository: 'github://TelescopeSt/Telescope:v2.x.x/src' ].
-	spec
-		baseline: 'Carrefour'
-		with: [ spec repository: 'github://badetitou/Carrefour/src' ]
+	spec package: 'PetitXml' with: [ spec repository: 'http://smalltalkhub.com/mc/Moose/PetitParser/main' ].
+	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
+	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour/src' ]
 ]
 
 { #category : #baselines }
@@ -72,7 +65,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
-		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'Telescope') ];
+		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'TelescopeCytoscape') ];
 		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
