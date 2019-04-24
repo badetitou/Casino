@@ -6,14 +6,15 @@ notifications:
         on_success: never
         on_failure: always
         
-matrix:
-  allow_failures:
-    - smalltalk: Moose64-8.0
-      smalltalk_config: .smalltalk.ston
-    - smalltalk: Moose32-8.0
-      smalltalk_config: .smalltalk.ston
-    - smalltalk: Moose64-7.0
-      smalltalk_config: .smalltalk.ston
+smalltalk:
+  - Moose32-7.0
+  - Moose64-7.0
 
+matrix:
+  allow_failures: # Allow bleeding edge builds to fail
+    - smalltalk_config: .bleedingEdge.ston
   include:
-    - smalltalk: Moose32-7.0
+    - smalltalk: Moose64-8.0
+      smalltalk_config: .bleedingEdge.ston
+    - smalltalk: Moose32-8.0
+      smalltalk_config: .bleedingEdge.ston
