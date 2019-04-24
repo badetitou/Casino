@@ -11,3 +11,7 @@ os:
 
 smalltalk:
   - Moose-7.0
+
+matrix:
+  allow_failures:
+    - smalltalk: Moose-8.0
