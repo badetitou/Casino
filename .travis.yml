@@ -5,10 +5,7 @@ notifications:
     email:
         on_success: never
         on_failure: always
-
-os:
-- osx
-
+        
 matrix:
   allow_failures:
     - smalltalk: Moose64-8.0
