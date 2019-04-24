@@ -121,9 +121,7 @@ CSNModelExporter >> visitUIAbsoluteWidth: aBLUIAbsoluteWidth [
 
 { #category : #'as yet unclassified' }
 CSNModelExporter >> visitUIButton: aBLUIButton [
-	^ self
-		visitUILeaf:
-			aBLUIButton
+	^ self visitUIContainer: aBLUIButton
 ]
 
 { #category : #'as yet unclassified' }

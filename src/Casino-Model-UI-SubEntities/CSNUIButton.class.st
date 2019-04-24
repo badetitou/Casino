@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNUIButton,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNUIContainer,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
