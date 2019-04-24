@@ -5,10 +5,6 @@ notifications:
     email:
         on_success: never
         on_failure: always
-        
-os:
-  - linux
-  - osx
 
 smalltalk:
   - Moose32-7.0
