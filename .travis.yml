@@ -12,9 +12,8 @@ smalltalk:
 
 matrix:
   allow_failures: # Allow bleeding edge builds to fail
-    - smalltalk_config: .bleedingEdge.ston
+    - smalltalk: Moose64-8.0
+    - smalltalk: Moose32-8.0
   include:
     - smalltalk: Moose64-8.0
-      smalltalk_config: .bleedingEdge.ston
     - smalltalk: Moose32-8.0
-      smalltalk_config: .bleedingEdge.ston
