@@ -9,9 +9,11 @@ notifications:
 os:
 - osx
 
-smalltalk:
-  - Moose-7.0
-
 matrix:
   allow_failures:
-    - smalltalk: Moose-8.0
+    - smalltalk: Moose64-8.0
+    - smalltalk: Moose32-8.0
+    - smalltalk: Moose64-7.0
+
+  include:
+    smalltalk: Moose32-7.0
