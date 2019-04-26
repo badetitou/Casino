@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNUISelect,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNUIInput,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
