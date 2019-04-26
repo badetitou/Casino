@@ -6,8 +6,14 @@ notifications:
         on_success: never
         on_failure: always
 
-os:
-- osx
-
 smalltalk:
-  - Moose-7.0
+  - Moose32-7.0
+  - Moose64-7.0
+
+matrix:
+  allow_failures: # Allow bleeding edge builds to fail
+    - smalltalk: Moose64-8.0
+    - smalltalk: Moose32-8.0
+  include:
+    - smalltalk: Moose64-8.0
+    - smalltalk: Moose32-8.0
