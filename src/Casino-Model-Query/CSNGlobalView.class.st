@@ -7,12 +7,8 @@ Class {
 { #category : #'as yet unclassified' }
 CSNGlobalView class >> generalViewForModel: aGUIModel [
 	| visu |
-	visu := TLCycleDependencies  new 
-	 	entities: {"aGUIModel allCSNCell."aGUIModel allCSNWidget. "aGUIModel allCSNLayout"} flattened;
-		property: [ :each | each atScope: CSNWidget  ];
-		widthBlock: [ :each | 6 ];
-		heightBlock: [ :each | 6 ];
-		yourself.
+	visu := TLVisualization fromEntities: aGUIModel allCSNWidget.
+	visu layout: TLForceBasedLayout.
 	^ visu
 ]
 
