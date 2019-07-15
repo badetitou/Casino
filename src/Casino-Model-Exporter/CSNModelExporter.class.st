@@ -125,6 +125,11 @@ CSNModelExporter >> visitUIButton: aBLUIButton [
 ]
 
 { #category : #'as yet unclassified' }
+CSNModelExporter >> visitUICanvas: aCanvas [
+	^ self visitUIContainer: aCanvas
+]
+
+{ #category : #'as yet unclassified' }
 CSNModelExporter >> visitUIClass: aBLUIClass [
 	^ self visitAttribute: aBLUIClass
 ]
