@@ -1,7 +1,7 @@
 Class {
 	#name : #CSNUICanvas,
 	#superclass : #CSNUIContainer,
-	#category : #'Casino-Model-UI-SubEntities-Widgets-Extended'
+	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #visiting }
