@@ -1,9 +1,9 @@
 "
-SmalltalkImage current garbageCollect.
-
 ""Generate BlApp""
-gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\verveineJ5\KitchenGWT.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Developpement\mse\verveineJ5'.
+gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\VerveineJNicolas\KitchenGWT.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'.
+
+gwtMooseModel allWithType: FASTEntity.
 
 ""Generate Bl Model""
 gwtModel := MooseModel new name: 'Showroom';
@@ -555,7 +555,7 @@ CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
 
 { #category : #accessing }
 CSNWebModelJava >> widgetAnonymousSubclasses [
-	^ ((self modelWidget flatCollect: [ :widget | widget subclassHierarchy ]) select: #isAnonymousClass) asOrderedCollection 
+	^ ((self modelWidget flatCollect: [ :widget | widget subclassHierarchy ]) select: #isAnonymousClass)
 ]
 
 { #category : #accessing }

@@ -2,21 +2,22 @@ Extension { #name : #FAMIXClass }
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXClass >> affectation [
-	"Compatibility with invocation for the creation of the widget"
-
-	(self isAnonymousClass and: [ self typeContainer hasSourceAnchor ])
-		ifTrue: [ ((self allAtScope: FAMIXMethod) sort: [ :method1 :method2 | method1 sourceAnchor startPos < method2 sourceAnchor startPos ]) first generateFastIfNotDoneAndBind.
-			(self fastDeclaration first atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ]
-		ifFalse: [ 
-
 	| selfSourceAnchor |
+	"Compatibility with invocation for the creation of the widget"
+	self isAnonymousClass
+		ifTrue: [ (((self allAtScope: FamixTMethod) select: #hasSourceAnchor) sort: [ :method1 :method2 | method1 sourceAnchor startPos < method2 sourceAnchor startPos ])
+				ifNotEmpty: [ :theAncessorsMethod | 
+					theAncessorsMethod first generateFastIfNotDoneAndBind.
+					(self fastDeclaration first atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ] ].
+
+
 	selfSourceAnchor := self sourceAnchor ifNotNil: [ self sourceAnchor ] ifNil: [ self container sourceAnchor ].
-	^ ((self container localVariables select: [ :el | el sourceAnchor isNotNil ])
+	^ ((self container localVariables select: #hasSourceAnchor)
 		select: [ :localVariable | localVariable sourceAnchor startPos < selfSourceAnchor startPos and: [ localVariable sourceAnchor endPos > selfSourceAnchor endPos ] ])
 		at: 1
 		ifAbsent: [ ((self container accesses select: #isWrite) select: [ :access | access sourceAnchor startPos < selfSourceAnchor startPos and: [ access endAffectationPos > selfSourceAnchor endPos ] ])
 				at: 1
-				ifAbsent: [ ^ self ] ] ]
+				ifAbsent: [ ^ self ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
