@@ -3,13 +3,14 @@ Extension { #name : #FAMIXInvocation }
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXInvocation >> affectation [
 	"in the case of
-			TreeItemCopie service3 = new TreeItemCopie(new BLLabel(""SRHA - Service RH - Absences""));
+			TreeItemCopie service3 = new TreeItemCopie(new BLLabel(""SRHA - Se ']' expected ->rvice RH - Absences""));
 	The BLLabel affectation must not be service3 (it is wrong)
 "
 
 	self container ifNotNil: [ ^ nil ].
-	self from sourceAnchor ifNotNil: [ (self from generateFastIfNotDoneAndBind). 
-	 (self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [:aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable. ] ].
+	"we do not believe in isInitializer"
+	(self from hasSourceAnchor and: [ self from name ~= '<Initializer>' ]) ifTrue: [ (self from generateFastIfNotDoneAndBind). 
+ 	 (self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [:aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable. ] ].
 	^ ((self from localVariables
 		select: [ :el | el sourceAnchor isNotNil ])
 		select: [ :localVariable | 
