@@ -7,5 +7,6 @@ CSNCoreHorizontalAlignement class >> canHandle: anInvocation [
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
 CSNCoreHorizontalAlignement class >> createAttributeFrom: anInvocation for: aWidgetInstance withImporter: anImporter [
+	aWidgetInstance ifNil: [ ^ CSNAlignement createAlignementWithHorizontal: (anInvocation parameters first) andVertical: nil  ].
 	^ aWidgetInstance subWidgets do: [:widget | widget position: (CSNAlignement createAlignementWithHorizontal: (anInvocation parameters first) andVertical: nil) ].
 ]

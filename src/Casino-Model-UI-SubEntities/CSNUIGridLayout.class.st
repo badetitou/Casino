@@ -39,58 +39,45 @@ CSNUIGridLayout >> atPositionX: anX Y: anY [
 { #category : #'as yet unclassified' }
 CSNUIGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation [
 	| aXValue |
-	aXValue := anInvocation parameters first.
+	"The first check of is array is used in debug if we try to re determine some values"
+	anInvocation isArray ifTrue: [ aXValue := anInvocation first ] ifFalse: [ aXValue := anInvocation parameters first ].
 	^ aXValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| currentXValue |
 			"widget.setWidget(widget.getRowCount(), ..)"
-			(aXValue includesSubstring: 'getRowCount')
-				ifTrue: [ ^ self maxLevel + 1 ].
+			(aXValue includesSubstring: 'getRowCount') ifTrue: [ ^ self maxLevel + 1 ].
 			"determine current var value"
-			currentXValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
-				at: ((aXValue removePrefix: '++') removeSuffix: '++')
-				ifAbsent: [ nil ].
+			currentXValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((aXValue removePrefix: '++') removeSuffix: '++') ifAbsent: [ nil ].
 			"If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
 			Else, we'll say it's the max level (but we do not have arguments)"
 			currentXValue
-				ifNotNil: [ (anInvocation from localVariables
-						select: [ :localVariable | localVariable name = ((aXValue removePrefix: '++') removeSuffix: '++') ])
+				ifNotNil: [ (anInvocation from localVariables select: [ :localVariable | localVariable name = ((aXValue removePrefix: '++') removeSuffix: '++') ])
 						ifNotEmpty: [ :localVariable | 
 							| positions |
 							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
-							anInvocation from sourceAnchor sourceText replaceAllRegex: '\n' with: '' .
+							anInvocation from sourceAnchor sourceText replaceAllRegex: '\n' with: ''.
 							"anInvocation from sourceAnchor
 								copyFrom: positions first - 102
 								to: positions first + localVariable first name size - 1 + 100."
 							"First we extract only the interesting usages (between the previous set we analysed and the current one"
-							positions := positions
-								select: [ :val | 
-									val < anInvocation sourceAnchor startPos
-										and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
+							positions := positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
 							"Then we compute for each position the action we have to do"
 							positions
 								do: [ :val | 
 									"if the usage is something like ++var or var++, we increment the currentXValue"
-									((anInvocation from sourceAnchor copyFrom: val - 2 to: val + localVariable first name size - 1)
-										= ('++' , localVariable first name)
-										or: [ (anInvocation from sourceAnchor copyFrom: val to: val + localVariable first name size - 1 + 2)
-												= (localVariable first name , '++') ])
+									((anInvocation from sourceAnchor copyFrom: val - 2 to: val + localVariable first name size - 1) = ('++' , localVariable first name)
+										or: [ (anInvocation from sourceAnchor copyFrom: val to: val + localVariable first name size - 1 + 2) = (localVariable first name , '++') ])
 										ifTrue: [ currentXValue := currentXValue + 1 ]
-										ifFalse: [ self haltIf: [localVariable first incomingAccesses anySatisfy: [:access | access sourceAnchor startPos = val] ] ] ] ] ]
+										ifFalse: [ self haltIf: [ localVariable first incomingAccesses anySatisfy: [ :access | access sourceAnchor startPos = val ] ] ] ] ] ]
 				ifNil: [ currentXValue := self maxLevel ].
 			"widget.setWidget(++var, ..)"
 			(aXValue beginsWith: '++')
 				ifTrue: [ currentXValue := currentXValue + 1.
-					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
-						at: (aXValue removePrefix: '++')
-						put: currentXValue ]
+					(self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aXValue removePrefix: '++') put: currentXValue ]
 				ifFalse: [ "widget.setWidget(var++, ..)"
 					(aXValue endsWith: '++')
-						ifTrue: [ (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
-								at: (aXValue removeSuffix: '++')
-								put: currentXValue + 1 ]
-						ifFalse:
-							[ "widget.setWidget(var, ..)" (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aXValue put: currentXValue ] ].
+						ifTrue: [ (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: (aXValue removeSuffix: '++') put: currentXValue + 1 ]
+						ifFalse: [ "widget.setWidget(var, ..)" (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aXValue put: currentXValue ] ].
 			^ currentXValue ]
 		ifNotNil: [ ^ aXValue asInteger ]
 ]
@@ -106,7 +93,8 @@ CSNUIGridLayout >> determineXandYfrom: anInvocation andPrevious: anPreviousInvoc
 { #category : #'as yet unclassified' }
 CSNUIGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation [
 	| aYValue |
-	aYValue := anInvocation parameters second.
+		"The first check of is array is used in debug if we try to re determine some values"
+	anInvocation isArray ifTrue: [ aYValue := anInvocation second ] ifFalse: [ aYValue := anInvocation parameters second ].
 	^ aYValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| currentYValue |

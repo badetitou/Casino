@@ -27,9 +27,10 @@ CSNUIGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNUIGridLayout >> extractAddingPosition: anAssocWidgetArrayOrArrayValue [
-	^  anAssocWidgetArrayOrArrayValue value sourceAnchor
+	"the first ifTrue is False is only use when we debug to avoid a bug when we restart"
+	^  anAssocWidgetArrayOrArrayValue value isArray ifTrue: [ 0 ] ifFalse: [  (anAssocWidgetArrayOrArrayValue value sourceAnchor )
 				ifNil: [ 0 ]
-				ifNotNil: [ :sourceText | sourceText startPos ] 
+				ifNotNil: [ :sourceText | sourceText startPos ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
@@ -58,7 +59,8 @@ CSNUIGridLayout >> postImport [
 	(self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
 		associations
 		do:
-			[ :assoc | (self atPositionX: assoc value first Y: assoc value second) do: [ :widget | widget   addAttribute: assoc key ] ]
+			[ :assoc | (self atPositionX: assoc value first Y: assoc value second) do: [ :widget | (assoc key isKindOf: CSNPosition) ifTrue: [ widget position: assoc key ] ifFalse: [ 
+				widget addAttribute: assoc key ] ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
