@@ -135,7 +135,12 @@ CSNWebModelJava >> addWidgetAttributes [
 		do: [ :widget | 
 			widget variable receivingInvocations
 				do: [ :invoc | 
-					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil ])
+					(invoc signature = 'getFlexCellFormatter()' and: [ invoc previous isNotNil and: [ 
+							"example we don't want
+									setWidth(""100%"");
+									FlexCellFormatter fcfMain = _ftMain.getFlexCellFormatter();
+							here the previous is setWith()"
+							invoc previous receiver isImplicitVariable not ] ])
 						ifTrue: [ self factory createAttributeFrom: invoc previous forCellOf: widget ]
 						ifFalse: [ self factory createAttributeFrom: invoc for: widget ] ] ]
 		displayingProgress: [ :widget | 'compute attribute of ' , widget asString ]
@@ -144,12 +149,7 @@ CSNWebModelJava >> addWidgetAttributes [
 
 { #category : #adding }
 CSNWebModelJava >> addWidgetDefaultAttributes [
-	self
-		model allCSNWidgetExceptPage
-		do:
-			#addDefaultAttribute
-		displayingProgress: [ :widget | 'DefaultAttribute for ' , widget asString ]
-		every: 1000
+	self model allCSNWidgetExceptPage do: #addDefaultAttribute displayingProgress: [ :widget | 'DefaultAttribute for ' , widget asString ] every: 1000
 ]
 
 { #category : #accessing }
