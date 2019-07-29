@@ -1,3 +1,12 @@
+"
+I'm the abstract Importer of CasinI 
+
+At least extends import
+we can extend 
+	#createFactory if you want you're own
+	#preImport to execute some code before the import
+	#postImport to execute some code after the import
+"
 Class {
 	#name : #CSNWebModel,
 	#superclass : #Object,
@@ -23,6 +32,7 @@ CSNWebModel class >> webSkinRoot [
 
 { #category : #initialization }
 CSNWebModel >> createFactory [
+	factory := self factoryClass new model: model; importer: self; yourself 
 ]
 
 { #category : #private }
@@ -37,6 +47,11 @@ CSNWebModel >> createModelIn: aModel [
 { #category : #accessing }
 CSNWebModel >> factory [
 	^ factory
+]
+
+{ #category : #initialization }
+CSNWebModel >> factoryClass [
+	^ CSNWidgetFactory
 ]
 
 { #category : #accessing }
