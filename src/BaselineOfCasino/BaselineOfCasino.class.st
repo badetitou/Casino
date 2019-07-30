@@ -63,7 +63,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model') ];
-		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit') ];
+		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'TelescopeCytoscape') ];
 		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model') ];
