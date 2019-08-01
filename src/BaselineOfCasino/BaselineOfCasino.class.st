@@ -34,7 +34,7 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests');
 		group: 'model' with: #('Casino-Model');
 		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer' 'Casino-Model-Extension');
-		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout');
+		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
 		group: 'query' with: #('Casino-Model-Query');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
@@ -63,6 +63,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-UI-SubEntities-Generator';
 		
 		package: 'Casino-Model-Layout' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout-Generator') ];
+		package: 'Casino-Model-Layout-Extension' with: [ spec requires: #('Casino-Model-Layout') ];
 		package: 'Casino-Model-Layout-Generator';
 		
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model') ];

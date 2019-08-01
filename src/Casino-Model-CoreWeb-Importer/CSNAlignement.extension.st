@@ -1,7 +1,7 @@
 Extension { #name : #CSNAlignement }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNAlignement class >> createAlignementWithHorizontal: horizontal andVertical: vertical [
+CSNAlignement classSide >> createAlignementWithHorizontal: horizontal andVertical: vertical [
 	^ vertical = 'HasVerticalAlignment.ALIGN_TOP'
 		ifTrue: [ CSNNorthAlignement generateWithHorizontal: horizontal ]
 		ifFalse: [ vertical = 'HasVerticalAlignment.ALIGN_BOTTOM'

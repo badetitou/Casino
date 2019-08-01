@@ -11,7 +11,7 @@ CSNCenterAlignement >> angularValue [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNCenterAlignement class >> generateWithHorizontal: horizontal [
+CSNCenterAlignement classSide >> generateWithHorizontal: horizontal [
 	^ horizontal = 'HasHorizontalAlignment.ALIGN_LEFT'
 		ifTrue: [ CSNWestAlignement new ]
 		ifFalse: [ horizontal = 'HasHorizontalAlignment.ALIGN_RIGHT'

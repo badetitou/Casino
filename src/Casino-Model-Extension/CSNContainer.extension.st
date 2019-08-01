@@ -1,12 +1,12 @@
-Extension { #name : #CSNUIContainer }
+Extension { #name : #CSNContainer }
 
 { #category : #'*Casino-Model-Extension' }
-CSNUIContainer >> isContainer [
+CSNContainer >> isContainer [
 	^ true
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNUIContainer >> recursiveElements [
+CSNContainer >> recursiveElements [
 	| widgs |
 	widgs := self widgets
 		,
@@ -15,7 +15,7 @@ CSNUIContainer >> recursiveElements [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNUIContainer >> recursiveWidgets [
+CSNContainer >> recursiveWidgets [
 	| widgs |
 	widgs := self widgets
 		,
@@ -24,6 +24,6 @@ CSNUIContainer >> recursiveWidgets [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNUIContainer >> subWidgets [
+CSNContainer >> subWidgets [
 	^ (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [{}])) flattened.
 ]
