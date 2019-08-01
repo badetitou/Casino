@@ -1,6 +1,6 @@
-Extension { #name : #CSNCell }
+Extension { #name : #CSNLCell }
 
 { #category : #'*Casino-Model-Exporter' }
-CSNCell >> accept: anExporter [
+CSNLCell >> accept: anExporter [
 	^ anExporter visitCell: self
 ]

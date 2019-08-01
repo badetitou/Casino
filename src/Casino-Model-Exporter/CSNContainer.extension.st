@@ -1,6 +1,6 @@
-Extension { #name : #CSNUIContainer }
+Extension { #name : #CSNContainer }
 
 { #category : #'*Casino-Model-Exporter' }
-CSNUIContainer >> accept: anExporter [
+CSNContainer >> accept: anExporter [
 	^ anExporter visitUIContainer: self
 ]

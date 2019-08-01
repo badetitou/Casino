@@ -66,7 +66,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Layout-Extension' with: [ spec requires: #('Casino-Model-Layout') ];
 		package: 'Casino-Model-Layout-Generator';
 		
-		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model') ];
+		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];

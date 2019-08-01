@@ -1,6 +1,6 @@
-Extension { #name : #CSNLayout }
+Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-Exporter' }
-CSNLayout >> accept: anExporter [
+CSNLLayout >> accept: anExporter [
 	^ anExporter visitLayout: self
 ]
