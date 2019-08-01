@@ -1,10 +1,10 @@
-Extension { #name : #CSNUIHorizontalLayout }
+Extension { #name : #CSNLHorizontalLayout }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNUIHorizontalLayout >> computeAlignementAttribute [
+CSNLHorizontalLayout >> computeAlignementAttribute [
 	self cell
 		ifNotEmpty: [ :cells | 
-			(cells first widget position isNotNil and: [ (cells first attributes select: [ :attribute | attribute isKindOf: CSNUIWidth ]) isEmpty ]) 
+			(cells first widget position isNotNil and: [ (cells first attributes select: [ :attribute | attribute isOfType: CSNUIWidth ]) isEmpty ]) 
 				ifTrue: [
 					^ CSNAttribute new
 						name: 'alignment';
@@ -14,6 +14,6 @@ CSNUIHorizontalLayout >> computeAlignementAttribute [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNUIHorizontalLayout >> getLayoutAttribute [
+CSNLHorizontalLayout >> getLayoutAttribute [
 	^ {super getLayoutAttribute. self computeAlignementAttribute}
 ]

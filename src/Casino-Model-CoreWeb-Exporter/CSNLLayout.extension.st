@@ -1,6 +1,6 @@
-Extension { #name : #CSNLayout }
+Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNLayout >> getLayoutAttribute [
+CSNLLayout >> getLayoutAttribute [
 	^ CSNUIClass new attributeValue: 'p-grid'
 ]

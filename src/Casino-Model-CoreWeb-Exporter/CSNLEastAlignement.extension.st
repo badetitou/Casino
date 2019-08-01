@@ -1,11 +1,11 @@
-Extension { #name : #CSNNorthEastAlignement }
+Extension { #name : #CSNLEastAlignement }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNNorthEastAlignement >> angularHorizontalAlignement [
+CSNLEastAlignement >> angularHorizontalAlignement [
 	^ 'p-justify-end'
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNNorthEastAlignement >> angularValue [
+CSNLEastAlignement >> angularValue [
 	^ 'text-align: right;'
 ]

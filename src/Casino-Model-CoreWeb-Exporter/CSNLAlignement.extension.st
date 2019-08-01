@@ -1,11 +1,11 @@
-Extension { #name : #CSNAlignement }
+Extension { #name : #CSNLAlignement }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNAlignement >> angularHorizontalAlignement [
+CSNLAlignement >> angularHorizontalAlignement [
 	^ 'p-justify-start'
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNAlignement >> angularValue [
+CSNLAlignement >> angularValue [
 	^ ''
 ]

@@ -1,11 +1,11 @@
-Extension { #name : #CSNSouthWestAlignement }
+Extension { #name : #CSNLWestAlignement }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNSouthWestAlignement >> angularHorizontalAlignement [
+CSNLWestAlignement >> angularHorizontalAlignement [
 	^ 'p-justify-start'
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNSouthWestAlignement >> angularValue [
+CSNLWestAlignement >> angularValue [
 	^ 'text-align: left;'
 ]
