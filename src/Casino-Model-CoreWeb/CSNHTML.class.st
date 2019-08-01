@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNHTML,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#category : #'Casino-Model-CoreWeb-Widget'
 }
 

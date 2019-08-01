@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNProgressBar,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#category : #'Casino-Model-CoreWeb-Widget'
 }
 
