@@ -11,7 +11,7 @@ CSNHTML class >> createWidgetFor: anInvocation [
 	widget := super createWidgetFor: anInvocation.
 	widget
 		addWidget:
-			(CSNUILeaf new
+			(CSNLeaf new
 				text:
 					(anInvocation parameters
 						at: 1

@@ -9,7 +9,7 @@ CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 			anInvocation ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].
 			"widget on the grid"
 			param := anInvocation parameters.
-			tmpCell := CSNCell new
+			tmpCell := CSNLCell new
 				widget: aWidget;
 				yourself.
 			(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) add: tmpCell -> anInvocation.
@@ -19,8 +19,8 @@ CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 				position:
 					(param size >= 4
 						ifTrue: [ ((param at: 4) beginsWith: 'HasHorizontalAlignment.')
-								ifTrue: [ CSNAlignement createAlignementWithHorizontal: (param at: 4) andVertical: (param at: 5 ifAbsent: [ nil ]) ]
-								ifFalse: [ CSNAlignement createAlignementWithHorizontal: (param at: 5 ifAbsent: [ nil ]) andVertical: (param at: 4) ] ]
+								ifTrue: [ CSNLAlignement createAlignementWithHorizontal: (param at: 4) andVertical: (param at: 5 ifAbsent: [ nil ]) ]
+								ifFalse: [ CSNLAlignement createAlignementWithHorizontal: (param at: 5 ifAbsent: [ nil ]) andVertical: (param at: 4) ] ]
 						ifFalse: [ nil ]).
 			cell add: tmpCell ]
 ]

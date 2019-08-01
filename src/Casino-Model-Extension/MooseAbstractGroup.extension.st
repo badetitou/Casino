@@ -28,7 +28,7 @@ MooseAbstractGroup >> allCSNCell [
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNLayout [
 	<navigation: 'Sub-Layout'>
-	^ self allWithSubTypesOf: CSNLayout
+	^ self allWithSubTypesOf: CSNLLayout
 ]
 
 { #category : #'*Casino-Model-Extension' }
