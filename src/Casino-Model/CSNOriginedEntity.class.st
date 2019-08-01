@@ -4,8 +4,8 @@ Root entity of the meta-model
 Class {
 	#name : #CSNOriginedEntity,
 	#superclass : #MooseEntity,
-	#traits : 'FamixTNamed + FamixTWithSourceAnchor + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamed classTrait + FamixTWithSourceAnchor classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTNamed + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamed classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#source'
 	],
@@ -21,31 +21,11 @@ CSNOriginedEntity class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNOriginedEntity class >> generatedSlotNames [
-	<generated>
-	'CSNOriginedEntity class>>#generatedSlotNames'.
-	^ #(source)
-]
-
-{ #category : #generator }
-CSNOriginedEntity class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTNamed FamixTWithSourceAnchor TEntityMetaLevelDependency)
-]
-
 { #category : #meta }
 CSNOriginedEntity class >> metamodel [
 
 	<generated>
-	^ (self class environment at: #CSNLayoutMetamodelGenerator) metamodel
-]
-
-{ #category : #meta }
-CSNOriginedEntity class >> requirements [
-
-	<generated>
-	^ {  }
+	^ (self class environment at: #CSNMetamodelGenerator) metamodel
 ]
 
 { #category : #testing }
@@ -120,6 +100,13 @@ CSNOriginedEntity >> isPackage [
 
 { #category : #testing }
 CSNOriginedEntity >> isReference [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+CSNOriginedEntity >> isStructuralEntity [
 
 	<generated>
 	^ false

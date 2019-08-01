@@ -3,7 +3,7 @@ I'm specific to Berger-Levrault (company). Do not use me if you don't know what 
 "
 Class {
 	#name : #CSNBusinessPage,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#instVars : [
 		'#pageContainers => FMMany type: #CSNPage opposite: #businessPage',
 		'#title'
@@ -14,30 +14,17 @@ Class {
 { #category : #meta }
 CSNBusinessPage class >> annotation [
 
-	<MSEClass: #BusinessPage super: #CSNUIContainer>
+	<MSEClass: #BusinessPage super: #CSNContainer>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #generator }
-CSNBusinessPage class >> generatedSlotNames [
+{ #category : #adding }
+CSNBusinessPage >> addPageContainers: anObject [
+			
 	<generated>
-	'CSNBusinessPage class>>#generatedSlotNames'.
-	^ #(pageContainers title)
-]
-
-{ #category : #generator }
-CSNBusinessPage class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNBusinessPage class >> requirements [
-
-	<generated>
-	^ {  }
+	^ self pageContainers add: anObject
 ]
 
 { #category : #accessing }

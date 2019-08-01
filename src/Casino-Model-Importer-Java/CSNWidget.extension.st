@@ -46,7 +46,7 @@ CSNWidget class >> createWidgetFor: anInvocation [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget class >> defaultIfNotFoundFor: anInvocation [
-	^ CSNUIContainer new
+	^ CSNContainer new
 		realClass: anInvocation invokedClass;
 		source: anInvocation;
 		yourself

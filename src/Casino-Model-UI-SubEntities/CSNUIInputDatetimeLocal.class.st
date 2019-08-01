@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIInputDatetimeLocal class >> annotation [
-	<MSEClass: #CSNUIInputDatetimeLocal super: #CSNUIInput>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #InputDatetimeLocal super: #CSNUIInput>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

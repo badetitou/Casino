@@ -17,26 +17,6 @@ CSNService class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNService class >> generatedSlotNames [
-	<generated>
-	'CSNService class>>#generatedSlotNames'.
-	^ #(actions targetPoint)
-]
-
-{ #category : #generator }
-CSNService class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNService class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 CSNService >> actions [
 
@@ -59,6 +39,13 @@ CSNService >> actionsGroup [
 	<navigation: 'Actions'>
 	^ MooseGroup
 			withAll: (self actions asSet)
+]
+
+{ #category : #adding }
+CSNService >> addActions: anObject [
+			
+	<generated>
+	^ self actions add: anObject
 ]
 
 { #category : #accessing }

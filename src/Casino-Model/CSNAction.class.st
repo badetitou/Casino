@@ -19,19 +19,6 @@ CSNAction class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNAction class >> generatedSlotNames [
-	<generated>
-	'CSNAction class>>#generatedSlotNames'.
-	^ #(caller)
-]
-
-{ #category : #generator }
-CSNAction class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 CSNAction class >> requirements [
 

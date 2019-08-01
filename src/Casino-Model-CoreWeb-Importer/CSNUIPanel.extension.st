@@ -17,7 +17,7 @@ CSNUIPanel class >> canHandle: anInvocation [
 CSNUIPanel class >> createWidgetFor: anInvocation [
 	| widget |
 	widget := super createWidgetFor: anInvocation.
-	widget layout: (CSNLayout newCoreLayoutFor: anInvocation).
+	widget layout: (CSNLLayout newCoreLayoutFor: anInvocation).
 	(anInvocation parameters size >= 2)
 		ifTrue: [ widget addAttribute: (CSNUIWidth new name: 'width'; attributeValue: (anInvocation parameters at: 2) )].
 	^ widget

@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUIHeading2,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 CSNUIHeading2 class >> annotation [
-	<MSEClass: #CSNUIHeading2 super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Heading2 super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

@@ -10,6 +10,15 @@ Class {
 	#category : #'Casino-Model-UI-SubEntities-Attributes'
 }
 
+{ #category : #meta }
+CSNUIHeight class >> annotation [
+
+	<MSEClass: #Height super: #CSNAttribute>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]
+
 { #category : #accessing }
 CSNUIHeight >> accept: anExporter [
 	^ anExporter visitUIHeight: self

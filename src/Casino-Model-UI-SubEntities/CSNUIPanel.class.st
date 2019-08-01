@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUIPanel,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#category : #'Casino-Model-UI-SubEntities-Panel'
 }
 
 { #category : #meta }
 CSNUIPanel class >> annotation [
-	<MSEClass: #CSNUIPanel super: #CSNUIContainer>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Panel super: #CSNContainer>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #visiting }

@@ -15,23 +15,3 @@ CSNActionService class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-CSNActionService class >> generatedSlotNames [
-	<generated>
-	'CSNActionService class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNActionService class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNActionService class >> requirements [
-
-	<generated>
-	^ {  }
-]

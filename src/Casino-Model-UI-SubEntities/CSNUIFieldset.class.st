@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIFieldset class >> annotation [
-	<MSEClass: #CSNUIFieldset super: #CSNUIPanel>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Fieldset super: #CSNUIPanel>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #visiting }

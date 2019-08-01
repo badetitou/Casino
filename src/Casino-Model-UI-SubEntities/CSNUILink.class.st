@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUILink,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 CSNUILink class >> annotation [
-	<MSEClass: #CSNUILink super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Link super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

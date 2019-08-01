@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUIList,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 CSNUIList class >> annotation [
-	<MSEClass: #CSNUIList super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #List super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

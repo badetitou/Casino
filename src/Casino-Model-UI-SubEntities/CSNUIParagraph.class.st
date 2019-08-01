@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUIParagraph,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 CSNUIParagraph class >> annotation [
-	<MSEClass: #CSNUIParagraph super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Paragraph super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

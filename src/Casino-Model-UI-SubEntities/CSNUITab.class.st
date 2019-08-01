@@ -7,9 +7,18 @@ the model -> contained widget
 "
 Class {
 	#name : #CSNUITab,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#category : #'Casino-Model-UI-SubEntities-Widgets-Extended'
 }
+
+{ #category : #meta }
+CSNUITab class >> annotation [
+
+	<MSEClass: #Tab super: #CSNContainer>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]
 
 { #category : #visiting }
 CSNUITab >> accept: anExporter [

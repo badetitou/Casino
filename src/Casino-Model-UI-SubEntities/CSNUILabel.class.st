@@ -8,6 +8,15 @@ Class {
 	#category : #'Casino-Model-UI-SubEntities-Attributes'
 }
 
+{ #category : #meta }
+CSNUILabel class >> annotation [
+
+	<MSEClass: #Label super: #CSNAttribute>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]
+
 { #category : #accessing }
 CSNUILabel >> accept: anExporter [
 	^ anExporter visitUILabel: self
