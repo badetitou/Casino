@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIInputCheckbox class >> annotation [
-	<MSEClass: #CSNUIInputCheckbox super: #CSNUIInput>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #InputCheckbox super: #CSNUIInput>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIInputUrl class >> annotation [
-	<MSEClass: #CSNUIInputUrl super: #CSNUIInput>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #InputUrl super: #CSNUIInput>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIInputColor class >> annotation [
-	<MSEClass: #CSNUIInputColor super: #CSNUIInput>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #InputColor super: #CSNUIInput>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

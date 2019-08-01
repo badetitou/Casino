@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUIOrderedList class >> annotation [
-	<MSEClass: #CSNUIOrderedList super: #CSNUIList>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #OrderedList super: #CSNUIList>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }
