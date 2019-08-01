@@ -3,7 +3,7 @@ I represent the root of the user interface (A Windows, a web page)
 "
 Class {
 	#name : #CSNPage,
-	#superclass : #CSNUIContainer,
+	#superclass : #CSNContainer,
 	#instVars : [
 		'#businessPage => FMMany type: #CSNBusinessPage opposite: #pageContainers',
 		'#caller => FMMany type: #CSNActionAppel opposite: #call',
@@ -19,30 +19,17 @@ Class {
 { #category : #meta }
 CSNPage class >> annotation [
 
-	<MSEClass: #Page super: #CSNUIContainer>
+	<MSEClass: #Page super: #CSNContainer>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #generator }
-CSNPage class >> generatedSlotNames [
+{ #category : #adding }
+CSNPage >> addCaller: anObject [
+			
 	<generated>
-	'CSNPage class>>#generatedSlotNames'.
-	^ #(businessPage caller codePhase codeValue realClassName subtitle title)
-]
-
-{ #category : #generator }
-CSNPage class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNPage class >> requirements [
-
-	<generated>
-	^ {  }
+	^ self caller add: anObject
 ]
 
 { #category : #accessing }

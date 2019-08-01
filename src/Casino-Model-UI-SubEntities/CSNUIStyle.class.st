@@ -8,6 +8,15 @@ Class {
 	#category : #'Casino-Model-UI-SubEntities-Attributes'
 }
 
+{ #category : #meta }
+CSNUIStyle class >> annotation [
+
+	<MSEClass: #Style super: #CSNAttribute>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]
+
 { #category : #accessing }
 CSNUIStyle >> styleAttribute [
 	^ styleAttribute

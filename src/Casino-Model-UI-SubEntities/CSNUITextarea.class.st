@@ -1,14 +1,16 @@
 Class {
 	#name : #CSNUITextarea,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#category : #'Casino-Model-UI-SubEntities-Widgets'
 }
 
 { #category : #meta }
 CSNUITextarea class >> annotation [
-	<MSEClass: #CSNUITextarea super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Textarea super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }

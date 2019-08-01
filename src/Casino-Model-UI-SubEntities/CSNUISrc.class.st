@@ -11,3 +11,12 @@ Class {
 	#superclass : #CSNAttribute,
 	#category : #'Casino-Model-UI-SubEntities-Attributes'
 }
+
+{ #category : #meta }
+CSNUISrc class >> annotation [
+
+	<MSEClass: #Src super: #CSNAttribute>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]

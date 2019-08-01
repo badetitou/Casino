@@ -21,19 +21,6 @@ CSNAttribute class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNAttribute class >> generatedSlotNames [
-	<generated>
-	'CSNAttribute class>>#generatedSlotNames'.
-	^ #(attributeValue oldClass widget)
-]
-
-{ #category : #generator }
-CSNAttribute class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 CSNAttribute class >> requirements [
 

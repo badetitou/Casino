@@ -9,6 +9,15 @@ Class {
 	#category : #'Casino-Model-UI-SubEntities-Attributes'
 }
 
+{ #category : #meta }
+CSNUITitle class >> annotation [
+
+	<MSEClass: #Title super: #CSNAttribute>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
+]
+
 { #category : #accessing }
 CSNUITitle >> accept: anExporter [
 	^ anExporter visitUITitle: self

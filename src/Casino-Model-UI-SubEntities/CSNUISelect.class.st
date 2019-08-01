@@ -6,9 +6,11 @@ Class {
 
 { #category : #meta }
 CSNUISelect class >> annotation [
-	<MSEClass: #CSNUISelect super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Select super: #CSNUIInput>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #visiting }

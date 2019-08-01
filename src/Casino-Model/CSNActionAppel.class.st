@@ -1,8 +1,6 @@
 Class {
 	#name : #CSNActionAppel,
 	#superclass : #CSNAction,
-	#traits : 'FamixTAssociation',
-	#classTraits : 'FamixTAssociation classTrait',
 	#instVars : [
 		'#call => FMOne type: #CSNPage opposite: #caller'
 	],
@@ -16,19 +14,6 @@ CSNActionAppel class >> annotation [
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #generator }
-CSNActionAppel class >> generatedSlotNames [
-	<generated>
-	'CSNActionAppel class>>#generatedSlotNames'.
-	^ #(call)
-]
-
-{ #category : #generator }
-CSNActionAppel class >> generatedTraitNames [
-	<generated>
-	^ #(FamixTAssociation)
 ]
 
 { #category : #meta }

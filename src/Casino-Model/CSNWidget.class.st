@@ -7,11 +7,10 @@ Class {
 	#instVars : [
 		'#actions => FMMany type: #CSNAction opposite: #caller',
 		'#attributes => FMMany type: #CSNAttribute opposite: #widget',
-		'#cellOwner => FMOne type: #CSNCell opposite: #widget',
 		'#position',
 		'#realClass',
 		'#size',
-		'#widgetContainer => FMOne type: #CSNUIContainer opposite: #widgets'
+		'#widgetContainer => FMOne type: #CSNContainer opposite: #widgets'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -25,24 +24,11 @@ CSNWidget class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNWidget class >> generatedSlotNames [
-	<generated>
-	'CSNWidget class>>#generatedSlotNames'.
-	^ #(actions attributes cellOwner position realClass size widgetContainer)
-]
-
-{ #category : #generator }
-CSNWidget class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 CSNWidget class >> requirements [
 
 	<generated>
-	^ { CSNCell. CSNUIContainer }
+	^ { CSNContainer }
 ]
 
 { #category : #accessing }
@@ -67,6 +53,20 @@ CSNWidget >> actionsGroup [
 	<navigation: 'Actions'>
 	^ MooseGroup
 			withAll: (self actions asSet)
+]
+
+{ #category : #adding }
+CSNWidget >> addActions: anObject [
+			
+	<generated>
+	^ self actions add: anObject
+]
+
+{ #category : #adding }
+CSNWidget >> addAttributes: anObject [
+			
+	<generated>
+	^ self attributes add: anObject
 ]
 
 { #category : #accessing }
@@ -106,66 +106,6 @@ CSNWidget >> belongsTo: anObject [
 
 	<generated>
 	self widgetContainer: anObject
-
-]
-
-{ #category : #accessing }
-CSNWidget >> cellOwner [
-
-	<generated>
-	<container>
-
-	^ cellOwner
-]
-
-{ #category : #accessing }
-CSNWidget >> cellOwner: anObject [
-
-	<generated>
-	cellOwner := anObject
-
-]
-
-{ #category : #navigation }
-CSNWidget >> cellOwnerGroup [
-
-	<generated>
-	<navigation: 'CellOwner'>
-	^ MooseGroup
-			with: (self cellOwner)
-]
-
-{ #category : #accessing }
-CSNWidget >> position [
-
-	<MSEProperty: #position type: #CSNPosition>
-	<generated>
-	<MSEComment: 'The alignement of the widget'>
-	^ position
-]
-
-{ #category : #accessing }
-CSNWidget >> position: anObject [
-
-	<generated>
-	position := anObject
-
-]
-
-{ #category : #accessing }
-CSNWidget >> size [
-
-	<MSEProperty: #size type: #CSNSize>
-	<generated>
-	<MSEComment: 'The size of the widget'>
-	^ size
-]
-
-{ #category : #accessing }
-CSNWidget >> size: anObject [
-
-	<generated>
-	size := anObject
 
 ]
 

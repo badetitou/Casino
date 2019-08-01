@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNUIInput,
-	#superclass : #CSNUILeaf,
+	#superclass : #CSNLeaf,
 	#instVars : [
 		'value'
 	],
@@ -9,9 +9,11 @@ Class {
 
 { #category : #meta }
 CSNUIInput class >> annotation [
-	<MSEClass: #CSNUIInput super: #CSNUILeaf>
-	<package: #CSNWebModelJava>
-	^ self
+
+	<MSEClass: #Input super: #CSNLeaf>
+	<package: #'Casino-Model-UI-SubEntities'>
+	<generated>
+	^self
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,6 +36,14 @@ CSNUIInput >> text [
 { #category : #accessing }
 CSNUIInput >> text: anObject [
 	text := anObject
+]
+
+{ #category : #accessing }
+CSNUIInput >> value [
+
+	<MSEProperty: #value type: #String>
+	<generated>
+	^ value
 ]
 
 { #category : #accessing }

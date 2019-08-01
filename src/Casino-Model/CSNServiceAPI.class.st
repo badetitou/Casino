@@ -16,19 +16,6 @@ CSNServiceAPI class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNServiceAPI class >> generatedSlotNames [
-	<generated>
-	'CSNServiceAPI class>>#generatedSlotNames'.
-	^ #(serviceOwner)
-]
-
-{ #category : #generator }
-CSNServiceAPI class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
 { #category : #meta }
 CSNServiceAPI class >> requirements [
 

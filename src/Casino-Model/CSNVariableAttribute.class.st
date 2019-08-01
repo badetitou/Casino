@@ -15,23 +15,3 @@ CSNVariableAttribute class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-CSNVariableAttribute class >> generatedSlotNames [
-	<generated>
-	'CSNVariableAttribute class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNVariableAttribute class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNVariableAttribute class >> requirements [
-
-	<generated>
-	^ {  }
-]

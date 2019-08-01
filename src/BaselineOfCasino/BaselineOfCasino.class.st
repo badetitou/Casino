@@ -32,15 +32,15 @@ BaselineOfCasino >> defineGroups: spec [
 	spec
 		group: 'default' with: #('core-extented' 'Casino-Model-Exporter-Angular' 'Casino-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests');
-		group: 'model' with: #('Casino-MetamodelGenerator' 'Casino-Model');
+		group: 'model' with: #('Casino-Model');
 		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer' 'Casino-Model-Extension');
-		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities');
+		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout');
 		group: 'query' with: #('Casino-Model-Query');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests');
 		group: 'rh' with: #('bl' 'Casino-Migration-RH');
-		group: 'ui-bl' with: #('bl' 'tests' 'Casino-MetamodelGenerator');
+		group: 'ui-bl' with: #('bl' 'tests');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
 		group: 'behavior' with: #('ui-bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Bind-UIBehavior' 'Casino-Behavior-Model');
 		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests');
@@ -54,19 +54,23 @@ BaselineOfCasino >> defineGroups: spec [
 { #category : #baselines }
 BaselineOfCasino >> definePackages: spec [
 	spec
-		repository: 'https://github.com/badetitou/Casino-ToolKit';
-		package: 'Casino-Model';
-		package: 'Casino-Model-FamixNGPatch';
-		package: 'Casino-Model-Extension';
-		package: 'Casino-MetamodelGenerator';
-		package: 'Casino-Model-Explorer';
+		"models"
+		package: 'Casino-Model' with: [spec requires: #('Casino-Model-Generator')];
+		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model')];
+		package: 'Casino-Model-Generator';
+		
+		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model' 'Casino-Model-UI-SubEntities-Generator') ];
+		package: 'Casino-Model-UI-SubEntities-Generator';
+		
+		package: 'Casino-Model-Layout' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout-Generator') ];
+		package: 'Casino-Model-Layout-Generator';
+		
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'TelescopeCytoscape') ];
-		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('PetitXml' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
@@ -76,8 +80,8 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
 		
 		"behavior-core"
+		package: 'Casino-Behavior-Model' with: [ spec requires: #('FASTJava' 'Casino-Behavior-Model-Generator') ];
 		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FASTJava') ];
-		package: 'Casino-Behavior-Model' with: [ spec requires: #('FASTJava') ];
 		package: 'Casino-Behavior-Model-Visitor' with: [ spec requires: #('Casino-Behavior-Model') ];
 		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
 		"behavior-importer"
