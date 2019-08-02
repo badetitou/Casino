@@ -32,8 +32,8 @@ BaselineOfCasino >> defineGroups: spec [
 	spec
 		group: 'default' with: #('core-extented' 'Casino-Model-Exporter-Angular' 'Casino-Model-Importer-Java');
 		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests');
-		group: 'model' with: #('Casino-Model');
-		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer' 'Casino-Model-Extension');
+		group: 'model' with: #('Casino-Model' 'Casino-Core-ExternalLibrary' 'Casino-Model-Extension');
+		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer');
 		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
 		group: 'query' with: #('Casino-Model-Query');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
@@ -57,6 +57,7 @@ BaselineOfCasino >> definePackages: spec [
 		"models"
 		package: 'Casino-Model' with: [spec requires: #('Casino-Model-Generator')];
 		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model')];
+		package: 'Casino-Core-ExternalLibrary' with: [ spec requires: #('Casino-Model')];
 		package: 'Casino-Model-Generator';
 		
 		package: 'Casino-Model-UI-SubEntities' with: [ spec requires: #('Casino-Model' 'Casino-Model-UI-SubEntities-Generator') ];
@@ -68,15 +69,19 @@ BaselineOfCasino >> definePackages: spec [
 		
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit') ];
+		
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
-		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'TelescopeCytoscape') ];
+		
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('PetitXml' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
+		
+		package: 'Casino-Model-Query' with: [ spec requires: #('Casino-Model' 'TelescopeCytoscape') ];
 		package: 'Casino-Model-Toolkit' with: [ spec requires: #('Casino-Model-CoreWeb') ];
+		
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
 		

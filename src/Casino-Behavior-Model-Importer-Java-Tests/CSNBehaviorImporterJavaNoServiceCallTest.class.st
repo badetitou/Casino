@@ -18,5 +18,5 @@ CSNBehaviorImporterJavaNoServiceCallTest >> createUiModel [
 { #category : #running }
 CSNBehaviorImporterJavaNoServiceCallTest >> testImportNoAsynchroneFound [
 
-	self assert: (model allWithSubTypesOf: CSNBCall) size equals: 0.
+	self assert: (model allWithType: CSNBCall) size equals: 0.
 ]

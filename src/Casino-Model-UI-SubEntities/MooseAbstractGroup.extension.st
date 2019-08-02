@@ -44,5 +44,5 @@ MooseAbstractGroup >> allCSNPanel [
 MooseAbstractGroup >> allCSNUiPanel [
 	
 	<navigation: 'BL UiPanel'>
-	^ self allWithSubTypesOf: CSNUIPanel 
+	^ self allWithType: CSNUIPanel 
 ]

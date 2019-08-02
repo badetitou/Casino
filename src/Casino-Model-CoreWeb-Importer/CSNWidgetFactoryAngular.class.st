@@ -56,7 +56,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
-	self model silentlyAdd: (CSNService new
+	self model add: (CSNService new
 		name: aServiceClass name;
 		targetPoint: CSNWebModelJava webRoot, '/services/', aServiceClass name asLowercase;
 		source: aServiceClass;

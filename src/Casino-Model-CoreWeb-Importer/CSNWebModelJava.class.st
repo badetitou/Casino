@@ -1,17 +1,12 @@
 "
 ""Generate BlApp""
-gwtMooseModel := MooseModel importFromMSEStream:  'D:\Developpement\mse\VerveineJNicolas\KitchenGWT.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'.
-
-gwtMooseModel allWithType: FASTEntity.
+gwtMooseModel := FAMIXMooseModel new importFromMSEStream:  'D:\Developpement\mse\VerveineJNicolas\KitchenGWT.mse' asFileReference readStream.
+gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'. 
 
 ""Generate Bl Model""
-gwtModel := MooseModel new name: 'Showroom';
-	metamodel:
-			(MooseModel
-				metamodelComposedOf:
-					{CSNLayoutMetamodelGenerator metamodel}); yourself.
-CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and:  'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+gwtModel := CSNUIMooseModel new.
+CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and: 'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+
 
 CSNModelExporterAngularBLSpecific export: gwtModel.
 "
