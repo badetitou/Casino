@@ -1,8 +1,8 @@
 Extension { #name : #CSNBusinessPage }
 
-{ #category : #'*Casino-Model-Exporter' }
-CSNBusinessPage >> accept: anExporter [
-	^ anExporter visitPageMetier: self
+{ #category : #'*Casino-Model-Exporter-generated' }
+CSNBusinessPage >> accept: aCSNModelExporter [
+	^ aCSNModelExporter visitCSNBusinessPage: self
 ]
 
 { #category : #'*Casino-Model-Exporter' }

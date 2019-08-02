@@ -12,8 +12,3 @@ CSNUIAbsoluteHeight class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIAbsoluteHeight >> accept: anExporter [
-	^ anExporter visitUIAbsoluteHeight: self
-]

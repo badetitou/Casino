@@ -12,8 +12,3 @@ CSNUITree class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUITree >> accept: anExporter [
-	^ anExporter visitUITree: self
-]

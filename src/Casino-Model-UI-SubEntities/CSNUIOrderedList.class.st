@@ -12,8 +12,3 @@ CSNUIOrderedList class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIOrderedList >> accept: anExporter [
-	^ anExporter visitUIOrderedList: self
-]

@@ -17,11 +17,6 @@ CSNUIDisabled class >> annotation [
 ]
 
 { #category : #accessing }
-CSNUIDisabled >> accept: anExporter [
-	^ anExporter visitUIDisabled: self
-]
-
-{ #category : #accessing }
 CSNUIDisabled >> disabled [
 	^ disabled
 ]

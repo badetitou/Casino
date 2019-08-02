@@ -1,8 +1,8 @@
 Extension { #name : #CSNLeaf }
 
-{ #category : #'*Casino-Model-Exporter' }
-CSNLeaf >> accept: anExporter [
-	^ anExporter visitUILeaf: self
+{ #category : #'*Casino-Model-Exporter-generated' }
+CSNLeaf >> accept: aCSNModelExporter [
+	^ aCSNModelExporter visitCSNLeaf: self
 ]
 
 { #category : #'*Casino-Model-Exporter' }

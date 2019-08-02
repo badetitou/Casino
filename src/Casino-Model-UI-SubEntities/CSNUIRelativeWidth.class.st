@@ -12,8 +12,3 @@ CSNUIRelativeWidth class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIRelativeWidth >> accept: anExporter [
-	^ anExporter visitUIRelativeWidth: self
-]

@@ -12,8 +12,3 @@ CSNUIParagraph class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIParagraph >> accept: anExporter [
-	^ anExporter visitUIParagraph: self
-]

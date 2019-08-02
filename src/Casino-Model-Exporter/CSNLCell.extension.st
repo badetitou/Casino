@@ -1,6 +1,6 @@
 Extension { #name : #CSNLCell }
 
-{ #category : #'*Casino-Model-Exporter' }
-CSNLCell >> accept: anExporter [
-	^ anExporter visitCell: self
+{ #category : #'*Casino-Model-Exporter-generated' }
+CSNLCell >> accept: aCSNModelExporter [
+	^ aCSNModelExporter visitCSNLCell: self
 ]

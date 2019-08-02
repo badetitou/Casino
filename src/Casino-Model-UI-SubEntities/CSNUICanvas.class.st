@@ -12,8 +12,3 @@ CSNUICanvas class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUICanvas >> accept: anExporter [
-	^ anExporter visitUICanvas: self
-]

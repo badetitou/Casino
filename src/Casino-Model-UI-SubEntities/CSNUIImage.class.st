@@ -12,8 +12,3 @@ CSNUIImage class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIImage >> accept: anExporter [
-	^ anExporter visitUIImage: self
-]

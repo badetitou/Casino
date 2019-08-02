@@ -12,8 +12,3 @@ CSNUIFieldset class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUIFieldset >> accept: anExporter [
-	^ anExporter visitUIFieldset: self
-]

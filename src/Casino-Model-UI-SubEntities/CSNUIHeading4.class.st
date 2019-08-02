@@ -12,8 +12,3 @@ CSNUIHeading4 class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIHeading4 >> accept: anExporter [
-	^ anExporter visitUIHeading4: self
-]

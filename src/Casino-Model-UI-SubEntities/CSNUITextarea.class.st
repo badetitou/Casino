@@ -12,8 +12,3 @@ CSNUITextarea class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUITextarea >> accept: anExporter [
-	^ anExporter visitUITextarea: self
-]

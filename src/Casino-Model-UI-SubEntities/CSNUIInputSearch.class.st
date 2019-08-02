@@ -12,8 +12,3 @@ CSNUIInputSearch class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputSearch >> accept: anExporter [
-	^ anExporter visitUIInputSearch: self
-]

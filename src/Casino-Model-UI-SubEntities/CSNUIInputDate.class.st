@@ -12,8 +12,3 @@ CSNUIInputDate class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputDate >> accept: anExporter [
-	^ anExporter visitUIInputDate: self
-]

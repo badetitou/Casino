@@ -16,8 +16,3 @@ CSNUILabel class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUILabel >> accept: anExporter [
-	^ anExporter visitUILabel: self
-]

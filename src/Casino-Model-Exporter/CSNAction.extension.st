@@ -1,7 +1,6 @@
 Extension { #name : #CSNAction }
 
-{ #category : #'*Casino-Model-Exporter' }
-CSNAction >> accept: anExporter [
-	^ anExporter visitAction: self 
-
+{ #category : #'*Casino-Model-Exporter-generated' }
+CSNAction >> accept: aCSNModelExporter [
+	^ aCSNModelExporter visitCSNAction: self
 ]

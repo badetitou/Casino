@@ -12,8 +12,3 @@ CSNUIPanel class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUIPanel >> accept: anExporter [
-	^ anExporter visitUIPanel: self
-]

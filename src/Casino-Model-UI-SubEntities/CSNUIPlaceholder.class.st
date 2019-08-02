@@ -12,8 +12,3 @@ CSNUIPlaceholder class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIPlaceholder >> accept: anExporter [
-	^ anExporter visitUIPlaceholder: self
-]

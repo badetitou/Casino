@@ -12,8 +12,3 @@ CSNUIInputDatetimeLocal class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputDatetimeLocal >> accept: anExporter [
-	^ anExporter visitUIInputDatetimeLocal: self
-]

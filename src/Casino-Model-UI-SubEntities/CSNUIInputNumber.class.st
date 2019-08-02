@@ -12,8 +12,3 @@ CSNUIInputNumber class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputNumber >> accept: anExporter [
-	^ anExporter visitUIInputNumber: self
-]

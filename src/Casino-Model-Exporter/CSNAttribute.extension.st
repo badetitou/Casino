@@ -1,6 +1,6 @@
 Extension { #name : #CSNAttribute }
 
-{ #category : #'*Casino-Model-Exporter' }
-CSNAttribute >> accept: anExporter [
-	^ anExporter visitAttribute: self 
+{ #category : #'*Casino-Model-Exporter-generated' }
+CSNAttribute >> accept: aCSNModelExporter [
+	^ aCSNModelExporter visitCSNAttribute: self
 ]

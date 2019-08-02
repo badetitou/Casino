@@ -12,8 +12,3 @@ CSNUIAbsoluteWidth class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIAbsoluteWidth >> accept: anExporter [
-	^ anExporter visitUIAbsoluteWidth: self
-]

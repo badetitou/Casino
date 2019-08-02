@@ -12,9 +12,3 @@ CSNUIButton class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIButton >> accept: anExporter [
-	^ anExporter
-		visitUIButton: self
-]

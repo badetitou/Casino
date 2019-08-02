@@ -12,8 +12,3 @@ CSNUIInputRadio class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputRadio >> accept: anExporter [
-	^ anExporter visitUIInputRadio: self
-]

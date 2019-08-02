@@ -18,8 +18,3 @@ CSNUIHeight class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIHeight >> accept: anExporter [
-	^ anExporter visitUIHeight: self
-]

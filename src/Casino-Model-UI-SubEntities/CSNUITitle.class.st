@@ -17,8 +17,3 @@ CSNUITitle class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUITitle >> accept: anExporter [
-	^ anExporter visitUITitle: self
-]

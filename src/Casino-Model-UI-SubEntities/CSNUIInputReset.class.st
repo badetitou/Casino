@@ -12,8 +12,3 @@ CSNUIInputReset class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUIInputReset >> accept: anExporter [
-	^ anExporter visitUIInputReset: self
-]

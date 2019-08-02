@@ -12,8 +12,3 @@ CSNUIRelativeHeight class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIRelativeHeight >> accept: anExporter [
-	^ anExporter visitUIRelativeHeight: self
-]

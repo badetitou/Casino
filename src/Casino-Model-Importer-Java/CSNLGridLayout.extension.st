@@ -59,7 +59,7 @@ CSNLGridLayout >> postImport [
 	(self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
 		associations
 		do:
-			[ :assoc | (self atPositionX: assoc value first Y: assoc value second) do: [ :widget | (assoc key isKindOf: CSNPosition) ifTrue: [ widget position: assoc key ] ifFalse: [ 
+			[ :assoc | (self atPositionX: assoc value first Y: assoc value second) do: [ :widget | (assoc key isKindOf: CSNLPosition) ifTrue: [ widget position: assoc key ] ifFalse: [ 
 				widget addAttribute: assoc key ] ] ]
 ]
 

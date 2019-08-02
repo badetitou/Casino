@@ -16,11 +16,6 @@ CSNUIInput class >> annotation [
 	^self
 ]
 
-{ #category : #'as yet unclassified' }
-CSNUIInput >> accept: anExporter [
-	^ anExporter visitUIInput: self
-]
-
 { #category : #accessing }
 CSNUIInput >> initialize [
 	super initialize.

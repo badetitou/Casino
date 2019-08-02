@@ -12,8 +12,3 @@ CSNUITable class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUITable >> accept: anExporter [
-	^ anExporter visitUITable: self
-]

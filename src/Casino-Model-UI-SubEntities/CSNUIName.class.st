@@ -12,8 +12,3 @@ CSNUIName class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIName >> accept: anExporter [
-	^ anExporter visitUIName: self
-]

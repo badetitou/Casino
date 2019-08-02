@@ -12,8 +12,3 @@ CSNUITabManager class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUITabManager >> accept: anExporter [
-	^ anExporter visitUITabManager: self
-]

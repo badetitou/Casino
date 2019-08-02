@@ -12,8 +12,3 @@ CSNUISelect class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #visiting }
-CSNUISelect >> accept: anExporter [
-	^ anExporter visitUISelect: self
-]

@@ -12,8 +12,3 @@ CSNUIWidth class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIWidth >> accept: anExporter [
-	^ anExporter visitUIWidth: self
-]

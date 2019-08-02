@@ -12,8 +12,3 @@ CSNUIValue class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIValue >> accept: anExporter [
-	^ anExporter visitUIValue: self
-]
