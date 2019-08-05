@@ -3,10 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'importer'
+		'importer',
+		'visitorImporters'
 	],
 	#category : #'Casino-Model-Importer'
 }
+
+{ #category : #creating }
+CSNWidgetFactory >> addVisitorImporter: aVisitorImporter [
+	self visitorImporters add: (aVisitorImporter factory: self; yourself)
+]
 
 { #category : #accessing }
 CSNWidgetFactory >> create: anEntity [
@@ -19,6 +25,12 @@ CSNWidgetFactory >> create: anEntity [
 { #category : #accessing }
 CSNWidgetFactory >> importer: anObject [
 	importer := anObject
+]
+
+{ #category : #initialization }
+CSNWidgetFactory >> initialize [
+	super initialize.
+	visitorImporters := OrderedCollection new.
 ]
 
 { #category : #accessing }
@@ -34,4 +46,14 @@ CSNWidgetFactory >> model: anObject [
 { #category : #accessing }
 CSNWidgetFactory >> uiModel [
 	^ importer
+]
+
+{ #category : #accessing }
+CSNWidgetFactory >> visitorImporters [
+	^ visitorImporters
+]
+
+{ #category : #accessing }
+CSNWidgetFactory >> visitorImporters: anObject [
+	visitorImporters := anObject
 ]

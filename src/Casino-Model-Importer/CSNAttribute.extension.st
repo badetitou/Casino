@@ -1,21 +1,16 @@
-Extension { #name : #CSNWidget }
+Extension { #name : #CSNAttribute }
 
 { #category : #'*Casino-Model-Importer' }
-CSNWidget class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
+CSNAttribute class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
 	aCollectionOfImporter do: [ :importer | importer entity: aWidgetInstance ]
 ]
 
 { #category : #'*Casino-Model-Importer' }
-CSNWidget class >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
+CSNAttribute class >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
 	self initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance.
 	self subclasses 
 		do: [ :subclass | aCollectionOfImporter 
 			do: [ :importer | (subclass accept: importer) ifNotNil: [ :newWidget | ^ newWidget ] 
 				] 
 			]
-]
-
-{ #category : #'*Casino-Model-Importer' }
-CSNWidget >> postImport [
-	
 ]

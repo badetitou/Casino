@@ -6,8 +6,12 @@ Class {
 	#name : #CSNModelImporterVisitor,
 	#superclass : #CSNModelVisitor,
 	#instVars : [
-		'factory',
-		'entity'
+		'entity',
+		'factory'
+	],
+	#classInstVars : [
+		'entity',
+		'factory'
 	],
 	#category : #'Casino-Model-Importer'
 }
@@ -36,4 +40,9 @@ CSNModelImporterVisitor >> factory [
 { #category : #accessing }
 CSNModelImporterVisitor >> factory: anObject [
 	factory := anObject
+]
+
+{ #category : #visitor }
+CSNModelImporterVisitor >> visitCSNOriginedEntity: aCSNOriginedEntity [
+	^ nil
 ]
