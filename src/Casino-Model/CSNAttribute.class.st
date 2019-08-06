@@ -5,8 +5,8 @@ Class {
 	#name : #CSNAttribute,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
-		'#attributeValue',
-		'#oldClass',
+		'#attributeValue => FMProperty',
+		'#oldClass => FMProperty',
 		'#widget => FMOne type: #CSNWidget opposite: #attributes'
 	],
 	#category : #'Casino-Model-Entities'

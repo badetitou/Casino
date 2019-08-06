@@ -7,7 +7,8 @@ Class {
 	#superclass : #CSNModelVisitor,
 	#instVars : [
 		'entity',
-		'factory'
+		'factory',
+		'source'
 	],
 	#classInstVars : [
 		'entity',
@@ -40,6 +41,16 @@ CSNModelImporterVisitor >> factory [
 { #category : #accessing }
 CSNModelImporterVisitor >> factory: anObject [
 	factory := anObject
+]
+
+{ #category : #accessing }
+CSNModelImporterVisitor >> source [
+	^ source
+]
+
+{ #category : #accessing }
+CSNModelImporterVisitor >> source: anObject [
+	source := anObject
 ]
 
 { #category : #visitor }

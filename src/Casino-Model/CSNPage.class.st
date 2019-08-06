@@ -7,11 +7,11 @@ Class {
 	#instVars : [
 		'#businessPage => FMMany type: #CSNBusinessPage opposite: #pageContainers',
 		'#caller => FMMany type: #CSNActionAppel opposite: #call',
-		'#codePhase',
-		'#codeValue',
-		'#realClassName',
-		'#subtitle',
-		'#title'
+		'#codePhase => FMProperty',
+		'#codeValue => FMProperty',
+		'#realClassName => FMProperty',
+		'#subtitle => FMProperty',
+		'#title => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
 }

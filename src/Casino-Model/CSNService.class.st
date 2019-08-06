@@ -3,7 +3,7 @@ Class {
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
 		'#actions => FMMany type: #CSNServiceAPI opposite: #serviceOwner',
-		'#targetPoint'
+		'#targetPoint => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
 }

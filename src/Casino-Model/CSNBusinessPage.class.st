@@ -6,7 +6,7 @@ Class {
 	#superclass : #CSNContainer,
 	#instVars : [
 		'#pageContainers => FMMany type: #CSNPage opposite: #businessPage',
-		'#title'
+		'#title => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
 }

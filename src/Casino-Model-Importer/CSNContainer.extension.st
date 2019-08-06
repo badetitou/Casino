@@ -8,7 +8,8 @@ CSNContainer >> addAllWidgets: aCollectionOfWidget [
 
 { #category : #'*Casino-Model-Importer' }
 CSNContainer >> addWidget: aWidget [
-	self layout ifNotNil: [ self layout addWidget: aWidget withInvocationOfAdd: nil ] ifNil: [ widgets add: aWidget ]
+
+	self layout ifNotNil: [:layout | layout addWidget: aWidget withInvocationOfAdd: nil ] ifNil: [ self widgets add: aWidget ]
 ]
 
 { #category : #'*Casino-Model-Importer' }

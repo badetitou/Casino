@@ -7,9 +7,7 @@ Class {
 	#instVars : [
 		'#actions => FMMany type: #CSNAction opposite: #caller',
 		'#attributes => FMMany type: #CSNAttribute opposite: #widget',
-		'#position',
-		'#realClass',
-		'#size',
+		'#realClass => FMProperty',
 		'#widgetContainer => FMOne type: #CSNContainer opposite: #widgets'
 	],
 	#category : #'Casino-Model-Entities'
