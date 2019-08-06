@@ -3,46 +3,41 @@ Extension { #name : #MooseAbstractGroup }
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNCheckBox [
 	<navigation: 'BL CheckBox'>
-	^ self allWithType: CSNUIInputCheckbox
+	^ self allWithSubTypesOf: CSNUIInputCheckbox
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNFieldset [
 	<navigation: 'BL Fieldset'>
-	^ self allWithType: CSNUIFieldset
+	^ self allWithSubTypesOf: CSNUIFieldset
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNLabel [
-	<
-	navigation:
-		'BLParagraph'>
-	^ self
-		allWithType:
-			CSNUIParagraph
+	<navigation: 'BLParagraph'>
+	^ self allWithSubTypesOf: CSNUIParagraph
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNLinkButton [
 	<navigation: 'BL Button'>
-	^ self allWithType: CSNUIButton
+	^ self allWithSubTypesOf: CSNUIButton
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNLinkLabel [
 	<navigation: 'BL Link'>
-	^ self allWithType: CSNUILink
+	^ self allWithSubTypesOf: CSNUILink
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNPanel [
 	<navigation: 'BL Panel'>
-	^ self allWithType: CSNUIPanel
+	^ self allWithSubTypesOf: CSNUIPanel
 ]
 
 { #category : #'*Casino-Model-UI-SubEntities' }
 MooseAbstractGroup >> allCSNUiPanel [
-	
 	<navigation: 'BL UiPanel'>
-	^ self allWithType: CSNUIPanel 
+	^ self allWithSubTypesOf: CSNUIPanel
 ]

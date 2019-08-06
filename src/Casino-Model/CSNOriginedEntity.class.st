@@ -28,13 +28,13 @@ CSNOriginedEntity class >> metamodel [
 	^ (self class environment at: #CSNMetamodelGenerator) metamodel
 ]
 
-{ #category : #scoping }
+{ #category : #private }
 CSNOriginedEntity >> gtNodesIn: composite [
 	<gtInspectorPresentationOrder: 1000>
 	^ composite tree
 		title: 'Tree';
 		display: [ :anObject | anObject ];
-		children: [ :each | each children ];
+		children: [ :each | each childrenNode ];
 		yourself
 ]
 

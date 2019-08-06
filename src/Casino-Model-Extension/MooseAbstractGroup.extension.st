@@ -2,79 +2,74 @@ Extension { #name : #MooseAbstractGroup }
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNAction [
-	
 	<navigation: 'BL Actions'>
-	^ self allWithType: CSNAction
+	^ self allWithSubTypesOf: CSNAction
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNActionAppel [
 	<navigation: #CSNActionAppel>
-	^ self allWithType: CSNActionAppel 
+	^ self allWithSubTypesOf: CSNActionAppel 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNAttributes [
 	<navigation: 'BL Attributes'>
-	^ self allWithType: CSNAttribute
+	^ self allWithSubTypesOf: CSNAttribute
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNCell [
 	<navigation: 'BL Cell'>
-	^ self allWithType: CSNLCell 
+	^ self allWithSubTypesOf: CSNLCell 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNLayout [
 	<navigation: 'Sub-Layout'>
-	^ self allWithType: CSNLLayout
+	^ self allWithSubTypesOf: CSNLLayout
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNPage [
-	<
-	navigation:
-		'BL Page'>
-	^ self
-		allWithType:
-			CSNPage
+	<navigation: 'BL Page'>
+	^ self allWithSubTypesOf: CSNPage
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNPageMetier [
 	<navigation: 'BL Page Metier'>
-	^ self allWithType: CSNBusinessPage 
+	^ self allWithSubTypesOf: CSNBusinessPage 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNService [
 	<navigation: 'BL Service'>
-	^ self allWithType: CSNService 
+	^ self allWithSubTypesOf: CSNService 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNServiceAPI [
 	<navigation: #CSNServiceAPI>
-	^ self allWithType: CSNServiceAPI
+	^ self allWithSubTypesOf: CSNServiceAPI
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNUiContainer [
 	
 	<navigation: 'BL UiContainer'>
-	^ self allWithType: CSNContainer 
+	^ self allWithSubTypesOf: CSNContainer 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNWidget [
 	<navigation: 'Sub-Widget'>
-	^ self allWithType: CSNWidget
+	^ self allWithSubTypesOf: CSNWidget
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNWidgetExceptPage [
 	<navigation: 'Sub-Widget ExceptPage'>
-	^ (self allWithType: CSNWidget)
-		reject: [ :el | (el isKindOf: CSNPage) or: [ el isKindOf: CSNBusinessPage ] ]
+	^ (self allWithSubTypesOf: CSNWidget)
+		reject: [ :el | (el isOfType: CSNPage) or: [ el isOfType: CSNBusinessPage ] ]
 ]
