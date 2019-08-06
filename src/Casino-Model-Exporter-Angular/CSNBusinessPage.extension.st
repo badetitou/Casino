@@ -3,7 +3,7 @@ Extension { #name : #CSNBusinessPage }
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> calledBehavior [
 	^ (self recursiveWidgetsWithoutMetiers
-		collect: [ :widget | widget actions ]) flattened asOrderedCollection removeDuplicates
+		collect: [ :widget | widget actions ]) flattened asSet
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

@@ -219,7 +219,7 @@ CSNWebModelJava >> generateServiceAction [
 
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
-	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet asOrderedCollection
+	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
 		reject: [ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ])
 		do: [ :invocation | 
 			| blWidget |

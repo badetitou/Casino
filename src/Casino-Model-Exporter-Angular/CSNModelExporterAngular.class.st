@@ -39,6 +39,16 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 	^ anObject 
 ]
 
+{ #category : #generate }
+CSNModelExporterAngular >> businessPageImportList [
+	^ '    Component,
+    OnDestroy,
+    OnInit,
+    ElementRef,
+    Renderer2,
+    ViewChild'
+]
+
 { #category : #accessing }
 CSNModelExporterAngular >> currentPath [
 	^ currentPath 
@@ -298,11 +308,7 @@ export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
 CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	^ '
 import {
-    Component,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-    ViewContainerRef
+', self businessPageImportList,'
 } from ''@angular/core'';
 '
 		,
@@ -333,9 +339,7 @@ export class ' , aBLPageMetier componentName capitalized
 		,
 			'
 
-    constructor(' , aBLPageMetier behaviors
-		,
-			') {
+    constructor() {
 ' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
 		,
 			'

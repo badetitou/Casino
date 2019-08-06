@@ -60,12 +60,7 @@ CSNModelExporterAngularBLSpecific >> behaviorModelExporter [
 CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	^ '
 import {
-    Component,
-    OnDestroy,
-    OnInit,
-    ElementRef,
-    Renderer2,
-    ViewChild
+', self businessPageImportList ,'
 } from ''@angular/core'';
 '
 		,
@@ -91,7 +86,7 @@ export class ' , aBLPageMetier componentName capitalized
 			' implements OnInit, OnDestroy {
 
 ' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (aBLPageMetier recursiveWidgets flattened collect: [ :widget | widget idViewChild ]) asOrderedCollection removeDuplicates flatten
+		, (aBLPageMetier recursiveWidgets flattened collect: [ :widget | widget idViewChild ]) asSet flatten
 		,
 			'
 ' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
