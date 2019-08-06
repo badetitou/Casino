@@ -16,24 +16,11 @@ CSNBNavigation class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNBNavigation class >> generatedSlotNames [
+{ #category : #adding }
+CSNBNavigation >> addArguments: anObject [
+			
 	<generated>
-	'CSNBNavigation class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNBNavigation class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNBNavigation class >> requirements [
-
-	<generated>
-	^ {  }
+	^ self arguments add: anObject
 ]
 
 { #category : #accessing }
@@ -41,7 +28,6 @@ CSNBNavigation >> arguments [
 
 	<generated>
 	<MSEProperty: #arguments type: #Object>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 

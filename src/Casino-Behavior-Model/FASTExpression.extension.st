@@ -16,8 +16,13 @@ FASTExpression >> carrefourPopUpOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #carrefourPopUpOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #carrefourPopUpOwner put: anObject.
-	anObject data: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourPopUpOwner.
+		self privateState attributeAt: #carrefourPopUpOwner put: anObject.
+		otherSide data: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #carrefourPopUpOwner put: anObject.
+		anObject data: self ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }

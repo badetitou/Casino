@@ -332,14 +332,14 @@ export class ' , aBLPageMetier componentName capitalized
 			' implements OnInit, OnDestroy {
 
 ' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (aBLPageMetier recursiveWidgets flattened flatCollect: [ :widget | widget idViewChild ])
+		, (aBLPageMetier recursiveWidgets flattened collect: [ :widget | widget idViewChild ]) asOrderedCollection removeDuplicates flatten
 		,
 			'
-' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
+' , (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables)
 		,
 			'
 
-    constructor() {
+    constructor(',(aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]),') {
 ' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ])
 		,
 			'

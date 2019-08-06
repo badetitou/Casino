@@ -86,10 +86,10 @@ export class ' , aBLPageMetier componentName capitalized
 			' implements OnInit, OnDestroy {
 
 ' , (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ])
-		, (aBLPageMetier recursiveWidgets flattened collect: [ :widget | widget idViewChild ]) asSet flatten
+		, (aBLPageMetier recursiveWidgets flattened collect: [ :widget | widget idViewChild ]) asOrderedCollection removeDuplicates flatten
 		,
 			'
-' , (aBLPageMetier recursiveWidgets flattened flatCollect: #getVariables)
+' , (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables)
 		,
 			'
 

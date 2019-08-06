@@ -34,7 +34,7 @@ CSNOriginedEntity >> gtNodesIn: composite [
 	^ composite tree
 		title: 'Tree';
 		display: [ :anObject | anObject ];
-		children: [ :each | each childrenNode ];
+		children: [ :each | each children ];
 		yourself
 ]
 

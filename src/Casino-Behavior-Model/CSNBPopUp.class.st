@@ -16,26 +16,6 @@ CSNBPopUp class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNBPopUp class >> generatedSlotNames [
-	<generated>
-	'CSNBPopUp class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNBPopUp class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNBPopUp class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 CSNBPopUp >> data [
 
@@ -50,8 +30,13 @@ CSNBPopUp >> data: anObject [
 
 	<generated>
 	(self privateState attributeAt: #data ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #data put: anObject.
-	anObject carrefourPopUpOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self data.
+		self privateState attributeAt: #data put: anObject.
+		otherSide carrefourPopUpOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #data put: anObject.
+		anObject carrefourPopUpOwner: self ]
 ]
 
 { #category : #navigation }

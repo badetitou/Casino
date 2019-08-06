@@ -15,23 +15,3 @@ CSNBSynchroneCall class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #generator }
-CSNBSynchroneCall class >> generatedSlotNames [
-	<generated>
-	'CSNBSynchroneCall class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNBSynchroneCall class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNBSynchroneCall class >> requirements [
-
-	<generated>
-	^ {  }
-]

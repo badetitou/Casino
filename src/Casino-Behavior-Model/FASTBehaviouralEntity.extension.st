@@ -16,8 +16,13 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #carrefourOnFailureOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #carrefourOnFailureOwner put: anObject.
-	anObject onFailure: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourOnFailureOwner.
+		self privateState attributeAt: #carrefourOnFailureOwner put: anObject.
+		otherSide onFailure: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #carrefourOnFailureOwner put: anObject.
+		anObject onFailure: self ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
@@ -36,6 +41,11 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
 
 	<generated>
 	(self privateState attributeAt: #carrefourOnSuccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #carrefourOnSuccessOwner put: anObject.
-	anObject onSuccess: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourOnSuccessOwner.
+		self privateState attributeAt: #carrefourOnSuccessOwner put: anObject.
+		otherSide onSuccess: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #carrefourOnSuccessOwner put: anObject.
+		anObject onSuccess: self ]
 ]

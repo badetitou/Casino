@@ -18,33 +18,12 @@ CSNBCall class >> annotation [
 	^self
 ]
 
-{ #category : #generator }
-CSNBCall class >> generatedSlotNames [
-	<generated>
-	'CSNBCall class>>#generatedSlotNames'.
-	^ #()
-]
-
-{ #category : #generator }
-CSNBCall class >> generatedTraitNames [
-	<generated>
-	^ #()
-]
-
-{ #category : #meta }
-CSNBCall class >> requirements [
-
-	<generated>
-	^ {  }
-]
-
 { #category : #accessing }
 CSNBCall >> onFailure [
 
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ko'''>
 	<MSEProperty: #onFailure type: #Object>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
@@ -53,8 +32,13 @@ CSNBCall >> onFailure: anObject [
 
 	<generated>
 	(self privateState attributeAt: #onFailure ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #onFailure put: anObject.
-	anObject carrefourOnFailureOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self onFailure.
+		self privateState attributeAt: #onFailure put: anObject.
+		otherSide carrefourOnFailureOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #onFailure put: anObject.
+		anObject carrefourOnFailureOwner: self ]
 ]
 
 { #category : #navigation }
@@ -72,7 +56,6 @@ CSNBCall >> onSuccess [
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ok'''>
 	<MSEProperty: #onSuccess type: #Object>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 
@@ -81,8 +64,13 @@ CSNBCall >> onSuccess: anObject [
 
 	<generated>
 	(self privateState attributeAt: #onSuccess ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	self privateState attributeAt: #onSuccess put: anObject.
-	anObject carrefourOnSuccessOwner: self
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self onSuccess.
+		self privateState attributeAt: #onSuccess put: anObject.
+		otherSide carrefourOnSuccessOwner: nil ]
+	ifNotNil: [ 
+		self privateState attributeAt: #onSuccess put: anObject.
+		anObject carrefourOnSuccessOwner: self ]
 ]
 
 { #category : #navigation }
