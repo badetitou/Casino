@@ -22,6 +22,16 @@ CSNWidgetFactory >> create: anEntity [
 	^ self model add: anEntity new
 ]
 
+{ #category : #creating }
+CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
+	^ CSNAttribute newFrom: anElement for: aWidget withImporters: visitorImporters
+]
+
+{ #category : #'as yet unclassified' }
+CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
+	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ self create: CSNContainer ]
+]
+
 { #category : #accessing }
 CSNWidgetFactory >> importer: anObject [
 	importer := anObject
