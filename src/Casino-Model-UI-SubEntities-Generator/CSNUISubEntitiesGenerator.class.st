@@ -70,7 +70,8 @@ Class {
 		'widget',
 		'attribute',
 		'container',
-		'leaf'
+		'leaf',
+		'uiCustomWidget'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -104,6 +105,7 @@ CSNUISubEntitiesGenerator class >> submetamodels [
 CSNUISubEntitiesGenerator >> defineClasses [
 	super defineClasses.
 	"widget"
+	uiCustomWidget := builder newClassNamed: #CustomWidget. 
 	uiButton := builder newClassNamed: #Button.
 	uiCanvas := builder newClassNamed: #Canvas.
 	uiPanel := builder newClassNamed: #Panel.
@@ -185,6 +187,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 CSNUISubEntitiesGenerator >> defineHierarchy [
 	super defineHierarchy.
 	"widgets"
+	uiCustomWidget --|> container.
 	uiButton --|> container.
 	uiCanvas --|> container.
 	uiPanel --|> container.
