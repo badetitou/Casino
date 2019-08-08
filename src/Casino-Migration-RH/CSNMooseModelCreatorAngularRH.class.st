@@ -1,11 +1,18 @@
 "
 mooseModel := nil.
-mooseModel := MooseModel importFromMSEStream: 'D:\Developpement\mse\VerveineJNicolas\GRH.mse' asFileReference readStream.
+mooseModel := FAMIXMooseModel importFromMSEStream: 'D:\Developpement\mse\VerveineJNicolas\GRH.mse' asFileReference readStream.
 mooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'.
 
 ""Generate Bl Model""
-model := MooseModel new name: 'GRH'; yourself.
-CSNMooseModelCreatorAngular runOn: model fromSourceModel: mooseModel and:  'D:\Developpement\mse\BLGRHGWT\BLGRHGwt\src\fr\bl\GRH.module.xml'.
+model := nil.
+model := CSNUIMooseModel new name: 'GRH'; yourself.
+CSNMooseModelCreatorAngularRH runOn: model fromSourceModel: mooseModel and:  'D:\Developpement\mse\BLGRHGWT\BLGRHGwt\src\fr\bl\GRH.module.xml'.
+model name: 'GRH'.
+model size.
+ ""120746""
+
+FASTJavaMooseModel allInstances size.
+ ""883 922""
 
 
 CSNModelExporterAngular export: model.
