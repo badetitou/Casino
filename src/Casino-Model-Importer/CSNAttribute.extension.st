@@ -2,7 +2,7 @@ Extension { #name : #CSNAttribute }
 
 { #category : #'*Casino-Model-Importer' }
 CSNAttribute class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
-	aCollectionOfImporter do: [ :importer | importer entity: aWidgetInstance ]
+	aCollectionOfImporter do: [ :importer | importer entity: aWidgetInstance; source: anInvocation ]
 ]
 
 { #category : #'*Casino-Model-Importer' }

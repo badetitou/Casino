@@ -33,6 +33,11 @@ CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
 ]
 
 { #category : #accessing }
+CSNWidgetFactory >> importer [
+	^ importer
+]
+
+{ #category : #accessing }
 CSNWidgetFactory >> importer: anObject [
 	importer := anObject
 ]
@@ -51,11 +56,6 @@ CSNWidgetFactory >> model [
 { #category : #accessing }
 CSNWidgetFactory >> model: anObject [
 	model := anObject
-]
-
-{ #category : #accessing }
-CSNWidgetFactory >> uiModel [
-	^ importer
 ]
 
 { #category : #accessing }
