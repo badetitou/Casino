@@ -17,9 +17,9 @@ CSNContainer >> recursiveElements [
 { #category : #'*Casino-Model-Extension' }
 CSNContainer >> recursiveWidgets [
 	| widgs |
-	widgs := self widgets
+	widgs := (self widgets
 		,
-			(self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [ {} ]).
+			(self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [ {} ])) reject: [:el | el = self ].
 	^ widgs , (widgs collect: #recursiveWidgets)
 ]
 

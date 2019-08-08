@@ -525,6 +525,7 @@ CSNModelExporterAngular >> visitCSNHTML: aBLHTML [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLCell: aBLCell [
+	aBLCell layoutOwner container = aBLCell widget ifTrue: [ ^ '' ].
 	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
 ]
 
