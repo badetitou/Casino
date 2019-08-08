@@ -133,7 +133,10 @@ CSNWebModelJava >> addWidgetAttributes [
 					invoc signature = 'getFlexCellFormatter()'
 						ifTrue: [ invoc affectation
 								ifNotNil:
-									[ :variableWithFlexCellFormater | variableWithFlexCellFormater receivingInvocations do: [ :invocOnFlexCellVariable |
+									[ :variableWithFlexCellFormater | 
+										| variable |
+										variable := variableWithFlexCellFormater isAccess ifTrue: [ variableWithFlexCellFormater variable ] ifFalse: [ variableWithFlexCellFormater ].
+									 variable receivingInvocations do: [ :invocOnFlexCellVariable |
 											(invocOnFlexCellVariable parameters size >= 2) ifTrue: [ self factory createAttributeFrom: invocOnFlexCellVariable forCellOf: widget ] ] ]
 								ifNil: [ (invoc previous isNotNil and: [ invoc previous receiver ifNotNil: [ :receiver | receiver isImplicitVariable not ] ifNil: [ true ] ])
 										ifTrue: [ self factory createAttributeFrom: invoc previous forCellOf: widget ] ] ]
