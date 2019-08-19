@@ -96,9 +96,7 @@ CSNAttribute >> widget: anObject [
 
 { #category : #navigation }
 CSNAttribute >> widgetGroup [
-
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
+	^ MooseGroup with: self widget
 ]

@@ -61,9 +61,7 @@ CSNAction >> caller: anObject [
 
 { #category : #navigation }
 CSNAction >> callerGroup [
-
 	<generated>
 	<navigation: 'Caller'>
-	^ MooseGroup
-			with: (self caller)
+	^ MooseGroup with: self caller
 ]

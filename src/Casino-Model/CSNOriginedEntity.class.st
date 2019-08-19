@@ -7,7 +7,8 @@ Class {
 	#traits : 'FamixTNamed + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTNamed classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
-		'#source'
+		'#source',
+		'#sources => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
 }
@@ -38,110 +39,21 @@ CSNOriginedEntity >> gtNodesIn: composite [
 		yourself
 ]
 
-{ #category : #testing }
-CSNOriginedEntity >> isAccess [
+{ #category : #accessing }
+CSNOriginedEntity >> sources [
 
+	<MSEProperty: #sources type: #Object>
 	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isAssociation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isAttribute [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isClass [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isFunction [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isInheritance [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isInvocation [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isMethod [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isNamespace [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isPackage [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isReference [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isStructuralEntity [
-
-	<generated>
-	^ false
-]
-
-{ #category : #testing }
-CSNOriginedEntity >> isType [
-
-	<generated>
-	^ false
+	<MSEComment: 'The sources of the element
+It may reference multiple entity if the entity is defined in different context
+example: in a JavaProgram and in a XML file'>
+	^ sources
 ]
 
 { #category : #accessing }
-CSNOriginedEntity >> source [
-
-	<MSEProperty: #source type: #MooseEntity>
-	<generated>
-	<MSEComment: 'The source of the element (from the importation)'>
-	^ source
-]
-
-{ #category : #accessing }
-CSNOriginedEntity >> source: anObject [
+CSNOriginedEntity >> sources: anObject [
 
 	<generated>
-	source := anObject
+	sources := anObject
 
 ]

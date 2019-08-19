@@ -78,7 +78,11 @@ CSNMetamodelGenerator >> defineHierarchy [
 
 { #category : #definition }
 CSNMetamodelGenerator >> defineProperties [
-	(entity property: #source type: #MooseEntity) comment: 'The source of the element (from the importation)'.
+	(entity property: #sources type: #Object)
+		comment:
+			'The sources of the element
+It may reference multiple entity if the entity is defined in different context
+example: in a JavaProgram and in a XML file'.
 	(page property: #codePhase type: #String) comment: 'The unique code of the Phase'.
 	(page property: #codeValue type: #String) comment: 'The short name of the codePhase'.
 	(page property: #title type: #String) comment: 'The main title of the phase'.
@@ -89,7 +93,7 @@ CSNMetamodelGenerator >> defineProperties [
 	(attribute property: 'attributeValue' type: #String) comment: 'The literal value of the attribute'.
 	attribute property: #oldClass type: #Object.
 	leaf property: #text type: #String.
-	(service property: #targetPoint type: #String) comment: 'The url of the distant service'.
+	(service property: #targetPoint type: #String) comment: 'The url of the distant service'
 ]
 
 { #category : #definition }

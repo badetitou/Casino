@@ -58,9 +58,7 @@ CSNServiceAPI >> serviceOwner: anObject [
 
 { #category : #navigation }
 CSNServiceAPI >> serviceOwnerGroup [
-
 	<generated>
 	<navigation: 'ServiceOwner'>
-	^ MooseGroup
-			with: (self serviceOwner)
+	^ MooseGroup with: self serviceOwner
 ]

@@ -27,7 +27,6 @@ CSNPage class >> annotation [
 
 { #category : #adding }
 CSNPage >> addCaller: anObject [
-			
 	<generated>
 	^ self caller add: anObject
 ]
@@ -49,11 +48,9 @@ CSNPage >> businessPage: anObject [
 
 { #category : #navigation }
 CSNPage >> businessPageGroup [
-
 	<generated>
 	<navigation: 'BusinessPage'>
-	^ MooseGroup
-			withAll: (self businessPage asSet)
+	^ MooseGroup withAll: self businessPage asSet
 ]
 
 { #category : #accessing }
@@ -73,11 +70,9 @@ CSNPage >> caller: anObject [
 
 { #category : #navigation }
 CSNPage >> callerGroup [
-
 	<generated>
 	<navigation: 'Caller'>
-	^ MooseGroup
-			withAll: (self caller asSet)
+	^ MooseGroup withAll: self caller asSet
 ]
 
 { #category : #accessing }

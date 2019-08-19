@@ -34,16 +34,13 @@ CSNService >> actions: anObject [
 
 { #category : #navigation }
 CSNService >> actionsGroup [
-
 	<generated>
 	<navigation: 'Actions'>
-	^ MooseGroup
-			withAll: (self actions asSet)
+	^ MooseGroup withAll: self actions asSet
 ]
 
 { #category : #adding }
 CSNService >> addActions: anObject [
-			
 	<generated>
 	^ self actions add: anObject
 ]

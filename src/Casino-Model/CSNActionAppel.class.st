@@ -58,9 +58,7 @@ CSNActionAppel >> call: anObject [
 
 { #category : #navigation }
 CSNActionAppel >> callGroup [
-
 	<generated>
 	<navigation: 'Call'>
-	^ MooseGroup
-			with: (self call)
+	^ MooseGroup with: self call
 ]

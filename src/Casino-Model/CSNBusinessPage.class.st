@@ -22,7 +22,6 @@ CSNBusinessPage class >> annotation [
 
 { #category : #adding }
 CSNBusinessPage >> addPageContainers: anObject [
-			
 	<generated>
 	^ self pageContainers add: anObject
 ]
@@ -44,11 +43,9 @@ CSNBusinessPage >> pageContainers: anObject [
 
 { #category : #navigation }
 CSNBusinessPage >> pageContainersGroup [
-
 	<generated>
 	<navigation: 'PageContainers'>
-	^ MooseGroup
-			withAll: (self pageContainers asSet)
+	^ MooseGroup withAll: self pageContainers asSet
 ]
 
 { #category : #accessing }

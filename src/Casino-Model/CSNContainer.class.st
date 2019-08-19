@@ -21,7 +21,6 @@ CSNContainer class >> annotation [
 
 { #category : #adding }
 CSNContainer >> addWidgets: anObject [
-			
 	<generated>
 	^ self widgets add: anObject
 ]
@@ -43,9 +42,7 @@ CSNContainer >> widgets: anObject [
 
 { #category : #navigation }
 CSNContainer >> widgetsGroup [
-
 	<generated>
 	<navigation: 'Widgets'>
-	^ MooseGroup
-			withAll: (self widgets asSet)
+	^ MooseGroup withAll: self widgets asSet
 ]

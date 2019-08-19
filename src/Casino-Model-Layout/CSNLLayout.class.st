@@ -25,7 +25,6 @@ CSNLLayout class >> requirements [
 
 { #category : #adding }
 CSNLLayout >> addCell: anObject [
-			
 	<generated>
 	^ self cell add: anObject
 ]
@@ -63,11 +62,9 @@ CSNLLayout >> cell: anObject [
 
 { #category : #navigation }
 CSNLLayout >> cellGroup [
-
 	<generated>
 	<navigation: 'Cell'>
-	^ MooseGroup
-			withAll: (self cell asSet)
+	^ MooseGroup withAll: self cell asSet
 ]
 
 { #category : #accessing }
@@ -96,9 +93,7 @@ CSNLLayout >> container: anObject [
 
 { #category : #navigation }
 CSNLLayout >> containerGroup [
-
 	<generated>
 	<navigation: 'Container'>
-	^ MooseGroup
-			with: (self container)
+	^ MooseGroup with: self container
 ]

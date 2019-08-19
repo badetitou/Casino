@@ -46,23 +46,19 @@ CSNWidget >> actions: anObject [
 
 { #category : #navigation }
 CSNWidget >> actionsGroup [
-
 	<generated>
 	<navigation: 'Actions'>
-	^ MooseGroup
-			withAll: (self actions asSet)
+	^ MooseGroup withAll: self actions asSet
 ]
 
 { #category : #adding }
 CSNWidget >> addActions: anObject [
-			
 	<generated>
 	^ self actions add: anObject
 ]
 
 { #category : #adding }
 CSNWidget >> addAttributes: anObject [
-			
 	<generated>
 	^ self attributes add: anObject
 ]
@@ -84,11 +80,9 @@ CSNWidget >> attributes: anObject [
 
 { #category : #navigation }
 CSNWidget >> attributesGroup [
-
 	<generated>
 	<navigation: 'Attributes'>
-	^ MooseGroup
-			withAll: (self attributes asSet)
+	^ MooseGroup withAll: self attributes asSet
 ]
 
 { #category : #accessing }
@@ -126,9 +120,7 @@ CSNWidget >> widgetContainer: anObject [
 
 { #category : #navigation }
 CSNWidget >> widgetContainerGroup [
-
 	<generated>
 	<navigation: 'WidgetContainer'>
-	^ MooseGroup
-			with: (self widgetContainer)
+	^ MooseGroup with: self widgetContainer
 ]

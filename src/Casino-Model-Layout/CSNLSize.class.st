@@ -69,9 +69,7 @@ CSNLSize >> widget: anObject [
 
 { #category : #navigation }
 CSNLSize >> widgetGroup [
-
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
+	^ MooseGroup with: self widget
 ]

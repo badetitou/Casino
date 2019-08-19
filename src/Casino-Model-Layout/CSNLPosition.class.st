@@ -69,9 +69,7 @@ CSNLPosition >> widget: anObject [
 
 { #category : #navigation }
 CSNLPosition >> widgetGroup [
-
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
+	^ MooseGroup with: self widget
 ]

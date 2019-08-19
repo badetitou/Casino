@@ -58,11 +58,9 @@ CSNLCell >> layoutOwner: anObject [
 
 { #category : #navigation }
 CSNLCell >> layoutOwnerGroup [
-
 	<generated>
 	<navigation: 'LayoutOwner'>
-	^ MooseGroup
-			with: (self layoutOwner)
+	^ MooseGroup with: self layoutOwner
 ]
 
 { #category : #accessing }
@@ -89,9 +87,7 @@ CSNLCell >> widget: anObject [
 
 { #category : #navigation }
 CSNLCell >> widgetGroup [
-
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup
-			with: (self widget)
+	^ MooseGroup with: self widget
 ]
