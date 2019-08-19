@@ -757,6 +757,11 @@ CSNModelVisitor >> visitCSNUIClass: aCSNUIClass [
 ]
 
 { #category : #generated }
+CSNModelVisitor >> visitCSNUICustomWidget: aCSNUICustomWidget [
+	^ self visitCSNContainer: aCSNUICustomWidget
+]
+
+{ #category : #generated }
 CSNModelVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 	^ self visitCSNAttribute: aCSNUIDisabled
 ]
