@@ -22,6 +22,14 @@ CSNWidgetFactory >> create: anEntity [
 	^ self model add: anEntity new
 ]
 
+{ #category : #accessing }
+CSNWidgetFactory >> create: anEntity fromSource: aSource [
+	"Use me to create an entity and add it direclty in the model
+	
+	If you use only me, we're sure to not forget adding entities in the model"
+	^ (self model add: anEntity new) addSource: aSource; yourself
+]
+
 { #category : #creating }
 CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 	^ CSNAttribute newFrom: anElement for: aWidget withImporters: visitorImporters

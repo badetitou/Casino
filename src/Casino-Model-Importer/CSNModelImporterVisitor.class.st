@@ -23,6 +23,11 @@ CSNModelImporterVisitor >> create: anEntity [
 ]
 
 { #category : #accessing }
+CSNModelImporterVisitor >> create: anEntity fromSource: aSource [
+	^ self factory create: anEntity fromSource: aSource
+]
+
+{ #category : #accessing }
 CSNModelImporterVisitor >> entity [
 	"the owner entity"
 	^ entity
