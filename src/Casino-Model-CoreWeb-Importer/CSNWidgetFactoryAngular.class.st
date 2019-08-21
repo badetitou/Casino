@@ -38,7 +38,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
 				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ ((self uiModel sourceModel allModelClasses
+						ifTrue: [ ((self importer sourceModel allModelClasses
 								select: [ :e | (e superInheritances collect: [ :a | a to name ]) includes: 'HomePhaseController' ])
 								at: 1) mooseName ]
 						ifFalse: [ 'STUB C/S' ] ]);
@@ -48,7 +48,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 	model silentlyAdd: (blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
-				source: (self uiModel getClassNamed: blPhase realClassName);
+				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
 				computeSubtitle.
 			blPhase ])
