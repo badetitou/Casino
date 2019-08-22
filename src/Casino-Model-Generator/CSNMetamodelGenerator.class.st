@@ -102,7 +102,7 @@ CSNMetamodelGenerator >> defineRelations [
 	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
 	((page property: #caller) <>-* (actionAppel property: #call)) withNavigation.
-	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
+	((page property: #businessPage) *-* (businessPage property: #pageContainers) container) withNavigation; withoutPrimaryContainer.
 	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)) withNavigation
 ]
 

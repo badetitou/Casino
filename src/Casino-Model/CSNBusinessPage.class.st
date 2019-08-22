@@ -20,6 +20,13 @@ CSNBusinessPage class >> annotation [
 	^self
 ]
 
+{ #category : #meta }
+CSNBusinessPage class >> requirements [
+
+	<generated>
+	^ { CSNPage }
+]
+
 { #category : #adding }
 CSNBusinessPage >> addPageContainers: anObject [
 	<generated>
@@ -30,6 +37,8 @@ CSNBusinessPage >> addPageContainers: anObject [
 CSNBusinessPage >> pageContainers [
 
 	<generated>
+	<container>
+
 	^ pageContainers
 ]
 

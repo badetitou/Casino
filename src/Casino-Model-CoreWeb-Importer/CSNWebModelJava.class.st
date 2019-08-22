@@ -185,10 +185,9 @@ CSNWebModelJava >> generateBLActionAppel [
 	self linkFromWidgetActionAppel
 		do: [ :el | 
 			| action |
-			action := CSNActionAppel new.
+			action := (self factory create: CSNActionAppel).
 			el key addAction: action.
-			el value ifNil: [  ] ifNotNil: [ action call: el value ].
-			self model silentlyAdd: action ]
+			el value ifNil: [  ] ifNotNil: [ action call: el value ] ]
 ]
 
 { #category : #'private-actions' }
@@ -231,8 +230,7 @@ CSNWebModelJava >> generateWidget [
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
 			blWidget affectedActions: invocation affectation.
-			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ].
-			self model silentlyAdd: blWidget ]
+			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ] ]
 		displayingProgress: [ :invoc | 'Generate widget : ' , invoc asString ]
 		every: 100
 ]

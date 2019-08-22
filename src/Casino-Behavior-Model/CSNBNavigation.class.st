@@ -18,7 +18,6 @@ CSNBNavigation class >> annotation [
 
 { #category : #adding }
 CSNBNavigation >> addArguments: anObject [
-			
 	<generated>
 	^ self arguments add: anObject
 ]
@@ -28,6 +27,7 @@ CSNBNavigation >> arguments [
 
 	<generated>
 	<MSEProperty: #arguments type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
@@ -40,9 +40,7 @@ CSNBNavigation >> arguments: anObject [
 
 { #category : #navigation }
 CSNBNavigation >> argumentsGroup [
-
 	<generated>
 	<navigation: 'Arguments'>
-	^ MooseGroup
-			withAll: (self arguments asSet)
+	^ MooseGroup withAll: self arguments asSet
 ]

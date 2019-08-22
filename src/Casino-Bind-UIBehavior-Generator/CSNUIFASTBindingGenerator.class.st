@@ -36,7 +36,7 @@ CSNUIFASTBindingGenerator class >> prefix [
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
 
-	^ { FASTJavaMetamodelGenerator. CSNLayoutMetamodelGenerator. CSNBehaviorModelGenerator }
+	^ { FASTJavaMetamodelGenerator. CSNMetamodelGenerator .CSNLayoutMetamodelGenerator. CSNBehaviorModelGenerator }
 ]
 
 { #category : #definition }

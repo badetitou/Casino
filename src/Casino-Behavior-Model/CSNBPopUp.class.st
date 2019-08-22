@@ -41,9 +41,7 @@ CSNBPopUp >> data: anObject [
 
 { #category : #navigation }
 CSNBPopUp >> dataGroup [
-
 	<generated>
 	<navigation: 'Data'>
-	^ MooseGroup
-			with: (self data)
+	^ MooseGroup with: self data
 ]
