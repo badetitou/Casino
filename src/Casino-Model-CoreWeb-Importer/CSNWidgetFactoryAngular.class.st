@@ -22,45 +22,44 @@ CSNWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
-	self model
-		silentlyAdd:
-			(CSNBusinessPage new
-				name: aFAMIXClass name;
-				source: aFAMIXClass;
-				computeTitle)
+	^ (self create: CSNBusinessPage)
+		name: aFAMIXClass name;
+		source: aFAMIXClass;
+		computeTitle;
+		yourself
 ]
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 	| blPhase |
-	blPhase := CSNPage new
+	blPhase := (self create: CSNPage)
 		realClassName:
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
 				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ ((self uiModel sourceModel allModelClasses
+						ifTrue: [ ((self importer sourceModel allModelClasses
 								select: [ :e | (e superInheritances collect: [ :a | a to name ]) includes: 'HomePhaseController' ])
 								at: 1) mooseName ]
 						ifFalse: [ 'STUB C/S' ] ]);
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue);
 		name: (xmlElement attributeAt: #codeValue).
-	model silentlyAdd: (blPhase realClassName = 'STUB C/S'
+	(blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
-				source: (self uiModel getClassNamed: blPhase realClassName);
+				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
-				computeSubtitle.
-			blPhase ])
+				computeSubtitle ]).
+	^ blPhase
 ]
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
-	self model add: (CSNService new
+	^ (self create: CSNService)
 		name: aServiceClass name;
 		targetPoint: CSNWebModelJava webRoot, '/services/', aServiceClass name asLowercase;
 		source: aServiceClass;
-		yourself)
+		yourself
 	
 ]
 

@@ -35,7 +35,7 @@ CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 	^ CSNAttribute newFrom: anElement for: aWidget withImporters: visitorImporters
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creating }
 CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
 	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ self create: CSNContainer ]
 ]

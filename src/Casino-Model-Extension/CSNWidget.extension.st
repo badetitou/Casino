@@ -45,6 +45,16 @@ CSNWidget >> parameters [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> parametersAt: aParameterName [
+	^ self parameters at: aParameterName
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNWidget >> parametersAt: aParameterName put: anObject [
+	^ self parameters at: aParameterName put: anObject
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> realClass [
 	<MSEProperty: #realClass type: #Object>
 	^ realClass
