@@ -26,7 +26,8 @@ CSNWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
 	(self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ])
-		do: [ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
+		do: [ :widget |
+			 self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
 		displayingProgress: [ :widget | 'compute ' , widget class name ]
 		every: 1000
 ]
@@ -105,10 +106,10 @@ CSNWebModelJava >> addPPPToWidget [
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
 	^ widget affectedActions
 		ifNotNil: [ | usages |
-			usages := {widget affectedActions allUsages.widget affectedActions allUsages collect: [ :el | el allContainers ]} flattened
-				reject: [ :el | (el receiver isNotNil and: [ (el receiver name includesSubstring: 'content') ]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
+			usages := {widget affectedActions allUsages . (widget affectedActions allUsages collect: [ :el | el allContainers ])} flattened
+				reject: [ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
 			responsabilityHandlerForUsages
-				handleAddLinkedFromVariable: usages asOrderedCollection 
+				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget
 				withXmlui: xmlUiWidgetLink
 				andImporter: self ]

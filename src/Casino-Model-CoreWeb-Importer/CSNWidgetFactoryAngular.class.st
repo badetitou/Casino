@@ -64,6 +64,15 @@ CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
 ]
 
 { #category : #factory }
+CSNWidgetFactoryAngular >> createWidgetFor: theWidgetSource withParent: parent [
+	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters)
+		ifNil: [ (self create: CSNContainer)
+				source: theWidgetSource;
+				realClass: ((#(#FactoryBLLabel #ComponentUtils) includes: theWidgetSource invokedClassName) ifTrue: [ nil ] ifFalse: [ theWidgetSource invokedClass ]);
+				yourself ]
+]
+
+{ #category : #factory }
 CSNWidgetFactoryAngular >> moduleHomeName [
 	^ 'BL_HOME_PHASE_MODULE'
 ]
