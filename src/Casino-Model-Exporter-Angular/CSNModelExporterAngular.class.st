@@ -506,6 +506,11 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngular >> visitCSNClickHandler: aCSNClickHandler [
+	^ self visitCSNAction: aCSNClickHandler
+]
+
+{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 	^ aBLUIContainer layout
 		ifNotNil: [ :layout | self visit: layout ]

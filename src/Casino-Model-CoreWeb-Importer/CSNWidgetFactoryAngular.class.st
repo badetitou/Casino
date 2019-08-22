@@ -11,7 +11,7 @@ CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createAttributeFrom: invoc for: widget [
-	^ widget createAttributeFromAngularInvocation: invoc withImporter: self uiModel
+	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
 ]
 
 { #category : #factory }

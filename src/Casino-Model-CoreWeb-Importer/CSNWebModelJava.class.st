@@ -4,11 +4,10 @@ gwtMooseModel := FAMIXMooseModel new importFromMSEStream:  'D:\Developpement\mse
 gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'. 
 
 ""Generate Bl Model""
-gwtModel := CSNUIMooseModel new.
+gwtModel := CSNUIMooseModel new name: 'Showroom'; yourself.
 CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and: 'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
 
-
-CSNModelExporterAngularBLSpecific export: gwtModel.
+CSNModelExporterAngular export: gwtModel.
 "
 Class {
 	#name : #CSNWebModelJava,
@@ -26,7 +25,7 @@ Class {
 CSNWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
-	self model allCSNWidgetExceptPage
+	(self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ])
 		do: [ :widget | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
 		displayingProgress: [ :widget | 'compute ' , widget class name ]
 		every: 1000
@@ -95,7 +94,7 @@ CSNWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 CSNWebModelJava >> addPPPToWidget [
-	self model allCSNWidgetExceptPage select: [ :a | a widgetContainer isNil and: [ a cellOwner isNil ] ]
+	self model allCSNWidgetExceptPage select: [:widget | widget parents isEmpty ]
 		thenDo: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from.
@@ -174,7 +173,11 @@ CSNWebModelJava >> computeAllConstructorsLink [
 
 { #category : #initialization }
 CSNWebModelJava >> createFactory [
-	factory := CSNWidgetFactoryAngular new model: model; importer: self; yourself
+	factory := CSNWidgetFactoryAngular new
+		model: model;
+		importer: self;
+		addVisitorImporter: CSNModelImporterCoreWebVisitor new;
+		yourself
 ]
 
 { #category : #'private-actions' }
@@ -226,7 +229,7 @@ CSNWebModelJava >> generateWidget [
 		reject: [ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ])
 		do: [ :invocation | 
 			| blWidget |
-			blWidget := CSNWidget newFor: invocation.
+			blWidget := self factoryCreateWidgetFrom: invocation.
 			blWidget affectedActions: invocation affectation.
 			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ].
 			self model silentlyAdd: blWidget ]
@@ -548,7 +551,7 @@ CSNWebModelJava >> searchCalledPhaseFromInvocation: invoc [
 
 { #category : #private }
 CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
-	^ (self model allCSNWidget select: [ :widget | widget source = anInvocation ]) at: 1 ifAbsent: [ ^ nil ]
+	^ (self model allCSNWidget select: [ :widget | widget sources isNotEmpty and: [ widget source = anInvocation ] ]) at: 1 ifAbsent: [ ^ nil ]
 ]
 
 { #category : #accessing }

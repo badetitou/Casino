@@ -58,7 +58,7 @@ CSNModelImporterCoreWebVisitor >> createWidgetPanel: aWidgetClass [
 				addAttribute:
 					((self create: CSNUIWidth)
 						name: 'width';
-						attributeValue: (panel parameters at: 2)) ].
+						attributeValue: (source parameters at: 2)) ].
 	^ panel
 ]
 
@@ -81,7 +81,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNDialog: aCSNDialog [
 	^ 'BLDialogBox' = source invokedClassName
 		ifTrue: [ | dialog |
 			dialog := self createWidget: aCSNDialog.
-			dialog parameterAt: #header put: (source parameters at: 1 ifAbsent: [ 'todo' ]).
+			dialog parametersAt: #header put: (source parameters at: 1 ifAbsent: [ 'todo' ]).
 			source parameters size = 1
 				ifTrue: [ dialog
 						addAttribute:
@@ -92,7 +92,8 @@ CSNModelImporterCoreWebVisitor >> visitCSNDialog: aCSNDialog [
 						addAttribute:
 							((self create: CSNModal)
 								attributeValue: source parameters last;
-								yourself) ] ]
+								yourself) ].
+			dialog ]
 		ifFalse: [ nil ]
 ]
 
@@ -334,22 +335,19 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
 	^ (#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils') includes: source invokedClassName)
 		ifTrue: [ | paragraph |
-			paragraph := (self createWidget: aCSNUIParagraph).
+			paragraph := self createWidget: aCSNUIParagraph.
 			'ComponentUtils' = source invokedClassName
-		ifTrue: [ self attributeFor: paragraph fromComponentUtilsForInvocation: source ]
-		ifFalse: [ source
-				addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ])).
-			paragraph
-				addAttribute:
-					((self create: CSNUIClass)
-						attributeValue:
-							((source parameters size = 2
-								ifTrue: [ ((source parameters at: 2) prefixMatchesRegex: 'BLLabel\..*')
-										ifTrue: [ source parameters at: 2 ]
-										ifFalse: [ 'NIVEAU2' ] ]
-								ifFalse: [ source parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ])
-								removePrefix: 'BLLabel.')) ].
-							paragraph ] ifFalse: [ nil ]
+				ifTrue: [ self attributeFor: paragraph fromComponentUtilsForInvocation: source ]
+				ifFalse: [ paragraph
+						addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
+						addAttribute:
+							((self create: CSNUIClass)
+								attributeValue:
+									((source parameters size = 2
+										ifTrue: [ ((source parameters at: 2) prefixMatchesRegex: 'BLLabel\..*') ifTrue: [ source parameters at: 2 ] ifFalse: [ 'NIVEAU2' ] ]
+										ifFalse: [ source parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ]) removePrefix: 'BLLabel.')) ].
+			paragraph ]
+		ifFalse: [ nil ]
 ]
 
 { #category : #generated }

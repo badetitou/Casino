@@ -37,7 +37,7 @@ CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 
 { #category : #creating }
 CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
-	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ self create: CSNContainer ]
+	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ (self create: CSNContainer) source: theWidgetSource; yourself ]
 ]
 
 { #category : #accessing }

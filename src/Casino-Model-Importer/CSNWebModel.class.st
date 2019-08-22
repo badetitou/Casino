@@ -56,7 +56,7 @@ CSNWebModel >> factoryClass [
 
 { #category : #accessing }
 CSNWebModel >> factoryCreateWidgetFrom: anObject [
-	^ self factory createWidgetFrom: anObject 
+	^ self factory createWidgetFor: anObject withParent: nil 
 ]
 
 { #category : #api }
