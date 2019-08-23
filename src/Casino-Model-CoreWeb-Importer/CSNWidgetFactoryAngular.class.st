@@ -10,14 +10,8 @@ CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
 ]
 
 { #category : #factory }
-CSNWidgetFactoryAngular >> createAttributeFrom: invoc for: widget [
-	^ widget createAttributeFromAngularInvocation: invoc withImporter: self importer
-]
-
-{ #category : #factory }
 CSNWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
-	^ (CSNAttribute newFrom: invoc for: nil withImporter: self)
-		ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
+	^ (self createAttributeFor: nil from: invoc) ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
 ]
 
 { #category : #factory }

@@ -19,16 +19,6 @@ CSNWidget >> affectedActions: anObject [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNWidget >> createAttributeFrom: anInvocation [
-	^ CSNAttribute newFrom: anInvocation for: self
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget >> createAttributeFromAngularInvocation: anInvocation withImporter: anImporter [
-	^ CSNAttribute newFrom: anInvocation for: self withImporter: anImporter
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> variable [
 	(self affectedActions isKindOf: FAMIXAccess)
 		ifTrue: [ 

@@ -140,7 +140,7 @@ CSNWebModelJava >> addWidgetAttributes [
 											(invocOnFlexCellVariable parameters size >= 2) ifTrue: [ self factory createAttributeFrom: invocOnFlexCellVariable forCellOf: widget ] ] ]
 								ifNil: [ (invoc previous isNotNil and: [ invoc previous receiver ifNotNil: [ :receiver | receiver isImplicitVariable not ] ifNil: [ true ] ])
 										ifTrue: [ self factory createAttributeFrom: invoc previous forCellOf: widget ] ] ]
-						ifFalse: [ self factory createAttributeFrom: invoc for: widget ] ] ]
+						ifFalse: [ self factory createAttributeFor: widget from: invoc ] ] ]
 		displayingProgress: [ :widget | 'compute attribute of ' , widget asString ]
 		every: 1000
 ]
