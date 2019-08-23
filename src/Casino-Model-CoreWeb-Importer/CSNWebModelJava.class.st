@@ -245,7 +245,7 @@ CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
 { #category : #accessing }
 CSNWebModelJava >> getPageMetierFromClass: aClass [
-	^ self getFromSource: self model allCSNPageMetier forClass: aClass
+	^ self getFromSource: (self model allCSNPageMetier reject: [ :businessPage | businessPage sources isEmpty ]) forClass: aClass
 ]
 
 { #category : #private }
