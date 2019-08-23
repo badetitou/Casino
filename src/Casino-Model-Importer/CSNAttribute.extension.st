@@ -12,5 +12,6 @@ CSNAttribute class >> newFrom: anInvocation for: aWidgetInstance withImporters: 
 		do: [ :subclass | aCollectionOfImporter 
 			do: [ :importer | (subclass accept: importer) ifNotNil: [ :newWidget | ^ newWidget ] 
 				] 
-			]
+			].
+	^ nil
 ]

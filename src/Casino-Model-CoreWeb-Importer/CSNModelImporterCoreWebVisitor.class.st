@@ -146,13 +146,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNCoreHorizontalAlignement: aCSNCoreHori
 				ifNil: [ | alignement |
 					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
 					self factory model add: alignement.
-					alignement ]
+					^ alignement ]
 				ifNotNil: [ entity subWidgets
 						do: [ :widget | 
 							| alignement |
 							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
 							self factory model add: alignement.
-							widget position: alignement ] ] ]
+							widget position: alignement ].
+					^ nil ] ]
 		ifFalse: [ ^ nil ]
 ]
 
@@ -179,13 +180,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNCoreVerticalAlignement: aCSNCoreVertic
 				ifNil: [ | alignement |
 					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
 					self factory model add: alignement.
-					alignement ]
+					^ alignement ]
 				ifNotNil: [ entity subWidgets
 						do: [ :widget | 
 							| alignement |
 							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
 							self factory model add: alignement.
-							widget position: alignement ] ] ]
+							widget position: alignement ].
+					^ nil ] ]
 		ifFalse: [ ^ nil ]
 ]
 
@@ -264,7 +266,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNSwitch: aCSNSwitch [
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	(self canBeCSNUIHeight and: [ (self getAttributeValueFrom: source) endsWith: 'px' ])
+	^ (self canBeCSNUIHeight and: [ (self getAttributeValueFrom: source) endsWith: 'px' ])
 		ifTrue: [ | attribute |
 			attribute := self visitCSNUIHeight: aCSNUIAbsoluteHeight.
 			attribute attributeValue: (attribute attributeValue removeSuffix: 'px').
@@ -276,7 +278,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteWidth: aCSNUIAbsoluteWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	(self canBeCSNUIWidth and: [ (self getAttributeValueFrom: source) endsWith: 'px' ])
+	^ (self canBeCSNUIWidth and: [ (self getAttributeValueFrom: source) endsWith: 'px' ])
 		ifTrue: [ | attribute |
 			attribute := self visitCSNUIWidth: aCSNUIAbsoluteWidth.
 			attribute attributeValue: (attribute attributeValue removeSuffix: 'px').
@@ -318,7 +320,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 CSNModelImporterCoreWebVisitor >> visitCSNUIHeight: aCSNUIHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	self canBeCSNUIHeight
+	^ self canBeCSNUIHeight
 		ifTrue: [ (self createAttribute: aCSNUIHeight for: source)
 				name: 'height';
 				yourself ]
@@ -515,7 +517,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
 CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeHeight: aCSNUIRelativeHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	(self canBeCSNUIHeight and: [ (self getAttributeValueFrom: source) endsWith: '%' ])
+	^ (self canBeCSNUIHeight and: [ (self getAttributeValueFrom: source) endsWith: '%' ])
 		ifTrue: [ | attribute |
 			attribute := self visitCSNUIHeight: aCSNUIRelativeHeight.
 			attribute attributeValue: (attribute attributeValue removeSuffix: '%').
@@ -527,7 +529,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeHeight: aCSNUIRelativeHeight
 CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeWidth: aCSNUIRelativeWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	(self canBeCSNUIWidth and: [ (self getAttributeValueFrom: source) endsWith: '%' ])
+	^ (self canBeCSNUIWidth and: [ (self getAttributeValueFrom: source) endsWith: '%' ])
 		ifTrue: [ | attribute |
 			attribute := self visitCSNUIWidth: aCSNUIRelativeWidth.
 			attribute attributeValue: (attribute attributeValue removeSuffix: '%').
@@ -563,7 +565,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITitle: aCSNUITitle [
 CSNModelImporterCoreWebVisitor >> visitCSNUIWidth: aCSNUIWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 
-	self canBeCSNUIWidth
+	^ self canBeCSNUIWidth
 		ifTrue: [ (self createAttribute: aCSNUIWidth for: source)
 				name: 'width';
 				yourself ]
