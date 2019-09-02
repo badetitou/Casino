@@ -71,7 +71,8 @@ Class {
 		'attribute',
 		'container',
 		'leaf',
-		'uiCustomWidget'
+		'uiCustomWidget',
+		'uiWidgetLabel'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -148,6 +149,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiUnorderedList := builder newClassNamed: #UnorderedList.
 	uiParagraph := builder newClassNamed: #Paragraph.
 	uiTextarea := builder newClassNamed: #Textarea.
+	uiWidgetLabel := builder newClassNamed: #WidgetLabel.
 
 	"attributes"
 
@@ -196,6 +198,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiTabManager --|> container.
 	uiTable --|> container.
 	uiTree --|> container.
+	uiWidgetLabel --|> container.
 	uiHeading1 --|> leaf.
 	uiHeading2 --|> leaf.
 	uiHeading3 --|> leaf.

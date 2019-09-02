@@ -1052,6 +1052,11 @@ CSNModelVisitor >> visitCSNUIValue: aCSNUIValue [
 ]
 
 { #category : #generated }
+CSNModelVisitor >> visitCSNUIWidgetLabel: aCSNUIWidgetLabel [
+	^ self visitCSNContainer: aCSNUIWidgetLabel
+]
+
+{ #category : #generated }
 CSNModelVisitor >> visitCSNUIWidth: aCSNUIWidth [
 	^ self visitCSNAttribute: aCSNUIWidth
 ]
