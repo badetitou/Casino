@@ -100,6 +100,21 @@ CSNModelVisitor class >> visitCSNInput: aCSNInput [
 ]
 
 { #category : #generated }
+CSNModelVisitor class >> visitCSNLAbsolutePosition: aCSNLAbsolutePosition [
+	^ self visitCSNLPosition: aCSNLAbsolutePosition
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLAbsoluteSize: aCSNLAbsoluteSize [
+	^ self visitCSNLSize: aCSNLAbsoluteSize
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLAlignement: aCSNLAlignement [
+	^ self visitCSNLPosition: aCSNLAlignement
+]
+
+{ #category : #generated }
 CSNModelVisitor class >> visitCSNLBorderLayout: aCSNLBorderLayout [
 	^ self visitCSNLLayout: aCSNLBorderLayout
 ]
@@ -107,6 +122,16 @@ CSNModelVisitor class >> visitCSNLBorderLayout: aCSNLBorderLayout [
 { #category : #generated }
 CSNModelVisitor class >> visitCSNLCell: aCSNLCell [
 	^ self visitCSNWidget: aCSNLCell
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLCenterAlignement: aCSNLCenterAlignement [
+	^ self visitCSNLAlignement: aCSNLCenterAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLEastAlignement: aCSNLEastAlignement [
+	^ self visitCSNLAlignement: aCSNLEastAlignement
 ]
 
 { #category : #generated }
@@ -125,8 +150,63 @@ CSNModelVisitor class >> visitCSNLLayout: aCSNLLayout [
 ]
 
 { #category : #generated }
+CSNModelVisitor class >> visitCSNLNorthAlignement: aCSNLNorthAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLNorthEastAlignement: aCSNLNorthEastAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthEastAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLNorthWestAlignement: aCSNLNorthWestAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthWestAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLPosition: aCSNLPosition [
+	^ self visitCSNOriginedEntity: aCSNLPosition
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLRelativePosition: aCSNLRelativePosition [
+	^ self visitCSNLPosition: aCSNLRelativePosition
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLRelativeSize: aCSNLRelativeSize [
+	^ self visitCSNLSize: aCSNLRelativeSize
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLSize: aCSNLSize [
+	^ self visitCSNOriginedEntity: aCSNLSize
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLSouthAlignement: aCSNLSouthAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLSouthEastAlignement: aCSNLSouthEastAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthEastAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLSouthWestAlignement: aCSNLSouthWestAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthWestAlignement
+]
+
+{ #category : #generated }
 CSNModelVisitor class >> visitCSNLVerticalLayout: aCSNLVerticalLayout [
 	^ self visitCSNLLayout: aCSNLVerticalLayout
+]
+
+{ #category : #generated }
+CSNModelVisitor class >> visitCSNLWestAlignement: aCSNLWestAlignement [
+	^ self visitCSNLAlignement: aCSNLWestAlignement
 ]
 
 { #category : #generated }
@@ -630,6 +710,21 @@ CSNModelVisitor >> visitCSNInput: aCSNInput [
 ]
 
 { #category : #generated }
+CSNModelVisitor >> visitCSNLAbsolutePosition: aCSNLAbsolutePosition [
+	^ self visitCSNLPosition: aCSNLAbsolutePosition
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLAbsoluteSize: aCSNLAbsoluteSize [
+	^ self visitCSNLSize: aCSNLAbsoluteSize
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLAlignement: aCSNLAlignement [
+	^ self visitCSNLPosition: aCSNLAlignement
+]
+
+{ #category : #generated }
 CSNModelVisitor >> visitCSNLBorderLayout: aCSNLBorderLayout [
 	^ self visitCSNLLayout: aCSNLBorderLayout
 ]
@@ -637,6 +732,16 @@ CSNModelVisitor >> visitCSNLBorderLayout: aCSNLBorderLayout [
 { #category : #generated }
 CSNModelVisitor >> visitCSNLCell: aCSNLCell [
 	^ self visitCSNWidget: aCSNLCell
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLCenterAlignement: aCSNLCenterAlignement [
+	^ self visitCSNLAlignement: aCSNLCenterAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLEastAlignement: aCSNLEastAlignement [
+	^ self visitCSNLAlignement: aCSNLEastAlignement
 ]
 
 { #category : #generated }
@@ -655,8 +760,63 @@ CSNModelVisitor >> visitCSNLLayout: aCSNLLayout [
 ]
 
 { #category : #generated }
+CSNModelVisitor >> visitCSNLNorthAlignement: aCSNLNorthAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLNorthEastAlignement: aCSNLNorthEastAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthEastAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLNorthWestAlignement: aCSNLNorthWestAlignement [
+	^ self visitCSNLAlignement: aCSNLNorthWestAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLPosition: aCSNLPosition [
+	^ self visitCSNOriginedEntity: aCSNLPosition
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLRelativePosition: aCSNLRelativePosition [
+	^ self visitCSNLPosition: aCSNLRelativePosition
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLRelativeSize: aCSNLRelativeSize [
+	^ self visitCSNLSize: aCSNLRelativeSize
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLSize: aCSNLSize [
+	^ self visitCSNOriginedEntity: aCSNLSize
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLSouthAlignement: aCSNLSouthAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLSouthEastAlignement: aCSNLSouthEastAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthEastAlignement
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLSouthWestAlignement: aCSNLSouthWestAlignement [
+	^ self visitCSNLAlignement: aCSNLSouthWestAlignement
+]
+
+{ #category : #generated }
 CSNModelVisitor >> visitCSNLVerticalLayout: aCSNLVerticalLayout [
 	^ self visitCSNLLayout: aCSNLVerticalLayout
+]
+
+{ #category : #generated }
+CSNModelVisitor >> visitCSNLWestAlignement: aCSNLWestAlignement [
+	^ self visitCSNLAlignement: aCSNLWestAlignement
 ]
 
 { #category : #generated }

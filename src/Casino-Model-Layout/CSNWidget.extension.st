@@ -2,10 +2,10 @@ Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNWidget >> cellOwner [
+	"Relation named: #cellOwner type: #CSNCell opposite: #widget"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #cellOwner type: #Object>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #cellOwner ifAbsent: [ nil ]
@@ -27,6 +27,7 @@ CSNWidget >> cellOwner: anObject [
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNWidget >> position [
+	"Relation named: #position type: #CSNPosition opposite: #widget"
 
 	<generated>
 	<MSEProperty: #position type: #Object>
@@ -50,6 +51,7 @@ CSNWidget >> position: anObject [
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNWidget >> size [
+	"Relation named: #size type: #CSNSize opposite: #widget"
 
 	<generated>
 	<MSEProperty: #size type: #Object>

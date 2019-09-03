@@ -112,6 +112,8 @@ CSNLayoutMetamodelGenerator >> defineHierarchy [
 	alignement --|> position.
 	cell --|> widget.
 	layout --|> entity.
+	position --|> entity.
+	size --|> entity.
 	
 	"layouts"
 	grid --|> layout.

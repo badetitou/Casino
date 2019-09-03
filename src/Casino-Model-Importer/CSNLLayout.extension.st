@@ -2,11 +2,15 @@ Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-Importer' }
 CSNLLayout >> addWidget: aWidget [
-	| createdCell |
-	createdCell := self mooseModel add: (CSNLCell new widget: aWidget; yourself).
-	self cell add: createdCell.
-	^ aWidget
-	
+	^ (aWidget isKindOf: CSNLCell)
+		ifTrue: [ self addCell: aWidget ]
+		ifFalse: [ | createdCell |
+			createdCell := self mooseModel
+				add:
+					(CSNLCell new
+						widget: aWidget;
+						yourself).
+			self addCell: createdCell ]
 ]
 
 { #category : #'*Casino-Model-Importer' }

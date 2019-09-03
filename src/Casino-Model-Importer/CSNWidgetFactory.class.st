@@ -30,6 +30,11 @@ CSNWidgetFactory >> create: anEntity fromSource: aSource [
 	^ (self model add: anEntity new) addSource: aSource; yourself
 ]
 
+{ #category : #'as yet unclassified' }
+CSNWidgetFactory >> createAlignementFrom: anAlignementIdentifier [
+	^ CSNLAlignement newFrom: anAlignementIdentifier withImporters: visitorImporters
+]
+
 { #category : #creating }
 CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 	^ CSNAttribute newFrom: anElement for: aWidget withImporters: visitorImporters

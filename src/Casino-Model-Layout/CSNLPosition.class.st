@@ -1,23 +1,16 @@
 Class {
 	#name : #CSNLPosition,
-	#superclass : #MooseEntity,
+	#superclass : #CSNOriginedEntity,
 	#category : #'Casino-Model-Layout-Entities'
 }
 
 { #category : #meta }
 CSNLPosition class >> annotation [
 
-	<MSEClass: #Position super: #MooseEntity>
+	<MSEClass: #Position super: #CSNOriginedEntity>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLPosition class >> metamodel [
-
-	<generated>
-	^ (self class environment at: #CSNLayoutMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }
@@ -45,10 +38,10 @@ CSNLPosition >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNLPosition >> widget [
+	"Relation named: #widget type: #CSNLWidget opposite: #position"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #widget type: #Object>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
