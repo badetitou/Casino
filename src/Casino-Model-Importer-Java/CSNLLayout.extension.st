@@ -1,6 +1,17 @@
 Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-Importer-Java' }
+CSNLLayout >> affectedActions [
+	<MSEProperty: #affectedActions type: #Object>
+	^ self privateState attributeAt: #affectedActions ifAbsent: nil
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+CSNLLayout >> affectedActions: anObject [
+	self privateState attributeAt: #affectedActions put: anObject
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 CSNLLayout >> childAttribute [
 	^ { }
 ]
