@@ -651,7 +651,7 @@ CSNModelVisitor >> visitCSNLHorizontalLayout: aCSNLHorizontalLayout [
 
 { #category : #generated }
 CSNModelVisitor >> visitCSNLLayout: aCSNLLayout [
-	^ self
+	^ self visitCSNOriginedEntity: aCSNLLayout
 ]
 
 { #category : #generated }
