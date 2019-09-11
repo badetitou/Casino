@@ -24,11 +24,6 @@ CSNWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNWidget >> isContainer [
-	^ false
-]
-
-{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> isWidget [ 
 	^ true
 ]

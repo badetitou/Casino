@@ -12,6 +12,11 @@ CSNOriginedEntity >> initialize [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNOriginedEntity >> isContainer [
+	^ false
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> isWidget [
 	^ false
 ]
