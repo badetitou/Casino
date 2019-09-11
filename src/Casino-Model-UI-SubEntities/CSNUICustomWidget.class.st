@@ -1,7 +1,7 @@
 Class {
 	#name : #CSNUICustomWidget,
 	#superclass : #CSNContainer,
-	#category : #'Casino-Model-UI-SubEntities-Entities'
+	#category : #'Casino-Model-UI-SubEntities-Widgets-Extended'
 }
 
 { #category : #meta }

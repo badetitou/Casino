@@ -6,6 +6,16 @@ CSNOriginedEntity >> addSource: aSource [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNOriginedEntity >> gtNodesIn: composite [
+	<gtInspectorPresentationOrder: 1000>
+	^ composite tree
+		title: 'Tree';
+		display: [ :anObject | anObject ];
+		children: [ :each | each children ];
+		yourself
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> initialize [
 	super initialize.
 	sources := OrderedCollection new
@@ -19,6 +29,18 @@ CSNOriginedEntity >> isContainer [
 { #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> isWidget [
 	^ false
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNOriginedEntity >> parentNode [
+	^ self parents asOrderedCollection at: 1 ifAbsent: [ nil ] 
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNOriginedEntity >> rootNode [
+
+	"I should be overriden in my users"
+	^ self parentNode ifNil: [ self ] ifNotNil: [:parent | parent rootNode ]
 ]
 
 { #category : #'*Casino-Model-Extension' }
