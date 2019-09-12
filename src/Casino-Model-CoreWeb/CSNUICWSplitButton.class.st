@@ -1,23 +1,25 @@
 Class {
-	#name : #CSNSplitButton,
-	#superclass : #CSNInput,
-	#category : #'Casino-Model-CoreWeb-Widget'
+	#name : #CSNUICWSplitButton,
+	#superclass : #CSNUIInput,
+	#category : #'Casino-Model-CoreWeb-Entities'
 }
 
 { #category : #meta }
-CSNSplitButton class >> annotation [
-	<MSEClass: #BLColorPicker super: #CSNWidget>
-	<package: #CSNWebModelJava>
-	^ self
+CSNUICWSplitButton class >> annotation [
+
+	<MSEClass: #SplitButton super: #CSNUIInput>
+	<package: #'Casino-Model-CoreWeb'>
+	<generated>
+	^self
 ]
 
-{ #category : #accessing }
-CSNSplitButton >> getExternalDependency [
+{ #category : #'as yet unclassified' }
+CSNUICWSplitButton >> getExternalDependency [
 	^ {PNGSplitButton}
 ]
 
 { #category : #'as yet unclassified' }
-CSNSplitButton >> getInitializations [
+CSNUICWSplitButton >> getInitializations [
 	^ '        this.items' , self mooseID asString
 		,
 			' = [
@@ -30,12 +32,12 @@ CSNSplitButton >> getInitializations [
         ];'
 ]
 
-{ #category : #accessing }
-CSNSplitButton >> getSelector [
+{ #category : #'as yet unclassified' }
+CSNUICWSplitButton >> getSelector [
 	^ 'p-splitButton'
 ]
 
 { #category : #'as yet unclassified' }
-CSNSplitButton >> getVariables [
+CSNUICWSplitButton >> getVariables [
 	^'    items' , self mooseID asString , ': MenuItem[];'
 ]

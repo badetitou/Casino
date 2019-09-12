@@ -41,10 +41,10 @@ CSNActionAppel >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNActionAppel >> call [
+	"Relation named: #call type: #CSNPage opposite: #caller"
 
 	<generated>
 	<container>
-
 	^ call
 ]
 

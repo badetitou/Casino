@@ -41,10 +41,10 @@ CSNServiceAPI >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNServiceAPI >> serviceOwner [
+	"Relation named: #serviceOwner type: #CSNService opposite: #actions"
 
 	<generated>
 	<container>
-
 	^ serviceOwner
 ]
 

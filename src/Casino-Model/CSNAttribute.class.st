@@ -79,10 +79,10 @@ CSNAttribute >> oldClass: anObject [
 
 { #category : #accessing }
 CSNAttribute >> widget [
+	"Relation named: #widget type: #CSNWidget opposite: #attributes"
 
 	<generated>
 	<container>
-
 	^ widget
 ]
 

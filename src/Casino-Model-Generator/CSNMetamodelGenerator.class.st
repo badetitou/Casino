@@ -17,7 +17,6 @@ Class {
 		'attribute',
 		'actionAttribute',
 		'normalAttribute',
-		'variableAttribute',
 		'behavior',
 		'page',
 		'businessPage',
@@ -46,7 +45,6 @@ CSNMetamodelGenerator >> defineClasses [
 	actionAppel := builder newClassNamed: #ActionAppel.
 	entity := builder newClassNamed: #OriginedEntity comment: 'Root entity of the meta-model'.
 	attribute := builder newClassNamed: #Attribute comment: 'I represent a characteritic that can be add to a Widget'.
-	variableAttribute := builder newClassNamed: #VariableAttribute comment: 'I will be removed soon'.
 	actionService := builder newClassNamed: #ActionService comment: 'I reprensent a call to a distant service'.
 	page := builder newClassNamed: #Page comment: 'I represent the root of the user interface (A Windows, a web page)'.
 	service := builder newClassNamed: #Service.
@@ -71,7 +69,6 @@ CSNMetamodelGenerator >> defineHierarchy [
 	widget <|-- leaf.
 	container <|-- page.
 	container <|-- businessPage.
-	attribute <|-- variableAttribute.
 	action <|-- actionService.
 	action <|-- actionAppel
 ]

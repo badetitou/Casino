@@ -72,7 +72,9 @@ Class {
 		'container',
 		'leaf',
 		'uiCustomWidget',
-		'uiWidgetLabel'
+		'uiWidgetLabel',
+		'uiModal',
+		'uiModel'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -178,6 +180,9 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiAbsoluteWidth := builder newClassNamed: #AbsoluteWidth.
 	uiRelativeWidth := builder newClassNamed: #RelativeWidth.
 	
+	uiModal := builder newClassNamed: #Modal.
+	uiModel := builder newClassNamed: #Model.
+	
 	"from Core"
 	container := self remoteEntity: #Container withPrefix: #CSN.
 	leaf := self remoteEntity: #Leaf withPrefix: #CSN.
@@ -256,6 +261,8 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiTitle --|> attribute.
 	uiValue --|> attribute.
 	uiWidth --|> attribute.
+	uiModel --|> attribute.
+	uiModal --|> attribute.
 	uiAbsoluteWidth --|> uiWidth.
 	uiRelativeWidth --|> uiWidth
 ]

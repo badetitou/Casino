@@ -35,10 +35,10 @@ CSNBusinessPage >> addPageContainers: anObject [
 
 { #category : #accessing }
 CSNBusinessPage >> pageContainers [
+	"Relation named: #pageContainers type: #CSNPage opposite: #businessPage"
 
 	<generated>
 	<container>
-
 	^ pageContainers
 ]
 

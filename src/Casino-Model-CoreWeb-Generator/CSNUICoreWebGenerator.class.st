@@ -17,8 +17,6 @@ Class {
 		'splitButton',
 		'switch',
 		'lightFieldset',
-		'modal',
-		'model',
 		'open',
 		'progressBar',
 		'csnContainer',
@@ -75,8 +73,6 @@ CSNUICoreWebGenerator >> defineClasses [
 	splitButton := builder newClassNamed: #SplitButton.
 	switch := builder newClassNamed: #Switch.
 	lightFieldset := builder newClassNamed: #LightFieldset.
-	modal := builder newClassNamed: #Modal.
-	model := builder newClassNamed: #Model.
 	open := builder newClassNamed: #Open.
 	progressBar := builder newClassNamed: #ProgressBar.
 	
@@ -112,8 +108,5 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	coreVerticalAlignement --|> csnAttribute.
 	lightFieldset --|> csnAttribute.
 
-
-	modal --|> csnVariableAttribute.
-	model --|> csnVariableAttribute.
-	open --|> csnVariableAttribute
+	open --|> csnAttribute
 ]

@@ -44,10 +44,10 @@ CSNAction >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNAction >> caller [
+	"Relation named: #caller type: #CSNWidget opposite: #actions"
 
 	<generated>
 	<container>
-
 	^ caller
 ]
 
