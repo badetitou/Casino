@@ -1,11 +1,13 @@
 Extension { #name : #CSNLNorthAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLNorthAlignement >> accept: aCSNModelVisitor [
+CSNLNorthAlignement class >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLNorthAlignement: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLNorthAlignement class >> accept: aCSNModelVisitor [
+CSNLNorthAlignement >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLNorthAlignement: self
 ]

@@ -2,11 +2,13 @@ Extension { #name : #CSNLAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
 CSNLAlignement >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLAlignement: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
 CSNLAlignement class >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLAlignement: self
 ]
 

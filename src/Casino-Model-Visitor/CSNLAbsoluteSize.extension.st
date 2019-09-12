@@ -1,11 +1,13 @@
 Extension { #name : #CSNLAbsoluteSize }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAbsoluteSize class >> accept: aCSNModelVisitor [
+CSNLAbsoluteSize >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLAbsoluteSize: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAbsoluteSize >> accept: aCSNModelVisitor [
+CSNLAbsoluteSize class >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLAbsoluteSize: self
 ]
