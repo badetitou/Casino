@@ -74,7 +74,10 @@ Class {
 		'uiCustomWidget',
 		'uiWidgetLabel',
 		'uiModal',
-		'uiModel'
+		'uiModel',
+		'uiDropdownButton',
+		'uiMenu',
+		'uiMenuItem'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -151,6 +154,9 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiUnorderedList := builder newClassNamed: #UnorderedList.
 	uiParagraph := builder newClassNamed: #Paragraph.
 	uiTextarea := builder newClassNamed: #Textarea.
+	uiDropdownButton := builder newClassNamed: #DropdownButton.
+	uiMenu := builder newClassNamed: #Menu.
+	uiMenuItem := builder newClassNamed: #MenuItem.
 	uiWidgetLabel := builder newClassNamed: #WidgetLabel.
 
 	"attributes"
@@ -196,6 +202,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	"widgets"
 	uiCustomWidget --|> container.
 	uiButton --|> container.
+	uiDropdownButton --|> uiButton.
 	uiCanvas --|> container.
 	uiPanel --|> container.
 	uiFieldset --|> uiPanel.
@@ -238,6 +245,8 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiUnorderedList --|> uiList.
 	uiParagraph --|> leaf.
 	uiTextarea --|> leaf.
+	uiMenu --|> container.
+	uiMenuItem --|> leaf.
 
 	"attributes"
 	uiAlt --|> attribute.

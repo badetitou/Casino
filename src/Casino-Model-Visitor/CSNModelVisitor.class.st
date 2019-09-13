@@ -358,6 +358,12 @@ CSNModelVisitor class >> visitCSNUIDisabled: aCSNUIDisabled [
 ]
 
 { #category : #visiting }
+CSNModelVisitor class >> visitCSNUIDropdownButton: aCSNUIDropdownButton [
+	<generated>
+	^ self visitCSNContainer: aCSNUIDropdownButton
+]
+
+{ #category : #visiting }
 CSNModelVisitor class >> visitCSNUIFieldset: aCSNUIFieldset [
 	<generated>
 	^ self visitCSNUIPanel: aCSNUIFieldset
@@ -565,6 +571,18 @@ CSNModelVisitor class >> visitCSNUIMax: aCSNUIMax [
 CSNModelVisitor class >> visitCSNUIMaxlength: aCSNUIMaxlength [
 	<generated>
 	^ self visitCSNAttribute: aCSNUIMaxlength
+]
+
+{ #category : #visiting }
+CSNModelVisitor class >> visitCSNUIMenu: aCSNUIMenu [
+	<generated>
+	^ self visitCSNContainer: aCSNUIMenu
+]
+
+{ #category : #visiting }
+CSNModelVisitor class >> visitCSNUIMenuItem: aCSNUIMenuItem [
+	<generated>
+	^ self visitCSNLeaf: aCSNUIMenuItem
 ]
 
 { #category : #visiting }
@@ -1090,6 +1108,12 @@ CSNModelVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 ]
 
 { #category : #visiting }
+CSNModelVisitor >> visitCSNUIDropdownButton: aCSNUIDropdownButton [
+	<generated>
+	^ self visitCSNContainer: aCSNUIDropdownButton
+]
+
+{ #category : #visiting }
 CSNModelVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 	<generated>
 	^ self visitCSNUIPanel: aCSNUIFieldset
@@ -1297,6 +1321,18 @@ CSNModelVisitor >> visitCSNUIMax: aCSNUIMax [
 CSNModelVisitor >> visitCSNUIMaxlength: aCSNUIMaxlength [
 	<generated>
 	^ self visitCSNAttribute: aCSNUIMaxlength
+]
+
+{ #category : #visiting }
+CSNModelVisitor >> visitCSNUIMenu: aCSNUIMenu [
+	<generated>
+	^ self visitCSNContainer: aCSNUIMenu
+]
+
+{ #category : #visiting }
+CSNModelVisitor >> visitCSNUIMenuItem: aCSNUIMenuItem [
+	<generated>
+	^ self visitCSNLeaf: aCSNUIMenuItem
 ]
 
 { #category : #visiting }
