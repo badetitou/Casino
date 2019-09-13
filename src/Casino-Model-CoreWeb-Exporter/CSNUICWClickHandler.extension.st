@@ -1,7 +1,7 @@
-Extension { #name : #CSNClickHandler }
+Extension { #name : #CSNUICWClickHandler }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNClickHandler >> extractMethodNamed: methodsName from: methodsText [
+CSNUICWClickHandler >> extractMethodNamed: methodsName from: methodsText [
 	"I return the content of onClick generated method"
 
 	| beginPos endPos |

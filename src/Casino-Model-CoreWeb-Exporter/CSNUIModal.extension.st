@@ -1,6 +1,6 @@
-Extension { #name : #CSNModal }
+Extension { #name : #CSNUIModal }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNModal >> name [
+CSNUIModal >> name [
 	^ 'modal'
 ]

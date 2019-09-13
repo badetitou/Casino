@@ -212,15 +212,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNDialog: aCSNDialog [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNHTML: aCSNHTML [
-	^ 'HTML' = source invokedClassName
-		ifTrue: [ (self createWidget: aCSNHTML)
-				addWidget: ((self create: CSNLeaf) text: (source parameters at: 1 ifAbsent: [ '' ]));
-				yourself ]
-		ifFalse: [ nil ]
-]
-
 { #category : #api }
 CSNModelImporterCoreWebVisitor >> visitCSNOpen: aCSOpen [
 	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
@@ -237,21 +228,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNProgressBar: aCSNProgressBar [
 CSNModelImporterCoreWebVisitor >> visitCSNRichTextArea: aCSNRichTextArea [
 	^ (#('BLRTFWithToolbar') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNRichTextArea) ] 
-		ifFalse: [ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNSplitButton: aCSNSplitButton [
-	^ 'BLSplitButton' = source invokedClassName
-		ifTrue: [ | splitButton |
-			splitButton := (self createWidget: aCSNSplitButton)
-				parametersAt: #label put: (source parameters at: 1 ifAbsent: [ 'todo' ]);
-				yourself.
-			(self create: CSNModel)
-				name: 'model';
-				attributeValue: 'items';
-				widget: splitButton.
-			splitButton ]
 		ifFalse: [ nil ]
 ]
 
@@ -295,6 +271,30 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 				yourself ] ifFalse: [ nil ]
 ]
 
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
+	^ 'HTML' = source invokedClassName
+		ifTrue: [ (self createWidget: aCSNHTML)
+				addWidget: ((self create: CSNLeaf) text: (source parameters at: 1 ifAbsent: [ '' ]));
+				yourself ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
+	^ 'BLSplitButton' = source invokedClassName
+		ifTrue: [ | splitButton |
+			splitButton := (self createWidget: aCSNSplitButton)
+				parametersAt: #label put: (source parameters at: 1 ifAbsent: [ 'todo' ]);
+				yourself.
+			(self create: CSNModel)
+				name: 'model';
+				attributeValue: 'items';
+				widget: splitButton.
+			splitButton ]
+		ifFalse: [ nil ]
+]
+
 { #category : #api }
 CSNModelImporterCoreWebVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 	^ (source isInvocation and: [ source attributeName = 'enabled' ]) ifTrue: [ self createAttribute: aCSNUIDisabled for: source ] ifFalse: [ nil ]
@@ -309,9 +309,9 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 				yourself.
 
 			((source invokedClass withSuperclassHierarchy collect: #invokedClassName) includes: 'BLFieldSetPanelDynamic')
-				ifTrue: [ panel addAttribute: (self create: CSNDynamicFieldset).
-					(source parameters at: 2 ifAbsent: [ '' ]) = 'true' ifTrue: [ panel addAttribute: (self create: CSNLightFieldset) ] ].
-			((source invokedClass withSuperclassHierarchy collect: #invokedClassName) includes: 'BLGroupBoxPanel') ifTrue: [ panel addAttribute: (self create: CSNGroupFieldset) ].
+				ifTrue: [ panel addAttribute: (self create: CSNUICWDynamicFieldset).
+					(source parameters at: 2 ifAbsent: [ '' ]) = 'true' ifTrue: [ panel addAttribute: (self create: CSNUICWLightFieldset) ] ].
+			((source invokedClass withSuperclassHierarchy collect: #invokedClassName) includes: 'BLGroupBoxPanel') ifTrue: [ panel addAttribute: (self create: CSNUICWGroupFieldset) ].
 			^ panel ]
 		ifFalse: [ nil ]
 ]

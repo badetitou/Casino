@@ -506,11 +506,6 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNClickHandler: aCSNClickHandler [
-	^ self visitCSNAction: aCSNClickHandler
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 	^ aBLUIContainer layout
 		ifNotNil: [ :layout | self visit: layout ]
@@ -521,11 +516,6 @@ CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 							(aBLUIContainer widgets
 								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
 						indentBy: 4), String crlf, '</' , aBLUIContainer getSelector , '>' ]
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNHTML: aBLHTML [
-	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
 ]
 
 { #category : #visiting }
@@ -606,11 +596,6 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNSplitButton: aBLSplitButton [
-	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
 	^ self protectString: aBLUIAbsoluteHeight attributeValue, 'px'
 ]
@@ -618,6 +603,21 @@ CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteWidth: aBLUIAbsoluteWidth [
 	^ self protectString: aBLUIAbsoluteWidth attributeValue , 'px'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
+	^ self visitCSNAction: aCSNClickHandler
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
+	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
+	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
 ]
 
 { #category : #visiting }

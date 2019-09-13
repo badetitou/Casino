@@ -12,3 +12,13 @@ CSNUICWGroupFieldset class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #accessing }
+CSNUICWGroupFieldset >> attributeValue [
+	^ 'true'
+]
+
+{ #category : #accessing }
+CSNUICWGroupFieldset >> name [
+	^ 'group'
+]
