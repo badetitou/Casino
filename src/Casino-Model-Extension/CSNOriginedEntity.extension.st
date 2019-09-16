@@ -11,7 +11,7 @@ CSNOriginedEntity >> gtNodesIn: composite [
 	^ composite tree
 		title: 'Tree';
 		display: [ :anObject | anObject ];
-		children: [ :each | each children ];
+		children: [ :each | (each children) select: [ :child | (child isKindOf: CSNWidget) or: [ child isKindOf: CSNLLayout ] ] ];
 		yourself
 ]
 
