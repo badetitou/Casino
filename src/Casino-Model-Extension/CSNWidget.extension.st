@@ -27,10 +27,9 @@ CSNWidget >> addingPosition: anObject [
 CSNWidget >> gtAttributesIn: composite [
 	<gtInspectorPresentationOrder: 1001>
 	^ composite table
-		noSelection;
 		title: 'Attributes';
 		display: [ :anObject | anObject mooseInterestingEntity attributes ];
-		sorted: [ :x :y | x name < y name ];
+		sorted: [ :x :y | x name asString < y name asString ];
 		column: 'Names' evaluated: [ :each | each name ];
 		column: 'Attribute Value' evaluated: [ :each :anObject | each attributeValue ];
 		when: [ :anObject | (anObject mooseInterestingEntity isKindOf: CSNWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
