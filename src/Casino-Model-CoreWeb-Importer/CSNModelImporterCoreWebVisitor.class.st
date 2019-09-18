@@ -287,7 +287,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
 			splitButton := (self createWidget: aCSNSplitButton)
 				parametersAt: #label put: (source parameters at: 1 ifAbsent: [ 'todo' ]);
 				yourself.
-			(self create: CSNModel)
+			(self create: CSNUIModel)
 				name: 'model';
 				attributeValue: 'items';
 				widget: splitButton.

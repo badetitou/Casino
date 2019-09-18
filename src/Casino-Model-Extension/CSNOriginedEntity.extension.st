@@ -45,7 +45,7 @@ CSNOriginedEntity >> rootNode [
 
 { #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> source [
-	^ sources anyOne
+	^ sources at: 1 ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Model-Extension' }
