@@ -30,14 +30,24 @@ CSNWidgetFactory >> create: anEntity fromSource: aSource [
 	^ (self model add: anEntity new) addSource: aSource; yourself
 ]
 
+{ #category : #'as yet unclassified' }
+CSNWidgetFactory >> createAlignementFrom: anAlignementIdentifier [
+	^ CSNLAlignement newFrom: anAlignementIdentifier withImporters: visitorImporters
+]
+
 { #category : #creating }
 CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 	^ CSNAttribute newFrom: anElement for: aWidget withImporters: visitorImporters
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creating }
+CSNWidgetFactory >> createLayoutFor: theWidgetSource withParent: parent [
+	^ (CSNLLayout newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ (self create: CSNLHorizontalLayout) source: theWidgetSource; yourself ]
+]
+
+{ #category : #creating }
 CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
-	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ self create: CSNContainer ]
+	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ (self create: CSNContainer) source: theWidgetSource; yourself ]
 ]
 
 { #category : #accessing }

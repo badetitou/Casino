@@ -19,52 +19,6 @@ CSNWidget >> affectedActions: anObject [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNWidget class >> canHandle: anInvocation [
-	^ false
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget >> createAttributeFrom: anInvocation [
-	^ CSNAttribute newFrom: anInvocation for: self
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget >> createAttributeFromAngularInvocation: anInvocation withImporter: anImporter [
-	^ CSNAttribute newFrom: anInvocation for: self withImporter: anImporter
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget class >> createWidgetFor: anInvocation [
-	^ self new
-		realClass:
-			((#(#FactoryBLLabel #ComponentUtils) includes: anInvocation invokedClassName)
-				ifTrue: [ nil ]
-				ifFalse: [ anInvocation invokedClass ]);
-		source: anInvocation;
-		yourself
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget class >> defaultIfNotFoundFor: anInvocation [
-	^ CSNContainer new
-		realClass: anInvocation invokedClass;
-		source: anInvocation;
-		yourself
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-CSNWidget class >> newFor: anInvocation [
-	self subclasses
-		do: [ :subclass | 
-			| try |
-			try := subclass newFor: anInvocation.
-			try ifNotNil: [ ^ try ] ].
-	(self canHandle: anInvocation)
-		ifTrue: [ ^ self createWidgetFor: anInvocation ]
-		ifFalse: [ ^ self defaultIfNotFoundFor: anInvocation ]
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> variable [
 	(self affectedActions isKindOf: FAMIXAccess)
 		ifTrue: [ 

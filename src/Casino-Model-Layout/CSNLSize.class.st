@@ -1,23 +1,16 @@
 Class {
 	#name : #CSNLSize,
-	#superclass : #MooseEntity,
+	#superclass : #CSNOriginedEntity,
 	#category : #'Casino-Model-Layout-Entities'
 }
 
 { #category : #meta }
 CSNLSize class >> annotation [
 
-	<MSEClass: #Size super: #MooseEntity>
+	<MSEClass: #Size super: #CSNOriginedEntity>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLSize class >> metamodel [
-
-	<generated>
-	^ (self class environment at: #CSNLayoutMetamodelGenerator) metamodel
 ]
 
 { #category : #meta }
@@ -45,10 +38,10 @@ CSNLSize >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNLSize >> widget [
+	"Relation named: #widget type: #CSNLWidget opposite: #size"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #widget type: #Object>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]

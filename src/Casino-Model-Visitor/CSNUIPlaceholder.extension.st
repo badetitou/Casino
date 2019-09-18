@@ -1,6 +1,13 @@
 Extension { #name : #CSNUIPlaceholder }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIPlaceholder class >> accept: aCSNModelVisitor [
+CSNUIPlaceholder >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNUIPlaceholder: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNUIPlaceholder classSide >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNUIPlaceholder: self
 ]

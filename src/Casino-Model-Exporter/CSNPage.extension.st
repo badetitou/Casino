@@ -1,10 +1,5 @@
 Extension { #name : #CSNPage }
 
-{ #category : #'*Casino-Model-Exporter-generated' }
-CSNPage >> accept: aCSNModelExporter [
-	^ aCSNModelExporter visitCSNPage: self
-]
-
 { #category : #'*Casino-Model-Exporter' }
 CSNPage >> hasMultiplePageMetier [
 	^ self businessPage size > 1

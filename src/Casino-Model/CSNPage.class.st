@@ -33,6 +33,7 @@ CSNPage >> addCaller: anObject [
 
 { #category : #accessing }
 CSNPage >> businessPage [
+	"Relation named: #businessPage type: #CSNBusinessPage opposite: #pageContainers"
 
 	<generated>
 	^ businessPage
@@ -55,6 +56,7 @@ CSNPage >> businessPageGroup [
 
 { #category : #accessing }
 CSNPage >> caller [
+	"Relation named: #caller type: #CSNActionAppel opposite: #call"
 
 	<generated>
 	^ caller

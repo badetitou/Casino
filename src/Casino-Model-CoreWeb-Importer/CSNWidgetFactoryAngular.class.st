@@ -10,30 +10,23 @@ CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
 ]
 
 { #category : #factory }
-CSNWidgetFactoryAngular >> createAttributeFrom: invoc for: widget [
-	^ widget createAttributeFromAngularInvocation: invoc withImporter: self uiModel
-]
-
-{ #category : #factory }
 CSNWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
-	^ (CSNAttribute newFrom: invoc for: nil withImporter: self)
-		ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
+	^ (self createAttributeFor: nil from: invoc) ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
 ]
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
-	self model
-		silentlyAdd:
-			(CSNBusinessPage new
-				name: aFAMIXClass name;
-				source: aFAMIXClass;
-				computeTitle)
+	^ (self create: CSNBusinessPage)
+		name: aFAMIXClass name;
+		source: aFAMIXClass;
+		computeTitle;
+		yourself
 ]
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 	| blPhase |
-	blPhase := CSNPage new
+	blPhase := (self create: CSNPage)
 		realClassName:
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
@@ -45,23 +38,32 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue);
 		name: (xmlElement attributeAt: #codeValue).
-	model silentlyAdd: (blPhase realClassName = 'STUB C/S'
+	(blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
 				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
-				computeSubtitle.
-			blPhase ])
+				computeSubtitle ]).
+	^ blPhase
 ]
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
-	self model add: (CSNService new
+	^ (self create: CSNService)
 		name: aServiceClass name;
 		targetPoint: CSNWebModelJava webRoot, '/services/', aServiceClass name asLowercase;
 		source: aServiceClass;
-		yourself)
+		yourself
 	
+]
+
+{ #category : #factory }
+CSNWidgetFactoryAngular >> createWidgetFor: theWidgetSource withParent: parent [
+	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters)
+		ifNil: [ (self create: CSNContainer)
+				source: theWidgetSource;
+				realClass: ((#(#FactoryBLLabel #ComponentUtils) includes: theWidgetSource invokedClassName) ifTrue: [ nil ] ifFalse: [ theWidgetSource invokedClass ]);
+				yourself ]
 ]
 
 { #category : #factory }

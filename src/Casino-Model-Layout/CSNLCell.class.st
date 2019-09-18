@@ -41,10 +41,10 @@ CSNLCell >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNLCell >> layoutOwner [
+	"Relation named: #layoutOwner type: #CSNLLayout opposite: #cell"
 
 	<generated>
 	<container>
-
 	^ layoutOwner
 ]
 
@@ -65,6 +65,7 @@ CSNLCell >> layoutOwnerGroup [
 
 { #category : #accessing }
 CSNLCell >> widget [
+	"Relation named: #widget type: #CSNLWidget opposite: #cellOwner"
 
 	<generated>
 	<MSEProperty: #widget type: #Object>

@@ -1,6 +1,13 @@
 Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLLayout class >> accept: aCSNModelVisitor [
+CSNLLayout >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNLLayout: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNLLayout classSide >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLLayout: self
 ]

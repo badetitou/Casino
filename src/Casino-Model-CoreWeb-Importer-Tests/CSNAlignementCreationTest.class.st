@@ -7,11 +7,11 @@ Class {
 { #category : #tests }
 CSNAlignementCreationTest >> testCenter [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_CENTER'
 		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
-	self assert: createdElement class equals: CSNCenterAlignement.
-	createdElement := CSNAlignement
+	self assert: createdElement class equals: CSNLCenterAlignement.
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: nil
 		andVertical: nil.
 	self assert: createdElement equals: nil
@@ -20,87 +20,87 @@ CSNAlignementCreationTest >> testCenter [
 { #category : #tests }
 CSNAlignementCreationTest >> testEast [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
 		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
-	self assert: createdElement class equals: CSNEastAlignement.
-	createdElement := CSNAlignement
+	self assert: createdElement class equals: CSNLEastAlignement.
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
 		andVertical: nil.
-	self assert: createdElement class equals: CSNEastAlignement
+	self assert: createdElement class equals: CSNLEastAlignement
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testNorth [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_CENTER'
 		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
-	self assert: createdElement class equals: CSNNorthAlignement.
-	createdElement := CSNAlignement
+	self assert: createdElement class equals: CSNLNorthAlignement.
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: nil
 		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
-	self assert: createdElement class equals: CSNNorthAlignement
+	self assert: createdElement class equals: CSNLNorthAlignement
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testNorthEast [
 		| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
 		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
-	self assert: createdElement class equals: CSNNorthEastAlignement.
+	self assert: createdElement class equals: CSNLNorthEastAlignement.
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testNorthWest [
 		| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
 		andVertical: 'HasVerticalAlignment.ALIGN_TOP'.
-	self assert: createdElement class equals: CSNNorthWestAlignement
+	self assert: createdElement class equals: CSNLNorthWestAlignement
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testSouth [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_CENTER'
 		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
-	self assert: createdElement class equals: CSNSouthAlignement.
-	createdElement := CSNAlignement
+	self assert: createdElement class equals: CSNLSouthAlignement.
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: nil
 		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
-	self assert: createdElement class equals: CSNSouthAlignement
+	self assert: createdElement class equals: CSNLSouthAlignement
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testSouthEast [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_RIGHT'
 		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
-	self assert: createdElement class equals: CSNSouthEastAlignement
+	self assert: createdElement class equals: CSNLSouthEastAlignement
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testSouthWest [
 		| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
 		andVertical: 'HasVerticalAlignment.ALIGN_BOTTOM'.
-	self assert: createdElement class equals: CSNSouthWestAlignement.
+	self assert: createdElement class equals: CSNLSouthWestAlignement.
 ]
 
 { #category : #tests }
 CSNAlignementCreationTest >> testWest [
 	| createdElement |
-	createdElement := CSNAlignement
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
 		andVertical: 'HasVerticalAlignment.ALIGN_MIDDLE'.
-	self assert: createdElement class equals: CSNWestAlignement.
-	createdElement := CSNAlignement
+	self assert: createdElement class equals: CSNLWestAlignement.
+	createdElement := CSNLAlignement
 		createAlignementWithHorizontal: 'HasHorizontalAlignment.ALIGN_LEFT'
 		andVertical: nil.
-	self assert: createdElement class equals: CSNWestAlignement
+	self assert: createdElement class equals: CSNLWestAlignement
 ]

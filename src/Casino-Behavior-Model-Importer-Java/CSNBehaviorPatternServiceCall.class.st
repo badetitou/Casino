@@ -47,7 +47,7 @@ CSNBehaviorPatternServiceCall >> newSynchroneCall [
 { #category : #running }
 CSNBehaviorPatternServiceCall >> run [
 	self uiModel ifNil: [ ^ self ].
-	(self model allWithType: FASTVariableExpression) asOrderedCollection
+	(self model allWithType: FASTJavaVariableExpression) asOrderedCollection
 		do: [ :namedEntity | 
 			(self uiModel allCSNService
 				select: [ :service | service name = namedEntity name ])

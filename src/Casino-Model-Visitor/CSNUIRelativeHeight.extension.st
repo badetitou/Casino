@@ -1,6 +1,13 @@
 Extension { #name : #CSNUIRelativeHeight }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIRelativeHeight class >> accept: aCSNModelVisitor [
+CSNUIRelativeHeight >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNUIRelativeHeight: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNUIRelativeHeight classSide >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNUIRelativeHeight: self
 ]

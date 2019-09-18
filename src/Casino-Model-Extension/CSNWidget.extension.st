@@ -24,8 +24,15 @@ CSNWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNWidget >> isContainer [
-	^ false
+CSNWidget >> gtAttributesIn: composite [
+	<gtInspectorPresentationOrder: 1001>
+	^ composite table
+		title: 'Attributes';
+		display: [ :anObject | anObject mooseInterestingEntity attributes ];
+		sorted: [ :x :y | x name asString < y name asString ];
+		column: 'Names' evaluated: [ :each | each name ];
+		column: 'Attribute Value' evaluated: [ :each :anObject | each attributeValue ];
+		when: [ :anObject | (anObject mooseInterestingEntity isKindOf: CSNWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
 ]
 
 { #category : #'*Casino-Model-Extension' }
@@ -42,6 +49,16 @@ CSNWidget >> name [
 CSNWidget >> parameters [
 	<MSEProperty: #parameters type: #Object>
 	^ self privateState attributeAt: #parameters ifAbsentPut: [ Dictionary new ]
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNWidget >> parametersAt: aParameterName [
+	^ self parameters at: aParameterName
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNWidget >> parametersAt: aParameterName put: anObject [
+	^ self parameters at: aParameterName put: anObject
 ]
 
 { #category : #'*Casino-Model-Extension' }

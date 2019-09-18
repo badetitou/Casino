@@ -1,11 +1,6 @@
 Extension { #name : #CSNContainer }
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNContainer class >> defaultIfNotFoundFor: anInvocation [
-	^ nil
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
 CSNContainer >> postImport [
 	super postImport.
 	widgets := self widgets asOrderedCollection

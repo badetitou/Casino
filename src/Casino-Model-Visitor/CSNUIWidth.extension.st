@@ -1,6 +1,13 @@
 Extension { #name : #CSNUIWidth }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIWidth class >> accept: aCSNModelVisitor [
+CSNUIWidth >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNUIWidth: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNUIWidth classSide >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNUIWidth: self
 ]

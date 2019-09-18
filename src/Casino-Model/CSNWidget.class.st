@@ -31,6 +31,7 @@ CSNWidget class >> requirements [
 
 { #category : #accessing }
 CSNWidget >> actions [
+	"Relation named: #actions type: #CSNAction opposite: #caller"
 
 	<generated>
 	^ actions
@@ -65,6 +66,7 @@ CSNWidget >> addAttributes: anObject [
 
 { #category : #accessing }
 CSNWidget >> attributes [
+	"Relation named: #attributes type: #CSNAttribute opposite: #widget"
 
 	<generated>
 	^ attributes
@@ -103,10 +105,10 @@ CSNWidget >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNWidget >> widgetContainer [
+	"Relation named: #widgetContainer type: #CSNContainer opposite: #widgets"
 
 	<generated>
 	<container>
-
 	^ widgetContainer
 ]
 

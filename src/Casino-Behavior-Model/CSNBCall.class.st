@@ -24,6 +24,7 @@ CSNBCall >> onFailure [
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ko'''>
 	<MSEProperty: #onFailure type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
@@ -43,11 +44,9 @@ CSNBCall >> onFailure: anObject [
 
 { #category : #navigation }
 CSNBCall >> onFailureGroup [
-
 	<generated>
 	<navigation: 'OnFailure'>
-	^ MooseGroup
-			with: (self onFailure)
+	^ MooseGroup with: self onFailure
 ]
 
 { #category : #accessing }
@@ -56,6 +55,7 @@ CSNBCall >> onSuccess [
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ok'''>
 	<MSEProperty: #onSuccess type: #Object>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 
@@ -75,9 +75,7 @@ CSNBCall >> onSuccess: anObject [
 
 { #category : #navigation }
 CSNBCall >> onSuccessGroup [
-
 	<generated>
 	<navigation: 'OnSuccess'>
-	^ MooseGroup
-			with: (self onSuccess)
+	^ MooseGroup with: self onSuccess
 ]

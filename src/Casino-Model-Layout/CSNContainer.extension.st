@@ -2,6 +2,7 @@ Extension { #name : #CSNContainer }
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNContainer >> layout [
+	"Relation named: #layout type: #CSNLayout opposite: #container"
 
 	<generated>
 	<MSEProperty: #layout type: #Object>

@@ -71,7 +71,13 @@ Class {
 		'attribute',
 		'container',
 		'leaf',
-		'uiCustomWidget'
+		'uiCustomWidget',
+		'uiWidgetLabel',
+		'uiModal',
+		'uiModel',
+		'uiDropdownButton',
+		'uiMenu',
+		'uiMenuItem'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -148,6 +154,10 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiUnorderedList := builder newClassNamed: #UnorderedList.
 	uiParagraph := builder newClassNamed: #Paragraph.
 	uiTextarea := builder newClassNamed: #Textarea.
+	uiDropdownButton := builder newClassNamed: #DropdownButton.
+	uiMenu := builder newClassNamed: #Menu.
+	uiMenuItem := builder newClassNamed: #MenuItem.
+	uiWidgetLabel := builder newClassNamed: #WidgetLabel.
 
 	"attributes"
 
@@ -176,6 +186,9 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiAbsoluteWidth := builder newClassNamed: #AbsoluteWidth.
 	uiRelativeWidth := builder newClassNamed: #RelativeWidth.
 	
+	uiModal := builder newClassNamed: #Modal.
+	uiModel := builder newClassNamed: #Model.
+	
 	"from Core"
 	container := self remoteEntity: #Container withPrefix: #CSN.
 	leaf := self remoteEntity: #Leaf withPrefix: #CSN.
@@ -189,6 +202,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	"widgets"
 	uiCustomWidget --|> container.
 	uiButton --|> container.
+	uiDropdownButton --|> uiButton.
 	uiCanvas --|> container.
 	uiPanel --|> container.
 	uiFieldset --|> uiPanel.
@@ -196,6 +210,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiTabManager --|> container.
 	uiTable --|> container.
 	uiTree --|> container.
+	uiWidgetLabel --|> container.
 	uiHeading1 --|> leaf.
 	uiHeading2 --|> leaf.
 	uiHeading3 --|> leaf.
@@ -230,6 +245,8 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiUnorderedList --|> uiList.
 	uiParagraph --|> leaf.
 	uiTextarea --|> leaf.
+	uiMenu --|> container.
+	uiMenuItem --|> leaf.
 
 	"attributes"
 	uiAlt --|> attribute.
@@ -253,6 +270,8 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiTitle --|> attribute.
 	uiValue --|> attribute.
 	uiWidth --|> attribute.
+	uiModel --|> attribute.
+	uiModal --|> attribute.
 	uiAbsoluteWidth --|> uiWidth.
 	uiRelativeWidth --|> uiWidth
 ]

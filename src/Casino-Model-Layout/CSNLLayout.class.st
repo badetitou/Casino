@@ -47,6 +47,7 @@ CSNLLayout >> belongsTo: anObject [
 
 { #category : #accessing }
 CSNLLayout >> cell [
+	"Relation named: #cell type: #CSNLCell opposite: #layoutOwner"
 
 	<generated>
 	^ cell
@@ -69,10 +70,10 @@ CSNLLayout >> cellGroup [
 
 { #category : #accessing }
 CSNLLayout >> container [
+	"Relation named: #container type: #CSNLContainer opposite: #layout"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #container type: #Object>
 	^ self privateState attributeAt: #container ifAbsent: [ nil ]
 ]

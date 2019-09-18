@@ -21,7 +21,7 @@ CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	| newClass invoc success fail namedEntity methodInvoc1 classProperty expression type |
 	expression := FASTExpressionStatement new.
 	invoc := FASTJavaMethodInvocation new name: 'generateError'; yourself.
-	type := FASTVariableExpression new name: 'AsyncCallClass'; yourself.
+	type := FASTJavaVariableExpression new name: 'AsyncCallClass'; yourself.
 	newClass := FASTJavaNewClassExpression new type: type; yourself.
 	invoc arguments add: newClass.
 	success := FASTJavaMethodEntity new name: 'onSuccess'; yourself.
@@ -29,7 +29,7 @@ CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	model silentlyAddAll: {newClass. success. fail. type.}.
 	newClass declarations add: success.
 	newClass declarations add: fail.
-	namedEntity := FASTVariableExpression new name: 'IGwtServiceIncubator'; yourself.
+	namedEntity := FASTJavaVariableExpression new name: 'IGwtServiceIncubator'; yourself.
 	methodInvoc1 := FASTJavaMethodInvocation new name: 'getInsctance'; yourself.
 	invoc receiver: methodInvoc1.
 	classProperty := FASTJavaClassProperty new.

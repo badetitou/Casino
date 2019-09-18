@@ -1,6 +1,13 @@
 Extension { #name : #CSNLeaf }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLeaf class >> accept: aCSNModelVisitor [
+CSNLeaf classSide >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNLeaf: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNLeaf >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNLeaf: self
 ]

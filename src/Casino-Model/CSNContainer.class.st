@@ -27,6 +27,7 @@ CSNContainer >> addWidgets: anObject [
 
 { #category : #accessing }
 CSNContainer >> widgets [
+	"Relation named: #widgets type: #CSNWidget opposite: #widgetContainer"
 
 	<generated>
 	^ widgets

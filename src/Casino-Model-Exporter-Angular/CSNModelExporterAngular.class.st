@@ -519,11 +519,6 @@ CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNHTML: aBLHTML [
-	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNLCell: aBLCell [
 	aBLCell layoutOwner container = aBLCell widget ifTrue: [ ^ '' ].
 	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
@@ -601,11 +596,6 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNSplitButton: aBLSplitButton [
-	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
 	^ self protectString: aBLUIAbsoluteHeight attributeValue, 'px'
 ]
@@ -613,6 +603,21 @@ CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteWidth: aBLUIAbsoluteWidth [
 	^ self protectString: aBLUIAbsoluteWidth attributeValue , 'px'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
+	^ self visitCSNAction: aCSNClickHandler
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
+	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
+	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
 ]
 
 { #category : #visiting }

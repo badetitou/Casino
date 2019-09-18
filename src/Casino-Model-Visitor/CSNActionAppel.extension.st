@@ -1,6 +1,13 @@
 Extension { #name : #CSNActionAppel }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNActionAppel class >> accept: aCSNModelVisitor [
+CSNActionAppel >> accept: aCSNModelVisitor [
+	<generated>
+	^ aCSNModelVisitor visitCSNActionAppel: self
+]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNActionAppel classSide >> accept: aCSNModelVisitor [
+	<generated>
 	^ aCSNModelVisitor visitCSNActionAppel: self
 ]

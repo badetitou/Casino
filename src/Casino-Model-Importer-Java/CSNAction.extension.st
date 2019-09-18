@@ -1,17 +1,17 @@
 Extension { #name : #CSNAction }
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNAction class >> canHandle: aFAMIXElement [
+CSNAction classSide >> canHandle: aFAMIXElement [
 	^ false
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNAction class >> canHandle: aFAMIXElement for: aWidgetInstanc [
+CSNAction classSide >> canHandle: aFAMIXElement for: aWidgetInstanc [
 	^ self canHandle: aFAMIXElement
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNAction class >> createActionFrom: aClass for: aWidgetInstance withImporter: anImporter [
+CSNAction classSide >> createActionFrom: aClass for: aWidgetInstance withImporter: anImporter [
 	^ self new
 		source: aClass;
 		name: aClass name;
@@ -20,7 +20,7 @@ CSNAction class >> createActionFrom: aClass for: aWidgetInstance withImporter: a
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNAction class >> newFrom: aClass for: aWidgetInstance withImporter: anImporter [
+CSNAction classSide >> newFrom: aClass for: aWidgetInstance withImporter: anImporter [
 
 	self subclasses
 		do: [ :subclass | 

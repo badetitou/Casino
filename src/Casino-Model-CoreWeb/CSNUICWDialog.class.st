@@ -1,0 +1,24 @@
+Class {
+	#name : #CSNUICWDialog,
+	#superclass : #CSNContainer,
+	#category : #'Casino-Model-CoreWeb-Entities'
+}
+
+{ #category : #meta }
+CSNUICWDialog class >> annotation [
+
+	<MSEClass: #Dialog super: #CSNContainer>
+	<package: #'Casino-Model-CoreWeb'>
+	<generated>
+	^self
+]
+
+{ #category : #'as yet unclassified' }
+CSNUICWDialog >> getExternalDependency [
+	^ {PNGDialog}
+]
+
+{ #category : #'as yet unclassified' }
+CSNUICWDialog >> getSelector [
+	^ 'p-dialog'
+]
