@@ -1,15 +1,16 @@
 "
+Smalltalk vm parameterAt: 45 put: (Smalltalk vm parameterAt: 44) * 8.
+
 mooseModel := nil.
-mooseModel := FAMIXMooseModel importFromMSEStream: 'D:\Developpement\mse\VerveineJNicolas\GRH.mse' asFileReference readStream.
-mooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'.
+mooseModel := CRFMooseModel importFromMSEStream: '../../../BenoitVerhaeghe/mse/VerveineJ/GRH.mse' asFileReference readStream.
+mooseModel rootFolder: '../../../BenoitVerhaeghe/mse/VerveineJ/'.
 
 ""Generate Bl Model""
 model := nil.
 model := CSNUIMooseModel new name: 'GRH'; yourself.
-CSNMooseModelCreatorAngularRH runOn: model fromSourceModel: mooseModel and:  'D:\Developpement\mse\BLGRHGWT\BLGRHGwt\src\fr\bl\GRH.module.xml'.
+CSNMooseModelCreatorAngularRH runOn: model fromSourceModel: mooseModel and:  '../../../BenoitVerhaeghe/mse/BLGRHGWT/BLGRHGwt/src/fr/bl/GRH.module.xml'.
 model name: 'GRH'.
 model size.
- ""120746""
 
 FASTJavaMooseModel allInstances size.
  ""883 922""
