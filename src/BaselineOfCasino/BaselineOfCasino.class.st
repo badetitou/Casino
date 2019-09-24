@@ -39,7 +39,6 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
 		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests');
-		group: 'rh' with: #('bl' 'Casino-Migration-RH');
 		group: 'ui-bl' with: #('bl' 'tests');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
 		group: 'behavior' with: #('ui-bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Bind-UIBehavior' 'Casino-Behavior-Model');
@@ -86,6 +85,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Toolkit' with: [ spec requires: #('Casino-Model-CoreWeb') ];
 		
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
+		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
 		
 		"behavior-core"
