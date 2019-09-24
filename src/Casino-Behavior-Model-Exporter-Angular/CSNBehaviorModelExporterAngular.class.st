@@ -57,6 +57,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaClassProperty: aFASTJavaClassPro
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
+	^ self accept: aFASTJavaClassTypeExpression typeName
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaConditionStatement: aFASTJavaConditionStatement [
 	^ aFASTJavaConditionStatement childrenNode flatCollect: [ :child | self clone accept: child ]
 ]
@@ -161,6 +166,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaTryCatchStatement: aFASTJavaTryC
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTryPartStatement: aFASTJavaTryPartStatement [
 	^ aFASTJavaTryPartStatement childrenNode flatCollect: [ :child | self clone accept: child ]
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaTypeName: aFASTJavaTypeName [
+	^ aFASTJavaTypeName name
 ]
 
 { #category : #generated }

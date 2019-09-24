@@ -128,7 +128,7 @@ export class ' , aBLPageMetier componentName capitalized
 '
 		,
 			(''
-				, (aBLPageMetier calledBehavior flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ])
+				, (aBLPageMetier calledBehavior flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ] as: OrderedCollection) 
 				indentBy: 4)
 		,
 			'

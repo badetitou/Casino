@@ -23,3 +23,14 @@ CSNModelDependencyExporter >> context [
 CSNModelDependencyExporter >> context: anObject [
 	context := anObject
 ]
+
+{ #category : #generated }
+CSNModelDependencyExporter >> visitCSNActionAppel: anActionAppel [
+	^ self visitCSNAction: anActionAppel
+]
+
+{ #category : #generated }
+CSNModelDependencyExporter >> visitCSNUICWClickHandler: aCSNUICWClickHandler [
+	<generated>
+	^ self visitCSNAction: aCSNUICWClickHandler
+]

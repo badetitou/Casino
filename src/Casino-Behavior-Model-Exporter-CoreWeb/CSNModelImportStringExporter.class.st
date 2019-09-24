@@ -5,13 +5,8 @@ Class {
 }
 
 { #category : #generated }
-CSNModelImportStringExporter >> visitAction: anAction [
+CSNModelImportStringExporter >> visitCSNAction: anAction [
 	^ anAction behavior collect: [ :behavior | self accept: behavior ]
-]
-
-{ #category : #generated }
-CSNModelImportStringExporter >> visitActionAppel: anActionAppel [
-	^ self visitAction: anActionAppel
 ]
 
 { #category : #generated }

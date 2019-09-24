@@ -5,12 +5,12 @@ Class {
 }
 
 { #category : #generated }
-CSNModelInitializeVariableExporter >> visitAction: anAction [
+CSNModelInitializeVariableExporter >> visitCSNAction: anAction [
 	^ anAction behavior collect: [ :behavior | self accept: behavior ]
 ]
 
 { #category : #generated }
-CSNModelInitializeVariableExporter >> visitActionAppel: anActionAppel [
+CSNModelInitializeVariableExporter >> visitCSNActionAppel: anActionAppel [
 	^ ''
 ]
 
