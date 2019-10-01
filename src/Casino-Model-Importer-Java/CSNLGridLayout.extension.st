@@ -1,7 +1,7 @@
 Extension { #name : #CSNLGridLayout }
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
 	| tmpCell |
 	anInvocation
 		ifNil: [ self addWidget: aWidget ]
@@ -9,7 +9,7 @@ CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
 			anInvocation ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].
 			"widget on the grid"
 			param := anInvocation parameters.
-			tmpCell := CSNLCell new
+			tmpCell := (aFactory create: CSNLCell)
 				widget: aWidget;
 				yourself.
 			(self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) add: tmpCell -> anInvocation.

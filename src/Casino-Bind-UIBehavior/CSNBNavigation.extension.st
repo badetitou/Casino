@@ -2,6 +2,7 @@ Extension { #name : #CSNBNavigation }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNBNavigation >> page [
+	"Relation named: #page type: #CSNBPage opposite: #navigations"
 
 	<generated>
 	<MSEProperty: #page type: #Object>

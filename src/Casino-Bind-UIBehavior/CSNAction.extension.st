@@ -2,6 +2,7 @@ Extension { #name : #CSNAction }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNAction >> behavior [
+	"Relation named: #behavior type: #CSNMethodEntity opposite: #ui"
 
 	<generated>
 	<MSEProperty: #behavior type: #Object>

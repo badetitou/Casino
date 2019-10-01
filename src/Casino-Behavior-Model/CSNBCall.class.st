@@ -20,6 +20,7 @@ CSNBCall class >> annotation [
 
 { #category : #accessing }
 CSNBCall >> onFailure [
+	"Relation named: #onFailure type: #CSNBBehaviouralEntity opposite: #carrefourOnFailureOwner"
 
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ko'''>
@@ -51,6 +52,7 @@ CSNBCall >> onFailureGroup [
 
 { #category : #accessing }
 CSNBCall >> onSuccess [
+	"Relation named: #onSuccess type: #CSNBBehaviouralEntity opposite: #carrefourOnSuccessOwner"
 
 	<generated>
 	<MSEComment: 'The statement executed if the call return ''ok'''>

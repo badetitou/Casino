@@ -94,7 +94,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 
 	autoComplete --|> uiInput.
 	richTextArea --|> uiInput.
-	splitButton --|> uiInput.
+	splitButton --|> csnContainer.
 	switch --|> uiInput.
 
 

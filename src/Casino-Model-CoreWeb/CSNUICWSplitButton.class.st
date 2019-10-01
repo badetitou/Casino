@@ -1,13 +1,13 @@
 Class {
 	#name : #CSNUICWSplitButton,
-	#superclass : #CSNUIInput,
+	#superclass : #CSNContainer,
 	#category : #'Casino-Model-CoreWeb-Entities'
 }
 
 { #category : #meta }
 CSNUICWSplitButton class >> annotation [
 
-	<MSEClass: #SplitButton super: #CSNUIInput>
+	<MSEClass: #SplitButton super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

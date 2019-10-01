@@ -9,11 +9,11 @@ CSNContainer >> addAllWidgets: aCollectionOfWidget [
 { #category : #'*Casino-Model-Importer' }
 CSNContainer >> addWidget: aWidget [
 
-	self layout ifNotNil: [:layout | layout addWidget: aWidget withInvocationOfAdd: nil ] ifNil: [ self widgets add: aWidget ]
+	self layout ifNotNil: [:layout | layout addWidget: aWidget withInvocationOfAdd: nil usingFactory: nil ] ifNil: [ self widgets add: aWidget ]
 ]
 
 { #category : #'*Casino-Model-Importer' }
-CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
 	aWidget addingPosition: anInvocation sourceAnchor startPos.
 	self addWidget: aWidget
 ]

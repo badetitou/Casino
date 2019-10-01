@@ -11,5 +11,5 @@ CSNLinkWidgetResponsabilitiesXmluiHandler >> handleAddLinkedFromVariable: aColle
 		ifPresent: [ :listOfWidgetClass | 
 			listOfWidgetClass
 				do:
-					[ :widgetClass | (theCurrentImporter model allCSNWidgetExceptPage select: [ :widget | widget realClass = widgetClass ]) do: [ :widget | widget addWidget: widgetContainer ] ] ]
+					[ :widgetClass | (theCurrentImporter model allCSNWidgetExceptPage select: [ :widget | widget isContainer and: [ widget realClass = widgetClass ] ]) do: [ :widget | widget addWidget: widgetContainer ] ] ]
 ]

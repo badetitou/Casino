@@ -87,157 +87,6 @@ CSNModelImporterCoreWebVisitor >> getAttributeValueFrom: anInvocation [
 	^ anInvocation parameters first
 ]
 
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNAutoComplete: aCSNAutoComplete [
-	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL') includes: source invokedClassName) 
-		ifTrue: [ (self createWidget: aCSNAutoComplete) ] 
-		ifFalse: [ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNChart: aCSNChart [
-	^ ('.*Chart.*' asRegex matchesPrefix: source invokedClassName) 
-		ifTrue: [ self createWidget: aCSNChart ] 
-		ifFalse: [ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNCoreCellWidth: aCSNCoreCellWidth [
-	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
-	
-	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
-	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
-	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
-	"
-
-	^ (source isInvocation and: [ source attributeName = 'cellwidth' ])
-		ifTrue: [ (factory importer
-				widgetInVariable:
-					((source from localVariables select: [ :localVariable | localVariable name = (source parameters at: 1) ]) ifNotEmpty: [ :correspondingVariable | correspondingVariable first ] ifEmpty: [ nil ]))
-				ifNotNil: [ :widget | 
-					^ (self create: CSNUIWidth)
-						name: 'cellwidth';
-						attributeValue: (source parameters at: 2);
-						widget: widget cellOwner;
-						yourself ] ]
-		ifFalse: [ ^ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNCoreColSpan: aCSNCoreColSpan [
-	^ (source isInvocation and: [ source attributeName = 'colspan' ])
-		ifTrue: [ (self createAttribute: aCSNCoreColSpan for: source)
-				attributeValue: source parameters third;
-				yourself ]
-		ifFalse: [ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNCoreHorizontalAlignement: aCSNCoreHorizontalAlignement [
-	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
-	
-	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
-	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
-	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
-	"
-
-	^ (source isInvocation and: [ source attributeName = 'horizontalalignment' ])
-		ifTrue: [ entity
-				ifNil: [ | alignement |
-					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
-					self factory model add: alignement.
-					^ alignement ]
-				ifNotNil: [ entity subWidgets
-						do: [ :widget | 
-							| alignement |
-							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
-							self factory model add: alignement.
-							widget position: alignement ].
-					^ nil ] ]
-		ifFalse: [ ^ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNCoreRowSpan: aCSNCoreRowSpan [
-	^ (source isInvocation and: [ source attributeName = 'rowspan' ])
-		ifTrue: [ (self createAttribute: aCSNCoreRowSpan for: source)
-				attributeValue: source parameters third;
-				yourself ]
-		ifFalse: [ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNCoreVerticalAlignement: aCSNCoreVerticalAlignement [
-	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
-	
-	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
-	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
-	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
-	"
-
-	^ (source isInvocation and: [ source attributeName = 'verticalalignment' ])
-		ifTrue: [ entity
-				ifNil: [ | alignement |
-					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
-					self factory model add: alignement.
-					^ alignement ]
-				ifNotNil: [ entity subWidgets
-						do: [ :widget | 
-							| alignement |
-							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
-							self factory model add: alignement.
-							widget position: alignement ].
-					^ nil ] ]
-		ifFalse: [ ^ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNDialog: aCSNDialog [
-	^ 'BLDialogBox' = source invokedClassName
-		ifTrue: [ | dialog |
-			dialog := self createWidget: aCSNDialog.
-			dialog parametersAt: #header put: (source parameters at: 1 ifAbsent: [ 'todo' ]).
-			source parameters size = 1
-				ifTrue: [ dialog
-						addAttribute:
-							((self create: CSNModal)
-								attributeValue: 'true';
-								yourself) ]
-				ifFalse: [ dialog
-						addAttribute:
-							((self create: CSNModal)
-								attributeValue: source parameters last;
-								yourself) ].
-			dialog ]
-		ifFalse: [ nil ]
-]
-
-{ #category : #api }
-CSNModelImporterCoreWebVisitor >> visitCSNOpen: aCSOpen [
-	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNProgressBar: aCSNProgressBar [
-	^ 'BLProgressBar' = source invokedClassName
-		ifTrue: [ (self createWidget: aCSNProgressBar) ]
-		ifFalse: [ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNRichTextArea: aCSNRichTextArea [
-	^ (#('BLRTFWithToolbar') includes: source invokedClassName) 
-		ifTrue: [ (self createWidget: aCSNRichTextArea) ] 
-		ifFalse: [ nil ]
-]
-
-{ #category : #visitor }
-CSNModelImporterCoreWebVisitor >> visitCSNSwitch: aCSNSwitch [
-	^ 'BLToggleButton' = source invokedClassName
-		ifTrue: [ (self createWidget: aCSNSwitch) ]
-		ifFalse: [ nil ]
-]
-
 { #category : #api }
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
@@ -272,11 +121,155 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 ]
 
 { #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
+	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL') includes: source invokedClassName) 
+		ifTrue: [ (self createWidget: aCSNAutoComplete) ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWChart: aCSNChart [
+	^ ('.*Chart.*' asRegex matchesPrefix: source invokedClassName) 
+		ifTrue: [ self createWidget: aCSNChart ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreCellWidth: aCSNCoreCellWidth [
+	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
+	
+	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
+	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
+	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
+	"
+
+	^ (source isInvocation and: [ source attributeName = 'cellwidth' ])
+		ifTrue: [ (factory importer
+				widgetInVariable:
+					((source from localVariables select: [ :localVariable | localVariable name = (source parameters at: 1) ]) ifNotEmpty: [ :correspondingVariable | correspondingVariable first ] ifEmpty: [ nil ]))
+				ifNotNil: [ :widget | 
+					^ (self create: CSNUIWidth)
+						name: 'cellwidth';
+						attributeValue: (source parameters at: 2);
+						widget: widget cellOwner;
+						yourself ] ]
+		ifFalse: [ ^ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreColSpan: aCSNCoreColSpan [
+	^ (source isInvocation and: [ source attributeName = 'colspan' ])
+		ifTrue: [ (self createAttribute: aCSNCoreColSpan for: source)
+				attributeValue: source parameters third;
+				yourself ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreHorizontalAlignement: aCSNCoreHorizontalAlignement [
+	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
+	
+	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
+	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
+	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
+	"
+
+	^ (source isInvocation and: [ source attributeName = 'horizontalalignment' ])
+		ifTrue: [ entity
+				ifNil: [ | alignement |
+					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
+					self factory model add: alignement.
+					^ alignement ]
+				ifNotNil: [ entity subWidgets
+						do: [ :widget | 
+							| alignement |
+							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
+							self factory model add: alignement.
+							widget position: alignement ].
+					^ nil ] ]
+		ifFalse: [ ^ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreRowSpan: aCSNCoreRowSpan [
+	^ (source isInvocation and: [ source attributeName = 'rowspan' ])
+		ifTrue: [ (self createAttribute: aCSNCoreRowSpan for: source)
+				attributeValue: source parameters third;
+				yourself ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreVerticalAlignement: aCSNCoreVerticalAlignement [
+	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
+	
+	1. Get the variable name -> anInvocation parameters at: 1 (in ex: bl_groupe_vertical_290)
+	2. Determine the real variable with the property -> anImporter widgetInVariable: ()
+	3. If this variable exist as a Widget (we hope so... but sometimes there are bugs for something we don't currently know), create the attribute and add it to the cellOwner of the variable
+	"
+
+	^ (source isInvocation and: [ source attributeName = 'verticalalignment' ])
+		ifTrue: [ entity
+				ifNil: [ | alignement |
+					alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
+					self factory model add: alignement.
+					^ alignement ]
+				ifNotNil: [ entity subWidgets
+						do: [ :widget | 
+							| alignement |
+							alignement := CSNLAlignement createAlignementWithHorizontal: source parameters first andVertical: nil.
+							self factory model add: alignement.
+							widget position: alignement ].
+					^ nil ] ]
+		ifFalse: [ ^ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
+	^ 'BLDialogBox' = source invokedClassName
+		ifTrue: [ | dialog |
+			dialog := self createWidget: aCSNDialog.
+			dialog parametersAt: #header put: (source parameters at: 1 ifAbsent: [ 'todo' ]).
+			source parameters size = 1
+				ifTrue: [ dialog
+						addAttribute:
+							((self create: CSNUIModal)
+								attributeValue: 'true';
+								yourself) ]
+				ifFalse: [ dialog
+						addAttribute:
+							((self create: CSNUIModal)
+								attributeValue: source parameters last;
+								yourself) ].
+			dialog ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 	^ 'HTML' = source invokedClassName
 		ifTrue: [ (self createWidget: aCSNHTML)
 				addWidget: ((self create: CSNLeaf) text: (source parameters at: 1 ifAbsent: [ '' ]));
 				yourself ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWOpen: aCSOpen [
+	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWProgressBar: aCSNProgressBar [
+	^ 'BLProgressBar' = source invokedClassName
+		ifTrue: [ (self createWidget: aCSNProgressBar) ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWRichTextArea: aCSNRichTextArea [
+	^ (#('BLRTFWithToolbar') includes: source invokedClassName) 
+		ifTrue: [ (self createWidget: aCSNRichTextArea) ] 
 		ifFalse: [ nil ]
 ]
 
@@ -292,6 +285,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
 				attributeValue: 'items';
 				widget: splitButton.
 			splitButton ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWSwitch: aCSNSwitch [
+	^ 'BLToggleButton' = source invokedClassName
+		ifTrue: [ (self createWidget: aCSNSwitch) ]
 		ifFalse: [ nil ]
 ]
 

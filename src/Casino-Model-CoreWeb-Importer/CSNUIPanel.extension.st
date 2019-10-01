@@ -1,8 +1,8 @@
 Extension { #name : #CSNUIPanel }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation [
-	self layout addWidget: aWidget withInvocationOfAdd: anInvocation 
+CSNUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
+	^ self layout addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }

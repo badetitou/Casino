@@ -12,7 +12,7 @@ CSNLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd:
 	((mapVariableInvocationOfAdd collect: [ :VariableInvocationOfAdd | (theCurrentImporter widgetInVariable: VariableInvocationOfAdd key) -> VariableInvocationOfAdd value ])
 		select: [ :assoc | assoc key isNotNil ])
 		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found key addWidget: widgetContainer withInvocationOfAdd: found value ].
+			founds do: [ :found | found key addWidget: widgetContainer withInvocationOfAdd: found value usingFactory: theCurrentImporter factory ].
 			^ true ].
 	^ false
 ]

@@ -18,6 +18,7 @@ CSNBPopUp class >> annotation [
 
 { #category : #accessing }
 CSNBPopUp >> data [
+	"Relation named: #data type: #CSNBExpression opposite: #carrefourPopUpOwner"
 
 	<generated>
 	<MSEComment: 'The data that will be displayed in the popUp'>

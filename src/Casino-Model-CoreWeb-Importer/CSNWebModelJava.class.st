@@ -101,7 +101,7 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 				whileTrue: [ | found |
 					found := self widgetInVariable: containerInvocation receiver.
 					found
-						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation.
+						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation usingFactory: self factory.
 							containerInvocation := nil ]
 						ifNil: [ containerInvocation := containerInvocation container ] ] ]
 ]

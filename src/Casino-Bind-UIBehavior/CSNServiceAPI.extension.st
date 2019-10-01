@@ -2,6 +2,7 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNServiceAPI >> callers [
+	"Relation named: #callers type: #CSNCall opposite: #distantService"
 
 	<generated>
 	<MSEProperty: #callers type: #Object>

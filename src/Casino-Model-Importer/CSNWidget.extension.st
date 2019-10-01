@@ -1,7 +1,7 @@
 Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Importer' }
-CSNWidget classSide >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
+CSNWidget class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
 	aCollectionOfImporter
 		do: [ :importer | 
 			importer
@@ -10,7 +10,7 @@ CSNWidget classSide >> initializeImporters: aCollectionOfImporter withInvocation
 ]
 
 { #category : #'*Casino-Model-Importer' }
-CSNWidget classSide >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
+CSNWidget class >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
 	self initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance.
 	self subclasses
 		do: [ :subclass | 

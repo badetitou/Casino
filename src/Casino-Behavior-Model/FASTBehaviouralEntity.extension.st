@@ -2,10 +2,10 @@ Extension { #name : #FASTBehaviouralEntity }
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTBehaviouralEntity >> carrefourOnFailureOwner [
+	"Relation named: #carrefourOnFailureOwner type: #FASTCall opposite: #onFailure"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #carrefourOnFailureOwner type: #Object>
 	<package: #'Casino-Behavior-Model'>
 	^ self privateState attributeAt: #carrefourOnFailureOwner ifAbsent: [ nil ]
@@ -27,10 +27,10 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTBehaviouralEntity >> carrefourOnSuccessOwner [
+	"Relation named: #carrefourOnSuccessOwner type: #FASTCall opposite: #onSuccess"
 
 	<generated>
 	<container>
-
 	<MSEProperty: #carrefourOnSuccessOwner type: #Object>
 	<package: #'Casino-Behavior-Model'>
 	^ self privateState attributeAt: #carrefourOnSuccessOwner ifAbsent: [ nil ]

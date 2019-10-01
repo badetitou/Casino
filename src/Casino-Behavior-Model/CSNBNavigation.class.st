@@ -24,6 +24,7 @@ CSNBNavigation >> addArguments: anObject [
 
 { #category : #accessing }
 CSNBNavigation >> arguments [
+	"Relation named: #arguments type: #CSNBExpression opposite: #navigation"
 
 	<generated>
 	<MSEProperty: #arguments type: #Object>

@@ -2,6 +2,7 @@ Extension { #name : #FASTJavaMethodEntity }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 FASTJavaMethodEntity >> ui [
+	"Relation named: #ui type: #FASTJavaAction opposite: #behavior"
 
 	<generated>
 	<MSEProperty: #ui type: #Object>

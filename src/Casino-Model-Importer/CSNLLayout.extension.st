@@ -14,13 +14,13 @@ CSNLLayout >> addWidget: aWidget [
 ]
 
 { #category : #'*Casino-Model-Importer' }
-CSNLLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation [
+CSNLLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
 	anInvocation ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].
 	^ self addWidget: aWidget.
 ]
 
 { #category : #'*Casino-Model-Importer' }
-CSNLLayout classSide >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
+CSNLLayout class >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
 	self subclasses do: [ :subclass | aCollectionOfImporter do: [ :importer | (subclass accept: importer) ifNotNil: [ :newLayout | ^ newLayout ] ] ].
 	^ nil
 ]
