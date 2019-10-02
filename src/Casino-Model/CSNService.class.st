@@ -22,6 +22,7 @@ CSNService >> actions [
 	"Relation named: #actions type: #CSNServiceAPI opposite: #serviceOwner"
 
 	<generated>
+	<derived>
 	^ actions
 ]
 

@@ -6,9 +6,14 @@ Class {
 
 { #category : #meta }
 CSNUIModel class >> annotation [
-
-	<MSEClass: #Model super: #CSNAttribute>
+	<MSEClass: #CSNUIModel super: #MooseModel>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
-	^self
+]
+
+{ #category : #initialization }
+CSNUIModel >> initialize [
+	<generated>
+	super initialize.
+	self metamodel: (self class environment at: #CSNUISubEntitiesGenerator) metamodel
 ]

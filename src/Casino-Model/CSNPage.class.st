@@ -36,6 +36,7 @@ CSNPage >> businessPage [
 	"Relation named: #businessPage type: #CSNBusinessPage opposite: #pageContainers"
 
 	<generated>
+	<derived>
 	^ businessPage
 ]
 
@@ -59,6 +60,7 @@ CSNPage >> caller [
 	"Relation named: #caller type: #CSNActionAppel opposite: #call"
 
 	<generated>
+	<derived>
 	^ caller
 ]
 

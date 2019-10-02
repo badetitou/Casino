@@ -34,6 +34,7 @@ CSNWidget >> actions [
 	"Relation named: #actions type: #CSNAction opposite: #caller"
 
 	<generated>
+	<derived>
 	^ actions
 ]
 
@@ -69,6 +70,7 @@ CSNWidget >> attributes [
 	"Relation named: #attributes type: #CSNAttribute opposite: #widget"
 
 	<generated>
+	<derived>
 	^ attributes
 ]
 
@@ -85,22 +87,6 @@ CSNWidget >> attributesGroup [
 	<generated>
 	<navigation: 'Attributes'>
 	^ MooseGroup withAll: self attributes asSet
-]
-
-{ #category : #accessing }
-CSNWidget >> belongsTo [
-
-	<generated>
-	^ self widgetContainer
-
-]
-
-{ #category : #accessing }
-CSNWidget >> belongsTo: anObject [
-
-	<generated>
-	self widgetContainer: anObject
-
 ]
 
 { #category : #accessing }

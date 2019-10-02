@@ -21,28 +21,13 @@ CSNLPosition class >> requirements [
 ]
 
 { #category : #accessing }
-CSNLPosition >> belongsTo [
-
-	<generated>
-	^ self widget
-
-]
-
-{ #category : #accessing }
-CSNLPosition >> belongsTo: anObject [
-
-	<generated>
-	self widget: anObject
-
-]
-
-{ #category : #accessing }
 CSNLPosition >> widget [
-	"Relation named: #widget type: #CSNLWidget opposite: #position"
+	"Relation named: #widget type: #CSNWidget opposite: #position"
 
 	<generated>
 	<container>
-	<MSEProperty: #widget type: #Object>
+	<derived>
+	<MSEProperty: #widget type: #CSNWidget opposite: #position>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 

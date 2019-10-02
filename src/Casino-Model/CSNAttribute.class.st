@@ -46,22 +46,6 @@ CSNAttribute >> attributeValue: anObject [
 ]
 
 { #category : #accessing }
-CSNAttribute >> belongsTo [
-
-	<generated>
-	^ self widget
-
-]
-
-{ #category : #accessing }
-CSNAttribute >> belongsTo: anObject [
-
-	<generated>
-	self widget: anObject
-
-]
-
-{ #category : #accessing }
 CSNAttribute >> oldClass [
 
 	<MSEProperty: #oldClass type: #Object>

@@ -21,28 +21,13 @@ CSNLSize class >> requirements [
 ]
 
 { #category : #accessing }
-CSNLSize >> belongsTo [
-
-	<generated>
-	^ self widget
-
-]
-
-{ #category : #accessing }
-CSNLSize >> belongsTo: anObject [
-
-	<generated>
-	self widget: anObject
-
-]
-
-{ #category : #accessing }
 CSNLSize >> widget [
-	"Relation named: #widget type: #CSNLWidget opposite: #size"
+	"Relation named: #widget type: #CSNWidget opposite: #size"
 
 	<generated>
 	<container>
-	<MSEProperty: #widget type: #Object>
+	<derived>
+	<MSEProperty: #widget type: #CSNWidget opposite: #size>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 

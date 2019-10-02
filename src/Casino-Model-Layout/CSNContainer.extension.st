@@ -2,10 +2,11 @@ Extension { #name : #CSNContainer }
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNContainer >> layout [
-	"Relation named: #layout type: #CSNLayout opposite: #container"
+	"Relation named: #layout type: #CSNLLayout opposite: #container"
 
 	<generated>
-	<MSEProperty: #layout type: #Object>
+	<derived>
+	<MSEProperty: #layout type: #CSNLLayout opposite: #container>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #layout ifAbsent: [ nil ]
 ]

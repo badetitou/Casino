@@ -24,22 +24,6 @@ CSNActionAppel class >> requirements [
 ]
 
 { #category : #accessing }
-CSNActionAppel >> belongsTo [
-
-	<generated>
-	^ self call
-
-]
-
-{ #category : #accessing }
-CSNActionAppel >> belongsTo: anObject [
-
-	<generated>
-	self call: anObject
-
-]
-
-{ #category : #accessing }
 CSNActionAppel >> call [
 	"Relation named: #call type: #CSNPage opposite: #caller"
 

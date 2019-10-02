@@ -30,6 +30,7 @@ CSNContainer >> widgets [
 	"Relation named: #widgets type: #CSNWidget opposite: #widgetContainer"
 
 	<generated>
+	<derived>
 	^ widgets
 ]
 

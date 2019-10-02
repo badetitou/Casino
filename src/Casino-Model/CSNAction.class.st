@@ -27,22 +27,6 @@ CSNAction class >> requirements [
 ]
 
 { #category : #accessing }
-CSNAction >> belongsTo [
-
-	<generated>
-	^ self caller
-
-]
-
-{ #category : #accessing }
-CSNAction >> belongsTo: anObject [
-
-	<generated>
-	self caller: anObject
-
-]
-
-{ #category : #accessing }
 CSNAction >> caller [
 	"Relation named: #caller type: #CSNWidget opposite: #actions"
 

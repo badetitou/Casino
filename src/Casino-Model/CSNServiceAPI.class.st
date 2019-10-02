@@ -24,22 +24,6 @@ CSNServiceAPI class >> requirements [
 ]
 
 { #category : #accessing }
-CSNServiceAPI >> belongsTo [
-
-	<generated>
-	^ self serviceOwner
-
-]
-
-{ #category : #accessing }
-CSNServiceAPI >> belongsTo: anObject [
-
-	<generated>
-	self serviceOwner: anObject
-
-]
-
-{ #category : #accessing }
 CSNServiceAPI >> serviceOwner [
 	"Relation named: #serviceOwner type: #CSNService opposite: #actions"
 

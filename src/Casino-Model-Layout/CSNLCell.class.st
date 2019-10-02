@@ -24,22 +24,6 @@ CSNLCell class >> requirements [
 ]
 
 { #category : #accessing }
-CSNLCell >> belongsTo [
-
-	<generated>
-	^ self layoutOwner
-
-]
-
-{ #category : #accessing }
-CSNLCell >> belongsTo: anObject [
-
-	<generated>
-	self layoutOwner: anObject
-
-]
-
-{ #category : #accessing }
 CSNLCell >> layoutOwner [
 	"Relation named: #layoutOwner type: #CSNLLayout opposite: #cell"
 
@@ -65,10 +49,10 @@ CSNLCell >> layoutOwnerGroup [
 
 { #category : #accessing }
 CSNLCell >> widget [
-	"Relation named: #widget type: #CSNLWidget opposite: #cellOwner"
+	"Relation named: #widget type: #CSNWidget opposite: #cellOwner"
 
 	<generated>
-	<MSEProperty: #widget type: #Object>
+	<MSEProperty: #widget type: #CSNWidget opposite: #cellOwner>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 
