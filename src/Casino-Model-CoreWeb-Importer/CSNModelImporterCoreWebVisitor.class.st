@@ -366,7 +366,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputColor: aCSNUIInputColor [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputDate: aCSNUIInputDate [
-	^ (#('BLTextBoxDate' 'BLTextBoxDatePicker') includes: source invokedClassName)
+	^ (#('BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker') includes: source invokedClassName)
 		ifTrue: [ (self createWidgetInput: aCSNUIInputDate)
 				addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
 				parametersAt: #type put: 'date';
@@ -496,7 +496,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
-	^ (#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils') includes: source invokedClassName)
+	^ (#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils' 'InlineLabel') includes: source invokedClassName)
 		ifTrue: [ | paragraph |
 			paragraph := self createWidget: aCSNUIParagraph.
 			'ComponentUtils' = source invokedClassName
