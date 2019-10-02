@@ -1,13 +1,13 @@
 Extension { #name : #CSNUIUnorderedList }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIUnorderedList classSide >> accept: aCSNModelVisitor [
+CSNUIUnorderedList >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIUnorderedList: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIUnorderedList >> accept: aCSNModelVisitor [
+CSNUIUnorderedList class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIUnorderedList: self
 ]

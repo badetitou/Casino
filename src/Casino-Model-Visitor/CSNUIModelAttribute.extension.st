@@ -1,13 +1,13 @@
-Extension { #name : #CSNUIModel }
+Extension { #name : #CSNUIModelAttribute }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIModel >> accept: aCSNModelVisitor [
+CSNUIModelAttribute class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIModel: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIModel classSide >> accept: aCSNModelVisitor [
+CSNUIModelAttribute >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIModel: self
 ]

@@ -7,7 +7,7 @@ CSNUIInputWeek >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputWeek classSide >> accept: aCSNModelVisitor [
+CSNUIInputWeek class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputWeek: self
 ]

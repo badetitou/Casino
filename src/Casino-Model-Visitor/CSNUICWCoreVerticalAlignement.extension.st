@@ -7,7 +7,7 @@ CSNUICWCoreVerticalAlignement >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWCoreVerticalAlignement classSide >> accept: aCSNModelVisitor [
+CSNUICWCoreVerticalAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWCoreVerticalAlignement: self
 ]

@@ -7,7 +7,7 @@ CSNUICWDynamicFieldset >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWDynamicFieldset classSide >> accept: aCSNModelVisitor [
+CSNUICWDynamicFieldset class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWDynamicFieldset: self
 ]

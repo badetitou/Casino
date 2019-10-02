@@ -187,7 +187,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiRelativeWidth := builder newClassNamed: #RelativeWidth.
 	
 	uiModal := builder newClassNamed: #Modal.
-	uiModel := builder newClassNamed: #Model.
+	uiModel := builder newClassNamed: #ModelAttribute.
 	
 	"from Core"
 	container := self remoteEntity: #Container withPrefix: #CSN.

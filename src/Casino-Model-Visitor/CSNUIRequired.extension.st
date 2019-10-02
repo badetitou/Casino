@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIRequired }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIRequired classSide >> accept: aCSNModelVisitor [
+CSNUIRequired class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIRequired: self
 ]

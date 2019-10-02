@@ -1,13 +1,13 @@
 Extension { #name : #CSNUITabManager }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUITabManager >> accept: aCSNModelVisitor [
+CSNUITabManager class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUITabManager: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUITabManager classSide >> accept: aCSNModelVisitor [
+CSNUITabManager >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUITabManager: self
 ]

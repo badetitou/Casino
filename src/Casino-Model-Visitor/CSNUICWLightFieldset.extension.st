@@ -7,7 +7,7 @@ CSNUICWLightFieldset >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWLightFieldset classSide >> accept: aCSNModelVisitor [
+CSNUICWLightFieldset class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWLightFieldset: self
 ]

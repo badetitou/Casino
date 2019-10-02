@@ -7,7 +7,7 @@ CSNUIInputCheckbox >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputCheckbox classSide >> accept: aCSNModelVisitor [
+CSNUIInputCheckbox class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputCheckbox: self
 ]

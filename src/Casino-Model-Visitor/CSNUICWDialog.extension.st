@@ -7,7 +7,7 @@ CSNUICWDialog >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWDialog classSide >> accept: aCSNModelVisitor [
+CSNUICWDialog class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWDialog: self
 ]

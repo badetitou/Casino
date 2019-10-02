@@ -1,13 +1,13 @@
 Extension { #name : #CSNUIInputReset }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputReset classSide >> accept: aCSNModelVisitor [
+CSNUIInputReset >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputReset: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputReset >> accept: aCSNModelVisitor [
+CSNUIInputReset class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputReset: self
 ]

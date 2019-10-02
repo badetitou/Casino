@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWAutoComplete }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWAutoComplete classSide >> accept: aCSNModelVisitor [
+CSNUICWAutoComplete class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWAutoComplete: self
 ]

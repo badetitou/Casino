@@ -1,11 +1,11 @@
-Extension { #name : #CSNUIModel }
+Extension { #name : #CSNUIModelAttribute }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNUIModel >> leftToken [
+CSNUIModelAttribute >> leftToken [
 	^ '['
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNUIModel >> rightToken [
+CSNUIModelAttribute >> rightToken [
 	^ ']'
 ]

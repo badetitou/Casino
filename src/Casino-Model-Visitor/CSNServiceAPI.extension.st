@@ -1,7 +1,7 @@
 Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNServiceAPI classSide >> accept: aCSNModelVisitor [
+CSNServiceAPI class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNServiceAPI: self
 ]

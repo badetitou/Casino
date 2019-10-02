@@ -1,7 +1,7 @@
 Extension { #name : #CSNBusinessPage }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNBusinessPage classSide >> accept: aCSNModelVisitor [
+CSNBusinessPage class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNBusinessPage: self
 ]

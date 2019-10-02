@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWHTML }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWHTML classSide >> accept: aCSNModelVisitor [
+CSNUICWHTML class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWHTML: self
 ]

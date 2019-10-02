@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWCoreHorizontalAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWCoreHorizontalAlignement classSide >> accept: aCSNModelVisitor [
+CSNUICWCoreHorizontalAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWCoreHorizontalAlignement: self
 ]

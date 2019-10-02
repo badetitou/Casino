@@ -7,7 +7,7 @@ CSNUICWClickHandler >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWClickHandler classSide >> accept: aCSNModelVisitor [
+CSNUICWClickHandler class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWClickHandler: self
 ]

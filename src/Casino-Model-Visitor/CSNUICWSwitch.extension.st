@@ -7,7 +7,7 @@ CSNUICWSwitch >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICWSwitch classSide >> accept: aCSNModelVisitor [
+CSNUICWSwitch class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICWSwitch: self
 ]

@@ -7,7 +7,7 @@ CSNActionAppel >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNActionAppel classSide >> accept: aCSNModelVisitor [
+CSNActionAppel class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNActionAppel: self
 ]

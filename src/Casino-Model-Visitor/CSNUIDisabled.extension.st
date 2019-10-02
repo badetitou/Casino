@@ -7,7 +7,7 @@ CSNUIDisabled >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIDisabled classSide >> accept: aCSNModelVisitor [
+CSNUIDisabled class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIDisabled: self
 ]

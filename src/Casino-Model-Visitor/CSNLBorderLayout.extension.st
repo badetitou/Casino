@@ -7,7 +7,7 @@ CSNLBorderLayout >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLBorderLayout classSide >> accept: aCSNModelVisitor [
+CSNLBorderLayout class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLBorderLayout: self
 ]

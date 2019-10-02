@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIWidgetLabel }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIWidgetLabel classSide >> accept: aCSNModelVisitor [
+CSNUIWidgetLabel class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIWidgetLabel: self
 ]
