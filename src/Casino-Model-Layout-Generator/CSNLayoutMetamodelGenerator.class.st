@@ -37,14 +37,6 @@ Class {
 }
 
 { #category : #accessing }
-CSNLayoutMetamodelGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
-
-{ #category : #accessing }
 CSNLayoutMetamodelGenerator class >> packageName [
 
 	<ignoreForCoverage>
