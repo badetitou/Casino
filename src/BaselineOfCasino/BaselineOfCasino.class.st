@@ -25,8 +25,8 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec
 		baseline: 'PetitParser'
 		with: [ spec
-				loads: #('ParserCore');
-				repository: 'github://moosetechnology/PetitParser:master/src' ].
+				loads: #('Xml');
+				repository: 'github://moosetechnology/PetitParser:development/src' ].
 	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
 	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour/src' ]
 ]
