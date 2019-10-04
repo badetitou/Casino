@@ -1,12 +1,12 @@
 "
 mooseModel := nil.
-mooseModel := CRFMooseModel importFromMSEStream: 'D:\Developpement\mse\VerveineJNicolas\Office.mse' asFileReference readStream.
+mooseModel := CRFModel importFromMSEStream: 'D:\Developpement\mse\VerveineJNicolas\Office.mse' asFileReference readStream.
 mooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'.
 
 ""Generate Bl Model""
 model := nil.
-model := CSNUIMooseModel new name: 'Office'; yourself.
-CSNMooseModelCreatorAngularRH runOn: model fromSourceModel: mooseModel and:  'D:\Developpement\mse\BLOfficeGWT\BLThotGwt\src\fr\bl\application.module.xml'.
+model := CSNUIModel new name: 'Office'; yourself.
+CSNMooseModelCreatorAngularPostOffice runOn: model fromSourceModel: mooseModel and:  'D:\Developpement\mse\BLOfficeGWT\BLThotGwt\src\fr\bl\application.module.xml'.
 model name: 'Office'.
 model size.
  ""120746""
