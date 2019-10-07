@@ -7,7 +7,7 @@ Class {
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesXmluiHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	xmluiLinkTable
-		at: ((widgetContainer source from atScope: FAMIXClass) at: 1)
+		at: ((widgetContainer source from atAnyScope: {FamixTClass. FamixTParameterizedType}) at: 1)
 		ifPresent: [ :listOfWidgetClass | 
 			listOfWidgetClass
 				do:
