@@ -18,7 +18,7 @@ FAMIXAttribute >> allUsages [
 		asSet.
 	invocations := (posUsages
 		flatCollect: [ :usage | 
-			(self parentType outgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
+			(self parentType queryAllOutgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
 				select: [ :out | out sourceAnchor intervalAsCharPos rangeIncludes: usage ] ])
 		reject: [ :invoc | invoc receiver = self ].
 	"Ici il peut y avoir un bug si un widget est ajouté dans une classe anonyme, mais il ne faut pas que l'on pense que l'ajout soit lié au addClickHandler"

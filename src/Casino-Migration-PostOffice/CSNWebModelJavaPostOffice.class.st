@@ -17,3 +17,10 @@ CSNWebModelJavaPostOffice >> generatePhase [
 			(aXmlNode isElement and: [ aXmlNode name localName = 'phase' and: [ (aXmlNode attributeAt: #className ifAbsent:  [ '' ]) beginsWith: 'fr.bl.client.thot.phase' ] ])
 				ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ].
 ]
+
+{ #category : #accessing }
+CSNWebModelJavaPostOffice >> linkXmlUiWidget [
+	^ {self modelWidget} flatten
+		select: [ :a | a superclass mooseName endsWith: 'Ui' ]
+		thenCollect: [ :a |1halt. Association new key: a  value: a superclass]
+]
