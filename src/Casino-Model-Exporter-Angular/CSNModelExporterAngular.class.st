@@ -209,6 +209,7 @@ export class ' , aModel name capitalized , 'Module { }'
 { #category : #generate }
 CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
 	^ 'import { NgModule } from ''@angular/core'';
+import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
 import { ComponentsModule } from ''../../../components/components.module'';
 import { IndexComponent } from ''./components/index/index.component'';
@@ -238,7 +239,8 @@ export const COMPONENTS: any[] = [
 ' , aCSNPage widgetsDependenciesName
 		,
 			'
-        ComponentsModule
+        ComponentsModule,
+        TranslateModule
     ],
     entryComponents: [
         IndexComponent
