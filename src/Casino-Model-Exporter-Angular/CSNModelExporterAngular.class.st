@@ -152,7 +152,7 @@ import { FormsModule } from ''@angular/forms'';
 import { BrowserAnimationsModule } from ''@angular/platform-browser/animations'';
 import { ToastrModule } from ''ngx-toastr'';
 
-import { DEMOS_ROUTES } from ''./' , aModel name
+import { DEMOS_ROUTES } from ''./' , aModel name uncapitalized
 		,
 			'.routing'';
 import { IndexComponent } from ''./components/index/index.component'';
@@ -245,22 +245,6 @@ export const COMPONENTS: any[] = [
     ]
 })
 export class ' , aCSNPage getModuleClassName , ' {}' , String crlf
-]
-
-{ #category : #generate }
-CSNModelExporterAngular >> generateRouteSourceCode [
-	^ 'import { ModuleWithProviders } from ''@angular/core'';
-import { RouterModule, Routes } from ''@angular/router'';
-import { IndexComponent } from ''./components/index/index.component'';
-
-const routes: Routes = [
-    {
-        path: '''', component: IndexComponent
-    }
-];
-
-export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
-'
 ]
 
 { #category : #generate }

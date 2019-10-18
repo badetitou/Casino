@@ -7,12 +7,12 @@ MooseModel >> getHTMLName [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 MooseModel >> getModuleName [
-	^ self name , '.module.ts'
+	^ self name uncapitalized , '.module.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 MooseModel >> getRouteName [
-	^ self name , '.routing.ts'
+	^ self name uncapitalized , '.routing.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
