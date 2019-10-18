@@ -89,7 +89,7 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 	^ widget affectedActions
 		ifNotNil: [ | usages |
 			usages := {widget affectedActions allUsages . (widget affectedActions allUsages collect: [ :el | el allContainers ])} flattened
-				reject: [ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
+				reject: [ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' "content is never generated in our model... so we rely on the next step"]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget

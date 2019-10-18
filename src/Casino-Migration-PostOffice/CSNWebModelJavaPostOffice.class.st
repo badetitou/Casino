@@ -19,8 +19,15 @@ CSNWebModelJavaPostOffice >> generatePhase [
 ]
 
 { #category : #accessing }
+CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
+	^ {self modelPhases  , self modelPageMetier} flatten asSet
+		select: [ :a |  a superclass mooseName endsWith: 'Ui' ]
+		thenCollect: [ :a | Association new key: a  value: a superclass]
+]
+
+{ #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiWidget [
 	^ {self modelWidget} flatten
 		select: [ :a | a superclass mooseName endsWith: 'Ui' ]
-		thenCollect: [ :a |1halt. Association new key: a  value: a superclass]
+		thenCollect: [ :a | Association new key: a  value: a superclass]
 ]
