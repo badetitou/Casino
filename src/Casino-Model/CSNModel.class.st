@@ -4,16 +4,15 @@ Class {
 	#category : #'Casino-Model'
 }
 
+{ #category : #accessing }
+CSNModel class >> allSubmetamodelsPackagesNames [
+	<generated>
+	^ #(#'Moose-Query' #'Famix-Traits')
+]
+
 { #category : #meta }
 CSNModel class >> annotation [
 	<MSEClass: #CSNModel super: #MooseModel>
 	<package: #'Casino-Model'>
 	<generated>
-]
-
-{ #category : #initialization }
-CSNModel >> initialize [
-	<generated>
-	super initialize.
-	self metamodel: (self class environment at: #CSNMetamodelGenerator) metamodel
 ]

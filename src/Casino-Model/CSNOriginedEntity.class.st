@@ -26,7 +26,7 @@ CSNOriginedEntity class >> annotation [
 CSNOriginedEntity class >> metamodel [
 
 	<generated>
-	^ (self class environment at: #CSNMetamodelGenerator) metamodel
+	^ CSNModel metamodel
 ]
 
 { #category : #accessing }

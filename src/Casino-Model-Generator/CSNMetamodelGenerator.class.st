@@ -38,6 +38,11 @@ CSNMetamodelGenerator class >> prefix [
 	^ #CSN
 ]
 
+{ #category : #accessing }
+CSNMetamodelGenerator class >> submetamodels [
+	^ {FamixGenerator}
+]
+
 { #category : #definition }
 CSNMetamodelGenerator >> defineClasses [
 	super defineClasses.
@@ -99,12 +104,6 @@ CSNMetamodelGenerator >> defineRelations [
 	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
 	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
 	((page property: #caller) <>-* (actionAppel property: #call)) withNavigation.
-	((page property: #businessPage) *-* (businessPage property: #pageContainers) container) withNavigation; withoutPrimaryContainer.
+	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
 	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)) withNavigation
-]
-
-{ #category : #definition }
-CSNMetamodelGenerator >> newBuilder [
-
-	^ self builderWithStandardTraits
 ]

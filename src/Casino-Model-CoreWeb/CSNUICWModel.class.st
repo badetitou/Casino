@@ -4,16 +4,15 @@ Class {
 	#category : #'Casino-Model-CoreWeb'
 }
 
+{ #category : #accessing }
+CSNUICWModel class >> allSubmetamodelsPackagesNames [
+	<generated>
+	^ #(#'Moose-Query' #'Famix-Traits' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout' #'Casino-Model')
+]
+
 { #category : #meta }
 CSNUICWModel class >> annotation [
 	<MSEClass: #CSNUICWModel super: #MooseModel>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
-]
-
-{ #category : #initialization }
-CSNUICWModel >> initialize [
-	<generated>
-	super initialize.
-	self metamodel: (self class environment at: #CSNUICoreWebGenerator) metamodel
 ]

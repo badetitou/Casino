@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CSNUIModel class >> allSubmetamodelsPackagesNames [
 	<generated>
-	^ #('Casino-Model-Layout' #'Casino-Model')
+	^ #(#'Moose-Query' #'Famix-Traits' 'Casino-Model-Layout' #'Casino-Model')
 ]
 
 { #category : #meta }
