@@ -367,7 +367,7 @@ CSNWebModelJava >> linkForAbstractTabPhase [
 		thenCollect: [ :class | 
 			class withSuperclassHierarchy
 				collect: [ :c | 
-					(c outgoingInvocations
+					((c queryLocalOutgoing: FamixTInvocation)
 						reject: [ :invoc | invoc receiver ifNotNil: [ :el | el name = #super ] ifNil: [ false ] ]
 						thenCollect: [ :invoc | invoc candidates at: 1 ])
 						select: [ :e | e isConstructor and: [ self modelPageMetier includes: e parentType ] ]
