@@ -133,11 +133,6 @@ CSNWebModelJava >> addWidgetDefaultAttributes [
 ]
 
 { #category : #accessing }
-CSNWebModelJava >> appNamespace [
-	^ 'fr::bl::client::grh::*'
-]
-
-{ #category : #accessing }
 CSNWebModelJava >> applicationSource [
 	"name of the directory with the GWT application"
 	^  'BLCoreIncubatorGwt'
@@ -533,7 +528,7 @@ CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
 
 { #category : #accessing }
 CSNWebModelJava >> widgetAnonymousSubclasses [
-	^ ((self modelWidget flatCollect: [ :widget | widget subclassHierarchy ]) select: #isAnonymousClass)
+	^ ((self modelWidget flatCollect: [ :widget | widget withSubclassHierarchy ]) select: #isAnonymousClass)
 ]
 
 { #category : #accessing }
