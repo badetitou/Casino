@@ -11,6 +11,15 @@ CSNWebModelJavaPostOffice >> applicationSource [
 ]
 
 { #category : #accessing }
+CSNWebModelJavaPostOffice >> createFactory [
+	factory := CSNWidgetFactoryAngular new
+		model: model;
+		importer: self;
+		addVisitorImporter: CSNModelImporterCoreWebVisitor new;
+		yourself
+]
+
+{ #category : #accessing }
 CSNWebModelJavaPostOffice >> generatePhase [
 	xml
 		nodesDo: [ :aXmlNode | 
