@@ -617,6 +617,11 @@ CSNModelExporterAngular >> visitCSNUIImage: aBLUIImage [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
+	^ '<' ,  (aBLUIInputCheckbox getListPropertiesAsStringWith: self), ' ></' , aBLUIInputCheckbox getSelector , '>'
+]
+
+{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
 	^ '<' ,  (aBLUIInputColor getListPropertiesAsStringWith: self), ' />'
 ]
@@ -649,6 +654,11 @@ CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputPassword: aBLUIInputPassword [
 	^ '<' ,  (aBLUIInputPassword getListPropertiesAsStringWith: self) , ' />'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUIInputRadio: aCSNUIInputRadio [
+	^ '<' ,  (aCSNUIInputRadio getListPropertiesAsStringWith: self), ' ></' , aCSNUIInputRadio getSelector , '>'
 ]
 
 { #category : #visiting }
