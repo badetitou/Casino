@@ -15,7 +15,7 @@ CSNWebModelJavaPostOffice >> createFactory [
 	factory := CSNWidgetFactoryAngular new
 		model: model;
 		importer: self;
-		addVisitorImporter: CSNModelImporterCoreWebVisitor new;
+		addVisitorImporter: CSNModelImporterCoreWebPostOfficeVisitor new;
 		yourself
 ]
 
@@ -39,4 +39,9 @@ CSNWebModelJavaPostOffice >> linkXmlUiWidget [
 	^ {self modelWidget} flatten
 		select: [ :a | a superclass mooseName endsWith: 'Ui' ]
 		thenCollect: [ :a | Association new key: a  value: a superclass]
+]
+
+{ #category : #accessing }
+CSNWebModelJavaPostOffice >> widgetNamespaces [
+	^ {'fr::bl::client::core::refui' . 'fr::bl::client::thot::widgets'}
 ]

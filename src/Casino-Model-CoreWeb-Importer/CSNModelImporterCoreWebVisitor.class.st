@@ -302,7 +302,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
-	^ (#('BLFieldSetPanelDynamic' 'BLGroupBoxPanel' 'BLFieldSetPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+	^ (#('BLFieldSetPanelDynamic' 'BLGroupBoxPanel' 'BLFieldSetPanel' 'BLPortlet') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ | panel |
 			panel := (self createWidgetPanel: aCSNUIFieldset)
 				addAttribute: ((self create: CSNUITitle) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));

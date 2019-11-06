@@ -89,7 +89,9 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 	^ widget affectedActions
 		ifNotNil: [ | usages |
 			usages := {widget affectedActions allUsages . (widget affectedActions allUsages collect: [ :el | el allContainers ])} flattened
-				reject: [ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' "content is never generated in our model... so we rely on the next step"]) or: [ (el signature prefixMatchesRegex: 'setWidget\(.*|add\(.*') not ] ].
+				reject: [ :el | 
+					(el receiver isNotNil and: [ el receiver name includesSubstring: 'content'	"content is never generated in our model... so we rely on the next step" ])
+						or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget
@@ -140,13 +142,11 @@ CSNWebModelJava >> applicationSource [
 
 { #category : #adding }
 CSNWebModelJava >> computeAllConstructorsLink [
-	^ (self sourceModel constructors
-		collect: [ :method | 
+	^ self sourceModel constructors
+		flatCollect: [ :method | 
 			| got |
 			got := (method queryAll: #in) atScope: FAMIXClass.
-			got
-				ifNotEmpty: [ got collect: [ :p | Association new key: p value: method parentType ] ] ])
-		flatten
+			got collect: [ :p | Association new key: p value: method parentType ] ]
 ]
 
 { #category : #initialization }
@@ -203,7 +203,7 @@ CSNWebModelJava >> generateServiceAction [
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
 	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
-		reject: [ :invocationOrClass | (self widgetNamespace match: invocationOrClass from mooseName) or: [ '*noname#super*' match: invocationOrClass asString ] ])
+		reject: [ :invocationOrClass | (invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces) or: [ '*noname#super*' match: invocationOrClass asString ] ])
 		do: [ :invocation | 
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
@@ -265,7 +265,7 @@ CSNWebModelJava >> getPhaseNamed: aCodePhase [
 
 { #category : #accessing }
 CSNWebModelJava >> gwtWidgetNamespace [
-	^ 'com::google::gwt::user::client::ui*'
+	^ 'com::google::gwt::user::client::ui'
 ]
 
 { #category : #api }
@@ -463,7 +463,7 @@ CSNWebModelJava >> modelWidget [
 		ifNil: [ modelWidgetCache := self sourceModel allClasses
 				select: [ :e | 
 					(e superclassHierarchy anySatisfy: [ :a | a name = 'Widget' ])
-						and: [ (self widgetNamespace match: e container mooseName)  or: [ (self gwtWidgetNamespace match: e container mooseName )
+						and: [ (e container mooseName beginsWithAnyOf: self widgetNamespaces )  or: [ (e container mooseName beginsWith: self gwtWidgetNamespace )
 								or: [ self isWidgetFromApplication: e ] ] ] ] ]
 ]
 
@@ -560,8 +560,8 @@ CSNWebModelJava >> widgetInVariable: aVariable [
 ]
 
 { #category : #accessing }
-CSNWebModelJava >> widgetNamespace [
-	^ 'fr::bl::client::core::refui*'
+CSNWebModelJava >> widgetNamespaces [
+	^ {'fr::bl::client::core::refui'}
 ]
 
 { #category : #accessing }
