@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWHTML class >> annotation [
 
-	<MSEClass: #HTML super: #CSNContainer>
+	<FMClass: #HTML super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

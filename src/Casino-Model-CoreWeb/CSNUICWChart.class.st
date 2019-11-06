@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWChart class >> annotation [
 
-	<MSEClass: #Chart super: #CSNContainer>
+	<FMClass: #Chart super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

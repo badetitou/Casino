@@ -2,10 +2,11 @@ Extension { #name : #CSNAction }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNAction >> behavior [
-	"Relation named: #behavior type: #CSNMethodEntity opposite: #ui"
+	"Relation named: #behavior type: #FASTJavaMethodEntity opposite: #ui"
 
 	<generated>
-	<MSEProperty: #behavior type: #Object>
+	<derived>
+	<FMProperty: #behavior type: #FASTJavaMethodEntity opposite: #ui>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #behavior ifAbsentPut: [ FMMultivalueLink on: self opposite: #ui: ]
 ]

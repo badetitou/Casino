@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWClickHandler class >> annotation [
 
-	<MSEClass: #ClickHandler super: #CSNAction>
+	<FMClass: #ClickHandler super: #CSNAction>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

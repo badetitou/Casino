@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWCoreRowSpan class >> annotation [
 
-	<MSEClass: #CoreRowSpan super: #CSNAttribute>
+	<FMClass: #CoreRowSpan super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

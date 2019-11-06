@@ -2,10 +2,11 @@ Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNPage >> navigations [
-	"Relation named: #navigations type: #CSNNavigation opposite: #page"
+	"Relation named: #navigations type: #CSNBNavigation opposite: #page"
 
 	<generated>
-	<MSEProperty: #navigations type: #Object>
+	<derived>
+	<FMProperty: #navigations type: #CSNBNavigation opposite: #page>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #navigations ifAbsentPut: [ FMMultivalueLink on: self opposite: #page: ]
 ]

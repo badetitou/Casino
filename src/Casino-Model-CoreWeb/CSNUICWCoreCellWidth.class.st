@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWCoreCellWidth class >> annotation [
 
-	<MSEClass: #CoreCellWidth super: #CSNAttribute>
+	<FMClass: #CoreCellWidth super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

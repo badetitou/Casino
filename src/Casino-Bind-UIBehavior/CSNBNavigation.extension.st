@@ -2,10 +2,10 @@ Extension { #name : #CSNBNavigation }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNBNavigation >> page [
-	"Relation named: #page type: #CSNBPage opposite: #navigations"
+	"Relation named: #page type: #CSNPage opposite: #navigations"
 
 	<generated>
-	<MSEProperty: #page type: #Object>
+	<FMProperty: #page type: #CSNPage opposite: #navigations>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #page ifAbsent: [ nil ]
 ]

@@ -37,7 +37,6 @@ CSNServiceAPI >> serviceOwner: anObject [
 
 	<generated>
 	serviceOwner := anObject
-
 ]
 
 { #category : #navigation }

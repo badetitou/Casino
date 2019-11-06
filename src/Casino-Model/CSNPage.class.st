@@ -45,7 +45,6 @@ CSNPage >> businessPage: anObject [
 
 	<generated>
 	businessPage value: anObject
-
 ]
 
 { #category : #navigation }
@@ -69,7 +68,6 @@ CSNPage >> caller: anObject [
 
 	<generated>
 	caller value: anObject
-
 ]
 
 { #category : #navigation }

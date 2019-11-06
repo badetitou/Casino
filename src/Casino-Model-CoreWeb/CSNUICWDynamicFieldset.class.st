@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWDynamicFieldset class >> annotation [
 
-	<MSEClass: #DynamicFieldset super: #CSNAttribute>
+	<FMClass: #DynamicFieldset super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

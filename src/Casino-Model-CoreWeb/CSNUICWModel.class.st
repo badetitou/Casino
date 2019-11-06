@@ -12,7 +12,7 @@ CSNUICWModel class >> allSubmetamodelsPackagesNames [
 
 { #category : #meta }
 CSNUICWModel class >> annotation [
-	<MSEClass: #CSNUICWModel super: #MooseModel>
+	<FMClass: #CSNUICWModel super: #MooseModel>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 ]

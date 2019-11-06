@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWProgressBar class >> annotation [
 
-	<MSEClass: #ProgressBar super: #CSNContainer>
+	<FMClass: #ProgressBar super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

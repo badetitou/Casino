@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWSwitch class >> annotation [
 
-	<MSEClass: #Switch super: #CSNUIInput>
+	<FMClass: #Switch super: #CSNUIInput>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

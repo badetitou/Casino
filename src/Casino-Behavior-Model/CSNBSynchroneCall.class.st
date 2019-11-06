@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 CSNBSynchroneCall class >> annotation [
 
-	<MSEClass: #SynchroneCall super: #CSNBCall>
+	<FMClass: #SynchroneCall super: #CSNBCall>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self

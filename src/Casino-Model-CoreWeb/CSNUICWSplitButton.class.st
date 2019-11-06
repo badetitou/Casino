@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWSplitButton class >> annotation [
 
-	<MSEClass: #SplitButton super: #CSNContainer>
+	<FMClass: #SplitButton super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

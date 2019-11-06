@@ -2,10 +2,10 @@ Extension { #name : #CSNBCall }
 
 { #category : #'*Casino-Bind-UIBehavior-accessing' }
 CSNBCall >> distantService [
-	"Relation named: #distantService type: #CSNBServiceAPI opposite: #callers"
+	"Relation named: #distantService type: #CSNServiceAPI opposite: #callers"
 
 	<generated>
-	<MSEProperty: #distantService type: #Object>
+	<FMProperty: #distantService type: #CSNServiceAPI opposite: #callers>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #distantService ifAbsent: [ nil ]
 ]

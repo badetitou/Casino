@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 CSNBCall class >> annotation [
 
-	<MSEClass: #Call super: #FASTExpression>
+	<FMClass: #Call super: #FASTExpression>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -20,11 +20,11 @@ CSNBCall class >> annotation [
 
 { #category : #accessing }
 CSNBCall >> onFailure [
-	"Relation named: #onFailure type: #CSNBBehaviouralEntity opposite: #carrefourOnFailureOwner"
+	"Relation named: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner"
 
 	<generated>
-	<MSEComment: 'The statement executed if the call return ''ko'''>
-	<MSEProperty: #onFailure type: #Object>
+	<FMComment: 'The statement executed if the call return ''ko'''>
+	<FMProperty: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
@@ -52,11 +52,11 @@ CSNBCall >> onFailureGroup [
 
 { #category : #accessing }
 CSNBCall >> onSuccess [
-	"Relation named: #onSuccess type: #CSNBBehaviouralEntity opposite: #carrefourOnSuccessOwner"
+	"Relation named: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner"
 
 	<generated>
-	<MSEComment: 'The statement executed if the call return ''ok'''>
-	<MSEProperty: #onSuccess type: #Object>
+	<FMComment: 'The statement executed if the call return ''ok'''>
+	<FMProperty: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]

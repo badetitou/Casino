@@ -2,11 +2,12 @@ Extension { #name : #FASTExpression }
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTExpression >> carrefourPopUpOwner [
-	"Relation named: #carrefourPopUpOwner type: #FASTPopUp opposite: #data"
+	"Relation named: #carrefourPopUpOwner type: #CSNBPopUp opposite: #data"
 
 	<generated>
 	<container>
-	<MSEProperty: #carrefourPopUpOwner type: #Object>
+	<derived>
+	<FMProperty: #carrefourPopUpOwner type: #CSNBPopUp opposite: #data>
 	<package: #'Casino-Behavior-Model'>
 	^ self privateState attributeAt: #carrefourPopUpOwner ifAbsent: [ nil ]
 ]
@@ -27,11 +28,11 @@ FASTExpression >> carrefourPopUpOwner: anObject [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTExpression >> navigation [
-	"Relation named: #navigation type: #FASTNavigation opposite: #arguments"
+	"Relation named: #navigation type: #CSNBNavigation opposite: #arguments"
 
 	<generated>
 	<container>
-	<MSEProperty: #navigation type: #Object>
+	<FMProperty: #navigation type: #CSNBNavigation opposite: #arguments>
 	<package: #'Casino-Behavior-Model'>
 	^ self privateState attributeAt: #navigation ifAbsent: [ nil ]
 ]

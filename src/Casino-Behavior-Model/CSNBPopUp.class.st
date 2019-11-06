@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 CSNBPopUp class >> annotation [
 
-	<MSEClass: #PopUp super: #FASTExpression>
+	<FMClass: #PopUp super: #FASTExpression>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -18,11 +18,11 @@ CSNBPopUp class >> annotation [
 
 { #category : #accessing }
 CSNBPopUp >> data [
-	"Relation named: #data type: #CSNBExpression opposite: #carrefourPopUpOwner"
+	"Relation named: #data type: #FASTExpression opposite: #carrefourPopUpOwner"
 
 	<generated>
-	<MSEComment: 'The data that will be displayed in the popUp'>
-	<MSEProperty: #data type: #Object>
+	<FMComment: 'The data that will be displayed in the popUp'>
+	<FMProperty: #data type: #FASTExpression opposite: #carrefourPopUpOwner>
 	^ self privateState attributeAt: #data ifAbsent: [ nil ]
 ]
 

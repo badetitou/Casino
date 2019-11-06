@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWOpen class >> annotation [
 
-	<MSEClass: #Open super: #CSNAttribute>
+	<FMClass: #Open super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

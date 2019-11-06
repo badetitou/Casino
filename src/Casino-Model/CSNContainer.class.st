@@ -39,7 +39,6 @@ CSNContainer >> widgets: anObject [
 
 	<generated>
 	widgets value: anObject
-
 ]
 
 { #category : #navigation }

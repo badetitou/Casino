@@ -20,13 +20,7 @@ CSNBehaviorImporterJavaTest >> setUp [
 	super setUp.
 	model := MooseModel new
 		metamodel:
-			(MooseModel
-				metamodelComposedOf:
-					{
-					FASTMetamodelGenerator metamodel.
-					FASTJavaMetamodelGenerator metamodel.
-					CSNBehaviorModelGenerator metamodel.
-					CSNLayoutMetamodelGenerator metamodel});
-		yourself.
-	
+			(MooseModel metamodelComposedOf:
+				{FASTModel metamodel . FASTJavaModel metamodel . CSNBModel metamodel . CSNLModel metamodel});
+		yourself
 ]

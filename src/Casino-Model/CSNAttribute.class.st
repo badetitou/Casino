@@ -75,7 +75,6 @@ CSNAttribute >> widget: anObject [
 
 	<generated>
 	widget := anObject
-
 ]
 
 { #category : #navigation }

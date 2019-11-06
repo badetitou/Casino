@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWDialog class >> annotation [
 
-	<MSEClass: #Dialog super: #CSNContainer>
+	<FMClass: #Dialog super: #CSNContainer>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

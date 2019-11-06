@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWCoreHorizontalAlignement class >> annotation [
 
-	<MSEClass: #CoreHorizontalAlignement super: #CSNAttribute>
+	<FMClass: #CoreHorizontalAlignement super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

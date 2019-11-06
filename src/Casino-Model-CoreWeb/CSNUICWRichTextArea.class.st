@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWRichTextArea class >> annotation [
 
-	<MSEClass: #RichTextArea super: #CSNUIInput>
+	<FMClass: #RichTextArea super: #CSNUIInput>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

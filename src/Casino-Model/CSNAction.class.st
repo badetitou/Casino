@@ -40,7 +40,6 @@ CSNAction >> caller: anObject [
 
 	<generated>
 	caller := anObject
-
 ]
 
 { #category : #navigation }

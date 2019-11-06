@@ -10,24 +10,25 @@ Class {
 { #category : #meta }
 CSNBNavigation class >> annotation [
 
-	<MSEClass: #Navigation super: #FASTExpression>
+	<FMClass: #Navigation super: #FASTExpression>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-CSNBNavigation >> addArguments: anObject [
+CSNBNavigation >> addArgument: anObject [
 	<generated>
 	^ self arguments add: anObject
 ]
 
 { #category : #accessing }
 CSNBNavigation >> arguments [
-	"Relation named: #arguments type: #CSNBExpression opposite: #navigation"
+	"Relation named: #arguments type: #FASTExpression opposite: #navigation"
 
 	<generated>
-	<MSEProperty: #arguments type: #Object>
+	<derived>
+	<FMProperty: #arguments type: #FASTExpression opposite: #navigation>
 	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]

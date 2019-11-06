@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWAutoComplete class >> annotation [
 
-	<MSEClass: #AutoComplete super: #CSNUIInput>
+	<FMClass: #AutoComplete super: #CSNUIInput>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self

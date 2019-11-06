@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICWGroupFieldset class >> annotation [
 
-	<MSEClass: #GroupFieldset super: #CSNAttribute>
+	<FMClass: #GroupFieldset super: #CSNAttribute>
 	<package: #'Casino-Model-CoreWeb'>
 	<generated>
 	^self
