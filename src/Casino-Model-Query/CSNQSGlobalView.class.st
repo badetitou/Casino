@@ -1,19 +1,19 @@
 Class {
-	#name : #CSNGlobalView,
+	#name : #CSNQSGlobalView,
 	#superclass : #TLObject,
 	#category : #'Casino-Model-Query'
 }
 
 { #category : #'as yet unclassified' }
-CSNGlobalView class >> generalViewForModel: aGUIModel [
+CSNQSGlobalView class >> generalViewForModel: aGUIModel [
 	| visu |
 	visu := TLVisualization fromEntities: aGUIModel allCSNWidget.
-	visu layout: TLForceBasedLayout.
+	visu layout: TLTreeLayout.
 	^ visu
 ]
 
 { #category : #'as yet unclassified' }
-CSNGlobalView class >> pageExplorerFor: aGUIModel [
+CSNQSGlobalView class >> pageExplorerFor: aGUIModel [
 	| visu |
 	(visu := TLVisualization fromEntities: aGUIModel allCSNPage)
 		layout:
@@ -28,5 +28,5 @@ CSNGlobalView class >> pageExplorerFor: aGUIModel [
 ]
 
 { #category : #'see class side' }
-CSNGlobalView >> seeClassSide [
+CSNQSGlobalView >> seeClassSide [
 ]
