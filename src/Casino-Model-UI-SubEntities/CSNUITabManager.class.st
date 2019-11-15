@@ -16,6 +16,8 @@ CSNUITabManager class >> annotation [
 { #category : #adding }
 CSNUITabManager >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
 	| aTab |
+	aWidget addingPosition: anInvocation sourceAnchor startPos.
+	(aWidget isKindOf: CSNUITab) ifTrue: [ ^ self addWidget: aWidget ].
 	aTab := aFactory create: CSNUITab.
 	aTab
 		addAttribute:
@@ -23,6 +25,5 @@ CSNUITabManager >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFac
 				attributeValue: (anInvocation parameters at: 1 ifAbsent: [ '' ]);
 				yourself).
 	self addWidget: aTab.
-	aWidget addingPosition: anInvocation sourceAnchor startPos.
 	^ aTab addWidget: aWidget
 ]
