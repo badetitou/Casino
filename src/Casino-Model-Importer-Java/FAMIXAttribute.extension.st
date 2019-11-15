@@ -6,22 +6,19 @@ FAMIXAttribute >> allUsages [
 
 	| methodsToUsages methods invocations return |
 	"check if the variable is returned by a method"
-	return := (self incomingAccesses select: #isReturned)
-		ifEmpty: [ {} ]
-		ifNotEmpty: [ :list | list first from allUsages ].
+	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first from allUsages ].
 
 	"check the invocation inside methods"
 	methods := self incomingAccesses collect: #from as: Set.	"self parentType methods."
-	methodsToUsages := (methods
+	methodsToUsages := methods
 		select: [ :method | method hasSourceAnchor and: [ method isInstanciationInitializer not ] ]
-		thenCollect: [ :method | method -> (method sourceAnchor findAllOccurrencesOfVariableNamed: self name) ]).
+		thenCollect: [ :method | method -> (method sourceAnchor findAllOccurrencesOfVariableNamed: self name) ].
 	invocations := (methodsToUsages
-		collect: [ :methodToUsage |
-			methodToUsage value collect: [ :usage |
-			(methodToUsage key parentType queryAllOutgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
-				select: [ :out | out sourceAnchor intervalAsCharPos rangeIncludes: usage ] ] ]) flattened
-		reject: [ :invoc | invoc receiver = self ].
-	^ {(invocations
-		select: [ :usage | usage parameters anySatisfy: [ :param | '*' , self name , '*' match: param ] ]).
+		collect: [ :methodToUsage | 
+			methodToUsage value
+				collect: [ :usage | 
+					(methodToUsage key parentType queryAllOutgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
+						select: [ :out | out sourceAnchor intervalAsCharPos rangeIncludes: usage ] ] ]) flattened reject: [ :invoc | invoc receiver = self ].
+	^ {(invocations select: [ :usage | usage parameters anySatisfy: [ :param | param includesSubstring: self name ] ]).
 	return} flattened
 ]
