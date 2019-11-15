@@ -488,9 +488,9 @@ CSNModelImporterCoreWebVisitor >> visitCSNUILink: aCSNUILink [
 CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 	^ ('BLImageUploadPanel' ~= source invokedClassName
 		and: [ 'BLFileUploadPanel' ~= source invokedClassName
-				and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName)
-						or: [ ('.*Panel' asRegex matchesPrefix: source invokedClassName) ] ] ]) 
-		ifTrue: [ (self createWidgetPanel: aCSNUIPanel) ] 
+				and: [ 'TabSubPanel' ~= source invokedClassName
+						and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ] ] ])
+		ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
 		ifFalse: [ nil ]
 ]
 
@@ -541,6 +541,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeWidth: aCSNUIRelativeWidth [
 CSNModelImporterCoreWebVisitor >> visitCSNUISelect: aCSNUISelect [
 	^ (#('BLListBox' 'ListBox' 'BLMultiCombo') includes: source invokedClassName) 
 		ifTrue: [ self createWidgetInput: aCSNUISelect ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUITabManager: aCSNUITabManager [
+	^ ('TabSubPanel' = source invokedClassName) 
+		ifTrue: [ (self createWidget: aCSNUITabManager) ] 
 		ifFalse: [ nil ]
 ]
 
