@@ -13,3 +13,24 @@ CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIInputDate: aCSNUIInputDate
 				yourself ]
 		ifFalse: [ nil ]
 ]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUISelect: aCSNUISelect [
+	^ (#('BLListBox' 'ListBox' 'BLMultiCombo' 'BLThotListBox') includes: source invokedClassName) 
+		ifTrue: [ self createWidgetInput: aCSNUISelect ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUITab: aCSNUITab [
+	^ ('ThotSideBarItem' = source invokedClassName) 
+		ifTrue: [ (self createWidget: aCSNUITab) ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUITabManager: aCSNUITabManager [
+	^ (#('TabSubPanel' 'ThotDeckSidePanel') includes: source invokedClassName) 
+		ifTrue: [ (self createWidget: aCSNUITabManager) ] 
+		ifFalse: [ nil ]
+]
