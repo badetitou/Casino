@@ -4,7 +4,9 @@ SmalltalkCISpec {
       #baseline : 'Casino',
       #directory : 'src',
       #load : [ 'tests' ],
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+      #onConflict : #useIncoming,
+      #onUpgrade : #useIncoming
     }
   ]
 }
