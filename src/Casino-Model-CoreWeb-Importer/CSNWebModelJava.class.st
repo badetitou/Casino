@@ -566,7 +566,7 @@ CSNWebModelJava >> widgetFactoryInvocation [
 { #category : #accessing }
 CSNWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
-	^ (self model allCSNWidget select: [ :el | ( el variable = aVariable ) or: [ aVariable typeScope = el realClass ] ]) at: 1 ifAbsent: nil
+	^ self model allCSNWidget detect: [ :el | ( el variable = aVariable ) ] ifNone: [ self model allCSNWidget detect: [ :el | aVariable typeScope = el realClass ] ifNone: [nil]]
 ]
 
 { #category : #accessing }
