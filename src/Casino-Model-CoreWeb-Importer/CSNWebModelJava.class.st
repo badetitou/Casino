@@ -80,12 +80,14 @@ CSNWebModelJava >> addPPPToWidget [
 	self model allCSNWidgetExceptPage select: [:widget | widget parents isEmpty ]
 		thenDo: [ :widget | 
 			| founds |
-			founds := self widgetOwnerCase1: widget source from.
+			"self haltIf: [ widget affectedActions isNotNil and: [ widget affectedActions name = 'panelGrc' ]]."
+			founds := self widgetOwnerCase1: widget source from maxLevel: 15 level: 0.
 			founds ifNotNil: [ founds do: [ :found | found addWidget: widget ] ] ]
 ]
 
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
+	
 	^ widget affectedActions
 		ifNotNil: [ | usages |
 			usages := {widget affectedActions allUsages . (widget affectedActions allUsages collect: [ :el | el allContainers ])} flattened
@@ -216,6 +218,14 @@ CSNWebModelJava >> generateWidget [
 { #category : #accessing }
 CSNWebModelJava >> getClassNamed: aClassName [
 	^ (self sourceModel allModelClasses select: [ :a | a mooseName = aClassName ]) at: 1
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> getCustomWidgetFromClass: aClass [
+	^ ((self model allWithType: CSNUICustomWidget) reject: [ :widget | widget source isClass ])
+		detect: [ :custom | (custom source to first atScope: FamixTClass) anyOne = aClass ]
+		ifFound: [ :founded | {founded} "need to return a collection to follow the other getPage and getBusinessPage"]
+		ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -565,37 +575,25 @@ CSNWebModelJava >> widgetNamespaces [
 ]
 
 { #category : #accessing }
-CSNWebModelJava >> widgetOwnerCase1: invocation [
-	| found |
-	(invocation isNil or: [ invocation isNamespace ])
-		ifTrue: [ ^ nil ].
-	invocation isClass
-		ifFalse: [ ^ self widgetOwnerCase1: invocation belongsTo ]
-		ifTrue: [ found := self getPhaseFromClass: invocation.
-			found
-				ifNotNil: [ ^ found ]
-				ifNil: [ found := self getPageMetierFromClass: invocation.
-					found ifNotNil: [ ^ found ].
-					invocation incomingReferences ifNotEmpty: [ :references | ^ self widgetOwnerCase1: (references at: 1) from belongsTo maxLevel: 15 level: 0 ] ] ].
-	^ self widgetOwnerCase1: invocation belongsTo
-]
-
-{ #category : #accessing }
 CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level [
 	| found |
-	level = maxLevel
-		ifTrue: [ ^ nil ].
-	(invocation isNil or: [ invocation isNamespace ])
-		ifTrue: [ ^ nil ].
+	level = maxLevel ifTrue: [ ^ nil ].
+	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ nil ].
 	invocation isClass
-		ifFalse: [ ^ self widgetOwnerCase1: invocation maxLevel: maxLevel level: level + 1 ]
+		ifFalse: [ 
+			(invocation atScope: FamixTClass) ifEmpty: [ ^ nil ].
+			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) first maxLevel: maxLevel level: level + 1 ]
 		ifTrue: [ found := self getPhaseFromClass: invocation.
 			found
 				ifNotNil: [ ^ found ]
 				ifNil: [ found := self getPageMetierFromClass: invocation.
-					found ifNotNil: [ ^ found ].
-					invocation incomingReferences ifNotEmpty: [ :references | ^ self widgetOwnerCase1: (references at: 1) from belongsTo maxLevel: maxLevel level: level + 1 ] ] ].
-	^ self widgetOwnerCase1: invocation maxLevel: maxLevel level: level + 1 
+					found
+						ifNotNil: [ ^ found ]
+						ifNil: [ found := self getCustomWidgetFromClass: invocation.
+							found ifNotNil: [ ^ found ].
+							invocation incomingReferences
+								ifNotEmpty: [ :references | ^ self widgetOwnerCase1: (references at: 1) from belongsTo maxLevel: maxLevel level: level + 1 ] ] ] ].
+	^ self widgetOwnerCase1: invocation maxLevel: maxLevel level: level + 1
 ]
 
 { #category : #accessing }

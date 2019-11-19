@@ -60,7 +60,7 @@ CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
 { #category : #factory }
 CSNWidgetFactoryAngular >> createWidgetFor: theWidgetSource withParent: parent [
 	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters)
-		ifNil: [ (self create: CSNContainer)
+		ifNil: [ (self create: CSNUICustomWidget)
 				source: theWidgetSource;
 				realClass: ((#(#FactoryBLLabel #ComponentUtils) includes: theWidgetSource invokedClassName) ifTrue: [ nil ] ifFalse: [ theWidgetSource invokedClass ]);
 				yourself ]
