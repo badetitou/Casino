@@ -87,13 +87,10 @@ CSNWebModelJava >> addPPPToWidget [
 
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
-	
 	^ widget affectedActions
 		ifNotNil: [ | usages |
-			usages := {widget affectedActions allUsages . (widget affectedActions allUsages collect: [ :el | el allContainers ])} flattened
-				reject: [ :el | 
-					(el receiver isNotNil and: [ el receiver name includesSubstring: 'content'	"content is never generated in our model... so we rely on the next step" ])
-						or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
+			usages := widget affectedActions allUsages , (widget affectedActions allUsages flatCollect: [ :el | el allContainers ])
+				select: [ :el | el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('} ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget
@@ -566,7 +563,7 @@ CSNWebModelJava >> widgetFactoryInvocation [
 { #category : #accessing }
 CSNWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
-	^ self model allCSNWidget detect: [ :el | ( el variable = aVariable ) ] ifNone: [ self model allCSNWidget detect: [ :el | aVariable typeScope = el realClass ] ifNone: [nil]]
+	^ self model allCSNWidget detect: [ :el | ( el variable = aVariable ) ] ifNone: [ self model allCSNWidget detect: [ :el | aVariable name ~= 'content' and: [ aVariable typeScope = el realClass ] ]  ifNone: [nil]]
 ]
 
 { #category : #accessing }
