@@ -18,9 +18,5 @@ CSNBehaviorImporterJavaTest class >> isAbstract [
 { #category : #running }
 CSNBehaviorImporterJavaTest >> setUp [
 	super setUp.
-	model := MooseModel new
-		metamodel:
-			(MooseModel metamodelComposedOf:
-				{FASTModel metamodel . FASTJavaModel metamodel . CSNBModel metamodel . CSNLModel metamodel});
-		yourself
+	model := CSNBModel new
 ]

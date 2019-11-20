@@ -16,14 +16,6 @@ Class {
 }
 
 { #category : #accessing }
-CSNBehaviorModelGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
-
-{ #category : #accessing }
 CSNBehaviorModelGenerator class >> packageName [
 
 	^ #'Casino-Behavior-Model'
@@ -36,7 +28,7 @@ CSNBehaviorModelGenerator class >> prefix [
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator }
+	^ { FASTMetamodelGenerator . FASTJavaMetamodelGenerator }
 ]
 
 { #category : #definition }

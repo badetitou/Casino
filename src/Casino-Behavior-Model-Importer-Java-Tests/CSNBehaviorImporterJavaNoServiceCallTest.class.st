@@ -8,11 +8,15 @@ Class {
 CSNBehaviorImporterJavaNoServiceCallTest >> createUiModel [
 	| service serviceApi |
 	uiModel := MooseModel new.
-	uiModel metamodel: CSNLayoutMetamodelGenerator metamodel.
-	service := CSNService new name: 'IGwtServiceIncubator'; yourself.
-	serviceApi := CSNServiceAPI new name: 'aNonExistingMethod'; yourself.
+	uiModel metamodel: CSNLModel metamodel.
+	service := CSNService new
+		name: 'IGwtServiceIncubator';
+		yourself.
+	serviceApi := CSNServiceAPI new
+		name: 'aNonExistingMethod';
+		yourself.
 	serviceApi serviceOwner: service.
-	uiModel addAll: { service. serviceApi }.
+	uiModel addAll: {service . serviceApi}
 ]
 
 { #category : #running }

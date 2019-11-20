@@ -12,15 +12,10 @@ CSNBehaviorImporterJavaNavigationTest >> modelMse [
 { #category : #running }
 CSNBehaviorImporterJavaNavigationTest >> setUp [
 	super setUp.
-	model := self modelMse metamodel:
-			(MooseModel
-				metamodelComposedOf:
-					{
-					FASTMetamodelGenerator metamodel.
-					FASTJavaMetamodelGenerator metamodel.
-					CSNBehaviorModelGenerator metamodel.
-					CSNLayoutMetamodelGenerator metamodel}); yourself.
-	(CSNBehaviorPatternNavigation on: model) run.
+	model := self modelMse
+		metamodel: CSNBModel metamodel;
+		yourself.
+	(CSNBehaviorPatternNavigation on: model) run
 ]
 
 { #category : #tests }

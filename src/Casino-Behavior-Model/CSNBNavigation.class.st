@@ -29,7 +29,6 @@ CSNBNavigation >> arguments [
 	<generated>
 	<derived>
 	<FMProperty: #arguments type: #FASTExpression opposite: #navigation>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
