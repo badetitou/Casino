@@ -62,8 +62,8 @@ CSNWebModelJava >> addLinkPhaseToPageMetier [
 
 { #category : #adding }
 CSNWebModelJava >> addLinkXmlUi [
-	xmlUiLink := self linkXmlUiPhaseAndPageMetier asDictionary reverse.
-	xmlUiWidgetLink := self linkXmlUiWidget asDictionary reverse.
+	xmlUiLink := CSNMultiValueDictionary newFrom: self linkXmlUiPhaseAndPageMetier.
+	xmlUiWidgetLink := CSNMultiValueDictionary newFrom: self linkXmlUiWidget
 ]
 
 { #category : #adding }
@@ -350,14 +350,13 @@ CSNWebModelJava >> import [
 
 { #category : #accessing }
 CSNWebModelJava >> isElementFromApplication: e [
-	^ e sourceAnchor isNotNil and: [('*' , self applicationSource , '*' match: e sourceAnchor fileName)]
+	^ e sourceAnchor isNotNil and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
 ]
 
 { #category : #accessing }
 CSNWebModelJava >> isWidgetFromApplication: e [
 	^ (self isElementFromApplication: e)
-		and: [ (({self model allCSNPage.
-			self model allCSNPageMetier} flatten collect: #source) includes: e) not ]
+		and: [ (e name endsWith: 'Ui') not and: [ ((self model allCSNPage , self model allCSNPageMetier collect: #source) includes: e) not ] ]
 ]
 
 { #category : #private }
@@ -441,15 +440,13 @@ CSNWebModelJava >> linkPageMetierToPageMetier [
 
 { #category : #private }
 CSNWebModelJava >> linkXmlUiPhaseAndPageMetier [
-	^ {self modelPhases  , self modelPageMetier} flatten
-		select: [ :a | '*XMLUi' match: a superclass mooseName ]
-		thenCollect: [ :a | Association new key: a  value: a superclass]
+	^ self modelPhases , self modelPageMetier select: [ :a | a superclass mooseName endsWith: 'XMLUi' ] thenCollect: [ :a | a superclass -> a ]
 ]
 
 { #category : #adding }
 CSNWebModelJava >> linkXmlUiWidget [
-	^ {self modelWidget} flatten
-		select: [ :a | '*XMLUi' match: a superclass mooseName ]
+	^ self modelWidget
+		select: [ :a | a superclass mooseName endsWith: 'XMLUi'  ]
 		thenCollect: [ :a | Association new key: a  value: a superclass]
 ]
 
@@ -472,11 +469,6 @@ CSNWebModelJava >> modelWidget [
 					(e superclassHierarchy anySatisfy: [ :a | a name = 'Widget' ])
 						and: [ (e container mooseName beginsWithAnyOf: self widgetNamespaces )  or: [ (e container mooseName beginsWith: self gwtWidgetNamespace )
 								or: [ self isWidgetFromApplication: e ] ] ] ] ]
-]
-
-{ #category : #private }
-CSNWebModelJava >> modelWidgetInstances [
-	^ self model allCSNWidget collect: #source
 ]
 
 { #category : #api }
@@ -502,20 +494,6 @@ CSNWebModelJava >> postImport [
 			self model allCSNPage do: #postImport displayingProgress: [:wid | 'post import page : ', wid name asString ].
 	].
 	
-]
-
-{ #category : #private }
-CSNWebModelJava >> searchAffectationForInvocationOrAnonymousClass: anInvocationOrAnonymousClass [
-	"The mooseVariable if there is an affactation
-	else nil
-	
-	1. We look for a local variable
-	2. We look for a class variable 
-		2.1 Because we don't have enought information with famix. We've supposed that the affectation is not to far from the access of the variable. So we've write 5 'space'. But it's not sure
-	3. We look in declaration in the class
-	"
-
-	^ anInvocationOrAnonymousClass affectation
 ]
 
 { #category : #private }
