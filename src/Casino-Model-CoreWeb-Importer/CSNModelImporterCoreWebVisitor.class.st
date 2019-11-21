@@ -129,7 +129,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWChart: aCSNChart [
-	^ ('.*Chart.*' asRegex matchesPrefix: source invokedClassName) 
+	^ (source invokedClassName includesSubstring: 'Chart') 
 		ifTrue: [ self createWidget: aCSNChart ] 
 		ifFalse: [ nil ]
 ]
@@ -553,7 +553,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITabManager: aCSNUITabManager [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
-	^ (#('BLTableList') includes: source invokedClassName)
+	^ (#('BLTableList' 'BLTableListBulk') includes: source invokedClassName)
 		ifTrue: [ self createWidget: aCSNUITable ] ifFalse: [ nil ]
 ]
 
