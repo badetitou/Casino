@@ -164,7 +164,7 @@ CSNWebModelJava >> generateBLActionAppel [
 			| action |
 			action := (self factory create: CSNActionAppel).
 			el key addAction: action.
-			el value ifNil: [  ] ifNotNil: [ action call: el value ] ]
+			el value ifNotNil: [ action call: el value ] ]
 ]
 
 { #category : #'private-actions' }
@@ -202,7 +202,9 @@ CSNWebModelJava >> generateServiceAction [
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
 	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
-		reject: [ :invocationOrClass | (invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces) or: [ '*noname#super*' match: invocationOrClass asString ] ])
+		reject: [ :invocationOrClass | 
+			(invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces)
+				or: [ (invocationOrClass asString includesSubstring: 'noname#super') or: [ self isInFactory: invocationOrClass ] ] ])
 		do: [ :invocation | 
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
@@ -252,10 +254,7 @@ CSNWebModelJava >> getPageMetierFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseCallInvocations [
-	^ (((self sourceModel allClasses
-		select:
-			[ :a | '*ConstantsPhase' match: a mooseName ])
-		at: 1) methods collect: #incomingInvocations) flatten
+	^ (((self sourceModel allClasses select: [ :a | a mooseName endsWith: 'ConstantsPhase' ]) at: 1) methods collect: #incomingInvocations) flatten
 ]
 
 { #category : #accessing }
@@ -353,6 +352,12 @@ CSNWebModelJava >> isElementFromApplication: e [
 	^ e sourceAnchor isNotNil and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
 ]
 
+{ #category : #'private-actions' }
+CSNWebModelJava >> isInFactory: invocationOrClass [
+	"used in PostOffice cause some factory are defined inside the PostOffice application \ie createBLLinkLabel"
+	^ false
+]
+
 { #category : #accessing }
 CSNWebModelJava >> isWidgetFromApplication: e [
 	^ (self isElementFromApplication: e)
@@ -377,6 +382,7 @@ CSNWebModelJava >> linkForAbstractTabPhase [
 
 { #category : #private }
 CSNWebModelJava >> linkFromWidgetActionAppel [
+	
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
 			| link |
@@ -398,7 +404,7 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase1: anInvocation [
 	" case 1 "
 	found := self searchWidgetFromConstructorInvocation: elContainer.
 	found
-		ifNotNil: [ ^ Association new key: found value: (self searchCalledPhaseFromInvocation: anInvocation) ]
+		ifNotNil: [ ^ found -> (self searchCalledPhaseFromInvocation: anInvocation) ]
 		ifNil: [ ^ self linkFromWidgetActionAppelCase1: elContainer ]
 ]
 
@@ -408,7 +414,6 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 	case 2
 	var i = new Widget ()
 	i.addHandler..(BlBl)"
- 
 	anInvocation from parentType isHandlerClass
 		ifFalse: [ ^ nil ].
 	(self widgetInVariable:
@@ -418,9 +423,7 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 						and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]) at: 1 ifAbsent: [ ^ nil ])
 				receiver)
 		ifNotNil: [ :widgetContainer | 
-			^ Association new
-				key: widgetContainer
-				value: (self searchCalledPhaseFromInvocation: anInvocation) ]
+			^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ]
 		ifNil:  [ ^ nil ]
 ]
 

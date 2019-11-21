@@ -7,7 +7,6 @@ Class {
 	#traits : 'FamixTNamed + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTNamed classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
-		'#source',
 		'#sources => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'

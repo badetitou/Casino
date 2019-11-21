@@ -15,6 +15,19 @@ CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIInputDate: aCSNUIInputDate
 ]
 
 { #category : #visitor }
+CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUILink: aCSNUILink [
+	^ ('BLLinkLabel' = source invokedClassName or: [ source isInvocation and: [ source signature beginsWith: 'createBLLinkLabel' ] ])
+		ifTrue: [ (self createWidget: aCSNUILink) 
+			addAttribute:
+			((self create: CSNUILabel)
+				attributeValue:
+					(source parameters ifNotEmpty: [ :parameters | parameters first ] ifEmpty: [ 'todo' ]));
+				yourself ] 
+		
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
 CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIPanel: aCSNUIPanel [
 	^ ((#('BLImageUploadPanel' 'BLFileUploadPanel' 'TabSubPanel' 'ThotDeckSidePanel') includes: source invokedClassName) not
 		and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ])

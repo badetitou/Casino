@@ -28,6 +28,26 @@ CSNWebModelJavaPostOffice >> generatePhase [
 ]
 
 { #category : #accessing }
+CSNWebModelJavaPostOffice >> isInFactory: invocationOrClass [
+	"used in PostOffice cause some factory are defined inside the PostOffice application \ie createBLLinkLabel"
+	invocationOrClass isClass ifTrue: [ ^ false ].
+	^ (invocationOrClass from atScope: FamixTMethod) anyOne name = 'createBLLinkLabel'
+]
+
+{ #category : #accessing }
+CSNWebModelJavaPostOffice >> linkFromWidgetActionAppel [
+	"the uncommented line is to wait behavioral code"
+	
+	^ self getPhaseCallInvocations
+		collect: [ :el | 
+			| link |
+			link := self linkFromWidgetActionAppelCase1: el.
+			link ifNil: [ link := self linkFromWidgetActionAppelCase2: el ].
+			link ]
+		thenSelect: #isNotNil
+]
+
+{ #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
 	^ (self modelPhases , self modelPageMetier) asSet select: [ :a | a superclass mooseName endsWith: 'Ui' ] thenCollect: [ :a | a superclass -> a ]
 ]
@@ -36,6 +56,15 @@ CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
 CSNWebModelJavaPostOffice >> linkXmlUiWidget [
 	^ self modelWidget
 		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | class mooseName endsWith: 'Ui' ] thenCollect: [ :class | class -> widget ] ]
+]
+
+{ #category : #accessing }
+CSNWebModelJavaPostOffice >> widgetFactoryInvocation [
+	^ (((self sourceModel allModelClasses
+		select: [ :a | #(#FactoryBLLabel #ComponentUtils #AbstractPhaseBurAdminUi) includes: a name ])
+		flatCollect: #methods)
+		select: [ :m | m name = 'create' or: [ m name beginsWithAnyOf: #('getLibelleItem' 'createBLLinkLabel') ] ]
+		thenCollect: #incomingInvocations) flatten
 ]
 
 { #category : #accessing }

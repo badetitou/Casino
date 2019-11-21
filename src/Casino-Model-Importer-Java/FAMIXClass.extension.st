@@ -65,7 +65,7 @@ FAMIXClass >> invokedClassName [
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXClass >> isHandlerClass [
-	^ 'anonymous(ClickHandler)' match: self name 
+	^ '_Anonymous(ClickHandler)' match: self name 
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
