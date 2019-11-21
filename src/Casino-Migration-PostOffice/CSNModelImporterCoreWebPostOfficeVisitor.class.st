@@ -15,6 +15,14 @@ CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIInputDate: aCSNUIInputDate
 ]
 
 { #category : #visitor }
+CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIPanel: aCSNUIPanel [
+	^ ((#('BLImageUploadPanel' 'BLFileUploadPanel' 'TabSubPanel' 'ThotDeckSidePanel') includes: source invokedClassName) not
+		and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ])
+		ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
 CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
 	^ (#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils' 'InlineLabel' 'BLLabelItem') includes: source invokedClassName)
 		ifTrue: [ | paragraph |
