@@ -145,7 +145,7 @@ CSNWebModelJava >> computeAllConstructorsLink [
 		flatCollect: [ :method | 
 			| got |
 			got := (method queryAll: #in) atScope: FAMIXClass.
-			got collect: [ :p | Association new key: p value: method parentType ] ]
+			got collect: [ :p | p -> method parentType ] ]
 ]
 
 { #category : #initialization }
@@ -254,7 +254,8 @@ CSNWebModelJava >> getPageMetierFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseCallInvocations [
-	^ (((self sourceModel allClasses select: [ :a | a mooseName endsWith: 'ConstantsPhase' ]) at: 1) methods collect: #incomingInvocations) flatten
+	^ (self sourceModel allClasses detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ] ifNone: [ self error: 'No call invocation strategy' ]) methods
+		flatCollect: #incomingInvocations
 ]
 
 { #category : #accessing }
@@ -264,9 +265,7 @@ CSNWebModelJava >> getPhaseFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseNamed: aCodePhase [
-	^ (self model allCSNPage select: [ :e | e codePhase = aCodePhase ])
-		ifEmpty: [ ^ nil ]
-		ifNotEmpty: [ :a | a at: 1 ]
+	^ self model allCSNPage detect: [ :e | e codePhase = aCodePhase ] ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -349,7 +348,7 @@ CSNWebModelJava >> import [
 
 { #category : #accessing }
 CSNWebModelJava >> isElementFromApplication: e [
-	^ e sourceAnchor isNotNil and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
+	^ e hasSourceAnchor and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
 ]
 
 { #category : #'private-actions' }
@@ -414,17 +413,15 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 	case 2
 	var i = new Widget ()
 	i.addHandler..(BlBl)"
-	anInvocation from parentType isHandlerClass
-		ifFalse: [ ^ nil ].
-	(self widgetInVariable:
-			((anInvocation from parentType container outgoingInvocations
-				select: [ :invoc | invoc sourceAnchor isNotNil and: [ 
-					invoc sourceAnchor startPos < anInvocation sourceAnchor startPos
-						and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]) at: 1 ifAbsent: [ ^ nil ])
-				receiver)
-		ifNotNil: [ :widgetContainer | 
-			^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ]
-		ifNil:  [ ^ nil ]
+
+	anInvocation from parentType isHandlerClass ifFalse: [ ^ nil ].
+	(self
+		widgetInVariable:
+			(anInvocation from parentType container outgoingInvocations
+				detect: [ :invoc | 
+					invoc sourceAnchor isNotNil
+						and: [ invoc sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]
+				ifNone: [ ^ nil ]) receiver) ifNotNil: [ :widgetContainer | ^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ] ifNil: [ ^ nil ]
 ]
 
 { #category : #private }
@@ -501,17 +498,17 @@ CSNWebModelJava >> postImport [
 
 { #category : #private }
 CSNWebModelJava >> searchCalledPhase: aSignature [
-	^ (self getPhaseNamed: (aSignature replaceAllRegex: '\(\)' with: '')) ifNil: [^nil]
+	^ self getPhaseNamed: (aSignature replaceAllRegex: '\(\)' with: '')
 ]
 
 { #category : #private }
 CSNWebModelJava >> searchCalledPhaseFromInvocation: invoc [
-	^ self searchCalledPhase:  (invoc to at: 1) signature
+	^ self searchCalledPhase: (invoc to at: 1) signature
 ]
 
 { #category : #private }
 CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
-	^ (self model allCSNWidget select: [ :widget | widget sources isNotEmpty and: [ widget source = anInvocation ] ]) at: 1 ifAbsent: [ ^ nil ]
+	^ self model allCSNWidget detect: [ :widget | widget sources isNotEmpty and: [ widget source = anInvocation ] ] ifNone: [ nil ]
 ]
 
 { #category : #accessing }
