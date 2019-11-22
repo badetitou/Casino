@@ -51,7 +51,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
 	^ (self create: CSNService)
 		name: aServiceClass name;
-		targetPoint: CSNWebModelJava webRoot, '/services/', aServiceClass name asLowercase;
+		targetPoint: self importer webRoot, '/services/', aServiceClass name asLowercase;
 		source: aServiceClass;
 		yourself
 	

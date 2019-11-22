@@ -55,7 +55,12 @@ CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiWidget [
 	^ self modelWidget
-		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | class mooseName endsWith: 'Ui' ] thenCollect: [ :class | class -> widget ] ]
+		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | self isElementFromApplication: class"class mooseName endsWith: 'Ui'" ] thenCollect: [ :class | class -> widget ] ]
+]
+
+{ #category : #accessing }
+CSNWebModelJavaPostOffice >> webRoot [
+	^ 'https://pofrap1lagbl:15443/interrop/thot/' 
 ]
 
 { #category : #accessing }

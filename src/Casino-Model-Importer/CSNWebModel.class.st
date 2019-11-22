@@ -18,18 +18,6 @@ Class {
 	#category : #'Casino-Model-Importer'
 }
 
-{ #category : #accessing }
-CSNWebModel class >> webRoot [
-	"I represent the root of URL"
-	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/'
-]
-
-{ #category : #accessing }
-CSNWebModel class >> webSkinRoot [
-	"I represent the root of URL"
-	^ self webRoot , 'skins/e-sedit/'
-]
-
 { #category : #initialization }
 CSNWebModel >> createFactory [
 	factory := self factoryClass new model: model; importer: self; yourself 
@@ -92,4 +80,16 @@ CSNWebModel >> sourceModel [
 { #category : #accessing }
 CSNWebModel >> sourceModel: anObject [
 	sourceModel := anObject
+]
+
+{ #category : #accessing }
+CSNWebModel >> webRoot [
+	"I represent the root of URL"
+	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/'
+]
+
+{ #category : #accessing }
+CSNWebModel >> webSkinRoot [
+	"I represent the root of URL"
+	^ self webRoot , 'skins/e-sedit/'
 ]

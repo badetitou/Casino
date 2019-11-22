@@ -334,7 +334,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 			addAttribute:
 			
 					((self create: CSNUISrc)
-						attributeValue: CSNWebModelJava webSkinRoot
+						attributeValue: self factory importer webSkinRoot
 				,
 							('BLDocButton' = source invokedClassName
 								ifTrue: [ 'images/boutons/bt_aide_fs.gif' ]

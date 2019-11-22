@@ -450,7 +450,7 @@ CSNWebModelJava >> linkXmlUiPhaseAndPageMetier [
 CSNWebModelJava >> linkXmlUiWidget [
 	^ self modelWidget
 		select: [ :a | a superclass mooseName endsWith: 'XMLUi'  ]
-		thenCollect: [ :a | Association new key: a  value: a superclass]
+		thenCollect: [ :a | a -> a superclass]
 ]
 
 { #category : #accessing }
