@@ -204,7 +204,8 @@ CSNWebModelJava >> generateWidget [
 	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
 		reject: [ :invocationOrClass | 
 			(invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces)
-				or: [ (invocationOrClass asString includesSubstring: 'noname#super') or: [ self isInFactory: invocationOrClass ] ] ])
+				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
+						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ])
 		do: [ :invocation | 
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
