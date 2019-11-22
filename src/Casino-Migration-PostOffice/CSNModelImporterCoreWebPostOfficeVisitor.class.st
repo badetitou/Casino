@@ -29,7 +29,7 @@ CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUILink: aCSNUILink [
 
 { #category : #visitor }
 CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUIPanel: aCSNUIPanel [
-	^ ((#('BLImageUploadPanel' 'BLFileUploadPanel' 'TabSubPanel' 'ThotDeckSidePanel') includes: source invokedClassName) not
+	^ ((#('BLImageUploadPanel' 'BLFileUploadPanel' 'TabSubPanel' 'ThotDeckSidePanel' 'TabPanel') includes: source invokedClassName) not
 		and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ])
 		ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
 		ifFalse: [ nil ]
@@ -70,7 +70,7 @@ CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUITab: aCSNUITab [
 
 { #category : #visitor }
 CSNModelImporterCoreWebPostOfficeVisitor >> visitCSNUITabManager: aCSNUITabManager [
-	^ (#('TabSubPanel' 'ThotDeckSidePanel') includes: source invokedClassName) 
+	^ (#('TabSubPanel' 'ThotDeckSidePanel' 'TabPanel') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNUITabManager) ] 
 		ifFalse: [ nil ]
 ]
