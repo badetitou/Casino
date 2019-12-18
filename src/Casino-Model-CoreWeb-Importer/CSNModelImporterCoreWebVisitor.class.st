@@ -130,7 +130,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
-	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL') includes: source invokedClassName) 
+	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNAutoComplete) ] 
 		ifFalse: [ nil ]
 ]
