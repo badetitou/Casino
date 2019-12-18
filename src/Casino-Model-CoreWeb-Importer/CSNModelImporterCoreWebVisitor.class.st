@@ -411,13 +411,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputNumber: aCSNUIInputNumber [
 		ifTrue: [ | inputNumber |
 			inputNumber := self createWidgetInput: aCSNUIInputNumber.
 			inputNumber parametersAt: #type put: 'number'.
-			'BLTextBoxAnnee' = source invokedClassName
+			inputNumber addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ])).
+			"'BLTextBoxAnnee' = source invokedClassName
 				ifTrue: [ source parameters
 						ifNotEmpty: [ inputNumber
 								addAttribute:
 									((self create: CSNUIValue)
 										attributeValue: (source parameters at: 1);
-										yourself) ] ].
+										yourself) ] ]."
 			(#('BLTextBoxNumber' 'BLTextBoxAnnee') includes: source invokedClassName)
 				ifTrue: [ inputNumber
 						addAttribute:
