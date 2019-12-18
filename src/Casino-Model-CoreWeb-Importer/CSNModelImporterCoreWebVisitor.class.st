@@ -484,6 +484,11 @@ CSNModelImporterCoreWebVisitor >> visitCSNUILink: aCSNUILink [
 		ifFalse: [ nil ]
 ]
 
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUIMaxlength: aCSNUIMaxlength [
+	^ (source isInvocation and: [ source signature beginsWith: 'setMaxLength' ]) ifTrue: [ self createAttribute: aCSNUIMaxlength for: source ] ifFalse: [ nil ]
+]
+
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 	^ ('BLImageUploadPanel' ~= source invokedClassName
@@ -541,6 +546,27 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeWidth: aCSNUIRelativeWidth [
 CSNModelImporterCoreWebVisitor >> visitCSNUISelect: aCSNUISelect [
 	^ (#('BLListBox' 'ListBox' 'BLMultiCombo') includes: source invokedClassName) 
 		ifTrue: [ self createWidgetInput: aCSNUISelect ] 
+		ifFalse: [ nil ]
+]
+
+{ #category : #api }
+CSNModelImporterCoreWebVisitor >> visitCSNUISize: aCSNUISize [
+	^ (source isInvocation and: [ source signature beginsWith: 'setSize' ])
+		ifTrue: [ source parameters size = 2
+				ifTrue: [ "width"
+					(self create: CSNUIWidth)
+						source: source;
+						name: 'width';
+						attributeValue: source parameters first;
+						widget: entity.
+					"height"
+					^ (self create: CSNUIHeight)
+						source: source;
+						name: 'height';
+						attributeValue: source parameters second;
+						widget: entity;
+						yourself ].
+			^ self createAttribute: aCSNUISize for: source ]
 		ifFalse: [ nil ]
 ]
 

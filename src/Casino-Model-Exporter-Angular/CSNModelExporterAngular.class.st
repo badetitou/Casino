@@ -547,7 +547,8 @@ CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLeaf: aBLUILeaf [
 	^ '<' , (aBLUILeaf getListPropertiesAsStringWith: self) , '>'
-		, ((aBLUILeaf attributes select: [ :a | a isKindOf: CSNUILabel ]) flatCollect: [ :attribute | String crlf , ((self visit: attribute) indentBy: 4) , String crlf ]) , '</' , aBLUILeaf getSelector , '>'
+		, ((aBLUILeaf attributes select: [ :a | a isKindOf: CSNUILabel ]) flatCollect: [ :attribute | String crlf , ((self visit: attribute) indentBy: 4) , String crlf ])
+		, '</' , aBLUILeaf getSelector , '>'
 ]
 
 { #category : #visiting }
