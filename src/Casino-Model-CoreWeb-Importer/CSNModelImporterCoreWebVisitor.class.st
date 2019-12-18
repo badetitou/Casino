@@ -375,6 +375,11 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputDate: aCSNUIInputDate [
 ]
 
 { #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNUIInputEmail: aCSNUIInputEmail [
+	^ nil
+]
+
+{ #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputFile: aCSNUIInputFile [
 	^ ('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink' asRegex matchesPrefix: source invokedClassName)
 		ifTrue: [ (self createWidgetInput: aCSNUIInputFile)
