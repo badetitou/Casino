@@ -114,10 +114,18 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteWidth: aCSNUIAbsoluteWidth [
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 	^ (#('Button' 'BLLinkButton') includes: source invokedClassName)
-		ifTrue: [ (self createWidget: aCSNUIButton) 
-			addAttribute: ((self create: CSNUILabel) 
-				attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-				yourself ] ifFalse: [ nil ]
+		ifTrue: [ | button |
+			button := (self createWidget: aCSNUIButton)
+				addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
+				yourself.
+			"if BL"
+			'BLLinkButton' = source invokedClassName
+				ifTrue: [ button
+						addAttribute:
+							((self create: CSNUIClass)
+								attributeValue: (((source parameters second beginsWith: 'BLLinkButton.') ifTrue: [ source parameters second ] ifFalse: [ 'NIVEAU2' ]) removePrefix: 'BLLinkButton.')) ].
+			button ]
+		ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
