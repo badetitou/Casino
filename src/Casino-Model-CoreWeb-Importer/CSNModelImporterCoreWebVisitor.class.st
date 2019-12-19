@@ -389,7 +389,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputEmail: aCSNUIInputEmail [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputFile: aCSNUIInputFile [
-	^ ('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink' asRegex matchesPrefix: source invokedClassName)
+	^ ('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink|FileUpload' asRegex matchesPrefix: source invokedClassName)
 		ifTrue: [ (self createWidgetInput: aCSNUIInputFile)
 				parametersAt: #type put: 'file';
 				yourself ]
@@ -506,7 +506,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 	^ ('BLImageUploadPanel' ~= source invokedClassName
 		and: [ 'BLFileUploadPanel' ~= source invokedClassName
 				and: [ 'TabSubPanel' ~= source invokedClassName
-						and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ] ] ])
+						and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid' 'Grid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ] ] ])
 		ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
 		ifFalse: [ nil ]
 ]
