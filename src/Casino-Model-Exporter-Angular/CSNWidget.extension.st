@@ -56,7 +56,6 @@ CSNWidget >> getListPropertiesAsStringWith: anExporter [
   anExporter <<< self getSelector.
   self attributesTagWith: anExporter.
   anExporter <<< self actionsTag.
-  self parametersTagWith: anExporter.
   anExporter <<< self idTag
 ]
 
@@ -95,13 +94,4 @@ CSNWidget >> idViewChild [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> isPageMetier [
 	^ false
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> parametersTagWith: anExporter [
-  ^self parameters associationsDo: [:attr |  anExporter
-           <<< ' ';
-           <<< attr key;
-           <<< '=';
-           <<< (CSNModelExporterAngular convertIfString: (anExporter protectString: attr value)) ]
 ]

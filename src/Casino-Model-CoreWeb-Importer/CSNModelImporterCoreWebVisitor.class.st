@@ -237,7 +237,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 	^ 'BLDialogBox' = source invokedClassName
 		ifTrue: [ | dialog |
 			dialog := self createWidget: aCSNDialog.
-			dialog parametersAt: #header put: (source parameters at: 1 ifAbsent: [ 'todo' ]).
+			dialog  addAttribute: ((self create: CSNUICWHeader) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ])).
 			source parameters size = 1
 				ifTrue: [ dialog
 						addAttribute:
@@ -283,17 +283,15 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWRichTextArea: aCSNRichTextArea [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
-	^ 'BLSplitButton' = source invokedClassName
-		ifTrue: [ | splitButton |
-			splitButton := (self createWidget: aCSNSplitButton)
-				parametersAt: #label put: (source parameters at: 1 ifAbsent: [ 'todo' ]);
-				yourself.
-			(self create: CSNUIModelAttribute)
-				name: 'model';
-				attributeValue: 'items';
-				widget: splitButton.
-			splitButton ]
-		ifFalse: [ nil ]
+  ^'BLSplitButton' = source invokedClassName ifTrue: [ | splitButton |
+        splitButton := (self createWidget: aCSNSplitButton)
+           addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));
+           yourself.
+        (self create: CSNUIModelAttribute)
+           name: 'model';
+           attributeValue: 'items';
+           widget: splitButton.
+        splitButton ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
@@ -354,12 +352,10 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
-	^ (#('BLCheckBox' 'CheckBox') includes: source invokedClassName)
-		ifTrue: [ (self createWidgetInput: aCSNUIInputCheckbox)
-				addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-				parametersAt: #labelPosition put: (source parameters at: 4 ifAbsent: [ '0' ]);
-				yourself ]
-		ifFalse: [ nil ]
+  ^(#('BLCheckBox' 'CheckBox') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputCheckbox)
+           addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
+           addAttribute: ((self create: CSNUICWLabelPosition) attributeValue: (source parameters at: 4 ifAbsent: [ '0' ]));
+           yourself ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
@@ -423,7 +419,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputRadio: aCSNUIInputRadio [
   ^(#('BLRadioButton' 'RadioButton') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputRadio)
            addAttribute: ((self create: CSNUIName) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));
            addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 2 ifAbsent: [ 'todo' ]));
-           parametersAt: #labelPosition put: (source parameters at: 5 ifAbsent: [ '0' ]);
+           addAttribute: ((self create: CSNUICWLabelPosition) attributeValue: (source parameters at: 5 ifAbsent: [ '0' ]));
            yourself ] ifFalse: [ nil ]
 ]
 

@@ -24,18 +24,12 @@ Class {
 		'csnAttribute',
 		'coreColSpan',
 		'uiInput',
-		'csnVariableAttribute'
+		'csnVariableAttribute',
+		'header',
+		'labelPosition'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
-
-{ #category : #accessing }
-CSNUICoreWebGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
 
 { #category : #accessing }
 CSNUICoreWebGenerator class >> packageName [
@@ -75,7 +69,10 @@ CSNUICoreWebGenerator >> defineClasses [
 	lightFieldset := builder newClassNamed: #LightFieldset.
 	open := builder newClassNamed: #Open.
 	progressBar := builder newClassNamed: #ProgressBar.
-	
+
+	header := builder newClassNamed: #Header.
+	labelPosition := builder newClassNamed: #LabelPosition.
+		
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
 	csnAction := self remoteEntity: #Action withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
@@ -91,6 +88,8 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	dialog --|> csnContainer.
 	html --|> csnContainer.
 	progressBar --|> csnContainer.
+	
+	
 
 	autoComplete --|> uiInput.
 	richTextArea --|> uiInput.
@@ -107,6 +106,9 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	coreRowSpan --|> csnAttribute.
 	coreVerticalAlignement --|> csnAttribute.
 	lightFieldset --|> csnAttribute.
+	
+	labelPosition --|> csnAttribute.
+	header --|> csnAttribute.
 
 	open --|> csnAttribute
 ]

@@ -54,22 +54,6 @@ CSNWidget >> name [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNWidget >> parameters [
-	<MSEProperty: #parameters type: #Object>
-	^ self privateState attributeAt: #parameters ifAbsentPut: [ Dictionary new ]
-]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> parametersAt: aParameterName [
-	^ self parameters at: aParameterName
-]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> parametersAt: aParameterName put: anObject [
-	^ self parameters at: aParameterName put: anObject
-]
-
-{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> realClass [
 	<MSEProperty: #realClass type: #Object>
 	^ realClass
