@@ -103,7 +103,9 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
         currentWriteStream
            << '</bl-tabs>';
            << String crlf ].
-  currentWriteStream << ((aBLPageMetier widgets reject: [:widget |  widget isPageMetier ]) flatCollect: [:widget |  (self visit: widget) , String crlf ])
+  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  currentWriteStream
+           << (self visit: widget);
+           << String crlf ]
 ]
 
 { #category : #generate }
@@ -115,9 +117,9 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage [
-	| id |
-	id := 0.
-	currentWriteStream << '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
+  | id |
+  id := 0.
+  currentWriteStream << '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
                 <div class="cursor-pointer"> <!-- (click)="save()" -->
@@ -125,22 +127,28 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: a
                 </div>
             </div>
         </bl-phase-business-pages-tab-header>'.
-	currentWriteStream <<
-			(aCSNPage sortedPageMetiers
-				flatCollect: [ :metier | 
-					id := id + 1.
-					'
-            <bl-phase-business-page-tab id="P' , id asString
-						, '" title="' , (self protectString: metier title) , '">	'
-						, String crlf , '                ' , metier getTag , String crlf
-						, '            </bl-phase-business-page-tab>' , String crlf ]).
-	currentWriteStream << '    </bl-phase-business-pages-tab-container>'
+  aCSNPage sortedPageMetiers do: [:metier |  id := id + 1.
+        currentWriteStream
+           << '
+            <bl-phase-business-page-tab id="P';
+           << id asString;
+           << '" title="';
+           << (self protectString: metier title);
+           << '">	';
+           << String crlf;
+           << '                ';
+           << metier getTag;
+           << String crlf;
+           << '            </bl-phase-business-page-tab>';
+           << String crlf ].
+  currentWriteStream << '    </bl-phase-business-pages-tab-container>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage [
-	currentWriteStream << (aCSNPage widgets
-		flatCollect: [ :widget | (self visit: widget) , String crlf ])
+  aCSNPage widgets do: [:widget |  currentWriteStream
+           << (self visit: widget);
+           << String crlf ]
 ]
 
 { #category : #visiting }
@@ -333,19 +341,31 @@ export class ';
      << aBLPageMetier componentName capitalized;
      << ' implements OnInit, OnDestroy {
 
-';
-     << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '    public ' , phase name , ': Phase;' , String crlf ]);
+'.
+  aBLPageMetier collectPhaseCalled do: [:phase |  currentWriteStream
+           << '    public ';
+           << phase name;
+           << ': Phase;';
+           << String crlf ].
+  currentWriteStream
      << (aBLPageMetier recursiveWidgets flattened collect: [:widget |  widget idViewChild ]) asOrderedCollection removeDuplicates flatten;
      << '
 ';
      << (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
      << '
 
-    constructor(';
-     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
-     << ') {
-';
-     << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
+    constructor('.
+  aBLPageMetier collectPhaseCalled ifNotEmpty: [ currentWriteStream << 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+  currentWriteStream << ') {
+'.
+  aBLPageMetier collectPhaseCalled do: [:phase |  currentWriteStream
+           << '        this.';
+           << phase name;
+           << ' = this._phaseService.getPhase(''';
+           << phase name;
+           << ''');';
+           << String crlf ].
+  currentWriteStream
      << '
     }
 
@@ -412,10 +432,18 @@ CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
 import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
 import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
 import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
-';
-     << (aCSNPage hasMultiplePageMetier ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ] ifFalse: [ '' ]);
-     << (aCSNPage businessPage flatCollect: [:metier |  'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ]);
-     << '
+'.
+  aCSNPage hasMultiplePageMetier ifTrue: [ currentWriteStream
+           << 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';';
+           << String crlf ].
+  aCSNPage businessPage do: [:metier |  currentWriteStream
+           << 'import { ';
+           << metier componentName;
+           << ' } from ''../..';
+           << metier getLocalComponentPath;
+           << ''';';
+           << String crlf ].
+  currentWriteStream << '
 
 
 @Component({
@@ -423,10 +451,19 @@ import { DesktopStateService } from ''../../../../../components/service/desktop-
 })
 export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
 
-';
-     << (aCSNPage hasMultiplePageMetier ifTrue: [ '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
-' , String crlf ] ifFalse: [ '' ]);
-     << (aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage flatCollect: [:metier |  '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ] ifFalse: [ '' ]);
+'.
+  aCSNPage hasMultiplePageMetier ifTrue: [ currentWriteStream << '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
+' ;<< String crlf ].
+  aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [:metier |  currentWriteStream
+                 << '@ViewChild(';
+                 << metier componentName;
+                 << ') public ';
+                 << metier getAcceptedName;
+                 << ': ';
+                 << metier componentName;
+                 << ';';
+                 << String crlf ] ].
+  currentWriteStream
      << '
 
     constructor(protected phaseService: DesktopStateService) {
