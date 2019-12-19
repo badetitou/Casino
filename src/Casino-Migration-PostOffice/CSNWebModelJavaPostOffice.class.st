@@ -5,6 +5,28 @@ Class {
 }
 
 { #category : #accessing }
+CSNWebModelJavaPostOffice >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
+	^ widget affectedActions
+		ifNotNil: [ | usages |
+			usages := widget affectedActions allUsages , (widget affectedActions allUsages flatCollect: [ :el | el allContainers ])
+				select: [ :el | el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('} ].
+			responsabilityHandlerForUsages
+				handleAddLinkedFromVariable: usages asOrderedCollection
+				to: widget
+				withXmlui: xmlUiWidgetLink
+				andImporter: self ]
+		ifNil: [ | containerInvocation |
+			containerInvocation := widget source container.
+			[ containerInvocation isNotNil ]
+				whileTrue: [ | found |
+					found := self widgetInVariable: containerInvocation receiver.
+					found
+						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation usingFactory: self factory.
+							containerInvocation := nil ]
+						ifNil: [ containerInvocation := containerInvocation container ] ] ]
+]
+
+{ #category : #accessing }
 CSNWebModelJavaPostOffice >> applicationSource [
 	"name of the directory with the GWT application"
 	^  'BLThotGwt'
@@ -54,8 +76,7 @@ CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
 
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiWidget [
-	^ self modelWidget
-		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | self isElementFromApplication: class"class mooseName endsWith: 'Ui'" ] thenCollect: [ :class | class -> widget ] ]
+  ^self modelWidget flatCollect: [:widget |  widget superclassHierarchy select: [:class |  self isElementFromApplication: class ] thenCollect: [:class |  class -> widget ] ]
 ]
 
 { #category : #accessing }
