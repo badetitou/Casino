@@ -68,7 +68,7 @@ CSNWebModelJava >> addLinkXmlUi [
 
 { #category : #adding }
 CSNWebModelJava >> addOnClickAttribute [
-	((self sourceModel allClasses select: [ :c | 'ClickHandler' match: c name ]) at: 1) subclassHierarchy
+	((self sourceModel allClasses select: [ :c | 'ClickHandler' = c name ]) at: 1) subclassHierarchy
 		select: [ :class | self isElementFromApplication: class ]
 		thenDo: [ :class | 
 			(class allUsages collect: #receiver)
@@ -81,7 +81,7 @@ CSNWebModelJava >> addPPPToWidget [
 		thenDo: [ :widget | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source from maxLevel: 15 level: 0.
-			founds ifNotNil: [ founds do: [ :found | found addWidget: widget ] ] ]
+			founds do: [ :found | found addWidget: widget ] ]
 ]
 
 { #category : #adding }
@@ -543,11 +543,11 @@ CSNWebModelJava >> widgetNamespaces [
 { #category : #accessing }
 CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level [
 	| found |
-	level = maxLevel ifTrue: [ ^ nil ].
-	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ nil ].
+	level = maxLevel ifTrue: [ ^ {  } ].
+	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ {  } ].
 	invocation isClass
 		ifFalse: [ 
-			(invocation atScope: FamixTClass) ifEmpty: [ ^ nil ].
+			(invocation atScope: FamixTClass) ifEmpty: [ ^ {  } ].
 			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) first maxLevel: maxLevel level: level + 1 ]
 		ifTrue: [ found := self getPhaseFromClass: invocation.
 			found
