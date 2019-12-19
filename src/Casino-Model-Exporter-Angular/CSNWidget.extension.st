@@ -8,14 +8,13 @@ CSNWidget >> actionsTag [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> attributesTagWith: anExporter [
-	^ ((self computeSelfAttributes flattened groupedBy: #name) asDictionary
-		associationsCollect: [ :mapAttributeNameValues | 
-			' ' , mapAttributeNameValues key , '="'
-				,
-					((mapAttributeNameValues value asOrderedCollection
-						flatCollect: [ :attribute | (anExporter visit: attribute) , ' ' ])
-						removeLast;
-						yourself) , '"' ]) flatten
+  ^(self computeSelfAttributes flattened groupedBy: #name) asDictionary associationsDo: [:mapAttributeNameValues |  anExporter
+           <<< ' ';
+           <<< mapAttributeNameValues key;
+           <<< '="'.
+        mapAttributeNameValues value asOrderedCollection do: [:attribute |  anExporter visit: attribute.
+              anExporter <<< ' ' ].
+        anExporter <<< '"' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -54,8 +53,11 @@ CSNWidget >> getExternalDependency [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
-	^ self getSelector , (self attributesTagWith: anExporter)
-		, self actionsTag , (self parametersTagWith: anExporter) , self idTag
+  anExporter <<< self getSelector.
+  self attributesTagWith: anExporter.
+  anExporter <<< self actionsTag.
+  self parametersTagWith: anExporter.
+  anExporter <<< self idTag
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -97,7 +99,9 @@ CSNWidget >> isPageMetier [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> parametersTagWith: anExporter [
-	^ (self parameters
-		associationsCollect: [ :attr | ' ' , attr key , '=' , (CSNModelExporterAngular convertIfString: (anExporter protectString: attr value)) ])
-		flatten
+  ^self parameters associationsDo: [:attr |  anExporter
+           <<< ' ';
+           <<< attr key;
+           <<< '=';
+           <<< (CSNModelExporterAngular convertIfString: (anExporter protectString: attr value)) ]
 ]

@@ -28,7 +28,8 @@ Class {
 	#superclass : #CSNModelExporter,
 	#instVars : [
 		'currentPath',
-		'currentWriteStream'
+		'currentWriteStream',
+		'indentLevel'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -40,6 +41,17 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 	^ anObject 
 ]
 
+{ #category : #indent }
+CSNModelExporterAngular >> << elements [
+  self indent.
+  currentWriteStream << elements
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> <<< elements [
+  currentWriteStream << elements
+]
+
 { #category : #generate }
 CSNModelExporterAngular >> businessPageImportList [
 	^ '    Component,
@@ -48,6 +60,11 @@ CSNModelExporterAngular >> businessPageImportList [
     ElementRef,
     Renderer2,
     ViewChild'
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> crlf [
+  ^ self <<< String crlf 
 ]
 
 { #category : #accessing }
@@ -103,9 +120,8 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
         currentWriteStream
            << '</bl-tabs>';
            << String crlf ].
-  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  currentWriteStream
-           << (self visit: widget);
-           << String crlf ]
+  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  self visit: widget.
+        currentWriteStream << String crlf ]
 ]
 
 { #category : #generate }
@@ -146,9 +162,8 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: a
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage [
-  aCSNPage widgets do: [:widget |  currentWriteStream
-           << (self visit: widget);
-           << String crlf ]
+  aCSNPage widgets do: [:widget |  self visit: widget.
+        currentWriteStream << String crlf ]
 ]
 
 { #category : #visiting }
@@ -421,13 +436,12 @@ export class IndexComponent implements OnInit {
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
-  currentWriteStream
-     << 'import {
+  currentWriteStream << 'import {
     Component,
     OnDestroy,
-    OnInit';
-     << (aCSNPage hasMultiplePageMetier ifTrue: [ ', ViewChild' ] ifFalse: [ '' ]);
-     << '
+    OnInit'.
+  aCSNPage hasMultiplePageMetier ifTrue: [ currentWriteStream << ', ViewChild' ].
+  currentWriteStream << '
 } from ''@angular/core'';
 import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
 import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
@@ -452,8 +466,10 @@ import { DesktopStateService } from ''../../../../../components/service/desktop-
 export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
 
 '.
-  aCSNPage hasMultiplePageMetier ifTrue: [ currentWriteStream << '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
-' ;<< String crlf ].
+  aCSNPage hasMultiplePageMetier ifTrue: [ currentWriteStream
+           << '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
+';
+           << String crlf ].
   aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [:metier |  currentWriteStream
                  << '@ViewChild(';
                  << metier componentName;
@@ -485,6 +501,41 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
      << String crlf
 ]
 
+{ #category : #indent }
+CSNModelExporterAngular >> indent [
+  1 to: self indentLevel * self indentNumber do: [:i |  currentWriteStream << self indentCharacter ]
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> indentCharacter [
+	^ String space
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> indentLevel [
+  ^indentLevel
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> indentMinus [
+  ^indentLevel := indentLevel - 1 
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> indentNumber [
+  ^4
+]
+
+{ #category : #indent }
+CSNModelExporterAngular >> indentPlus [
+  ^indentLevel := indentLevel + 1 
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> initialize [
+	indentLevel := 0
+]
+
 { #category : #api }
 CSNModelExporterAngular >> prepareExport [
 	context := CSNContext new root: (FileSystem disk workingDirectory / model name) asFileReference; yourself.
@@ -507,7 +558,7 @@ CSNModelExporterAngular >> serviceRoot [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNAttribute: aBLAttribute [
-	^ self protectString: aBLAttribute attributeValue asString
+	self <<< (self protectString: aBLAttribute attributeValue asString)
 ]
 
 { #category : #visiting }
@@ -534,15 +585,20 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
-	^ aBLUIContainer layout
-		ifNotNil: [ :layout | self visit: layout ]
-		ifNil: [ '<' , (aBLUIContainer getListPropertiesAsStringWith: self) , '>'
-				,
-					(''
-						,
-							(aBLUIContainer widgets
-								flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
-						indentBy: 4), String crlf, '</' , aBLUIContainer getSelector , '>' ]
+  aBLUIContainer layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self << '<'.
+        aBLUIContainer getListPropertiesAsStringWith: self.
+        self <<< '>'.
+        aBLUIContainer widgets do: [:widget |  self
+                 crlf;
+                 indentPlus.
+              self
+                 visit: widget;
+                 indentMinus ].
+        self
+           crlf;
+           << '</';
+           <<< aBLUIContainer getSelector;
+           <<< '>' ]
 ]
 
 { #category : #visiting }
@@ -553,43 +609,80 @@ CSNModelExporterAngular >> visitCSNLCell: aBLCell [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
-	^ '<' , (aBLUIGridLayout container getListPropertiesAsStringWith: self)
-		,
-			'>
-	<tbody>' , String crlf
-		,
-			(''
-				,
-					((0 to: aBLUIGridLayout maxLevel)
-						flatCollect: [ :number | 
-							'<tr>'
-								,
-									(((aBLUIGridLayout atLevelSorted: number) reject: #isNil)
-										flatCollect: [ :cell | (String crlf , '<td' , ((cell attributesTagWith: self) , '>' , String crlf , ((self visit: cell) indentBy: 4) , String crlf , '</td>') indentBy: 4) , String crlf ])
-								, '</tr>' , String crlf ]) indentBy: 8)
-		,
-			'
-    </tbody>
-</' , aBLUIGridLayout container getSelector , '>'
+  self << '<'.
+  aBLUIGridLayout container getListPropertiesAsStringWith: self.
+  self
+     <<< '>';
+     crlf;
+     indentPlus;
+     << '<tbody>';
+     crlf;
+     indentPlus.
+  0 to: aBLUIGridLayout maxLevel do: [:number |  self
+           << '<tr>';
+           crlf;
+           indentPlus.
+        (aBLUIGridLayout atLevelSorted: number) reject: #isNil thenDo: [:cell |  self << '<td'.
+              cell attributesTagWith: self.
+              self
+                 <<< '>';
+                 crlf.
+              self indentPlus.
+              self visit: cell.
+              self indentMinus.
+              self
+                 crlf;
+                 << '</td>';
+                 crlf ].
+        self
+           indentMinus;
+           << '</tr>';
+           crlf ].
+  self
+     indentMinus;
+     << '</tbody>';
+     indentMinus;
+     crlf;
+     << '</';
+     <<< aBLUIGridLayout container getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
-	^ '<' , (aBLLayout container getListPropertiesAsStringWith: self) , '>'
-		,
-			(''
-				,
-					({aBLLayout container widgets.
-					(aBLLayout cell)} flatten
-						flatCollect: [ :widget | String crlf , (self visit: widget) ])
-				indentBy: 4) , String crlf, '</' , aBLLayout container getSelector , '>'
+  self << '<'.
+  aBLLayout container getListPropertiesAsStringWith: self.
+  self <<< '>'.
+  {aBLLayout container widgets . 
+  aBLLayout cell} flatten do: [:widget |  self
+           crlf;
+           indentPlus.
+        self visit: widget.
+        self indentMinus ].
+  self
+     crlf;
+     << '</';
+     <<< aBLLayout container getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLeaf: aBLUILeaf [
-	^ '<' , (aBLUILeaf getListPropertiesAsStringWith: self) , '>'
-		, ((aBLUILeaf attributes select: [ :a | a isKindOf: CSNUILabel ]) flatCollect: [ :attribute | String crlf , ((self visit: attribute) indentBy: 4) , String crlf ])
-		, '</' , aBLUILeaf getSelector , '>'
+  self << '<'.
+  aBLUILeaf getListPropertiesAsStringWith: self.
+  self <<< '>'.
+  aBLUILeaf attributes select: [:a |  a isKindOf: CSNUILabel ] thenDo: [:attribute |  self
+           crlf;
+           indentPlus;
+           indent.
+        self visit: attribute.
+        self
+           crlf;
+           indentMinus ].
+  self
+     << '</';
+     <<< aBLUILeaf getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
@@ -628,166 +721,236 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
-	^ self protectString: aBLUIAbsoluteHeight attributeValue, 'px'
+  self
+     <<< (self protectString: aBLUIAbsoluteHeight attributeValue);
+     <<< 'px'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteWidth: aBLUIAbsoluteWidth [
-	^ self protectString: aBLUIAbsoluteWidth attributeValue , 'px'
+  self
+     <<< (self protectString: aBLUIAbsoluteWidth attributeValue);
+     <<< 'px'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
-	^ self visitCSNAction: aCSNClickHandler
+	self visitCSNAction: aCSNClickHandler
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
-	^ '', (aBLHTML widgets flatCollect: [ :widget | String crlf , (self visit: widget) , String crlf ])
+  aBLHTML widgets do: [:widget |  self <<< String crlf.
+        self visit: widget.
+        self <<< String crlf ]
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
-	^  '<' , (aBLSplitButton getListPropertiesAsStringWith: self) , '></' , aBLSplitButton getSelector , '>'
+  self << '<'.
+  aBLSplitButton getListPropertiesAsStringWith: self.
+  self
+     <<< '></';
+     <<< aBLSplitButton getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIHeight: aBLUIHeight [
-	^ self protectString: aBLUIHeight attributeValue 
+  self <<< (self protectString: aBLUIHeight attributeValue)
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIImage: aBLUIImage [
-	^   '<' ,  (aBLUIImage getListPropertiesAsStringWith: self) , ' />'
+  self << '<'.
+  aBLUIImage getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
-	^ '<' ,  (aBLUIInputCheckbox getListPropertiesAsStringWith: self), ' ></' , aBLUIInputCheckbox getSelector , '>'
+  self << '<'.
+  aBLUIInputCheckbox getListPropertiesAsStringWith: self.
+  self
+     <<< ' ></';
+     <<< aBLUIInputCheckbox getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
-	^ '<' ,  (aBLUIInputColor getListPropertiesAsStringWith: self), ' />'
+  self
+     << '<';
+     <<< (aBLUIInputColor getListPropertiesAsStringWith: self);
+     <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputDate: aBLUIInputDate [
-	^ '<' ,  (aBLUIInputDate getListPropertiesAsStringWith: self), ' />'
+  self << '<'.
+  aBLUIInputDate getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputFile: aBLUIInputFile [
-	^ '<' , (aBLUIInputFile getListPropertiesAsStringWith: self) , ' />'
+  self << '<'.
+  aBLUIInputFile getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputMonth: aBLUIInputMonth [
-	^ '<'
-		,
-			(aBLUIInputMonth
-				getListPropertiesAsStringWith: self)
-		,
-			' />'
+  self << '<'.
+  aBLUIInputMonth getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
-	^ '<' ,  (aBLUIInputNumber getListPropertiesAsStringWith: self), ' />'
+  self << '<'.
+  aBLUIInputNumber getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputPassword: aBLUIInputPassword [
-	^ '<' ,  (aBLUIInputPassword getListPropertiesAsStringWith: self) , ' />'
+  self << '<'.
+  aBLUIInputPassword getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputRadio: aCSNUIInputRadio [
-	^ '<' ,  (aCSNUIInputRadio getListPropertiesAsStringWith: self), ' ></' , aCSNUIInputRadio getSelector , '>'
+  self << '<'.
+  aCSNUIInputRadio getListPropertiesAsStringWith: self.
+  self
+     <<< ' ></';
+     <<< aCSNUIInputRadio getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputText: aBLUIInputText [
-	^  '<input id="float-' , aBLUIInputText mooseID asString , '" type="text" value="' , aBLUIInputText value1
-		,
-			'" placeholder="', aBLUIInputText text,'" pInputText>'
+  self
+     << '<input id="float-';
+     <<< aBLUIInputText mooseID asString;
+     <<< '" type="text" value="';
+     <<< aBLUIInputText value1;
+     <<< '" placeholder="';
+     <<< aBLUIInputText text;
+     <<< '" pInputText>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
-	^ '<' , (aBLUIInputTime getListPropertiesAsStringWith: self) , ' />'
+  self << '<'.
+  aBLUIInputTime getListPropertiesAsStringWith: self.
+  self <<< ' />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUILabel: aBLUILabel [
-	^ self protectString: aBLUILabel attributeValue
+  self <<< (self protectString: aBLUILabel attributeValue)
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIName: aBLUIName [
-	^ self protectString: aBLUIName attributeValue 
+  self <<< (self protectString: aBLUIName attributeValue)
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
-	^ aBLUIPanel layout
-		ifNotNil: [ :layout | self visit: layout ]
-		ifNil: [ '<' , (aBLUIPanel getListPropertiesAsStringWith: self) , '>'
-				,
-					(''
-						,
-							(aBLUIPanel widgets
-								flatCollect: [ :widget | String crlf , (self visit: widget) ])
-						indentBy: 4) , String crlf, '</' , aBLUIPanel getSelector , '>' ]
+  aBLUIPanel layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self
+           << '<';
+           <<< (aBLUIPanel getListPropertiesAsStringWith: self);
+           <<< '>'.
+        aBLUIPanel widgets do: [:widget |  self <<< String crlf.
+              self indentPlus.
+              self visit: widget.
+              self indentMinus ].
+        self
+           crlf;
+           << '</';
+           <<< aBLUIPanel getSelector;
+           <<< '>' ]
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
-	^ '<' , (aBLUIParagraph getListPropertiesAsStringWith: self) , '>'
-		, (( aBLUIParagraph attributes select: [ :a | a isKindOf: CSNUILabel])
-				flatCollect:
-					[ :attribute | String crlf , ((self visit: attribute ) indentBy: 4), String crlf ]) 
-		, '</' , aBLUIParagraph getSelector , '>'
+  self << '<'.
+  aBLUIParagraph getListPropertiesAsStringWith: self.
+  self <<< '>'.
+  aBLUIParagraph attributes select: [:a |  a isKindOf: CSNUILabel ] thenDo: [:attribute |  self
+           crlf;
+           indentPlus;
+           indent.
+        self visit: attribute.
+        self
+           indentMinus;
+           crlf ].
+  self
+     << '</';
+     <<< aBLUIParagraph getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPlaceholder: aBLUIPlaceholder [
-	^ self protectString: aBLUIPlaceholder attributeValue
+	self <<<  (self protectString: aBLUIPlaceholder attributeValue)
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIRelativeHeight: aBLUIRelativeHeight [
-	^ self protectString: aBLUIRelativeHeight attributeValue , '%'
+  self
+     <<< (self protectString: aBLUIRelativeHeight attributeValue);
+     <<< '%'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIRelativeWidth: aBLUIRelativeWidth [
-	^ self protectString: aBLUIRelativeWidth attributeValue , '%'
+  self
+     <<< (self protectString: aBLUIRelativeWidth attributeValue);
+     <<< '%'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
-	^ '<' , (aBLUISelect getListPropertiesAsStringWith: self) , '>', String crlf , '</' , aBLUISelect getSelector , '>' 
+  self <<< '<'.
+  aBLUISelect getListPropertiesAsStringWith: self.
+  self
+     <<< '>';
+     <<< String crlf;
+     <<< '</';
+     <<< aBLUISelect getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUITitle: aBLUITitle [
-	^ self protectString: aBLUITitle attributeValue 
+	self <<< (self protectString: aBLUITitle attributeValue) 
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIWidth: aBLUIWidth [
-	^ self protectString: aBLUIWidth attributeValue 
+	 self <<< (self protectString: aBLUIWidth attributeValue) 
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNWidget: aBLWidget [
-	^ '<' , (aBLWidget getListPropertiesAsStringWith: self) , '>'
-		, (('',
-			(( aBLWidget widgets)
-				flatCollect:
-					[ :widget | String crlf , (self visit: widget), String crlf ])) indentBy: 4)
-		, '</' , aBLWidget getSelector , '>'
+  self
+     << '<';
+     <<< (aBLWidget getListPropertiesAsStringWith: self);
+     <<< '>'.
+  aBLWidget widgets do: [:widget |  self <<< String crlf.
+        self indentPlus.
+        self visit: widget.
+        self indentMinus.
+        self <<< String crlf ].
+  self
+     << '</';
+     <<< aBLWidget getSelector;
+     <<< '>'
 ]
 
 { #category : #visiting }
