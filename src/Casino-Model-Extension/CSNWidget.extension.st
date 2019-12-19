@@ -36,6 +36,14 @@ CSNWidget >> gtAttributesIn: composite [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> gtSourcesIn: composite [
+	<gtInspectorPresentationOrder: 1001>
+	^ composite list
+		title: 'Sources';
+		display: [ :anObject | anObject mooseInterestingEntity sources ]
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> isWidget [ 
 	^ true
 ]

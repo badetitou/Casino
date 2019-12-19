@@ -61,9 +61,9 @@ CSNWebModelJava >> addLinkPhaseToPageMetier [
 ]
 
 { #category : #adding }
-CSNWebModelJava >> addLinkXmlUi [
+CSNWebModelJava >> addLinkXmlUi [ 
 	xmlUiLink := CSNMultiValueDictionary newFrom: self linkXmlUiPhaseAndPageMetier.
-	xmlUiWidgetLink := CSNMultiValueDictionary newFrom: self linkXmlUiWidget
+	xmlUiWidgetLink := (CSNMultiValueDictionary newFrom: self linkXmlUiWidget) addAllMulti:  xmlUiLink; yourself.
 ]
 
 { #category : #adding }
@@ -80,7 +80,6 @@ CSNWebModelJava >> addPPPToWidget [
 	self model allCSNWidgetExceptPage select: [:widget | widget parents isEmpty ]
 		thenDo: [ :widget | 
 			| founds |
-			"self haltIf: [ widget affectedActions isNotNil and: [ widget affectedActions name = 'panelGrc' ]]."
 			founds := self widgetOwnerCase1: widget source from maxLevel: 15 level: 0.
 			founds ifNotNil: [ founds do: [ :found | found addWidget: widget ] ] ]
 ]
@@ -144,7 +143,7 @@ CSNWebModelJava >> computeAllConstructorsLink [
 	^ self sourceModel constructors
 		flatCollect: [ :method | 
 			| got |
-			got := (method queryAll: #in) atScope: FAMIXClass.
+			got := (method queryAll: #in) atScope: FamixTClass.
 			got collect: [ :p | p -> method parentType ] ]
 ]
 
@@ -201,7 +200,7 @@ CSNWebModelJava >> generateServiceAction [
 
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
-	((self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation) asSet
+	(self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
 		reject: [ :invocationOrClass | 
 			(invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces)
 				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
@@ -441,14 +440,13 @@ CSNWebModelJava >> linkPageMetierToPageMetier [
 
 { #category : #private }
 CSNWebModelJava >> linkXmlUiPhaseAndPageMetier [
-	^ self modelPhases , self modelPageMetier select: [ :a | a superclass mooseName endsWith: 'XMLUi' ] thenCollect: [ :a | a superclass -> a ]
+	^  (self modelPhases , self modelPageMetier) asSet select: [ :a | a superclass mooseName endsWith: 'Ui' ] thenCollect: [ :a | a superclass -> a ]
 ]
 
 { #category : #adding }
 CSNWebModelJava >> linkXmlUiWidget [
 	^ self modelWidget
-		select: [ :a | a superclass mooseName endsWith: 'XMLUi'  ]
-		thenCollect: [ :a | a -> a superclass]
+		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | (self isElementFromApplication: class) or: [class mooseName endsWith: 'Ui'] ] thenCollect: [ :class | class -> widget ] ]
 ]
 
 { #category : #accessing }
@@ -527,7 +525,7 @@ CSNWebModelJava >> widgetConstructorsInvocation [
 				select: [ :method | 
 					method isConstructor
 						or: [ (method name copyReplaceAll: '.' with: '::') asSymbol = method parentType mooseName  ] ]
-				thenCollect: #incomingInvocations ]) flattened
+				thenCollect: #incomingInvocations ]) flattened asSet
 ]
 
 { #category : #accessing }

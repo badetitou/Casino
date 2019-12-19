@@ -27,7 +27,8 @@ Class {
 	#name : #CSNModelExporterAngular,
 	#superclass : #CSNModelExporter,
 	#instVars : [
-		'currentPath'
+		'currentPath',
+		'currentWriteStream'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -67,18 +68,18 @@ CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSN
 	aCSNPage hasNoPageMetier
 		ifTrue:
 			[ ^ self generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage ].
-	^ self generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
+	self generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
-^ '<bl-phase-business-page-container>
+ currentWriteStream << '<bl-phase-business-page-container>
         <bl-phase-business-page-header>
         </bl-phase-business-page-header>
 
         <bl-phase-business-page id="P1" title="Page 1">
-            ' , aCSNPage businessPage anyOne getTag
-		,
+            ' ; << aCSNPage businessPage anyOne getTag
+		; <<
 			'
         </bl-phase-business-page>
     </bl-phase-business-page-container>'
@@ -105,9 +106,9 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage [
-	| text id |
+	| id |
 	id := 0.
-	text := '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
+	currentWriteStream << '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
                 <div class="cursor-pointer"> <!-- (click)="save()" -->
@@ -115,8 +116,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: a
                 </div>
             </div>
         </bl-phase-business-pages-tab-header>'.
-	text := text
-		,
+	currentWriteStream <<
 			(aCSNPage sortedPageMetiers
 				flatCollect: [ :metier | 
 					id := id + 1.
@@ -125,22 +125,21 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: a
 						, '" title="' , (self protectString: metier title) , '">	'
 						, String crlf , '                ' , metier getTag , String crlf
 						, '            </bl-phase-business-page-tab>' , String crlf ]).
-	text := text , '    </bl-phase-business-pages-tab-container>'.
-	^ text
+	currentWriteStream << '    </bl-phase-business-pages-tab-container>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage [
-	^ aCSNPage widgets
-		flatCollect: [ :widget | (self visit: widget) , String crlf ]
+	currentWriteStream << (aCSNPage widgets
+		flatCollect: [ :widget | (self visit: widget) , String crlf ])
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
-	^ '<bl-phase-container>
-	' , (self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase )
-		,
-			'
+  currentWriteStream << '<bl-phase-container>
+	'.
+  self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
+  currentWriteStream << '
 </bl-phase-container>'
 ]
 
@@ -208,25 +207,24 @@ export class ' , aModel name capitalized , 'Module { }'
 
 { #category : #generate }
 CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
-	^ 'import { NgModule } from ''@angular/core'';
+  currentWriteStream
+     << 'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
 import { ComponentsModule } from ''../../../components/components.module'';
 import { IndexComponent } from ''./components/index/index.component'';
-import { PHASE_ROUTES } from ''./' , aCSNPage name , '.route'';'
-		, String crlf , aCSNPage widgetsDependenciesImportInstruction
-		,
-			(aCSNPage businessPage
-				flatCollect: [ :aBusinessPage | 
-					aBusinessPage
-						getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ])
-		,
-			'
+import { PHASE_ROUTES } from ''./';
+     << aCSNPage name;
+     << '.route'';';
+     << String crlf;
+     << aCSNPage widgetsDependenciesImportInstruction;
+     << (aCSNPage businessPage flatCollect: [:aBusinessPage |  aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
+     << '
 export const COMPONENTS: any[] = [
     IndexComponent,
-' , aCSNPage getComponentsPageMetierListName
-		,
-			'
+';
+     << aCSNPage getComponentsPageMetierListName;
+     << '
 ];
 
 @NgModule({
@@ -236,9 +234,9 @@ export const COMPONENTS: any[] = [
     imports: [
         CommonModule,
         PHASE_ROUTES,
-' , aCSNPage widgetsDependenciesName
-		,
-			'
+';
+     << aCSNPage widgetsDependenciesName;
+     << '
         ComponentsModule,
         TranslateModule
     ],
@@ -246,7 +244,10 @@ export const COMPONENTS: any[] = [
         IndexComponent
     ]
 })
-export class ' , aCSNPage getModuleClassName , ' {}' , String crlf
+export class ';
+     << aCSNPage getModuleClassName;
+     << ' {}';
+     << String crlf
 ]
 
 { #category : #generate }
@@ -276,7 +277,7 @@ export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { 
 
 { #category : #generate }
 CSNModelExporterAngular >> generateRouteSourceCodeForPage [
-	^ 'import { ModuleWithProviders } from ''@angular/core'';
+  currentWriteStream << 'import { ModuleWithProviders } from ''@angular/core'';
 import { RouterModule, Routes } from ''@angular/router'';
 import { IndexComponent } from ''./components/index/index.component'';
 
@@ -389,27 +390,21 @@ export class IndexComponent implements OnInit {
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
-	^ 'import {
+  currentWriteStream
+     << 'import {
     Component,
     OnDestroy,
-    OnInit'
-		,
-			(aCSNPage hasMultiplePageMetier
-				ifTrue: [ ', ViewChild' ]
-				ifFalse: [ '' ])
-		,
-			'
+    OnInit';
+     << (aCSNPage hasMultiplePageMetier ifTrue: [ ', ViewChild' ] ifFalse: [ '' ]);
+     << '
 } from ''@angular/core'';
 import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
 import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
 import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
-'
-		,
-			(aCSNPage hasMultiplePageMetier
-				ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ]
-				ifFalse: [ '' ]) , (aCSNPage businessPage flatCollect: [ :metier | 'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ])
-		,
-			'
+';
+     << (aCSNPage hasMultiplePageMetier ifTrue: [ 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';' , String crlf ] ifFalse: [ '' ]);
+     << (aCSNPage businessPage flatCollect: [:metier |  'import { ' , metier componentName , ' } from ''../..' , metier getLocalComponentPath , ''';' , String crlf ]);
+     << '
 
 
 @Component({
@@ -417,18 +412,11 @@ import { DesktopStateService } from ''../../../../../components/service/desktop-
 })
 export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
 
-'
-		,
-			(aCSNPage hasMultiplePageMetier
-				ifTrue: [ '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
-' , String crlf ]
-				ifFalse: [ '' ])
-		,
-			(aCSNPage hasMultiplePageMetier
-				ifTrue: [ aCSNPage businessPage flatCollect: [ :metier | '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ]
-				ifFalse: [ '' ])
-		,
-			'
+';
+     << (aCSNPage hasMultiplePageMetier ifTrue: [ '@ViewChild(BusinessPageContainerComponent) public container: BusinessPageContainerComponent;
+' , String crlf ] ifFalse: [ '' ]);
+     << (aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage flatCollect: [:metier |  '@ViewChild(' , metier componentName , ') public ' , metier getAcceptedName , ': ' , metier componentName , ';' , String crlf ] ] ifFalse: [ '' ]);
+     << '
 
     constructor(protected phaseService: DesktopStateService) {
         super(phaseService);
@@ -445,7 +433,8 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
     public init(): void {
 
     }
-}' , String crlf
+}';
+     << String crlf
 ]
 
 { #category : #api }
@@ -557,24 +546,27 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	self
-		writeFile: phaseRoot / aBLPhase getModuleName
-		withCode: (self generateModuleSourceCodeForPage: aBLPhase).
+	currentWriteStream := (phaseRoot / aBLPhase getModuleName) asFileReference writeStream. 
+	self generateModuleSourceCodeForPage: aBLPhase.
+	currentWriteStream flush; close.
 	"Write phase.route.ts"
-	self
-		writeFile: phaseRoot / aBLPhase getRouteName
-		withCode: self generateRouteSourceCodeForPage.
+	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream. 
+	self generateRouteSourceCodeForPage.
+	currentWriteStream flush; close.
 	"Write components"
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
 	indexRoot ensureCreateDirectory.
-	self
-		writeFile: indexRoot / aBLPhase getTSName
-		withCode: (self generateTSSourceCodeForPage: aBLPhase).
-	self
-		writeFile: indexRoot / aBLPhase getHTMLName
-		withCode: (self generateHTMLSourceCodeForPage: aBLPhase).
+
+	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream. 
+	self generateTSSourceCodeForPage: aBLPhase.
+	currentWriteStream flush; close.
+	
+	currentWriteStream := (indexRoot / aBLPhase getHTMLName) asFileReference writeStream. 
+	self generateHTMLSourceCodeForPage: aBLPhase.
+	currentWriteStream flush; close.
+
 	aBLPhase businessPage
 		do: [ :metier | 
 			self clone
