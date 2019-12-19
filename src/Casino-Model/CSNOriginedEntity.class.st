@@ -15,7 +15,7 @@ Class {
 { #category : #meta }
 CSNOriginedEntity class >> annotation [
 
-	<MSEClass: #OriginedEntity super: #MooseEntity>
+	<FMClass: #OriginedEntity super: #MooseEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
@@ -31,9 +31,9 @@ CSNOriginedEntity class >> metamodel [
 { #category : #accessing }
 CSNOriginedEntity >> sources [
 
-	<MSEProperty: #sources type: #Object>
+	<FMProperty: #sources type: #Object>
 	<generated>
-	<MSEComment: 'The sources of the element
+	<FMComment: 'The sources of the element
 It may reference multiple entity if the entity is defined in different context
 example: in a JavaProgram and in a XML file'>
 	^ sources
@@ -41,8 +41,6 @@ example: in a JavaProgram and in a XML file'>
 
 { #category : #accessing }
 CSNOriginedEntity >> sources: anObject [
-
 	<generated>
 	sources := anObject
-
 ]

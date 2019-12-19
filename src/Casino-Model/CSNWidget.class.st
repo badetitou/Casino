@@ -16,17 +16,10 @@ Class {
 { #category : #meta }
 CSNWidget class >> annotation [
 
-	<MSEClass: #Widget super: #CSNOriginedEntity>
+	<FMClass: #Widget super: #CSNOriginedEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNWidget class >> requirements [
-
-	<generated>
-	^ { CSNContainer }
 ]
 
 { #category : #accessing }
@@ -43,7 +36,6 @@ CSNWidget >> actions: anObject [
 
 	<generated>
 	actions value: anObject
-
 ]
 
 { #category : #navigation }
@@ -54,13 +46,13 @@ CSNWidget >> actionsGroup [
 ]
 
 { #category : #adding }
-CSNWidget >> addActions: anObject [
+CSNWidget >> addAction: anObject [
 	<generated>
 	^ self actions add: anObject
 ]
 
 { #category : #adding }
-CSNWidget >> addAttributes: anObject [
+CSNWidget >> addAttribute: anObject [
 	<generated>
 	^ self attributes add: anObject
 ]
@@ -79,7 +71,6 @@ CSNWidget >> attributes: anObject [
 
 	<generated>
 	attributes value: anObject
-
 ]
 
 { #category : #navigation }
@@ -103,7 +94,6 @@ CSNWidget >> widgetContainer: anObject [
 
 	<generated>
 	widgetContainer := anObject
-
 ]
 
 { #category : #navigation }

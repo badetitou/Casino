@@ -19,7 +19,7 @@ Class {
 { #category : #meta }
 CSNPage class >> annotation [
 
-	<MSEClass: #Page super: #CSNContainer>
+	<FMClass: #Page super: #CSNContainer>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
@@ -80,84 +80,74 @@ CSNPage >> callerGroup [
 { #category : #accessing }
 CSNPage >> codePhase [
 
-	<MSEProperty: #codePhase type: #String>
+	<FMProperty: #codePhase type: #String>
 	<generated>
-	<MSEComment: 'The unique code of the Phase'>
+	<FMComment: 'The unique code of the Phase'>
 	^ codePhase
 ]
 
 { #category : #accessing }
 CSNPage >> codePhase: anObject [
-
 	<generated>
 	codePhase := anObject
-
 ]
 
 { #category : #accessing }
 CSNPage >> codeValue [
 
-	<MSEProperty: #codeValue type: #String>
+	<FMProperty: #codeValue type: #String>
 	<generated>
-	<MSEComment: 'The short name of the codePhase'>
+	<FMComment: 'The short name of the codePhase'>
 	^ codeValue
 ]
 
 { #category : #accessing }
 CSNPage >> codeValue: anObject [
-
 	<generated>
 	codeValue := anObject
-
 ]
 
 { #category : #accessing }
 CSNPage >> realClassName [
 
-	<MSEProperty: #realClassName type: #String>
+	<FMProperty: #realClassName type: #String>
 	<generated>
-	<MSEComment: 'The name of the class in Java'>
+	<FMComment: 'The name of the class in Java'>
 	^ realClassName
 ]
 
 { #category : #accessing }
 CSNPage >> realClassName: anObject [
-
 	<generated>
 	realClassName := anObject
-
 ]
 
 { #category : #accessing }
 CSNPage >> subtitle [
 
-	<MSEProperty: #subtitle type: #String>
+	<FMProperty: #subtitle type: #String>
 	<generated>
-	<MSEComment: 'The subtitle of the phase'>
+	<FMComment: 'The subtitle of the phase'>
 	^ subtitle
 ]
 
 { #category : #accessing }
 CSNPage >> subtitle: anObject [
-
 	<generated>
 	subtitle := anObject
-
 ]
 
 { #category : #accessing }
 CSNPage >> title [
 
-	<MSEProperty: #title type: #String>
+	<FMProperty: #title type: #String>
 	<generated>
-	<MSEComment: 'The main title of the phase'>
+	<FMComment: 'The main title of the phase'>
 	^ title
 ]
 
 { #category : #accessing }
 CSNPage >> title: anObject [
-
 	<generated>
 	title := anObject
-
 ]

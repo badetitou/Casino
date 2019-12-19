@@ -10,17 +10,10 @@ Class {
 { #category : #meta }
 CSNActionAppel class >> annotation [
 
-	<MSEClass: #ActionAppel super: #CSNAction>
+	<FMClass: #ActionAppel super: #CSNAction>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNActionAppel class >> requirements [
-
-	<generated>
-	^ { CSNPage }
 ]
 
 { #category : #accessing }
@@ -37,7 +30,6 @@ CSNActionAppel >> call: anObject [
 
 	<generated>
 	call := anObject
-
 ]
 
 { #category : #navigation }

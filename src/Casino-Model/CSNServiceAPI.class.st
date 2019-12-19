@@ -10,17 +10,10 @@ Class {
 { #category : #meta }
 CSNServiceAPI class >> annotation [
 
-	<MSEClass: #ServiceAPI super: #CSNOriginedEntity>
+	<FMClass: #ServiceAPI super: #CSNOriginedEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNServiceAPI class >> requirements [
-
-	<generated>
-	^ { CSNService }
 ]
 
 { #category : #accessing }

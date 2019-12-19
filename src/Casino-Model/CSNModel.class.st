@@ -12,7 +12,7 @@ CSNModel class >> allSubmetamodelsPackagesNames [
 
 { #category : #meta }
 CSNModel class >> annotation [
-	<MSEClass: #CSNModel super: #MooseModel>
+	<FMClass: #CSNModel super: #MooseModel>
 	<package: #'Casino-Model'>
 	<generated>
 ]

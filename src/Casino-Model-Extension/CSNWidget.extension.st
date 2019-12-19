@@ -1,16 +1,6 @@
 Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Extension' }
-CSNWidget >> addAction: anBLAction [
-	^ self actions add: anBLAction
-]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> addAttribute: attribute [
-	^ self attributes add: attribute
-]
-
-{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> addingPosition [
 	<MSEProperty: #addingPosition type: #Number>
 	^ self privateState
@@ -32,7 +22,7 @@ CSNWidget >> gtAttributesIn: composite [
 		sorted: [ :x :y | x name asString < y name asString ];
 		column: 'Names' evaluated: [ :each | each name ];
 		column: 'Attribute Value' evaluated: [ :each :anObject | each attributeValue ];
-		when: [ :anObject | (anObject mooseInterestingEntity isKindOf: CSNWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
+		when: [ :anObject | (anObject mooseInterestingEntity isWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
 ]
 
 { #category : #'*Casino-Model-Extension' }

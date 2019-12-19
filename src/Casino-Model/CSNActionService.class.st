@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 CSNActionService class >> annotation [
 
-	<MSEClass: #ActionService super: #CSNAction>
+	<FMClass: #ActionService super: #CSNAction>
 	<package: #'Casino-Model'>
 	<generated>
 	^self

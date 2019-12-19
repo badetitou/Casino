@@ -14,14 +14,14 @@ Class {
 { #category : #meta }
 CSNBusinessPage class >> annotation [
 
-	<MSEClass: #BusinessPage super: #CSNContainer>
+	<FMClass: #BusinessPage super: #CSNContainer>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
 
 { #category : #adding }
-CSNBusinessPage >> addPageContainers: anObject [
+CSNBusinessPage >> addPageContainer: anObject [
 	<generated>
 	^ self pageContainers add: anObject
 ]
@@ -39,7 +39,6 @@ CSNBusinessPage >> pageContainers: anObject [
 
 	<generated>
 	pageContainers value: anObject
-
 ]
 
 { #category : #navigation }
@@ -52,16 +51,14 @@ CSNBusinessPage >> pageContainersGroup [
 { #category : #accessing }
 CSNBusinessPage >> title [
 
-	<MSEProperty: #title type: #String>
+	<FMProperty: #title type: #String>
 	<generated>
-	<MSEComment: 'The main title of the page metier'>
+	<FMComment: 'The main title of the page metier'>
 	^ title
 ]
 
 { #category : #accessing }
 CSNBusinessPage >> title: anObject [
-
 	<generated>
 	title := anObject
-
 ]

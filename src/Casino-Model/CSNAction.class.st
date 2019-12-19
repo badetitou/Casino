@@ -13,17 +13,10 @@ Class {
 { #category : #meta }
 CSNAction class >> annotation [
 
-	<MSEClass: #Action super: #CSNOriginedEntity>
+	<FMClass: #Action super: #CSNOriginedEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNAction class >> requirements [
-
-	<generated>
-	^ { CSNWidget }
 ]
 
 { #category : #accessing }

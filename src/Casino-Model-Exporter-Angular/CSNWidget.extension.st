@@ -36,7 +36,7 @@ CSNWidget >> container [
 CSNWidget >> generateDefaultClassAttribute [
 	"Use me to add a Attribute to all the widget during the exportation
 	ex: Adding a class to all the dom with the name of the widget"
-	^ CSNAttribute new name: 'class'; attributeValue: ('ID-', self class name asString). 
+	^ CSNUIClass new attributeValue: ('ID-', self class name asString). 
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

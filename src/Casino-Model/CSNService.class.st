@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 CSNService class >> annotation [
 
-	<MSEClass: #Service super: #CSNOriginedEntity>
+	<FMClass: #Service super: #CSNOriginedEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
@@ -31,7 +31,6 @@ CSNService >> actions: anObject [
 
 	<generated>
 	actions value: anObject
-
 ]
 
 { #category : #navigation }
@@ -42,7 +41,7 @@ CSNService >> actionsGroup [
 ]
 
 { #category : #adding }
-CSNService >> addActions: anObject [
+CSNService >> addAction: anObject [
 	<generated>
 	^ self actions add: anObject
 ]
@@ -50,16 +49,14 @@ CSNService >> addActions: anObject [
 { #category : #accessing }
 CSNService >> targetPoint [
 
-	<MSEProperty: #targetPoint type: #String>
+	<FMProperty: #targetPoint type: #String>
 	<generated>
-	<MSEComment: 'The url of the distant service'>
+	<FMComment: 'The url of the distant service'>
 	^ targetPoint
 ]
 
 { #category : #accessing }
 CSNService >> targetPoint: anObject [
-
 	<generated>
 	targetPoint := anObject
-
 ]

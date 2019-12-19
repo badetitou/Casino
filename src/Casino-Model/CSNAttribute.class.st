@@ -15,50 +15,39 @@ Class {
 { #category : #meta }
 CSNAttribute class >> annotation [
 
-	<MSEClass: #Attribute super: #CSNOriginedEntity>
+	<FMClass: #Attribute super: #CSNOriginedEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-CSNAttribute class >> requirements [
-
-	<generated>
-	^ { CSNWidget }
-]
-
 { #category : #accessing }
 CSNAttribute >> attributeValue [
 
-	<MSEProperty: #attributeValue type: #String>
+	<FMProperty: #attributeValue type: #String>
 	<generated>
-	<MSEComment: 'The literal value of the attribute'>
+	<FMComment: 'The literal value of the attribute'>
 	^ attributeValue
 ]
 
 { #category : #accessing }
 CSNAttribute >> attributeValue: anObject [
-
 	<generated>
 	attributeValue := anObject
-
 ]
 
 { #category : #accessing }
 CSNAttribute >> oldClass [
 
-	<MSEProperty: #oldClass type: #Object>
+	<FMProperty: #oldClass type: #Object>
 	<generated>
 	^ oldClass
 ]
 
 { #category : #accessing }
 CSNAttribute >> oldClass: anObject [
-
 	<generated>
 	oldClass := anObject
-
 ]
 
 { #category : #accessing }

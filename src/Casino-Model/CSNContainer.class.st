@@ -13,16 +13,10 @@ Class {
 { #category : #meta }
 CSNContainer class >> annotation [
 
-	<MSEClass: #Container super: #CSNWidget>
+	<FMClass: #Container super: #CSNWidget>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
-]
-
-{ #category : #adding }
-CSNContainer >> addWidgets: anObject [
-	<generated>
-	^ self widgets add: anObject
 ]
 
 { #category : #accessing }

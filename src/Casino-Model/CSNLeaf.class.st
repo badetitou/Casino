@@ -13,7 +13,7 @@ Class {
 { #category : #meta }
 CSNLeaf class >> annotation [
 
-	<MSEClass: #Leaf super: #CSNWidget>
+	<FMClass: #Leaf super: #CSNWidget>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
@@ -22,15 +22,13 @@ CSNLeaf class >> annotation [
 { #category : #accessing }
 CSNLeaf >> text [
 
-	<MSEProperty: #text type: #String>
+	<FMProperty: #text type: #String>
 	<generated>
 	^ text
 ]
 
 { #category : #accessing }
 CSNLeaf >> text: anObject [
-
 	<generated>
 	text := anObject
-
 ]
