@@ -772,7 +772,7 @@ CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
   self << '<'.
   aBLUIInputCheckbox getListPropertiesAsStringWith: self.
   self
-     <<< ' ></';
+     <<< ' type="checkbox"></';
      <<< aBLUIInputCheckbox getSelector;
      <<< '>'
 ]
@@ -782,42 +782,42 @@ CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
   self
      << '<';
      <<< (aBLUIInputColor getListPropertiesAsStringWith: self);
-     <<< ' />'
+     <<< ' type="color" />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputDate: aBLUIInputDate [
   self << '<'.
   aBLUIInputDate getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="date"/>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputFile: aBLUIInputFile [
   self << '<'.
   aBLUIInputFile getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="file"/>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputMonth: aBLUIInputMonth [
   self << '<'.
   aBLUIInputMonth getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="month"/>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
   self << '<'.
   aBLUIInputNumber getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="number"/>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputPassword: aBLUIInputPassword [
   self << '<'.
   aBLUIInputPassword getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="password"/>'
 ]
 
 { #category : #visiting }
@@ -825,8 +825,18 @@ CSNModelExporterAngular >> visitCSNUIInputRadio: aCSNUIInputRadio [
   self << '<'.
   aCSNUIInputRadio getListPropertiesAsStringWith: self.
   self
-     <<< ' ></';
+     <<< ' type="radio"></';
      <<< aCSNUIInputRadio getSelector;
+     <<< '>'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngular >> visitCSNUIInputRange: aCSNUIInputRange [
+  self << '<'.
+  aCSNUIInputRange getListPropertiesAsStringWith: self.
+  self
+     <<< ' type="range"></';
+     <<< aCSNUIInputRange getSelector;
      <<< '>'
 ]
 
@@ -846,7 +856,7 @@ CSNModelExporterAngular >> visitCSNUIInputText: aBLUIInputText [
 CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
   self << '<'.
   aBLUIInputTime getListPropertiesAsStringWith: self.
-  self <<< ' />'
+  self <<< ' type="time"/>'
 ]
 
 { #category : #visiting }

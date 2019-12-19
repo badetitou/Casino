@@ -356,7 +356,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
 	^ (#('BLCheckBox' 'CheckBox') includes: source invokedClassName)
 		ifTrue: [ (self createWidgetInput: aCSNUIInputCheckbox)
-				parametersAt: #type put: 'checkbox';
 				addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
 				parametersAt: #labelPosition put: (source parameters at: 4 ifAbsent: [ '0' ]);
 				yourself ]
@@ -365,21 +364,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputColor: aCSNUIInputColor [
-	^ ('BLTextBoxColorPicker' = source invokedClassName)
-		ifTrue: [ (self createWidgetInput: aCSNUIInputColor)
-				parametersAt: #type put: 'color';
-				yourself ]
-		ifFalse: [ nil ]
+  ^'BLTextBoxColorPicker' = source invokedClassName ifTrue: [ self createWidgetInput: aCSNUIInputColor ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputDate: aCSNUIInputDate [
-	^ (#('BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker') includes: source invokedClassName)
-		ifTrue: [ (self createWidgetInput: aCSNUIInputDate)
-				addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-				parametersAt: #type put: 'date';
-				yourself ]
-		ifFalse: [ nil ]
+  ^(#('BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputDate)
+           addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
+           yourself ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
@@ -389,20 +381,12 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputEmail: aCSNUIInputEmail [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputFile: aCSNUIInputFile [
-	^ ('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink|FileUpload' asRegex matchesPrefix: source invokedClassName)
-		ifTrue: [ (self createWidgetInput: aCSNUIInputFile)
-				parametersAt: #type put: 'file';
-				yourself ]
-		ifFalse: [ nil ]
+  ^('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink|FileUpload' asRegex matchesPrefix: source invokedClassName) ifTrue: [ self createWidgetInput: aCSNUIInputFile ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputMonth: aCSNUIInputMonth [
-	^ (#('BLTextBoxPeriodePicker' 'BLTextBoxPeriode') includes: source invokedClassName)
-		ifTrue: [ (self createWidgetInput: aCSNUIInputMonth)
-				parametersAt: #type put: 'month';
-				yourself ]
-		ifFalse: [ nil ]
+  ^(#('BLTextBoxPeriodePicker' 'BLTextBoxPeriode') includes: source invokedClassName) ifTrue: [ self createWidgetInput: aCSNUIInputMonth ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
@@ -410,7 +394,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputNumber: aCSNUIInputNumber [
 	^ (#('BLTextBoxNumber' 'BLTextBoxAnnee' 'BLTextBoxNumeric' 'BLTextBoxAmount' 'BLTextBoxPercentage') includes: source invokedClassName)
 		ifTrue: [ | inputNumber |
 			inputNumber := self createWidgetInput: aCSNUIInputNumber.
-			inputNumber parametersAt: #type put: 'number'.
 			inputNumber addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ])).
 			"'BLTextBoxAnnee' = source invokedClassName
 				ifTrue: [ source parameters
@@ -432,17 +415,12 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputNumber: aCSNUIInputNumber [
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputPassword: aCSNUIInputPassword [
-	^ (#('BLPasswordBox' 'PasswordTextBox') includes: source invokedClassName)
-		ifTrue: [ (self createWidgetInputText: aCSNUIInputPassword)
-				parametersAt: #type put: 'password';
-				yourself ]
-		ifFalse: [ nil ]
+  ^(#('BLPasswordBox' 'PasswordTextBox') includes: source invokedClassName) ifTrue: [ self createWidgetInputText: aCSNUIInputPassword ] ifFalse: [ nil ]
 ]
 
 { #category : #visitor }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputRadio: aCSNUIInputRadio [
   ^(#('BLRadioButton' 'RadioButton') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputRadio)
-           parametersAt: #type put: 'radio';
            addAttribute: ((self create: CSNUIName) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));
            addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 2 ifAbsent: [ 'todo' ]));
            parametersAt: #labelPosition put: (source parameters at: 5 ifAbsent: [ '0' ]);
@@ -468,7 +446,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputTime: aCSNUIInputTime [
 	^ 'BLTextBoxTime' = source invokedClassName
 		ifTrue: [ | inputTime |
 			inputTime := (self createWidgetInput: aCSNUIInputTime)
-				parametersAt: #type put: 'time';
 				yourself.
 			source parameters
 				ifNotEmpty: [ source parameters size >= 4
