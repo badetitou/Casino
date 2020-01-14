@@ -87,6 +87,7 @@ It may reference multiple entity if the entity is defined in different context
 example: in a JavaProgram and in a XML file'.
 	(page property: #codePhase type: #String) comment: 'The unique code of the Phase'.
 	(page property: #codeValue type: #String) comment: 'The short name of the codePhase'.
+	(page property: #shortcut type: #String) comment: 'The shortcut to the page'.
 	(page property: #title type: #String) comment: 'The main title of the phase'.
 	(page property: #subtitle type: #String) comment: 'The subtitle of the phase'.
 	(businessPage property: #title type: #String) comment: 'The main title of the page metier'.
