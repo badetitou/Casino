@@ -10,6 +10,7 @@ Class {
 		'#codePhase => FMProperty',
 		'#codeValue => FMProperty',
 		'#realClassName => FMProperty',
+		'#shortcut => FMProperty',
 		'#subtitle => FMProperty',
 		'#title => FMProperty'
 	],
@@ -120,6 +121,21 @@ CSNPage >> realClassName [
 CSNPage >> realClassName: anObject [
 	<generated>
 	realClassName := anObject
+]
+
+{ #category : #accessing }
+CSNPage >> shortcut [
+
+	<FMProperty: #shortcut type: #String>
+	<generated>
+	<FMComment: 'The shortcut to the page'>
+	^ shortcut
+]
+
+{ #category : #accessing }
+CSNPage >> shortcut: anObject [
+	<generated>
+	shortcut := anObject
 ]
 
 { #category : #accessing }
