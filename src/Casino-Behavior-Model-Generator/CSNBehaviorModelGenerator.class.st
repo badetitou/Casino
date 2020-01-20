@@ -10,7 +10,8 @@ Class {
 		'popUp',
 		'page',
 		'fastBehaviouralEntity',
-		'statement'
+		'statement',
+		'openDialog'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -50,6 +51,11 @@ CSNBehaviorModelGenerator >> commentForNavigation [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForOpenDialog [
+	^ 'I represent a call which will create a dialog with the data as inside it (it corresponds most of the time to a String, but it can change)'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForPopUp [
 	^ 'I represent a call which will create a pop up with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
@@ -68,6 +74,7 @@ CSNBehaviorModelGenerator >> defineClasses [
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
+	openDialog := builder newClassNamed: #OpenDialog comment: self commentForOpenDialog.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
 	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
 	statement := self remoteEntity: #Statement withPrefix: #FAST
@@ -80,7 +87,8 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	call --|> expression.
 	asynchroneCall --|> call.
 	synchroneCall --|> call.
-	popUp --|> expression
+	popUp --|> expression.
+	openDialog --|> expression.
 ]
 
 { #category : #definition }
