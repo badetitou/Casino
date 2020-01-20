@@ -73,32 +73,20 @@ CSNBehaviorModelImporterJava >> initialize [
 	super initialize.
 	self carrefourBinder: CRFBinderVisitor new.
 	self parser: JavaSmaCCProgramNodeImporterVisitor new.
-	FASTJavaMetamodelGenerator resetMetamodel.
-	FASTMetamodelGenerator resetMetamodel.
-	CSNBehaviorModelGenerator resetMetamodel.
-	CSNLayoutMetamodelGenerator resetMetamodel
 ]
 
 { #category : #accessing }
 CSNBehaviorModelImporterJava >> newBehavioralModel [
-	^ MooseModel new
-		metamodel:
-			(MooseModel
-				metamodelComposedOf:
-					{FASTJavaMetamodelGenerator metamodel.
-					FASTMetamodelGenerator metamodel.
-					CSNBehaviorModelGenerator metamodel.
-					CSNLayoutMetamodelGenerator metamodel});
-		yourself
+	^ CSNBModel new
 ]
 
 { #category : #initialization }
 CSNBehaviorModelImporterJava >> resetNeededMetamodels [
 	
-	FASTJavaMetamodelGenerator resetMetamodel.
-	FASTMetamodelGenerator resetMetamodel.
-	CSNBehaviorModelGenerator resetMetamodel.
-	CSNLayoutMetamodelGenerator resetMetamodel
+	FASTJavaModel resetMetamodel.
+	FASTModel resetMetamodel.
+	CSNBModel resetMetamodel.
+	CSNLModel resetMetamodel
 ]
 
 { #category : #api }

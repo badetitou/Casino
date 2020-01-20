@@ -7,7 +7,7 @@ Class {
 { #category : #accessing }
 CSNBModel class >> allSubmetamodelsPackagesNames [
 	<generated>
-	^ #(#'Moose-Query' #'Famix-Traits' #'FAST-Java-Model' #'FAST-Core-Model')
+	^ #(#'Moose-Query' #'Famix-Traits' #'FAST-Java-Model' #'FAST-Core-Model' 'Casino-Model-Layout' #'Casino-Model')
 ]
 
 { #category : #meta }

@@ -28,7 +28,7 @@ CSNBehaviorModelGenerator class >> prefix [
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator . FASTJavaMetamodelGenerator }
+	^ { FASTMetamodelGenerator . FASTJavaMetamodelGenerator . CSNLayoutMetamodelGenerator}
 ]
 
 { #category : #definition }
