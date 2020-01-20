@@ -25,6 +25,7 @@ CSNBCall >> onFailure [
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ko'''>
 	<FMProperty: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
@@ -56,6 +57,7 @@ CSNBCall >> onSuccess [
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ok'''>
 	<FMProperty: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner>
+	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 

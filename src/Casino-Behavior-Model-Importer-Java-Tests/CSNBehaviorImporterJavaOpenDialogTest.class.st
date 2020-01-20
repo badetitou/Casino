@@ -6,7 +6,8 @@ Class {
 	#superclass : #CSNBehaviorImporterJavaTest,
 	#instVars : [
 		'famixModel',
-		'method'
+		'method',
+		'uiModel'
 	],
 	#category : #'Casino-Behavior-Model-Importer-Java-Tests'
 }
@@ -261,7 +262,6 @@ public class Hello {
 
 { #category : #running }
 CSNBehaviorImporterJavaOpenDialogTest >> setUp [
-	| uiModel |
 	super setUp.
 	famixModel := (MooseModel importFromMSEStream:
 			               self famixModelString readStream)
@@ -282,8 +282,13 @@ CSNBehaviorImporterJavaOpenDialogTest >> setUp [
 ]
 
 { #category : #tests }
+CSNBehaviorImporterJavaOpenDialogTest >> testImportDialogAffected [
+
+	self assert: (model allWithType: CSNBOpenDialog) anyOne dialog equals: uiModel anyOne
+]
+
+{ #category : #tests }
 CSNBehaviorImporterJavaOpenDialogTest >> testImportOpenDialogType [
 
 	self assert: (model allWithType: CSNBOpenDialog) size equals: 1
-	
 ]

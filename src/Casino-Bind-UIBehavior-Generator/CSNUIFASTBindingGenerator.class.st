@@ -7,18 +7,12 @@ Class {
 		'navigation',
 		'page',
 		'serviceAPI',
-		'call'
+		'call',
+		'openDialog',
+		'cwDialog'
 	],
 	#category : #'Casino-Bind-UIBehavior-Generator'
 }
-
-{ #category : #accessing }
-CSNUIFASTBindingGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> packageName [
@@ -35,8 +29,12 @@ CSNUIFASTBindingGenerator class >> prefix [
 
 { #category : #accessing }
 CSNUIFASTBindingGenerator class >> submetamodels [
-
-	^ { FASTJavaMetamodelGenerator. CSNMetamodelGenerator .CSNLayoutMetamodelGenerator. CSNBehaviorModelGenerator }
+	^ { 
+		  FASTJavaMetamodelGenerator.
+		  CSNMetamodelGenerator.
+		  CSNLayoutMetamodelGenerator.
+		  CSNBehaviorModelGenerator.
+		  CSNUICoreWebGenerator }
 ]
 
 { #category : #definition }
@@ -48,6 +46,9 @@ CSNUIFASTBindingGenerator >> defineClasses [
 	page := self remoteEntity: #Page withPrefix: #CSN.
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
 	call := self remoteEntity: #Call withPrefix: #CSNB.
+	
+	openDialog := self remoteEntity: #OpenDialog withPrefix: #CSNB.
+	cwDialog := self remoteEntity: #Dialog withPrefix: #CSNUICW.
 ]
 
 { #category : #definition }
@@ -55,5 +56,7 @@ CSNUIFASTBindingGenerator >> defineRelations [
 	super defineRelations.
 	(action property: #behavior) -* (javaMethod property: #ui).
 	(navigation property: #page) *- (page property: #navigations).
-	(serviceAPI property: #callers) -* (call property: #distantService)
+	(serviceAPI property: #callers) -* (call property: #distantService).
+	
+	(openDialog property: #dialog) *- (cwDialog property: #opener).
 ]

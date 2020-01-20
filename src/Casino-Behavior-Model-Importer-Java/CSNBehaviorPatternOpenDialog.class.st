@@ -25,6 +25,7 @@ CSNBehaviorPatternOpenDialog >> run [
 				          testDialog affectedActions
 				          = invocation receiver famixVariable ].
 			openDialog := self newOpenDialog: dialog.
+			openDialog dialog: dialog.
 			parent := invocation parentNode.
 			invocation removeAllPotentialParentNode.
 			parent expression: openDialog.
