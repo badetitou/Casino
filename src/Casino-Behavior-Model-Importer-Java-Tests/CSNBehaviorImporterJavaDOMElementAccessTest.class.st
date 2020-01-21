@@ -300,6 +300,40 @@ CSNBehaviorImporterJavaDOMElementAccessTest >> setUp [
 ]
 
 { #category : #tests }
+CSNBehaviorImporterJavaDOMElementAccessTest >> testCorrectAccessedElement [
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'show' ]
+				 ifNone: [ self error ]) receiver
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | access widget affectedActions name = 'db' ]
+				 ifNone: [ self error ]).
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'show' ]
+				 ifNone: [ self error ])
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | access widget affectedActions name = 'db' ]
+				 ifNone: [ self error ]) receiverOwner.
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'getText' ]
+				 ifNone: [ self error ])
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | 
+				 access widget affectedActions name = '_llTestModalDialog' ]
+				 ifNone: [ self error ]) receiverOwner.
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'getText' ]
+				 ifNone: [ self error ]) receiver
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | 
+				 access widget affectedActions name = '_llTestModalDialog' ]
+				 ifNone: [ self error ])
+]
+
+{ #category : #tests }
 CSNBehaviorImporterJavaDOMElementAccessTest >> testImportDOMElemeentAccessNumber [
 
 	self assert: (model allWithType: CSNBDOMElementAcccess) size equals: 2
