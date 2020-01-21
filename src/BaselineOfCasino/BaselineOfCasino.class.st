@@ -45,7 +45,7 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests');
 		group: 'ui-bl' with: #('bl' 'tests');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
-		group: 'behavior' with: #('ui-bl' 'Casino-Bind-UIBehavior-Generator' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Bind-UIBehavior' 'Casino-Behavior-Model');
+		group: 'behavior' with: #('ui-bl' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model');
 		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests');
 		
 		"bl"
@@ -104,10 +104,5 @@ BaselineOfCasino >> definePackages: spec [
 		"behavior-exporter"
 		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
 		package: 'Casino-Behavior-Model-Exporter-Angular' with: [ spec requires: #('Casino-Behavior-Model-Exporter') ];
-		package: 'Casino-Behavior-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Behavior-Model-Exporter-Angular') ];
-		
-		
-		"binding"
-		package: 'Casino-Bind-UIBehavior' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
-		package: 'Casino-Bind-UIBehavior-Generator' with: [ spec requires: #('Casino-Model' 'FASTJava') ]
+		package: 'Casino-Behavior-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Behavior-Model-Exporter-Angular') ] 
 ]

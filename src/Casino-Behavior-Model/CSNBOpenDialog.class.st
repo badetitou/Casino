@@ -15,3 +15,19 @@ CSNBOpenDialog class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #accessing }
+CSNBOpenDialog >> dialog [
+	"Relation named: #dialog type: #CSNUICWDialog opposite: #opener"
+
+	<generated>
+	<FMProperty: #dialog type: #CSNUICWDialog opposite: #opener>
+	^ self privateState attributeAt: #dialog ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+CSNBOpenDialog >> dialog: anObject [
+
+	<generated>
+	self privateState attributeAt: #dialog put: (FMMultivalueLink on: self update: #opener from: self dialog to: anObject).
+]

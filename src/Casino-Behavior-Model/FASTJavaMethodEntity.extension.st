@@ -1,16 +1,16 @@
 Extension { #name : #FASTJavaMethodEntity }
 
-{ #category : #'*Casino-Bind-UIBehavior-accessing' }
+{ #category : #'*Casino-Behavior-Model-accessing' }
 FASTJavaMethodEntity >> ui [
 	"Relation named: #ui type: #CSNAction opposite: #behavior"
 
 	<generated>
 	<FMProperty: #ui type: #CSNAction opposite: #behavior>
-	<package: #'Casino-Bind-UIBehavior'>
+	<package: #'Casino-Behavior-Model'>
 	^ self privateState attributeAt: #ui ifAbsent: [ nil ]
 ]
 
-{ #category : #'*Casino-Bind-UIBehavior-accessing' }
+{ #category : #'*Casino-Behavior-Model-accessing' }
 FASTJavaMethodEntity >> ui: anObject [
 
 	<generated>

@@ -11,7 +11,13 @@ Class {
 		'page',
 		'fastBehaviouralEntity',
 		'statement',
-		'openDialog'
+		'openDialog',
+		'domElementAcccess',
+		'action',
+		'javaMethod',
+		'serviceAPI',
+		'cwDialog',
+		'csnWidget'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -29,7 +35,12 @@ CSNBehaviorModelGenerator class >> prefix [
 
 { #category : #accessing }
 CSNBehaviorModelGenerator class >> submetamodels [
-	^ { FASTMetamodelGenerator . FASTJavaMetamodelGenerator . CSNLayoutMetamodelGenerator}
+	^ { 
+		  FASTMetamodelGenerator.
+		  FASTJavaMetamodelGenerator.
+		  CSNLayoutMetamodelGenerator.
+		  CSNMetamodelGenerator.
+		  CSNUICoreWebGenerator }
 ]
 
 { #category : #definition }
@@ -43,6 +54,11 @@ CSNBehaviorModelGenerator >> commentForCall [
 	^ 'I represent an abstract call to a distant service
 	
 Since I''m abstract, I should not be instanciate (but, it is a reasonnable solution if you don''t know witch call instanciate)'
+]
+
+{ #category : #definition }
+CSNBehaviorModelGenerator >> commentForDOMElementAccess [
+	^ 'Access to a DOM element'
 ]
 
 { #category : #definition }
@@ -75,9 +91,18 @@ CSNBehaviorModelGenerator >> defineClasses [
 	synchroneCall  := builder newClassNamed: #SynchroneCall comment: self commentForSynchroneCall.
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
 	openDialog := builder newClassNamed: #OpenDialog comment: self commentForOpenDialog.
+	domElementAcccess := builder newClassNamed: #DOMElementAcccess comment: self commentForDOMElementAccess.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
 	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
-	statement := self remoteEntity: #Statement withPrefix: #FAST
+	statement := self remoteEntity: #Statement withPrefix: #FAST.
+	
+	action := self remoteEntity: #Action withPrefix: #CSN.
+	csnWidget := self remoteEntity: #Widget withPrefix: #CSN.
+	javaMethod := self remoteEntity: #MethodEntity withPrefix: #FASTJava.
+	page := self remoteEntity: #Page withPrefix: #CSN.
+	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
+
+	cwDialog := self remoteEntity: #Dialog withPrefix: #CSNUICW.
 ]
 
 { #category : #definition }
@@ -89,14 +114,31 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	synchroneCall --|> call.
 	popUp --|> expression.
 	openDialog --|> expression.
+	domElementAcccess --|> expression.
+	domElementAcccess --|> #TReceiver
 ]
 
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
-	((navigation property: #arguments) <>-* (expression property: #navigation)) withoutPrimaryContainer.
+	((navigation property: #arguments)
+	 <>-* (expression property: #navigation)) withoutPrimaryContainer.
+	(((call property: #onSuccess) comment:
+		  'The statement executed if the call return ''ok''')
+	 <>- (fastBehaviouralEntity property: #carrefourOnSuccessOwner))
+		withoutPrimaryContainer.
+	(((call property: #onFailure) comment:
+		  'The statement executed if the call return ''ko''')
+	 <>- (fastBehaviouralEntity property: #carrefourOnFailureOwner))
+		withoutPrimaryContainer.
+	(((popUp property: #data) comment:
+		  'The data that will be displayed in the popUp')
+	 <>- (expression property: #carrefourPopUpOwner))
+		withoutPrimaryContainer.
 		
-	(((call property: #onSuccess ) comment: 'The statement executed if the call return ''ok''') <>- (fastBehaviouralEntity property: #carrefourOnSuccessOwner)) withoutPrimaryContainer.
-	(((call property: #onFailure ) comment: 'The statement executed if the call return ''ko''') <>- (fastBehaviouralEntity property: #carrefourOnFailureOwner)) withoutPrimaryContainer.
-	(((popUp property: #data ) comment: 'The data that will be displayed in the popUp') <>- (expression property: #carrefourPopUpOwner)) withoutPrimaryContainer.
+	(action property: #behavior) -* (javaMethod property: #ui).
+	(navigation property: #page) *- (page property: #navigations).
+	(serviceAPI property: #callers) -* (call property: #distantService).
+	(openDialog property: #dialog) *- (cwDialog property: #opener).
+	(domElementAcccess property: #widget) *- (csnWidget property: #behavioralAccess)
 ]

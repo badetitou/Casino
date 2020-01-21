@@ -16,7 +16,7 @@ CSNBehaviorPatternOpenDialog >> run [
 		select: [ :invocation | 
 			invocation name = 'show' and: [ 
 				(self uiModel allWithSubTypesOf: CSNUICWDialog) anySatisfy: [ 
-					:dialog | 
+					:dialog |
 					dialog affectedActions = invocation receiver famixVariable ] ] ]
 		thenDo: [ :invocation | 
 			| dialog openDialog parent  |

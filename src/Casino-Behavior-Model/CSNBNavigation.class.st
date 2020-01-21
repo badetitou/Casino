@@ -29,7 +29,6 @@ CSNBNavigation >> arguments [
 	<generated>
 	<derived>
 	<FMProperty: #arguments type: #FASTExpression opposite: #navigation>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
@@ -45,4 +44,20 @@ CSNBNavigation >> argumentsGroup [
 	<generated>
 	<navigation: 'Arguments'>
 	^ MooseGroup withAll: self arguments asSet
+]
+
+{ #category : #accessing }
+CSNBNavigation >> page [
+	"Relation named: #page type: #CSNPage opposite: #navigations"
+
+	<generated>
+	<FMProperty: #page type: #CSNPage opposite: #navigations>
+	^ self privateState attributeAt: #page ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+CSNBNavigation >> page: anObject [
+
+	<generated>
+	self privateState attributeAt: #page put: (FMMultivalueLink on: self update: #navigations from: self page to: anObject).
 ]

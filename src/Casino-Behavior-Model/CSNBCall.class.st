@@ -19,13 +19,28 @@ CSNBCall class >> annotation [
 ]
 
 { #category : #accessing }
+CSNBCall >> distantService [
+	"Relation named: #distantService type: #CSNServiceAPI opposite: #callers"
+
+	<generated>
+	<FMProperty: #distantService type: #CSNServiceAPI opposite: #callers>
+	^ self privateState attributeAt: #distantService ifAbsent: [ nil ]
+]
+
+{ #category : #accessing }
+CSNBCall >> distantService: anObject [
+
+	<generated>
+	self privateState attributeAt: #distantService put: (FMMultivalueLink on: self update: #callers from: self distantService to: anObject).
+]
+
+{ #category : #accessing }
 CSNBCall >> onFailure [
 	"Relation named: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner"
 
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ko'''>
 	<FMProperty: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
@@ -57,7 +72,6 @@ CSNBCall >> onSuccess [
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ok'''>
 	<FMProperty: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner>
-	<package: #'Casino-Bind-UIBehavior'>
 	^ self privateState attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 
