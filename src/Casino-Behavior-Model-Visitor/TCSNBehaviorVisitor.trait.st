@@ -1,0 +1,39 @@
+Trait {
+	#name : #TCSNBehaviorVisitor,
+	#category : #'Casino-Behavior-Model-Visitor'
+}
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitAsynchroneCall: anAsynchroneCall [
+	^ self visitCall: anAsynchroneCall
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCall: aCall [
+	^ self visitFASTExpression: aCall
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitDOMElementAcccess: aDOMElementAcccess [
+	^ self visitFASTExpression: aDOMElementAcccess
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitNavigation: aNavigation [
+	^ self visitFASTExpression: aNavigation
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitOpenDialog: anOpenDialog [
+	^ self visitFASTExpression: anOpenDialog
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitPopUp: aPopUp [
+	^ self visitFASTExpression: aPopUp
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitSynchroneCall: aSynchroneCall [
+	^ self visitCall: aSynchroneCall
+]

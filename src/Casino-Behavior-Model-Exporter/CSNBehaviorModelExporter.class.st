@@ -1,6 +1,8 @@
 Class {
 	#name : #CSNBehaviorModelExporter,
 	#superclass : #FASTJavaVisitor,
+	#traits : 'TCSNBehaviorVisitor',
+	#classTraits : 'TCSNBehaviorVisitor classTrait',
 	#category : #'Casino-Behavior-Model-Exporter'
 }
 
@@ -12,29 +14,4 @@ CSNBehaviorModelExporter class >> export: aBehaviorModel [
 { #category : #visitor }
 CSNBehaviorModelExporter >> export: aBehaviorMethod [
 	^ self accept: aBehaviorMethod
-]
-
-{ #category : #visitor }
-CSNBehaviorModelExporter >> visitAsynchroneCall: aCall [
-	^ self visitCall: aCall
-]
-
-{ #category : #visitor }
-CSNBehaviorModelExporter >> visitCall: aCall [
-	^ self visitFASTExpression: aCall
-]
-
-{ #category : #visitor }
-CSNBehaviorModelExporter >> visitNavigation: aNavigation [
-	^ self visitFASTExpression: aNavigation
-]
-
-{ #category : #visitor }
-CSNBehaviorModelExporter >> visitPopUp: aPopUp [
-	^ self visitFASTExpression: aPopUp
-]
-
-{ #category : #visitor }
-CSNBehaviorModelExporter >> visitSynchroneCall: aCall [
-	^ self visitCall: aCall
 ]

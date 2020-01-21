@@ -34,3 +34,13 @@ CSNModelDependencyExporter >> visitCSNUICWClickHandler: aCSNUICWClickHandler [
 	<generated>
 	^ self visitCSNAction: aCSNUICWClickHandler
 ]
+
+{ #category : #generated }
+CSNModelDependencyExporter >> visitDOMElementAcccess: aDOMElementAcccess [
+	^ ''
+]
+
+{ #category : #generated }
+CSNModelDependencyExporter >> visitOpenDialog: anOpenDialog [
+	^ ''
+]

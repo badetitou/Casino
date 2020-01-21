@@ -47,8 +47,10 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaCastExpression: aFASTJavaCastExp
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
-	^ 'catch (' , (', ' join:(aFASTJavaCatchPartStatement parameter ifNotNil: [ :parameter | (self clone accept: parameter) ]))
-		, ') ' , (self clone accept: aFASTJavaCatchPartStatement body)
+	^ 'catch (' , (aFASTJavaCatchPartStatement parameter
+		   ifNotNil: [ :parameter | self clone accept: parameter ]
+		   ifNil: [ '' ]) , ') '
+	  , (self clone accept: aFASTJavaCatchPartStatement body)
 ]
 
 { #category : #generated }

@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
+	^ 'this.', (aDOMElementAcccess widget ifNotNil: [ :widget | widget affectedActions uniqueName ] ifNil:  ['BLA']), '.nativeElement'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	^ aFASTJavaMethodEntity uniqueName , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self clone accept: parameter ]))
 		,
@@ -18,6 +23,11 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
 	^ 'this.openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
+	^ 'this.' , anOpenDialog dialog affectedActions uniqueName , '.openDialog()'
 ]
 
 { #category : #generated }
