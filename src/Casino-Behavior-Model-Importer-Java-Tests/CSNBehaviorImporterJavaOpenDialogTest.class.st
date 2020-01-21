@@ -261,13 +261,25 @@ public class Hello {
 ]
 
 { #category : #running }
+CSNBehaviorImporterJavaOpenDialogTest >> resourcesFileReference [
+	| repo filePath |
+	filePath := '/home/travis/build/badetitou/Casino'.
+	repo := filePath asFileReference exists
+		ifTrue: [ filePath asFileReference ]
+		ifFalse: [ (IceRepository registry
+				detect: [ :each | each includesPackageNamed: self class package name ]
+				ifNone: [ self error: 'Please add a clone of this project to Iceberg to access to the resources' ]) location ].
+	^ repo / 'tests-resources'
+]
+
+{ #category : #running }
 CSNBehaviorImporterJavaOpenDialogTest >> setUp [
 	super setUp.
 	famixModel := (MooseModel importFromMSEStream:
 			               self famixModelString readStream)
 		              name: #famixModel;
 		              yourself.
-	famixModel rootFolder: 'D:\Developpement\mse\verveineJ2'.
+	famixModel rootFolder: self resourcesFileReference / 'tbehavioral'.
 	method := (famixModel allWithType: FAMIXMethod)
 		          detect: [ :a | a name = 'onClick' ]
 		          ifNone: [ self error ].
