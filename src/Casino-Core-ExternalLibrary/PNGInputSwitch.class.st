@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGInputSwitch class >> getSelector [
+	^ 'p-inputSwitch'
+]
+
+{ #category : #accessing }
 PNGInputSwitch class >> moduleName [
 	^ 'InputSwitchModule'
 ]

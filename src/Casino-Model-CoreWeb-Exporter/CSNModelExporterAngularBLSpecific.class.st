@@ -88,15 +88,15 @@ export class ';
 
 ';
      << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '    public ' , phase name , ': Phase;' , String crlf ]);
-     << (aBLPageMetier recursiveWidgets flattened collect: [:widget |  widget idViewChild ]) asOrderedCollection removeDuplicates flatten;
+     << (((aBLPageMetier calledBehavior flatCollect: [ :action  | action behavior flatCollect: [:behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget  ] ]) asSet) collect: [:widget |  widget idViewChild]) asOrderedCollection;
      << '
 ';
      << (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
      << '
 
-    constructor(private renderer: Renderer2,';
-     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
-     << (', ' join: (aBLPageMetier calledBehavior flatCollect: [:behavior |  self behaviorInitializeVariableExporter export: behavior withContext: self context ]) flattened asOrderedCollection removeDuplicates);
+    constructor(private renderer: Renderer2, ';
+     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
+     << (', ' join: ((((aBLPageMetier calledBehavior collect: [:behavior | self behaviorInitializeVariableExporter export: behavior withContext: self context ])) flattened) reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
      << ') {
 ';
      << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);

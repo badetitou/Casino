@@ -14,11 +14,6 @@ CSNUICWProgressBar class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWProgressBar >> getExternalDependency [
-	^ {PNGProgressBar}
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWProgressBar >> getSelector [
-	^ 'p-progressBar'
+CSNUICWProgressBar >> angularComponent [
+	^ PNGProgressBar
 ]

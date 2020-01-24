@@ -4,6 +4,11 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #'as yet unclassified' }
+PNGTurboTable class >> getSelector [
+	^ 'p-table'
+]
+
 { #category : #accessing }
 PNGTurboTable class >> moduleName [
 	^ 'TableModule'

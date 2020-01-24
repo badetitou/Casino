@@ -7,6 +7,11 @@ CSNWidget >> actionsTag [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> angularComponent [
+	^ WidgetRepresentation
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> attributesTagWith: anExporter [
   ^(self computeSelfAttributes flattened groupedBy: #name) asDictionary associationsDo: [:mapAttributeNameValues |  anExporter
            <<< ' ';
@@ -48,7 +53,7 @@ CSNWidget >> getExternalDependencies [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getExternalDependency [
-	^ {}
+	^ { self angularComponent }
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -66,7 +71,7 @@ CSNWidget >> getPositionAttribute [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getSelector [
-	^ 'div'
+	^ self angularComponent getSelector
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -87,8 +92,10 @@ CSNWidget >> idTag [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> idViewChild [
 	^ (self variable isNil or: [ self variable isInvocation ])
-		ifTrue: [ '' ]
-		ifFalse: [ '    @ViewChild(''' , self id , ''') ' , self id , ': ElementRef;' , String crlf ]
+		  ifTrue: [ '' ]
+		  ifFalse: [ 
+			  '    @ViewChild(''' , self id , ''') ' , self id , ': '
+			  , self angularComponent moduleName , ';' , String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

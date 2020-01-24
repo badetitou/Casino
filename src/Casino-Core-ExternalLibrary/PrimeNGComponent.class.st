@@ -1,12 +1,14 @@
 Class {
 	#name : #PrimeNGComponent,
-	#superclass : #WidgetDependency,
+	#superclass : #WidgetRepresentation,
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
-PrimeNGComponent class >> importString [
-	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
+{ #category : #accessing }
+PrimeNGComponent class >> isLocal [
+	"The widget is NOT imported from a distant library
+	It is already part of the exported project"
+	^ false
 ]
 
 { #category : #accessing }

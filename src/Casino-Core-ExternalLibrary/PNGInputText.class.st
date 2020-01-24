@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGInputText class >> getSelector [
+	^ 'input'
+]
+
+{ #category : #accessing }
 PNGInputText class >> moduleName [
 	^ 'InputTextModule'
 ]

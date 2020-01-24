@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGSlider class >> getSelector [
+	^ 'p-slider'
+]
+
+{ #category : #accessing }
 PNGSlider class >> moduleName [
 	^ 'SliderModule'
 ]

@@ -14,8 +14,8 @@ CSNUICWChart class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWChart >> getExternalDependency [
-	^ {PNGChart}
+CSNUICWChart >> angularComponent [
+	^ PNGChart
 ]
 
 { #category : #'as yet unclassified' }

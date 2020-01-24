@@ -14,8 +14,8 @@ CSNUICWSplitButton class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWSplitButton >> getExternalDependency [
-	^ {PNGSplitButton}
+CSNUICWSplitButton >> angularComponent [
+	^ PNGSplitButton
 ]
 
 { #category : #'as yet unclassified' }
@@ -30,11 +30,6 @@ CSNUICWSplitButton >> getInitializations [
 		,
 			'
         ];'
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSplitButton >> getSelector [
-	^ 'p-splitButton'
 ]
 
 { #category : #'as yet unclassified' }

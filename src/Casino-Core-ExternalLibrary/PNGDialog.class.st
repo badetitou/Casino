@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGDialog class >> getSelector [
+	^ 'p-dialog'
+]
+
+{ #category : #accessing }
 PNGDialog class >> moduleName [
 	^ 'DialogModule'
 ]

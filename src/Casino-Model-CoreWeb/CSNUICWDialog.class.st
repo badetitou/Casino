@@ -14,11 +14,6 @@ CSNUICWDialog class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWDialog >> getExternalDependency [
-	^ {PNGDialog}
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWDialog >> getSelector [
-	^ 'p-dialog'
+CSNUICWDialog >> angularComponent [
+	^ PNGDialog
 ]

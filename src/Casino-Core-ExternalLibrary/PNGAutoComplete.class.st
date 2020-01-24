@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGAutoComplete class >> getSelector [
+	^ 'p-autoComplete'
+]
+
+{ #category : #accessing }
 PNGAutoComplete class >> moduleName [
 	^ 'AutoCompleteModule'
 ]

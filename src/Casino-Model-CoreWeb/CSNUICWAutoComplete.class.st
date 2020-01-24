@@ -14,11 +14,6 @@ CSNUICWAutoComplete class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWAutoComplete >> getExternalDependency [
-	^ {PNGAutoComplete}
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWAutoComplete >> getSelector [
-	^ 'p-autoComplete'
+CSNUICWAutoComplete >> angularComponent [
+	^ PNGAutoComplete
 ]

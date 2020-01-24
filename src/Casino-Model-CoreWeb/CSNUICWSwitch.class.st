@@ -14,8 +14,8 @@ CSNUICWSwitch class >> annotation [
 ]
 
 { #category : #'as yet unclassified' }
-CSNUICWSwitch >> getExternalDependency [
-	^ {PNGInputSwitch}
+CSNUICWSwitch >> angularComponent [
+	^ PNGInputSwitch
 ]
 
 { #category : #'as yet unclassified' }

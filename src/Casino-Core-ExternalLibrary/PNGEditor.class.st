@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGEditor class >> getSelector [
+	^ 'p-editor'
+]
+
+{ #category : #accessing }
 PNGEditor class >> moduleName [
 	^ 'EditorModule'
 ]

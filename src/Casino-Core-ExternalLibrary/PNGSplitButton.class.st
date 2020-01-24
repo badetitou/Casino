@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGSplitButton class >> getSelector [
+	^ 'p-splitButton'
+]
+
+{ #category : #accessing }
 PNGSplitButton class >> internalDependencies [
 	^ {PNGMenuItem}
 ]

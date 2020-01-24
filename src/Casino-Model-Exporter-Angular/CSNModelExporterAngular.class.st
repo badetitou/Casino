@@ -57,7 +57,6 @@ CSNModelExporterAngular >> businessPageImportList [
 	^ '    Component,
     OnDestroy,
     OnInit,
-    ElementRef,
     Renderer2,
     ViewChild'
 ]
@@ -363,7 +362,6 @@ export class ';
            << ': Phase;';
            << String crlf ].
   currentWriteStream
-     << (aBLPageMetier recursiveWidgets flattened collect: [:widget |  widget idViewChild ]) asOrderedCollection removeDuplicates flatten;
      << '
 ';
      << (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);

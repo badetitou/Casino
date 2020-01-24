@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+PNGProgressBar class >> getSelector [
+	^ 'p-progressBar'
+]
+
+{ #category : #accessing }
 PNGProgressBar class >> moduleName [
 	^ 'ProgressBarModule'
 ]
