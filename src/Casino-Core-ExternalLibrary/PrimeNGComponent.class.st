@@ -12,6 +12,12 @@ PrimeNGComponent class >> isLocal [
 ]
 
 { #category : #accessing }
+PrimeNGComponent class >> isNative [
+	"The widget is part of the html standard"
+	^ false
+]
+
+{ #category : #accessing }
 PrimeNGComponent class >> moduleName [
 	self subclassResponsibility 
 ]

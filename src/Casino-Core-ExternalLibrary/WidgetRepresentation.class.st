@@ -27,6 +27,12 @@ WidgetRepresentation class >> isLocal [
 ]
 
 { #category : #accessing }
+WidgetRepresentation class >> isNative [
+	"The widget is part of the html standard"
+	^ true
+]
+
+{ #category : #accessing }
 WidgetRepresentation class >> moduleName [
 	^ 'ElementRef'
 ]
