@@ -89,8 +89,9 @@ CSNWidget >> gtSourceCodeIn: composite [
 			  anObject mooseInterestingEntity sources anyOne sourceAnchor
 				  sourceText ];
 		  when: [ :anObject | 
-			  anObject mooseInterestingEntity sources anyOne sourceAnchor
-				  isNotNil ];
+			  anObject mooseInterestingEntity sources isNotEmpty and: [ 
+					  anObject mooseInterestingEntity sources anyOne sourceAnchor
+						  isNotNil ] ];
 		  withLineNumbers: true
 ]
 

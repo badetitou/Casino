@@ -6,8 +6,6 @@ Class {
 
 { #category : #accessing }
 PrimeNGComponent class >> isLocal [
-	"The widget is NOT imported from a distant library
-	It is already part of the exported project"
 	^ false
 ]
 

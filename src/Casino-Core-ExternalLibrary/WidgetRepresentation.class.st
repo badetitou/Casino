@@ -5,6 +5,10 @@ Class {
 }
 
 { #category : #accessing }
+WidgetRepresentation class >> componentAttributeOn: anExporter [
+]
+
+{ #category : #accessing }
 WidgetRepresentation class >> getSelector [
 	^ 'div'
 ]
