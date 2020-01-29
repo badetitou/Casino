@@ -85,6 +85,15 @@ CSNBusinessPage >> getTag [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNBusinessPage >> idViewChild [
+	^ (self variable isNil or: [ self variable isInvocation ])
+		  ifTrue: [ '' ]
+		  ifFalse: [ 
+			  '    @ViewChild(' , self componentName , ', { static: true}) ' , self id , ': '
+			  , self componentName , ';' , String crlf ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> isPageMetier [
 	^ true
 ]

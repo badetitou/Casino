@@ -17,7 +17,7 @@ CSNPage >> getLocalComponentPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalModulePath [
-	^ self name, '/' , self name , '.module#' , self getModuleClassName
+	^ self name, '/' , self name , '.module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

@@ -94,7 +94,7 @@ CSNWidget >> idViewChild [
 	^ (self variable isNil or: [ self variable isInvocation ])
 		  ifTrue: [ '' ]
 		  ifFalse: [ 
-			  '    @ViewChild(''' , self id , ''') ' , self id , ': '
+			  '    @ViewChild(''' , self id , ''', { static: false}) ' , self id , ': '
 			  , self angularComponent moduleName , ';' , String crlf ]
 ]
 
