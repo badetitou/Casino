@@ -532,7 +532,14 @@ CSNWebModelJava >> widgetFactoryInvocation [
 { #category : #accessing }
 CSNWebModelJava >> widgetInVariable: aVariable [
 	aVariable ifNil: [ ^ nil ].
-	^ self model allCSNWidget detect: [ :el | ( el variable = aVariable ) ] ifNone: [ self model allCSNWidget detect: [ :el | aVariable name ~= 'content' and: [ aVariable typeScope = el realClass ] ]  ifNone: [nil]]
+	^ self model allCSNWidget
+		  detect: [ :el | el variable = aVariable ]
+		  ifNone: [ 
+			  self model allCSNWidget
+				  detect: [ :el | 
+					  aVariable name ~= 'content' and: [ 
+						  (aVariable atScope: FamixTType) anyOne = el realClass ] ]
+				  ifNone: [ nil ] ]
 ]
 
 { #category : #accessing }
