@@ -41,6 +41,16 @@ CSNModelDependencyExporter >> visitDOMElementAcccess: aDOMElementAcccess [
 ]
 
 { #category : #generated }
+CSNModelDependencyExporter >> visitFASTEntity: aFASTEntity [
+	| scopes |
+	scopes := (CSNBModel metamodel packages select: [ :package | 
+		           package name = CSNBehaviorModelGenerator packageName ])
+		          first classes collect: #implementingClass.
+	^ (((aFASTEntity allToAnyScope: scopes) \ {aFASTEntity}) collect: [ :scope | 
+		   scope accept: self ]) flattened
+]
+
+{ #category : #generated }
 CSNModelDependencyExporter >> visitOpenDialog: anOpenDialog [
 	^ ''
 ]

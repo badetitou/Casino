@@ -23,6 +23,12 @@ CSNBehaviorPattern class >> on: model fromUiModel: aUiModel [
 	^ self new model: model; uiModel: aUiModel 
 ]
 
+{ #category : #helper }
+CSNBehaviorPattern class >> order [
+	"allow to execute a pattern before another"
+	^ 10
+]
+
 { #category : #accessing }
 CSNBehaviorPattern >> model [
 	^ model

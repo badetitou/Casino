@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIImage class >> annotation [
 
-	<MSEClass: #Image super: #CSNLeaf>
+	<FMClass: #Image super: #CSNLeaf>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIFieldset class >> annotation [
 
-	<MSEClass: #Fieldset super: #CSNUIPanel>
+	<FMClass: #Fieldset super: #CSNUIPanel>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIWidgetLabel class >> annotation [
 
-	<MSEClass: #WidgetLabel super: #CSNContainer>
+	<FMClass: #WidgetLabel super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

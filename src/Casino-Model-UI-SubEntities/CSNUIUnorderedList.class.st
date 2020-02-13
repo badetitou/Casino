@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIUnorderedList class >> annotation [
 
-	<MSEClass: #UnorderedList super: #CSNUIList>
+	<FMClass: #UnorderedList super: #CSNUIList>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

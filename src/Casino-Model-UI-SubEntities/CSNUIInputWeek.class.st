@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputWeek class >> annotation [
 
-	<MSEClass: #InputWeek super: #CSNUIInput>
+	<FMClass: #InputWeek super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

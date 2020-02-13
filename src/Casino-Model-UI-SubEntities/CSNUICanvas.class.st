@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICanvas class >> annotation [
 
-	<MSEClass: #Canvas super: #CSNContainer>
+	<FMClass: #Canvas super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

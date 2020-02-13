@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 CSNUIRequired class >> annotation [
 
-	<MSEClass: #Required super: #CSNAttribute>
+	<FMClass: #Required super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

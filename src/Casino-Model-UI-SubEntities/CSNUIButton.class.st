@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIButton class >> annotation [
 
-	<MSEClass: #Button super: #CSNContainer>
+	<FMClass: #Button super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

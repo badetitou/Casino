@@ -20,15 +20,6 @@ CSNModelInitializeVariableExporter >> visitCall: aCall [
 ]
 
 { #category : #generated }
-CSNModelInitializeVariableExporter >> visitFASTEntity: aFASTEntity [
-	^ ((aFASTEntity allToAnyScope:
-		    ((CSNBModel metamodel packages select: [ :package | 
-			      package name = CSNBehaviorModelGenerator packageName ]) first
-			     classes collect: #implementingClass)) collect: [ :scope | 
-		   scope accept: self ]) flattened
-]
-
-{ #category : #generated }
 CSNModelInitializeVariableExporter >> visitNavigation: aNavigation [
 	^ ''
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #CSNModelImporterCoreWebVisitor,
 	#superclass : #CSNModelImporterVisitor,
-	#category : #'Casino-Model-CoreWeb-Importer'
+	#category : #'Casino-Model-CoreWeb-Importer-Visitor'
 }
 
 { #category : #private }

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputCheckbox class >> annotation [
 
-	<MSEClass: #InputCheckbox super: #CSNUIInput>
+	<FMClass: #InputCheckbox super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputRadio class >> annotation [
 
-	<MSEClass: #InputRadio super: #CSNUIInput>
+	<FMClass: #InputRadio super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

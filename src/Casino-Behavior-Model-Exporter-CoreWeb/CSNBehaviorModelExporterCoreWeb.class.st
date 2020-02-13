@@ -40,3 +40,13 @@ CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
 CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
 	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << (self clone accept: aPopUp data) << ')' ]
 ]
+
+{ #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> visitSetElementAttribute: aSetElementAttribute [
+	^ (aSetElementAttribute receiver
+		   ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
+		   ifNil: [ '' ]) , 'set'
+	  , aSetElementAttribute attribute name, '(' , (', ' join:
+		   (aSetElementAttribute arguments collect: [ :argument | 
+			    self clone accept: argument ])) , ')'
+]

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputColor class >> annotation [
 
-	<MSEClass: #InputColor super: #CSNUIInput>
+	<FMClass: #InputColor super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

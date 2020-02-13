@@ -12,7 +12,7 @@ Class {
 { #category : #meta }
 CSNUITitle class >> annotation [
 
-	<MSEClass: #Title super: #CSNAttribute>
+	<FMClass: #Title super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUILink class >> annotation [
 
-	<MSEClass: #Link super: #CSNLeaf>
+	<FMClass: #Link super: #CSNLeaf>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

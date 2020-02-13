@@ -13,13 +13,16 @@ CSNWidget >> angularComponent [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> attributesTagWith: anExporter [
-  ^(self computeSelfAttributes flattened groupedBy: #name) asDictionary associationsDo: [:mapAttributeNameValues |  anExporter
-           <<< ' ';
-           <<< mapAttributeNameValues key;
-           <<< '="'.
-        mapAttributeNameValues value asOrderedCollection do: [:attribute |  anExporter visit: attribute.
-              anExporter <<< ' ' ].
-        anExporter <<< '"' ]
+	^ (self computeSelfAttributes flattened groupedBy: #name)
+		  asDictionary associationsDo: [ :mapAttributeNameValues | 
+		  anExporter
+			  <<< ' ';
+			  <<< mapAttributeNameValues key;
+			  <<< '="'.
+		  mapAttributeNameValues value asOrderedCollection do: [ :attribute | 
+			  anExporter visit: attribute.
+			  anExporter <<< ' ' ].
+		  anExporter <<< '"' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

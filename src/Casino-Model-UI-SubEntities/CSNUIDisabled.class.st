@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 CSNUIDisabled class >> annotation [
 
-	<MSEClass: #Disabled super: #CSNAttribute>
+	<FMClass: #Disabled super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

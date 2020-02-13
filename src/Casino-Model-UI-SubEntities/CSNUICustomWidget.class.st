@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUICustomWidget class >> annotation [
 
-	<MSEClass: #CustomWidget super: #CSNContainer>
+	<FMClass: #CustomWidget super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

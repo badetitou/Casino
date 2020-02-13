@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUISize class >> annotation [
 
-	<MSEClass: #Size super: #CSNAttribute>
+	<FMClass: #Size super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

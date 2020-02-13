@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIAlt class >> annotation [
 
-	<MSEClass: #Alt super: #CSNAttribute>
+	<FMClass: #Alt super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

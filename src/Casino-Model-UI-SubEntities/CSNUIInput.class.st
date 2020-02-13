@@ -10,7 +10,7 @@ Class {
 { #category : #meta }
 CSNUIInput class >> annotation [
 
-	<MSEClass: #Input super: #CSNLeaf>
+	<FMClass: #Input super: #CSNLeaf>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self
@@ -36,7 +36,7 @@ CSNUIInput >> text: anObject [
 { #category : #accessing }
 CSNUIInput >> value [
 
-	<MSEProperty: #value type: #String>
+	<FMProperty: #value type: #String>
 	<generated>
 	^ value
 ]

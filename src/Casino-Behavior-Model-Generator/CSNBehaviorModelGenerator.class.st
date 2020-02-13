@@ -17,7 +17,10 @@ Class {
 		'javaMethod',
 		'serviceAPI',
 		'cwDialog',
-		'csnWidget'
+		'csnWidget',
+		'setElementAttribute',
+		'csnAttribute',
+		'javaMethodInvocation'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -92,13 +95,16 @@ CSNBehaviorModelGenerator >> defineClasses [
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
 	openDialog := builder newClassNamed: #OpenDialog comment: self commentForOpenDialog.
 	domElementAcccess := builder newClassNamed: #DOMElementAcccess comment: self commentForDOMElementAccess.
+	setElementAttribute := builder newClassNamed: #SetElementAttribute comment: 'set the attribute value of an element accessed'.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
 	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
 	statement := self remoteEntity: #Statement withPrefix: #FAST.
 	
 	action := self remoteEntity: #Action withPrefix: #CSN.
 	csnWidget := self remoteEntity: #Widget withPrefix: #CSN.
+	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
 	javaMethod := self remoteEntity: #MethodEntity withPrefix: #FASTJava.
+	javaMethodInvocation := self remoteEntity: #MethodInvocation withPrefix: #FASTJava.
 	page := self remoteEntity: #Page withPrefix: #CSN.
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
 
@@ -115,7 +121,9 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	popUp --|> expression.
 	openDialog --|> expression.
 	domElementAcccess --|> expression.
-	domElementAcccess --|> #TReceiver
+	domElementAcccess --|> #TReceiver.
+	setElementAttribute --|> javaMethodInvocation
+	
 ]
 
 { #category : #definition }
@@ -140,5 +148,6 @@ CSNBehaviorModelGenerator >> defineRelations [
 	(navigation property: #page) *- (page property: #navigations).
 	(serviceAPI property: #callers) -* (call property: #distantService).
 	(openDialog property: #dialog) *- (cwDialog property: #opener).
-	(domElementAcccess property: #widget) *- (csnWidget property: #behavioralAccess)
+	(domElementAcccess property: #widget) *- (csnWidget property: #behavioralAccess).
+	(setElementAttribute property: #attribute) *- (csnAttribute property: #behavioralSetAccess)
 ]

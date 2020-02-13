@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIAbsoluteHeight class >> annotation [
 
-	<MSEClass: #AbsoluteHeight super: #CSNUIHeight>
+	<FMClass: #AbsoluteHeight super: #CSNUIHeight>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

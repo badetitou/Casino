@@ -12,7 +12,7 @@ CSNUIModel class >> allSubmetamodelsPackagesNames [
 
 { #category : #meta }
 CSNUIModel class >> annotation [
-	<MSEClass: #CSNUIModel super: #MooseModel>
+	<FMClass: #CSNUIModel super: #MooseModel>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 ]

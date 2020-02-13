@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputMonth class >> annotation [
 
-	<MSEClass: #InputMonth super: #CSNUIInput>
+	<FMClass: #InputMonth super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

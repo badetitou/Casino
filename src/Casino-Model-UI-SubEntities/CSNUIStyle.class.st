@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 CSNUIStyle class >> annotation [
 
-	<MSEClass: #Style super: #CSNAttribute>
+	<FMClass: #Style super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

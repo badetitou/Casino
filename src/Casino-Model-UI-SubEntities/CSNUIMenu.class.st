@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIMenu class >> annotation [
 
-	<MSEClass: #Menu super: #CSNContainer>
+	<FMClass: #Menu super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

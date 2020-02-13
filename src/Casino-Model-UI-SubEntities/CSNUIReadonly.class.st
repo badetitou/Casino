@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIReadonly class >> annotation [
 
-	<MSEClass: #Readonly super: #CSNAttribute>
+	<FMClass: #Readonly super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

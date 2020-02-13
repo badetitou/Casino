@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputDatetimeLocal class >> annotation [
 
-	<MSEClass: #InputDatetimeLocal super: #CSNUIInput>
+	<FMClass: #InputDatetimeLocal super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

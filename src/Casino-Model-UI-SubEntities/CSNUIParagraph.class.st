@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIParagraph class >> annotation [
 
-	<MSEClass: #Paragraph super: #CSNLeaf>
+	<FMClass: #Paragraph super: #CSNLeaf>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

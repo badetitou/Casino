@@ -24,9 +24,9 @@ CSNBehaviorModelImporterJava >> carrefourBinder: anObject [
 
 { #category : #run }
 CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
-	CSNBehaviorPattern
-		allSubclassesDo:
-			[ :patternClass | (patternClass on: model fromUiModel: self uiModel) run ]
+	(CSNBehaviorPattern allSubclasses sorted: #order ascending) do: [ 
+		:patternClass | 
+		(patternClass on: model fromUiModel: self uiModel) run ]
 ]
 
 { #category : #accessing }

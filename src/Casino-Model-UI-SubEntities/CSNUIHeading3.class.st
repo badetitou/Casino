@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIHeading3 class >> annotation [
 
-	<MSEClass: #Heading3 super: #CSNLeaf>
+	<FMClass: #Heading3 super: #CSNLeaf>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

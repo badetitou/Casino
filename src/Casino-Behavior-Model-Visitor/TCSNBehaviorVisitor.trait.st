@@ -34,6 +34,11 @@ TCSNBehaviorVisitor >> visitPopUp: aPopUp [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitSetElementAttribute: aSetElementAttribute [ 
+	^ self visitFASTJavaMethodInvocation: aSetElementAttribute
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitSynchroneCall: aSynchroneCall [
 	^ self visitCall: aSynchroneCall
 ]

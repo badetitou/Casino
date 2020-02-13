@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 CSNUILabel class >> annotation [
 
-	<MSEClass: #Label super: #CSNAttribute>
+	<FMClass: #Label super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

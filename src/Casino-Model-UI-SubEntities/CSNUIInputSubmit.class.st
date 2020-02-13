@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputSubmit class >> annotation [
 
-	<MSEClass: #InputSubmit super: #CSNUIInput>
+	<FMClass: #InputSubmit super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

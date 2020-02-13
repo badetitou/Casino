@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 CSNUITab class >> annotation [
 
-	<MSEClass: #Tab super: #CSNContainer>
+	<FMClass: #Tab super: #CSNContainer>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

@@ -77,7 +77,8 @@ Class {
 		'uiModel',
 		'uiDropdownButton',
 		'uiMenu',
-		'uiMenuItem'
+		'uiMenuItem',
+		'uiVisibility'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -188,6 +189,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	
 	uiModal := builder newClassNamed: #Modal.
 	uiModel := builder newClassNamed: #ModelAttribute.
+	uiVisibility := builder newClassNamed: #Visibility.
 	
 	"from Core"
 	container := self remoteEntity: #Container withPrefix: #CSN.
@@ -272,6 +274,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiWidth --|> attribute.
 	uiModel --|> attribute.
 	uiModal --|> attribute.
+	uiVisibility --|> attribute.
 	uiAbsoluteWidth --|> uiWidth.
 	uiRelativeWidth --|> uiWidth
 ]

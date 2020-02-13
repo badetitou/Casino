@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIRelativeWidth class >> annotation [
 
-	<MSEClass: #RelativeWidth super: #CSNUIWidth>
+	<FMClass: #RelativeWidth super: #CSNUIWidth>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

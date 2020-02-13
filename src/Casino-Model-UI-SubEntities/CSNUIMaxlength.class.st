@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIMaxlength class >> annotation [
 
-	<MSEClass: #Maxlength super: #CSNAttribute>
+	<FMClass: #Maxlength super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

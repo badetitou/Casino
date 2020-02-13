@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIInputTime class >> annotation [
 
-	<MSEClass: #InputTime super: #CSNUIInput>
+	<FMClass: #InputTime super: #CSNUIInput>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

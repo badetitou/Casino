@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNUIId class >> annotation [
 
-	<MSEClass: #Id super: #CSNAttribute>
+	<FMClass: #Id super: #CSNAttribute>
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 	^self

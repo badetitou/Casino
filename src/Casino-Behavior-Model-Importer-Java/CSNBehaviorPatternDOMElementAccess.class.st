@@ -23,11 +23,13 @@ CSNBehaviorPatternDOMElementAccess >> run [
 		              yourself.
 	(self model allWithSubTypesOf: FASTJavaIdentifier) do: [ :identifier | 
 		reverseDic at: identifier famixVariable ifPresent: [ :widgets | 
-			| parent domAccess selector |
-			self haltIf: [ widgets size > 1 ].
-			selector := identifier currentParentSelector, ':'.
-			identifier metamodel.
+			| domAccess selector |
+			selector := identifier currentParentSelector , ':'.
 			domAccess := self newDOMAccessTo: widgets first.
-			domAccess perform: selector withArguments: { identifier parentNode }
-			  ] ]
+			domAccess
+				startPos: identifier startPos;
+				endPos: identifier endPos.
+			domAccess
+				perform: selector
+				withArguments: { identifier parentNode } ] ]
 ]
