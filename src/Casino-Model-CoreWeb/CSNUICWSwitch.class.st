@@ -15,10 +15,5 @@ CSNUICWSwitch class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUICWSwitch >> angularComponent [
-	^ PNGInputSwitch
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSwitch >> getSelector [
-	^ 'p-inputSwitch'
+	^ MCSlideToggle
 ]

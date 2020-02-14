@@ -21,27 +21,22 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #MCInput,
+	#name : #MCCard,
 	#superclass : #MaterialComponent,
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
 { #category : #accessing }
-MCInput class >> componentAttributeOn: anExporter [
-	anExporter <<< ' matInput '
+MCCard class >> getSelector [
+	^ 'mat-card'
 ]
 
 { #category : #accessing }
-MCInput class >> getSelector [
-	^ 'input'
+MCCard class >> moduleName [
+	^ 'MatCardModule'
 ]
 
 { #category : #accessing }
-MCInput class >> moduleName [
-	^ 'MatInputModule'
-]
-
-{ #category : #accessing }
-MCInput class >> modulePath [
-	^ '@angular/material/input'
+MCCard class >> modulePath [
+	^ '@angular/material/card'
 ]

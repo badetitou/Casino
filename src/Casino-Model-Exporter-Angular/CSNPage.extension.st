@@ -103,8 +103,8 @@ CSNPage >> widgetsDependencies [
 CSNPage >> widgetsDependenciesImportInstruction [
 	^ ''
 		,
-			((self widgetsDependencies reject: #isLocal)
-				flatCollect: [ :dependency | dependency importString , String crlf ])
+			(((self widgetsDependencies reject: #isLocal)
+				collect: [ :dependency | dependency importString , String crlf ]) as: Set) asOrderedCollection flatten
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
