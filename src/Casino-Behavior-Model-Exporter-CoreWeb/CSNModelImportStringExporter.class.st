@@ -15,6 +15,11 @@ CSNModelImportStringExporter >> visitCall: aCall [
 ]
 
 { #category : #generated }
+CSNModelImportStringExporter >> visitDOMElementAcccess: aDOMElementAcccess [
+	^ aDOMElementAcccess widget angularComponent importString
+]
+
+{ #category : #generated }
 CSNModelImportStringExporter >> visitNavigation: aNavigation [
 	^ ''
 ]

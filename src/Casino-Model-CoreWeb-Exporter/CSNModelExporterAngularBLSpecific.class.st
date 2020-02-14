@@ -58,69 +58,106 @@ CSNModelExporterAngularBLSpecific >> behaviorModelExporter [
 
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
-  currentWriteStream
-     << '
+	currentWriteStream
+		<<
+			'
 import {
 ';
-     << self businessPageImportList;
-     << '
+		<< self businessPageImportList;
+		<<
+			'
 } from ''@angular/core'';
 ';
-     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
+		<<
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
 import { Phase } from ''app/components/service/model/phase/phase.model'';
 import { PhaseService } from ''app/components/service/phase.service'';
 ' ]);
-     << aBLPageMetier widgetsDependencies;
-     << (String crlf join: (aBLPageMetier calledBehavior flatCollect: [:behavior |  self behaviorImportExporter export: behavior withContext: self context ]) flattened asOrderedCollection removeDuplicates);
-     << '
+		<<
+			(String crlf
+				join:
+					(aBLPageMetier widgetsDependencies
+						, (aBLPageMetier calledBehavior flatCollect: [ :behavior | self behaviorImportExporter export: behavior withContext: self context ]) flattened) asSet 
+						);
+		<<
+			'
 
 @Component({
     selector: ''';
-     << aBLPageMetier getSelector;
-     << ''',
+		<< aBLPageMetier getSelector;
+		<<
+			''',
     templateUrl: ''./';
-     << aBLPageMetier getHTMLName;
-     << '''
+		<< aBLPageMetier getHTMLName;
+		<<
+			'''
 })
 export class ';
-     << aBLPageMetier componentName capitalized;
-     << ' implements OnInit, OnDestroy {
+		<< aBLPageMetier componentName capitalized;
+		<<
+			' implements OnInit, OnDestroy {
 
 ';
-     << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '    public ' , phase name , ': Phase;' , String crlf ]);
-     << (((aBLPageMetier calledBehavior flatCollect: [ :action  | action behavior flatCollect: [:behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget  ] ]) asSet) collect: [:widget |  widget idViewChild]) asOrderedCollection;
-     << '
+		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);
+		<<
+			((aBLPageMetier calledBehavior
+				flatCollect: [ :action | action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet
+				collect: [ :widget | widget idViewChild ]) asOrderedCollection;
+		<<
+			'
 ';
-     << (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
-     << '
+		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
+		<<
+			'
 
     constructor(private renderer: Renderer2, ';
-     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
-     << (', ' join: ((((aBLPageMetier calledBehavior collect: [:behavior | self behaviorInitializeVariableExporter export: behavior withContext: self context ])) flattened) reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
-     << ') {
+		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
+		<<
+			(', '
+				join:
+					((aBLPageMetier calledBehavior collect: [ :behavior | self behaviorInitializeVariableExporter export: behavior withContext: self context ]) flattened
+						reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
+		<<
+			') {
 ';
-     << (aBLPageMetier collectPhaseCalled flatCollect: [:phase |  '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
-     << '
+		<<
+			(aBLPageMetier collectPhaseCalled
+				flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
+		<<
+			'
     }
 
     public ngOnInit(): void {
 ';
-     << (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
-     << '
+		<< (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
+		<<
+			'
     }
 
     public ngOnDestroy(): void {
 
     }
 ';
-     << (aBLPageMetier collectPhaseCalled ifNotEmpty: [ String crlf , '    public openPhase(phase: Phase): void {
+		<<
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty: [ String crlf
+						,
+							'    public openPhase(phase: Phase): void {
         this._desktopStateService.selectPhase(phase);
     }' ]);
-     << '
+		<<
+			'
 
 ';
-     << ('' , (aBLPageMetier calledBehavior flatCollect: [:action |  action behavior flatCollect: [:behaveMethod |  '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ] as: OrderedCollection) indentBy: 4);
-     << '
+		<<
+			(''
+				,
+					(aBLPageMetier calledBehavior
+						flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ]
+						as: OrderedCollection) indentBy: 4);
+		<<
+			'
 }
 '
 ]
