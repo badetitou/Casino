@@ -176,8 +176,8 @@ CSNWebModelJava >> generatePhase [
 { #category : #'private-actions' }
 CSNWebModelJava >> generateService [
 	| interfaceService |
-	interfaceService := self sourceModel allTypes
-		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | a name = 'RemoteService' ]) and: [ e isInterface ] ].
+	interfaceService := self sourceModel allTypes asSet
+		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | #('RestService' 'RemoteService') includes: a name ]) and: [ e isInterface ] ].
 	interfaceService addAll: ((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ]) collect: #declaredType).
 	interfaceService do: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
 ]
