@@ -62,8 +62,7 @@ CSNWidget >> getExternalDependency [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
 	anExporter <<< self getSelector.
-	self angularComponent componentAttributeOn: anExporter.
-	self attributesTagWith: anExporter.
+	self angularComponent componentAttributeOn: anExporter forWidget: self.
 	anExporter <<< self actionsTag.
 	anExporter <<< self idTag
 ]

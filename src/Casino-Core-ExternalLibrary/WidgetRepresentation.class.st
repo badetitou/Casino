@@ -4,8 +4,31 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #'accessing - export' }
+WidgetRepresentation class >> attributeDictionary [
+	^ {  } asDictionary
+]
+
+{ #category : #export }
+WidgetRepresentation class >> attributeNameInComponent: attribute [
+	^ self attributeDictionary at: attribute ifAbsent: [ attribute name ]
+]
+
+{ #category : #export }
+WidgetRepresentation class >> attributeOf: aWidget [
+	^ aWidget computeSelfAttributes
+]
+
+{ #category : #export }
 WidgetRepresentation class >> componentAttributeOn: anExporter [
+]
+
+{ #category : #export }
+WidgetRepresentation class >> componentAttributeOn: anExporter forWidget: aWidget [
+	| attributes |
+	attributes := self attributeOf: aWidget.
+	self exportAttributes: attributes with: anExporter.
+	self componentAttributeOn: anExporter
 ]
 
 { #category : #export }
@@ -13,6 +36,21 @@ WidgetRepresentation class >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter.
 	self exportContentOf: aWidget with: anExporter.
 	self exportFooterOf: aWidget with: anExporter.
+]
+
+{ #category : #export }
+WidgetRepresentation class >> exportAttributes: attributes with: anExporter [
+	^ (attributes flattened groupedBy: [:attribute | (self attributeNameInComponent: attribute) ]) asDictionary
+		associationsDo: [ :mapAttributeNameValues | 
+			anExporter
+				<<< ' ';
+				<<< mapAttributeNameValues key;
+				<<< '="'.
+			mapAttributeNameValues value asOrderedCollection
+				do: [ :attribute | 
+					anExporter visit: attribute.
+					anExporter <<< ' ' ].
+			anExporter <<< '"' ]
 ]
 
 { #category : #export }

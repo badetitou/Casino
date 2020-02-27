@@ -32,6 +32,19 @@ MCButton class >> componentAttributeOn: anExporter [
 ]
 
 { #category : #accessing }
+MCButton class >> exportContentOf: aWidget with: anExporter [
+	aWidget attributes detect: [ :attribute | attribute isOfType: CSNUILabel ] ifFound: [ :attribute | anExporter visit: attribute ].
+	aWidget widgets
+		do: [ :widget | 
+			anExporter
+				crlf;
+				indentPlus.
+			anExporter
+				visit: widget;
+				indentMinus ]
+]
+
+{ #category : #accessing }
 MCButton class >> getSelector [
 	^ 'button'
 ]

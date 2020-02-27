@@ -27,6 +27,18 @@ Class {
 }
 
 { #category : #accessing }
+MCTab class >> attributeDictionary [
+	^ super attributeDictionary
+		at: CSNUITitle put: 'label';
+		yourself
+]
+
+{ #category : #accessing }
+MCTab class >> attributeNameInComponent: attribute [
+	^ self attributeDictionary at: attribute class ifAbsent: [ attribute name ]
+]
+
+{ #category : #accessing }
 MCTab class >> getSelector [
 	^ 'mat-tab'
 ]
