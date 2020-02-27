@@ -27,6 +27,40 @@ Class {
 }
 
 { #category : #accessing }
+MCCard class >> exportFooterOf: aWidget with: anExporter [
+
+	anExporter << '</mat-card-content>';
+		indentMinus;
+		crlf;
+		<< '</';
+		<<< aWidget getSelector;
+		<<< '>';
+		indentMinus
+]
+
+{ #category : #accessing }
+MCCard class >> exportHeaderOf: aWidget with: anExporter [
+	anExporter << '<'.
+	aWidget getListPropertiesAsStringWith: anExporter.
+	anExporter <<< '>'.
+	anExporter
+		indentPlus;
+		crlf;
+		<< '<mat-card-header>';
+		indentPlus;
+		crlf;
+		<< '<mat-card-title>'.
+	aWidget attributes detect: [ :a | a isOfType: CSNUITitle ] ifFound: [ :attribute | anExporter visit: attribute ].
+	anExporter
+		<<< '</mat-card-title>';
+		crlf;
+		indentMinus;
+		<< '</mat-card-header>';
+		crlf;
+		<< '<mat-card-content>'
+]
+
+{ #category : #accessing }
 MCCard class >> getSelector [
 	^ 'mat-card'
 ]

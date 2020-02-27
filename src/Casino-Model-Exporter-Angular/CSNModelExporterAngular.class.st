@@ -552,7 +552,7 @@ CSNModelExporterAngular >> indentLevel [
 
 { #category : #indent }
 CSNModelExporterAngular >> indentMinus [
-  ^indentLevel := indentLevel - 1 
+	^ indentLevel := indentLevel - 1
 ]
 
 { #category : #indent }
@@ -619,20 +619,12 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
-  aBLUIContainer layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self << '<'.
-        aBLUIContainer getListPropertiesAsStringWith: self.
-        self <<< '>'.
-        aBLUIContainer widgets do: [:widget |  self
-                 crlf;
-                 indentPlus.
-              self
-                 visit: widget;
-                 indentMinus ].
-        self
-           crlf;
-           << '</';
-           <<< aBLUIContainer getSelector;
-           <<< '>' ]
+	aBLUIContainer layout
+		ifNotNil: [ :layout | 
+			aBLUIContainer angularComponent exportHeaderOf: aBLUIContainer with: self.
+			self visit: layout.
+			aBLUIContainer angularComponent exportFooterOf: aBLUIContainer with: self ]
+		ifNil: [ aBLUIContainer angularComponent export: aBLUIContainer with: self ]
 ]
 
 { #category : #visiting }
@@ -643,10 +635,7 @@ CSNModelExporterAngular >> visitCSNLCell: aBLCell [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
-  self << '<'.
-  aBLUIGridLayout container getListPropertiesAsStringWith: self.
-  self
-     <<< '>';
+	self
      crlf;
      indentPlus;
      << '<tbody>';
@@ -676,28 +665,18 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
      indentMinus;
      << '</tbody>';
      indentMinus;
-     crlf;
-     << '</';
-     <<< aBLUIGridLayout container getSelector;
-     <<< '>'
+     crlf
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
-  self << '<'.
-  aBLLayout container getListPropertiesAsStringWith: self.
-  self <<< '>'.
-  {aBLLayout container widgets . 
-  aBLLayout cell} flatten do: [:widget |  self
-           crlf;
-           indentPlus.
-        self visit: widget.
-        self indentMinus ].
-  self
-     crlf;
-     << '</';
-     <<< aBLLayout container getSelector;
-     <<< '>'
+	aBLLayout container widgets , aBLLayout cell
+		do: [ :widget | 
+			self
+				crlf;
+				indentPlus.
+			self visit: widget.
+			self indentMinus ]
 ]
 
 { #category : #visiting }
@@ -905,7 +884,8 @@ CSNModelExporterAngular >> visitCSNUIName: aBLUIName [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
-  aBLUIPanel layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self
+ 	self visitCSNContainer:  aBLUIPanel
+	"aBLUIPanel layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self
            << '<';
            <<< (aBLUIPanel getListPropertiesAsStringWith: self);
            <<< '>'.
@@ -917,7 +897,7 @@ CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
            crlf;
            << '</';
            <<< aBLUIPanel getSelector;
-           <<< '>' ]
+           <<< '>' ]"
 ]
 
 { #category : #visiting }
@@ -982,19 +962,7 @@ CSNModelExporterAngular >> visitCSNUIWidth: aBLUIWidth [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNWidget: aBLWidget [
-  self
-     << '<';
-     <<< (aBLWidget getListPropertiesAsStringWith: self);
-     <<< '>'.
-  aBLWidget widgets do: [:widget |  self <<< String crlf.
-        self indentPlus.
-        self visit: widget.
-        self indentMinus.
-        self <<< String crlf ].
-  self
-     << '</';
-     <<< aBLWidget getSelector;
-     <<< '>'
+	aBLWidget angularComponent export: aBLWidget with: self
 ]
 
 { #category : #visiting }

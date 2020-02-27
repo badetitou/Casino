@@ -8,6 +8,41 @@ Class {
 WidgetRepresentation class >> componentAttributeOn: anExporter [
 ]
 
+{ #category : #export }
+WidgetRepresentation class >> export: aWidget with: anExporter [
+	self exportHeaderOf: aWidget with: anExporter.
+	self exportContentOf: aWidget with: anExporter.
+	self exportFooterOf: aWidget with: anExporter.
+]
+
+{ #category : #export }
+WidgetRepresentation class >> exportContentOf: aWidget with: anExporter [
+	aWidget widgets
+		do: [ :widget | 
+			anExporter
+				crlf;
+				indentPlus.
+			anExporter
+				visit: widget;
+				indentMinus ]
+]
+
+{ #category : #export }
+WidgetRepresentation class >> exportFooterOf: aWidget with: anExporter [
+	anExporter
+		crlf;
+		<< '</';
+		<<< aWidget getSelector;
+		<<< '>'
+]
+
+{ #category : #export }
+WidgetRepresentation class >> exportHeaderOf: aWidget with: anExporter [
+	anExporter << '<'.
+	aWidget getListPropertiesAsStringWith: anExporter.
+	anExporter <<< '>'
+]
+
 { #category : #accessing }
 WidgetRepresentation class >> getSelector [
 	^ 'div'
