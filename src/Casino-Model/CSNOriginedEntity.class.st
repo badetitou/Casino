@@ -4,8 +4,8 @@ Root entity of the meta-model
 Class {
 	#name : #CSNOriginedEntity,
 	#superclass : #MooseEntity,
-	#traits : 'FamixTNamed + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamed classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#sources => FMProperty'
 	],

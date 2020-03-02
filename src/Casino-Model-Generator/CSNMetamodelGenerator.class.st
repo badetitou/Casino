@@ -63,7 +63,7 @@ CSNMetamodelGenerator >> defineClasses [
 { #category : #definition }
 CSNMetamodelGenerator >> defineHierarchy [
 	super defineHierarchy.
-	entity --|> #TNamed.
+	entity --|> #TNamedEntity.
 	entity --|> #TEntityMetaLevelDependency.
 	entity <|-- action.
 	entity <|-- attribute.
