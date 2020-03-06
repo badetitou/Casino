@@ -51,7 +51,7 @@ MCInput class >> exportFooterOf: aWidget with: anExporter [
 { #category : #accessing }
 MCInput class >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
-		<< '<mat-form-field>';
+		<< '<mat-form-field appearance="fill">';
 		crlf.
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]

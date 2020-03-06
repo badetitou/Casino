@@ -1,6 +1,11 @@
 Extension { #name : #CSNUIInputDate }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNUIInputDate >> angularComponent [
-	^ MCInput
+CSNUIInputDate >> computeSelfAttributes [
+	^ super computeSelfAttributes
+		,
+			{(CSNAttribute new
+				name: 'type';
+				attributeValue: 'date';
+				yourself)}
 ]

@@ -40,16 +40,13 @@ WidgetRepresentation class >> export: aWidget with: anExporter [
 
 { #category : #export }
 WidgetRepresentation class >> exportAttributes: attributes with: anExporter [
-	^ (attributes flattened groupedBy: [:attribute | (self attributeNameInComponent: attribute) ]) asDictionary
+	^ (attributes flattened groupedBy: [ :attribute | self attributeNameInComponent: attribute ]) asDictionary
 		associationsDo: [ :mapAttributeNameValues | 
 			anExporter
 				<<< ' ';
 				<<< mapAttributeNameValues key;
 				<<< '="'.
-			mapAttributeNameValues value asOrderedCollection
-				do: [ :attribute | 
-					anExporter visit: attribute.
-					anExporter <<< ' ' ].
+			mapAttributeNameValues value asOrderedCollection do: [ :attribute | anExporter visit: attribute ] separatedBy: [ anExporter <<< ' ' ].
 			anExporter <<< '"' ]
 ]
 

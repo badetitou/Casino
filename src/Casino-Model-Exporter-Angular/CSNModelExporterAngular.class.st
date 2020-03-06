@@ -800,13 +800,6 @@ CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputDate: aBLUIInputDate [
-  self << '<'.
-  aBLUIInputDate getListPropertiesAsStringWith: self.
-  self <<< ' type="date"/>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputFile: aBLUIInputFile [
   self << '<'.
   aBLUIInputFile getListPropertiesAsStringWith: self.
@@ -825,13 +818,6 @@ CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
   self << '<'.
   aBLUIInputNumber getListPropertiesAsStringWith: self.
   self <<< ' type="number"/>'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputPassword: aBLUIInputPassword [
-  self << '<'.
-  aBLUIInputPassword getListPropertiesAsStringWith: self.
-  self <<< ' type="password"/>'
 ]
 
 { #category : #visiting }

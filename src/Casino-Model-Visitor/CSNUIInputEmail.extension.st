@@ -11,3 +11,13 @@ CSNUIInputEmail class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputEmail: self
 ]
+
+{ #category : #'*Casino-Model-Visitor-generated' }
+CSNUIInputEmail >> computeSelfAttributes [
+	^ super computeSelfAttributes
+		,
+			{(CSNAttribute new
+				name: 'type';
+				attributeValue: 'email';
+				yourself)}
+]
