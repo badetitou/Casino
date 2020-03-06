@@ -1,6 +1,11 @@
 Extension { #name : #CSNUIInputDate }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNUIInputDate >> angularComponent [
+	^ MCDatePicker
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNUIInputDate >> computeSelfAttributes [
 	^ super computeSelfAttributes
 		,
