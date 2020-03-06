@@ -7,5 +7,5 @@ CSNUIInputCheckbox >> angularComponent [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNUIInputCheckbox >> computeSelfAttributes [
-	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened
+	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened asOrderedCollection 
 ]

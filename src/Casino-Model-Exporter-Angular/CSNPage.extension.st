@@ -103,7 +103,7 @@ CSNPage >> widgetsDependencies [
 CSNPage >> widgetsDependenciesImportInstruction [
 	^ ''
 		,
-			(((self widgetsDependencies reject: #isLocal)
+			(((self widgetsDependencies reject: [:a | a isLocal ])
 				collect: [ :dependency | dependency importString , String crlf ]) as: Set) asOrderedCollection flatten
 ]
 
@@ -111,6 +111,6 @@ CSNPage >> widgetsDependenciesImportInstruction [
 CSNPage >> widgetsDependenciesName [
 	^ ''
 		,
-			((self widgetsDependencies reject: #isLocal)
+			((self widgetsDependencies reject: [:a | a isLocal ])
 				flatCollect: [ :dependency | '        ', dependency moduleName , ',' , String crlf ])
 ]

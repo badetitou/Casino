@@ -32,6 +32,41 @@ MCInput class >> componentAttributeOn: anExporter [
 ]
 
 { #category : #accessing }
+MCInput class >> exportContentOf: aWidget with: anExporter [
+	anExporter
+		indentPlus;
+		<< '<'.
+	aWidget getListPropertiesAsStringWith: anExporter.
+	anExporter
+		<<< '>';
+		crlf;
+		indentMinus
+]
+
+{ #category : #accessing }
+MCInput class >> exportFooterOf: aWidget with: anExporter [
+	anExporter << '</mat-form-field>'
+]
+
+{ #category : #accessing }
+MCInput class >> exportHeaderOf: aWidget with: anExporter [
+	anExporter
+		<< '<mat-form-field>';
+		crlf.
+	aWidget attributes
+		detect: [ :att | att isOfType: CSNUILabel ]
+		ifFound: [ :att | 
+			anExporter
+				indentPlus;
+				<< '<mat-label>';
+				crlf;
+				visit: att;
+				crlf;
+				<< '</mat-label>';
+				indentMinus ]
+]
+
+{ #category : #accessing }
 MCInput class >> getSelector [
 	^ 'input'
 ]

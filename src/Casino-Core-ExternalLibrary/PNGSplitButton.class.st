@@ -11,7 +11,7 @@ PNGSplitButton class >> getSelector [
 
 { #category : #accessing }
 PNGSplitButton class >> internalDependencies [
-	^ {PNGMenuItem}
+	^ { PNGMenuItem }
 ]
 
 { #category : #accessing }

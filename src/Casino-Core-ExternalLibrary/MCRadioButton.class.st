@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #accessing }
+MCRadioButton class >> componentAttributeOn: anExporter [
+	anExporter <<< ' type="radio" '
+]
+
+{ #category : #accessing }
+MCRadioButton class >> exportContentOf: aWidget with: anExporter [
+	aWidget attributes detect: [ :att | att isOfType: CSNUILabel ] ifFound: [ :att | anExporter visit: att ]
+]
+
+{ #category : #accessing }
 MCRadioButton class >> getSelector [
 	^ 'mat-radio-button'
 ]

@@ -27,7 +27,7 @@ CSNWidget >> attributesTagWith: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> computeSelfAttributes [
-	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened
+	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened asOrderedCollection 
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

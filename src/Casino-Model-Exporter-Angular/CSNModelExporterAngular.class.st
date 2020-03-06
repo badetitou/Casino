@@ -680,8 +680,9 @@ CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNLeaf: aBLUILeaf [
-  self << '<'.
+CSNModelExporterAngular >> visitCSNLeaf: aCSNLeaf [
+^ self visitCSNWidget: aCSNLeaf
+  "self << '<'.
   aBLUILeaf getListPropertiesAsStringWith: self.
   self <<< '>'.
   aBLUILeaf attributes select: [:a |  a isKindOf: CSNUILabel ] thenDo: [:attribute |  self
@@ -695,7 +696,7 @@ CSNModelExporterAngular >> visitCSNLeaf: aBLUILeaf [
   self
      << '</';
      <<< aBLUILeaf getSelector;
-     <<< '>'
+     <<< '>'"
 ]
 
 { #category : #visiting }
@@ -834,16 +835,6 @@ CSNModelExporterAngular >> visitCSNUIInputPassword: aBLUIInputPassword [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputRadio: aCSNUIInputRadio [
-  self << '<'.
-  aCSNUIInputRadio getListPropertiesAsStringWith: self.
-  self
-     <<< ' type="radio"></';
-     <<< aCSNUIInputRadio getSelector;
-     <<< '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputRange: aCSNUIInputRange [
   self << '<'.
   aCSNUIInputRange getListPropertiesAsStringWith: self.
@@ -851,18 +842,6 @@ CSNModelExporterAngular >> visitCSNUIInputRange: aCSNUIInputRange [
      <<< ' type="range"></';
      <<< aCSNUIInputRange getSelector;
      <<< '>'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputText: aBLUIInputText [
-  self
-     << '<input id="float-';
-     <<< aBLUIInputText mooseID asString;
-     <<< '" type="text" value="';
-     <<< aBLUIInputText value1;
-     <<< '" placeholder="';
-     <<< aBLUIInputText text;
-     <<< '" pInputText>'
 ]
 
 { #category : #visiting }

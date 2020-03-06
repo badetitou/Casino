@@ -28,8 +28,9 @@ Class {
 
 { #category : #accessing }
 MCCard class >> exportFooterOf: aWidget with: anExporter [
-
-	anExporter << '</mat-card-content>';
+	anExporter
+		crlf;
+		<< '</mat-card-content>';
 		indentMinus;
 		crlf;
 		<< '</';
