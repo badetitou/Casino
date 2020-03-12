@@ -86,16 +86,26 @@ CSNWebModelJava >> addPPPToWidget [
 
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
-  ^ widget affectedActions ifNotNil: [ | usages |
-        usages := widget affectedActions allUsages , (widget affectedActions allUsages flatCollect: [:el |  el allContainers ]) reject: [:el |  (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 
-                          'add(' . 
-                          'setRecto('}) not ] ].
-        responsabilityHandlerForUsages handleAddLinkedFromVariable: usages asOrderedCollection to: widget withXmlui: xmlUiWidgetLink andImporter: self ] ifNil: [ | containerInvocation |
-        containerInvocation := widget source container.
-        [ containerInvocation isNotNil ] whileTrue: [ | found |
-              found := self widgetInVariable: containerInvocation receiver.
-              found ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation usingFactory: self factory.
-                    containerInvocation := nil ] ifNil: [ containerInvocation := containerInvocation container ] ] ]
+	^ widget affectedActions
+		ifNotNil: [ | usages |
+			usages := widget affectedActions allUsages.
+			usages := usages , (usages flatCollect: [ :el | el allContainers ])
+				reject:
+					[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
+			responsabilityHandlerForUsages
+				handleAddLinkedFromVariable: usages asOrderedCollection
+				to: widget
+				withXmlui: xmlUiWidgetLink
+				andImporter: self ]
+		ifNil: [ | containerInvocation |
+			containerInvocation := widget source container.
+			[ containerInvocation isNotNil ]
+				whileTrue: [ | found |
+					found := self widgetInVariable: containerInvocation receiver.
+					found
+						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation usingFactory: self factory.
+							containerInvocation := nil ]
+						ifNil: [ containerInvocation := containerInvocation container ] ] ]
 ]
 
 { #category : #adding }
