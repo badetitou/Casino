@@ -79,6 +79,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaFieldAccess: aFASTJavaFieldAcces
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
+	^ (self accept: aFASTJavaForEachStatement list) , '.forEach((' , (self accept: aFASTJavaForEachStatement fieldname) , ') => '
+		, (self accept: aFASTJavaForEachStatement body) , ');'.
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
 	^ aFASTJavaIdentifier famixVariable ifNil: [ aFASTJavaIdentifier name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
 ]
@@ -218,7 +224,7 @@ CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTStatement: aFASTStatement [
-	^ '', (aFASTStatement childrenNode flatCollect: [:child | self clone accept: child])
+	^ '' , (aFASTStatement orderedChildren flatCollect: [ :child | self clone accept: child ])
 ]
 
 { #category : #generated }

@@ -597,24 +597,28 @@ CSNModelExporterAngular >> visitCSNAttribute: aBLAttribute [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
-  | pageMetierRoot |
-  pageMetierRoot := self currentPath.
-  [ pageMetierRoot ensureCreateDirectory ] on: DirectoryExists do: [  ].
-  
-  "Write pageMetier.module.ts"currentWriteStream := (pageMetierRoot / aBLPageMetier getHTMLName) asFileReference writeStream.
-  self generateHTMLSourceCodeForBusinessPage: aBLPageMetier.
-  currentWriteStream
-     flush;
-     close.
-  
-  "Write pageMetier.route.ts"currentWriteStream := (pageMetierRoot / aBLPageMetier getTSName) asFileReference writeStream.
-  self generateTSSourceCodeForBusinessPage: aBLPageMetier.
-  currentWriteStream
-     flush;
-     close.
-  aBLPageMetier metiers do: [:metier |  self class new
-           currentPath: pageMetierRoot / 'components' / metier getFolderName;
-           visit: metier ]
+	| pageMetierRoot |
+	pageMetierRoot := self currentPath.
+	[ pageMetierRoot ensureCreateDirectory ]
+		on: DirectoryExists
+		do: [  ].
+
+	"Write pageMetier.module.ts"
+	currentWriteStream := (pageMetierRoot / aBLPageMetier getHTMLName) asFileReference writeStream.
+	[ self generateHTMLSourceCodeForBusinessPage: aBLPageMetier.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
+
+	"Write pageMetier.route.ts"
+	currentWriteStream := (pageMetierRoot / aBLPageMetier getTSName) asFileReference writeStream.
+	[ self generateTSSourceCodeForBusinessPage: aBLPageMetier.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
+	aBLPageMetier metiers
+		do: [ :metier | 
+			self class new
+				currentPath: pageMetierRoot / 'components' / metier getFolderName;
+				visit: metier ]
 ]
 
 { #category : #visiting }
@@ -705,26 +709,30 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getModuleName) asFileReference writeStream. 
-	self generateModuleSourceCodeForPage: aBLPhase.
-	currentWriteStream flush; close.
+	currentWriteStream := (phaseRoot / aBLPhase getModuleName) asFileReference writeStream.
+	[ self generateModuleSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
 	"Write phase.route.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream. 
-	self generateRouteSourceCodeForPage.
-	currentWriteStream flush; close.
+	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream.
+	[ self generateRouteSourceCodeForPage.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
 	"Write components"
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / 'index'.
 	indexRoot ensureCreateDirectory.
 
-	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream. 
-	self generateTSSourceCodeForPage: aBLPhase.
-	currentWriteStream flush; close.
-	
-	currentWriteStream := (indexRoot / aBLPhase getHTMLName) asFileReference writeStream. 
-	self generateHTMLSourceCodeForPage: aBLPhase.
-	currentWriteStream flush; close.
+	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream.
+	[ self generateTSSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
+
+	currentWriteStream := (indexRoot / aBLPhase getHTMLName) asFileReference writeStream.
+	[ self generateHTMLSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ]
+		ensure: [ currentWriteStream close ].
 
 	aBLPhase businessPage
 		do: [ :metier | 

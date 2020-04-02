@@ -15,5 +15,6 @@ CSNUICWProgressBar class >> annotation [
 
 { #category : #'as yet unclassified' }
 CSNUICWProgressBar >> angularComponent [
-	^ CSNBLMaterialHorizontalGaugeComponent
+	^ MCProgressBar 
+	"^ CSNBLMaterialHorizontalGaugeComponent"
 ]
