@@ -31,8 +31,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
 				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ ((self importer sourceModel allModelClasses select: [ :e | (e superInheritances collect: [ :a | a target name ]) includes: 'HomePhaseController' ]) at: 1)
-								mooseName ]
+						ifTrue: [ ((self importer sourceModel allModelClasses select: [ :e | (e superInheritances collect: [ :a | a target name ]) includes: 'HomePhaseController' ]) ifEmpty: [ 'STUB C/S' ] ifNotEmpty: [ :collectionOfPossibleHomePage | collectionOfPossibleHomePage first mooseName]) ]
 						ifFalse: [ 'STUB C/S' ] ]);
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue);
