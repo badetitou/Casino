@@ -51,7 +51,10 @@ BaselineOfCasino >> defineGroups: spec [
 		"bl"
 		group: 'behavior-bl' with: #('behavior-importer-java' 'behavior-exporter-angular');
 		group: 'behavior-importer-java' with: #('behavior' 'Casino-Behavior-Model-Importer-Java');
-		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb')
+		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb');
+		
+		"bl migration"
+		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl')
 ]
 
 { #category : #baselines }
@@ -91,6 +94,7 @@ BaselineOfCasino >> definePackages: spec [
 		
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
+		package: 'Casino-Migration-Omaje' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ];
 		
 		"behavior-core"
