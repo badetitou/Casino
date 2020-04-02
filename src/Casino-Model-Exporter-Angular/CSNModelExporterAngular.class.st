@@ -565,7 +565,7 @@ CSNModelExporterAngular >> indentPlus [
   ^indentLevel := indentLevel + 1 
 ]
 
-{ #category : #visiting }
+{ #category : #initialization }
 CSNModelExporterAngular >> initialize [
 	indentLevel := 0
 ]

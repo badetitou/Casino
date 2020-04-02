@@ -7,10 +7,7 @@ CSNOriginedEntity >> addSource: aSource [
 
 { #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> currentParentSelector [
-	| res |
-	res := Set new.
-	self parentSelectors do: [ :accessor | 
-		(self perform: accessor) ifNotNil: [ :r | ^ accessor ] ].
+	self parentSelectors do: [ :accessor | (self perform: accessor) ifNotNil: [ :r | ^ accessor ] ].
 	^ nil
 ]
 

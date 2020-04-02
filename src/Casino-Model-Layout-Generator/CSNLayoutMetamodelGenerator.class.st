@@ -126,11 +126,6 @@ CSNLayoutMetamodelGenerator >> defineHierarchy [
 ]
 
 { #category : #definition }
-CSNLayoutMetamodelGenerator >> defineProperties [
-	super defineProperties.
-]
-
-{ #category : #definition }
 CSNLayoutMetamodelGenerator >> defineRelations [
 	super defineRelations.
 	((cell property: #layoutOwner) *-<> (layout property: #cell)) withNavigation.
