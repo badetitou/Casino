@@ -77,3 +77,11 @@ FAMIXClass >> parameters [
 		to: (self container sourceText findString: self sourceText)) ifEmpty: [^ {}].
 	^ (subString copyFrom: (subString findLastOccurrenceOfString: 'new' startingAt: 1) to: subString size) extractParameters
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FAMIXClass >> source [
+	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
+	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"
+
+	^ self container
+]

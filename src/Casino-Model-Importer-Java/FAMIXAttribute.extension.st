@@ -6,7 +6,7 @@ FAMIXAttribute >> allUsages [
 
 	| methodsToUsages methods invocations return |
 	"check if the variable is returned by a method"
-	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first from allUsages ].
+	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first source allUsages ].
 
 	"check the invocation inside methods"
 	methods := self incomingAccesses collect: #from as: Set.	"self parentType methods."

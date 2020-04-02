@@ -77,10 +77,11 @@ CSNWebModelJava >> addOnClickAttribute [
 
 { #category : #adding }
 CSNWebModelJava >> addPPPToWidget [
-	self model allCSNWidgetExceptPage select: [:widget | widget parents isEmpty ]
+	self model allCSNWidgetExceptPage
+		select: [ :widget | widget parents isEmpty ]
 		thenDo: [ :widget | 
 			| founds |
-			founds := self widgetOwnerCase1: widget source from maxLevel: 15 level: 0.
+			founds := self widgetOwnerCase1: widget source source maxLevel: 15 level: 0.
 			founds do: [ :found | found addWidget: widget ] ]
 ]
 
@@ -204,7 +205,7 @@ CSNWebModelJava >> generateServiceAction [
 CSNWebModelJava >> generateWidget [
 	(self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
 		reject: [ :invocationOrClass | 
-			(invocationOrClass from mooseName beginsWithAnyOf: self widgetNamespaces)
+			(invocationOrClass source mooseName beginsWithAnyOf: self widgetNamespaces)
 				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
 						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ])
 		do: [ :invocation | 
@@ -224,8 +225,8 @@ CSNWebModelJava >> getClassNamed: aClassName [
 { #category : #accessing }
 CSNWebModelJava >> getCustomWidgetFromClass: aClass [
 	^ ((self model allWithType: CSNUICustomWidget) reject: [ :widget | widget source isClass ])
-		detect: [ :custom | (custom source to first atScope: FamixTClass) anyOne = aClass ]
-		ifFound: [ :founded | {founded} "need to return a collection to follow the other getPage and getBusinessPage"]
+		detect: [ :custom | (custom source target first atScope: FamixTClass) anyOne = aClass ]
+		ifFound: [ :founded | {founded}	"need to return a collection to follow the other getPage and getBusinessPage" ]
 		ifNone: [ nil ]
 ]
 
@@ -433,10 +434,8 @@ CSNWebModelJava >> linkPageMetierToPageMetier [
 			pageMetier incomingInstanciations
 				reject: [ :invoc | invoc signature matchesRegex: '.*this\(.*|.*super\(.*' ]
 				thenCollect: [ :invoc | 
-					((self getPageMetierFromClass: (invoc to at: 1) parentType) at: 1)
-						affectedActions: ((invoc affectation ) ifNil: [invoc]).
-					(self getPageMetierFromClass: invoc from parentType)
-						-> (self getPageMetierFromClass: (invoc to at: 1) parentType) ] ])
+					((self getPageMetierFromClass: (invoc target at: 1) parentType) at: 1) affectedActions: (invoc affectation ifNil: [ invoc ]).
+					(self getPageMetierFromClass: invoc source parentType) -> (self getPageMetierFromClass: (invoc target at: 1) parentType) ] ])
 		select: [ :assoc | assoc key isNotNil ]
 ]
 
@@ -504,7 +503,7 @@ CSNWebModelJava >> searchCalledPhase: aSignature [
 
 { #category : #private }
 CSNWebModelJava >> searchCalledPhaseFromInvocation: invoc [
-	^ self searchCalledPhase: (invoc to at: 1) signature
+	^ self searchCalledPhase: (invoc target at: 1) signature
 ]
 
 { #category : #private }
@@ -560,11 +559,10 @@ CSNWebModelJava >> widgetNamespaces [
 { #category : #accessing }
 CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level [
 	| found |
-	level = maxLevel ifTrue: [ ^ {  } ].
-	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ {  } ].
+	level = maxLevel ifTrue: [ ^ {} ].
+	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ {} ].
 	invocation isClass
-		ifFalse: [ 
-			(invocation atScope: FamixTClass) ifEmpty: [ ^ {  } ].
+		ifFalse: [ (invocation atScope: FamixTClass) ifEmpty: [ ^ {} ].
 			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) first maxLevel: maxLevel level: level + 1 ]
 		ifTrue: [ found := self getPhaseFromClass: invocation.
 			found
@@ -575,7 +573,7 @@ CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level 
 						ifNil: [ found := self getCustomWidgetFromClass: invocation.
 							found ifNotNil: [ ^ found ].
 							invocation incomingReferences
-								ifNotEmpty: [ :references | ^ self widgetOwnerCase1: (references at: 1) from belongsTo maxLevel: maxLevel level: level + 1 ] ] ] ].
+								ifNotEmpty: [ :references | ^ self widgetOwnerCase1: (references at: 1) source belongsTo maxLevel: maxLevel level: level + 1 ] ] ] ].
 	^ self widgetOwnerCase1: invocation maxLevel: maxLevel level: level + 1
 ]
 

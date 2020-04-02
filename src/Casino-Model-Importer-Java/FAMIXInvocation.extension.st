@@ -9,24 +9,19 @@ FAMIXInvocation >> affectation [
 
 	self container ifNotNil: [ ^ nil ].
 	"we do not believe in isInitializer"
-	(self from hasSourceAnchor and: [ self from name ~= '<Initializer>' ]) ifTrue: [ (self from generateFastIfNotDoneAndBind). 
- 	 (self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator}) ifNotEmpty: [:aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable. ] ].
-	^ ((self from localVariables
-		select: [ :el | el sourceAnchor isNotNil ])
-		select: [ :localVariable | 
-			localVariable sourceAnchor startPos < self sourceAnchor startPos
-				and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
+	(self source hasSourceAnchor and: [ self source name ~= '<Initializer>' ])
+		ifTrue: [ self source generateFastIfNotDoneAndBind.
+			(self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator})
+				ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ].
+	^ ((self source localVariables select: [ :el | el sourceAnchor isNotNil ])
+		select: [ :localVariable | localVariable sourceAnchor startPos < self sourceAnchor startPos and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
 		at: 1
-		ifAbsent: [ ((self from accesses select: #isWrite)
-				select: [ :access | 
-					access sourceAnchor startPos < self sourceAnchor startPos
-						and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
+		ifAbsent: [ ((self source accesses select: #isWrite)
+				select: [ :access | access sourceAnchor startPos < self sourceAnchor startPos and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
 				at: 1
-				ifAbsent: [ self from isInstanciationInitializer
-						ifTrue: [ (((self from atScope: FAMIXClass) at: 1) attributes
-								select: [ :attribute | 
-									attribute sourceAnchor startPos < self sourceAnchor startPos
-										and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
+				ifAbsent: [ self source isInstanciationInitializer
+						ifTrue: [ (((self source atScope: FAMIXClass) at: 1) attributes
+								select: [ :attribute | attribute sourceAnchor startPos < self sourceAnchor startPos and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
 								at: 1
 								ifAbsent: [ ^ nil ] ] ] ]
 ]
@@ -48,15 +43,11 @@ FAMIXInvocation >> attributeName [
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXInvocation >> container [
 	self sourceAnchor ifNil: [ ^ nil ].
-	^ ((self from outgoingInvocations
+	^ ((self source outgoingInvocations
 		select: [ :invocation | 
 			invocation sourceAnchor isNotNil
-				and: [ self sourceAnchor startPos > invocation sourceAnchor startPos
-						and: [ self sourceAnchor endPos < invocation sourceAnchor endPos ] ] ])
-		sort:
-			[ :invocationA :invocationB | invocationA sourceAnchor startPos > invocationB sourceAnchor startPos ])
-		at: 1
-		ifAbsent: [ ^ nil ]
+				and: [ self sourceAnchor startPos > invocation sourceAnchor startPos and: [ self sourceAnchor endPos < invocation sourceAnchor endPos ] ] ])
+		sort: [ :invocationA :invocationB | invocationA sourceAnchor startPos > invocationB sourceAnchor startPos ]) at: 1 ifAbsent: [ ^ nil ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

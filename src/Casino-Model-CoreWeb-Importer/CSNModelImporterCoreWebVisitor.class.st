@@ -154,7 +154,9 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreCellWidth: aCSNCoreCellWidth [
 	^ (source isInvocation and: [ source attributeName = 'cellwidth' ])
 		ifTrue: [ (factory importer
 				widgetInVariable:
-					((source from localVariables select: [ :localVariable | localVariable name = (source parameters at: 1) ]) ifNotEmpty: [ :correspondingVariable | correspondingVariable first ] ifEmpty: [ nil ]))
+					((source source localVariables select: [ :localVariable | localVariable name = (source parameters at: 1) ])
+						ifNotEmpty: [ :correspondingVariable | correspondingVariable first ]
+						ifEmpty: [ nil ]))
 				ifNotNil: [ :widget | 
 					^ (self create: CSNUIWidth)
 						name: 'cellwidth';

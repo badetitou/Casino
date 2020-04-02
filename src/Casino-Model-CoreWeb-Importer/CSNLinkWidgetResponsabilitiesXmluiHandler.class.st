@@ -7,9 +7,10 @@ Class {
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesXmluiHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
 	xmluiLinkTable
-		at: ((widgetContainer source from atAnyScope: {FamixTClass. FamixTParameterizedType}) at: 1)
+		at: ((widgetContainer source source atAnyScope: {FamixTClass . FamixTParameterizedType}) at: 1)
 		ifPresent: [ :listOfWidgetClass | 
 			listOfWidgetClass
-				do:
-					[ :widgetClass | (theCurrentImporter model allCSNWidgetExceptPage select: [ :widget | widget isContainer and: [ widget realClass = widgetClass ] ]) do: [ :widget | widget addWidget: widgetContainer ] ] ]
+				do: [ :widgetClass | 
+					(theCurrentImporter model allCSNWidgetExceptPage select: [ :widget | widget isContainer and: [ widget realClass = widgetClass ] ])
+						do: [ :widget | widget addWidget: widgetContainer ] ] ]
 ]

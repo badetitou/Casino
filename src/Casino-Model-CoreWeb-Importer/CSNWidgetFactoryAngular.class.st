@@ -31,20 +31,19 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 			((xmlElement attributeAt: #className)
 				ifNotNil: [ :a | (a replaceAllRegex: '\.' with: '::') replaceAllRegex: ' ' with: '' ]
 				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ ((self importer sourceModel allModelClasses
-								select: [ :e | (e superInheritances collect: [ :a | a to name ]) includes: 'HomePhaseController' ])
-								at: 1) mooseName ]
+						ifTrue: [ ((self importer sourceModel allModelClasses select: [ :e | (e superInheritances collect: [ :a | a target name ]) includes: 'HomePhaseController' ]) at: 1)
+								mooseName ]
 						ifFalse: [ 'STUB C/S' ] ]);
 		codePhase: (xmlElement attributeAt: #codePhase);
 		codeValue: (xmlElement attributeAt: #codeValue);
 		shortcut: (xmlElement attributeAt: #raccourci);
 		name: (xmlElement attributeAt: #codeValue).
-	(blPhase realClassName = 'STUB C/S'
+	blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
 				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
-				computeSubtitle ]).
+				computeSubtitle ].
 	^ blPhase
 ]
 
