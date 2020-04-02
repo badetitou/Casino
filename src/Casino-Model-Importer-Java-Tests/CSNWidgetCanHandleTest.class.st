@@ -37,7 +37,7 @@ CSNWidgetCanHandleTest >> setUp [
 	i addCandidate: m
 ]
 
-{ #category : #running }
+{ #category : #tests }
 CSNWidgetCanHandleTest >> testCanHandle [
 	self assert: self generatedModelClass equals: (CSNWidget newFor: i) class
 ]

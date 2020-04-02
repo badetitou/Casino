@@ -16,7 +16,7 @@ CSNUIInput class >> annotation [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CSNUIInput >> initialize [
 	super initialize.
 	value := ''.

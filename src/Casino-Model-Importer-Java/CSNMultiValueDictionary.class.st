@@ -41,18 +41,15 @@ CSNMultiValueDictionary >> addAllMulti: keyedCollection [
 { #category : #accessing }
 CSNMultiValueDictionary >> at: key add: value [
 	"Store value under key. If key already exists, store multiple values as Array"
-	
+
 	| existingValue newValue |
 	existingValue := self at: key ifAbsent: [ nil ].
-	newValue := existingValue isNil
-		ifTrue: [ Array with: value ] 
-		ifFalse: [
-			existingValue isArray 
+	newValue := existingValue
+		ifNil: [ Array with: value ]
+		ifNotNil: [ existingValue isArray
 				ifTrue: [ existingValue copyWith: value ]
 				ifFalse: [ Array with: existingValue with: value ] ].
-	^ self at: key put: newValue 
-
-
+	^ self at: key put: newValue
 ]
 
 { #category : #enumerating }
