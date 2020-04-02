@@ -33,9 +33,7 @@ CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 CSNBehaviorModelImporterJava >> convertibleActions [
 	"We only convert these actions"
 
-	^ self uiModel allCSNAction
-	select:
-			[ :action | action isActionService not and: [ action isActionAppel not ] ]
+	^ self uiModel allCSNAction select: [ :action | action isActionService not and: [ action isActionAppel not ] ]
 ]
 
 { #category : #api }

@@ -138,7 +138,7 @@ CSNWebModelJava >> addWidgetDefaultAttributes [
 { #category : #accessing }
 CSNWebModelJava >> applicationSource [
 	"name of the directory with the GWT application"
-	^  'BLOmajeGwt'
+	^  'BLCoreIncubatorGwt'
 ]
 
 { #category : #adding }
