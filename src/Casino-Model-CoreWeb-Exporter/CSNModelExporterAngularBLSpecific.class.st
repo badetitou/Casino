@@ -58,16 +58,8 @@ CSNModelExporterAngularBLSpecific >> behaviorModelExporter [
 
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
+	self writeBusinessPageImportList.
 	currentWriteStream
-		<<
-			'
-import {
-';
-		<< self businessPageImportList;
-		<<
-			'
-} from ''@angular/core'';
-';
 		<<
 			(aBLPageMetier collectPhaseCalled
 				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
@@ -78,8 +70,7 @@ import { PhaseService } from ''app/components/service/phase.service'';
 			(String crlf
 				join:
 					(aBLPageMetier widgetsDependencies
-						, (aBLPageMetier calledBehavior flatCollect: [ :behavior | self behaviorImportExporter export: behavior withContext: self context ]) flattened) asSet 
-						);
+						, (aBLPageMetier calledBehavior flatCollect: [ :behavior | self behaviorImportExporter export: behavior withContext: self context ]) flattened) asSet);
 		<<
 			'
 
@@ -111,8 +102,10 @@ export class ';
 		<<
 			'
 
-    constructor(private renderer: Renderer2, ';
-		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ] ifEmpty: [ '' ]);
+    constructor(';
+		<<
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
 		<<
 			(', '
 				join:

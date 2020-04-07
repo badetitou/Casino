@@ -334,16 +334,8 @@ export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
+	self writeBusinessPageImportList.
 	currentWriteStream
-		<<
-			'
-import {
-';
-		<< self businessPageImportList;
-		<<
-			'
-} from ''@angular/core'';
-';
 		<<
 			(aBLPageMetier collectPhaseCalled
 				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
@@ -432,9 +424,6 @@ export class ';
 			'
 }
 '
-	",
-			((self recursiveWidgets flatCollect: #attributes)
-				flatCollect: [ :attribute | attribute attributeMethod ])"
 ]
 
 { #category : #generate }
@@ -973,6 +962,20 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
            currentPath: self rootPhases / aPage name;
            visit: aPage ] displayingProgress: [:page |  'export page: ' , page codePhase asString ].
   aMooseModel allCSNService do: [:rootElement |  self visit: rootElement ]
+]
+
+{ #category : #'private-generate' }
+CSNModelExporterAngular >> writeBusinessPageImportList [
+	currentWriteStream
+		<<
+			'
+import {
+';
+		<< self businessPageImportList;
+		<<
+			'
+} from ''@angular/core'';
+'
 ]
 
 { #category : #accessing }
