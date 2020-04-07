@@ -20,7 +20,9 @@ Class {
 		'csnWidget',
 		'setElementAttribute',
 		'csnAttribute',
-		'javaMethodInvocation'
+		'javaMethodInvocation',
+		'accessElementAttribute',
+		'getElementAttribute'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -95,7 +97,9 @@ CSNBehaviorModelGenerator >> defineClasses [
 	popUp := builder newClassNamed: #PopUp comment: self commentForPopUp.
 	openDialog := builder newClassNamed: #OpenDialog comment: self commentForOpenDialog.
 	domElementAcccess := builder newClassNamed: #DOMElementAcccess comment: self commentForDOMElementAccess.
+	accessElementAttribute := builder newClassNamed: #AccessElementAttribute comment: 'access the attribute value of an element accessed'.
 	setElementAttribute := builder newClassNamed: #SetElementAttribute comment: 'set the attribute value of an element accessed'.
+	getElementAttribute := builder newClassNamed: #GetElementAttribute comment: 'set the attribute value of an element accessed'.
 	expression := self remoteEntity: #Expression withPrefix: #FAST.
 	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
 	statement := self remoteEntity: #Statement withPrefix: #FAST.
@@ -122,7 +126,9 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	openDialog --|> expression.
 	domElementAcccess --|> expression.
 	domElementAcccess --|> #TReceiver.
-	setElementAttribute --|> javaMethodInvocation
+	accessElementAttribute --|> javaMethodInvocation.
+	getElementAttribute --|> accessElementAttribute.
+	setElementAttribute --|> accessElementAttribute.
 	
 ]
 
@@ -149,5 +155,5 @@ CSNBehaviorModelGenerator >> defineRelations [
 	(serviceAPI property: #callers) -* (call property: #distantService).
 	(openDialog property: #dialog) *- (cwDialog property: #opener).
 	(domElementAcccess property: #widget) *- (csnWidget property: #behavioralAccess).
-	(setElementAttribute property: #attribute) *- (csnAttribute property: #behavioralSetAccess)
+	(accessElementAttribute property: #attribute) *- (csnAttribute property: #behavioralAccess)
 ]

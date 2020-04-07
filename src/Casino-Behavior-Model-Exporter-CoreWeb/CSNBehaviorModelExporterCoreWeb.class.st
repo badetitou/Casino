@@ -28,6 +28,16 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aSetElementAttribute [
+	^ (aSetElementAttribute receiver
+		   ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
+		   ifNil: [ '' ]) , 'get'
+	  , aSetElementAttribute attribute name, '(' , (', ' join:
+		   (aSetElementAttribute arguments collect: [ :argument | 
+			    self clone accept: argument ])) , ')'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
 	^ 'this.openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
 ]

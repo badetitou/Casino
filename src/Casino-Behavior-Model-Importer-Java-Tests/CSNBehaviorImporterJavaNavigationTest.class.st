@@ -27,7 +27,7 @@ CSNBehaviorImporterJavaNavigationTest >> testImportNavigationArgumentsSize [
 
 { #category : #tests }
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationChildParent [
-	self assert: ((model allWithType: CSNBNavigation) anyOne childrenNode allSatisfy: [ :child | child parentNode = (model allWithType: CSNBNavigation) anyOne ])
+	self assert: ((model allWithType: CSNBNavigation) anyOne children allSatisfy: [ :child | child parentNode = (model allWithType: CSNBNavigation) anyOne ])
 ]
 
 { #category : #tests }
@@ -39,16 +39,12 @@ CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParent [
 
 { #category : #tests }
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParentChildren [
-
-	self assert: (model allWithType: CSNBNavigation) anyOne parentNode childrenNode anyOne equals: (model allWithType: CSNBNavigation) anyOne
-	
+	self assert: (model allWithType: CSNBNavigation) anyOne parentNode children anyOne equals: (model allWithType: CSNBNavigation) anyOne
 ]
 
 { #category : #tests }
 CSNBehaviorImporterJavaNavigationTest >> testImportNavigationParentChildrenSize [
-
-	self assert: (model allWithType: CSNBNavigation) anyOne parentNode childrenNode size equals: 1
-	
+	self assert: (model allWithType: CSNBNavigation) anyOne parentNode children size equals: 1
 ]
 
 { #category : #tests }

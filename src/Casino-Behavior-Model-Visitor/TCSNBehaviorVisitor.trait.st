@@ -4,6 +4,11 @@ Trait {
 }
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitAccessElementAttribute: aSetElementAttribute [ 
+	^ self visitFASTJavaMethodInvocation: aSetElementAttribute
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitAsynchroneCall: anAsynchroneCall [
 	^ self visitCall: anAsynchroneCall
 ]
@@ -16,6 +21,11 @@ TCSNBehaviorVisitor >> visitCall: aCall [
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitDOMElementAcccess: aDOMElementAcccess [
 	^ self visitFASTExpression: aDOMElementAcccess
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitGetElementAttribute: aSetElementAttribute [ 
+	^ self visitAccessElementAttribute: aSetElementAttribute
 ]
 
 { #category : #visiting }
@@ -35,7 +45,7 @@ TCSNBehaviorVisitor >> visitPopUp: aPopUp [
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitSetElementAttribute: aSetElementAttribute [ 
-	^ self visitFASTJavaMethodInvocation: aSetElementAttribute
+	^ self visitAccessElementAttribute: aSetElementAttribute
 ]
 
 { #category : #visiting }

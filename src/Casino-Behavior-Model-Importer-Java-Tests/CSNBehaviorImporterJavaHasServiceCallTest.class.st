@@ -55,9 +55,7 @@ CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneParent [
 
 { #category : #tests }
 CSNBehaviorImporterJavaHasServiceCallTest >> testImportAsynchroneParentChildren [
-	self
-		assert: (model allWithType: CSNBAsynchroneCall) anyOne
-		equals: (model allWithType: FASTExpressionStatement) anyOne childrenNode anyOne
+	self assert: (model allWithType: CSNBAsynchroneCall) anyOne equals: (model allWithType: FASTExpressionStatement) anyOne children anyOne
 ]
 
 { #category : #tests }

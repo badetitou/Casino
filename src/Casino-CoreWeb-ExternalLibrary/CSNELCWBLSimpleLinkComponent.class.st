@@ -5,6 +5,26 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter [
+	aWidget attributes
+		detect: [ :attribute | attribute isOfType: CSNUILabel ]
+		ifFound: [ :label | 
+			anExporter
+				crlf;
+				indentPlus;
+				visit: label;
+				indentMinus ].
+	aWidget widgets
+		do: [ :widget | 
+			anExporter
+				crlf;
+				indentPlus.
+			anExporter
+				visit: widget;
+				indentMinus ]
+]
+
+{ #category : #'as yet unclassified' }
 CSNELCWBLSimpleLinkComponent class >> getSelector [
 	^ 'bl-simple-link'
 ]
