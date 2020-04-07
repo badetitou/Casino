@@ -13,5 +13,11 @@ CSNModelCanHandleGetAttributeCoreWebVisitor >> visitCSNAttribute: aCSNAttribute 
 { #category : #api }
 CSNModelCanHandleGetAttributeCoreWebVisitor >> visitCSNUILabel: aCSNUILabel [
 	<generated>
-	^ source signature beginsWith: 'getText'
+	^ ({CSNUILink} anySatisfy: [ :possibleWidgetType | entity isOfType: possibleWidgetType ]) and: [ source signature beginsWith: 'getText' ]
+]
+
+{ #category : #api }
+CSNModelCanHandleGetAttributeCoreWebVisitor >> visitCSNUIValue: aCSNUIValue [
+	<generated>
+	^ ({CSNUIInput} anySatisfy: [ :possibleWidgetType | entity isOfType: possibleWidgetType ]) and: [ source signature beginsWith: 'getText' ]
 ]

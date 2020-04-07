@@ -29,13 +29,9 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aGetElementAttribute [
-	1halt.
 	^ (aGetElementAttribute receiver
-		   ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
-		   ifNil: [ '' ]) , 'getElementAccess'
-	  , aGetElementAttribute attribute name, '(' , (', ' join:
-		   (aGetElementAttribute arguments collect: [ :argument | 
-			    self clone accept: argument ])) , ')'
+		ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
+		ifNil: [ '' ]) , aGetElementAttribute attribute name
 ]
 
 { #category : #generated }
