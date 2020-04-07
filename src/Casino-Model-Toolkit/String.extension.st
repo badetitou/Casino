@@ -17,3 +17,12 @@ String >> findCloseBracketFor: startIndex [
 			pos := pos + 1 ].
 	^ self size + 1
 ]
+
+{ #category : #'*Casino-Model-Toolkit' }
+String >> inParenthesis [
+	^ self class
+		streamContents: [ :s | 
+			s nextPut: $(.
+			s nextPutAll: self.
+			s nextPut: $) ]
+]

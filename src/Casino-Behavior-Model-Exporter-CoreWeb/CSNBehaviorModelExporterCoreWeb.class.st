@@ -6,13 +6,14 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
-	^ 'this.' , (aDOMElementAcccess widget
-		   ifNotNil: [ :widget | 
-			   widget affectedActions uniqueName
-			   , (widget angularComponent isNative
-					    ifTrue: [ '.nativeElement' ]
-					    ifFalse: [ '' ]) ]
-		   ifNil: [ 'BLA' ])
+	^ aDOMElementAcccess widget
+		ifNotNil: [ :widget | 
+			| accessVariable |
+			accessVariable := 'this.' , widget affectedActions uniqueName.
+			widget angularComponent isNative
+				ifTrue: [ ('<any>', accessVariable) inParenthesis , '.nativeElement' ]
+				ifFalse: [ accessVariable ] ]
+		ifNil: [ 'ERROR DOM ELEMENT ACCESS' ]
 ]
 
 { #category : #generated }

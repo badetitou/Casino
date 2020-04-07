@@ -72,6 +72,12 @@ MCInput class >> getSelector [
 ]
 
 { #category : #accessing }
+MCInput class >> isNative [
+	"The widget is part of the html standard"
+	^ true
+]
+
+{ #category : #accessing }
 MCInput class >> moduleName [
 	^ 'MatInputModule'
 ]
