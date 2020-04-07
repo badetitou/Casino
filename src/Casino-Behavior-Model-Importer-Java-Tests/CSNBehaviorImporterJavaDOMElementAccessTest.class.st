@@ -275,28 +275,26 @@ CSNBehaviorImporterJavaDOMElementAccessTest >> resourcesFileReference [
 { #category : #running }
 CSNBehaviorImporterJavaDOMElementAccessTest >> setUp [
 	super setUp.
-	famixModel := (MooseModel importFromMSEStream:
-			               self famixModelString readStream)
-		              name: #famixModel;
-		              yourself.
+	famixModel := (MooseModel importFromMSEStream: self famixModelString readStream)
+		name: #famixModel;
+		yourself.
 	famixModel rootFolder: self resourcesFileReference / 'tbehavioral'.
-	method := (famixModel allWithType: FAMIXMethod)
-		          detect: [ :a | a name = 'onClick' ]
-		          ifNone: [ self error ].
-	model := method generateFastAndBind.
+	method := (famixModel allWithType: FAMIXMethod) detect: [ :a | a name = 'onClick' ] ifNone: [ self error ].
+	model := method generateFastAndBind
+		metamodel: CSNBModel metamodel;
+		yourself.
 	uiModel := CSNUICWModel new.
-	uiModel add: (CSNUICWDialog new
-			 affectedActions: ((famixModel allWithType: FAMIXLocalVariable)
-					  detect: [ :a | a name = 'db' ]
-					  ifNone: [ self error ]);
-			 yourself).
-	uiModel add: (CSNUILink new
-			 affectedActions: ((famixModel allWithType: FAMIXLocalVariable)
-					  detect: [ :a | a name = '_llTestModalDialog' ]
-					  ifNone: [ self error ]);
-			 yourself).
-	(CSNBehaviorPatternDOMElementAccess on: model fromUiModel: uiModel)
-		run
+	uiModel
+		add:
+			(CSNUICWDialog new
+				affectedActions: ((famixModel allWithType: FAMIXLocalVariable) detect: [ :a | a name = 'db' ] ifNone: [ self error ]);
+				yourself).
+	uiModel
+		add:
+			(CSNUILink new
+				affectedActions: ((famixModel allWithType: FAMIXLocalVariable) detect: [ :a | a name = '_llTestModalDialog' ] ifNone: [ self error ]);
+				yourself).
+	(CSNBehaviorPatternDOMElementAccess on: model fromUiModel: uiModel) run
 ]
 
 { #category : #tests }
@@ -331,6 +329,25 @@ CSNBehaviorImporterJavaDOMElementAccessTest >> testCorrectAccessedElement [
 				 detect: [ :access | 
 				 access widget affectedActions name = '_llTestModalDialog' ]
 				 ifNone: [ self error ])
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaDOMElementAccessTest >> testCorrectParentNode [
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'show' ]
+				 ifNone: [ self error ])
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | access widget affectedActions name = 'db' ]
+				 ifNone: [ self error ]) parentNode.
+	self
+		assert: ((model allWithType: FASTJavaMethodInvocation)
+				 detect: [ :invoc | invoc name = 'getText' ]
+				 ifNone: [ self error ])
+		equals: ((model allWithType: CSNBDOMElementAcccess)
+				 detect: [ :access | 
+				 access widget affectedActions name = '_llTestModalDialog' ]
+				 ifNone: [ self error ]) parentNode.
 ]
 
 { #category : #tests }

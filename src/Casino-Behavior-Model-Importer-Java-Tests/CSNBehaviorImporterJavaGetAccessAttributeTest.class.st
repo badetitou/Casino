@@ -283,7 +283,7 @@ CSNBehaviorImporterJavaGetAccessAttributeTest >> setUp [
 	method := (famixModel allWithType: FAMIXMethod)
 		          detect: [ :a | a name = 'onClick' ]
 		          ifNone: [ self error ].
-	model := method generateFastAndBind.
+	model := method generateFastAndBind metamodel: CSNBModel metamodel; yourself.
 	uiModel := CSNUICWModel new.
 	uiModel add: (CSNUICWDialog new
 			 affectedActions: ((famixModel allWithType: FAMIXLocalVariable)
@@ -296,11 +296,44 @@ CSNBehaviorImporterJavaGetAccessAttributeTest >> setUp [
 					  ifNone: [ self error ]);
 			 yourself).
 	(CSNBehaviorPatternDOMElementAccess on: model fromUiModel: uiModel)
+		run.
+	(CSNBehaviorPatternDOMAccessGetAttribute on: model fromUiModel: uiModel)
 		run
 ]
 
 { #category : #tests }
-CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportDOMElemeentAccessNumber [
+CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttribute [
 
 	self assert: (model allWithType: CSNBGetElementAttribute) size equals: 1
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttributeChildren [
+	"test I have the good children"
+	self
+		assert: (model allWithType: CSNBGetElementAttribute) anyOne children anyOne
+		equals:
+			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | access widget affectedActions name = '_llTestModalDialog' ] ifNone: [ self error ]).
+	"test my children have me as parent"
+	self
+		assert: (model allWithType: CSNBGetElementAttribute) anyOne
+		equals:
+			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | access widget affectedActions name = '_llTestModalDialog' ] ifNone: [ self error ]) parentNode
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttributeNumberOfChildren [
+
+	self assert: (model allWithType: CSNBGetElementAttribute) anyOne children size equals: 1
+]
+
+{ #category : #tests }
+CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttributeParentNode [
+	"test I have the good parentNode"
+
+	self assert: (model allWithType: CSNBGetElementAttribute) anyOne parentNode equals: (model allWithType: FASTJavaNewExpression) anyOne.
+	"Test my parent has me as one of its children"
+	self assertCollection: (model allWithType: FASTJavaNewExpression) anyOne children includesAll: (model allWithType: CSNBGetElementAttribute).
+	"Test the old child I replaced is removed"	
+	self assert: (model allWithType: FASTJavaNewExpression) anyOne arguments size equals: 2
 ]

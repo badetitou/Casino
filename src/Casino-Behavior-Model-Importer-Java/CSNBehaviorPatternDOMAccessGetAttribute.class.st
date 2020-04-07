@@ -24,7 +24,7 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #CSNBehaviorPatternDOMAccessSetAttribute,
+	#name : #CSNBehaviorPatternDOMAccessGetAttribute,
 	#superclass : #CSNBehaviorPattern,
 	#instVars : [
 		'canHandleVisitor'
@@ -33,15 +33,15 @@ Class {
 }
 
 { #category : #helper }
-CSNBehaviorPatternDOMAccessSetAttribute class >> order [
+CSNBehaviorPatternDOMAccessGetAttribute class >> order [
 	"allow to execute a pattern before another"
 	^ 11
 ]
 
 { #category : #running }
-CSNBehaviorPatternDOMAccessSetAttribute >> createSetAttribute: attributeType of: domAccess insteadOfInvocation: invocation [
+CSNBehaviorPatternDOMAccessGetAttribute >> createGetAttribute: attributeType of: domAccess insteadOfInvocation: invocation [
 	| elementAttribute |
-	elementAttribute := self model add: (CSNBSetElementAttribute new
+	elementAttribute := self model add: (CSNBGetElementAttribute new
 			                     receiver: domAccess;
 			                     attribute:
 				                     (self
@@ -52,17 +52,18 @@ CSNBehaviorPatternDOMAccessSetAttribute >> createSetAttribute: attributeType of:
 			                     yourself).
 	invocation arguments do: [ :argument | 
 		elementAttribute addArgument: argument ].
+	invocation removeAllPotentialParentNode.
 	^ elementAttribute
 ]
 
 { #category : #initialization }
-CSNBehaviorPatternDOMAccessSetAttribute >> initialize [
+CSNBehaviorPatternDOMAccessGetAttribute >> initialize [
 	super initialize.
-	canHandleVisitor := CSNModelCanHandleSetAttributeCoreWebVisitor new
+	canHandleVisitor := CSNModelCanHandleGetAttributeCoreWebVisitor new
 ]
 
 { #category : #running }
-CSNBehaviorPatternDOMAccessSetAttribute >> resolveAttribute: attributeType of: widget [
+CSNBehaviorPatternDOMAccessGetAttribute >> resolveAttribute: attributeType of: widget [
 	^ widget attributes
 		  detect: [ :attribute | attribute isOfType: attributeType ]
 		  ifNone: [ 
@@ -70,7 +71,7 @@ CSNBehaviorPatternDOMAccessSetAttribute >> resolveAttribute: attributeType of: w
 ]
 
 { #category : #running }
-CSNBehaviorPatternDOMAccessSetAttribute >> run [
+CSNBehaviorPatternDOMAccessGetAttribute >> run [
 	(self model allWithType: CSNBDOMElementAcccess) asOrderedCollection
 		select: [ :elementAccess | 
 			(elementAccess parentNode isOfType: FASTJavaMethodInvocation) and: [ 
@@ -82,12 +83,12 @@ CSNBehaviorPatternDOMAccessSetAttribute >> run [
 			CSNAttribute subclasses
 				detect: [ :attributeType | attributeType accept: canHandleVisitor ]
 				ifFound: [ :attributeType | 
-					| setAttribute selector parentNode |
+					| getAttribute selector parentNode |
 					selector := elementAccess parentNode currentParentSelector , ':'.
 					parentNode := elementAccess parentNode parentNode.
-					setAttribute := self
-						                createSetAttribute: attributeType
+					getAttribute := self
+						                createGetAttribute: attributeType
 						                of: elementAccess
 						                insteadOfInvocation: elementAccess parentNode.
-					setAttribute perform: selector withArguments: { parentNode }. ] ]
+					getAttribute perform: selector withArguments: { parentNode }. ] ]
 ]

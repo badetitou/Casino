@@ -9,3 +9,9 @@ CSNModelCanHandleGetAttributeCoreWebVisitor >> visitCSNAttribute: aCSNAttribute 
 	<generated>
 	^ false
 ]
+
+{ #category : #api }
+CSNModelCanHandleGetAttributeCoreWebVisitor >> visitCSNUILabel: aCSNUILabel [
+	<generated>
+	^ source signature beginsWith: 'getText'
+]
