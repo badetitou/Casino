@@ -566,7 +566,9 @@ CSNModelExporterAngular >> prepareExport [
 
 { #category : #api }
 CSNModelExporterAngular >> protectString: aString [
-	^ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' 
+	^ aString
+		ifNotNil: [ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' ]
+		ifNil: [ '' ]
 ]
 
 { #category : #accessing }

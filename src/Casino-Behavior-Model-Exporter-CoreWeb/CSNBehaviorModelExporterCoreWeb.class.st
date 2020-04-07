@@ -28,12 +28,13 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aSetElementAttribute [
-	^ (aSetElementAttribute receiver
+CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aGetElementAttribute [
+	1halt.
+	^ (aGetElementAttribute receiver
 		   ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
-		   ifNil: [ '' ]) , 'get'
-	  , aSetElementAttribute attribute name, '(' , (', ' join:
-		   (aSetElementAttribute arguments collect: [ :argument | 
+		   ifNil: [ '' ]) , 'getElementAccess'
+	  , aGetElementAttribute attribute name, '(' , (', ' join:
+		   (aGetElementAttribute arguments collect: [ :argument | 
 			    self clone accept: argument ])) , ')'
 ]
 
