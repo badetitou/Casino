@@ -607,7 +607,7 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 		ensure: [ currentWriteStream close ].
 	aBLPageMetier metiers
 		do: [ :metier | 
-			self class new
+			self clone
 				currentPath: pageMetierRoot / 'components' / metier getFolderName;
 				visit: metier ]
 ]
