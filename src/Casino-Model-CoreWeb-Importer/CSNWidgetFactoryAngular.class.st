@@ -59,10 +59,16 @@ CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
 { #category : #factory }
 CSNWidgetFactoryAngular >> createWidgetFor: theWidgetSource withParent: parent [
 	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters)
-		ifNil: [ (self create: CSNUICustomWidget)
+		ifNil: [ | widget |
+			widget := (self create: CSNUICustomWidget)
 				source: theWidgetSource;
-				realClass: ((#(#FactoryBLLabel #ComponentUtils) includes: theWidgetSource invokedClassName) ifTrue: [ nil ] ifFalse: [ theWidgetSource invokedClass ]);
-				yourself ]
+				realClass:
+					((#(#FactoryBLLabel #ComponentUtils) includes: theWidgetSource invokedClassName)
+						ifTrue: [ nil ]
+						ifFalse: [ theWidgetSource invokedClass ]);
+				yourself.
+			(CSNLLayout newFrom: theWidgetSource for: theWidgetSource withImporters: self visitorImporters) ifNotNil: [ :layout | widget layout: layout ].
+			widget ]
 ]
 
 { #category : #factory }
