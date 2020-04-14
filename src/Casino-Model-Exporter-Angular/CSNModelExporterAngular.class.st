@@ -982,5 +982,5 @@ import {
 
 { #category : #accessing }
 CSNModelExporterAngular >> writeFile: aFileReference withCode: theSourceCode [
-	(aFileReference writeStream nextPutAll: theSourceCode) flush
+	aFileReference writeStreamDo: [ :aWriteStream | aWriteStream nextPutAll: theSourceCode ]
 ]

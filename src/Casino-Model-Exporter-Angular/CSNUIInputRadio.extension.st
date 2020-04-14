@@ -2,7 +2,8 @@ Extension { #name : #CSNUIInputRadio }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNUIInputRadio >> angularComponent [
-	^ MCRadioButton 
+	"^ MCRadioButton "
+	^ CSNELCWBLRadioComponent
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

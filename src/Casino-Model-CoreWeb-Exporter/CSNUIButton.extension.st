@@ -2,7 +2,7 @@ Extension { #name : #CSNUIButton }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNUIButton >> angularComponent [
-	"CSNELCWBLButtonLinkComponent"
+	^ CSNELCWBLButtonLinkComponent
 	"CSNBLMaterialButtonComponent"
-	^ MCButton
+	"^ MCButton"
 ]

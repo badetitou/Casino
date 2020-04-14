@@ -2,7 +2,8 @@ Extension { #name : #CSNUIInputCheckbox }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNUIInputCheckbox >> angularComponent [
-	^ MCCheckbox
+	"^ MCCheckbox"
+	^ CSNELCWBLCheckboxComponent
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
