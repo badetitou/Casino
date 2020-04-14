@@ -18,3 +18,9 @@ CSNWebModelJavaOmaje >> createFactory [
 		addVisitorImporter: CSNModelImporterCoreWebVisitor new;
 		yourself
 ]
+
+{ #category : #accessing }
+CSNWebModelJavaOmaje >> webRoot [
+	"I represent the root of URL"
+	^ 'http://127.0.0.1:8010/'
+]
