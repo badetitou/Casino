@@ -12,6 +12,7 @@ CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter 
 			anExporter
 				crlf;
 				indentPlus;
+				indent;
 				visit: label;
 				indentMinus ].
 	aWidget widgets
