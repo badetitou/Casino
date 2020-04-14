@@ -11,7 +11,7 @@ WidgetRepresentation class >> attributeDictionary [
 
 { #category : #export }
 WidgetRepresentation class >> attributeNameInComponent: attribute [
-	^ self attributeDictionary at: attribute ifAbsent: [ attribute name ]
+	^ self attributeDictionary at: attribute class ifAbsent: [ attribute name ]
 ]
 
 { #category : #export }
@@ -36,6 +36,11 @@ WidgetRepresentation class >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter.
 	self exportContentOf: aWidget with: anExporter.
 	self exportFooterOf: aWidget with: anExporter.
+]
+
+{ #category : #export }
+WidgetRepresentation class >> exportAttribute: attribute with: anExporter [
+	anExporter <<< (anExporter protectString: attribute attributeValue asString)
 ]
 
 { #category : #export }

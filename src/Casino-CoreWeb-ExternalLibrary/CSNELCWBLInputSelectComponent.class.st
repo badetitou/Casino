@@ -27,6 +27,13 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+CSNELCWBLInputSelectComponent class >> attributeDictionary [
+	^ super attributeDictionary
+		at: CSNUIWidth put: 'style';
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 CSNELCWBLInputSelectComponent class >> attributeOf: aWidget [
 	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
@@ -34,6 +41,17 @@ CSNELCWBLInputSelectComponent class >> attributeOf: aWidget [
 { #category : #'as yet unclassified' }
 CSNELCWBLInputSelectComponent class >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter
+]
+
+{ #category : #'as yet unclassified' }
+CSNELCWBLInputSelectComponent class >> exportAttribute: attribute with: anExporter [
+	attribute class = CSNUIWidth
+		ifTrue: [ anExporter
+				<<< attribute name;
+				<<< ':';
+				<<< (anExporter protectString: attribute attributeValue asString);
+				<<< ';' ]
+		ifFalse: [ super exportAttribute: attribute with: anExporter ]
 ]
 
 { #category : #'as yet unclassified' }

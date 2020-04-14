@@ -39,6 +39,11 @@ CSNWidget >> container [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> exportAttribute: normalyOneOfMyWidget with: anExporter [
+	self angularComponent exportAttribute: normalyOneOfMyWidget with: anExporter
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> generateDefaultClassAttribute [
 	"Use me to add a Attribute to all the widget during the exportation
 	ex: Adding a class to all the dom with the name of the widget"

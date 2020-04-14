@@ -582,8 +582,10 @@ CSNModelExporterAngular >> serviceRoot [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNAttribute: aBLAttribute [
-	self <<< (self protectString: aBLAttribute attributeValue asString)
+CSNModelExporterAngular >> visitCSNAttribute: aCSNAttribute [
+	aCSNAttribute widget
+		ifNil: [ WidgetRepresentation exportAttribute: aCSNAttribute with: self ]
+		ifNotNil: [ :widget | widget exportAttribute: aCSNAttribute with: self ]
 ]
 
 { #category : #visiting }
@@ -741,9 +743,9 @@ CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIAbsoluteWidth: aBLUIAbsoluteWidth [
-  self
-     <<< (self protectString: aBLUIAbsoluteWidth attributeValue);
-     <<< 'px'
+	self
+		<<< (self protectString: aBLUIAbsoluteWidth attributeValue);
+		<<< 'px'
 ]
 
 { #category : #visiting }
@@ -917,11 +919,6 @@ CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUITitle: aBLUITitle [
 	self <<< (self protectString: aBLUITitle attributeValue) 
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIWidth: aBLUIWidth [
-	 self <<< (self protectString: aBLUIWidth attributeValue) 
 ]
 
 { #category : #visiting }
