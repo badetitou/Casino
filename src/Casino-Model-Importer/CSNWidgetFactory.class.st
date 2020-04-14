@@ -42,7 +42,10 @@ CSNWidgetFactory >> createAttributeFor: aWidget from: anElement [
 
 { #category : #creating }
 CSNWidgetFactory >> createLayoutFor: theWidgetSource withParent: parent [
-	^ (CSNLLayout newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ (self create: CSNLHorizontalLayout) source: theWidgetSource; yourself ]
+	^ (CSNLLayout newFrom: theWidgetSource for: parent withImporters: visitorImporters)
+		ifNil: [ (self create: CSNLHorizontalLayout)
+				source: theWidgetSource;
+				yourself ]
 ]
 
 { #category : #creating }

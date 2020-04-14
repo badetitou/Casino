@@ -2,5 +2,5 @@ Extension { #name : #CSNLHorizontalLayout }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
 CSNLHorizontalLayout class >> canHandle: anInvocation [
-	^ #('HorizontalPanel' 'BLHorizontalPanel') includes: anInvocation invokedClassName
+	^ #('HorizontalPanel' 'BLHorizontalPanel') includesAny: (anInvocation invokedClass withSuperclassHierarchy collect: #invokedClassName)
 ]

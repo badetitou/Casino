@@ -87,6 +87,27 @@ CSNModelImporterCoreWebVisitor >> getAttributeValueFrom: anInvocation [
 	^ anInvocation parameters first
 ]
 
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNLGridLayout: aCSNLGridLayout [
+	^ (#('BLFlexTable' 'FlexTable' 'BLGrid') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self create: aCSNLGridLayout ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNLHorizontalLayout: aCSNLHorizontalLayout [
+	^ (#('HorizontalPanel' 'BLHorizontalPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self create: aCSNLHorizontalLayout ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visitor }
+CSNModelImporterCoreWebVisitor >> visitCSNLVerticalLayout: aCSNLHorizontalLayout [
+	^ (#('VerticalPanel' 'BLVerticalPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self create: aCSNLHorizontalLayout ]
+		ifFalse: [ nil ]
+]
+
 { #category : #api }
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight [
 	"because the subclass also need to check before creation, we externalise the condition"

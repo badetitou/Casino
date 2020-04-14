@@ -536,7 +536,7 @@ CSNModelExporterAngular >> indentCharacter [
 
 { #category : #indent }
 CSNModelExporterAngular >> indentLevel [
-  ^indentLevel
+	^ indentLevel
 ]
 
 { #category : #indent }
@@ -546,12 +546,12 @@ CSNModelExporterAngular >> indentMinus [
 
 { #category : #indent }
 CSNModelExporterAngular >> indentNumber [
-  ^4
+	^ 4
 ]
 
 { #category : #indent }
 CSNModelExporterAngular >> indentPlus [
-  ^indentLevel := indentLevel + 1 
+	^ indentLevel := indentLevel + 1
 ]
 
 { #category : #initialization }
