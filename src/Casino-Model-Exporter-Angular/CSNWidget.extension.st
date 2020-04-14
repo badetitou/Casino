@@ -67,7 +67,12 @@ CSNWidget >> getListPropertiesAsStringWith: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getPositionAttribute [
-	^ self position ifNotNil: [ CSNUIStyle new name: 'style'; attributeValue: self position angularValue; yourself ] ifNil: [ {  } ]
+	^ self position
+		ifNotNil: [ CSNUIStyle new
+				name: 'style';
+				attributeValue: self position angularValue;
+				yourself ]
+		ifNil: [ {} ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

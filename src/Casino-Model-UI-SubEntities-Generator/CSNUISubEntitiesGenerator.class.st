@@ -285,7 +285,5 @@ CSNUISubEntitiesGenerator >> defineProperties [
 	"Widgets"
 	uiInput property: #value type: #String.
 	"Attributes"
-	uiDisabled property: #disabled type: #Boolean.
-	uiStyle property: #styleAttribute type: #String.
-	uiStyle property: #styleAttributeValue type: #String.
+	uiDisabled property: #disabled type: #Boolean
 ]

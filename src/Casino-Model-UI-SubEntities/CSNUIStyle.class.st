@@ -16,23 +16,3 @@ CSNUIStyle class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #accessing }
-CSNUIStyle >> styleAttribute [
-	^ styleAttribute
-]
-
-{ #category : #accessing }
-CSNUIStyle >> styleAttribute: anObject [
-	styleAttribute := anObject
-]
-
-{ #category : #accessing }
-CSNUIStyle >> styleAttributeValue [
-	^ styleAttributeValue
-]
-
-{ #category : #accessing }
-CSNUIStyle >> styleAttributeValue: anObject [
-	styleAttributeValue := anObject
-]
