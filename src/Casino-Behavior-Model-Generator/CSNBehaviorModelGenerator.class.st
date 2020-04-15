@@ -14,7 +14,6 @@ Class {
 		'openDialog',
 		'domElementAcccess',
 		'action',
-		'javaMethod',
 		'serviceAPI',
 		'cwDialog',
 		'csnWidget',
@@ -107,7 +106,6 @@ CSNBehaviorModelGenerator >> defineClasses [
 	action := self remoteEntity: #Action withPrefix: #CSN.
 	csnWidget := self remoteEntity: #Widget withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
-	javaMethod := self remoteEntity: #MethodEntity withPrefix: #FASTJava.
 	javaMethodInvocation := self remoteEntity: #MethodInvocation withPrefix: #FASTJava.
 	page := self remoteEntity: #Page withPrefix: #CSN.
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
@@ -150,7 +148,7 @@ CSNBehaviorModelGenerator >> defineRelations [
 	 <>- (expression property: #carrefourPopUpOwner))
 		withoutPrimaryContainer.
 		
-	(action property: #behavior) -* (javaMethod property: #ui).
+	(action property: #behavior) -* (fastBehaviouralEntity property: #ui).
 	(navigation property: #page) *- (page property: #navigations).
 	(serviceAPI property: #callers) -* (call property: #distantService).
 	(openDialog property: #dialog) *- (cwDialog property: #opener).

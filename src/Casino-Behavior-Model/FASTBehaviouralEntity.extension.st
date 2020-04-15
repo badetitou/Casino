@@ -51,3 +51,20 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
 		self privateState attributeAt: #carrefourOnSuccessOwner put: anObject.
 		anObject onSuccess: self ]
 ]
+
+{ #category : #'*Casino-Behavior-Model-accessing' }
+FASTBehaviouralEntity >> ui [
+	"Relation named: #ui type: #CSNAction opposite: #behavior"
+
+	<generated>
+	<FMProperty: #ui type: #CSNAction opposite: #behavior>
+	<package: #'Casino-Behavior-Model'>
+	^ self privateState attributeAt: #ui ifAbsent: [ nil ]
+]
+
+{ #category : #'*Casino-Behavior-Model-accessing' }
+FASTBehaviouralEntity >> ui: anObject [
+
+	<generated>
+	self privateState attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).
+]
