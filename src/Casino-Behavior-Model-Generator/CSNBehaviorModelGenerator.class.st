@@ -24,7 +24,9 @@ Class {
 		'getElementAttribute',
 		'onChange',
 		'onClick',
-		'onError'
+		'onError',
+		'onSubmit',
+		'onSubmitSuccess'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -89,6 +91,17 @@ CSNBehaviorModelGenerator >> commentForOnError [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnSubmit [
+	^ 'Should happen when the submit event is fired (on a form)'
+]
+
+{ #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnSubmitSuccess [
+	^ 'Should happen when the submitSucess event is fired (on a form)
+(when a submit has correcly proceed)'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForOpenDialog [
 	^ 'I represent a call which will create a dialog with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
@@ -134,6 +147,8 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onChange := builder newClassNamed: #OnChange comment: self commentForOnChange.
 	onClick := builder newClassNamed: #OnClick comment: self commentForOnClick.
 	onError := builder newClassNamed: #OnError comment: self commentForOnError.
+	onSubmit := builder newClassNamed: #OnSubmit comment: self commentForOnSubmit.
+	onSubmitSuccess := builder newClassNamed: #OnSubmitSuccess comment: self commentForOnSubmitSuccess
 ]
 
 { #category : #definition }
@@ -154,7 +169,9 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	"Event"
 	onChange --|> action.
 	onClick --|> action.
-	onError --|> action
+	onError --|> action.
+	onSubmit --|> action.
+	onSubmitSuccess --|> action
 ]
 
 { #category : #definition }
