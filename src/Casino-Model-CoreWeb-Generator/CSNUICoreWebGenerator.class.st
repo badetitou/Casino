@@ -3,7 +3,6 @@ Class {
 	#superclass : #FamixMetamodelGenerator,
 	#instVars : [
 		'chart',
-		'clickHandler',
 		'coreCellWidth',
 		'coreHorizontalAlignement',
 		'coreRowSpan',
@@ -20,7 +19,6 @@ Class {
 		'open',
 		'progressBar',
 		'csnContainer',
-		'csnAction',
 		'csnAttribute',
 		'coreColSpan',
 		'uiInput',
@@ -52,7 +50,6 @@ CSNUICoreWebGenerator class >> submetamodels [
 CSNUICoreWebGenerator >> defineClasses [
 	super defineClasses.
 	chart := builder newClassNamed: #Chart.
-	clickHandler := builder newClassNamed: #ClickHandler.
 	coreCellWidth := builder newClassNamed: #CoreCellWidth.
 	coreColSpan := builder newClassNamed: #CoreColSpan.
 	coreHorizontalAlignement := builder newClassNamed: #CoreHorizontalAlignement.
@@ -74,7 +71,6 @@ CSNUICoreWebGenerator >> defineClasses [
 	labelPosition := builder newClassNamed: #LabelPosition.
 		
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
-	csnAction := self remoteEntity: #Action withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
 	csnVariableAttribute := self remoteEntity: #VariableAttribute withPrefix: #CSN.
 	
@@ -99,7 +95,6 @@ CSNUICoreWebGenerator >> defineHierarchy [
 
 	dynamicFieldset --|> csnAttribute.
 	groupFieldset --|> csnAttribute.
-	clickHandler --|> csnAction.
 	coreCellWidth --|> csnAttribute.
 	coreColSpan --|> csnAttribute.
 	coreHorizontalAlignement --|> csnAttribute.
