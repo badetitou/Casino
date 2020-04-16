@@ -69,7 +69,7 @@ CSNWebModelJava >> addLinkXmlUi [
 { #category : #adding }
 CSNWebModelJava >> addOnClickAttribute [
 	self sourceModel allClasses
-		detect: [ :c | 'EventHandler' = c name ]
+		detect: [ :c | #'com::google::gwt::event::shared::EventHandler' = c mooseName ]
 		ifFound: [ :eventHandlerClass | 
 			eventHandlerClass subclassHierarchy
 				select: [ :class | self isElementFromApplication: class ]

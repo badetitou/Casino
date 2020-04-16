@@ -219,7 +219,7 @@ CSNBehaviorModelExporterAngular >> visitFASTLiteral: aFASTLiteral [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
-	^ aFASTNamedEntity famixVariable ifNil: [ aFASTNamedEntity name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
+	^ aFASTNamedEntity name
 ]
 
 { #category : #generated }

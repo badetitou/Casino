@@ -31,7 +31,6 @@ CSNBOnError class >> createActionFrom: aClass for: aWidgetInstance withImporter:
 { #category : #'as yet unclassified' }
 CSNBOnError >> getAngularRepresentation [
 	^ self behavior
-		ifEmpty: [ "self warning: #ThisShouldBeFixed."
-			'' ]
+		ifEmpty: [ '' ]
 		ifNotEmpty: [ :behaviors | '(error)="' , behaviors anyOne uniqueName , '()"' ]
 ]

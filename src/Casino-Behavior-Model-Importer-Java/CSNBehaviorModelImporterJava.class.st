@@ -78,18 +78,8 @@ CSNBehaviorModelImporterJava >> newBehavioralModel [
 	^ CSNBModel new
 ]
 
-{ #category : #initialization }
-CSNBehaviorModelImporterJava >> resetNeededMetamodels [
-	
-	FASTJavaModel resetMetamodel.
-	FASTModel resetMetamodel.
-	CSNBModel resetMetamodel.
-	CSNLModel resetMetamodel
-]
-
 { #category : #api }
 CSNBehaviorModelImporterJava >> resetUIAndGenerateBehavioralModel [
-	self resetNeededMetamodels.
 	self uiModel allCSNAction
 		do: [ :action | action behavior removeAll ].
 	^ self generateBehavioralModel

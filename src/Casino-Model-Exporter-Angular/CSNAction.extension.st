@@ -3,7 +3,7 @@ Extension { #name : #CSNAction }
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNAction >> getAngularRepresentation [
 	^ self behavior
-		ifEmpty: [ "self warning: #ThisShouldBeFixed."
+		ifEmpty: [ self warning: #ThisShouldBeFixed.
 			'' ]
 		ifNotEmpty: [ :behaviors | '(unknow)="' , behaviors anyOne uniqueName , '()"' ]
 ]
