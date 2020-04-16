@@ -23,7 +23,8 @@ Class {
 		'accessElementAttribute',
 		'getElementAttribute',
 		'onChange',
-		'onClick'
+		'onClick',
+		'onError'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -83,6 +84,11 @@ CSNBehaviorModelGenerator >> commentForOnClick [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnError [
+	^ 'Should happen when the error event is fired'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForOpenDialog [
 	^ 'I represent a call which will create a dialog with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
@@ -127,6 +133,7 @@ CSNBehaviorModelGenerator >> defineClasses [
 	"Event"
 	onChange := builder newClassNamed: #OnChange comment: self commentForOnChange.
 	onClick := builder newClassNamed: #OnClick comment: self commentForOnClick.
+	onError := builder newClassNamed: #OnError comment: self commentForOnError.
 ]
 
 { #category : #definition }
@@ -146,7 +153,8 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	setElementAttribute --|> accessElementAttribute.
 	"Event"
 	onChange --|> action.
-	onClick --|> action
+	onClick --|> action.
+	onError --|> action
 ]
 
 { #category : #definition }

@@ -7,12 +7,6 @@ Class {
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
-{ #category : #testing }
-CSNBOnClick class >> accept: aCSNModelVisitor [
-	<generated>
-	^ aCSNModelVisitor visitCSNBOnClick: self
-]
-
 { #category : #meta }
 CSNBOnClick class >> annotation [
 

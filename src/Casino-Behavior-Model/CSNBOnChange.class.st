@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #meta }
-CSNBOnChange class >> accept: aCSNModelVisitor [
-	<generated>
-	^ aCSNModelVisitor visitCSNBOnChange: self
-]
-
-{ #category : #meta }
 CSNBOnChange class >> annotation [
 
 	<FMClass: #OnChange super: #CSNAction>
