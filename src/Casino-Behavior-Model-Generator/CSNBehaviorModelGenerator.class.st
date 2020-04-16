@@ -21,7 +21,9 @@ Class {
 		'csnAttribute',
 		'javaMethodInvocation',
 		'accessElementAttribute',
-		'getElementAttribute'
+		'getElementAttribute',
+		'onChange',
+		'onClick'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -71,6 +73,16 @@ CSNBehaviorModelGenerator >> commentForNavigation [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnChange [
+	^ 'Should happen when the change event is fired'
+]
+
+{ #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnClick [
+	^ 'Should happen when the click event is fired'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForOpenDialog [
 	^ 'I represent a call which will create a dialog with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
@@ -89,6 +101,7 @@ CSNBehaviorModelGenerator >> commentForSynchroneCall [
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineClasses [
 	super defineClasses.
+	"AST"
 	navigation := builder newClassNamed: #Navigation comment: self commentForNavigation.
 	call := builder newClassNamed: #Call comment: self commentForCall.
 	asynchroneCall  := builder newClassNamed: #AsynchroneCall comment: self commentForAsynchroneCall.
@@ -111,11 +124,15 @@ CSNBehaviorModelGenerator >> defineClasses [
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
 
 	cwDialog := self remoteEntity: #Dialog withPrefix: #CSNUICW.
+	"Event"
+	onChange := builder newClassNamed: #OnChange comment: self commentForOnChange.
+	onClick := builder newClassNamed: #OnClick comment: self commentForOnClick.
 ]
 
 { #category : #definition }
 CSNBehaviorModelGenerator >> defineHierarchy [
 	super defineHierarchy.
+	"AST"
 	navigation --|> expression.
 	call --|> expression.
 	asynchroneCall --|> call.
@@ -127,7 +144,9 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	accessElementAttribute --|> javaMethodInvocation.
 	getElementAttribute --|> accessElementAttribute.
 	setElementAttribute --|> accessElementAttribute.
-	
+	"Event"
+	onChange --|> action.
+	onClick --|> action
 ]
 
 { #category : #definition }

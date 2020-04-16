@@ -68,11 +68,14 @@ CSNWebModelJava >> addLinkXmlUi [
 
 { #category : #adding }
 CSNWebModelJava >> addOnClickAttribute [
-	((self sourceModel allClasses select: [ :c | 'ClickHandler' = c name ]) at: 1) subclassHierarchy
-		select: [ :class | self isElementFromApplication: class ]
-		thenDo: [ :class | 
-			(class allUsages collect: #receiver)
-				do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ]
+	self sourceModel allClasses
+		detect: [ :c | 'EventHandler' = c name ]
+		ifFound: [ :eventHandlerClass | 
+			eventHandlerClass subclassHierarchy
+				select: [ :class | self isElementFromApplication: class ]
+				thenDo: [ :class | 
+					(class allUsages collect: #receiver)
+						do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ] ]
 ]
 
 { #category : #adding }
