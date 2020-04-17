@@ -100,7 +100,7 @@ CSNWidget >> id [
 			index := 0.
 			potentialName := self variable name.
 			[ dic includes: potentialName ]
-				whileTrue: [ potentialName := (potentialName removeSuffix: index asString) , index asString.
+				whileTrue: [ potentialName := (potentialName removeSuffix: index asString) , (index + 1) asString.
 					index := index + 1 ].
 			potentialName ]
 ]
