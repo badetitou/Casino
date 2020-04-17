@@ -44,7 +44,9 @@ CSNBehaviorModelExporterAngular >> visitFASTBooleanLiteral: aFASTBooleanLiteral 
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTEntity: aFASTEntity [
-	^ self error: 'You need to implement a visitor because we must not export an ''Entity'''
+	self debugMode
+		ifTrue: [ self error: 'You need to implement a visitor because we must not export an ''Entity''' ]
+		ifFalse: [ super visitFASTEntity: aFASTEntity ]
 ]
 
 { #category : #generated }

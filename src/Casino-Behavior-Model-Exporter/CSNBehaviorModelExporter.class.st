@@ -3,6 +3,11 @@ Class {
 	#superclass : #FASTJavaVisitor,
 	#traits : 'TCSNBehaviorVisitor + TCSNExporter',
 	#classTraits : 'TCSNBehaviorVisitor classTrait + TCSNExporter classTrait',
+	#instVars : [
+		'errorStream',
+		'showUnknowExport',
+		'debugMode'
+	],
 	#category : #'Casino-Behavior-Model-Exporter'
 }
 
@@ -23,7 +28,49 @@ CSNBehaviorModelExporter class >> export: aBehaviorModel on: aStream withIndentL
 		export: aBehaviorModel
 ]
 
-{ #category : #visitor }
+{ #category : #accessing }
+CSNBehaviorModelExporter >> debugMode [
+	^ debugMode
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> debugMode: anObject [
+	debugMode := anObject
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> errorStream [
+	^ errorStream
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> errorStream: anObject [
+	errorStream := anObject
+]
+
+{ #category : #api }
 CSNBehaviorModelExporter >> export: aBehaviorMethod [
-	^ self accept: aBehaviorMethod
+	[ self showUnknowExport ifTrue: [ self errorStream: (WriteStream with: String new) ].
+	self accept: aBehaviorMethod ]
+		ensure: [ self errorStream
+				flush;
+				close ]
+]
+
+{ #category : #streaming }
+CSNBehaviorModelExporter >> initialize [
+	super initialize.
+	errorStream := WriteStream with: String new.
+	showUnknowExport := true.
+	debugMode := true
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> showUnknowExport [
+	^ showUnknowExport
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> showUnknowExport: anObject [
+	showUnknowExport := anObject
 ]
