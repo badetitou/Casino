@@ -86,6 +86,16 @@ CSNWidget >> getSelector [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> gtInAngular: composite [
+	<gtInspectorPresentationOrder: 1005>
+	composite text
+		title: 'Angular HTML';
+		display: [ String streamContents: [ :s | (CSNModelExporterAngular on: s) visit: self ] ];
+		withLineNumbers: true;
+		when: [ self isPageMetier not and: [ (self isKindOf: CSNPage) not ] ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> hierarchalAttributes [ 
 	^ {  }
 ]
