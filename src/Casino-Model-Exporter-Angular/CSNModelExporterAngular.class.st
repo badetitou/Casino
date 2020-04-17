@@ -26,10 +26,10 @@ BLModelExporterAngular export: model.
 Class {
 	#name : #CSNModelExporterAngular,
 	#superclass : #CSNModelExporter,
+	#traits : 'TCSNExporter',
+	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
-		'currentPath',
-		'currentWriteStream',
-		'indentLevel'
+		'currentPath'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -41,17 +41,6 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 	^ anObject 
 ]
 
-{ #category : #indent }
-CSNModelExporterAngular >> << elements [
-  self indent.
-  currentWriteStream << elements
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> <<< elements [
-  currentWriteStream << elements
-]
-
 { #category : #generate }
 CSNModelExporterAngular >> businessPageImportList [
 	^ '    Component,
@@ -59,11 +48,6 @@ CSNModelExporterAngular >> businessPageImportList [
     OnInit,
     Renderer2,
     ViewChild'
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> crlf [
-  ^ self <<< String crlf 
 ]
 
 { #category : #accessing }
@@ -522,36 +506,6 @@ export class IndexComponent extends AbstractPhaseComponent implements PhaseCompo
     }
 }';
 		<< String crlf
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indent [
-  1 to: self indentLevel * self indentNumber do: [:i |  currentWriteStream << self indentCharacter ]
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indentCharacter [
-	^ String space
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indentLevel [
-	^ indentLevel
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indentMinus [
-	^ indentLevel := indentLevel - 1
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indentNumber [
-	^ 4
-]
-
-{ #category : #indent }
-CSNModelExporterAngular >> indentPlus [
-	^ indentLevel := indentLevel + 1
 ]
 
 { #category : #initialization }

@@ -18,10 +18,10 @@ CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
-	^ aFASTJavaMethodEntity uniqueName , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self clone accept: parameter ]))
+	^ aFASTJavaMethodEntity uniqueName , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self accept: parameter ]))
 		,
 			') {
-' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self clone accept: statement) indentBy: 4 ]))
+' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self accept: statement) indentBy: 4 ]))
 		,
 			'
 }'
@@ -30,7 +30,7 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aGetElementAttribute [
 	^ (aGetElementAttribute receiver
-		ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
+		ifNotNil: [ :receiver | (self accept: receiver) , '.' ]
 		ifNil: [ '' ]) , aGetElementAttribute attribute name
 ]
 
@@ -46,15 +46,15 @@ CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
-	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << (self clone accept: aPopUp data) << ')' ]
+	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << (self accept: aPopUp data) << ')' ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitSetElementAttribute: aSetElementAttribute [
 	^ (aSetElementAttribute receiver
-		   ifNotNil: [ :receiver | (self clone accept: receiver) , '.' ]
+		   ifNotNil: [ :receiver | (self accept: receiver) , '.' ]
 		   ifNil: [ '' ]) , 'set'
 	  , aSetElementAttribute attribute name, '(' , (', ' join:
 		   (aSetElementAttribute arguments collect: [ :argument | 
-			    self clone accept: argument ])) , ')'
+			    self accept: argument ])) , ')'
 ]

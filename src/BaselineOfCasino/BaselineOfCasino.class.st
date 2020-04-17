@@ -76,7 +76,9 @@ BaselineOfCasino >> definePackages: spec [
 		
 		package: 'Casino-Model-Visitor' with: [ spec requires: #('model' 'Casino-Model-CoreWeb') ];
 		
-		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-Visitor') ];
+		package: 'Casino-Exporter';
+		
+		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-Visitor' 'Casino-Exporter') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
 		
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-Visitor') ];
@@ -107,7 +109,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Carrefour' 'Casino-Behavior-Model-Importer') ];
 		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
 		"behavior-exporter"
-		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
+		package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Exporter' 'Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
 		package: 'Casino-Behavior-Model-Exporter-Angular' with: [ spec requires: #('Casino-Behavior-Model-Exporter') ];
 		package: 'Casino-Behavior-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Behavior-Model-Exporter-Angular') ] 
 ]

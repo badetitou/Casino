@@ -1,8 +1,8 @@
 Class {
 	#name : #CSNBehaviorModelExporter,
 	#superclass : #FASTJavaVisitor,
-	#traits : 'TCSNBehaviorVisitor',
-	#classTraits : 'TCSNBehaviorVisitor classTrait',
+	#traits : 'TCSNBehaviorVisitor + TCSNExporter',
+	#classTraits : 'TCSNBehaviorVisitor classTrait + TCSNExporter classTrait',
 	#category : #'Casino-Behavior-Model-Exporter'
 }
 
