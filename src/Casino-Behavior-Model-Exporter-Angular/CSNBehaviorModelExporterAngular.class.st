@@ -163,8 +163,8 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 	aFASTJavaMethodEntity statements
 		do: [ :statement | self accept: statement ]
 		separatedBy: [ self
-				crlf;
-				indent ].
+				writeErrorIfSome;
+				crlf].
 	self
 		crlf;
 		<< '}';
@@ -181,7 +181,9 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 		<<< aFASTJavaMethodInvocation uniqueName;
 		<<< '('.
 	aFASTJavaMethodInvocation arguments do: [ :argument | self accept: argument ] separatedBy: [ self <<< ', ' ].
-	self <<< ')'
+	self <<< ')'.
+	
+	self errorStream << 'Unknow invocation: ' << aFASTJavaMethodInvocation uniqueName << '(...) | '
 ]
 
 { #category : #generated }
@@ -325,7 +327,8 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 		do: [ :statement | 
 			self indent.
 			self accept: statement ]
-		separatedBy: [ self crlf ].
+		separatedBy: [ self writeErrorIfSome.
+			self crlf ].
 	self
 		crlf;
 		indentMinus;

@@ -32,7 +32,9 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 		do: [ :statement | 
 			self indent.
 			self accept: statement ]
-		separatedBy: [ self crlf ].
+		separatedBy: [ self
+				writeErrorIfSome;
+				crlf ].
 	self
 		crlf;
 		indentMinus;
