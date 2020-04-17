@@ -74,3 +74,9 @@ CSNBehaviorModelExporter >> showUnknowExport [
 CSNBehaviorModelExporter >> showUnknowExport: anObject [
 	showUnknowExport := anObject
 ]
+
+{ #category : #accessing }
+CSNBehaviorModelExporter >> writeErrorIfSome [
+	self <<< '// CSN : '<<< (self errorStream contents).
+	self errorStream reset
+]

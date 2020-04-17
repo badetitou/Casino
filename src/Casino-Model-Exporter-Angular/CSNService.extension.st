@@ -53,7 +53,17 @@ CSNService >> prepareAcceptFor: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNService >> uniqueName [
-	^ self mooseName, self mooseID asString 
+	| dic |
+	dic := self mooseModel privateState cacheAt: #serviceUniqueName ifAbsentPut: [ {(self -> self mooseName)} asDictionary ].
+	^ dic
+		at: self
+		ifAbsentPut: [ | index potentialName |
+			index := 0.
+			potentialName := self mooseName.
+			[ dic includes: potentialName ]
+				whileTrue: [ potentialName := (potentialName removeSuffix: index asString) , index asString.
+					index := index + 1 ].
+			potentialName ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

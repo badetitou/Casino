@@ -20,6 +20,6 @@ CSNWidget >> affectedActions: anObject [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> variable [
-	(self affectedActions isKindOf: FamixTAccess) ifTrue: [ ^ self affectedActions variable ].
+	(self affectedActions isKindOf: FAMIXAccess) ifTrue: [ ^ self affectedActions variable ].
 	^ self affectedActions
 ]

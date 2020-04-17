@@ -24,6 +24,14 @@ CSNModelDependencyExporter >> context: anObject [
 	context := anObject
 ]
 
+{ #category : #accessing }
+CSNModelDependencyExporter >> export: aBehaviorMethod [
+	^ String
+		streamContents: [ :stream | 
+			self currentWriteStream: stream.
+			self accept: aBehaviorMethod ]
+]
+
 { #category : #generated }
 CSNModelDependencyExporter >> visitCSNActionAppel: anActionAppel [
 	^ self visitCSNAction: anActionAppel
