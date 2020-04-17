@@ -20,7 +20,8 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 		<<< '.';
 		<<< aCall distantService uniqueName;
 		<<< '().subscribe(';
-		crlf.
+		crlf;
+		indentPlus.
 	aCall onSuccess
 		ifNotNil: [ :success | 
 			self << 'data => '.
@@ -34,6 +35,7 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 			self accept: failure statementBlock ].
 	self
 		crlf;
+		indentMinus;
 		<< ')'
 ]
 
@@ -246,7 +248,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaThenPartStatement: aFASTJavaThen
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
-	self <<< 'try '.
+	self <<< 'try'.
 	self accept: aFASTJavaTryCatchStatement try.
 	aFASTJavaTryCatchStatement catches
 		do: [ :catch | 
@@ -276,10 +278,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaUnaryExpression: aFASTJavaUnaryE
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
 	self <<< 'let '.
-	aFASTJavaVarDeclStatement declarators
-		do: [ :declarator | 
-			self accept: declarator.
-			self <<< ' ' ].
+	aFASTJavaVarDeclStatement declarators do: [ :declarator | self accept: declarator ] separatedBy: [ self <<< ' ' ].
 	self <<< ';'
 ]
 
