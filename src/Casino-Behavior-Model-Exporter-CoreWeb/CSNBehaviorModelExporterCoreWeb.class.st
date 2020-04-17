@@ -6,55 +6,84 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
-	^ aDOMElementAcccess widget
+	aDOMElementAcccess widget
 		ifNotNil: [ :widget | 
 			| accessVariable |
 			accessVariable := 'this.' , widget id.
 			widget angularComponent isNative
-				ifTrue: [ ('<any>', accessVariable) inParenthesis , '.nativeElement' ]
-				ifFalse: [ accessVariable ] ]
-		ifNil: [ 'ERROR DOM ELEMENT ACCESS' ]
+				ifTrue: [ self
+						<<< ('<any>' , accessVariable) inParenthesis;
+						<<< '.nativeElement' ]
+				ifFalse: [ self <<< accessVariable ] ]
+		ifNil: [ self <<< 'ERROR DOM ELEMENT ACCESS' ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
-	^ aFASTJavaMethodEntity uniqueName , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self accept: parameter ]))
-		,
-			') {
-' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self accept: statement) indentBy: 4 ]))
-		,
-			'
-}'
+	self
+		<< aFASTJavaMethodEntity uniqueName;
+		<<< '('.
+	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
+	self
+		<<< ') {';
+		indentPlus;
+		crlf.
+	aFASTJavaMethodEntity statements
+		do: [ :statement | 
+			self indent.
+			self accept: statement ]
+		separatedBy: [ self crlf ].
+	self
+		crlf;
+		indentMinus;
+		<< '}'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aGetElementAttribute [
-	^ (aGetElementAttribute receiver
-		ifNotNil: [ :receiver | (self accept: receiver) , '.' ]
-		ifNil: [ '' ]) , aGetElementAttribute attribute name
+	aGetElementAttribute receiver
+		ifNotNil: [ :receiver | 
+			self accept: receiver.
+			self <<< '.' ].
+	self <<< aGetElementAttribute attribute name
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
-	^ 'this.openPhase(''', (aNavigation page ifNotNil: [ :page | page name ] ifNil:  ['TODO']), ''')'
+	self
+		<<< 'this.openPhase(''';
+		<<<
+			(aNavigation page
+				ifNotNil: [ :page | page name ]
+				ifNil: [ 'TODO' ]);
+		<<< ''')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
-	^ 'this.' , anOpenDialog dialog affectedActions uniqueName , '.openDialog()'
+	self
+		<<< 'this.';
+		<<< anOpenDialog dialog affectedActions uniqueName;
+		<<< '.openDialog()'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
-	^ String streamContents: [ :stream | stream << 'this._toastrService.success(' << (self accept: aPopUp data) << ')' ]
+	self <<< 'this._toastrService.success('.
+	self accept: aPopUp data.
+	self <<< ')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitSetElementAttribute: aSetElementAttribute [
-	^ (aSetElementAttribute receiver
-		   ifNotNil: [ :receiver | (self accept: receiver) , '.' ]
-		   ifNil: [ '' ]) , 'set'
-	  , aSetElementAttribute attribute name, '(' , (', ' join:
-		   (aSetElementAttribute arguments collect: [ :argument | 
-			    self accept: argument ])) , ')'
+	aSetElementAttribute receiver
+		ifNotNil: [ :receiver | 
+			self accept: receiver.
+			self <<< '.' ].
+	self
+		<<< 'set';
+		<<< aSetElementAttribute attribute name;
+		<<< '('.
+	aSetElementAttribute arguments do: [ :argument | self accept: argument ] separatedBy: [ self <<< ', ' ].
+	self <<< ')'
 ]

@@ -103,9 +103,7 @@ export class ';
 			'
 
     constructor(';
-		<<
-			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
+		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
 		<<
 			(', '
 				join:
@@ -142,15 +140,19 @@ export class ';
 		<<
 			'
 
-';
-		<<
-			(''
-				,
-					(aBLPageMetier calledBehavior
-						flatCollect: [ :action | action behavior flatCollect: [ :behaveMethod | '/*' , String crlf , (self behaviorModelExporter export: behaveMethod) , '*/' , String crlf ] ]
-						as: OrderedCollection) indentBy: 4);
-		<<
-			'
-}
-'
+'.
+	aBLPageMetier calledBehavior
+		do: [ :action | 
+			action behavior
+				do: [ :behaveMethod | 
+					self
+						<<< '/*';
+						crlf.
+					self behaviorModelExporter export: behaveMethod on: self currentWriteStream withIndentLevel: 1.
+					self
+						<<< '*/';
+						crlf ] ].
+	self
+		crlf;
+		<<< '}'
 ]

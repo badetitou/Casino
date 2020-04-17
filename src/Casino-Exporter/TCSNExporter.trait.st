@@ -57,6 +57,11 @@ TCSNExporter >> indentLevel [
 ]
 
 { #category : #streaming }
+TCSNExporter >> indentLevel: aLevel [
+	indentLevel := aLevel
+]
+
+{ #category : #streaming }
 TCSNExporter >> indentMinus [
 	^ indentLevel := indentLevel - 1
 ]

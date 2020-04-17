@@ -14,15 +14,32 @@ Class {
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
-	^ 'this.' , aCall distantService serviceOwner uniqueName uncapitalized , '.' , aCall distantService uniqueName , '().subscribe(' , String crlf
-		,
-			((aCall onSuccess ifNil: [ '' ] ifNotNil: [ :success | 'data => ' , (self accept: success statementBlock) , ',' , String crlf ])
-				, (aCall onFailure ifNil: [ '' ] ifNotNil: [ :failure | 'error => ' , (self accept: failure statementBlock) ]) indentBy: 4) , String crlf, ')'
+	self
+		<<< 'this.';
+		<<< aCall distantService serviceOwner uniqueName uncapitalized;
+		<<< '.';
+		<<< aCall distantService uniqueName;
+		<<< '().subscribe(';
+		crlf.
+	aCall onSuccess
+		ifNotNil: [ :success | 
+			self << 'data => '.
+			self accept: success statementBlock.
+			self
+				<< ',';
+				crlf ].
+	aCall onFailure
+		ifNotNil: [ :failure | 
+			self << 'error => '.
+			self accept: failure statementBlock ].
+	self
+		crlf;
+		<< ')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTBooleanLiteral: aFASTBooleanLiteral [
-	^ aFASTBooleanLiteral value
+	self <<< aFASTBooleanLiteral value
 ]
 
 { #category : #generated }
@@ -32,219 +49,314 @@ CSNBehaviorModelExporterAngular >> visitFASTEntity: aFASTEntity [
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTExpressionStatement: aFASTExpressionStatement [
-	^ (self accept: aFASTExpressionStatement expression) , ';'
+	(self accept: aFASTExpressionStatement expression).
+	self <<< ';'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
-	^ (self accept: aFASTJavaAssignementExpression variable), ' = ', (self accept: aFASTJavaAssignementExpression expression)
+	self accept: aFASTJavaAssignementExpression variable.
+	self <<< ' = '.
+	self accept: aFASTJavaAssignementExpression expression
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaCastExpression: aFASTJavaCastExpression [
-	^ '(<', (self accept: aFASTJavaCastExpression type), '> ', (self accept: aFASTJavaCastExpression expression), ')'
+	self <<< '(<'.
+	self accept: aFASTJavaCastExpression type.
+	self <<< '> '.
+	self accept: aFASTJavaCastExpression expression.
+	self <<< ')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaCatchPartStatement: aFASTJavaCatchPartStatement [
-	^ 'catch (' , (aFASTJavaCatchPartStatement parameter
-		   ifNotNil: [ :parameter | self accept: parameter ]
-		   ifNil: [ '' ]) , ') '
-	  , (self accept: aFASTJavaCatchPartStatement body)
+	self <<< 'catch ('.
+	aFASTJavaCatchPartStatement parameter ifNotNil: [ :parameter | self accept: parameter ].
+	self <<< ') '.
+	self accept: aFASTJavaCatchPartStatement body
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaClassProperty: aFASTJavaClassProperty [
-	^ (self accept: aFASTJavaClassProperty type) , '.', aFASTJavaClassProperty fieldName
+	self accept: aFASTJavaClassProperty type.
+	self
+		<<< '.';
+		<<< aFASTJavaClassProperty fieldName
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaClassTypeExpression: aFASTJavaClassTypeExpression [
-	^ self accept: aFASTJavaClassTypeExpression typeName
+	self accept: aFASTJavaClassTypeExpression typeName
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaConditionStatement: aFASTJavaConditionStatement [
-	^ aFASTJavaConditionStatement childrenNode flatCollect: [ :child | self accept: child ]
+	aFASTJavaConditionStatement orderedChildren flatCollect: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
-	^ aFASTJavaElsePartStatement childrenNode flatCollect: [ :child | self accept: child ]
+	aFASTJavaElsePartStatement orderedChildren flatCollect: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
-	^ aFASTJavaFieldAccess fieldName
+	self <<< aFASTJavaFieldAccess fieldName
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaForEachStatement: aFASTJavaForEachStatement [
-	^ (self accept: aFASTJavaForEachStatement list) , '.forEach((' , (self accept: aFASTJavaForEachStatement fieldname) , ') => '
-		, (self accept: aFASTJavaForEachStatement body) , ');'.
+	self accept: aFASTJavaForEachStatement list.
+	self <<< '.forEach(('.
+	self accept: aFASTJavaForEachStatement fieldname.
+	self <<< ') => '.
+	self accept: aFASTJavaForEachStatement body.
+	self <<< ');'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaIdentifier: aFASTJavaIdentifier [
-	^ aFASTJavaIdentifier famixVariable ifNil: [ aFASTJavaIdentifier name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
+	self
+		<<<
+			(aFASTJavaIdentifier famixVariable
+				ifNil: [ aFASTJavaIdentifier name ]
+				ifNotNil: [ :famixVariable | famixVariable uniqueName ])
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaIfStatement: aFASTJavaIfStatement [
-	| text |
-	text := 'if (' , (self accept: aFASTJavaIfStatement condition) , ')' , (self accept: aFASTJavaIfStatement thenPart).
-	aFASTJavaIfStatement elsePart ifNotNil: [ text := text , 'else ' , (self accept: aFASTJavaIfStatement elsePart) ].
-	^ text
+	self <<< 'if ('.
+	self accept: aFASTJavaIfStatement condition.
+	self <<< ')'.
+	self accept: aFASTJavaIfStatement thenPart.
+	aFASTJavaIfStatement elsePart
+		ifNotNil: [ self
+				crlf;
+				<< 'else '.
+			self accept: aFASTJavaIfStatement elsePart ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaInfixOperation: aFASTJavaInfixOperation [
-	^ (self accept: aFASTJavaInfixOperation leftOperand) , ' ', ( aFASTJavaInfixOperation operator), ' ', (self accept: aFASTJavaInfixOperation rightOperand).
-	
+	self accept: aFASTJavaInfixOperation leftOperand.
+	self
+		<<< ' ';
+		<<< aFASTJavaInfixOperation operator;
+		<<< ' '.
+	self accept: aFASTJavaInfixOperation rightOperand
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
-	^ aFASTJavaMethodEntity name , '(' , (', ' join: (aFASTJavaMethodEntity parameters collect: [ :parameter | self accept: parameter ]))
-		,
-			') {
-' , (String crlf join: (aFASTJavaMethodEntity statements collect: [ :statement | (self accept: statement) indentBy: 4 ]))
-		,
-			'
-}'
+	self
+		<< aFASTJavaMethodEntity name;
+		<<< '('.
+	((aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ]) / self)
+		<<< ') {';
+		indentPlus;
+		crlf.
+	aFASTJavaMethodEntity statements
+		do: [ :statement | self accept: statement ]
+		separatedBy: [ self
+				crlf;
+				indent ].
+	self
+		crlf;
+		<< '}';
+		indentMinus
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMethodInvocation [
-	^ (aFASTJavaMethodInvocation receiver ifNotNil: [ :receiver | (self accept: receiver), '.' ] ifNil: [ '' ])
-		, aFASTJavaMethodInvocation uniqueName , '('
-		, (', ' join: (aFASTJavaMethodInvocation arguments collect: [ :argument | self accept: argument ])) , ')'
+	aFASTJavaMethodInvocation receiver
+		ifNotNil: [ :receiver | 
+			self accept: receiver.
+			self <<< '.' ].
+	self
+		<<< aFASTJavaMethodInvocation uniqueName;
+		<<< '('.
+	aFASTJavaMethodInvocation arguments do: [ :argument | self accept: argument ] separatedBy: [ self <<< ', ' ].
+	self <<< ')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
- 	^ (super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression), ' {
-',
-	(String crlf join: ( aFASTJavaNewClassExpression declarations collect: [ :method | (self accept: method) indentBy: 4 ] )), ' 
-}'
+	super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression.
+	self
+		<<< ' {';
+		crlf.
+	aFASTJavaNewClassExpression declarations
+		do: [ :method | 
+			self indent.
+			self accept: method.
+			self crlf ].
+	self
+		crlf;
+		<<< '}'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewExpression: aFASTJavaNewExpression [
-	^ 'new ', (self accept: aFASTJavaNewExpression type), '(', (aFASTJavaNewExpression arguments flatCollect: [:arg | (self accept: arg), ',']), ')'
+	self <<< 'new '.
+	self accept: aFASTJavaNewExpression type.
+	self <<< '('.
+	aFASTJavaNewExpression arguments
+		do: [ :arg | 
+			self accept: arg.
+			self <<< ',' ].
+	self <<< ')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNullLiteral: aFASTJavaNullLiteral [
-	^ 'null'
+	self <<< 'null'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaOperationLeftOperand: aFASTJavaOperationLeftOperand [
-	^ aFASTJavaOperationLeftOperand childrenNode flatCollect: [:child | self accept: child ]
+	^ aFASTJavaOperationLeftOperand orderedChildren flatCollect: [:child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaOperationRightOperand: aFASTJavaOperationRightOperand [ 
-	^ aFASTJavaOperationRightOperand childrenNode flatCollect: [:child | self accept: child ]
+	^ aFASTJavaOperationRightOperand orderedChildren flatCollect: [:child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
-	^ (self accept: aFASTJavaOuterThis type) ,'this'
+	self accept: aFASTJavaOuterThis type.
+	self <<< 'this'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
-	^ '''' , (aFASTJavaStringLiteral value copyReplaceAll: '''' with: '\''' ) , ''''
+	self
+		<<< '''';
+		<<< (aFASTJavaStringLiteral value copyReplaceAll: '''' with: '\''');
+		<<< ''''
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaThenPartStatement: aFASTJavaThenPartStatement [
-	^ aFASTJavaThenPartStatement childrenNode flatCollect: [ :child | self accept: child ]
+	^ aFASTJavaThenPartStatement orderedChildren flatCollect: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTryCatchStatement: aFASTJavaTryCatchStatement [
-	^ 'try ' , (self accept: aFASTJavaTryCatchStatement try)
-		,
-		(aFASTJavaTryCatchStatement catches flatCollect: [ :catch | self accept: catch ])
+	self <<< 'try '.
+	self accept: aFASTJavaTryCatchStatement try.
+	aFASTJavaTryCatchStatement catches
+		do: [ :catch | 
+			self indent.
+			self accept: catch ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTryPartStatement: aFASTJavaTryPartStatement [
-	^ aFASTJavaTryPartStatement childrenNode flatCollect: [ :child | self accept: child ]
+	aFASTJavaTryPartStatement orderedChildren do: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaTypeName: aFASTJavaTypeName [
-	^ aFASTJavaTypeName name
+	self <<< aFASTJavaTypeName name
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaUnaryExpression: aFASTJavaUnaryExpression [
-	^ aFASTJavaUnaryExpression isPrefixedUnaryExpression
-		ifTrue: [ aFASTJavaUnaryExpression operator
-				, (self accept: aFASTJavaUnaryExpression expression) ]
-		ifFalse: [ (self accept: aFASTJavaUnaryExpression expression)
-				, aFASTJavaUnaryExpression operator ]
+	aFASTJavaUnaryExpression isPrefixedUnaryExpression
+		ifTrue: [ self <<< aFASTJavaUnaryExpression operator.
+			self accept: aFASTJavaUnaryExpression expression ]
+		ifFalse: [ self accept: aFASTJavaUnaryExpression expression.
+			self <<< aFASTJavaUnaryExpression operator ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaVarDeclStatement: aFASTJavaVarDeclStatement [
-	^ 'let '
-		,
-			(aFASTJavaVarDeclStatement declarators
-				flatCollect: [ :declarator | (self accept: declarator) , ' ' ]) , ';'
+	self <<< 'let '.
+	aFASTJavaVarDeclStatement declarators
+		do: [ :declarator | 
+			self accept: declarator.
+			self <<< ' ' ].
+	self <<< ';'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaVariableDeclarator: aFASTJavaVariableDeclarator [
-	^ (self accept: aFASTJavaVariableDeclarator variable)
-		,
-			(aFASTJavaVariableDeclarator expression
-				ifNil: [ '' ]
-				ifNotNil: [ ' = ', (self accept: aFASTJavaVariableDeclarator expression) ])
+	self accept: aFASTJavaVariableDeclarator variable.
+
+	aFASTJavaVariableDeclarator expression
+		ifNotNil: [ self <<< ' = '.
+			self accept: aFASTJavaVariableDeclarator expression ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaWhileStatement: aFASTJavaWhileStatement [
-	^ 'while(', (self accept: aFASTJavaWhileStatement condition), ')', (self accept: aFASTJavaWhileStatement body)
+	self <<< 'while('.
+	self accept: aFASTJavaWhileStatement condition.
+	self <<< ')'.
+	self accept: aFASTJavaWhileStatement body
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTLiteral: aFASTLiteral [
-	^ aFASTLiteral value
+	self <<< aFASTLiteral value
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
-	^ aFASTNamedEntity name
+	self <<< aFASTNamedEntity name
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTStatement: aFASTStatement [
-	^ '' , (aFASTStatement orderedChildren flatCollect: [ :child | self accept: child ])
+	self indent.
+	aFASTStatement orderedChildren flatCollect: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock [
-	^ ' {' , String crlf
-		, (aFASTStatementBlock statements flatCollect: [ :statement | ((self accept: statement) indentBy: 4) , String crlf ])
-		, '}' , String crlf
+	self
+		<<< ' {';
+		indentPlus;
+		crlf.
+	aFASTStatementBlock statements
+		do: [ :statement | 
+			self indent.
+			self accept: statement ]
+		separatedBy: [ self crlf ].
+	self
+		crlf;
+		indentMinus;
+		<< '}';
+		crlf
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTVariableExpression: aFASTVariableExpression [
-	^ aFASTVariableExpression famixVariable ifNil: [ aFASTVariableExpression name ] ifNotNil: [ :famixVariable | famixVariable uniqueName ]
+	self
+		<<<
+			(aFASTVariableExpression famixVariable
+				ifNil: [ aFASTVariableExpression name ]
+				ifNotNil: [ :famixVariable | famixVariable uniqueName ])
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitNavigation: aNavigation [
-	^ 'this.openPhase(''', (aNavigation arguments ifNotEmpty: [ :args | args flatCollect: [ :arg | (self accept: arg), ',' ] ] ifEmpty:  ['']), ''')'
+	self <<< 'this.openPhase('''.
+	aNavigation arguments
+		ifNotEmpty: [ :args | 
+			args
+				do: [ :arg | 
+					self
+						<<< (self accept: arg);
+						<<< ',' ] ].
+	self <<< ''')'
 ]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitPopUp: aPopUp [
-	^ String streamContents: [:stream | stream << 'alert(' << (self accept: aPopUp data) << ')' ]
+	self <<< 'alert('.
+	self accept: aPopUp data.
+	self <<< ')'
 ]

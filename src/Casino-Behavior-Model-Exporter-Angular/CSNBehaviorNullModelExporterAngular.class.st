@@ -6,5 +6,4 @@ Class {
 
 { #category : #generated }
 CSNBehaviorNullModelExporterAngular >> visitFASTEntity: aFASTEntity [
-	^ ''
 ]

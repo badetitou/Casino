@@ -11,6 +11,18 @@ CSNBehaviorModelExporter class >> export: aBehaviorModel [
 	^ self new export: aBehaviorModel
 ]
 
+{ #category : #actions }
+CSNBehaviorModelExporter class >> export: aBehaviorModel on: aStream [
+	^ (self on: aStream) export: aBehaviorModel
+]
+
+{ #category : #actions }
+CSNBehaviorModelExporter class >> export: aBehaviorModel on: aStream withIndentLevel: anIndentLevel [
+	^ (self on: aStream)
+		indentLevel: anIndentLevel;
+		export: aBehaviorModel
+]
+
 { #category : #visitor }
 CSNBehaviorModelExporter >> export: aBehaviorMethod [
 	^ self accept: aBehaviorMethod
