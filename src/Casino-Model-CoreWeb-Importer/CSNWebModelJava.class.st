@@ -67,18 +67,6 @@ CSNWebModelJava >> addLinkXmlUi [
 ]
 
 { #category : #adding }
-CSNWebModelJava >> addOnClickAttribute [
-	self sourceModel allClasses
-		detect: [ :c | #'com::google::gwt::event::shared::EventHandler' = c mooseName ]
-		ifFound: [ :eventHandlerClass | 
-			eventHandlerClass subclassHierarchy
-				select: [ :class | self isElementFromApplication: class ]
-				thenDo: [ :class | 
-					(class allUsages collect: #receiver)
-						do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ] ]
-]
-
-{ #category : #adding }
 CSNWebModelJava >> addPPPToWidget [
 	self model allCSNWidgetExceptPage
 		select: [ :widget | widget parents isEmpty ]
@@ -136,6 +124,22 @@ CSNWebModelJava >> addWidgetAttributes [
 { #category : #adding }
 CSNWebModelJava >> addWidgetDefaultAttributes [
 	self model allCSNWidgetExceptPage do: #addDefaultAttribute displayingProgress: [ :widget | 'DefaultAttribute for ' , widget asString ] every: 1000
+]
+
+{ #category : #adding }
+CSNWebModelJava >> addWidgetsActions [
+	self sourceModel allClasses
+		detect: [ :c | #'com::google::gwt::event::shared::EventHandler' = c mooseName ]
+		ifFound: [ :eventHandlerClass | 
+			eventHandlerClass subclassHierarchy
+				select: [ :class | self isElementFromApplication: class ]
+				thenDo: [ :class | 
+					| usages |
+					usages := class allUsages.
+					(usages collect: #receiver)
+						do: [ :receiver | 
+							((self widgetInVariable: receiver) ifNil: [ self linkFromWidgetActionAppelCase1: usages anyOne ])
+								ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -345,7 +349,7 @@ CSNWebModelJava >> import [
 			self addWidgetAttributes.
 			bar current: currentStep.
 			bar label: currentStep printString , '/' , maxStep printString , ' addOnClickAttribute'.
-			self addOnClickAttribute.
+			self addWidgetsActions.
 			currentStep := currentStep + 1.
 			bar current: currentStep.
 			bar label: currentStep printString , '/' , maxStep printString , ' addWidgetDefaultAttributes'.
@@ -387,14 +391,13 @@ CSNWebModelJava >> linkForAbstractTabPhase [
 
 { #category : #private }
 CSNWebModelJava >> linkFromWidgetActionAppel [
-	
 	^ self getPhaseCallInvocations
 		collect: [ :el | 
-			| link |
-			link := self linkFromWidgetActionAppelCase1: el.
+			| widget |
+			widget := self linkFromWidgetActionAppelCase1: el.
 			"link ifNil: [ link := self linkFromWidgetActionAppelCase2: el ]."
-			link ]
-		thenSelect: #isNotNil
+			widget -> (self searchCalledPhaseFromInvocation: el) ]
+		thenSelect: [ :a | a key isNotNil and: [ a value isNotNil ] ]
 ]
 
 { #category : #private }
@@ -403,14 +406,14 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase1: anInvocation [
 	case 1 and 4
 	new Widget ( new blabla ( new bleble ( CP)))"
 
-	| found elContainer |
-	elContainer := anInvocation container.
-	elContainer ifNil: [ ^ nil ].
-	" case 1 "
-	found := self searchWidgetFromConstructorInvocation: elContainer.
+	| found |
+	found := self searchWidgetFromConstructorInvocation: anInvocation.
 	found
-		ifNotNil: [ ^ found -> (self searchCalledPhaseFromInvocation: anInvocation) ]
-		ifNil: [ ^ self linkFromWidgetActionAppelCase1: elContainer ]
+		ifNotNil: [ ^ found ]
+		ifNil: [ | elContainer |
+			elContainer := anInvocation container.
+			elContainer ifNil: [ ^ nil ].
+			^ self linkFromWidgetActionAppelCase1: elContainer ]
 ]
 
 { #category : #private }
@@ -420,14 +423,16 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 	var i = new Widget ()
 	i.addHandler..(BlBl)"
 
-	anInvocation from parentType isHandlerClass ifFalse: [ ^ nil ].
+	anInvocation source parentType isHandlerClass ifFalse: [ ^ nil ].
 	(self
 		widgetInVariable:
 			(anInvocation from parentType container outgoingInvocations
 				detect: [ :invoc | 
 					invoc sourceAnchor isNotNil
 						and: [ invoc sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]
-				ifNone: [ ^ nil ]) receiver) ifNotNil: [ :widgetContainer | ^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ] ifNil: [ ^ nil ]
+				ifNone: [ ^ nil ]) receiver)
+		ifNotNil: [ :widgetContainer | ^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ]
+		ifNil: [ ^ nil ]
 ]
 
 { #category : #private }
