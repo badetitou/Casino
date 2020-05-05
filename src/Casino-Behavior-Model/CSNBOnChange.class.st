@@ -30,5 +30,5 @@ CSNBOnChange class >> createActionFrom: aClass for: aWidgetInstance withImporter
 
 { #category : #'as yet unclassified' }
 CSNBOnChange >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(change)="' , behaviors anyOne uniqueName , '()"' ]
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(change)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode), '()"' ]
 ]

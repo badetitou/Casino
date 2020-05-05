@@ -22,10 +22,9 @@ CSNBehaviorModelExporter class >> export: aBehaviorModel on: aStream [
 ]
 
 { #category : #actions }
-CSNBehaviorModelExporter class >> export: aBehaviorModel on: aStream withIndentLevel: anIndentLevel [
+CSNBehaviorModelExporter class >> on: aStream withIndentLevel: anIndentLevel [
 	^ (self on: aStream)
-		indentLevel: anIndentLevel;
-		export: aBehaviorModel
+		indentLevel: anIndentLevel
 ]
 
 { #category : #accessing }

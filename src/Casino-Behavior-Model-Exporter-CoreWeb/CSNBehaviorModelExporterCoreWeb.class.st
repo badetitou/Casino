@@ -21,7 +21,7 @@ CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self
-		<< aFASTJavaMethodEntity uniqueName;
+		<< (aFASTJavaMethodEntity uniqueNameInPage: self currentPage);
 		<<< '('.
 	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
 	self

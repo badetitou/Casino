@@ -148,7 +148,7 @@ export class ';
 					self
 						<<< '/*';
 						crlf.
-					self behaviorModelExporter export: behaveMethod on: self currentWriteStream withIndentLevel: 1.
+					(self behaviorModelExporter on: self currentWriteStream withIndentLevel: 1) currentPage: aBLPageMetier; export: behaveMethod.
 					self
 						<<< '*/';
 						crlf ] ].

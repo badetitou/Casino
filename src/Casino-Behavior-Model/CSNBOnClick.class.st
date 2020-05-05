@@ -30,5 +30,5 @@ CSNBOnClick class >> createActionFrom: aClass for: aWidgetInstance withImporter:
 
 { #category : #'as yet unclassified' }
 CSNBOnClick >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(click)="' , behaviors anyOne uniqueName , '()"' ]
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(click)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
 ]

@@ -9,8 +9,21 @@ behaviouralModel collect: [ :model | String crlf join: (model allFASTJavaMethodE
 Class {
 	#name : #CSNBehaviorModelExporterAngular,
 	#superclass : #CSNBehaviorModelExporter,
+	#instVars : [
+		'currentPage'
+	],
 	#category : #'Casino-Behavior-Model-Exporter-Angular'
 }
+
+{ #category : #accessing }
+CSNBehaviorModelExporterAngular >> currentPage [
+	^ currentPage
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporterAngular >> currentPage: anObject [
+	currentPage := anObject
+]
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitCall: aCall [
@@ -178,12 +191,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 			self accept: receiver.
 			self <<< '.' ].
 	self
-		<<< aFASTJavaMethodInvocation uniqueName;
+		<<< (aFASTJavaMethodInvocation uniqueNameInPage: self currentPage);
 		<<< '('.
 	aFASTJavaMethodInvocation arguments do: [ :argument | self accept: argument ] separatedBy: [ self <<< ', ' ].
 	self <<< ')'.
 	
-	self errorStream << 'Unknow invocation: ' << aFASTJavaMethodInvocation uniqueName << '(...) | '
+	self errorStream << 'Unknow invocation: ' << (aFASTJavaMethodInvocation uniqueNameInPage: self currentPage) << '(...) | '
 ]
 
 { #category : #generated }
