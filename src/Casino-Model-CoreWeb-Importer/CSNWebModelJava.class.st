@@ -244,7 +244,7 @@ CSNWebModelJava >> generateWidget [
 			(invocationOrClass source mooseName beginsWithAnyOf: self widgetNamespaces)
 				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
 						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ].
-	col
+	col asOrderedCollection
 		withIndexDo: [ :invocation :index | 
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
