@@ -161,13 +161,7 @@ CSNWebModelJava >> addWidgetsActions [
 		ifFound: [ :eventHandlerClass | 
 			eventHandlerClass subclassHierarchy
 				select: [ :class | self isElementFromApplication: class ]
-				thenDo: [ :class | 
-					| usages |
-					usages := class allUsages.
-					(usages collect: #receiver)
-						do: [ :receiver | 
-							((self widgetInVariable: receiver) ifNil: [ self linkFromWidgetActionAppelCase1: usages anyOne ])
-								ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ] ]
+				thenDo: [ :class | (self tryGetWidgetFromUsages: class allUsages) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ]
 ]
 
 { #category : #accessing }
@@ -494,6 +488,16 @@ CSNWebModelJava >> searchCalledPhaseFromInvocation: invoc [
 { #category : #private }
 CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
 	^ self model allCSNWidget detect: [ :widget | widget sources isNotEmpty and: [ widget source = anInvocation ] ] ifNone: [ nil ]
+]
+
+{ #category : #adding }
+CSNWebModelJava >> tryGetWidgetFromUsages: usages [
+	(usages collect: #receiver)
+		do: [ :receiver | 
+			(self linkFromWidgetActionAppelCase1: usages anyOne)
+				ifNotNil: [ :found | ^ found ]
+				ifNil: [ (self widgetInVariable: receiver) ifNotNil: [ :found | ^ found ] ] ].
+	^ nil
 ]
 
 { #category : #accessing }
