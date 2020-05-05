@@ -285,75 +285,39 @@ CSNWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 CSNWebModelJava >> import [
-	| currentStep maxStep |
-	currentStep := 0.
-	maxStep := 15.
-	'prepare generatePhase'
-		displayProgressFrom: 0
-		to: maxStep
-		during: [ :bar | 
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generatePhase'.
-			self generatePhase.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generatePageMetier'.
-			self generatePageMetier.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkXmlUi'.
-			self addLinkXmlUi.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkForAbstractTabPhase'.
-			self addLinkForAbstractTabPhase.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkPhaseToPageMetier'.
-			self addLinkPhaseToPageMetier.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkPageMetierToPageMetier'.
-			self addLinkPageMetierToPageMetier.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generateWidget'.
-			self generateWidget.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addLinkBetweenWidgets'.
-			"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
-			self addLinkBetweenWidgets.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addPPPToWidget'.
-			self addPPPToWidget.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generateBLActionAppel'.
-			self generateBLActionAppel.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generateService'.
-			self generateService.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' generateServiceAction'.
-			self generateServiceAction.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addWidgetAttributes'.
-			"this last two should stay at the end"
-			currentStep := currentStep + 1.
-			self addWidgetAttributes.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addOnClickAttribute'.
-			self addWidgetsActions.
-			currentStep := currentStep + 1.
-			bar current: currentStep.
-			bar label: currentStep printString , '/' , maxStep printString , ' addWidgetDefaultAttributes'.
-			self addWidgetDefaultAttributes.]
+	TinyLogger default addFileLoggerNamed: 'Casino.log'.
+	'1/14 generatePhase' record.
+	self generatePhase.
+	'2/14 generatePageMetier' record.
+	self generatePageMetier.
+	'3/14 addLinkXmlUi' record.
+	self addLinkXmlUi.
+	'4/14 addLinkForAbstractTabPhase' record.
+	self addLinkForAbstractTabPhase.
+	'5/14 addLinkPhaseToPageMetier' record.
+	self addLinkPhaseToPageMetier.
+	'6/14 addLinkPageMetierToPageMetier' record.
+	self addLinkPageMetierToPageMetier.
+	'7/14 generateWidget' record.
+	self generateWidget.
+	'8/14 addLinkBetweenWidgets' record.
+	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
+	self addLinkBetweenWidgets.
+	'9/14 addPPPToWidget' record.
+	self addPPPToWidget.
+	'10/14 generateBLActionAppel' record.
+	self generateBLActionAppel.
+	'11/14 generateService' record.
+	self generateService.
+	'11/14 generateServiceAction' record.
+	self generateServiceAction.
+	'12/14 addWidgetAttributes' record.
+	"this last two should stay at the end"
+	self addWidgetAttributes.
+	'13/14 addWidgetsActions' record.
+	self addWidgetsActions.
+	'14/14 addWidgetDefaultAttributes' record.
+	self addWidgetDefaultAttributes
 ]
 
 { #category : #accessing }

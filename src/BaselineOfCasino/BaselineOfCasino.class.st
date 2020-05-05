@@ -28,7 +28,8 @@ BaselineOfCasino >> defineDependencies: spec [
 				loads: #('Xml');
 				repository: 'github://moosetechnology/PetitParser:development/src' ].
 	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
-	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour/src' ]
+	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour/src' ].
+	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ]
 ]
 
 { #category : #baselines }
@@ -80,7 +81,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-Visitor' 'Casino-Exporter') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
 		
-		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-Visitor') ];
+		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-Visitor' 'TinyLogger') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
 		
