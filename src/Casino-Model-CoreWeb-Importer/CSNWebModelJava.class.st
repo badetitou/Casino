@@ -1,13 +1,43 @@
 "
-""Generate BlApp""
-gwtMooseModel := FAMIXMooseModel new importFromMSEStream:  'D:\Developpement\mse\VerveineJNicolas\KitchenGWT.mse' asFileReference readStream.
-gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas'. 
+TinyLogger
+	default ensureFileLoggerNamed: 'Casino.log'.
 
-""Generate Bl Model""
-gwtModel := CSNUIMooseModel new name: 'Showroom'; yourself.
-CSNMooseModelCreatorAngular runOn: gwtModel fromSourceModel: gwtMooseModel and: 'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+	self
+		execute: [ metamodel := FMMetaModelBuilder metamodelFromPackages: CSNBModel packagesToProcessToCreateMetamodel , CRFModel packagesToProcessToCreateMetamodel.
+			'D:\Developpement\mse\VerveineJNicolas\KitchenGWT.mse' asFileReference readStreamDo: [ :stream | gwtMooseModel := CRFModel new importFromMSEStream: stream ].
+			gwtMooseModel rootFolder: 'D:\Developpement\mse\VerveineJNicolas' ]
+		recordedAs: 'load Model'.
 
-CSNModelExporterAngular export: gwtModel.
+	""Generate Bl Model""
+	gwtModel := CSNUICWModel new
+		name: 'Showroom';
+		yourself.
+	gwtModel metamodel: metamodel.
+	CSNMooseModelCreatorAngular
+		runOn: gwtModel
+		fromSourceModel: gwtMooseModel
+		and: 'D:\Developpement\mse\KitchenGWT\BLCoreIncubatorGwt\src\fr\bl\application.module.xml'.
+
+
+	behavioralModel := behavioralImporter resetUIAndGenerateBehavioralModel.
+	behavioralImporter := CSNBehaviorModelImporterJava new
+		uiModel: gwtModel;
+		sourceCodeModel: gwtMooseModel;
+		yourself.
+
+
+	CSNModelExporterAngular export: gwtModel.
+
+	CSNModelExporterAngularBLSpecific export: gwtModel.
+
+
+	gwtModel := nil.
+	gwtMooseModel := nil.
+
+	CSNBehaviorModelGenerator generate.
+
+	gwtMooseModel flushPrivateState.
+	gwtModel flushPrivateState
 "
 Class {
 	#name : #CSNWebModelJava,
@@ -23,13 +53,11 @@ Class {
 
 { #category : #adding }
 CSNWebModelJava >> addLinkBetweenWidgets [
-	| responsabilityHandlerForUsages |
+	| responsabilityHandlerForUsages col |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
-	(self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ])
-		do: [ :widget |
-			 self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages ]
-		displayingProgress: [ :widget | 'compute ' , widget class name ]
-		every: 1000
+	col := self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ].
+	col withIndexDo: [ :widget :index | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages.
+		((index \\ 200) = 0) ifTrue: [ ((index / col size) asFloat * 100) record   ] ]
 ]
 
 { #category : #adding }
@@ -210,18 +238,19 @@ CSNWebModelJava >> generateServiceAction [
 
 { #category : #'private-actions' }
 CSNWebModelJava >> generateWidget [
-	(self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
+	| col |
+	col := self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
 		reject: [ :invocationOrClass | 
 			(invocationOrClass source mooseName beginsWithAnyOf: self widgetNamespaces)
 				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
-						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ])
-		do: [ :invocation | 
+						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ].
+	col
+		withIndexDo: [ :invocation :index | 
 			| blWidget |
 			blWidget := self factoryCreateWidgetFrom: invocation.
 			blWidget affectedActions: invocation affectation.
-			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ] ]
-		displayingProgress: [ :invoc | 'Generate widget : ' , invoc asString ]
-		every: 100
+			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ].
+			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #accessing }
@@ -285,7 +314,6 @@ CSNWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 CSNWebModelJava >> import [
-	TinyLogger default addFileLoggerNamed: 'Casino.log'.
 	self execute: [ self generatePhase ] recordedAs: '1/15 generatePhase'.
 	self execute: [ self generatePageMetier ] recordedAs: '2/15 generatePageMetier'.
 	self execute: [ self addLinkXmlUi ] recordedAs: '3/15 addLinkXmlUi'.
