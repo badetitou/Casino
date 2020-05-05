@@ -286,38 +286,23 @@ CSNWebModelJava >> gwtWidgetNamespace [
 { #category : #api }
 CSNWebModelJava >> import [
 	TinyLogger default addFileLoggerNamed: 'Casino.log'.
-	'1/14 generatePhase' record.
-	self generatePhase.
-	'2/14 generatePageMetier' record.
-	self generatePageMetier.
-	'3/14 addLinkXmlUi' record.
-	self addLinkXmlUi.
-	'4/14 addLinkForAbstractTabPhase' record.
-	self addLinkForAbstractTabPhase.
-	'5/14 addLinkPhaseToPageMetier' record.
-	self addLinkPhaseToPageMetier.
-	'6/14 addLinkPageMetierToPageMetier' record.
-	self addLinkPageMetierToPageMetier.
-	'7/14 generateWidget' record.
-	self generateWidget.
-	'8/14 addLinkBetweenWidgets' record.
+	self execute: [ self generatePhase ] recordedAs: '1/15 generatePhase'.
+	self execute: [ self generatePageMetier ] recordedAs: '2/15 generatePageMetier'.
+	self execute: [ self addLinkXmlUi ] recordedAs: '3/15 addLinkXmlUi'.
+	self execute: [ self addLinkForAbstractTabPhase ] recordedAs: '4/15 addLinkForAbstractTabPhase'.
+	self execute: [ self addLinkPhaseToPageMetier ] recordedAs: '5/15 addLinkPhaseToPageMetier'.
+	self execute: [ self addLinkPageMetierToPageMetier ] recordedAs: '6/15 addLinkPageMetierToPageMetier'.
+	self execute: [ self generateWidget ] recordedAs: '7/15 generateWidget'.
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
-	self addLinkBetweenWidgets.
-	'9/14 addPPPToWidget' record.
-	self addPPPToWidget.
-	'10/14 generateBLActionAppel' record.
-	self generateBLActionAppel.
-	'11/14 generateService' record.
-	self generateService.
-	'11/14 generateServiceAction' record.
-	self generateServiceAction.
-	'12/14 addWidgetAttributes' record.
+	self execute: [ self addLinkBetweenWidgets ] recordedAs: '8/15 addLinkBetweenWidgets'.
+	self execute: [ self addPPPToWidget ] recordedAs: '9/15 addPPPToWidget'.
+	self execute: [ self generateBLActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
+	self execute: [ self generateService ] recordedAs: '11/15 generateService'.
+	self execute: [ self generateServiceAction ] recordedAs: '12/15 generateServiceAction'.
 	"this last two should stay at the end"
-	self addWidgetAttributes.
-	'13/14 addWidgetsActions' record.
-	self addWidgetsActions.
-	'14/14 addWidgetDefaultAttributes' record.
-	self addWidgetDefaultAttributes
+	self execute: [ self addWidgetAttributes ] recordedAs: '13/15 addWidgetAttributes'.
+	self execute: [ self addWidgetsActions ] recordedAs: '14/15 addWidgetsActions'.
+	self execute: [ self addWidgetDefaultAttributes ] recordedAs: '15/15 addWidgetDefaultAttributes'
 ]
 
 { #category : #accessing }
