@@ -16,7 +16,5 @@ CSNLCenterAlignement class >> generateWithHorizontal: horizontal [
 		ifTrue: [ CSNLWestAlignement new ]
 		ifFalse: [ horizontal = 'HasHorizontalAlignment.ALIGN_RIGHT'
 				ifTrue: [ CSNLEastAlignement new ]
-				ifFalse: [ horizontal isNil
-						ifTrue: [ nil ]
-						ifFalse: [ self new ] ] ]
+				ifFalse: [ horizontal ifNotNil: [ self new ] ] ]
 ]
