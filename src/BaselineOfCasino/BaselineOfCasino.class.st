@@ -54,7 +54,8 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb');
 		
 		"bl migration"
-		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl')
+		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl');
+		group: 'rh' with: #('Casino-Migration-RH' 'behavior-bl')
 ]
 
 { #category : #baselines }
