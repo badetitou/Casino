@@ -26,7 +26,7 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLButtonLinkComponent class >> getSelector [
 	^ 'bl-button-link'
 ]

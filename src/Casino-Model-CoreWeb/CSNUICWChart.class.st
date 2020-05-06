@@ -18,7 +18,7 @@ CSNUICWChart >> angularComponent [
 	^ PNGChart
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNUICWChart >> getSelector [
 	^ 'p-chart'
 ]

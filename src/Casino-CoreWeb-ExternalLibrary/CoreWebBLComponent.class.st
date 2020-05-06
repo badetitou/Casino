@@ -4,12 +4,12 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CoreWebBLComponent class >> isNative [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CoreWebBLComponent class >> modulePath [
 	^ 'app/components/components/' , self subModulePath
 ]

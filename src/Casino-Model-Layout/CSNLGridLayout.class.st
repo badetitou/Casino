@@ -13,25 +13,25 @@ CSNLGridLayout class >> annotation [
 	^self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNLGridLayout >> at: anInvocation setAttribute: attribute [
 	^ (self privateState attributeAt: #cellAttribute ifAbsentPut: [ Dictionary new ])
 		add: attribute -> anInvocation
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNLGridLayout >> atLevel: level [
 	^ (self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) select: [ :position | position isArray and: [ (position first) = level ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNLGridLayout >> atLevelSorted: level [
 	^ ((((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		select: [ :position | (position at: 1) = level ]) associationsCollect: #yourself) sort: [ :a :b | a value second < b value second ])
 		collect: #key
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNLGridLayout >> atPositionX: anX Y: anY [
 	^ (self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		associations
@@ -155,7 +155,7 @@ CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 		ifNotNil: [ ^ aYValue asInteger ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNLGridLayout >> maxLevel [
 	^ (((self privateState attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) select: [ :element | element isArray ] thenCollect: [ :coord | coord first ]) select: [ :element | element isInteger ]) 
 		ifEmpty: [ ^ 0 ]

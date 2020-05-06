@@ -26,7 +26,7 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLFieldsetComponent class >> getSelector [
 	^ 'bl-fieldset'
 ]

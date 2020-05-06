@@ -26,24 +26,24 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - export' }
 CSNELCWBLInputSelectComponent class >> attributeDictionary [
 	^ super attributeDictionary
 		at: CSNUIWidth put: 'style';
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNELCWBLInputSelectComponent class >> attributeOf: aWidget [
 	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNELCWBLInputSelectComponent class >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNELCWBLInputSelectComponent class >> exportAttribute: attribute with: anExporter [
 	attribute class = CSNUIWidth
 		ifTrue: [ anExporter
@@ -54,24 +54,24 @@ CSNELCWBLInputSelectComponent class >> exportAttribute: attribute with: anExport
 		ifFalse: [ super exportAttribute: attribute with: anExporter ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNELCWBLInputSelectComponent class >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter <<< '/>'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLInputSelectComponent class >> getSelector [
 	^ 'select'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLInputSelectComponent class >> isNative [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLInputSelectComponent class >> modulePath [
 	^ '@angular/core'
 ]

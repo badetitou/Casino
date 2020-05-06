@@ -4,7 +4,7 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
@@ -25,7 +25,7 @@ CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter 
 				indentMinus ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLSimpleLinkComponent class >> getSelector [
 	^ 'bl-simple-link'
 ]

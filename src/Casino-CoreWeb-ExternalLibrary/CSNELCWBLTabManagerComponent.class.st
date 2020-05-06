@@ -4,7 +4,7 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLTabManagerComponent class >> getSelector [
 	^ 'bl-tabs'
 ]

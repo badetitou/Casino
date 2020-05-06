@@ -4,7 +4,7 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PNGTurboTable class >> getSelector [
 	^ 'p-table'
 ]
