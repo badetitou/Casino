@@ -14,6 +14,17 @@ CSNWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> gtActionsIn: composite [
+	<gtInspectorPresentationOrder: 1001>
+	^ composite table
+		title: 'Actions';
+		display: [ :anObject | anObject mooseInterestingEntity actions ];
+		sorted: [ :x :y | x name asString < y name asString ];
+		column: 'Names' evaluated: [ :each | each name ];
+		when: [ :anObject | anObject mooseInterestingEntity isWidget and: [ anObject actions isNotEmpty ] ]
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> gtAttributesIn: composite [
 	<gtInspectorPresentationOrder: 1001>
 	^ composite table
