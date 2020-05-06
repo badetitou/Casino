@@ -56,7 +56,7 @@ CSNBehaviorModelExporter >> export: aBehaviorMethod [
 				close ]
 ]
 
-{ #category : #streaming }
+{ #category : #initialization }
 CSNBehaviorModelExporter >> initialize [
 	super initialize.
 	errorStream := WriteStream with: String new.
