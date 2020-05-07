@@ -14,6 +14,36 @@ TCSNBehaviorVisitor >> visitAsynchroneCall: anAsynchroneCall [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnChange: aCSNBOnChange [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnChange
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnClick: aCSNBOnClick [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnClick
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnError: aCSNBOnError [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnError
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnSubmit: aCSNBOnSubmit [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnSubmit
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnSubmitSuccess: aCSNBOnSubmitSuccess [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnSubmitSuccess
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCall: aCall [
 	^ self visitFASTExpression: aCall
 ]

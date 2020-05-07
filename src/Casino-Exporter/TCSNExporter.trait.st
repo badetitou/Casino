@@ -27,6 +27,11 @@ TCSNExporter >> <<< elements [
 ]
 
 { #category : #streaming }
+TCSNExporter >> cr [
+  ^ self <<< String cr 
+]
+
+{ #category : #streaming }
 TCSNExporter >> crlf [
   ^ self <<< String crlf 
 ]
