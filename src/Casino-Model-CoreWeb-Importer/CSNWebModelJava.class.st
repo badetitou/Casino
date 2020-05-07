@@ -119,7 +119,7 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 				andImporter: self ]
 		ifNil: [ | containerInvocation |
 			containerInvocation := widget source container.
-			('no affectation widget ' , containerInvocation name) record.
+			('no affectation widget: ' , widget source asString) record.
 			[ containerInvocation isNotNil ]
 				whileTrue: [ | found |
 					found := self widgetInVariable: containerInvocation receiver.
