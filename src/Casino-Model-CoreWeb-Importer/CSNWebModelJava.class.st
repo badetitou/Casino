@@ -111,9 +111,11 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 			| usages |
 			self
 				execute: [ usages := widget affectedActions allUsages.
+					'allContainer ' record.
 					usages := usages , (usages flatCollect: [ :el | el allContainers ])
 						reject:
 							[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
+					'responsabilityHandlerForUsages ' record.
 					responsabilityHandlerForUsages
 						handleAddLinkedFromVariable: usages asOrderedCollection
 						to: widget

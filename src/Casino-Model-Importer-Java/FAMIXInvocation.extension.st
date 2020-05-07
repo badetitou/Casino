@@ -43,10 +43,12 @@ FAMIXInvocation >> attributeName [
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXInvocation >> container [
 	self sourceAnchor ifNil: [ ^ nil ].
-	^ ((self source outgoingInvocations
-		select: [ :invocation | 
-			invocation sourceAnchor isNotNil
-				and: [ self sourceAnchor startPos > invocation sourceAnchor startPos and: [ self sourceAnchor endPos < invocation sourceAnchor endPos ] ] ])
+	^ ((self source outgoingInvocations iterator
+		| [ :invocation | invocation sourceAnchor isNotNil ] selectIt
+		| [ :invocation | invocation = self ] rejectIt
+		| [ :invocation | self sourceAnchor startPos > invocation sourceAnchor startPos ] selectIt
+		| [ :invocation | self sourceAnchor endPos < invocation sourceAnchor endPos ] selectIt
+		> OrderedCollection)
 		sort: [ :invocationA :invocationB | invocationA sourceAnchor startPos > invocationB sourceAnchor startPos ]) at: 1 ifAbsent: [ nil ]
 ]
 
