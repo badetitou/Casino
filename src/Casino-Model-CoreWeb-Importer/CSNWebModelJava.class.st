@@ -110,7 +110,9 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 		ifNotNil: [ :affectedActions | 
 			| usages |
 			self
-				execute: [ usages := widget affectedActions allUsages.
+				execute: [ 
+					'allUsages ' record.
+					usages := widget affectedActions allUsages.
 					'allContainer ' record.
 					usages := usages , (usages flatCollect: [ :el | el allContainers ])
 						reject:
