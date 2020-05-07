@@ -6,7 +6,6 @@ Class {
 
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesAffectationHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	"self haltIf: [ widgetContainer source affectation name = 'ftFiltre' ]."
 	(self
 		addLinkedFromVariable: (aCollectionOfUsages collect: #affectation)
 		to: widgetContainer
