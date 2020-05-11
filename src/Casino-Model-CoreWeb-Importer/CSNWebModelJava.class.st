@@ -56,8 +56,10 @@ CSNWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages col |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
 	col := self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ].
-	col withIndexDo: [ :widget :index | self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages.
-		((index \\ 200) = 0) ifTrue: [ ((index / col size) asFloat * 100) record   ] ]
+	col
+		withIndexDo: [ :widget :index | 
+			self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages.
+			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #adding }
@@ -96,12 +98,14 @@ CSNWebModelJava >> addLinkXmlUi [
 
 { #category : #adding }
 CSNWebModelJava >> addPPPToWidget [
-	self model allCSNWidgetExceptPage
-		select: [ :widget | widget parents isEmpty ]
-		thenDo: [ :widget | 
+	| col |
+	col := (self model allCSNWidgetExceptPage select: [ :widget | widget parents isEmpty ]) asOrderedCollection.
+	col
+		withIndexDo: [ :widget :index | 
 			| founds |
 			founds := self widgetOwnerCase1: widget source source maxLevel: 15 level: 0.
-			founds do: [ :found | found addWidget: widget ] ]
+			founds do: [ :found | found addWidget: widget ].
+			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #adding }
