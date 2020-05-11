@@ -181,6 +181,19 @@ CSNWebModelJava >> applicationSource [
 	^  'BLCoreIncubatorGwt'
 ]
 
+{ #category : #'private - accessing' }
+CSNWebModelJava >> buisinessPageWithSources [
+	"I extract this method for optimisations purpose"
+
+	^ self model privateState cacheAt: #buisinessPageWithSources ifAbsentPut: [ self model allCSNPageMetier reject: [ :businessPage | businessPage sources isEmpty ] ]
+]
+
+{ #category : #'private - postImport' }
+CSNWebModelJava >> cleanImportCache [
+	self model privateState removeProperty: #buisinessPageWithSources
+	
+]
+
 { #category : #adding }
 CSNWebModelJava >> computeAllConstructorsLink [
 	^ self sourceModel constructors
@@ -199,7 +212,7 @@ CSNWebModelJava >> createFactory [
 		yourself
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generateBLActionAppel [
 	self linkFromWidgetActionAppel
 		do: [ :el | 
@@ -209,14 +222,14 @@ CSNWebModelJava >> generateBLActionAppel [
 			el value ifNotNil: [ action call: el value ] ]
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generatePageMetier [
 	sourceModel allModelClasses
 		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | a name = 'IPageMetier' ]) and: [ ('*XMLUi' match: e name) not ] ]
 		thenDo: [ :aPageMetier | self factory createBusinessPageFromFAMIXClass: aPageMetier ]
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generatePhase [
 	xml
 		nodesDo: [ :aXmlNode | 
@@ -224,7 +237,7 @@ CSNWebModelJava >> generatePhase [
 				ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ].
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generateService [
 	| interfaceService |
 	interfaceService := self sourceModel allTypes asSet
@@ -233,7 +246,7 @@ CSNWebModelJava >> generateService [
 	interfaceService do: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generateServiceAction [
 	self model allCSNService
 		withIndexDo: [ :e :index | 
@@ -241,7 +254,7 @@ CSNWebModelJava >> generateServiceAction [
 			index \\ 50 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> generateWidget [
 	| col |
 	col := self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
@@ -293,7 +306,7 @@ CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
 { #category : #accessing }
 CSNWebModelJava >> getPageMetierFromClass: aClass [
-	^ self getFromSource: (self model allCSNPageMetier reject: [ :businessPage | businessPage sources isEmpty ]) forClass: aClass
+	^ self getFromSource: self buisinessPageWithSources forClass: aClass
 ]
 
 { #category : #private }
@@ -343,7 +356,7 @@ CSNWebModelJava >> isElementFromApplication: e [
 	^ e hasSourceAnchor and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
 ]
 
-{ #category : #'private-actions' }
+{ #category : #'private - actions' }
 CSNWebModelJava >> isInFactory: invocationOrClass [
 	"used in PostOffice cause some factory are defined inside the PostOffice application \ie createBLLinkLabel"
 	^ false
@@ -483,6 +496,8 @@ CSNWebModelJava >> postImport [
 			bar label: currentStep printString , '/' , maxStep printString , ' for pages'.
 			self model allCSNPage do: #postImport displayingProgress: [:wid | 'post import page : ', wid name asString ].
 	].
+
+	self cleanImportCache
 	
 ]
 
