@@ -549,7 +549,7 @@ CSNWebModelJava >> widgetInVariable: aVariable [
 
 { #category : #accessing }
 CSNWebModelJava >> widgetNamespaces [
-	^ {'fr::bl::client::core::refui'}
+	^ {'fr::bl::client::core::refui' . 'fr::bl::client::sedit::refui'}
 ]
 
 { #category : #accessing }

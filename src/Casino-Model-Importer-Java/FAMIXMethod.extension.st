@@ -2,8 +2,14 @@ Extension { #name : #FAMIXMethod }
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXMethod >> allUsages [
-	^ self incomingInvocations , (self incomingInvocations flatCollect: [ :invoc | invoc affectation ifNil: [ {} ] ifNotNil: [ :aff | aff allUsages ] ])
-		ifEmpty: [ self parentType allUsages ]
+	('method allUsages:' , self mooseName) record.
+	^ self incomingInvocations
+		,
+			(self incomingInvocations
+				flatCollect: [ :invoc | 
+					invoc affectation
+						ifNil: [ {} ]
+						ifNotNil: [ :aff | aff allUsages ] ]) ifEmpty: [ self parentType allUsages ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
