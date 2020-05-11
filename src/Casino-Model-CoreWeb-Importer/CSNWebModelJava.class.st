@@ -236,9 +236,9 @@ CSNWebModelJava >> generateService [
 { #category : #'private-actions' }
 CSNWebModelJava >> generateServiceAction [
 	self model allCSNService
-		do: [ :e | self model silentlyAddAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)) ]
-		displayingProgress: [ :e | 'compute ' , e asString ]
-		every: 1000
+		withIndexDo: [ :e :index | 
+			self model addAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)).
+			index \\ 50 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
 ]
 
 { #category : #'private-actions' }
