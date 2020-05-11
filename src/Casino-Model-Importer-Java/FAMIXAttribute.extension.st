@@ -12,7 +12,7 @@ FAMIXAttribute >> allUsages [
 
 	"check the invocation inside methods"
 	'collect from' record.
-	methods := self incomingAccesses collect: #from as: Set.	"self parentType methods."
+	methods := self incomingAccesses collect: #source as: Set.	"self parentType methods."
 	'methodsToUsages' record.
 	methodsToUsages := methods
 		select: [ :method | method hasSourceAnchor and: [ method isInstanciationInitializer not ] ]
