@@ -8,7 +8,7 @@ FAMIXAttribute >> allUsages [
 	"check if the variable is returned by a method"
 	('attribute allUsages: ' , self mooseName) record.
 	'isReturned' record.
-	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first source ].
+	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first source allUsages ].
 
 	"check the invocation inside methods"
 	'collect from' record.
