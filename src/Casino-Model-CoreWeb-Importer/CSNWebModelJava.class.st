@@ -294,7 +294,7 @@ CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
 	| listOfSubAsyncClass |
 	listOfSubAsyncClass := {} "self getAsyncClassFrom: aServiceClass".
-	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor isNil or: [ method sourceAnchor sourceText isEmpty "reject method from src/target/... In source"] ]
+	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor isNil or: [ method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source"] ]
 		thenCollect: [ :method | CSNServiceAPI newFor: method ]
 ]
 
