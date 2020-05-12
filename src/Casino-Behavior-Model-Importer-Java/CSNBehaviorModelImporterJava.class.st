@@ -54,12 +54,21 @@ CSNBehaviorModelImporterJava >> generateFASTModelFor: action [
 	"Compute the FAST model for action and bind it to the Famix model"
 
 	^ action source methods
-		collect: [ :aFamixMethod | 
+		select: [ :aFamixMethod | 
+			aFamixMethod sourceText isEmpty ifTrue: [ ('Error with:' , aFamixMethod mooseName) record ].
+			aFamixMethod sourceText isNotEmpty ]
+		thenCollect: [ :aFamixMethod | 
 			"Create the FAST model"
-			self parser model: self newBehavioralModel.
+			[ self parser model: self newBehavioralModel.
 			self parser parseCodeMethodString: aFamixMethod sourceText.
 			self carrefourBinder bindFastModel: self parser model fromFamixMethodEntity: aFamixMethod.
-			self parser model allFASTJavaMethodEntity select: [ :method | method parentNode isNil ] thenDo: [ :behavior | action behavior add: behavior ].
+			self parser model allFASTJavaMethodEntity
+				select: [ :method | method parentNode isNil ]
+				thenDo: [ :behavior | action behavior add: behavior ] ]
+				on: Error
+				do: [ :err | 
+					('Error in parsing with:' , aFamixMethod mooseName) record.
+					err signal ].
 			self parser model ]
 ]
 
