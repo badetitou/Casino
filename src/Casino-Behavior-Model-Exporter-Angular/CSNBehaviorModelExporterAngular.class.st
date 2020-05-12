@@ -199,7 +199,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 		<<< '('.
 	aFASTJavaMethodInvocation arguments do: [ :argument | self accept: argument ] separatedBy: [ self <<< ', ' ].
 	self <<< ')'.
-	
+
 	self errorStream << 'Unknow invocation: ' << (aFASTJavaMethodInvocation uniqueNameInPage: self currentPage) << '(...) | '
 ]
 

@@ -8,8 +8,11 @@ CSNBusinessPage >> calledBehavior [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> collectPhaseCalled [
-	
-	^ (self recursiveWidgets flattened flatCollect: [ :localWidget | (localWidget actions select: #isActionAppel thenCollect: #call) select: #isNotNil  ]) asSet asOrderedCollection
+	^ (self recursiveWidgets flattened
+		flatCollect: [ :localWidget | 
+			(localWidget actions
+				select: #isActionAppel
+				thenCollect: #call) select: #isNotNil ]) asSet asOrderedCollection sort: #name ascending 
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
