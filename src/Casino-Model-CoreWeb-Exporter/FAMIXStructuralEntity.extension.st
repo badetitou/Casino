@@ -15,3 +15,8 @@ FAMIXStructuralEntity >> uniqueName [
 					potentialName := potentialName , index asString ].
 			potentialName ]
 ]
+
+{ #category : #'*Casino-Model-CoreWeb-Exporter' }
+FAMIXStructuralEntity >> uniqueName: aString [
+	(self allAtScope: FamixTClass) last privateState cacheAt: #uniqueName put: {(self -> aString)} asDictionary
+]

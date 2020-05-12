@@ -37,6 +37,8 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 		indentPlus.
 	aCall onSuccess
 		ifNotNil: [ :success | 
+			"set the futur variable with the good name"
+			aCall onSuccess parameters first famixVariable uniqueName: 'data'.
 			self << 'data => '.
 			self accept: success statementBlock.
 			self
@@ -44,6 +46,8 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 				crlf ].
 	aCall onFailure
 		ifNotNil: [ :failure | 
+			"set the futur variable with the good name"
+			aCall onFailure parameters first famixVariable uniqueName: 'error'.
 			self << 'error => '.
 			self accept: failure statementBlock ].
 	self
@@ -351,7 +355,6 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTVariableExpression: aFASTVariableExpression [
-	"self haltIf: [ aFASTVariableExpression name = 'caught' ]."
 	self
 		<<<
 			(aFASTVariableExpression famixVariable
