@@ -351,7 +351,7 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTVariableExpression: aFASTVariableExpression [
-	self haltIf: [ aFASTVariableExpression name = 'caught' ].
+	"self haltIf: [ aFASTVariableExpression name = 'caught' ]."
 	self
 		<<<
 			(aFASTVariableExpression famixVariable
