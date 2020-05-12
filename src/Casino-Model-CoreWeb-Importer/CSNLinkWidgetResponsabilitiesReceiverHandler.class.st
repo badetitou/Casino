@@ -6,7 +6,6 @@ Class {
 
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesReceiverHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	'receiver handler' record.
 	(self addLinkedFromMapVariableInvocationOfAdd: (aCollectionOfUsages collect: [ :el | el receiver -> el ]) to: widgetContainer in: theCurrentImporter)
 		ifFalse: [ self next
 				handleAddLinkedFromVariable: aCollectionOfUsages

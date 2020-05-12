@@ -5,7 +5,6 @@ FAMIXLocalVariable >> allUsages [
 	"All the invocations the localVariable involved"
 
 	| posUsages |
-	('localVaribale allUsages: ' , self mooseName) record.
 	"self fastAccesses
 		ifNotEmpty: [ :accesses | ((accesses difference: self fastDeclaration) select: [ :entity | entity isOfType: FASTJavaMethodInvocation ] thenCollect: #famix) reject: [ :invoc | invoc receiver = self ] ]
 		ifEmpty: ["

@@ -11,28 +11,23 @@ CSNBehaviorPatternServiceCall >> createAsynchroneCallFrom: namedEntity withDista
 	asynchroneCall
 		startPos: namedEntity parentNode parentNode parentNode startPos;
 		endPos: namedEntity parentNode parentNode parentNode endPos.
-	namedEntity parentNode parentNode parentNode parentNode expression:
-		asynchroneCall.
+	namedEntity parentNode parentNode parentNode parentNode expression: asynchroneCall.
 	namedEntity parentNode parentNode parentNode arguments
 		detect: [ :arg | arg class = FASTJavaNewClassExpression ]
 		ifFound: [ :newClass | 
-			(newClass declarations select: [ :m | m name = 'onSuccess' ]) 
+			(newClass declarations select: [ :m | m name = 'onSuccess' ])
 				ifNotEmpty: [ :successMethodInCollection | 
 					successMethodInCollection first removeAllPotentialParentNode.
 					asynchroneCall onSuccess: successMethodInCollection first ] ].
 	namedEntity parentNode parentNode parentNode arguments
 		detect: [ :arg | arg class = FASTJavaNewClassExpression ]
 		ifFound: [ :newClass | 
-			(newClass declarations select: [ :m | m name = 'onFailure' ]) 
+			(newClass declarations select: [ :m | m name = 'onFailure' ])
 				ifNotEmpty: [ :faillureMethodInCollection | 
 					faillureMethodInCollection first removeAllPotentialParentNode.
 					asynchroneCall onFailure: faillureMethodInCollection first ] ].
 	asynchroneCall distantService: action.
-	self model removeAll: { 
-			namedEntity parentNode parentNode parentNode.
-			namedEntity parentNode parentNode.
-			namedEntity parentNode.
-			namedEntity }
+	self model removeAll: {namedEntity parentNode parentNode parentNode . namedEntity parentNode parentNode . namedEntity parentNode . namedEntity}
 ]
 
 { #category : #'instance creation' }
@@ -42,7 +37,7 @@ CSNBehaviorPatternServiceCall >> newAsynchroneCall [
 
 { #category : #'instance creation' }
 CSNBehaviorPatternServiceCall >> newSynchroneCall [
-	^ self model silentlyAdd: CSNBSynchroneCall new
+	^ self model add: CSNBSynchroneCall new
 ]
 
 { #category : #running }

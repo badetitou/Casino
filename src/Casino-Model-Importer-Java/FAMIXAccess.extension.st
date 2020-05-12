@@ -2,7 +2,6 @@ Extension { #name : #FAMIXAccess }
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXAccess >> allUsages [
-	('access allUsages: ' , self mooseName) record.
 	^ self variable allUsages
 		ifEmpty: [ | posUsages |
 			posUsages := ((self source allAtAnyScope: {FamixTClass . FamixTMethod}) select: #hasSourceAnchor) first sourceAnchor

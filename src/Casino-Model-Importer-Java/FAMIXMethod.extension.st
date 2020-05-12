@@ -2,7 +2,6 @@ Extension { #name : #FAMIXMethod }
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXMethod >> allUsages [
-	('method allUsages:' , self mooseName) record.
 	^ self incomingInvocations
 		,
 			(self incomingInvocations

@@ -6,7 +6,6 @@ Class {
 
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesParameterHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	'parameter handler' record.
 	((aCollectionOfUsages collect: #receiver thenSelect: [ :receiver | receiver class = FAMIXParameter ])
 		ifEmpty: [ false ]
 		ifNotEmpty: [ :collection | 

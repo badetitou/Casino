@@ -6,7 +6,6 @@ Class {
 
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesContainerReceiverHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	'container receiver handler' record.
 	(self
 		addLinkedFromVariable:
 			(aCollectionOfUsages

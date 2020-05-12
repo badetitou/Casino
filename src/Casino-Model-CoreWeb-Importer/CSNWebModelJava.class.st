@@ -113,21 +113,15 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 	^ widget affectedActions
 		ifNotNil: [ :affectedActions | 
 			| usages |
-			self
-				execute: [ 
-					'allUsages ' record.
-					usages := widget affectedActions allUsages.
-					'allContainer ' record.
-					usages := usages , (usages flatCollect: [ :el | el allContainers ])
-						reject:
-							[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
-					'responsabilityHandlerForUsages ' record.
-					responsabilityHandlerForUsages
-						handleAddLinkedFromVariable: usages asOrderedCollection
-						to: widget
-						withXmlui: xmlUiWidgetLink
-						andImporter: self ]
-				recordedAs: 'search for: ' , affectedActions asString ]
+			usages := widget affectedActions allUsages.
+			usages := usages , (usages flatCollect: [ :el | el allContainers ])
+				reject:
+					[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
+			responsabilityHandlerForUsages
+				handleAddLinkedFromVariable: usages asOrderedCollection
+				to: widget
+				withXmlui: xmlUiWidgetLink
+				andImporter: self ]
 		ifNil: [ | containerInvocation |
 			containerInvocation := widget source container.
 			[ containerInvocation isNotNil ]
@@ -251,7 +245,7 @@ CSNWebModelJava >> generateServiceAction [
 	self model allCSNService
 		withIndexDo: [ :e :index | 
 			self model addAll: (e addAllActions: (self getListOfServiceActionForServiceClass: e source)).
-			index \\ 50 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
+			index \\ 10 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
 ]
 
 { #category : #'private - actions' }

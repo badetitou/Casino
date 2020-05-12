@@ -6,25 +6,19 @@ FAMIXAttribute >> allUsages [
 
 	| methodsToUsages methods invocations return |
 	"check if the variable is returned by a method"
-	('attribute allUsages: ' , self mooseName) record.
-	'isReturned' record.
 	return := (self incomingAccesses select: #isReturned) ifEmpty: [ {} ] ifNotEmpty: [ :list | list first source allUsages ].
 
 	"check the invocation inside methods"
-	'collect from' record.
 	methods := self incomingAccesses collect: #source as: Set.	"self parentType methods."
-	'methodsToUsages' record.
 	methodsToUsages := methods
 		select: [ :method | method hasSourceAnchor and: [ method isInstanciationInitializer not ] ]
 		thenCollect: [ :method | method -> (method sourceAnchor findAllOccurrencesOfVariableNamed: self name) ].
-	'invocations' record.
 	invocations := (methodsToUsages
 		collect: [ :methodToUsage | 
 			methodToUsage value
 				collect: [ :usage | 
 					(methodToUsage key parentType queryAllOutgoingInvocations select: [ :el | el sourceAnchor isNotNil ])
 						select: [ :out | out sourceAnchor intervalAsCharPos rangeIncludes: usage ] ] ]) flattened reject: [ :invoc | invoc receiver = self ].
-	'return' record.
 	^ {(invocations select: [ :usage | usage parameters anySatisfy: [ :param | param includesSubstring: self name ] ]).
 	return} flattened
 ]
