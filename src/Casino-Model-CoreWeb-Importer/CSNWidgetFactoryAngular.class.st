@@ -6,7 +6,9 @@ Class {
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
-	^ (CSNAction newFrom: aClass for: widget withImporter: self) ifNotNil: [ :action | self model silentlyAdd: action ]
+	^ (CSNAction newFrom: aClass for: widget withImporter: self)
+		ifNotNil: [ :action | self model silentlyAdd: action ]
+		ifNil: [ ('no corresponding action for ' , aClass asString) record ]
 ]
 
 { #category : #factory }

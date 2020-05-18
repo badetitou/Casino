@@ -166,7 +166,10 @@ CSNWebModelJava >> addWidgetsActions [
 		ifFound: [ :eventHandlerClass | 
 			eventHandlerClass subclassHierarchy
 				select: [ :class | self isElementFromApplication: class ]
-				thenDo: [ :class | (self tryGetWidgetFromUsages: class allUsages) ifNotNil: [ :found | self factory createActionFromClass: class for: found ] ] ]
+				thenDo: [ :class | 
+					(self tryGetWidgetFromUsages: class allUsages)
+						ifNotNil: [ :found | self factory createActionFromClass: class for: found ]
+						ifNil: [ ('no widget found for ' , class asString) record ] ] ]
 ]
 
 { #category : #accessing }
