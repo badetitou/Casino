@@ -748,17 +748,16 @@ CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
-  self
-     << '<';
-     <<< (aBLUIInputColor getListPropertiesAsStringWith: self);
-     <<< ' type="color" />'
+	self << '<'.
+	aBLUIInputColor getListPropertiesAsStringWith: self.
+	self <<< ' type="color" />'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputFile: aBLUIInputFile [
-  self << '<'.
-  aBLUIInputFile getListPropertiesAsStringWith: self.
-  self <<< ' type="file"/>'
+	self << '<'.
+	aBLUIInputFile getListPropertiesAsStringWith: self.
+	self <<< ' type="file"/>'
 ]
 
 { #category : #visiting }
