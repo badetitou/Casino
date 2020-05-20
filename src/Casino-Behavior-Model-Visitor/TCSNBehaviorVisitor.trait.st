@@ -32,6 +32,12 @@ TCSNBehaviorVisitor >> visitCSNBOnError: aCSNBOnError [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnFocus: aCSNBOnFocus [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnFocus
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnSubmit: aCSNBOnSubmit [
 	"see UI model"
 	^ self visitCSNAction: aCSNBOnSubmit

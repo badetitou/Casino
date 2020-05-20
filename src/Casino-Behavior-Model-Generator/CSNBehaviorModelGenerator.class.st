@@ -26,7 +26,8 @@ Class {
 		'onClick',
 		'onError',
 		'onSubmit',
-		'onSubmitSuccess'
+		'onSubmitSuccess',
+		'onFocus'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -91,6 +92,11 @@ CSNBehaviorModelGenerator >> commentForOnError [
 ]
 
 { #category : #definition }
+CSNBehaviorModelGenerator >> commentForOnFocus [
+	^ 'When the user focus on an element'
+]
+
+{ #category : #definition }
 CSNBehaviorModelGenerator >> commentForOnSubmit [
 	^ 'Should happen when the submit event is fired (on a form)'
 ]
@@ -148,7 +154,8 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onClick := builder newClassNamed: #OnClick comment: self commentForOnClick.
 	onError := builder newClassNamed: #OnError comment: self commentForOnError.
 	onSubmit := builder newClassNamed: #OnSubmit comment: self commentForOnSubmit.
-	onSubmitSuccess := builder newClassNamed: #OnSubmitSuccess comment: self commentForOnSubmitSuccess
+	onSubmitSuccess := builder newClassNamed: #OnSubmitSuccess comment: self commentForOnSubmitSuccess.
+	onFocus := builder newClassNamed: #OnFocus comment: self commentForOnFocus
 ]
 
 { #category : #definition }
@@ -171,7 +178,8 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	onClick --|> action.
 	onError --|> action.
 	onSubmit --|> action.
-	onSubmitSuccess --|> action
+	onSubmitSuccess --|> action.
+	onFocus --|> action.
 ]
 
 { #category : #definition }
