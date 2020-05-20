@@ -7,7 +7,7 @@ CSNAction >> gtCallerBehavior: composite [
 		title: 'Caller -> behavior';
 		with: [ :browser | 
 			browser
-				row: #caller;
+				row: #caller size: 100;
 				row: #evaluator.
 			browser transmit
 				to: #caller;
