@@ -256,7 +256,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self
 		<<< '''';
-		<<< (aFASTJavaStringLiteral value copyReplaceAll: '''' with: '\''');
+		<<< aFASTJavaStringLiteral value protectQuote;
 		<<< ''''
 ]
 
