@@ -5,6 +5,7 @@ CSNAction >> gtCallerBehavior: composite [
 	<gtInspectorPresentationOrder: 1000>
 	^ composite tabulator
 		title: 'Caller -> behavior';
+		when: [ self sources isNotEmpty ];
 		with: [ :browser | 
 			browser
 				row: #caller size: 100;
@@ -19,8 +20,13 @@ CSNAction >> gtCallerBehavior: composite [
 				to: #evaluator;
 				andShow: [ :a | 
 					a text
-						format: self sources anyOne sourceAnchor completeText;
-						initialize: [ :presentation |  presentation selectionInterval: (self sources anyOne sourceAnchor intervalAsCharPos) ];
+						format: [ self sources anyOne sourceAnchor completeText ];
+						initialize: [ :presentation | 
+							presentation
+								selectionInterval:
+									(self sources
+										ifNotEmpty: [ :sourcess | sourcess anyOne sourceAnchor intervalAsCharPos ]
+										ifEmpty: [ 0 to: 0 ]) ];
 						withLineNumbers: true;
 						yourself ] ];
 		yourself
