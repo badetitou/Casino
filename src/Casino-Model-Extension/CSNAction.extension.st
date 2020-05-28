@@ -14,7 +14,7 @@ CSNAction >> gtCallerBehavior: composite [
 				to: #caller;
 				andShow: [ :a | 
 					a text
-						format: self caller name;
+						format: self caller name asString;
 						yourself ].
 			browser transmit
 				to: #evaluator;
