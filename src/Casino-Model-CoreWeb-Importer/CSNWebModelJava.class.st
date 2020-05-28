@@ -166,7 +166,7 @@ CSNWebModelJava >> addWidgetsActions [
 		ifFound: [ :eventHandlerClass | 
 			eventHandlerClass subclassHierarchy
 				select: [ :class | self isElementFromApplication: class ]
-				thenDo: [ :class | 
+				thenDo: [ :class |
 					(self tryGetWidgetFromUsages: class allUsages)
 						ifNotNil: [ :found | self factory createActionFromClass: class for: found ]
 						ifNil: [ ('no widget found for ' , class asString) record ] ] ]
@@ -515,11 +515,11 @@ CSNWebModelJava >> searchWidgetFromConstructorInvocation: anInvocation [
 
 { #category : #adding }
 CSNWebModelJava >> tryGetWidgetFromUsages: usages [
-	(usages collect: #receiver)
-		do: [ :receiver | 
-			(self linkFromWidgetActionAppelCase1: usages anyOne)
-				ifNotNil: [ :found | ^ found ]
-				ifNil: [ (self widgetInVariable: receiver) ifNotNil: [ :found | ^ found ] ] ].
+	| widget |
+	usages
+		detect: [ :usage | (widget := (self linkFromWidgetActionAppelCase1: usage)) isNotNil ]
+		ifFound: [ :found | ^ widget ]
+		ifNone: [ (usages collect: #receiver) do: [ :receiver | (self widgetInVariable: receiver) ifNotNil: [ :found | ^ found ] ] ].
 	^ nil
 ]
 
