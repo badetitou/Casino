@@ -30,5 +30,5 @@ CSNBOnSubmit class >> createActionFrom: aClass for: aWidgetInstance withImporter
 
 { #category : #'as yet unclassified' }
 CSNBOnSubmit >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(ngSubmit)="' , behaviors anyOne uniqueName , '()"' ]
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(ngSubmit)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
 ]

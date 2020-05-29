@@ -108,34 +108,42 @@ CSNLGridLayout >> determineXandYfrom: anInvocation andPrevious: anPreviousInvoca
 { #category : #'as yet unclassified' }
 CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation [
 	| aYValue |
-		"The first check of is array is used in debug if we try to re determine some values"
-	anInvocation isArray ifTrue: [ aYValue := anInvocation second ] ifFalse: [ aYValue := anInvocation parameters second ].
+	"The first check of is array is used in debug if we try to re determine some values"
+	anInvocation isArray
+		ifTrue: [ aYValue := anInvocation second ]
+		ifFalse: [ aYValue := anInvocation parameters second ].
 	^ aYValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| currentYValue |
-			(aYValue includesSubstring: 'getCellCount')
-				ifTrue: [ ^ (self atLevel: aYValue parameters first asInteger) size ].
+			(aYValue includesSubstring: 'getCellCount') ifTrue: [ ^ (self atLevel: aYValue parameters first asInteger) size ].
 
 			"determine current var value"
-			currentYValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: ((aYValue removePrefix: '++') removeSuffix: '++') ifAbsent: [ nil ].
+			currentYValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
+				at: ((aYValue removePrefix: '++') removeSuffix: '++')
+				ifAbsent: [ nil ].
 
 			"If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
 			Else, we'll say it's the max level (but we do not have arguments)"
 			currentYValue
-				ifNotNil: [ (anInvocation from localVariables select: [ :localVariable | localVariable name = ((aYValue removePrefix: '++') removeSuffix: '++') ])
+				ifNotNil: [ (anInvocation source localVariables select: [ :localVariable | localVariable name = ((aYValue removePrefix: '++') removeSuffix: '++') ])
 						ifNotEmpty: [ :localVariable | 
 							| positions |
 							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
-							positions := positions select: [ :val | val < anInvocation sourceAnchor startPos and: [ val > (anPreviousInvocation ifNil: [ 0 ] ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
+							positions := positions
+								select: [ :val | 
+									val < anInvocation sourceAnchor startPos
+										and: [ val
+												>
+													(anPreviousInvocation
+														ifNil: [ 0 ]
+														ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
 							positions
 								do: [ :val | 
 									"if the usage is something like ++var or var++, we increment the currentXValue"
 									((anInvocation from sourceAnchor copyFrom: val - 2 to: val + localVariable first name size - 1) = ('++' , localVariable first name)
 										or: [ (anInvocation from sourceAnchor copyFrom: val to: val + localVariable first name size - 1 + 2) = (localVariable first name , '++') ])
 										ifTrue: [ currentYValue := currentYValue + 1 ]
-										ifFalse: [ self
-												haltIf: [ localVariable first incomingAccesses
-														anySatisfy: [ :access | access sourceAnchor startPos = val ] ] ] ] ] ]
+										ifFalse: [ self haltIf: [ localVariable first incomingAccesses anySatisfy: [ :access | access sourceAnchor startPos = val ] ] ] ] ] ]
 				ifNil: [ currentYValue := (self atLevel: self maxLevel) size ].
 
 

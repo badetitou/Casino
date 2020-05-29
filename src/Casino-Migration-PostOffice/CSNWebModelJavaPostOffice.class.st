@@ -52,8 +52,9 @@ CSNWebModelJavaPostOffice >> generatePhase [
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> isInFactory: invocationOrClass [
 	"used in PostOffice cause some factory are defined inside the PostOffice application \ie createBLLinkLabel"
+
 	invocationOrClass isClass ifTrue: [ ^ false ].
-	^ (invocationOrClass from atScope: FamixTMethod) anyOne name = 'createBLLinkLabel'
+	^ (invocationOrClass source atScope: FamixTMethod) anyOne name = 'createBLLinkLabel'
 ]
 
 { #category : #accessing }

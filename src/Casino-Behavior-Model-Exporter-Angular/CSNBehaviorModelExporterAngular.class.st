@@ -117,6 +117,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaConditionStatement: aFASTJavaCon
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
+	self flag: 'THIS IS NOT SUPPORTED YET BECAUSE IT IS NOT PRESENT IN FAST'.
+	self <<< '(ternair condition)'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaElsePartStatement [
 	aFASTJavaElsePartStatement orderedChildren flatCollect: [ :child | self accept: child ]
 ]
@@ -331,7 +337,7 @@ CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTStatement: aFASTStatement [
 	self indent.
-	aFASTStatement orderedChildren flatCollect: [ :child | self accept: child ]
+	aFASTStatement orderedChildren do: [ :child | self accept: child ]
 ]
 
 { #category : #generated }

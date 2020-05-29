@@ -16,3 +16,8 @@ CSNBOnSubmitSuccess class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #'as yet unclassified' }
+CSNBOnSubmitSuccess >> getAngularRepresentation [
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(ngSubmit)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
+]

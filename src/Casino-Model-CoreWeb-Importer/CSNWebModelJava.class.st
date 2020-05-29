@@ -187,8 +187,7 @@ CSNWebModelJava >> buisinessPageWithSources [
 
 { #category : #'private - postImport' }
 CSNWebModelJava >> cleanImportCache [
-	self model privateState removeProperty: #buisinessPageWithSources
-	
+	self model privateState removeCache: #buisinessPageWithSources
 ]
 
 { #category : #adding }
@@ -418,7 +417,7 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
 	anInvocation source parentType isHandlerClass ifFalse: [ ^ nil ].
 	(self
 		widgetInVariable:
-			(anInvocation from parentType container outgoingInvocations
+			(anInvocation source parentType container outgoingInvocations
 				detect: [ :invoc | 
 					invoc sourceAnchor isNotNil
 						and: [ invoc sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]

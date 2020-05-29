@@ -32,5 +32,5 @@ CSNBOnError class >> createActionFrom: aClass for: aWidgetInstance withImporter:
 CSNBOnError >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(error)="' , behaviors anyOne uniqueName , '()"' ]
+		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
 ]
