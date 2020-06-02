@@ -38,6 +38,12 @@ TCSNBehaviorVisitor >> visitCSNBOnFocus: aCSNBOnFocus [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnLoad: aCSNBOnLoad [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnLoad
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnSubmit: aCSNBOnSubmit [
 	"see UI model"
 	^ self visitCSNAction: aCSNBOnSubmit

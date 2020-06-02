@@ -27,7 +27,8 @@ Class {
 		'onError',
 		'onSubmit',
 		'onSubmitSuccess',
-		'onFocus'
+		'onFocus',
+		'onLoad'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -53,71 +54,76 @@ CSNBehaviorModelGenerator class >> submetamodels [
 		  CSNUICoreWebGenerator }
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForAsynchroneCall [
 	
 	^  'I represent an asynchrone call to a distant service'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForCall [
 	^ 'I represent an abstract call to a distant service
 	
 Since I''m abstract, I should not be instanciate (but, it is a reasonnable solution if you don''t know witch call instanciate)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForDOMElementAccess [
 	^ 'Access to a DOM element'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForNavigation [
 	^ 'I represent a special call that lead to the navigation to another page of the application'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnChange [
 	^ 'Should happen when the change event is fired'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnClick [
 	^ 'Should happen when the click event is fired'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnError [
 	^ 'Should happen when the error event is fired'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnFocus [
 	^ 'When the user focus on an element'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnLoad [
+	^ 'Is fired when a page and all its components is loaded'
+]
+
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnSubmit [
 	^ 'Should happen when the submit event is fired (on a form)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnSubmitSuccess [
 	^ 'Should happen when the submitSucess event is fired (on a form)
 (when a submit has correcly proceed)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOpenDialog [
 	^ 'I represent a call which will create a dialog with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForPopUp [
 	^ 'I represent a call which will create a pop up with the data as inside it (it corresponds most of the time to a String, but it can change)'
 ]
 
-{ #category : #definition }
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForSynchroneCall [
 	
 	^  'I represent an Synchrone call (normal call) to a distant service'
@@ -155,7 +161,8 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onError := builder newClassNamed: #OnError comment: self commentForOnError.
 	onSubmit := builder newClassNamed: #OnSubmit comment: self commentForOnSubmit.
 	onSubmitSuccess := builder newClassNamed: #OnSubmitSuccess comment: self commentForOnSubmitSuccess.
-	onFocus := builder newClassNamed: #OnFocus comment: self commentForOnFocus
+	onFocus := builder newClassNamed: #OnFocus comment: self commentForOnFocus.
+	onLoad := builder newClassNamed: #OnLoad comment: self commentForOnLoad
 ]
 
 { #category : #definition }
@@ -180,6 +187,7 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	onSubmit --|> action.
 	onSubmitSuccess --|> action.
 	onFocus --|> action.
+	onLoad --|> action
 ]
 
 { #category : #definition }
