@@ -44,6 +44,18 @@ TCSNBehaviorVisitor >> visitCSNBOnLoad: aCSNBOnLoad [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnOut: aCSNBOnOut [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnOut
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnOver: aCSNBOnOver [
+	"see UI model"
+	^ self visitCSNAction: aCSNBOnOver
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnSubmit: aCSNBOnSubmit [
 	"see UI model"
 	^ self visitCSNAction: aCSNBOnSubmit

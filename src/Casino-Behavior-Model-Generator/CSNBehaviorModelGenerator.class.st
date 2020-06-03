@@ -28,7 +28,9 @@ Class {
 		'onSubmit',
 		'onSubmitSuccess',
 		'onFocus',
-		'onLoad'
+		'onLoad',
+		'onOver',
+		'onOut'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -103,6 +105,16 @@ CSNBehaviorModelGenerator >> commentForOnLoad [
 ]
 
 { #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnOut [
+	^ 'Event is fired when the mouse leave the DOM element'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnOver [
+	^ 'Event is fired when the mouse is over the dom element'
+]
+
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnSubmit [
 	^ 'Should happen when the submit event is fired (on a form)'
 ]
@@ -162,7 +174,9 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onSubmit := builder newClassNamed: #OnSubmit comment: self commentForOnSubmit.
 	onSubmitSuccess := builder newClassNamed: #OnSubmitSuccess comment: self commentForOnSubmitSuccess.
 	onFocus := builder newClassNamed: #OnFocus comment: self commentForOnFocus.
-	onLoad := builder newClassNamed: #OnLoad comment: self commentForOnLoad
+	onLoad := builder newClassNamed: #OnLoad comment: self commentForOnLoad.
+	onOver := builder newClassNamed: #OnOver comment: self commentForOnOver.
+	onOut := builder newClassNamed: #OnOut comment: self commentForOnOut
 ]
 
 { #category : #definition }
@@ -187,7 +201,9 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	onSubmit --|> action.
 	onSubmitSuccess --|> action.
 	onFocus --|> action.
-	onLoad --|> action
+	onLoad --|> action.
+	onOver --|> action.
+	onOut --|> action
 ]
 
 { #category : #definition }
