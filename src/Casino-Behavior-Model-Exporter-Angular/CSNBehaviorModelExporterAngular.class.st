@@ -211,7 +211,23 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
-	super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression.
+	aFASTJavaNewClassExpression famixType isAnonymousClass
+		ifTrue: [ self <<< 'new class'.
+			aFASTJavaNewClassExpression famixType superclass mooseName = #'java::lang::Object'
+				ifFalse: [ self
+						<<< ' extends ';
+						<<< aFASTJavaNewClassExpression famixType superclass name ].
+			(aFASTJavaNewClassExpression famixType superclassHierarchy select: #isInterface)
+				ifNotEmpty: [ :interfaces | 
+					self <<< ' implements'.
+					interfaces
+						do: [ :interface | 
+							self
+								<<< ' ';
+								<<< interface name ]
+						separatedBy: [ self <<< ',' ] ] ]
+		ifFalse: [ super visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression ].
+
 	self
 		<<< ' {';
 		crlf.
