@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 MCProgressBar class >> getSelector [
-	^ '<mat-progress-bar>'
+	^ 'mat-progress-bar'
 ]
 
 { #category : #accessing }
