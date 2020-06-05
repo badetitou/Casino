@@ -3,10 +3,11 @@ Root entity of the meta-model
 "
 Class {
 	#name : #CSNOriginedEntity,
-	#superclass : #MooseEntity,
-	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
-	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
+	#superclass : #CSNEntity,
+	#traits : 'TDependencyQueries + TEntityMetaLevelDependency',
+	#classTraits : 'TDependencyQueries classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
+		'#name => FMProperty',
 		'#sources => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
@@ -15,17 +16,24 @@ Class {
 { #category : #meta }
 CSNOriginedEntity class >> annotation [
 
-	<FMClass: #OriginedEntity super: #MooseEntity>
+	<FMClass: #OriginedEntity super: #CSNEntity>
 	<package: #'Casino-Model'>
 	<generated>
 	^self
 ]
 
-{ #category : #meta }
-CSNOriginedEntity class >> metamodel [
+{ #category : #accessing }
+CSNOriginedEntity >> name [
 
+	<FMProperty: #name type: #String>
 	<generated>
-	^ CSNModel metamodel
+	^ name
+]
+
+{ #category : #accessing }
+CSNOriginedEntity >> name: anObject [
+	<generated>
+	name := anObject
 ]
 
 { #category : #accessing }

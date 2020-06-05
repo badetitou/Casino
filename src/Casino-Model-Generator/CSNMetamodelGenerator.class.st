@@ -63,7 +63,7 @@ CSNMetamodelGenerator >> defineClasses [
 { #category : #definition }
 CSNMetamodelGenerator >> defineHierarchy [
 	super defineHierarchy.
-	entity --|> #TNamedEntity.
+	entity --|> #TDependencyQueries.
 	entity --|> #TEntityMetaLevelDependency.
 	entity <|-- action.
 	entity <|-- attribute.
@@ -80,6 +80,8 @@ CSNMetamodelGenerator >> defineHierarchy [
 
 { #category : #definition }
 CSNMetamodelGenerator >> defineProperties [
+	super defineProperties.
+	entity property: #name type: #String.
 	(entity property: #sources type: #Object)
 		comment:
 			'The sources of the element
