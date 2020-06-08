@@ -52,13 +52,14 @@ CSNBehaviorModelExporterCoreWeb >> visitGetElementAttribute: aGetElementAttribut
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
-	self
-		<<< 'this.openPhase(''';
-		<<<
-			(aNavigation page
-				ifNotNil: [ :page | page name ]
-				ifNil: [ 'TODO' ]);
-		<<< ''')'
+	self <<< 'this.openPhase('.
+	aNavigation page
+		ifNotNil: [ :page | 
+			self
+				<<< 'this.';
+				<<< page name ]
+		ifNil: [ self <<< '''TODO''' ].
+	self <<< ')'
 ]
 
 { #category : #generated }
