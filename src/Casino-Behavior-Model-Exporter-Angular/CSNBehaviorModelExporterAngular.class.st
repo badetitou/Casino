@@ -233,12 +233,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNew
 		crlf.
 	aFASTJavaNewClassExpression declarations
 		do: [ :method | 
-			self indent.
+			self indentPlus.
 			self accept: method.
-			self crlf ].
-	self
-		crlf;
-		<<< '}'
+			self crlf.
+			self indentMinus ].
+	self << '}'
 ]
 
 { #category : #generated }
