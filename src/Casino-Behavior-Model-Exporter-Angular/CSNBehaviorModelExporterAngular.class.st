@@ -118,8 +118,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaConditionStatement: aFASTJavaCon
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaConditionalExpression: aFASTJavaConditionalExpression [
-	self flag: 'THIS IS NOT SUPPORTED YET BECAUSE IT IS NOT PRESENT IN FAST'.
-	self <<< '(ternair condition)'
+	self accept: aFASTJavaConditionalExpression condition.
+	self <<< ' ? '.
+	self accept: aFASTJavaConditionalExpression thenPart.
+	self <<< ' : '.
+	self accept: aFASTJavaConditionalExpression elsePart
 ]
 
 { #category : #generated }
