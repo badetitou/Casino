@@ -1,3 +1,7 @@
+"
+I'm a factory that creates the entities you asked me to.
+The main point is to ensure that all created entities will be part of the model
+"
 Class {
 	#name : #CSNWidgetFactory,
 	#superclass : #Object,
