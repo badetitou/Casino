@@ -859,12 +859,12 @@ CSNModelExporterAngular >> visitCSNUIRelativeWidth: aBLUIRelativeWidth [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
-  self <<< '<'.
+  self << '<'.
   aBLUISelect getListPropertiesAsStringWith: self.
   self
      <<< '>';
-     <<< String crlf;
-     <<< '</';
+     crlf;
+     << '</';
      <<< aBLUISelect getSelector;
      <<< '>'
 ]
