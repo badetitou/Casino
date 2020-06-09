@@ -13,6 +13,41 @@ CSNStringTest >> testComplexeThing [
 ]
 
 { #category : #tests }
+CSNStringTest >> testFindAllOccurencesOfVariableNamed [
+	| string variableNamed |
+	string := 'private void showDebugPanel(){
+		this.sys = new GwtStatisticsEventSystem();
+		this.panelComponent = new DefaultDebugStatisticsDebugPanelComponent(null);
+		this.xmlComponent = this.panelComponent.xmlComponent();
+		this.logComponent = new DefaultRawLogDebugPanelComponent(this.sys);
+		this.em = new GwtExceptionModel();
+		DebugPanelWidget debugPanel = new DebugPanelWidget(this, true, new DebugPanelWidget.Component[] {
+				this.panelComponent,
+				new DefaultExceptionDebugPanelComponent(this.em),
+				new DefaultCookieDebugPanelComponent(),
+				this.logComponent,
+				this.xmlComponent
+		});
+		BLDialogBox dialogDebug = new BLDialogBox("CORE - Debug Console", debugPanel, true);
+		dialogDebug.show();
+	}'.
+	variableNamed := 'dialogDebug'.
+	self assert: ((string findAllOccurrencesOfVariableNamed: variableNamed) includesAll: {607 . 682})
+]
+
+{ #category : #tests }
+CSNStringTest >> testFindAllOccurencesOfVariableNamedWithUnderscore [
+	
+	self assert: ('bl_de' allRangesOfSubstringNoSurrouned: 'bl') equals: #()
+]
+
+{ #category : #tests }
+CSNStringTest >> testFindAllOccurencesOfVariableNamedWithoutUnderscore [
+	
+	self assert: ('bl de' allRangesOfSubstringNoSurrouned: 'bl') equals: { 1 to: 2} asArray
+]
+
+{ #category : #tests }
 CSNStringTest >> testOneBooleanFalse [
 	| string |
 	string := 'setWidth(false)'.
