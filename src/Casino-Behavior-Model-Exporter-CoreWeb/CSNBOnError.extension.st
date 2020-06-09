@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnError }
 
-{ #category : #'*Casino-Model-Exporter-Angular' }
+{ #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnError >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]

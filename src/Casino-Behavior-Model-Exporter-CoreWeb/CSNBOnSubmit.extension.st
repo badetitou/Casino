@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnSubmit }
 
-{ #category : #'*Casino-Model-Exporter-Angular' }
+{ #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnSubmit >> getAngularRepresentation [
 	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(ngSubmit)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
 ]

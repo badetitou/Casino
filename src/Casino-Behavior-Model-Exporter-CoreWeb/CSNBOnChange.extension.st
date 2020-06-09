@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnChange }
 
-{ #category : #'*Casino-Model-Exporter-Angular' }
+{ #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnChange >> getAngularRepresentation [
 	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(change)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode), '()"' ]
 ]

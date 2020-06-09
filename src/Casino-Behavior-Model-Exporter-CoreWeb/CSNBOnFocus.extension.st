@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnFocus }
 
-{ #category : #'*Casino-Model-Exporter-Angular' }
+{ #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnFocus >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]
