@@ -12,8 +12,3 @@ CSNUICWSwitch class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSwitch >> angularComponent [
-	^ MCSlideToggle
-]

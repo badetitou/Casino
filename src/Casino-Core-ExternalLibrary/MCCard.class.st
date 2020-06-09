@@ -26,7 +26,7 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #export }
 MCCard class >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		crlf;
@@ -39,7 +39,7 @@ MCCard class >> exportFooterOf: aWidget with: anExporter [
 		indentMinus
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCCard class >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.

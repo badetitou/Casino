@@ -27,8 +27,3 @@ CSNBOnOut class >> createActionFrom: aClass for: aWidgetInstance withImporter: a
 		name: 'mouseout';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnOut >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(mouseout)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
-]

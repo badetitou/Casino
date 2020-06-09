@@ -26,12 +26,12 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #export }
 MCInput class >> componentAttributeOn: anExporter [
 	anExporter <<< ' matInput '
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCInput class >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
@@ -43,12 +43,12 @@ MCInput class >> exportContentOf: aWidget with: anExporter [
 		indentMinus
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCInput class >> exportFooterOf: aWidget with: anExporter [
 	anExporter << '</mat-form-field>'
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCInput class >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';

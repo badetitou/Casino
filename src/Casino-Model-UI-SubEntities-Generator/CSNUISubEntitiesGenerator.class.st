@@ -84,14 +84,6 @@ Class {
 }
 
 { #category : #accessing }
-CSNUISubEntitiesGenerator class >> modifyMetamodel: aMetamodel [
-
-	super modifyMetamodel: aMetamodel.
-	
-	self fixRemoteMetamodelRelationsIn: aMetamodel.
-]
-
-{ #category : #accessing }
 CSNUISubEntitiesGenerator class >> packageName [
 
 	^ 'Casino-Model-UI-SubEntities'

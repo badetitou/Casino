@@ -12,8 +12,3 @@ CSNUICWAutoComplete class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUICWAutoComplete >> angularComponent [
-	^ PNGAutoComplete
-]

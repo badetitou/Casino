@@ -12,8 +12,3 @@ CSNUICWDialog class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUICWDialog >> angularComponent [
-	^ PNGDialog
-]

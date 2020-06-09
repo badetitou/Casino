@@ -37,6 +37,21 @@ CSNWidget >> gtAttributesIn: composite [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> gtSourceCodeIn: composite [
+	<gtInspectorPresentationOrder: 1002>
+	^ composite text
+		  title: 'Source Code';
+		  display: [ :anObject | 
+			  anObject mooseInterestingEntity sources anyOne sourceAnchor
+				  sourceText ];
+		  when: [ :anObject | 
+			  anObject mooseInterestingEntity sources isNotEmpty and: [ 
+					  anObject mooseInterestingEntity sources anyOne sourceAnchor
+						  isNotNil ] ];
+		  withLineNumbers: true
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> gtSourcesIn: composite [
 	<gtInspectorPresentationOrder: 1001>
 	^ composite list

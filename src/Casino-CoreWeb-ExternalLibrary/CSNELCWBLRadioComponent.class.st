@@ -36,7 +36,7 @@ CSNELCWBLRadioComponent class >> moduleName [
 	^ 'BlRadioButtonComponent'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLRadioComponent class >> subModulePath [
 	^ 'radio-button/radio-button.component'
 ]

@@ -88,7 +88,7 @@ WidgetRepresentation class >> getSelector [
 	^ 'div'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 WidgetRepresentation class >> importString [
 	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
 ]

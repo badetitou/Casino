@@ -21,14 +21,10 @@ String >> findNext: aCharacter for: startIndex [
 	| pos nestLevel |
 	pos := startIndex + 1.
 	nestLevel := 0.
-	[ pos <= self size ]
-		whileTrue: [ ((self at: pos) = ${ or: [ (self at: pos) = $( ])
-				ifTrue: [ nestLevel := nestLevel + 1 ].
-			((self at: pos) = $} or: [ (self at: pos) = $) ])
-				ifTrue: [ nestLevel := nestLevel - 1 ].
-			((self at: pos) = aCharacter and: [nestLevel = 0])
-				ifTrue: [ ^ pos ].
-			pos := pos + 1 ].
+	pos to: self size do: [ :index | 
+		((self at: index) = ${ or: [ (self at: index) = $( ]) ifTrue: [ nestLevel := nestLevel + 1 ].
+		((self at: index) = $} or: [ (self at: index) = $) ]) ifTrue: [ nestLevel := nestLevel - 1 ].
+		((self at: index) = aCharacter and: [ nestLevel = 0 ]) ifTrue: [ ^ index ] ].
 	^ self size + 1
 ]
 

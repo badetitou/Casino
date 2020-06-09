@@ -30,7 +30,7 @@ CSNWidgetFactory >> create: anEntity fromSource: aSource [
 	^ (self model add: anEntity new) addSource: aSource; yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #creating }
 CSNWidgetFactory >> createAlignementFrom: anAlignementIdentifier [
 	^ CSNLAlignement newFrom: anAlignementIdentifier withImporters: visitorImporters
 ]

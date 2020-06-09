@@ -4,12 +4,12 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #export }
 MCRadioButton class >> componentAttributeOn: anExporter [
 	anExporter <<< ' type="radio" '
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCRadioButton class >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes detect: [ :att | att isOfType: CSNUILabel ] ifFound: [ :att | anExporter visit: att ]
 ]

@@ -14,7 +14,7 @@ CSNELCWBLTabComponent class >> moduleName [
 	^ 'TabComponent'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLTabComponent class >> subModulePath [
 	^ 'tab/tab/tab.component'
 ]

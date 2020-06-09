@@ -27,10 +27,3 @@ CSNBOnLoad class >> createActionFrom: aClass for: aWidgetInstance withImporter: 
 		name: 'load';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnLoad >> getAngularRepresentation [
-	^ self behavior
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(load)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
-]

@@ -87,28 +87,28 @@ CSNModelImporterCoreWebVisitor >> getAttributeValueFrom: anInvocation [
 	^ anInvocation parameters first
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNLGridLayout: aCSNLGridLayout [
 	^ (#('BLFlexTable' 'FlexTable' 'BLGrid') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ self create: aCSNLGridLayout ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNLHorizontalLayout: aCSNLHorizontalLayout [
 	^ (#('HorizontalPanel' 'BLHorizontalPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ self create: aCSNLHorizontalLayout ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNLVerticalLayout: aCSNLHorizontalLayout [
 	^ (#('VerticalPanel' 'BLVerticalPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ self create: aCSNLHorizontalLayout ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
@@ -120,7 +120,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteHeight: aCSNUIAbsoluteHeight
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteWidth: aCSNUIAbsoluteWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 
@@ -132,7 +132,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIAbsoluteWidth: aCSNUIAbsoluteWidth [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 	^ (#('Button' 'BLLinkButton') includes: source invokedClassName)
 		ifTrue: [ | button |
@@ -149,21 +149,21 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
 	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNAutoComplete) ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWChart: aCSNChart [
 	^ (source invokedClassName includesSubstring: 'Chart') 
 		ifTrue: [ self createWidget: aCSNChart ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreCellWidth: aCSNCoreCellWidth [
 	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
 	
@@ -187,7 +187,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreCellWidth: aCSNCoreCellWidth [
 		ifFalse: [ ^ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreColSpan: aCSNCoreColSpan [
 	^ (source isInvocation and: [ source attributeName = 'colspan' ])
 		ifTrue: [ (self createAttribute: aCSNCoreColSpan for: source)
@@ -196,7 +196,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreColSpan: aCSNCoreColSpan [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreHorizontalAlignement: aCSNCoreHorizontalAlignement [
 	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
 	
@@ -221,7 +221,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreHorizontalAlignement: aCSNCore
 		ifFalse: [ ^ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreRowSpan: aCSNCoreRowSpan [
 	^ (source isInvocation and: [ source attributeName = 'rowspan' ])
 		ifTrue: [ (self createAttribute: aCSNCoreRowSpan for: source)
@@ -230,7 +230,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreRowSpan: aCSNCoreRowSpan [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreVerticalAlignement: aCSNCoreVerticalAlignement [
 	"bl_groupe_horizontal_289.setCellWidth(bl_groupe_vertical_290, '50%');
 	
@@ -255,7 +255,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreVerticalAlignement: aCSNCoreVe
 		ifFalse: [ ^ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 	^ 'BLDialogBox' = source invokedClassName
 		ifTrue: [ | dialog |
@@ -276,7 +276,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 	^ 'HTML' = source invokedClassName
 		ifTrue: [ (self createWidget: aCSNHTML)
@@ -285,26 +285,26 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWOpen: aCSOpen [
 	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWProgressBar: aCSNProgressBar [
 	^ 'BLProgressBar' = source invokedClassName
 		ifTrue: [ (self createWidget: aCSNProgressBar) ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWRichTextArea: aCSNRichTextArea [
 	^ (#('BLRTFWithToolbar') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNRichTextArea) ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
   ^'BLSplitButton' = source invokedClassName ifTrue: [ | splitButton |
         splitButton := (self createWidget: aCSNSplitButton)
@@ -317,19 +317,19 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWSplitButton: aCSNSplitButton [
         splitButton ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWSwitch: aCSNSwitch [
 	^ 'BLToggleButton' = source invokedClassName
 		ifTrue: [ (self createWidget: aCSNSwitch) ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 	^ (source isInvocation and: [ source attributeName = 'enabled' ]) ifTrue: [ self createAttribute: aCSNUIDisabled for: source ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 	^ (#('BLFieldSetPanelDynamic' 'BLGroupBoxPanel' 'BLFieldSetPanel' 'BLPortlet') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ | panel |
@@ -345,7 +345,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIHeight: aCSNUIHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
@@ -356,7 +356,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIHeight: aCSNUIHeight [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 	^ (#('BLImage' 'BLImageButton' 'BLDocButton' 'Image') includes: source invokedClassName)
 		ifTrue: [ (self createWidget: aCSNUIImage) 
@@ -373,7 +373,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
   ^(#('BLCheckBox' 'CheckBox') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputCheckbox)
            addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
@@ -381,34 +381,34 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
            yourself ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputColor: aCSNUIInputColor [
   ^'BLTextBoxColorPicker' = source invokedClassName ifTrue: [ self createWidgetInput: aCSNUIInputColor ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputDate: aCSNUIInputDate [
   ^(#('BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputDate)
            addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
            yourself ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputEmail: aCSNUIInputEmail [
 	^ nil
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputFile: aCSNUIInputFile [
   ^('BLFileUpload*|BLImageUploadPanel|BLFileUploadPanelLink|FileUpload' asRegex matchesPrefix: source invokedClassName) ifTrue: [ self createWidgetInput: aCSNUIInputFile ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputMonth: aCSNUIInputMonth [
   ^(#('BLTextBoxPeriodePicker' 'BLTextBoxPeriode') includes: source invokedClassName) ifTrue: [ self createWidgetInput: aCSNUIInputMonth ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputNumber: aCSNUIInputNumber [
 	^ (#('BLTextBoxNumber' 'BLTextBoxAnnee' 'BLTextBoxNumeric' 'BLTextBoxAmount' 'BLTextBoxPercentage') includes: source invokedClassName)
 		ifTrue: [ | inputNumber |
@@ -432,12 +432,12 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputNumber: aCSNUIInputNumber [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputPassword: aCSNUIInputPassword [
   ^(#('BLPasswordBox' 'PasswordTextBox') includes: source invokedClassName) ifTrue: [ self createWidgetInputText: aCSNUIInputPassword ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputRadio: aCSNUIInputRadio [
   ^(#('BLRadioButton' 'RadioButton') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputRadio)
            addAttribute: ((self create: CSNUIName) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));
@@ -446,21 +446,21 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputRadio: aCSNUIInputRadio [
            yourself ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputRange: aCSNUIInputRange [
 	^ 'BLSliderBar' = source invokedClassName 
 		ifTrue: [ self createWidgetInput: aCSNUIInputRange ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputText: aCSNUIInputText [
 	^ (#('BLTextBox' 'TextBox' 'BLTextBoxRestricted') includes: source invokedClassName)
 		ifTrue: [ (self createWidgetInputText: aCSNUIInputText) ]
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputTime: aCSNUIInputTime [
 	^ 'BLTextBoxTime' = source invokedClassName
 		ifTrue: [ | inputTime |
@@ -479,7 +479,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputTime: aCSNUIInputTime [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUILink: aCSNUILink [
 	^ ('BLLinkLabel' = source invokedClassName)
 		ifTrue: [ (self createWidget: aCSNUILink) 
@@ -492,12 +492,12 @@ CSNModelImporterCoreWebVisitor >> visitCSNUILink: aCSNUILink [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIMaxlength: aCSNUIMaxlength [
 	^ (source isInvocation and: [ source signature beginsWith: 'setMaxLength' ]) ifTrue: [ self createAttribute: aCSNUIMaxlength for: source ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 	^ ('BLImageUploadPanel' ~= source invokedClassName
 		and: [ 'BLFileUploadPanel' ~= source invokedClassName
@@ -507,7 +507,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
   ^(#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils' 'InlineLabel' 'BLLabelItem' 'BLTextInputItem') includes: source invokedClassName) ifTrue: [ | paragraph |
         paragraph := self createWidget: aCSNUIParagraph.
@@ -517,7 +517,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
         paragraph ] ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeHeight: aCSNUIRelativeHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
@@ -529,7 +529,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeHeight: aCSNUIRelativeHeight
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeWidth: aCSNUIRelativeWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 
@@ -541,14 +541,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeWidth: aCSNUIRelativeWidth [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUISelect: aCSNUISelect [
 	^ (#('BLListBox' 'ListBox' 'BLMultiCombo') includes: source invokedClassName) 
 		ifTrue: [ self createWidgetInput: aCSNUISelect ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUISize: aCSNUISize [
 	^ (source isInvocation and: [ source signature beginsWith: 'setSize' ])
 		ifTrue: [ source parameters size = 2
@@ -569,31 +569,31 @@ CSNModelImporterCoreWebVisitor >> visitCSNUISize: aCSNUISize [
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITabManager: aCSNUITabManager [
 	^ ('TabSubPanel' = source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNUITabManager) ] 
 		ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
 	^ (#('BLTableList' 'BLTableListBulk') includes: source invokedClassName)
 		ifTrue: [ self createWidget: aCSNUITable ] ifFalse: [ nil ]
 ]
 
-{ #category : #visitor }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITextarea: aCSNUITextarea [
 	^ (#('BLTextArea' 'TextArea' 'BLRichTextArea' 'RichTextArea') includes: source invokedClassName)
 		ifTrue: [ self createWidget: aCSNUITextarea ] ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITitle: aCSNUITitle [
 	^ (source isInvocation and: [ source signature beginsWith: 'setTitle' ]) ifTrue: [ self createAttribute: aCSNUITitle for: source ] ifFalse: [ nil ]
 ]
 
-{ #category : #api }
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIWidth: aCSNUIWidth [
 	"because the subclass also need to check before creation, we externalise the condition"
 

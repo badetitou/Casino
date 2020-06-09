@@ -80,21 +80,6 @@ CSNWidget >> attributesGroup [
 	^ MooseGroup withAll: self attributes asSet
 ]
 
-{ #category : #'as yet unclassified' }
-CSNWidget >> gtSourceCodeIn: composite [
-	<gtInspectorPresentationOrder: 1002>
-	^ composite text
-		  title: 'Source Code';
-		  display: [ :anObject | 
-			  anObject mooseInterestingEntity sources anyOne sourceAnchor
-				  sourceText ];
-		  when: [ :anObject | 
-			  anObject mooseInterestingEntity sources isNotEmpty and: [ 
-					  anObject mooseInterestingEntity sources anyOne sourceAnchor
-						  isNotNil ] ];
-		  withLineNumbers: true
-]
-
 { #category : #accessing }
 CSNWidget >> widgetContainer [
 	"Relation named: #widgetContainer type: #CSNContainer opposite: #widgets"

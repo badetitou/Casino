@@ -27,8 +27,3 @@ CSNBOnOver class >> createActionFrom: aClass for: aWidgetInstance withImporter: 
 		name: 'mouseover';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnOver >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(mouseover)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
-]

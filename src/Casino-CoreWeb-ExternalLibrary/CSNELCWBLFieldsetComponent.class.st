@@ -36,7 +36,7 @@ CSNELCWBLFieldsetComponent class >> moduleName [
 	^ 'FieldsetComponent'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLFieldsetComponent class >> subModulePath [
 	^ 'fieldset/fieldset.component'
 ]

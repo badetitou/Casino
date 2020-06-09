@@ -12,27 +12,3 @@ CSNUICWSplitButton class >> annotation [
 	<generated>
 	^self
 ]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSplitButton >> angularComponent [
-	^ PNGSplitButton
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSplitButton >> getInitializations [
-	^ '        this.items' , self mooseID asString
-		,
-			' = [
-'
-		,
-			(self widgets
-				flatCollect: [ :widget | '            {label: ''' , ((widget attributes select: [:a | a isKindOf: CSNUILabel]) first) attributeValue , '''},' , String crlf ])
-		,
-			'
-        ];'
-]
-
-{ #category : #'as yet unclassified' }
-CSNUICWSplitButton >> getVariables [
-	^'    items' , self mooseID asString , ': MenuItem[];'
-]

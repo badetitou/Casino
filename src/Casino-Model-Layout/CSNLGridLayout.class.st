@@ -40,13 +40,13 @@ CSNLGridLayout >> atPositionX: anX Y: anY [
 		thenCollect: #key
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CSNLGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation [
 	| aXValue |
 	"The first check of is array is used in debug if we try to re determine some values"
-	anInvocation isArray
-		ifTrue: [ aXValue := anInvocation first ]
-		ifFalse: [ aXValue := anInvocation parameters first ].
+	aXValue := anInvocation isArray
+		ifTrue: [ anInvocation first ]
+		ifFalse: [ anInvocation parameters first ].
 	^ aXValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| currentXValue |
@@ -97,7 +97,7 @@ CSNLGridLayout >> determineXFrom: anInvocation andPrevious: anPreviousInvocation
 		ifNotNil: [ ^ aXValue asInteger ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #compute }
 CSNLGridLayout >> determineXandYfrom: anInvocation andPrevious: anPreviousInvocation [
 	"add tmp variable understanding"
 
@@ -105,13 +105,13 @@ CSNLGridLayout >> determineXandYfrom: anInvocation andPrevious: anPreviousInvoca
 	(self determineYFrom: anInvocation andPrevious: anPreviousInvocation)}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation [
 	| aYValue |
 	"The first check of is array is used in debug if we try to re determine some values"
-	anInvocation isArray
-		ifTrue: [ aYValue := anInvocation second ]
-		ifFalse: [ aYValue := anInvocation parameters second ].
+	aYValue := anInvocation isArray
+		ifTrue: [ anInvocation second ]
+		ifFalse: [ anInvocation parameters second ].
 	^ aYValue asInteger
 		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
 			| currentYValue |

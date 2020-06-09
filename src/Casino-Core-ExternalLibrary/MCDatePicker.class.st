@@ -26,7 +26,7 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #export }
 MCDatePicker class >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
@@ -41,7 +41,7 @@ MCDatePicker class >> exportContentOf: aWidget with: anExporter [
 		indentMinus
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCDatePicker class >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-datepicker-toggle matSuffix [for]="';
@@ -53,7 +53,7 @@ MCDatePicker class >> exportFooterOf: aWidget with: anExporter [
 		<< '</mat-form-field>'
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCDatePicker class >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';

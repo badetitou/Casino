@@ -13,11 +13,6 @@ CSNUICWChart class >> annotation [
 	^self
 ]
 
-{ #category : #'as yet unclassified' }
-CSNUICWChart >> angularComponent [
-	^ PNGChart
-]
-
 { #category : #accessing }
 CSNUICWChart >> getSelector [
 	^ 'p-chart'

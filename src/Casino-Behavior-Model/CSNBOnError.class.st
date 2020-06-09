@@ -27,10 +27,3 @@ CSNBOnError class >> createActionFrom: aClass for: aWidgetInstance withImporter:
 		name: 'error';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnError >> getAngularRepresentation [
-	^ self behavior
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
-]

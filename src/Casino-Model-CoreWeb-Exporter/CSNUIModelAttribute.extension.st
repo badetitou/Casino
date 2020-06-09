@@ -1,6 +1,6 @@
-Extension { #name : #CSNUIModel }
+Extension { #name : #CSNUIModelAttribute }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNUIModel >> attributeValue [
+CSNUIModelAttribute >> attributeValue [
 	^ super attributeValue , self widget mooseID asString
 ]

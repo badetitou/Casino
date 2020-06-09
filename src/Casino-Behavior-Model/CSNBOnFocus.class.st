@@ -27,10 +27,3 @@ CSNBOnFocus class >> createActionFrom: aClass for: aWidgetInstance withImporter:
 		name: 'focus';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnFocus >> getAngularRepresentation [
-	^ self behavior
-		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(focus)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
-]

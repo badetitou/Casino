@@ -36,7 +36,7 @@ CSNELCWBLButtonLinkComponent class >> moduleName [
 	^ 'BlButtonLinkComponent'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLButtonLinkComponent class >> subModulePath [
 	^ 'link-button/button-link/button-link.component'
 ]

@@ -14,7 +14,7 @@ CoreWebBLComponent class >> modulePath [
 	^ 'app/components/components/' , self subModulePath
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CoreWebBLComponent class >> subModulePath [
 	^ self subclassResponsibility
 ]

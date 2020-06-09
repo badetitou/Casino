@@ -26,12 +26,12 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #export }
 MCButton class >> componentAttributeOn: anExporter [
 	anExporter <<< ' mat-stroked-button '
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCButton class >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes detect: [ :attribute | attribute isOfType: CSNUILabel ] ifFound: [ :attribute | anExporter visit: attribute ].
 	aWidget widgets

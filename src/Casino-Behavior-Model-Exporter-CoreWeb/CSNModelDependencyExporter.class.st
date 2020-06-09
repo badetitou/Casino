@@ -7,7 +7,7 @@ Class {
 	#category : #'Casino-Behavior-Model-Exporter-CoreWeb'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 CSNModelDependencyExporter class >> export: behavior withContext: aContext [
 	^ self new
 		context: aContext;
@@ -36,7 +36,6 @@ CSNModelDependencyExporter >> visitCSNActionAppel: anActionAppel [
 
 { #category : #generated }
 CSNModelDependencyExporter >> visitCSNUICWClickHandler: aCSNUICWClickHandler [
-	<generated>
 	^ self visitCSNAction: aCSNUICWClickHandler
 ]
 

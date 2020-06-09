@@ -26,7 +26,7 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #'accessing - export' }
 MCTab class >> attributeDictionary [
 	^ super attributeDictionary
 		at: CSNUITitle put: 'label';

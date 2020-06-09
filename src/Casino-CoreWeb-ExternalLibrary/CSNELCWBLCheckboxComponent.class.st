@@ -36,7 +36,7 @@ CSNELCWBLCheckboxComponent class >> moduleName [
 	^ 'BlCheckboxComponent'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CSNELCWBLCheckboxComponent class >> subModulePath [
 	^ 'checkbox/checkbox.component'
 ]

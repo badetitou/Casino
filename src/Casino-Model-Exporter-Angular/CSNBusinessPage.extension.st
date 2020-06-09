@@ -21,6 +21,11 @@ CSNBusinessPage >> componentName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNBusinessPage >> componentsRootFromExporter: anExporter [
+	^ (self rootFromExporter: anExporter ) / 'components'
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getAcceptedName [
 	^ (self name splitOn: ':') last
 ]

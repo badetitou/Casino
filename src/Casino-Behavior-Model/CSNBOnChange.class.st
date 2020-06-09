@@ -27,8 +27,3 @@ CSNBOnChange class >> createActionFrom: aClass for: aWidgetInstance withImporter
 		name: 'change';
 		yourself
 ]
-
-{ #category : #'as yet unclassified' }
-CSNBOnChange >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(change)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode), '()"' ]
-]
