@@ -5,15 +5,7 @@ Class {
 }
 
 { #category : #tests }
-CSNStringTest >> testComplexeThing [
-	| string |
-	string := '("NIVEAU1LIST -> " + BLLabel.NIVEAU1LIST, BLLabel.NIVEAU1LIST)'.
-	self assert: string extractParameters size equals: 2.
-	self assert: (string extractParameters at: 2) equals: 'BLLabel.NIVEAU1LIST'
-]
-
-{ #category : #tests }
-CSNStringTest >> testFindAllOccurencesOfVariableNamed [
+CSNStringTest >> testAllRangesOfSubstringNoSurrouned [
 	| string variableNamed |
 	string := 'private void showDebugPanel(){
 		this.sys = new GwtStatisticsEventSystem();
@@ -32,19 +24,27 @@ CSNStringTest >> testFindAllOccurencesOfVariableNamed [
 		dialogDebug.show();
 	}'.
 	variableNamed := 'dialogDebug'.
-	self assert: ((string findAllOccurrencesOfVariableNamed: variableNamed) includesAll: {607 . 682})
+	self assert: (((string allRangesOfSubstringNoSurrouned: variableNamed) collect: #first) includesAll: {607 . 682})
 ]
 
 { #category : #tests }
-CSNStringTest >> testFindAllOccurencesOfVariableNamedWithUnderscore [
+CSNStringTest >> testAllRangesOfSubstringNoSurrounedWithUnderscore [
 	
 	self assert: ('bl_de' allRangesOfSubstringNoSurrouned: 'bl') equals: #()
 ]
 
 { #category : #tests }
-CSNStringTest >> testFindAllOccurencesOfVariableNamedWithoutUnderscore [
+CSNStringTest >> testAllRangesOfSubstringNoSurrounedWithoutUnderscore [
 	
 	self assert: ('bl de' allRangesOfSubstringNoSurrouned: 'bl') equals: { 1 to: 2} asArray
+]
+
+{ #category : #tests }
+CSNStringTest >> testComplexeThing [
+	| string |
+	string := '("NIVEAU1LIST -> " + BLLabel.NIVEAU1LIST, BLLabel.NIVEAU1LIST)'.
+	self assert: string extractParameters size equals: 2.
+	self assert: (string extractParameters at: 2) equals: 'BLLabel.NIVEAU1LIST'
 ]
 
 { #category : #tests }
