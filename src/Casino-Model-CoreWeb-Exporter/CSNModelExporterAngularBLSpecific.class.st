@@ -141,7 +141,8 @@ export class ';
 			'
 
 '.
-	aBLPageMetier calledBehavior
+	((aBLPageMetier calledBehavior asOrderedCollection reject: [ :action | action behavior isEmpty ])
+		sort: [ :action1 :action2 | (action1 behavior anyOne uniqueNameInPage: aBLPageMetier) < (action2 behavior anyOne uniqueNameInPage: aBLPageMetier) ])
 		do: [ :action | 
 			action behavior
 				do: [ :behaveMethod | 
