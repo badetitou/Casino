@@ -2,15 +2,17 @@ Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-Importer' }
 CSNLLayout >> addWidget: aWidget [
-	^ (aWidget isKindOf: CSNLCell)
-		ifTrue: [ self addCell: aWidget ]
-		ifFalse: [ | createdCell |
-			createdCell := self mooseModel
-				add:
-					(CSNLCell new
-						widget: aWidget;
-						yourself).
-			self addCell: createdCell ]
+	^ (self allParents , {self} includes: aWidget)
+		ifFalse: [ (aWidget isKindOf: CSNLCell)
+				ifTrue: [ self addCell: aWidget ]
+				ifFalse: [ | createdCell |
+					createdCell := self mooseModel
+						add:
+							(CSNLCell new
+								widget: aWidget;
+								yourself).
+					self addCell: createdCell ] ]
+			ifTrue: [ ('CSNLayout ', aWidget printString , ' is already present in the hierarchy') record ]
 ]
 
 { #category : #'*Casino-Model-Importer' }

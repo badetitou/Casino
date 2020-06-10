@@ -8,8 +8,11 @@ CSNContainer >> addAllWidgets: aCollectionOfWidget [
 
 { #category : #'*Casino-Model-Importer' }
 CSNContainer >> addWidget: aWidget [
-
-	self layout ifNotNil: [:layout | layout addWidget: aWidget withInvocationOfAdd: nil usingFactory: nil ] ifNil: [ self widgets add: aWidget ]
+	((self allParents , {self}) includes: aWidget)
+		ifFalse: [ self layout
+				ifNotNil: [ :layout | layout addWidget: aWidget withInvocationOfAdd: nil usingFactory: nil ]
+				ifNil: [ self widgets add: aWidget ] ]
+		ifTrue: [ ('CSNContainer: ', aWidget printString , ' is already present in the hierarchy') record ]
 ]
 
 { #category : #'*Casino-Model-Importer' }
