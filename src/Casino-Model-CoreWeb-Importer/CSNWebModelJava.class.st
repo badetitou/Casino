@@ -549,6 +549,9 @@ CSNWebModelJava >> widgetFactoryInvocation [
 
 { #category : #accessing }
 CSNWebModelJava >> widgetInVariable: aVariable [
+	"First check if the variable is the variable for a widget.
+	If not check at the type level.
+THIS CANNOT BE IN THE OTHER WAY"
 	aVariable ifNil: [ ^ nil ].
 	^ self model allCSNWidget
 		  detect: [ :el | el variable = aVariable ]
