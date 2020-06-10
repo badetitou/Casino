@@ -46,7 +46,8 @@ Class {
 		'xml',
 		'xmlUiLink',
 		'modelWidgetCache',
-		'xmlUiWidgetLink'
+		'xmlUiWidgetLink',
+		'customWidgetClassDictionnary'
 	],
 	#category : #'Casino-Model-CoreWeb-Importer'
 }
@@ -208,6 +209,18 @@ CSNWebModelJava >> createFactory [
 		yourself
 ]
 
+{ #category : #'private - accessing' }
+CSNWebModelJava >> customWidgetClassDictionnary [
+	^ customWidgetClassDictionnary
+		ifNil: [ customWidgetClassDictionnary := (CSNMultiValueDictionary
+				newFrom:
+					((self model allWithType: CSNUICustomWidget)
+						reject: [ :widget | widget source isClass ]
+						thenCollect: [ :custom | (custom source target first atScope: FamixTClass) anyOne -> custom ]))
+				removeKey: nil ifAbsent: [  ];
+				yourself ]
+]
+
 { #category : #'private - actions' }
 CSNWebModelJava >> generateBLActionAppel [
 	self linkFromWidgetActionAppel
@@ -274,10 +287,11 @@ CSNWebModelJava >> getClassNamed: aClassName [
 
 { #category : #accessing }
 CSNWebModelJava >> getCustomWidgetFromClass: aClass [
-	^ ((self model allWithType: CSNUICustomWidget) reject: [ :widget | widget source isClass ])
+	^ self customWidgetClassDictionnary at: aClass ifAbsent: [ nil ].
+	"((self model allWithType: CSNUICustomWidget) reject: [ :widget | widget source isClass ])
 		detect: [ :custom | (custom source target first atScope: FamixTClass) anyOne = aClass ]
-		ifFound: [ :founded | {founded}	"need to return a collection to follow the other getPage and getBusinessPage" ]
-		ifNone: [ nil ]
+		ifFound: [ :founded | 1h. {founded}	""need to return a collection to follow the other getPage and getBusinessPage"" ]
+		ifNone: [ nil ]"
 ]
 
 { #category : #accessing }
@@ -449,18 +463,18 @@ CSNWebModelJava >> linkXmlUiWidget [
 		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | (self isElementFromApplication: class) or: [class mooseName endsWith: 'Ui'] ] thenCollect: [ :class | class -> widget ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 CSNWebModelJava >> modelPageMetier [
 	^ self model allCSNPageMetier collect: #source
 ]
 
-{ #category : #private }
+{ #category : #'private - accessing' }
 CSNWebModelJava >> modelPhases [
 	"support the C/S Phase (see application RH)"
 	^ self model allCSNPage collect: #source thenReject: #isNil 
 ]
 
-{ #category : #accessing }
+{ #category : #'private - accessing' }
 CSNWebModelJava >> modelWidget [
 	^ modelWidgetCache
 		ifNil: [ modelWidgetCache := self sourceModel allClasses
