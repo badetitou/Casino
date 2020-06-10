@@ -709,16 +709,10 @@ CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
-	self
-		<< '<div class="HTML-TAG">';
-		indentPlus;
-		crlf.
+	self crlf.
 	aBLHTML widgets do: [ :widget | self << widget text ] separatedBy: [ self crlf ].
 
-	self
-		crlf;
-		indentMinus;
-		<< '</div>'
+	self crlf
 ]
 
 { #category : #visiting }
