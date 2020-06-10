@@ -307,8 +307,9 @@ CSNWebModelJava >> getPageMetierFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseCallInvocations [
-	^ (self sourceModel allClasses detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ] ifNone: [ self error: 'No call invocation strategy' ]) methods
-		flatCollect: #incomingInvocations
+	^ (self sourceModel allClasses
+		detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ]
+		ifNone: [ self error: 'No call invocation strategy' ]) methods flatCollect: #incomingInvocations
 ]
 
 { #category : #accessing }
@@ -403,8 +404,7 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase1: anInvocation [
 		ifNotNil: [ ^ found ]
 		ifNil: [ | elContainer |
 			elContainer := anInvocation container.
-			elContainer ifNil: [ ^ nil ].
-			^ self linkFromWidgetActionAppelCase1: elContainer ]
+			^ elContainer ifNotNil: [ self linkFromWidgetActionAppelCase1: elContainer ] ]
 ]
 
 { #category : #private }
@@ -499,12 +499,12 @@ CSNWebModelJava >> postImport [
 
 { #category : #private }
 CSNWebModelJava >> searchCalledPhase: aSignature [
-	^ self getPhaseNamed: (aSignature replaceAllRegex: '\(\)' with: '')
+	^  self getPhaseNamed: (aSignature removeSuffix: '()')
 ]
 
 { #category : #private }
 CSNWebModelJava >> searchCalledPhaseFromInvocation: invoc [
-	^ self searchCalledPhase: (invoc target at: 1) signature
+	^ self searchCalledPhase: invoc target first signature
 ]
 
 { #category : #private }
@@ -534,9 +534,7 @@ CSNWebModelJava >> widgetConstructorsInvocation [
 	^ (self modelWidget
 		collect: [ :widget | 
 			widget methods
-				select: [ :method | 
-					method isConstructor
-						or: [ (method name copyReplaceAll: '.' with: '::') asSymbol = method parentType mooseName  ] ]
+				select: #isConstructor
 				thenCollect: #incomingInvocations ]) flattened asSet
 ]
 
