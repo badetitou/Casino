@@ -47,6 +47,19 @@ CSNAddWidgetTest >> testLayoutAddPanelThatIsAlreadyAParent [
 ]
 
 { #category : #tests }
+CSNAddWidgetTest >> testLayoutAddWithInvocationPanelThatIsAlreadyAParent [
+	| panel layout model |
+	model := CSNUIModel new.
+	panel := CSNUIPanel new.
+	layout := CSNLLayout new.
+	model addAll: {panel . layout}.
+	panel layout: layout.
+	layout addWidget: panel withInvocationOfAdd: nil usingFactory: nil.
+	self assert: panel children anyOne children isEmpty.
+	self assert: panel parentNode isNil
+]
+
+{ #category : #tests }
 CSNAddWidgetTest >> testPanelAddPanel [
 	| panel model |
 	model := CSNUIModel new.

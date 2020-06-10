@@ -17,10 +17,12 @@ CSNContainer >> addWidget: aWidget [
 
 { #category : #'*Casino-Model-Importer' }
 CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
-	aWidget addingPosition: anInvocation sourceAnchor startPos.
-	self layout
-		ifNotNil: [ :layout | layout addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory ]
-		ifNil: [ self addWidget: aWidget ]
+	(self allParents , {self} includes: aWidget)
+		ifFalse: [ aWidget addingPosition: anInvocation sourceAnchor startPos.
+			self layout
+				ifNotNil: [ :layout | layout addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory ]
+				ifNil: [ self addWidget: aWidget ] ]
+		ifTrue: [ ('CSNCOntainer - AddWidgetWithInvocation: ' , aWidget printString , ' is already present in the hierarchy') record ]
 ]
 
 { #category : #'*Casino-Model-Importer' }
