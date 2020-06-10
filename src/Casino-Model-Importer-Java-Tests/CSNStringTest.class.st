@@ -119,6 +119,18 @@ CSNStringTest >> testProtectedString [
 ]
 
 { #category : #tests }
+CSNStringTest >> testRemoveComment [
+	
+	self assert: ('
+Hello //   
+//   je suis
+magnifique // vraiment' removeComment) equals: '
+Hello      
+            
+magnifique            '
+]
+
+{ #category : #tests }
 CSNStringTest >> testStringWithComma [
 	| string |
 	string := 'setWidth("Pat,ate")'.

@@ -97,25 +97,21 @@ String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [
 
 { #category : #'*Casino-Model-Importer-Java' }
 String >> removeComment [
-	| a b |
-	a := self replaceAllRegex: '//[[:graph:] ]*' withMultiples: ' '.
-	b := Character lf
-		join:
-			((self splitOn: Character lf)
-				collect: [ :subString | 
+	| c withCR withLF |
+	withCR := self includes: Character cr.
+	withLF := self includes: Character lf.
+	^ String
+		streamContents: [ :stream | 
+			self lines
+				do: [ :line | 
 					| start |
-					start := subString findString: '//'.
+					start := line findString: '//'.
 					start = 0
-						ifTrue: [ subString ]
-						ifFalse: [ String
-								streamContents: [ :stream | 
-									stream << (subString copyFrom: 1 to: start - 1).
-									start to: subString size do: [ :i | stream << ' ' ] ] ] ]).
-"	self haltIf: [ a ~= b ]."
-	(a intersection: b).
-	^ b
-	"^ self replaceAllRegex: '//[[:graph:] ]*' withMultiples: ' '
-"
+						ifTrue: [ stream << line ]
+						ifFalse: [ stream << (line copyFrom: 1 to: start - 1).
+							start to: line size do: [ :i | stream << ' ' ] ] ]
+				separatedBy: [ withCR ifTrue: [ stream << Character cr ].
+					withLF ifTrue: [ stream << Character lf ] ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
