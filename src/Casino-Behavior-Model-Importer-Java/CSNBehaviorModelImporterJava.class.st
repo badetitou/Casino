@@ -25,10 +25,17 @@ CSNBehaviorModelImporterJava >> carrefourBinder: anObject [
 { #category : #run }
 CSNBehaviorModelImporterJava >> convertFastToBehavioral: model [
 	"The first line is necessary to ensure that we can use parentNode and children"
+
 	model metamodel: CSNBModel metamodel.
-	(CSNBehaviorPattern allSubclasses sorted: #order ascending) do: [ 
-		:patternClass | 
-		(patternClass on: model fromUiModel: self uiModel) run ]
+	(CSNBehaviorPattern allSubclasses sorted: #order ascending)
+		collect: [ :patternClass | 
+			patternClass new
+				uiModel: self uiModel;
+				yourself ]
+		thenDo: [ :patternInstance | 
+			patternInstance
+				model: model;
+				run ]
 ]
 
 { #category : #accessing }

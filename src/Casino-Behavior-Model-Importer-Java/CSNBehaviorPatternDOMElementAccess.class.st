@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #running }
+CSNBehaviorPatternDOMElementAccess >> affectedActionsToWidgetsDic [
+	^ reverseDic
+		ifNil: [ reverseDic := (CSNMultiValueDictionary newFrom: ((self uiModel allWithSubTypesOf: CSNWidget) collect: [ :w | w affectedActions -> w ]))
+				removeKey: nil ifAbsent: [  ];
+				yourself ]
+]
+
+{ #category : #running }
 CSNBehaviorPatternDOMElementAccess >> newDOMAccessTo: aWidget [
 	^ self model add: (CSNBDOMElementAcccess new
 			   widget: aWidget;
@@ -15,21 +23,28 @@ CSNBehaviorPatternDOMElementAccess >> newDOMAccessTo: aWidget [
 ]
 
 { #category : #running }
+CSNBehaviorPatternDOMElementAccess >> reset [
+	reverseDic := nil
+]
+
+{ #category : #running }
 CSNBehaviorPatternDOMElementAccess >> run [
-	reverseDic := (CSNMultiValueDictionary newFrom:
-			               ((self uiModel allWithSubTypesOf: CSNWidget) 
-				                collect: [ :w | w affectedActions -> w ]))
-		              removeKey: nil ifAbsent: [  ];
-		              yourself.
-	(self model allWithSubTypesOf: FASTJavaIdentifier) do: [ :identifier | 
-		reverseDic at: identifier famixVariable ifPresent: [ :widgets | 
-			| domAccess selector |
-			selector := identifier currentParentSelector , ':'.
-			domAccess := self newDOMAccessTo: widgets first.
-			domAccess
-				startPos: identifier startPos;
-				endPos: identifier endPos.
-			domAccess
-				perform: selector
-				withArguments: { identifier parentNode } ] ]
+	(self model allWithSubTypesOf: FASTJavaIdentifier)
+		do: [ :identifier | 
+			self affectedActionsToWidgetsDic
+				at: identifier famixVariable
+				ifPresent: [ :widgets | 
+					| domAccess selector |
+					selector := identifier currentParentSelector , ':'.
+					domAccess := self newDOMAccessTo: widgets first.
+					domAccess
+						startPos: identifier startPos;
+						endPos: identifier endPos.
+					domAccess perform: selector withArguments: {identifier parentNode} ] ]
+]
+
+{ #category : #running }
+CSNBehaviorPatternDOMElementAccess >> uiModel: anObject [
+	super uiModel: anObject.
+	self reset
 ]
