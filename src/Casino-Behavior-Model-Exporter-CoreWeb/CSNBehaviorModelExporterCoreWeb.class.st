@@ -64,10 +64,14 @@ CSNBehaviorModelExporterCoreWeb >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
-	self
-		<<< 'this.';
-		<<< anOpenDialog dialog affectedActions uniqueName;
-		<<< '.openDialog()'
+	self <<< 'this.'.
+	anOpenDialog dialog affectedActions
+		ifNotNil: [ :affectedActions | self <<< affectedActions uniqueName ]
+		ifNil: [ self <<< 'unknowDialog'.
+			self errorStream
+				<< 'unknowDialog: ';
+				<< anOpenDialog dialog sources printString ].
+	self <<< '.openDialog()'
 ]
 
 { #category : #generated }
