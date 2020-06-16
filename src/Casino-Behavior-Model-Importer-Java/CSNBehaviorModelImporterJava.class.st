@@ -45,7 +45,10 @@ CSNBehaviorModelImporterJava >> generateBehavioralModel [
 	self convertibleActions
 		do: [ :action | models addAll: (self generateFASTModelFor: action) ]
 		displayingProgress: [ :action | 'Generate AST for ' , action asString ].
-	models do: [ :model | self convertFastToBehavioral: model ] displayingProgress: [ :model | 'Converting ' , model asString ].
+	models
+		withIndexDo: [ :model :index | 
+			self convertFastToBehavioral: model.
+			index \\ 200 = 0 ifTrue: [ ((index / models size) asFloat * 100) record ] ].
 	^ models
 ]
 
