@@ -50,7 +50,11 @@ CSNBehaviorModelExporter >> errorStream: anObject [
 { #category : #api }
 CSNBehaviorModelExporter >> export: aBehaviorMethod [
 	[ self showUnknowExport ifTrue: [ self errorStream: (WriteStream with: String new) ].
-	self accept: aBehaviorMethod ]
+	[ self accept: aBehaviorMethod ]
+		on: Error
+		do: [ :err | 
+			'Err during export of: ' , aBehaviorMethod sourceText.
+			err signal ] ]
 		ensure: [ self errorStream
 				flush;
 				close ]
