@@ -139,6 +139,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaElse
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
+	"This is empty and useless so I decided to remove this useless method declaration"
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaFieldAccess: aFASTJavaFieldAccess [
 	self <<< aFASTJavaFieldAccess fieldName
 ]
