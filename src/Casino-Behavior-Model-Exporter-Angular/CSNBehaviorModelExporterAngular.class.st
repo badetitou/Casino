@@ -83,6 +83,13 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaArrayAccess: aFASTJavaArrayAcces
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaArrayInitializer: aFASTJavaArrayInitializer [
+	self <<< '['.
+	aFASTJavaArrayInitializer initializers do: [ :initializer | self accept: initializer ] separatedBy: [ self <<< ', ' ].
+	self <<< ']'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	self accept: aFASTJavaAssignementExpression variable.
 	self <<< ' = '.
@@ -193,21 +200,24 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaInfixOperation: aFASTJavaInfixOp
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
 	self
-		<< aFASTJavaMethodEntity name;
+		<< (aFASTJavaMethodEntity name);
 		<<< '('.
-	((aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ]) / self)
+	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
+	self
 		<<< ') {';
 		indentPlus;
 		crlf.
 	aFASTJavaMethodEntity statements
-		do: [ :statement | self accept: statement ]
+		do: [ :statement | 
+			self indent.
+			self accept: statement ]
 		separatedBy: [ self
 				writeErrorIfSome;
-				crlf].
+				crlf ].
 	self
 		crlf;
-		<< '}';
-		indentMinus
+		indentMinus;
+		<< '}'
 ]
 
 { #category : #generated }

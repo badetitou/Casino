@@ -65,7 +65,8 @@ CSNBehaviorModelExporter >> initialize [
 	super initialize.
 	errorStream := WriteStream with: String new.
 	showUnknowExport := true.
-	debugMode := true
+	debugMode := true.
+	indentLevel := 0.
 ]
 
 { #category : #accessing }

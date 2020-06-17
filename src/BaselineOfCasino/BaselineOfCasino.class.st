@@ -51,7 +51,7 @@ BaselineOfCasino >> defineGroups: spec [
 		"bl"
 		group: 'behavior-bl' with: #('behavior-importer-java' 'behavior-exporter-angular');
 		group: 'behavior-importer-java' with: #('behavior' 'Casino-Behavior-Model-Importer-Java');
-		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb');
+		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb' 'Casino-Behavior-Model-Exporter-Angular-Tests');
 		
 		"bl migration"
 		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl');
@@ -81,6 +81,7 @@ BaselineOfCasino >> definePackages: spec [
 		
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-Visitor' 'Casino-Exporter') ];
 		package: 'Casino-Model-Exporter-Angular' with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
+		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-Visitor' 'TinyLogger') ];
 		package: 'Casino-Model-Importer-Tests' with: [ spec requires: #('Casino-Model-Importer') ];
