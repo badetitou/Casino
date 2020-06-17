@@ -26,6 +26,16 @@ CSNBusinessPage >> addPageContainer: anObject [
 	^ self pageContainers add: anObject
 ]
 
+{ #category : #'as yet unclassified' }
+CSNBusinessPage >> gtActionsTSCodeIn: composite [
+	<gtInspectorPresentationOrder: 1012>
+	composite text
+		title: 'TS';
+		display: [ String streamContents: [ :s | (CSNModelExporterAngularBLSpecific on: s) generateTSSourceCodeForBusinessPage: self ] ];
+		withLineNumbers: true	";
+		when: [ self actions isNotEmpty and: [ self actions anyOne behavior isNotEmpty ] ]"
+]
+
 { #category : #accessing }
 CSNBusinessPage >> pageContainers [
 	"Relation named: #pageContainers type: #CSNPage opposite: #businessPage"
