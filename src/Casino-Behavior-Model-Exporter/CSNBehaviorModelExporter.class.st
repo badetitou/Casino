@@ -53,7 +53,7 @@ CSNBehaviorModelExporter >> export: aBehaviorMethod [
 	[ self accept: aBehaviorMethod ]
 		on: Error
 		do: [ :err | 
-			'Err during export of: ' , aBehaviorMethod sourceText.
+			('Err during export of: ' , aBehaviorMethod sourceText) record.
 			err signal ] ]
 		ensure: [ self errorStream
 				flush;
