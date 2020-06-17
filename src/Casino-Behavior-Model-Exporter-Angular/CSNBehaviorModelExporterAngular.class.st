@@ -75,6 +75,14 @@ CSNBehaviorModelExporterAngular >> visitFASTExpressionStatement: aFASTExpression
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
+	self accept: aFASTJavaArrayAccess array.
+	self <<< '['.
+	self accept: aFASTJavaArrayAccess expression.
+	self <<< ']'.
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
 	self accept: aFASTJavaAssignementExpression variable.
 	self <<< ' = '.
