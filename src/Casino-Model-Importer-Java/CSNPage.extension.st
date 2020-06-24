@@ -2,15 +2,18 @@ Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNPage >> computeSubtitle [
-	subtitle := (((self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations) select: [ :invoc | invoc signature beginsWith: 'setPhaseSubtitle(' ])
-		at: 1
-		ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
+	subtitle := (self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
+		detect: [ :invoc | invoc signature beginsWith: 'setPhaseSubtitle(' ]
+		ifFound: [ :invoc | invoc parameters at: 1 ifAbsent: [ '' ] ]
+		ifNone: [ '' ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNPage >> computeTitle [
-	title := (((self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
-		select: [ :invoc | 'setPhaseTitle\(.*|super\(.*' asRegex matches: invoc signature ]) at: 1 ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
+	title := (self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
+		detect: [ :invoc | invoc signature beginsWithAnyOf: {'setPhaseTitle(' . 'setTitle(' . 'super('} ]
+		ifFound: [ :invoc | invoc parameters at: 1 ifAbsent: [ '' ] ]
+		ifNone: [ '' ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

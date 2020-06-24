@@ -9,6 +9,8 @@ CSNBusinessPage >> addingPosition [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNBusinessPage >> computeTitle [
-	title := (((self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
-		select: [ :invoc | 'super(*' match: invoc signature ]) at: 1 ifAbsent: [ ^ '' ]) parameters at: 1 ifAbsent: [ '' ]
+	title := (self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
+		detect: [ :invoc | invoc signature beginsWith: 'super(' ]
+		ifFound: [ :invoc | invoc parameters at: 1 ifAbsent: [ '' ] ]
+		ifNone: [ '' ]
 ]
