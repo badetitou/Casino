@@ -64,7 +64,7 @@ BaselineOfCasino >> definePackages: spec [
 		"models"
 		package: 'Casino-Model' with: [spec requires: #('Casino-Model-Generator')];
 		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model')];
-		package: 'Casino-Model-Extension-Tests' with: [ spec requires: #('Casino-Extension')];
+		package: 'Casino-Model-Extension-Tests' with: [ spec requires: #('Casino-Model-Extension')];
 		package: 'Casino-Core-ExternalLibrary' with: [ spec requires: #('Casino-Model')];
 		package: 'Casino-CoreWeb-ExternalLibrary' with: [ spec requires: #('Casino-Core-ExternalLibrary')];
 		package: 'Casino-Model-Generator';
