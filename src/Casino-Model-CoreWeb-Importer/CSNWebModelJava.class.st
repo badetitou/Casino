@@ -589,7 +589,7 @@ CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level 
 	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ {} ].
 	invocation isClass
 		ifFalse: [ (invocation atScope: FamixTClass) ifEmpty: [ ^ {} ].
-			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) first maxLevel: maxLevel level: level + 1 ]
+			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) anyOneIfOnlyOneElement maxLevel: maxLevel level: level + 1 ]
 		ifTrue: [ found := self getPhaseFromClass: invocation.
 			found
 				ifNotNil: [ ^ found ]

@@ -4,7 +4,7 @@ Extension { #name : #FAMIXAccess }
 FAMIXAccess >> allUsages [
 	^ self variable allUsages
 		ifEmpty: [ | posUsages |
-			posUsages := ((self source allAtAnyScope: {FamixTClass . FamixTMethod}) select: #hasSourceAnchor) first sourceAnchor
+			posUsages := ((self source allAtAnyScope: {FamixTClass . FamixTMethod}) select: #hasSourceAnchor) anyOneIfOnlyOneElement sourceAnchor
 				findAllOccurrencesOfVariableNamed: self variable name.
 			(posUsages
 				flatCollect:
@@ -14,7 +14,7 @@ FAMIXAccess >> allUsages [
 
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXAccess >> endAffectationPos [
-	^ ((self source allAtScope: FamixTClass) select: #hasSourceAnchor) first sourceAnchor completeText findNext: $; for: self sourceAnchor startPos
+	^ ((self source allAtScope: FamixTClass) select: #hasSourceAnchor) anyOneIfOnlyOneElement sourceAnchor completeText findNext: $; for: self sourceAnchor startPos
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

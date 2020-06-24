@@ -20,7 +20,7 @@ FAMIXInvocation >> affectation [
 				select: [ :access | access sourceAnchor startPos < self sourceAnchor startPos and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
 				at: 1
 				ifAbsent: [ self source isInstanciationInitializer
-						ifTrue: [ (((self source atScope: FAMIXClass) at: 1) attributes
+						ifTrue: [ (((self source atScope: FAMIXClass) anyOneIfOnlyOneElement) attributes
 								select: [ :attribute | attribute sourceAnchor startPos < self sourceAnchor startPos and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
 								at: 1
 								ifAbsent: [ ^ nil ] ] ] ]
