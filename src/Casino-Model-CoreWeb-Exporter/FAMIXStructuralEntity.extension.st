@@ -3,7 +3,7 @@ Extension { #name : #FAMIXStructuralEntity }
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FAMIXStructuralEntity >> uniqueName [
 	| dic |
-	dic := (self allAtScope: FamixTClass) last privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
+	dic := ((self allAtScope: FamixTClass) detect: [:class | class parents anyOneIfOnlyOneElement isNamespace]) privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
 	^ dic
 		at: self
 		ifAbsentPut: [ | index potentialName |
@@ -18,5 +18,5 @@ FAMIXStructuralEntity >> uniqueName [
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FAMIXStructuralEntity >> uniqueName: aString [
-	(self allAtScope: FamixTClass) last privateState cacheAt: #uniqueName put: {(self -> aString)} asDictionary
+	((self allAtScope: FamixTClass) detect: [:class | class parents anyOneIfOnlyOneElement isNamespace]) privateState cacheAt: #uniqueName put: {(self -> aString)} asDictionary
 ]

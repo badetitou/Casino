@@ -8,7 +8,7 @@ FAMIXLocalVariable >> shortName [
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FAMIXLocalVariable >> uniqueName [
 	| dic |
-	dic := (self allAtScope: FamixTMethod) last privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
+	dic := ((self atScope: FamixTMethod) anyOneIfOnlyOneElement) privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
 	^ dic
 		at: self
 		ifAbsentPut: [ | index potentialName |
