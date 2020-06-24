@@ -36,7 +36,7 @@ BaselineOfCasino >> defineDependencies: spec [
 BaselineOfCasino >> defineGroups: spec [
 	spec
 		group: 'default' with: #('core-extented' 'Casino-Model-Exporter-Angular' 'Casino-Model-Importer-Java');
-		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests' 'Casino-Model-Importer-Tests');
+		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests' 'Casino-Model-Importer-Tests' 'Casino-Extension-Tests');
 		group: 'model' with: #('Casino-Model' 'Casino-Core-ExternalLibrary' 'Casino-Model-Extension');
 		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer');
 		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
@@ -64,6 +64,7 @@ BaselineOfCasino >> definePackages: spec [
 		"models"
 		package: 'Casino-Model' with: [spec requires: #('Casino-Model-Generator')];
 		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model')];
+		package: 'Casino-Model-Extension-Tests' with: [ spec requires: #('Casino-Extension')];
 		package: 'Casino-Core-ExternalLibrary' with: [ spec requires: #('Casino-Model')];
 		package: 'Casino-CoreWeb-ExternalLibrary' with: [ spec requires: #('Casino-Core-ExternalLibrary')];
 		package: 'Casino-Model-Generator';
