@@ -23,7 +23,7 @@ FAMIXClass >> affectation [
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXClass >> allUsages [
 	^ (self isAnonymousClass and: [ self sourceAnchor isNotNil ])
-		ifTrue: [ self belongsTo queryAllOutgoingInvocations
+		ifTrue: [ (self parentPackage ifNil: [ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ] ]) queryAllOutgoingInvocations
 				select: [ :el | el sourceAnchor isNotNil and: [ el sourceAnchor startPos < self sourceAnchor startPos and: [ el sourceAnchor endPos > self sourceAnchor endPos ] ] ] ]
 		ifFalse: [ OrderedCollection new ]
 ]

@@ -85,7 +85,7 @@ import { PhaseService } from ''app/components/service/phase.service'';
 			'''
 })
 export class ';
-		<< aBLPageMetier componentName capitalized;
+		<< aBLPageMetier componentName;
 		<<
 			' implements OnInit, OnDestroy {
 

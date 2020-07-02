@@ -232,24 +232,37 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
-  currentWriteStream
-     << 'import { NgModule } from ''@angular/core'';
+	currentWriteStream
+		<<
+			'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
 import { ComponentsModule } from ''../../../components/components.module'';
-import { IndexComponent } from ''./components/index/index.component'';
+import { ';
+		<< aCSNPage componentName;
+		<< ' } from ''./components/';
+		<< aCSNPage getFolderName;
+		<< '/';
+		<< aCSNPage getAcceptedName;
+		<<
+			'.component'';
 import { PHASE_ROUTES } from ''./';
-     << aCSNPage name;
-     << '.route'';';
-     << String crlf;
-     << aCSNPage widgetsDependenciesImportInstruction;
-     << (aCSNPage businessPage flatCollect: [:aBusinessPage |  aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
-     << '
+		<< aCSNPage name;
+		<< '.route'';';
+		<< String crlf;
+		<< aCSNPage widgetsDependenciesImportInstruction;
+		<< (aCSNPage businessPage flatCollect: [ :aBusinessPage | aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
+		<<
+			'
 export const COMPONENTS: any[] = [
-    IndexComponent,
+    ';
+		<< aCSNPage componentName;
+		<<
+			',
 ';
-     << aCSNPage getComponentsPageMetierListName;
-     << '
+		<< aCSNPage getComponentsPageMetierListName;
+		<<
+			'
 ];
 
 @NgModule({
@@ -260,19 +273,23 @@ export const COMPONENTS: any[] = [
         CommonModule,
         PHASE_ROUTES,
 ';
-     << aCSNPage widgetsDependenciesName;
-     << '
+		<< aCSNPage widgetsDependenciesName;
+		<<
+			'
         ComponentsModule,
         TranslateModule
     ],
     entryComponents: [
-        IndexComponent
+        ';
+		<< aCSNPage componentName;
+		<<
+			'
     ]
 })
 export class ';
-     << aCSNPage getModuleClassName;
-     << ' {}';
-     << String crlf
+		<< aCSNPage getModuleClassName;
+		<< ' {}';
+		<< String crlf
 ]
 
 { #category : #generate }
@@ -301,14 +318,26 @@ export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { 
 ]
 
 { #category : #generate }
-CSNModelExporterAngular >> generateRouteSourceCodeForPage [
-  currentWriteStream << 'import { ModuleWithProviders } from ''@angular/core'';
+CSNModelExporterAngular >> generateRouteSourceCodeForPage: aCSNPage [
+	currentWriteStream
+		<<
+			'import { ModuleWithProviders } from ''@angular/core'';
 import { RouterModule, Routes } from ''@angular/router'';
-import { IndexComponent } from ''./components/index/index.component'';
+import { ';
+		<< aCSNPage componentName;
+		<< ' } from ''./components/';
+		<< aCSNPage getFolderName;
+		<< '/';
+		<< aCSNPage getAcceptedName;
+		<<
+			'.component'';
 
 const routes: Routes = [
     {
-        path: '''', component: IndexComponent
+        path: '''', component: ';
+		<< aCSNPage componentName;
+		<<
+			'
     }
 ];
 
@@ -341,7 +370,7 @@ import { PhaseService } from ''app/components/service/phase.service'';
 			'''
 })
 export class ';
-		<< aBLPageMetier componentName capitalized;
+		<< aBLPageMetier componentName;
 		<<
 			' implements OnInit, OnDestroy {
 
@@ -438,56 +467,67 @@ export class IndexComponent implements OnInit {
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
-	currentWriteStream << 'import {
+	currentWriteStream
+		<<
+			'import {
     Component,
     OnDestroy,
     OnInit'.
-	aCSNPage hasMultiplePageMetier ifTrue: [ 
-		currentWriteStream
-			<< ',';
-"			<< String crlf;
+	aCSNPage hasMultiplePageMetier
+		ifTrue: [ currentWriteStream
+				<< ',';
+				"			<< String crlf;
 			<< '    ElementRef,';"
-			<< String crlf;
-			<< '    ViewChild' ].
-	currentWriteStream << '
+					<< String crlf;
+				<< '    ViewChild' ].
+	currentWriteStream
+		<<
+			'
 } from ''@angular/core'';
 import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
 import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
 import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
 '.
-	aCSNPage hasMultiplePageMetier ifTrue: [ 
-		currentWriteStream
-			<<
-				'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';';
-			<< String crlf ].
-	aCSNPage businessPage do: [ :metier | 
-		currentWriteStream
-			<< 'import { ';
-			<< metier componentName;
-			<< ' } from ''../..';
-			<< metier getLocalComponentPath;
-			<< ''';';
-			<< String crlf ].
-	currentWriteStream << '
+	aCSNPage hasMultiplePageMetier
+		ifTrue: [ currentWriteStream
+				<< 'import { BusinessPageContainerComponent } from ''../../../../../components/components/phase/business-page/page-container/page-container.component'';';
+				<< String crlf ].
+	aCSNPage businessPage
+		do: [ :metier | 
+			currentWriteStream
+				<< 'import { ';
+				<< metier componentName;
+				<< ' } from ''../..';
+				<< metier getLocalComponentPath;
+				<< ''';';
+				<< String crlf ].
+	currentWriteStream
+		<<
+			'
 
 
 @Component({
-    templateUrl: ''./index.component.html''
+    templateUrl: ''./';
+		<< aCSNPage getHTMLName;
+		<<
+			'''
 })
-export class IndexComponent extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
+export class ';
+		<< aCSNPage componentName capitalized;
+		<<
+			' extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
 
 '.
-	aCSNPage hasMultiplePageMetier ifTrue: [ 
-		currentWriteStream
-			<<
-				'    @ViewChild(BusinessPageContainerComponent, { static: false }) public container: BusinessPageContainerComponent;
+	aCSNPage hasMultiplePageMetier
+		ifTrue: [ currentWriteStream
+				<<
+					'    @ViewChild(BusinessPageContainerComponent, { static: false }) public container: BusinessPageContainerComponent;
 ';
-			<< String crlf ].
-	aCSNPage hasMultiplePageMetier ifTrue: [ 
-		aCSNPage businessPage do: [ :metier | 
-			currentWriteStream << metier idViewChild << String crlf ] ].
+				<< String crlf ].
+	aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [ :metier | currentWriteStream << metier idViewChild << String crlf ] ].
 	currentWriteStream
-		<< '
+		<<
+			'
 
     constructor(protected phaseService: DesktopStateService) {
         super(phaseService);
@@ -662,13 +702,13 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 		ensure: [ currentWriteStream close ].
 	"Write phase.route.ts"
 	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream.
-	[ self generateRouteSourceCodeForPage.
+	[ self generateRouteSourceCodeForPage: aBLPhase.
 	currentWriteStream flush ]
 		ensure: [ currentWriteStream close ].
 	"Write components"
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
-	indexRoot := componentsRoot / 'index'.
+	indexRoot := componentsRoot / aBLPhase getFolderName.
 	indexRoot ensureCreateDirectory.
 
 	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream.

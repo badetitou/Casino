@@ -4,7 +4,7 @@ Extension { #name : #FAMIXAccess }
 FAMIXAccess >> allUsages [
 	^ self variable allUsages
 		ifEmpty: [ | posUsages |
-			posUsages := ((self source allAtAnyScope: {FamixTClass . FamixTMethod}) select: #hasSourceAnchor) anyOneIfOnlyOneElement sourceAnchor
+			posUsages := (((self source allAtAnyScope: {FamixTClass . FamixTMethod}) select: #hasSourceAnchor) reject: [ :el | el isClass and: [ el isInnerClass ]]) anyOneIfOnlyOneElement sourceAnchor
 				findAllOccurrencesOfVariableNamed: self variable name.
 			(posUsages
 				flatCollect:

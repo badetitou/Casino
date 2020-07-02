@@ -1,13 +1,23 @@
 Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> getAcceptedName [
+	^ (self name splitOn: ':') last
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getComponentsPageMetierListName [
 	^ self recursiveMetiers flattened flatCollect: [ :metier | '    ', metier componentName, ',', String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> getFolderName [
+	^ self getAcceptedName
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getHTMLName [
-	^ 'index.component.html'
+	^ self getAcceptedName  , '.component.html'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -71,8 +81,8 @@ CSNPage >> getSelector [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> getTSName [ 
-	^ 'index.component.ts'
+CSNPage >> getTSName [
+	^ self getAcceptedName  , '.component.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
