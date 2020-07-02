@@ -24,7 +24,8 @@ Class {
 		'uiInput',
 		'csnVariableAttribute',
 		'header',
-		'labelPosition'
+		'labelPosition',
+		'listAndDetails'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -49,12 +50,8 @@ CSNUICoreWebGenerator class >> submetamodels [
 { #category : #definition }
 CSNUICoreWebGenerator >> defineClasses [
 	super defineClasses.
+	"components"
 	chart := builder newClassNamed: #Chart.
-	coreCellWidth := builder newClassNamed: #CoreCellWidth.
-	coreColSpan := builder newClassNamed: #CoreColSpan.
-	coreHorizontalAlignement := builder newClassNamed: #CoreHorizontalAlignement.
-	coreRowSpan := builder newClassNamed: #CoreRowSpan.
-	coreVerticalAlignement := builder newClassNamed: #CoreVerticalAlignement.
 	dialog := builder newClassNamed: #Dialog.
 	dynamicFieldset := builder newClassNamed: #DynamicFieldset.
 	groupFieldset := builder newClassNamed: #GroupFieldset.
@@ -64,12 +61,20 @@ CSNUICoreWebGenerator >> defineClasses [
 	splitButton := builder newClassNamed: #SplitButton.
 	switch := builder newClassNamed: #Switch.
 	lightFieldset := builder newClassNamed: #LightFieldset.
-	open := builder newClassNamed: #Open.
 	progressBar := builder newClassNamed: #ProgressBar.
-
+	listAndDetails := (builder newClassNamed: #ListAndDetails) comment: 'Correspond to the BLCore class BLAbstractListeEtDetail'; yourself.
+	
+	"attributes"
 	header := builder newClassNamed: #Header.
 	labelPosition := builder newClassNamed: #LabelPosition.
-		
+	open := builder newClassNamed: #Open.
+	coreCellWidth := builder newClassNamed: #CoreCellWidth.
+	coreColSpan := builder newClassNamed: #CoreColSpan.
+	coreHorizontalAlignement := builder newClassNamed: #CoreHorizontalAlignement.
+	coreRowSpan := builder newClassNamed: #CoreRowSpan.
+	coreVerticalAlignement := builder newClassNamed: #CoreVerticalAlignement.
+	
+	"remotes"
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
 	csnVariableAttribute := self remoteEntity: #VariableAttribute withPrefix: #CSN.
@@ -84,6 +89,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	dialog --|> csnContainer.
 	html --|> csnContainer.
 	progressBar --|> csnContainer.
+	listAndDetails --|> csnContainer.
 	
 	
 

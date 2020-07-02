@@ -286,6 +286,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWListAndDetails: aCSNUICWListAndDetails [
+	^ (#('BLAbstractListeEtDetail') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: aCSNUICWListAndDetails ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWOpen: aCSOpen [
 	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
 ]

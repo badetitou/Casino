@@ -304,6 +304,11 @@ CSNModelVisitor class >> visitCSNUICWLightFieldset: aCSNUICWLightFieldset [
 ]
 
 { #category : #visiting }
+CSNModelVisitor class >> visitCSNUICWListAndDetails: aCSNUICWListAndDetails [
+	^ self visitCSNContainer: aCSNUICWListAndDetails
+]
+
+{ #category : #visiting }
 CSNModelVisitor class >> visitCSNUICWOpen: aCSNUICWOpen [
 	<generated>
 	^ self visitCSNAttribute: aCSNUICWOpen
@@ -1051,6 +1056,11 @@ CSNModelVisitor >> visitCSNUICWHTML: aCSNUICWHTML [
 CSNModelVisitor >> visitCSNUICWLightFieldset: aCSNUICWLightFieldset [
 	<generated>
 	^ self visitCSNAttribute: aCSNUICWLightFieldset
+]
+
+{ #category : #visiting }
+CSNModelVisitor >> visitCSNUICWListAndDetails: aCSNUICWListAndDetails [
+	^ self visitCSNContainer: aCSNUICWListAndDetails
 ]
 
 { #category : #visiting }

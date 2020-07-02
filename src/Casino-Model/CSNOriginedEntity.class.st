@@ -4,8 +4,8 @@ Root entity of the meta-model
 Class {
 	#name : #CSNOriginedEntity,
 	#superclass : #CSNEntity,
-	#traits : 'TDependencyQueries + TEntityMetaLevelDependency',
-	#classTraits : 'TDependencyQueries classTrait + TEntityMetaLevelDependency classTrait',
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#name => FMProperty',
 		'#sources => FMProperty'
