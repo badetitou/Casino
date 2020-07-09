@@ -16,7 +16,7 @@ export class ' , self uniqueName
     constructor(private http: HttpClient) {
     }
 
-' , (self actions flatCollect: [ :action | action exportCode , String crlf ])
+' , ((self actions sorted: #uniqueName ascending) flatCollect: [ :action | action exportCode , String crlf ])
 		,
 			'
 
