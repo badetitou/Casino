@@ -14,5 +14,5 @@ CSNUIInputFile class >> accept: aCSNModelVisitor [
 
 { #category : #'*Casino-Model-Visitor-generated' }
 CSNUIInputFile >> angularComponent [
-	^ HTMLInputComponent
+	^ CSNELCWBLInputFile 
 ]
