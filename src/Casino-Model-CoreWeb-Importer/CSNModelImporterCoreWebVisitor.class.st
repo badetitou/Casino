@@ -287,6 +287,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWLinkSimple: aCSNUICWLinkSimple [
+	^ (#('BLAbstractLienSimple') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: CSNUICWLinkSimple ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWListAndDetails: aCSNUICWListAndDetails [
 	^ (#('BLAbstractListeEtDetail') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ self createWidget: aCSNUICWListAndDetails ]
