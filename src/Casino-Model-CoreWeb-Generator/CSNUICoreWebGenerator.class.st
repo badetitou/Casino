@@ -25,7 +25,8 @@ Class {
 		'csnVariableAttribute',
 		'header',
 		'labelPosition',
-		'listAndDetails'
+		'listAndDetails',
+		'linkSimple'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -62,8 +63,11 @@ CSNUICoreWebGenerator >> defineClasses [
 	switch := builder newClassNamed: #Switch.
 	lightFieldset := builder newClassNamed: #LightFieldset.
 	progressBar := builder newClassNamed: #ProgressBar.
-	listAndDetails := (builder newClassNamed: #ListAndDetails) comment: 'Correspond to the BLCore class BLAbstractListeEtDetail'; yourself.
-	
+	listAndDetails := (builder newClassNamed: #ListAndDetails)
+		comment: 'Correspond to the BLCore class BLAbstractListeEtDetail';
+		yourself.
+	linkSimple := builder newClassNamed: #LinkSimple.
+
 	"attributes"
 	header := builder newClassNamed: #Header.
 	labelPosition := builder newClassNamed: #LabelPosition.
@@ -73,13 +77,13 @@ CSNUICoreWebGenerator >> defineClasses [
 	coreHorizontalAlignement := builder newClassNamed: #CoreHorizontalAlignement.
 	coreRowSpan := builder newClassNamed: #CoreRowSpan.
 	coreVerticalAlignement := builder newClassNamed: #CoreVerticalAlignement.
-	
+
 	"remotes"
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
 	csnVariableAttribute := self remoteEntity: #VariableAttribute withPrefix: #CSN.
-	
-	uiInput := self remoteEntity: #Input withPrefix: #CSNUI.
+
+	uiInput := self remoteEntity: #Input withPrefix: #CSNUI
 ]
 
 { #category : #definition }
@@ -90,8 +94,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	html --|> csnContainer.
 	progressBar --|> csnContainer.
 	listAndDetails --|> csnContainer.
-	
-	
+	linkSimple --|> csnContainer.	
 
 	autoComplete --|> uiInput.
 	richTextArea --|> uiInput.

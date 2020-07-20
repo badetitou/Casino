@@ -151,8 +151,9 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
-	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch') includes: source invokedClassName) 
-		ifTrue: [ (self createWidget: aCSNAutoComplete) ] 
+	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch')
+		includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: aCSNAutoComplete ]
 		ifFalse: [ nil ]
 ]
 
@@ -282,6 +283,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 		ifTrue: [ (self createWidget: aCSNHTML)
 				addWidget: ((self create: CSNLeaf) text: (source parameters at: 1 ifAbsent: [ '' ]));
 				yourself ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWLinkSimple: aCSNUICWLinkSimple [
+	^ (#('BLAbstractLienSimple') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: CSNUICWLinkSimple ]
 		ifFalse: [ nil ]
 ]
 
