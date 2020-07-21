@@ -26,7 +26,8 @@ Class {
 		'header',
 		'labelPosition',
 		'listAndDetails',
-		'linkSimple'
+		'linkSimple',
+		'table'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
