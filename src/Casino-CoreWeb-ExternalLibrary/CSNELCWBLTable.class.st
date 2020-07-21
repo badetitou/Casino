@@ -27,6 +27,35 @@ Class {
 }
 
 { #category : #accessing }
+CSNELCWBLTable class >> exportContentOf: aWidget with: anExporter [
+	anExporter
+		indentPlus;
+		crlf;
+		<< '<span slot="bl-table-foot">';
+		indentPlus;
+		crlf;
+		<< '<div class="row" style="float: right; margin-right: 1em;">';
+		indentPlus;
+		crlf.
+	aWidget widgets
+		do: [ :widget | 
+			anExporter
+				crlf;
+				indentPlus.
+			anExporter
+				visit: widget;
+				indentMinus ].
+	anExporter
+		indentMinus;
+		crlf;
+		<< '</div>';
+		indentMinus;
+		crlf;
+		<< '</span>';
+		indentMinus
+]
+
+{ #category : #accessing }
 CSNELCWBLTable class >> getSelector [
 	^ 'bl-table'
 ]

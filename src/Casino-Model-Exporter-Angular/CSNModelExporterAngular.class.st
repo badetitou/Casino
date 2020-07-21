@@ -247,7 +247,7 @@ import { ';
 		<<
 			'.component'';
 import { PHASE_ROUTES } from ''./';
-		<< aCSNPage name;
+		<< aCSNPage getAcceptedName;
 		<< '.route'';';
 		<< String crlf;
 		<< aCSNPage widgetsDependenciesImportInstruction;

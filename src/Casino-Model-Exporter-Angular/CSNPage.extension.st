@@ -2,7 +2,7 @@ Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getAcceptedName [
-	^ (self name splitOn: ':') last
+	^ (self name splitOn: ':') last asRealCamelCase
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -27,7 +27,7 @@ CSNPage >> getLocalComponentPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalModulePath [
-	^ self name, '/' , self name , '.module'
+	^ self name, '/' , self getAcceptedName , '.module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -62,22 +62,22 @@ CSNPage >> getMetadata [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getModuleClassName [
-	^ self name capitalized , 'Module'
+	^ self getAcceptedName , 'Module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getModuleName [
-	^ self name , '.module.ts'
+	^ self getAcceptedName , '.module.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getRouteName [
-	^ self name , '.route.ts'
+	^ self getAcceptedName , '.route.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getSelector [
-	^ 'bl-' , self mooseModel name , '-' , self name
+	^ 'bl-' , self mooseModel name , '-' , self getAcceptedName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
