@@ -795,13 +795,6 @@ CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputFile: aBLUIInputFile [
-	self << '<'.
-	aBLUIInputFile getListPropertiesAsStringWith: self.
-	self <<< ' type="file"/>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputMonth: aBLUIInputMonth [
   self << '<'.
   aBLUIInputMonth getListPropertiesAsStringWith: self.
