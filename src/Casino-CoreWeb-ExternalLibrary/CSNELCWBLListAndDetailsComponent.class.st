@@ -6,15 +6,15 @@ Class {
 
 { #category : #accessing }
 CSNELCWBLListAndDetailsComponent class >> getSelector [
-	^ 'bl-liste-et-details'
+	^ 'bl-liste-et-detail'
 ]
 
 { #category : #accessing }
 CSNELCWBLListAndDetailsComponent class >> moduleName [
-	^ 'ListeEtDetailsComponent'
+	^ 'ListeEtDetailComponent'
 ]
 
 { #category : #accessing }
 CSNELCWBLListAndDetailsComponent class >> subModulePath [
-	^ 'liste-et-details/liste-et-details.component'
+	^ 'liste-et-detail/liste-et-detail.component'
 ]
