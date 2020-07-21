@@ -96,7 +96,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	listAndDetails --|> csnContainer.
 	linkSimple --|> csnContainer.	
 
-	autoComplete --|> uiInput.
+	autoComplete --|> csnContainer.
 	richTextArea --|> uiInput.
 	splitButton --|> csnContainer.
 	switch --|> uiInput.
