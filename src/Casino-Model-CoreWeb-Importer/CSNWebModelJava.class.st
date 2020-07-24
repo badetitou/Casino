@@ -117,7 +117,7 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 			usages := widget affectedActions allUsages.
 			usages := usages , (usages flatCollect: [ :el | el allContainers ])
 				reject:
-					[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: {'setWidget(' . 'add(' . 'setRecto('}) not ] ].
+					[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget
@@ -219,6 +219,12 @@ CSNWebModelJava >> customWidgetClassDictionnary [
 						thenCollect: [ :custom | (custom source target first atScope: FamixTClass) anyOne -> custom ]))
 				removeKey: nil ifAbsent: [  ];
 				yourself ]
+]
+
+{ #category : #adding }
+CSNWebModelJava >> domBuildingMethods [
+	"setWidgetDetail and setListe are for the ListAndDetails"
+	^ {'setWidget(' . 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'}
 ]
 
 { #category : #'private - actions' }
