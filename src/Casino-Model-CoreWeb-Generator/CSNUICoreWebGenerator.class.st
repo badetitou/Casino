@@ -27,7 +27,8 @@ Class {
 		'labelPosition',
 		'listAndDetails',
 		'linkSimple',
-		'table'
+		'table',
+		'multiCombo'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -68,6 +69,7 @@ CSNUICoreWebGenerator >> defineClasses [
 		comment: 'Correspond to the BLCore class BLAbstractListeEtDetail';
 		yourself.
 	linkSimple := builder newClassNamed: #LinkSimple.
+	multiCombo :=  builder newClassNamed: #MultiCombo.
 
 	"attributes"
 	header := builder newClassNamed: #Header.
@@ -95,7 +97,8 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	html --|> csnContainer.
 	progressBar --|> csnContainer.
 	listAndDetails --|> csnContainer.
-	linkSimple --|> csnContainer.	
+	linkSimple --|> csnContainer.
+	multiCombo --|> csnContainer.
 
 	autoComplete --|> csnContainer.
 	richTextArea --|> uiInput.

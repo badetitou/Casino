@@ -11,7 +11,7 @@ CSNPage >> computeSubtitle [
 { #category : #'*Casino-Model-Importer-Java' }
 CSNPage >> computeTitle [
 	title := (self source withSuperclassHierarchy flatCollect: #queryAllOutgoingInvocations)
-		detect: [ :invoc | invoc signature beginsWithAnyOf: {'setPhaseTitle(' . 'super('} ]
+		detect: [ :invoc | (invoc signature beginsWithAnyOf: {'setPhaseTitle(' . 'super('}) and: [ invoc parameters isNotEmpty ] ]
 		ifFound: [ :invoc | invoc parameters at: 1 ]
 		ifNone: [ '' ]
 ]
