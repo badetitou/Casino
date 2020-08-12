@@ -4,7 +4,8 @@ Extension { #name : #CSNService }
 CSNService >> exportCode [
 	^ 'import { Injectable } from ''@angular/core'';
 
-import { Observable, first } from ''rxjs'';
+import { Observable } from ''rxjs'';
+import { first } from ''rxjs/operators'';
 
 import { HttpClient, HttpHeaders } from ''@angular/common/http'';
 

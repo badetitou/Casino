@@ -161,7 +161,8 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 { #category : #generate }
 CSNModelExporterAngular >> generateModuleSourceCodeForModel: aModel [
 	currentWriteStream
-		<< 'import { NgModule, Provider } from ''@angular/core'';
+		<<
+			'import { NgModule, Provider } from ''@angular/core'';
 import { BrowserModule } from ''@angular/platform-browser'';
 import { FormsModule } from ''@angular/forms'';
 import { BrowserAnimationsModule } from ''@angular/platform-browser/animations'';
@@ -169,30 +170,36 @@ import { ToastrModule } from ''ngx-toastr'';
 
 import { DEMOS_ROUTES } from ''./';
 		<< aModel name uncapitalized;
-		<< '.routing'';
+		<<
+			'.routing'';
 import { IndexComponent } from ''./components/index/index.component'';
 import { ComponentsModule } from ''../components/components.module'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
 '.
-	aModel allCSNService do: [ :service | 
-		currentWriteStream
-			<< 'import { ';
-			<< service uniqueName;
-			<< ' } from ''./';
-			<< service getLocalPath;
-			<< ''';';
-			<< String crlf ].
-	currentWriteStream << '
-
-export const phases: Phase[] = [
+	(aModel allCSNService sorted: #uniqueName ascending)
+		do: [ :service | 
+			currentWriteStream
+				<< 'import { ';
+				<< service uniqueName;
+				<< ' } from ''./';
+				<< service getLocalPath;
+				<< ''';';
+				crlf ].
+	currentWriteStream
+		crlf;
+		<<
+			'export const phases: Phase[] = [
 '.
-	aModel allCSNPage do: [ :blPhase | 
-		currentWriteStream
-			<< blPhase getMetadata;
-			<< ',';
-			<< String crlf ].
-	currentWriteStream << '
+	(aModel allCSNPage sorted: #name ascending)
+		do: [ :blPhase | 
+			currentWriteStream
+				<< blPhase getMetadata;
+				<< ',';
+				<< String crlf ].
+	currentWriteStream
+		<<
+			'
 ];
 
 @NgModule({
@@ -214,14 +221,16 @@ export const phases: Phase[] = [
     ],
     providers: [
 '.
-	aModel allCSNService do: [ :service | 
-		currentWriteStream
-			<< '        ';
-			<< service uniqueName;
-			<< ',';
-			<< String crlf ].
+	(aModel allCSNService sorted: #uniqueName ascending)
+		do: [ :service | 
+			currentWriteStream
+				<< '        ';
+				<< service uniqueName;
+				<< ',';
+				<< String crlf ].
 	currentWriteStream
-		<< '        { provide: PHASES, useValue: phases } as Provider
+		<<
+			'        { provide: PHASES, useValue: phases } as Provider
     ]
 })
 export class ';
