@@ -6,7 +6,7 @@ CSNServiceAPI >> exportCode [
     public ' , self uniqueName
 		,
 			'(): Observable<Object> {
-        return this.http.get<Object>(''/ws/', self serviceOwner targetPoint,'/', self name, ''', {
+        return this.http.get<Object>(''/ws/', self serviceOwner targetPoint asKebabCase ,'/', self name asKebabCase, ''', {
             withCredentials: true
         }).pipe(first());
     }

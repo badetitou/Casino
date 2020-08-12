@@ -52,7 +52,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 CSNWidgetFactoryAngular >> createServiceFromServiceClass: aServiceClass [
 	^ (self create: CSNService)
 		name: (aServiceClass name removePrefix: 'IGwt');
-		targetPoint: (aServiceClass name removePrefix: 'IGwt') asLowercase ;
+		targetPoint: (aServiceClass name removePrefix: 'IGwt') ;
 		source: aServiceClass;
 		yourself
 	

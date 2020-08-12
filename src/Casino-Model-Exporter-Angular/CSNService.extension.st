@@ -19,10 +19,7 @@ export class ' , self uniqueName
 
 ' , ((self actions sorted: #uniqueName ascending) flatCollect: [ :action | action exportCode , String crlf ])
 		,
-			'
-
-}
-'
+			'}'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
