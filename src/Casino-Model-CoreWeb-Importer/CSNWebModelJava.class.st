@@ -258,7 +258,7 @@ CSNWebModelJava >> generateService [
 	interfaceService := self sourceModel allTypes asSet
 		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | #('RestService' 'RemoteService') includes: a name ]) and: [ e isInterface ] ].
 	interfaceService addAll: ((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ]) collect: #declaredType).
-	interfaceService do: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
+	interfaceService reject: [ :service | service name endsWith:  'Async' ] thenDo: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
 ]
 
 { #category : #'private - actions' }

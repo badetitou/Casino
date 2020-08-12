@@ -5,7 +5,9 @@ CSNServiceAPI >> exportCode [
 	^ '    public ' , self uniqueName
 		,
 			'(): Observable<Object> {
-        return this.http.get<Object>(''', self serviceOwner targetPoint,'/', self name, '''); // TODO Add real URL
+        return this.http.get<Object>(''/ws/', self serviceOwner targetPoint,'/', self name, ''', {
+            withCredentials: true
+        }).pipe(first());
     }
 '
 ]
