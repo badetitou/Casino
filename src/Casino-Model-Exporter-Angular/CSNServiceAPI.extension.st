@@ -2,7 +2,8 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> exportCode [
-	^ '    public ' , self uniqueName
+	^ '    // TODO: Please check this service    
+	public ' , self uniqueName
 		,
 			'(): Observable<Object> {
         return this.http.get<Object>(''/ws/', self serviceOwner targetPoint,'/', self name, ''', {
