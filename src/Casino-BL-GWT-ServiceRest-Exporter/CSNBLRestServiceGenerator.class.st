@@ -64,6 +64,12 @@ CSNBLRestServiceGenerator >> initialize [
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> printImports: aClass [
+	super printImports: aClass.
+	aClass subclassHierarchyGroup do: [ :subClass | self printImports: subClass ]
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> printRESTImports [
 	self << 'import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -119,7 +125,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 				<< String crlf.
 			"Printing Attributs"
 			tabs := tabs + 1.
-			aClass attributes
+			(aClass attributes, aClass subclassHierarchyGroup collect: #attributes) flattened
 				do: [ :attribute | 
 					self clone visit: attribute.
 					currentStream << String crlf ].
