@@ -81,6 +81,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import fr.sedit.core.exception.BusinessException;
+
 import org.springframework.beans.factory.annotation.Autowired;'
 ]
 
@@ -192,7 +194,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 				<<< aMethod name;
 				<<< '('.
 			(aMethod parameters sorted: [ :p :p2 | p sourceAnchor startPos < p2 sourceAnchor startPos ]) do: [ :parameter | self clone visit: parameter ] separatedBy: [ self <<< ', ' ].
-			self <<< ')' ]
+			self <<< ')' <<< ' throws SeditGwtException' ]
 		ifTrue: [ self << 'static' ].
 	"Printing body of method if class is not abstract or an interface"
 
