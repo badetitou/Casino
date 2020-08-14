@@ -181,7 +181,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		ifFalse: [ self
 				<<< aMethod name;
 				<<< '('.
-			aMethod parameters do: [ :parameter | self clone visit: parameter ] separatedBy: [ self <<< ',' ].
+			(aMethod parameters sorted: [ :p :p2 | p sourceAnchor startPos < p2 sourceAnchor startPos ]) do: [ :parameter | self clone visit: parameter ] separatedBy: [ self <<< ', ' ].
 			self <<< ')' ]
 		ifTrue: [ self << 'static' ].
 	"Printing body of method if class is not abstract or an interface"

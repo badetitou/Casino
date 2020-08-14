@@ -128,7 +128,7 @@ CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 				ifNotNil: [ (anInvocation source localVariables select: [ :localVariable | localVariable name = ((aYValue removePrefix: '++') removeSuffix: '++') ])
 						ifNotEmpty: [ :localVariable | 
 							| positions |
-							positions := anInvocation from sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
+							positions := anInvocation source sourceAnchor findAllOccurrencesOfVariableNamed: localVariable first name.
 							positions := positions
 								select: [ :val | 
 									val < anInvocation sourceAnchor startPos
