@@ -51,6 +51,7 @@ CSNBLRestServiceGenerator >> createNamespaceFolderForClass: class [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> export [
+	self rootFolder ensureCreateDirectory.
 	service ifNil: [ self error ].
 	service source ifNotNil: [ :source | self createNamespaceFolderForClass: source ].
 	self visit: service source
@@ -59,7 +60,7 @@ CSNBLRestServiceGenerator >> export [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> initialize [
 	super initialize.
-	self rootFolder: FileSystem disk workingDirectory asFileReference 
+	self rootFolder: FileSystem disk workingDirectory asFileReference / self rootNamespace
 ]
 
 { #category : #accessing }
@@ -73,6 +74,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;'
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> rootNamespace [
+	^ 'fr/bl/server/omaje/ws/rest'
 ]
 
 { #category : #accessing }
@@ -91,7 +97,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 			"Printing class package and imports if the class is not an inner class"
 			aClass container isNamespace
 				ifTrue: [ self << 'package '.
-					aClass container fullNamePrintOn: currentStream.
+					aClass container fullNameLowerCasePrintOn: currentStream.
 					self
 						<<< ';';
 						crlf;
@@ -133,12 +139,13 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitNamespace: aNamespace [
 	aNamespace name = '<Default Package>' ifTrue: [ ^ self ].
-	aNamespace allParents reverse
+	((aNamespace allParents reject: [ :p | p name = 'remote' ]) reverse allButFirst: 4)
 		do: [ :namespace | 
-			self rootFolder: self rootFolder / namespace name.
+			self rootFolder: self rootFolder / namespace name asLowercase.
 			self rootFolder ensureCreateDirectory ].
-	self rootFolder: self rootFolder / aNamespace name.
-	self rootFolder ensureCreateDirectory
+	aNamespace name = 'remote'
+		ifFalse: [ self rootFolder: self rootFolder / aNamespace name asLowercase.
+			self rootFolder ensureCreateDirectory ]
 ]
 
 { #category : #accessing }
