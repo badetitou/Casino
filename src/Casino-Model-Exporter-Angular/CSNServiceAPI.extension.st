@@ -14,6 +14,21 @@ CSNServiceAPI >> exportCode [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> isDELETE [
+	^ name beginsWithAnyOf: {'delete' . 'remove'}
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> isGET [
+	^ (self isPOST or: [ self isDELETE ]) not
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> isPOST [
+	^ name beginsWithAnyOf: {'set' . 'create' . 'put' . 'post'}
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> uniqueName [
 	| dic |
 	dic := self serviceOwner privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
