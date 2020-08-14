@@ -65,8 +65,14 @@ CSNBLRestServiceGenerator >> initialize [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> printImports: aClass [
-	super printImports: aClass.
-	aClass subclassHierarchyGroup do: [ :subClass | self printImports: subClass ]
+	| declaredTypes annotationTypes |
+	declaredTypes := (self extractDeclaredTypesFor: aClass) asSet.
+	aClass subclassHierarchyGroup do: [ :subClass | declaredTypes addAll: (self extractDeclaredTypesFor: subClass) ].
+	self printImportsDeclaredTypes: declaredTypes. 
+	"fetching annotation imports"
+	annotationTypes := (self extractAnnotationTypesFor: aClass) asSet.
+	aClass subclassHierarchyGroup do: [ :subClass | annotationTypes addAll: ((self extractAnnotationTypesFor: subClass)) ].
+	self printImportsAnnotationTypes: annotationTypes.
 ]
 
 { #category : #accessing }
@@ -193,11 +199,18 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		ifFalse: [ self
 				<<< aMethod name;
 				<<< '('.
-			(aMethod parameters sorted: [ :p :p2 | p sourceAnchor startPos < p2 sourceAnchor startPos ]) do: [ :parameter | self clone visit: parameter ] separatedBy: [ self <<< ', ' ].
-			self <<< ')' <<< ' throws SeditGwtException' ]
+			(aMethod parameters sorted: [ :p :p2 | p sourceAnchor startPos < p2 sourceAnchor startPos ])
+				do: [ :parameter | self clone visit: parameter ]
+				separatedBy: [ self <<< ', ' ].
+			self <<< ')' ]
 		ifTrue: [ self << 'static' ].
-	"Printing body of method if class is not abstract or an interface"
+	"print exception"
+	((aMethod withMethodsOverriding collect: [ :m | m thrownExceptions collect: #exceptionClass ]) flattened asSet asOrderedCollection sorted: #name ascending)
+		ifNotEmpty: [ :exceptions | 
+			self <<< ' throws '.
+			exceptions do: [ :exception | self <<< exception name ] separatedBy: [ self <<< ', ' ] ].
 
+	"Printing body of method if class is not abstract or an interface"
 	currentStream
 		<< ' {';
 		<< String crlf.
