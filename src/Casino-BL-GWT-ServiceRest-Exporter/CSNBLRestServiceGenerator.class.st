@@ -79,7 +79,9 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;'
+import javax.ws.rs.core.MediaType;
+
+import org.springframework.beans.factory.annotation.Autowired;'
 ]
 
 { #category : #accessing }
@@ -90,6 +92,13 @@ CSNBLRestServiceGenerator >> rootNamespace [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> service: aService [
 	service := aService 
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
+
+	self << '@Autowired'; crlf.
+	super visitAttribute: aAttribute
 ]
 
 { #category : #accessing }
