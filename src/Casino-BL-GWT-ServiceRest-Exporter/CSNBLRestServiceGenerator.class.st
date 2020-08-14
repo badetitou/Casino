@@ -137,8 +137,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 			(aClass attributes, aClass subclassHierarchyGroup collect: #attributes) flattened
 				do: [ :attribute | 
 					self clone visit: attribute.
-					currentStream << String crlf ].
-			self crlf.
+					self crlf; crlf ].
 			"Closing Class"
 			service actions
 				do: [ :action | self visitServiceAPI: action ]
