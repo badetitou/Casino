@@ -152,10 +152,11 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	self crlf.
 	self addAnnotationForServiceAPI: aServiceAPI.
 	"Printing modifiers of method ex: static,public/private/protected"
+	self indent.
 	aMethod modifiers
 		do: [ :modifier | 
 			self
-				<< modifier;
+				<<< modifier;
 				space ].
 	"Printing return type for method"
 	aMethod declaredType

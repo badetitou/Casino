@@ -25,7 +25,7 @@ CSNServiceAPI >> isGET [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> isPOST [
-	^ name beginsWithAnyOf: {'set' . 'create' . 'put' . 'post'}
+	^ name beginsWithAnyOf: {'set' . 'create' . 'put' . 'post'. 'save'}
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
