@@ -147,6 +147,9 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	aMethod := aServiceAPI source.
 	aMethod isStub ifTrue: [ ^ self ].
 	"Printing method annotations"
+	aMethod comments do: [ :comment | self << comment sourceText ] separatedBy: [ self crlf ].
+	aMethod methodsOverriding do: [ :methodOverriding | methodOverriding comments do: [ :comment | self << comment sourceText ] ] separatedBy: [ self crlf ].
+	self crlf.
 	self addAnnotationForServiceAPI: aServiceAPI.
 	"Printing modifiers of method ex: static,public/private/protected"
 	aMethod modifiers
@@ -172,7 +175,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	currentStream
 		<< ' {';
 		<< String crlf.
-	aMethod methodsOverriding do: [ :methodOverriding  | self << methodOverriding bodySourceText asJavaComment ] separatedBy: [ self crlf ].
+	aMethod methodsOverriding do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ].
 	self
 		crlf;
 		<< '}'
