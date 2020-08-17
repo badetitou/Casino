@@ -87,8 +87,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import fr.sedit.core.exception.BusinessException;
-
 import org.springframework.beans.factory.annotation.Autowired;'
 ]
 
