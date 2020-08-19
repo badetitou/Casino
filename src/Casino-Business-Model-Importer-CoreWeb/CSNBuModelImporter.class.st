@@ -136,9 +136,9 @@ CSNBuModelImporter >> visitParameterType: aParameterType [
 CSNBuModelImporter >> visitParameterizedType: aClass [
 	"Probably a complex Type"
 
-	^ (aClass superclassHierarchy anySatisfy: [ :superclass | {'List'} includes: superclass name ])
+	^ (aClass withSuperclassHierarchy anySatisfy: [ :superclass | {'List' . 'Set'} includes: superclass name ])
 		ifTrue: [ self importCollectionType: aClass ]
-		ifFalse: [ (aClass superclassHierarchy anySatisfy: [ :superclass | {'Map'} includes: superclass name ])
+		ifFalse: [ (aClass withSuperclassHierarchy anySatisfy: [ :superclass | {'Map'} includes: superclass name ])
 				ifTrue: [ self importDictionaryType: aClass ]
 				ifFalse: [ self factory create: CSNBuDTO ] ]
 ]
@@ -148,4 +148,10 @@ CSNBuModelImporter >> visitPrimitiveType: aPrimitiveType [
 	"Probably a complex Type"
 
 	^ self importPrimitiveType: aPrimitiveType
+]
+
+{ #category : #visiting }
+CSNBuModelImporter >> visitType: aType [
+	self flag: 'Stil not suported'.
+	^ self factory create: CSNBuDTO
 ]
