@@ -45,7 +45,7 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self
 		indentPlus;
 		crlf.
-	aBusinessType attributes do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
+	(aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
 	self indentMinus.
 	self
 		crlf;
