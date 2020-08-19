@@ -75,8 +75,11 @@ CSNBusinessModelGenerator >> defineClasses [
 	
 	"Kind of Data Type"
 	businessType := builder newClassNamed: #BusinessType comment: self commentForBusinessType.
+	businessType withTesting.
 	primitive := builder newClassNamed: #Primitive comment: self commentForPrimitive.
-	complexType := builder newClassNamed: #ComplexType comment: self commentForComplexType.	
+	primitive withTesting.
+	complexType := builder newClassNamed: #ComplexType comment: self commentForComplexType.
+	complexType withTesting.
 	
 	"Kind of complexType"
 	collectionType := builder newClassNamed: #CollectionType comment: self commentForCollectionType.
@@ -108,7 +111,7 @@ CSNBusinessModelGenerator >> defineProperties [
 CSNBusinessModelGenerator >> defineRelations [
 	super defineRelations.
 	((businessType property: #attributes) <>-* (attribute property: #businessType)).
-	(attribute property: #attributeType) *-* (dto property: #usedInAttributes).
+	(attribute property: #attributeType) *- (dto property: #usedInAttributes).
 	(collectionType property: #type) *- (dto property: #inCollectionTypes).
 	(dictionaryType property: #key) *- (dto property: #asKeyInDictionaryTypes).
 	(dictionaryType property: #value) *- (dto property: #asValueInDictionaryTypes).

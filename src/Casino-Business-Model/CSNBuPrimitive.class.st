@@ -19,6 +19,13 @@ CSNBuPrimitive class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+CSNBuPrimitive >> isPrimitive [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 CSNBuPrimitive >> name [
 

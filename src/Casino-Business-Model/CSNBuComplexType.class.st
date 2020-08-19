@@ -15,3 +15,10 @@ CSNBuComplexType class >> annotation [
 	<generated>
 	^self
 ]
+
+{ #category : #testing }
+CSNBuComplexType >> isComplexType [
+
+	<generated>
+	^ true
+]

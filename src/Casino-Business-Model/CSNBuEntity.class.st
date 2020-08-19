@@ -19,3 +19,24 @@ CSNBuEntity class >> metamodel [
 	<generated>
 	^ CSNBuModel metamodel
 ]
+
+{ #category : #testing }
+CSNBuEntity >> isBusinessType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+CSNBuEntity >> isComplexType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+CSNBuEntity >> isPrimitive [
+
+	<generated>
+	^ false
+]

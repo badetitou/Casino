@@ -78,5 +78,5 @@ TCSNExporter >> indentNumber [
 
 { #category : #streaming }
 TCSNExporter >> indentPlus [
-	^ indentLevel := indentLevel + 1
+	^ indentLevel := self indentLevel + 1
 ]

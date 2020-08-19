@@ -74,7 +74,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 			| buAttribute |
 			buAttribute := self factory create: CSNBuAttribute.
 			buAttribute name: attribute name.
-			buAttribute addAttributeType: (attribute declaredType accept: self).
+			buAttribute attributeType: (attribute declaredType accept: self).
 			businessType addAttribute: buAttribute ].
 	^ businessType
 ]

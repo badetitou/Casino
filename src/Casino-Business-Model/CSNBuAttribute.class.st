@@ -21,18 +21,11 @@ CSNBuAttribute class >> annotation [
 	^self
 ]
 
-{ #category : #adding }
-CSNBuAttribute >> addAttributeType: anObject [
-	<generated>
-	^ self attributeType add: anObject
-]
-
 { #category : #accessing }
 CSNBuAttribute >> attributeType [
 	"Relation named: #attributeType type: #CSNBuDTO opposite: #usedInAttributes"
 
 	<generated>
-	<derived>
 	^ attributeType
 ]
 
@@ -40,7 +33,7 @@ CSNBuAttribute >> attributeType [
 CSNBuAttribute >> attributeType: anObject [
 
 	<generated>
-	attributeType value: anObject
+	attributeType := anObject
 ]
 
 { #category : #accessing }

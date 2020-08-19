@@ -100,6 +100,7 @@ CSNBuDTO >> usedInAttributes [
 	"Relation named: #usedInAttributes type: #CSNBuAttribute opposite: #attributeType"
 
 	<generated>
+	<derived>
 	^ usedInAttributes
 ]
 

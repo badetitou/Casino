@@ -50,6 +50,13 @@ CSNBuBusinessType >> attributesGroup [
 	^ MooseGroup withAll: self attributes asSet
 ]
 
+{ #category : #testing }
+CSNBuBusinessType >> isBusinessType [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 CSNBuBusinessType >> name [
 
