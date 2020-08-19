@@ -5,8 +5,8 @@ CSNServiceAPI >> exportCode [
 	^ '    // TODO: Please check this service
     public ' , self uniqueName
 		,
-			'(): Observable<Object> {
-        return this.http.get<Object>(''/ws/', self serviceOwner targetPoint asKebabCase ,'/', self name asKebabCase, ''', {
+			'(): Observable<any> {
+        return this.http.get<any>(''/ws/', self serviceOwner targetPoint asKebabCase ,'/', self name asKebabCase, ''', {
             withCredentials: true
         }).pipe(first());
     }
