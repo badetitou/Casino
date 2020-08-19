@@ -99,8 +99,9 @@ CSNBusinessModelGenerator >> defineHierarchy [
 { #category : #definition }
 CSNBusinessModelGenerator >> defineProperties [
 	super defineProperties.
-	businessType property: #typeName type: #String.
+	businessType property: #name type: #String.
 	attribute property: #name type: #String.
+	primitive property: #name type: #String.
 ]
 
 { #category : #definition }

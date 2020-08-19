@@ -7,7 +7,7 @@ Class {
 	#superclass : #CSNBuDTO,
 	#instVars : [
 		'#attributes => FMMany type: #CSNBuAttribute opposite: #businessType',
-		'#typeName => FMProperty'
+		'#name => FMProperty'
 	],
 	#category : #'Casino-Business-Model-Entities'
 }
@@ -51,15 +51,15 @@ CSNBuBusinessType >> attributesGroup [
 ]
 
 { #category : #accessing }
-CSNBuBusinessType >> typeName [
+CSNBuBusinessType >> name [
 
-	<FMProperty: #typeName type: #String>
+	<FMProperty: #name type: #String>
 	<generated>
-	^ typeName
+	^ name
 ]
 
 { #category : #accessing }
-CSNBuBusinessType >> typeName: anObject [
+CSNBuBusinessType >> name: anObject [
 	<generated>
-	typeName := anObject
+	name := anObject
 ]
