@@ -20,7 +20,7 @@ CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 
 	"is a Date"
 	({'Date'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'date'.
+		ifTrue: [ aCSNExporter <<< 'Date'.
 			^ self ].
 	Error signal: 'Unknow type of primitive type'
 ]

@@ -23,10 +23,15 @@ CSNServiceAPI >> isPOST [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNServiceAPI >> printBodyIn: aStream [
-	aStream << '['.
-	self source parameters do: [ :parameter | aStream << parameter name ] separatedBy: [ aStream << ', ' ].
-	aStream << ']'
+CSNServiceAPI >> printCreateFormDataIn: aStream [
+	self source parameters
+		ifNotEmpty: [ aStream crlf.
+			aStream
+				<< '        const formData = new FormData();';
+				crlf.
+			self sortedParameters
+				do: [ :parameter | aStream << '        formData.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
+				separatedBy: [ aStream crlf ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -36,14 +41,14 @@ CSNServiceAPI >> printCreateParamIn: aStream [
 			aStream
 				<< '        let params = new HttpParams();';
 				crlf.
-			self source parameters
+			self sortedParameters
 				do: [ :parameter | aStream << '        params = params.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
 				separatedBy: [ aStream crlf ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printParameterIn: aStream [
-	self source parameters do: [ :parameter | aStream << parameter name << ': any' ] separatedBy: [ aStream << ', ' ]
+	self sortedParameters do: [ :parameter | aStream << parameter name << ': any' ] separatedBy: [ aStream << ', ' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -51,6 +56,11 @@ CSNServiceAPI >> printRestTypeIn: aStream [
 	self isGET
 		ifTrue: [ aStream << 'get' ]
 		ifFalse: [ aStream << 'post' ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> sortedParameters [
+	^ self source parameters sorted: [ :p1 :p2 | p1 sourceAnchor startPos < p2 sourceAnchor startPos ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -77,7 +87,9 @@ CSNServiceAPI >> writeCodeIn: aStream [
 	self printParameterIn: aStream.
 
 	aStream << '): Observable<any> {'.
-	self isGET ifTrue: [ self printCreateParamIn: aStream ].
+	self isGET
+		ifTrue: [ self printCreateParamIn: aStream ]
+		ifFalse: [ self printCreateFormDataIn: aStream ].
 	aStream
 		<<
 			'
@@ -88,8 +100,7 @@ CSNServiceAPI >> writeCodeIn: aStream [
 		ifTrue: [ aStream
 				<< ',';
 				crlf;
-				<< '            '.
-			self printBodyIn: aStream ].
+				<< '            formData' ].
 	aStream
 		<<
 			', {
