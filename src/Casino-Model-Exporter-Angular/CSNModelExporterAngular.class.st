@@ -971,8 +971,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 CSNModelExporterAngular >> writeBusinessPageImportList [
 	currentWriteStream
 		<<
-			'
-import {
+			'import {
 ';
 		<< self businessPageImportList;
 		<<
