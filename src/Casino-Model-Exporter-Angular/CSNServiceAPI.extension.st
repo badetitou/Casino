@@ -34,10 +34,10 @@ CSNServiceAPI >> printCreateParamIn: aStream [
 	self source parameters
 		ifNotEmpty: [ aStream crlf.
 			aStream
-				<< '		let params = new HttpParams();';
+				<< '        let params = new HttpParams();';
 				crlf.
 			self source parameters
-				do: [ :parameter | aStream << '		params = params.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
+				do: [ :parameter | aStream << '        params = params.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
 				separatedBy: [ aStream crlf ] ]
 ]
 
@@ -98,7 +98,7 @@ CSNServiceAPI >> writeCodeIn: aStream [
 		ifTrue: [ aStream
 				<<
 					',
-		    params: params' ].
+            params: params' ].
 	aStream
 		<<
 			'
