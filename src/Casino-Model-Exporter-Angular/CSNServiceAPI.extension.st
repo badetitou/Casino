@@ -21,11 +21,13 @@ CSNServiceAPI >> isDELETE [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> isGET [
 	^ (self isPOST or: [ self isDELETE ]) not
+		and: [ (self source parameters collect: #declaredType)
+				allSatisfy: [ :type | type isPrimitiveType or: [ {'String' . 'Long' . 'Integer' . 'Double' . 'Boolean'} includes: type name ] ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> isPOST [
-	^ name beginsWithAnyOf: {'set' . 'create' . 'put' . 'post'. 'save'}
+	^ (name beginsWithAnyOf: {'set' . 'create' . 'put' . 'post'. 'save'})
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
