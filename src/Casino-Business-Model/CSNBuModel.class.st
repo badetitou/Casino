@@ -4,6 +4,12 @@ Class {
 	#category : #'Casino-Business-Model-Model'
 }
 
+{ #category : #accessing }
+CSNBuModel class >> allSubmetamodelsPackagesNames [
+	<generated>
+	^ #(#'Moose-Query' #'Famix-Traits' #'Casino-Model')
+]
+
 { #category : #meta }
 CSNBuModel class >> annotation [
 	<FMClass: #CSNBuModel super: #MooseModel>

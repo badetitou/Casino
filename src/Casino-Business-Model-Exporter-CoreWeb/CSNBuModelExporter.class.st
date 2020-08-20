@@ -20,7 +20,7 @@ CSNBuModelExporter >> exportAttributeDTO: aDTO [
 varName: <attributeBusinessType>;
 "
 
-	aDTO writeBusinessTypeOn: self.
+	aDTO writeBusinessTypeOn: self
 ]
 
 { #category : #export }

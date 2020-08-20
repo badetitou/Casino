@@ -91,8 +91,13 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 	| dictionary arguments |
 	dictionary := self factory create: CSNBuDictionaryType.
 	dictionary key: (aClass arguments first accept: self).
-	dictionary value: (aClass arguments second accept: self).
+	dictionary value: ((aClass arguments asOrderedCollection at: 2 ifAbsent: [ aClass arguments first ]) accept: self).
 	^ dictionary
+]
+
+{ #category : #importing }
+CSNBuModelImporter >> importForServiceApi: aServiceAPI [
+	aServiceAPI dataType: (aServiceAPI source declaredType accept: self)
 ]
 
 { #category : #importing }

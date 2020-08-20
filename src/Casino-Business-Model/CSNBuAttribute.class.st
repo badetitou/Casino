@@ -5,7 +5,7 @@ Class {
 	#name : #CSNBuAttribute,
 	#superclass : #CSNBuEntity,
 	#instVars : [
-		'#attributeType => FMMany type: #CSNBuDTO opposite: #usedInAttributes',
+		'#attributeType => FMOne type: #CSNBuDTO opposite: #usedInAttributes',
 		'#businessType => FMOne type: #CSNBuBusinessType opposite: #attributes',
 		'#name => FMProperty'
 	],

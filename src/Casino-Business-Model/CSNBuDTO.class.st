@@ -47,6 +47,12 @@ CSNBuDTO >> addUsedInAttribute: anObject [
 	^ self usedInAttributes add: anObject
 ]
 
+{ #category : #adding }
+CSNBuDTO >> addUsedInService: anObject [
+	<generated>
+	^ self usedInServices add: anObject
+]
+
 { #category : #accessing }
 CSNBuDTO >> asKeyInDictionaryTypes [
 	"Relation named: #asKeyInDictionaryTypes type: #CSNBuDictionaryType opposite: #key"
@@ -109,4 +115,21 @@ CSNBuDTO >> usedInAttributes: anObject [
 
 	<generated>
 	usedInAttributes value: anObject
+]
+
+{ #category : #accessing }
+CSNBuDTO >> usedInServices [
+	"Relation named: #usedInServices type: #CSNServiceAPI opposite: #dataType"
+
+	<generated>
+	<derived>
+	<FMProperty: #usedInServices type: #CSNServiceAPI opposite: #dataType>
+	^ self privateState attributeAt: #usedInServices ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+]
+
+{ #category : #accessing }
+CSNBuDTO >> usedInServices: anObject [
+
+	<generated>
+	self usedInServices value: anObject
 ]

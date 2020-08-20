@@ -12,7 +12,8 @@ Class {
 		'collectionType',
 		'dictionaryType',
 		'businessType',
-		'attribute'
+		'attribute',
+		'serviceAPI'
 	],
 	#category : #'Casino-Business-Model-Generator'
 }
@@ -26,6 +27,11 @@ CSNBusinessModelGenerator class >> packageName [
 { #category : #accessing }
 CSNBusinessModelGenerator class >> prefix [
 	^ #CSNBu
+]
+
+{ #category : #accessing }
+CSNBusinessModelGenerator class >> submetamodels [
+	^ { CSNMetamodelGenerator }
 ]
 
 { #category : #comments }
@@ -83,7 +89,10 @@ CSNBusinessModelGenerator >> defineClasses [
 	
 	"Kind of complexType"
 	collectionType := builder newClassNamed: #CollectionType comment: self commentForCollectionType.
-	dictionaryType := builder newClassNamed: #DictionaryType comment: self commentForDictionaryType
+	dictionaryType := builder newClassNamed: #DictionaryType comment: self commentForDictionaryType.
+	
+	"Remote entities - service"
+	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
 ]
 
 { #category : #definition }
@@ -110,9 +119,13 @@ CSNBusinessModelGenerator >> defineProperties [
 { #category : #definition }
 CSNBusinessModelGenerator >> defineRelations [
 	super defineRelations.
+	"local relations"
 	((businessType property: #attributes) <>-* (attribute property: #businessType)).
 	(attribute property: #attributeType) *- (dto property: #usedInAttributes).
 	(collectionType property: #type) *- (dto property: #inCollectionTypes).
 	(dictionaryType property: #key) *- (dto property: #asKeyInDictionaryTypes).
 	(dictionaryType property: #value) *- (dto property: #asValueInDictionaryTypes).
+	
+	"remote relations"
+	(serviceAPI property: #dataType) *- (dto property: #usedInServices)
 ]
