@@ -21,6 +21,13 @@ CSNBuDictionaryType class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+CSNBuDictionaryType >> isDictionaryType [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 CSNBuDictionaryType >> key [
 	"Relation named: #key type: #CSNBuDTO opposite: #asKeyInDictionaryTypes"

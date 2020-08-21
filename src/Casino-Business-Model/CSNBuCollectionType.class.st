@@ -19,6 +19,13 @@ CSNBuCollectionType class >> annotation [
 	^self
 ]
 
+{ #category : #testing }
+CSNBuCollectionType >> isCollectionType [
+
+	<generated>
+	^ true
+]
+
 { #category : #accessing }
 CSNBuCollectionType >> type [
 	"Relation named: #type type: #CSNBuDTO opposite: #inCollectionTypes"

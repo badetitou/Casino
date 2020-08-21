@@ -28,7 +28,21 @@ CSNBuEntity >> isBusinessType [
 ]
 
 { #category : #testing }
+CSNBuEntity >> isCollectionType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
 CSNBuEntity >> isComplexType [
+
+	<generated>
+	^ false
+]
+
+{ #category : #testing }
+CSNBuEntity >> isDictionaryType [
 
 	<generated>
 	^ false

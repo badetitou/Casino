@@ -89,7 +89,9 @@ CSNBusinessModelGenerator >> defineClasses [
 	
 	"Kind of complexType"
 	collectionType := builder newClassNamed: #CollectionType comment: self commentForCollectionType.
+	collectionType withTesting.
 	dictionaryType := builder newClassNamed: #DictionaryType comment: self commentForDictionaryType.
+	dictionaryType withTesting.
 	
 	"Remote entities - service"
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.

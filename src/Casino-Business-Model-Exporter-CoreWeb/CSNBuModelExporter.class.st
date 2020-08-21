@@ -26,17 +26,18 @@ varName: <attributeBusinessType>;
 { #category : #export }
 CSNBuModelExporter >> exportBusinessType: aBusinessType [
 
-	self printImports.
+	"self printImports."
+	self printImportDependencenciesOf: aBusinessType.
 	(self <<< 'export class ' <<< aBusinessType name)
-		<<< ' implements Deserializable {';
+		<<< ' {';
 		crlf;
 		indentPlus.
 	(aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
 	self indentMinus.
-	self crlf; crlf.
+	"self crlf; crlf.
 	self indentPlus.
 	self printDeserialize.
-	self indentMinus.
+	self indentMinus."
 	self
 		crlf;
 		<< '}';
@@ -60,8 +61,18 @@ CSNBuModelExporter >> printDeserialize [
 ]
 
 { #category : #export }
+CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
+	aBusinessType dependencies
+		ifNotEmpty: [ :dependencies | 
+			dependencies do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ] separatedBy: [ self crlf ].
+			self
+				crlf;
+				crlf ]
+]
+
+{ #category : #export }
 CSNBuModelExporter >> printImports [
-	self << 'import { Deserializable } from ''app/components/service/model/dto/deserializable.model'';'.
+	"self << 'import { Deserializable } from ''app/components/service/model/dto/deserializable.model'';'."
 	self crlf; crlf
 	
 ]

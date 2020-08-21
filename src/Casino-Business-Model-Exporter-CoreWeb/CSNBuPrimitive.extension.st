@@ -22,5 +22,13 @@ CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 	({'Date'} includes: self name)
 		ifTrue: [ aCSNExporter <<< 'Date'.
 			^ self ].
+
+	"is a byte"
+	({'byte'} includes: self name)
+		ifTrue: [ 
+			"not really supported"
+			aCSNExporter <<< 'any'.
+			^ self ].
+
 	Error signal: 'Unknow type of primitive type'
 ]
