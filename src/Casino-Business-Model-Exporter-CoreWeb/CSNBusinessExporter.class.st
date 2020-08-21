@@ -20,13 +20,17 @@ CSNBusinessExporter >> businessTypeExporter: anObject [
 
 { #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
+	(aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) do:
+		[ :businessType | self exportBusinessType: businessType ]
+]
+
+{ #category : #accessing }
+CSNBusinessExporter >> exportBusinessType: businessType [
 	(self modelRoot / 'dto') ensureCreateDirectory.
-	(aCSNBuModel allWithSubTypesOf: CSNBuBusinessType)
-		do: [ :businessType | 
-			 self modelRoot / 'dto' / (businessType name , '.model.ts')
-				writeStreamDo: [ :stream | 
-					self businessTypeExporter currentWriteStream: stream.
-					self businessTypeExporter exportBusinessType: businessType ] ]
+	^ self modelRoot / 'dto' / (businessType name , '.model.ts')
+		writeStreamDo: [ :stream | 
+			self businessTypeExporter currentWriteStream: stream.
+			self businessTypeExporter exportBusinessType: businessType ]
 ]
 
 { #category : #accessing }
