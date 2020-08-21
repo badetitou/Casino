@@ -24,7 +24,7 @@ CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 			^ self ].
 
 	"is a byte"
-	({'byte'} includes: self name)
+	({'byte' . 'void'} includes: self name)
 		ifTrue: [ 
 			"not really supported"
 			aCSNExporter <<< 'any'.

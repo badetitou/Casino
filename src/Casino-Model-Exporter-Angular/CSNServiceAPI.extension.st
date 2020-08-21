@@ -27,35 +27,35 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 	self source parameters
 		ifNotEmpty: [ aStream crlf.
 			aStream
-				<< '        const formData = new FormData();';
+				<< 'const formData = new FormData();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aStream << '        formData.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
+				do: [ :parameter | aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< ');' ]
 				separatedBy: [ aStream crlf ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNServiceAPI >> printCreateParamIn: aStream [
+CSNServiceAPI >> printCreateParamIn: aCSNExporter [
 	self source parameters
-		ifNotEmpty: [ aStream crlf.
-			aStream
-				<< '        let params = new HttpParams();';
+		ifNotEmpty: [ aCSNExporter crlf.
+			aCSNExporter
+				<< 'let params = new HttpParams();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aStream << '        params = params.append(''' << parameter name asKebabCase << ''', ' << parameter name << ');' ]
-				separatedBy: [ aStream crlf ] ]
+				do: [ :parameter | aCSNExporter << 'params = params.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< ');' ]
+				separatedBy: [ aCSNExporter crlf ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printParameterIn: aStream [
-	self sortedParameters do: [ :parameter | aStream << parameter name << ': any' ] separatedBy: [ aStream << ', ' ]
+	self sortedParameters do: [ :parameter | aStream <<< parameter name <<< ': any' ] separatedBy: [ aStream <<< ', ' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printRestTypeIn: aStream [
 	self isGET
-		ifTrue: [ aStream << 'get' ]
-		ifFalse: [ aStream << 'post' ]
+		ifTrue: [ aStream <<< 'get' ]
+		ifFalse: [ aStream <<< 'post' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
