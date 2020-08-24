@@ -64,7 +64,7 @@ CSNBuModelExporter >> printDeserialize [
 CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 	aBusinessType dependencies
 		ifNotEmpty: [ :dependencies | 
-			dependencies do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ] separatedBy: [ self crlf ].
+			(dependencies asOrderedCollection sorted: #name ascending) do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ] separatedBy: [ self crlf ].
 			self
 				crlf;
 				crlf ]
