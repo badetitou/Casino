@@ -191,8 +191,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 
-import org.springframework.beans.factory.annotation.Autowired;'
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import java.io.IOException;
+'
 ]
 
 { #category : #accessing }
@@ -333,9 +339,9 @@ CSNBLRestServiceGenerator >> visitServiceAPIParameter: parameter [
 	parameter dataType isDictionaryType
 		ifTrue: [ self <<< 'String ' <<< parameter name ]
 		ifFalse: [ parameter dataType isCollectionType
-				ifTrue: [ self <<< 'List<FormDataBodyParam> ' <<< parameter name ]
+				ifTrue: [ self <<< 'List<FormDataBodyPart> ' <<< parameter name ]
 				ifFalse: [ (parameter dataType isBusinessType or: [ parameter dataType isPrimitive not ])
-						ifTrue: [ self <<< 'FormDataBodyParam ' <<< parameter name ]
+						ifTrue: [ self <<< 'FormDataBodyPart ' <<< parameter name ]
 						ifFalse: [ self visitParameter: parameter source ] ] ].
 	parameter dataType isPrimitive not ifTrue: [ self <<< 'Json' ]
 ]
