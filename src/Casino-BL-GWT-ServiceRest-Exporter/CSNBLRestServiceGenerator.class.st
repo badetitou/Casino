@@ -67,6 +67,13 @@ CSNBLRestServiceGenerator >> addRESTTypeAnnotationFor: aServiceAPI [
 	self crlf
 ]
 
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> additionalExceptionFor: aServiceAPI [
+	^ (aServiceAPI parameters anySatisfy: [ :parameter | parameter dataType isDictionaryType ])
+		ifTrue: [ {'JsonParseException' . 'JsonMappingException' . 'IOException'} ]
+		ifFalse: [ {} ]
+]
+
 { #category : #convert }
 CSNBLRestServiceGenerator >> convertBusinessType: serviceParameter [
 	(self << '// Convert ')
@@ -316,11 +323,11 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 			self <<< ')' ]
 		ifTrue: [ self << 'static' ].
 	"print exception"
-	((aMethod withMethodsOverriding collect: [ :m | m thrownExceptions collect: #exceptionClass ]) flattened asSet asOrderedCollection sorted: #name ascending)
-		ifNotEmpty: [ :exceptions | 
+	(((aMethod withMethodsOverriding collect: [ :m | m thrownExceptions collect: #exceptionClass ]) flattened asSet asOrderedCollection sorted: #name ascending)
+		collect: #name) , (self additionalExceptionFor: aServiceAPI)
+		ifNotEmpty: [ :exceptionsName | 
 			self <<< ' throws '.
-			exceptions do: [ :exception | self <<< exception name ] separatedBy: [ self <<< ', ' ] ].
-	self printAdditionalExceptionFor: aServiceAPI.
+			exceptionsName do: [ :exceptionName | self <<< exceptionName ] separatedBy: [ self <<< ', ' ] ].
 
 	"Printing body of method if class is not abstract or an interface"
 	currentStream
