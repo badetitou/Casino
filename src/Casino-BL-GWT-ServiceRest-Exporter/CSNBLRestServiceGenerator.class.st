@@ -305,10 +305,11 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	"Printing modifiers of method ex: static,public/private/protected"
 	self indent.
 	aMethod modifiers
-		do: [ :modifier | 
+		ifNotEmptyDo: [ :modifier | 
 			self
 				<<< modifier;
-				space ].
+				space ]
+		ifEmpty: [ self <<< 'public' ].
 	"Printing return type for method"
 	aMethod declaredType
 		ifNotNil: [ :declaredType | 

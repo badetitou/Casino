@@ -8,7 +8,7 @@ CSNServiceAPI >> hasOnlyPrimitiveParameter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> isDELETE [
-	^ name beginsWithAnyOf: {'delete' . 'remove'}
+	^ name beginsWithAnyOf: {'delete' . 'remove' . 'clean' . 'purge'}
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
