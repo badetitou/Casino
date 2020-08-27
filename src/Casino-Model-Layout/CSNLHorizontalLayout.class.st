@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNLHorizontalLayout class >> annotation [
 
-	<MSEClass: #HorizontalLayout super: #CSNLLayout>
+	<FMClass: #HorizontalLayout super: #CSNLLayout>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self

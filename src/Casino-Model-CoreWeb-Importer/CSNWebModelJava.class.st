@@ -262,6 +262,20 @@ CSNWebModelJava >> generateService [
 ]
 
 { #category : #'private - actions' }
+CSNWebModelJava >> generateServiceAPIParameter [
+	(self model allWithSubTypesOf: CSNServiceAPI)
+		withIndexDo: [ :e :index | 
+			e source parameters
+				do: [ :parameter | 
+					e
+						addParameter:
+							((self factory create: CSNServiceAPIParameter fromSource: parameter)
+								name: parameter name;
+								yourself) ].
+			index \\ 10 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
+]
+
+{ #category : #'private - actions' }
 CSNWebModelJava >> generateServiceAction [
 	self model allCSNService
 		withIndexDo: [ :e :index | 
@@ -362,6 +376,7 @@ CSNWebModelJava >> import [
 	self execute: [ self generateBLActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
 	self execute: [ self generateService ] recordedAs: '11/15 generateService'.
 	self execute: [ self generateServiceAction ] recordedAs: '12/15 generateServiceAction'.
+	self execute: [ self generateServiceAPIParameter ] recordedAs: '12/15 generateServiceAPIParameter'.
 	"this last two should stay at the end"
 	self execute: [ self addWidgetAttributes ] recordedAs: '13/15 addWidgetAttributes'.
 	self execute: [ self addWidgetsActions ] recordedAs: '14/15 addWidgetsActions'.

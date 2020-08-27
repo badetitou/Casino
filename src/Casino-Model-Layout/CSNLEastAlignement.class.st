@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNLEastAlignement class >> annotation [
 
-	<MSEClass: #EastAlignement super: #CSNLAlignement>
+	<FMClass: #EastAlignement super: #CSNLAlignement>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self

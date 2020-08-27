@@ -10,17 +10,10 @@ Class {
 { #category : #meta }
 CSNLCell class >> annotation [
 
-	<MSEClass: #Cell super: #CSNWidget>
+	<FMClass: #Cell super: #CSNWidget>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLCell class >> requirements [
-
-	<generated>
-	^ { CSNLLayout }
 ]
 
 { #category : #accessing }
@@ -37,7 +30,6 @@ CSNLCell >> layoutOwner: anObject [
 
 	<generated>
 	layoutOwner := anObject
-
 ]
 
 { #category : #navigation }
@@ -52,7 +44,7 @@ CSNLCell >> widget [
 	"Relation named: #widget type: #CSNWidget opposite: #cellOwner"
 
 	<generated>
-	<MSEProperty: #widget type: #CSNWidget opposite: #cellOwner>
+	<FMProperty: #widget type: #CSNWidget opposite: #cellOwner>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 

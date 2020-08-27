@@ -10,17 +10,10 @@ Class {
 { #category : #meta }
 CSNLLayout class >> annotation [
 
-	<MSEClass: #Layout super: #CSNOriginedEntity>
+	<FMClass: #Layout super: #CSNOriginedEntity>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLLayout class >> requirements [
-
-	<generated>
-	^ { CSNContainer }
 ]
 
 { #category : #adding }
@@ -43,7 +36,6 @@ CSNLLayout >> cell: anObject [
 
 	<generated>
 	cell value: anObject
-
 ]
 
 { #category : #navigation }
@@ -59,7 +51,7 @@ CSNLLayout >> container [
 
 	<generated>
 	<container>
-	<MSEProperty: #container type: #CSNContainer opposite: #layout>
+	<FMProperty: #container type: #CSNContainer opposite: #layout>
 	^ self privateState attributeAt: #container ifAbsent: [ nil ]
 ]
 

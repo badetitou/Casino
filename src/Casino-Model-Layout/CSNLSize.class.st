@@ -7,17 +7,10 @@ Class {
 { #category : #meta }
 CSNLSize class >> annotation [
 
-	<MSEClass: #Size super: #CSNOriginedEntity>
+	<FMClass: #Size super: #CSNOriginedEntity>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLSize class >> requirements [
-
-	<generated>
-	^ { CSNWidget }
 ]
 
 { #category : #accessing }
@@ -27,7 +20,7 @@ CSNLSize >> widget [
 	<generated>
 	<container>
 	<derived>
-	<MSEProperty: #widget type: #CSNWidget opposite: #size>
+	<FMProperty: #widget type: #CSNWidget opposite: #size>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 

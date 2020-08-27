@@ -42,6 +42,12 @@ CSNBuDTO >> addInCollectionType: anObject [
 ]
 
 { #category : #adding }
+CSNBuDTO >> addUsedAsParameterType: anObject [
+	<generated>
+	^ self usedAsParameterType add: anObject
+]
+
+{ #category : #adding }
 CSNBuDTO >> addUsedInAttribute: anObject [
 	<generated>
 	^ self usedInAttributes add: anObject
@@ -99,6 +105,23 @@ CSNBuDTO >> inCollectionTypes: anObject [
 
 	<generated>
 	inCollectionTypes value: anObject
+]
+
+{ #category : #accessing }
+CSNBuDTO >> usedAsParameterType [
+	"Relation named: #usedAsParameterType type: #CSNServiceAPIParameter opposite: #dataType"
+
+	<generated>
+	<derived>
+	<FMProperty: #usedAsParameterType type: #CSNServiceAPIParameter opposite: #dataType>
+	^ self privateState attributeAt: #usedAsParameterType ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+]
+
+{ #category : #accessing }
+CSNBuDTO >> usedAsParameterType: anObject [
+
+	<generated>
+	self usedAsParameterType value: anObject
 ]
 
 { #category : #accessing }

@@ -2,6 +2,7 @@ Class {
 	#name : #CSNServiceAPI,
 	#superclass : #CSNOriginedEntity,
 	#instVars : [
+		'#parameters => FMMany type: #CSNServiceAPIParameter opposite: #serviceAPIOwner',
 		'#serviceOwner => FMOne type: #CSNService opposite: #actions'
 	],
 	#category : #'Casino-Model-Entities'
@@ -14,6 +15,35 @@ CSNServiceAPI class >> annotation [
 	<package: #'Casino-Model'>
 	<generated>
 	^self
+]
+
+{ #category : #adding }
+CSNServiceAPI >> addParameter: anObject [
+	<generated>
+	^ self parameters add: anObject
+]
+
+{ #category : #accessing }
+CSNServiceAPI >> parameters [
+	"Relation named: #parameters type: #CSNServiceAPIParameter opposite: #serviceAPIOwner"
+
+	<generated>
+	<derived>
+	^ parameters
+]
+
+{ #category : #accessing }
+CSNServiceAPI >> parameters: anObject [
+
+	<generated>
+	parameters value: anObject
+]
+
+{ #category : #navigation }
+CSNServiceAPI >> parametersGroup [
+	<generated>
+	<navigation: 'Parameters'>
+	^ MooseGroup withAll: self parameters asSet
 ]
 
 { #category : #accessing }

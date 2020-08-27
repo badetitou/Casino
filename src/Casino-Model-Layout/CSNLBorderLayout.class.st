@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNLBorderLayout class >> annotation [
 
-	<MSEClass: #BorderLayout super: #CSNLLayout>
+	<FMClass: #BorderLayout super: #CSNLLayout>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self

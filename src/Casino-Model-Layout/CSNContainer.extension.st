@@ -6,7 +6,7 @@ CSNContainer >> layout [
 
 	<generated>
 	<derived>
-	<MSEProperty: #layout type: #CSNLLayout opposite: #container>
+	<FMProperty: #layout type: #CSNLLayout opposite: #container>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #layout ifAbsent: [ nil ]
 ]

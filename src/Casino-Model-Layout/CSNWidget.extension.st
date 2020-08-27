@@ -7,7 +7,7 @@ CSNWidget >> cellOwner [
 	<generated>
 	<container>
 	<derived>
-	<MSEProperty: #cellOwner type: #CSNLCell opposite: #widget>
+	<FMProperty: #cellOwner type: #CSNLCell opposite: #widget>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #cellOwner ifAbsent: [ nil ]
 ]
@@ -31,7 +31,7 @@ CSNWidget >> position [
 	"Relation named: #position type: #CSNLPosition opposite: #widget"
 
 	<generated>
-	<MSEProperty: #position type: #CSNLPosition opposite: #widget>
+	<FMProperty: #position type: #CSNLPosition opposite: #widget>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #position ifAbsent: [ nil ]
 ]
@@ -55,7 +55,7 @@ CSNWidget >> size [
 	"Relation named: #size type: #CSNLSize opposite: #widget"
 
 	<generated>
-	<MSEProperty: #size type: #CSNLSize opposite: #widget>
+	<FMProperty: #size type: #CSNLSize opposite: #widget>
 	<package: #'Casino-Model-Layout'>
 	^ self privateState attributeAt: #size ifAbsent: [ nil ]
 ]

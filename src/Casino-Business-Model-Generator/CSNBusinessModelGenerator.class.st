@@ -13,7 +13,8 @@ Class {
 		'dictionaryType',
 		'businessType',
 		'attribute',
-		'serviceAPI'
+		'serviceAPI',
+		'serviceAPIParameter'
 	],
 	#category : #'Casino-Business-Model-Generator'
 }
@@ -95,6 +96,7 @@ CSNBusinessModelGenerator >> defineClasses [
 	
 	"Remote entities - service"
 	serviceAPI := self remoteEntity: #ServiceAPI withPrefix: #CSN.
+	serviceAPIParameter := self remoteEntity: #ServiceAPIParameter withPrefix: #CSN.
 ]
 
 { #category : #definition }
@@ -129,5 +131,6 @@ CSNBusinessModelGenerator >> defineRelations [
 	(dictionaryType property: #value) *- (dto property: #asValueInDictionaryTypes).
 	
 	"remote relations"
-	(serviceAPI property: #dataType) *- (dto property: #usedInServices)
+	(serviceAPI property: #dataType) *- (dto property: #usedInServices).
+	(serviceAPIParameter property: #dataType) *- (dto property: #usedAsParameterType)
 ]

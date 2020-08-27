@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNLRelativeSize class >> annotation [
 
-	<MSEClass: #RelativeSize super: #CSNLSize>
+	<FMClass: #RelativeSize super: #CSNLSize>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self

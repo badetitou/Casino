@@ -7,17 +7,10 @@ Class {
 { #category : #meta }
 CSNLPosition class >> annotation [
 
-	<MSEClass: #Position super: #CSNOriginedEntity>
+	<FMClass: #Position super: #CSNOriginedEntity>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
-]
-
-{ #category : #meta }
-CSNLPosition class >> requirements [
-
-	<generated>
-	^ { CSNWidget }
 ]
 
 { #category : #accessing }
@@ -27,7 +20,7 @@ CSNLPosition >> widget [
 	<generated>
 	<container>
 	<derived>
-	<MSEProperty: #widget type: #CSNWidget opposite: #position>
+	<FMProperty: #widget type: #CSNWidget opposite: #position>
 	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
 ]
 

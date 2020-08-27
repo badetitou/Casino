@@ -97,7 +97,8 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 
 { #category : #importing }
 CSNBuModelImporter >> importForServiceApi: aServiceAPI [
-	aServiceAPI dataType: (aServiceAPI source declaredType accept: self)
+	aServiceAPI dataType: (aServiceAPI source declaredType accept: self).
+	aServiceAPI parameters do: [ :parameter | parameter dataType: (parameter source accept: self)  ]
 ]
 
 { #category : #importing }
@@ -129,6 +130,11 @@ CSNBuModelImporter >> visitClass: aClass [
 CSNBuModelImporter >> visitEnum: aParameterType [
 	self flag: 'Stil not suported'.
 	^ self factory create: CSNBuDTO
+]
+
+{ #category : #visiting }
+CSNBuModelImporter >> visitParameter: aParameter [
+	^ aParameter declaredType accept: self
 ]
 
 { #category : #visiting }

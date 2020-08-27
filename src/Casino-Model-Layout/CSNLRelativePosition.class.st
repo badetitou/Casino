@@ -7,7 +7,7 @@ Class {
 { #category : #meta }
 CSNLRelativePosition class >> annotation [
 
-	<MSEClass: #RelativePosition super: #CSNLPosition>
+	<FMClass: #RelativePosition super: #CSNLPosition>
 	<package: #'Casino-Model-Layout'>
 	<generated>
 	^self
