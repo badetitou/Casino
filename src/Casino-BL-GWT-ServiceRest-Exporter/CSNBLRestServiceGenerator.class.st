@@ -67,6 +67,52 @@ CSNBLRestServiceGenerator >> addRESTTypeAnnotationFor: aServiceAPI [
 	self crlf
 ]
 
+{ #category : #convert }
+CSNBLRestServiceGenerator >> convertBusinessType: serviceParameter [
+	(self << '// Convert ')
+		<<< serviceParameter name;
+		crlf.
+	(self << serviceParameter name)
+		<<< 'Json.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
+		crlf.
+	self << serviceParameter source declaredType name <<< ' ' <<< serviceParameter name <<< ' = ' <<< serviceParameter name <<< 'Json.getValueAs('
+		<<< serviceParameter source declaredType name <<< '.class);'
+]
+
+{ #category : #convert }
+CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
+	(self << '// Convert ')
+		<<< serviceParameter name;
+		crlf.
+	self indent.
+	serviceParameter source declaredType accept: self.
+	(self <<< ' ' <<< serviceParameter name)
+		<<< ' = new ArrayList<>();';
+		crlf.
+	(self << 'for (FormDataBodyPart formDataBodyPart: ' <<< serviceParameter name)
+		<<< 'Json) {';
+		crlf.
+	self indentPlus.
+	self
+		<< 'formDataBodyPart.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
+		crlf.
+	(self << serviceParameter name <<< '.formDataBodyPart.getValueAs(' <<< serviceParameter source declaredType name)
+		<<< '.class));';
+		crlf.
+	self indentMinus.
+	^ self << '}'
+]
+
+{ #category : #convert }
+CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
+	(self << '// Convert ')
+		<<< serviceParameter name;
+		crlf.
+	self indent.
+	serviceParameter source declaredType accept: self.
+	self <<< ' ' <<< serviceParameter name <<< ' = new ObjectMapper().readValue(' <<< serviceParameter name <<< 'Json, Map.class);'
+]
+
 { #category : #accessing }
 CSNBLRestServiceGenerator >> createNamespaceFolderForClass: class [
 	self visitNamespace: (class atScope: FAMIXNamespace) anyOne
@@ -87,14 +133,36 @@ CSNBLRestServiceGenerator >> initialize [
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> printAdditionalExceptionFor: aServiceAPI [
+	(aServiceAPI parameters anySatisfy: [ :parameter | parameter dataType isDictionaryType ])
+		ifTrue: [ self <<< ', JsonParseException, JsonMappingException, IOException' ]
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> printAttributeOf: aMethod ofServiceApi: aServiceAPI [
-	(aMethod parameters sorted: [ :p :p2 | p sourceAnchor startPos < p2 sourceAnchor startPos ])
+	(aServiceAPI parameters sorted: [ :p :p2 | p source sourceAnchor startPos < p2 source sourceAnchor startPos ])
 		do: [ :parameter | 
 			aServiceAPI isGET
 				ifTrue: [ self <<< '@QueryParam("' <<< parameter name asKebabCase <<< '") ' ]
 				ifFalse: [ self <<< '@FormDataParam("' <<< parameter name asKebabCase <<< '") ' ].
-			self visit: parameter ]
+			self visitServiceAPIParameter: parameter ]
 		separatedBy: [ self <<< ', ' ]
+]
+
+{ #category : #convert }
+CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
+	self crlf.
+	aServiceAPI parameters
+		do: [ :serviceParameter | 
+			serviceParameter dataType isCollectionType
+				ifTrue: [ self convertCollectionType: serviceParameter.
+					self crlf ]
+				ifFalse: [ serviceParameter dataType isBusinessType
+						ifTrue: [ self convertBusinessType: serviceParameter.
+							self crlf ]
+						ifFalse: [ serviceParameter dataType isDictionaryType
+								ifTrue: [ self convertDictionaryType: serviceParameter.
+									self crlf ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -245,13 +313,29 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		ifNotEmpty: [ :exceptions | 
 			self <<< ' throws '.
 			exceptions do: [ :exception | self <<< exception name ] separatedBy: [ self <<< ', ' ] ].
+	self printAdditionalExceptionFor: aServiceAPI.
 
 	"Printing body of method if class is not abstract or an interface"
 	currentStream
 		<< ' {';
 		<< String crlf.
+	self indentPlus.
+	self printConvertParametersOf: aServiceAPI.
 	aMethod methodsOverriding do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ].
 	self
 		crlf;
+		indentMinus;
 		<< '}'
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> visitServiceAPIParameter: parameter [
+	parameter dataType isDictionaryType
+		ifTrue: [ self <<< 'String ' <<< parameter name ]
+		ifFalse: [ parameter dataType isCollectionType
+				ifTrue: [ self <<< 'List<FormDataBodyParam> ' <<< parameter name ]
+				ifFalse: [ parameter dataType isBusinessType
+						ifTrue: [ self <<< 'FormDataBodyParam ' <<< parameter name ]
+						ifFalse: [ self visitParameter: parameter source ] ] ].
+	parameter dataType isPrimitive not ifTrue: [ self <<< 'Json' ]
 ]
