@@ -157,11 +157,11 @@ CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 			serviceParameter dataType isCollectionType
 				ifTrue: [ self convertCollectionType: serviceParameter.
 					self crlf ]
-				ifFalse: [ (serviceParameter dataType isBusinessType or: [ serviceParameter dataType isPrimitive not ])
-						ifTrue: [ self convertBusinessType: serviceParameter.
+				ifFalse: [ serviceParameter dataType isDictionaryType
+						ifTrue: [ self convertDictionaryType: serviceParameter.
 							self crlf ]
-						ifFalse: [ serviceParameter dataType isDictionaryType
-								ifTrue: [ self convertDictionaryType: serviceParameter.
+						ifFalse: [ (serviceParameter dataType isBusinessType or: [ serviceParameter dataType isPrimitive not ])
+								ifTrue: [ self convertBusinessType: serviceParameter.
 									self crlf ] ] ] ]
 ]
 
@@ -197,6 +197,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import java.io.IOException;
 '
 ]
