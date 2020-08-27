@@ -60,7 +60,7 @@ CSNBLRestServiceGenerator >> addAuthors [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> addRESTTypeAnnotationFor: aServiceAPI [
 	aServiceAPI isDELETE
-		ifTrue: [ self << '@DELETE' ]
+		ifTrue: [ self << '@POST' ]
 		ifFalse: [ aServiceAPI isGET
 				ifTrue: [ self << '@GET' ]
 				ifFalse: [ self << '@POST' ] ].
@@ -96,7 +96,7 @@ CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
 	self
 		<< 'formDataBodyPart.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
 		crlf.
-	(self << serviceParameter name <<< '.formDataBodyPart.getValueAs(' <<< serviceParameter source declaredType name)
+	(self << serviceParameter name <<< '.add(formDataBodyPart.getValueAs(' <<< serviceParameter source declaredType arguments anyOne name)
 		<<< '.class));';
 		crlf.
 	self indentMinus.
@@ -157,7 +157,7 @@ CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 			serviceParameter dataType isCollectionType
 				ifTrue: [ self convertCollectionType: serviceParameter.
 					self crlf ]
-				ifFalse: [ serviceParameter dataType isBusinessType
+				ifFalse: [ (serviceParameter dataType isBusinessType or: [ serviceParameter dataType isPrimitive not ])
 						ifTrue: [ self convertBusinessType: serviceParameter.
 							self crlf ]
 						ifFalse: [ serviceParameter dataType isDictionaryType
