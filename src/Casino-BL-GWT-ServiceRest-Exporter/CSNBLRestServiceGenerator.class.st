@@ -334,7 +334,7 @@ CSNBLRestServiceGenerator >> visitServiceAPIParameter: parameter [
 		ifTrue: [ self <<< 'String ' <<< parameter name ]
 		ifFalse: [ parameter dataType isCollectionType
 				ifTrue: [ self <<< 'List<FormDataBodyParam> ' <<< parameter name ]
-				ifFalse: [ parameter dataType isBusinessType
+				ifFalse: [ (parameter dataType isBusinessType or: [ parameter dataType isPrimitive not ])
 						ifTrue: [ self <<< 'FormDataBodyParam ' <<< parameter name ]
 						ifFalse: [ self visitParameter: parameter source ] ] ].
 	parameter dataType isPrimitive not ifTrue: [ self <<< 'Json' ]
