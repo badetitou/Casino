@@ -242,7 +242,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	self << 'withCredentials: true'.
 	(aServiceAPI isGET and: [ aServiceAPI source parameters isNotEmpty ])
 		ifTrue: [ self
-				<< ',';
+				<<< ',';
 				crlf;
 				<< 'params: params' ].
 	self
