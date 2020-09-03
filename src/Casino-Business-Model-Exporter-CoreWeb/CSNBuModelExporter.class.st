@@ -84,6 +84,6 @@ CSNBuModelExporter >> printImports [
 	self
 		<< 'import { deserialize, deserializeAs, inheritSerialization } from ''cerialize'';';
 		crlf;
-		<< 'import { AbstractDTO } from ''app/components/service/model/dto/shared/user/abstract-dto.model''';
+		<< 'import { AbstractDTO } from ''app/components/service/model/dto/shared/user/abstract-dto.model;''';
 		crlf
 ]
