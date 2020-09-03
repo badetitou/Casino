@@ -47,6 +47,32 @@ TCSNExporter >> currentWriteStream: anObject [
 ]
 
 { #category : #streaming }
+TCSNExporter >> inBraces: aBlock [
+	self
+		<<< '{';
+		indentPlus;
+		crlf.
+	aBlock value.
+	self
+		crlf;
+		indentMinus;
+		<< '}'
+]
+
+{ #category : #streaming }
+TCSNExporter >> inBrakets: aBlock [
+	self
+		<<< '[';
+		indentPlus;
+		crlf.
+	aBlock value.
+	self
+		crlf;
+		indentMinus;
+		<< ']'
+]
+
+{ #category : #streaming }
 TCSNExporter >> indent [
   1 to: self indentLevel * self indentNumber do: [:i |  currentWriteStream << self indentCharacter ]
 ]

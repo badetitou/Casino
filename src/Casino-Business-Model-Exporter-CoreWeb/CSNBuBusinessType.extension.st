@@ -12,6 +12,15 @@ CSNBuBusinessType >> dependencies [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuBusinessType >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
+	aCSNExporter <<< '@deserializeAs('.
+	self writeBusinessTypeOn: aCSNExporter.
+	aCSNExporter <<< ', '''.
+	aCSNExporter <<< aName.
+	aCSNExporter <<< ''')'
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> writeBusinessTypeOn: aCSNExporter [
 	aCSNExporter <<< self name
 ]

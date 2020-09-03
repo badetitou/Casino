@@ -8,7 +8,9 @@ Class {
 
 { #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
-	self << attribute name <<< ': '.
+	self indent.
+	attribute attributeType printDeserializeOn: self forAttributeNamed: attribute name.
+	self <<< ' ' <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	self <<< ';'
 ]
@@ -24,47 +26,54 @@ varName: <attributeBusinessType>;
 ]
 
 { #category : #export }
-CSNBuModelExporter >> exportBusinessType: aBusinessType [
-
-	"self printImports."
-	self printImportDependencenciesOf: aBusinessType.
-	(self <<< 'export class ' <<< aBusinessType name)
-		<<< ' {';
-		crlf;
-		indentPlus.
-	(aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
-	self indentMinus.
-	"self crlf; crlf.
-	self indentPlus.
-	self printDeserialize.
-	self indentMinus."
-	self
-		crlf;
-		<< '}';
-		crlf
+CSNBuModelExporter >> exportAttributeGetter: attribute [
+	(self << 'get' <<< attribute name capitalized)
+		<<< '() ';
+		inBraces: [ self << 'return this.' <<< attribute name <<< ';' ]
 ]
 
 { #category : #export }
-CSNBuModelExporter >> printDeserialize [
+CSNBuModelExporter >> exportAttributeSetter: attribute [
+	self << 'set' <<< attribute name capitalized <<< '(' <<< attribute name <<< ': '.
+	attribute attributeType writeBusinessTypeOn: self.
 	self
-		<< 'deserialize(input: any): this {';
-		indentPlus;
-		crlf;
-		<< 'Object.assign(this, input);';
-		crlf;
-		<< 'return this;';
-		crlf;
-		indentMinus;
-		<< '}';
-		crlf;
-		indentMinus
+		<<< ') ';
+		inBraces: [ self << 'this.' <<< attribute name <<< ' = ' <<< attribute name <<< ';' ]
+]
+
+{ #category : #export }
+CSNBuModelExporter >> exportBusinessType: aBusinessType [
+	self printImports.
+	self printImportDependencenciesOf: aBusinessType.
+	self
+		<< '@inheritSerialization(AbstractDTO)';
+		crlf.
+	self << 'export class ' <<< aBusinessType name <<< ' extends AbstractDTO '.
+	self
+		inBraces: [ (aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
+			self
+				crlf;
+				crlf.
+			(aBusinessType attributes asOrderedCollection sorted: #name ascending)
+				do: [ :attribute | 
+					self exportAttributeGetter: attribute.
+					self
+						crlf;
+						crlf.
+					self exportAttributeSetter: attribute ]
+				separatedBy: [ self
+						crlf;
+						crlf ] ].
+	self crlf
 ]
 
 { #category : #export }
 CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 	aBusinessType dependencies
 		ifNotEmpty: [ :dependencies | 
-			(dependencies asOrderedCollection sorted: #name ascending) do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ] separatedBy: [ self crlf ].
+			(dependencies asOrderedCollection sorted: #name ascending)
+				do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ]
+				separatedBy: [ self crlf ].
 			self
 				crlf;
 				crlf ]
@@ -72,7 +81,9 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 
 { #category : #export }
 CSNBuModelExporter >> printImports [
-	"self << 'import { Deserializable } from ''app/components/service/model/dto/deserializable.model'';'."
-	self crlf; crlf
-	
+	self
+		<< 'import { deserialize, deserializeAs, inheritSerialization } from ''cerialize'';';
+		crlf;
+		<< 'import { AbstractDTO } from ''app/components/service/model/dto/shared/user/abstract-dto.model''';
+		crlf
 ]
