@@ -1,6 +1,16 @@
 Extension { #name : #CSNBuDictionaryType }
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDictionaryType >> innerName [
+	^ self value innerName
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDictionaryType >> innerType [
+	^ self value innerType
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDictionaryType >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
 	aCSNExporter <<< '@deserializeAs(' <<< self value name <<< ')'
 ]

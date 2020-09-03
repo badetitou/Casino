@@ -1,6 +1,11 @@
 Extension { #name : #CSNBuPrimitive }
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuPrimitive >> innerName [
+	^ self name
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 	"is a number"
 

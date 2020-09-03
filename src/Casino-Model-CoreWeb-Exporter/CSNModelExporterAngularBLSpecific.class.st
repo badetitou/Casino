@@ -178,9 +178,11 @@ CSNModelExporterAngularBLSpecific >> visitCSNService: aCSNService [
 					'import { Injectable } from ''@angular/core'';
 
 import { Observable } from ''rxjs'';
-import { first } from ''rxjs/operators'';
+import { first, map } from ''rxjs/operators'';
 
-import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';'; crlf; crlf.
+import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
+import { Deserialize } from ''cerialize'';
+'; crlf; crlf.
 
 self printServiceDependencies: aCSNService.
 
@@ -248,7 +250,18 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	self
 		crlf;
 		indentMinus;
-		<< '}).pipe(first());';
+		<< '}).pipe(first()'.
+	aServiceAPI dataType innerType isBusinessType
+		ifTrue: [ self
+				<<< ',';
+				crlf;indentPlus;
+				<< 'map(res =>';
+				inBraces: [ self << 'return Deserialize(res, ' <<< aServiceAPI dataType innerName <<< ');' ];
+				<<< ')';
+				indentMinus ].
+	self
+		crlf;
+		<< ');';
 		crlf;
 		indentMinus;
 		<< '}';

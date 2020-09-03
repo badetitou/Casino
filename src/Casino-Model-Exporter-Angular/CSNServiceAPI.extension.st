@@ -30,7 +30,7 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 				<< 'const formData = new FormData();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< ');' ]
+				do: [ :parameter | aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', JSON.stringify(' <<< parameter name <<< '));' ]
 				separatedBy: [ aStream crlf ] ]
 ]
 
@@ -48,7 +48,11 @@ CSNServiceAPI >> printCreateParamIn: aCSNExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printParameterIn: aStream [
-	self sortedParameters do: [ :parameter | aStream <<< parameter name <<< ': any' ] separatedBy: [ aStream <<< ', ' ]
+	self sortedParameters
+		do: [ :parameter | 
+			aStream <<< parameter name <<< ': '.
+			parameter dataType writeBusinessTypeOn: aStream ]
+		separatedBy: [ aStream <<< ', ' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -60,7 +64,7 @@ CSNServiceAPI >> printRestTypeIn: aStream [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> sortedParameters [
-	^ self source parameters sorted: [ :p1 :p2 | p1 sourceAnchor startPos < p2 sourceAnchor startPos ]
+	^ self parameters sorted: [ :p1 :p2 | p1 source sourceAnchor startPos < p2 source sourceAnchor startPos ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
