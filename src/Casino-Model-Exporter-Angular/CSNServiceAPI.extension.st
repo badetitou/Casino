@@ -42,7 +42,7 @@ CSNServiceAPI >> printCreateParamIn: aCSNExporter [
 				<< 'let params = new HttpParams();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aCSNExporter << 'params = params.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< ');' ]
+				do: [ :parameter | aCSNExporter << 'params = params.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< '.toString());' ]
 				separatedBy: [ aCSNExporter crlf ] ]
 ]
 

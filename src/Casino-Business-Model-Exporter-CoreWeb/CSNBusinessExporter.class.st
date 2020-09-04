@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+CSNBusinessExporter >> barrelName [
+	^ 'index.ts'
+]
+
+{ #category : #accessing }
 CSNBusinessExporter >> businessTypeExporter [
 	^ businessTypeExporter
 ]
@@ -20,8 +25,15 @@ CSNBusinessExporter >> businessTypeExporter: anObject [
 
 { #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
-	(aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) do:
-		[ :businessType | self exportBusinessType: businessType ]
+	self modelRoot / self barrelName
+		writeStreamDo: [ :barrelStream | 
+			self writeBarrelCommentOn: barrelStream.
+
+			(aCSNBuModel allWithSubTypesOf: CSNBuBusinessType)
+				do: [ :businessType | 
+					self exportBusinessType: businessType.
+					barrelStream << 'export * from ''./dto/' << businessType name << '.model'';'.
+					barrelStream crlf ] ]
 ]
 
 { #category : #accessing }
@@ -47,4 +59,17 @@ CSNBusinessExporter >> modelRoot [
 { #category : #accessing }
 CSNBusinessExporter >> modelRoot: anObject [
 	modelRoot := anObject
+]
+
+{ #category : #accessing }
+CSNBusinessExporter >> writeBarrelCommentOn: barrelStream [
+	barrelStream
+		<<
+			'/**
+ * @author Benoit Verhaeghe
+ *
+ * Until we fixed the problem of dependency please use this file to import the DTO
+ **/
+
+'
 ]

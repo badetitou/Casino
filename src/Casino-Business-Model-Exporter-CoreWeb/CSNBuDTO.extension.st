@@ -14,7 +14,7 @@ CSNBuDTO >> innerType [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
-	aCSNExporter <<< '@deserialize'
+	aCSNExporter <<< ''
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }

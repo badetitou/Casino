@@ -255,7 +255,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 		ifTrue: [ self
 				<<< ',';
 				crlf;indentPlus;
-				<< 'map(res =>';
+				<< 'map(res => ';
 				inBraces: [ self << 'return Deserialize(res, ' <<< aServiceAPI dataType innerName <<< ');' ];
 				<<< ')';
 				indentMinus ].

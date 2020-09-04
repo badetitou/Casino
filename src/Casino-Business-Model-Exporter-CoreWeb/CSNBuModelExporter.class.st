@@ -8,9 +8,8 @@ Class {
 
 { #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
-	self indent.
 	attribute attributeType printDeserializeOn: self forAttributeNamed: attribute name.
-	self <<< ' ' <<< attribute name <<< ': '.
+	self << attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	self <<< ';'
 ]
@@ -45,9 +44,6 @@ CSNBuModelExporter >> exportAttributeSetter: attribute [
 CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self printImports.
 	self printImportDependencenciesOf: aBusinessType.
-	self
-		<< '@inheritSerialization(AbstractDTO)';
-		crlf.
 	self << 'export class ' <<< aBusinessType name <<< ' extends AbstractDTO '.
 	self
 		inBraces: [ (aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
@@ -72,7 +68,7 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 	aBusinessType dependencies
 		ifNotEmpty: [ :dependencies | 
 			(dependencies asOrderedCollection sorted: #name ascending)
-				do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''./' <<< dependency name <<< '.model'';' ]
+				do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''..'';' ]
 				separatedBy: [ self crlf ].
 			self
 				crlf;
@@ -82,7 +78,7 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 { #category : #export }
 CSNBuModelExporter >> printImports [
 	self
-		<< 'import { deserialize, deserializeAs, inheritSerialization } from ''cerialize'';';
+		<< 'import { Type } from ''class-transformer'';';
 		crlf;
 		<< 'import { AbstractDTO } from ''app/components/service/model/dto/shared/user/abstract-dto.model'';';
 		crlf

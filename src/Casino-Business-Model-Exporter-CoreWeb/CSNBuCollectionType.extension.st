@@ -12,7 +12,9 @@ CSNBuCollectionType >> innerType [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuCollectionType >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
-	aCSNExporter <<< '@deserializeAs(' <<< self type name <<< ')'
+	(aCSNExporter << '@Type(() => ' <<< self type name)
+		<<< ')';
+		crlf
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
