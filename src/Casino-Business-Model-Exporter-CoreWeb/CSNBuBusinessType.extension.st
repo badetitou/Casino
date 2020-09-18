@@ -17,12 +17,8 @@ CSNBuBusinessType >> innerName [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
-CSNBuBusinessType >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
-	aCSNExporter << '@Type(() => '.
-	self writeBusinessTypeOn: aCSNExporter.
-	aCSNExporter
-		<<< ')';
-		crlf
+CSNBuBusinessType >> printJsonClassTypeOn: aCSNExporter [
+	aCSNExporter <<< self name
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }

@@ -11,10 +11,12 @@ CSNBuDictionaryType >> innerType [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
-CSNBuDictionaryType >> printDeserializeOn: aCSNExporter forAttributeNamed: aName [
-	(aCSNExporter << '@Type(() => ' <<< self value name)
-		<<< ')';
-		crlf
+CSNBuDictionaryType >> printJsonClassTypeOn: aCSNExporter [
+	aCSNExporter <<< 'Map, ['.
+	self key printJsonClassTypeOn: aCSNExporter.
+	aCSNExporter <<< ', '.
+	self value printJsonClassTypeOn: aCSNExporter.
+	aCSNExporter <<< ']'.
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }

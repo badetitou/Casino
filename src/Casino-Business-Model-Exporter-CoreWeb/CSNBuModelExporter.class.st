@@ -8,8 +8,8 @@ Class {
 
 { #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
-	attribute attributeType printDeserializeOn: self forAttributeNamed: attribute name.
-	self << attribute name <<< ': '.
+	attribute attributeType printJsonClassOn: self.
+	self << '@JsonProperty() ' <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	self <<< ';'
 ]
@@ -44,6 +44,9 @@ CSNBuModelExporter >> exportAttributeSetter: attribute [
 CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self printImports.
 	self printImportDependencenciesOf: aBusinessType.
+	(self << '@JsonTypeName({value: ''' <<< aBusinessType name)
+		<<< '''})';
+		crlf.
 	self << 'export class ' <<< aBusinessType name <<< ' extends AbstractDTO '.
 	self
 		inBraces: [ (aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
@@ -78,7 +81,7 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 { #category : #export }
 CSNBuModelExporter >> printImports [
 	self
-		<< 'import { Type } from ''class-transformer'';';
+		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''jackson-js'';';
 		crlf;
 		<< 'import { AbstractDTO } from ''app/components/service/model/dto/shared/user/abstract-dto.model'';';
 		crlf

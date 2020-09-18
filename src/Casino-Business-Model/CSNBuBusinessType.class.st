@@ -70,3 +70,8 @@ CSNBuBusinessType >> name: anObject [
 	<generated>
 	name := anObject
 ]
+
+{ #category : #printing }
+CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [ 
+	aCSNExporter <<< 'plainToClass(' <<< self innerName <<< ', res, { excludeExtraneousValues: true });'
+]
