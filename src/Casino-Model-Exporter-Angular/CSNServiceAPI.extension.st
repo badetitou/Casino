@@ -30,7 +30,12 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 				<< 'const formData = new FormData();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', JSON.stringify(' <<< parameter name <<< '));' ]
+				do: [ :parameter | 
+					aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', '.
+					parameter dataType isDictionaryType
+						ifFalse: [ aStream <<< 'JSON.stringify(' ]
+						ifTrue: [ aStream <<< 'this.mapToStringConverter.convertMapToJsonString(' ].
+					aStream <<< parameter name <<< '));' ]
 				separatedBy: [ aStream crlf ] ]
 ]
 

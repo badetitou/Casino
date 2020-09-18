@@ -72,6 +72,17 @@ CSNBuBusinessType >> name: anObject [
 ]
 
 { #category : #printing }
-CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [ 
-	aCSNExporter <<< 'plainToClass(' <<< self innerName <<< ', res, { excludeExtraneousValues: true });'
+CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [
+	aCSNExporter <<< 'this.objectMapper.parse<'.
+	self writeBusinessTypeOn: aCSNExporter.
+	aCSNExporter <<< '>(JSON.stringify(res), '
+		inBraces: [ aCSNExporter << 'mainCreator: () => ['.
+			self printJsonClassTypeOn: aCSNExporter.
+			aCSNExporter
+				<<< '],';
+				crlf.
+			aCSNExporter
+				<< 'features: { deserialization: { FAIL_ON_UNKNOWN_PROPERTIES: false } }';
+				crlf ].
+	aCSNExporter <<< ');'
 ]

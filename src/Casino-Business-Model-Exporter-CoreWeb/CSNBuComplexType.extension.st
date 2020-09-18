@@ -2,7 +2,18 @@ Extension { #name : #CSNBuComplexType }
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuComplexType >> printServiceDeserializeOn: aCSNExporter [
-	aCSNExporter <<< 'deserializeArray(' <<< self innerName <<< ', JSON.stringify(res), { excludeExtraneousValues: true })'
+	aCSNExporter <<< 'this.objectMapper.parse<'.
+	self writeBusinessTypeOn: aCSNExporter.
+	aCSNExporter <<< '>(JSON.stringify(res), '
+		inBraces: [ aCSNExporter << 'mainCreator: () => ['.
+			self printJsonClassTypeOn: aCSNExporter.
+			aCSNExporter
+				<<< '],';
+				crlf.
+			aCSNExporter
+				<< 'features: { deserialization: { FAIL_ON_UNKNOWN_PROPERTIES: false } }';
+				crlf ].
+	aCSNExporter <<< ');'
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
