@@ -212,7 +212,8 @@ export class ' << aCSNService uniqueName
 
     constructor(private http: HttpClient,
         private mapToStringConverter: MapToStringJsonConverterService) {
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new ObjectMapper({},
+            { features: { deserialization: { FAIL_ON_UNKNOWN_PROPERTIES: false } }});
     }
 
 '.

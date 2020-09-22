@@ -8,10 +8,7 @@ CSNBuComplexType >> printServiceDeserializeOn: aCSNExporter [
 		inBraces: [ aCSNExporter << 'mainCreator: () => ['.
 			self printJsonClassTypeOn: aCSNExporter.
 			aCSNExporter
-				<<< '],';
-				crlf.
-			aCSNExporter
-				<< 'features: { deserialization: { FAIL_ON_UNKNOWN_PROPERTIES: false } }';
+				<<< ']';
 				crlf ].
 	aCSNExporter <<< ');'
 ]
