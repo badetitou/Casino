@@ -28,7 +28,8 @@ Class {
 		'listAndDetails',
 		'linkSimple',
 		'table',
-		'multiCombo'
+		'multiCombo',
+		'rechercheEtListe'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -69,7 +70,10 @@ CSNUICoreWebGenerator >> defineClasses [
 		comment: 'Correspond to the BLCore class BLAbstractListeEtDetail';
 		yourself.
 	linkSimple := builder newClassNamed: #LinkSimple.
-	multiCombo :=  builder newClassNamed: #MultiCombo.
+	multiCombo := builder newClassNamed: #MultiCombo.
+	rechercheEtListe := (builder newClassNamed: #RechercheEtListe)
+		comment: 'Correspond to the BLCore class BLAbstractRechercheEtListe';
+		yourself.
 
 	"attributes"
 	header := builder newClassNamed: #Header.
@@ -99,6 +103,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	listAndDetails --|> csnContainer.
 	linkSimple --|> csnContainer.
 	multiCombo --|> csnContainer.
+	rechercheEtListe --|> csnContainer.
 
 	autoComplete --|> csnContainer.
 	richTextArea --|> uiInput.

@@ -210,6 +210,16 @@ CSNModelVisitor class >> visitCSNUICWProgressBar: aCSNUICWProgressBar [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor class >> visitCSNUICWRechercheEtListe: aCSNUICWRechercheEtListe [
+	^ self visitCSNContainer: aCSNUICWRechercheEtListe
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor >> visitCSNUICWRechercheEtListe: aCSNUICWRechercheEtListe [
+	^ self visitCSNContainer: aCSNUICWRechercheEtListe
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
 CSNModelVisitor >> visitCSNUICWRichTextArea: aCSNUICWRichTextArea [
 	<generated>
 	^ self visitCSNUIInput: aCSNUICWRichTextArea

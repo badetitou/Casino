@@ -320,6 +320,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWProgressBar: aCSNProgressBar [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWRechercheEtListe: aCSNUICWRechercheEtListe [
+	^ (#('BLAbstractRechercheEtListe') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: aCSNUICWRechercheEtListe ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWRichTextArea: aCSNRichTextArea [
 	^ (#('BLRTFWithToolbar') includes: source invokedClassName) 
 		ifTrue: [ (self createWidget: aCSNRichTextArea) ] 
