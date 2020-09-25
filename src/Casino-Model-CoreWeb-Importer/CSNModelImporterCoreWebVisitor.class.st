@@ -278,6 +278,13 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWFileUploadPanel: aCSNUICWFileUploadPanel [
+	^ (#('AbstractFileUploadPanel') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: aCSNUICWFileUploadPanel ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
 	^ 'HTML' = source invokedClassName
 		ifTrue: [ (self createWidget: aCSNHTML)

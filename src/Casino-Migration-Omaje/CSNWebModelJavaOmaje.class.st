@@ -15,7 +15,7 @@ CSNWebModelJavaOmaje >> createFactory [
 	factory := CSNWidgetFactoryAngularOmaje new
 		model: model;
 		importer: self;
-		addVisitorImporter: CSNModelImporterCoreWebVisitor new;
+		addVisitorImporter: CSNModelImporterOmajeVisitor new;
 		yourself
 ]
 

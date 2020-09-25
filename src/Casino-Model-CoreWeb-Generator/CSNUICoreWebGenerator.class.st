@@ -29,7 +29,8 @@ Class {
 		'linkSimple',
 		'table',
 		'multiCombo',
-		'rechercheEtListe'
+		'rechercheEtListe',
+		'fileUploadPanel'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -74,6 +75,9 @@ CSNUICoreWebGenerator >> defineClasses [
 	rechercheEtListe := (builder newClassNamed: #RechercheEtListe)
 		comment: 'Correspond to the BLCore class BLAbstractRechercheEtListe';
 		yourself.
+	fileUploadPanel := (builder newClassNamed: #FileUploadPanel)
+		comment: 'Correspond to the BLCore class BLFileUploadPanel';
+		yourself. 
 
 	"attributes"
 	header := builder newClassNamed: #Header.
@@ -104,6 +108,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	linkSimple --|> csnContainer.
 	multiCombo --|> csnContainer.
 	rechercheEtListe --|> csnContainer.
+	fileUploadPanel --|> csnContainer.
 
 	autoComplete --|> csnContainer.
 	richTextArea --|> uiInput.
