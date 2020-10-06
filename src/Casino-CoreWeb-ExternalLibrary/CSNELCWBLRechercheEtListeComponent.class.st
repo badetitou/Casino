@@ -52,7 +52,7 @@ CSNELCWBLRechercheEtListeComponent class >> exportContentOf: aWidget with: anExp
 		crlf;
 		<< '<span slot="slot=bl-recherche-et-liste-results">';
 		crlf;
-		<< '</span>'
+		<< '</span>';
 		indentMinus;
 		crlf.
 ]
