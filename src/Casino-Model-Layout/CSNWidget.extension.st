@@ -9,21 +9,21 @@ CSNWidget >> cellOwner [
 	<derived>
 	<FMProperty: #cellOwner type: #CSNLCell opposite: #widget>
 	<package: #'Casino-Model-Layout'>
-	^ self privateState attributeAt: #cellOwner ifAbsent: [ nil ]
+	^ self attributeAt: #cellOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNWidget >> cellOwner: anObject [
-
 	<generated>
-	(self privateState attributeAt: #cellOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self cellOwner.
-		self privateState attributeAt: #cellOwner put: anObject.
-		otherSide widget: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #cellOwner put: anObject.
-		anObject widget: self ]
+	(self attributeAt: #cellOwner ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self cellOwner.
+			self privateState attributeAt: #cellOwner put: anObject.
+			otherSide widget: nil ]
+		ifNotNil: [ self attributeAt: #cellOwner put: anObject.
+			anObject widget: self ]
 ]
 
 { #category : #'*Casino-Model-Layout-accessing' }
@@ -33,21 +33,21 @@ CSNWidget >> position [
 	<generated>
 	<FMProperty: #position type: #CSNLPosition opposite: #widget>
 	<package: #'Casino-Model-Layout'>
-	^ self privateState attributeAt: #position ifAbsent: [ nil ]
+	^ self attributeAt: #position ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNWidget >> position: anObject [
-
 	<generated>
-	(self privateState attributeAt: #position ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self position.
-		self privateState attributeAt: #position put: anObject.
-		otherSide widget: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #position put: anObject.
-		anObject widget: self ]
+	(self attributeAt: #position ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self position.
+			self privateState attributeAt: #position put: anObject.
+			otherSide widget: nil ]
+		ifNotNil: [ self attributeAt: #position put: anObject.
+			anObject widget: self ]
 ]
 
 { #category : #'*Casino-Model-Layout-accessing' }
@@ -57,7 +57,7 @@ CSNWidget >> size [
 	<generated>
 	<FMProperty: #size type: #CSNLSize opposite: #widget>
 	<package: #'Casino-Model-Layout'>
-	^ self privateState attributeAt: #size ifAbsent: [ nil ]
+	^ self attributeAt: #size ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Model-Layout-accessing' }

@@ -10,12 +10,12 @@ CSNWidget >> addDefaultAttribute [
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> affectedActions [
 	<MSEProperty: #affectedActions type: #Object>
-	^ self privateState attributeAt: #affectedActions ifAbsent: nil
+	^ self attributeAt: #affectedActions ifAbsent: nil
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> affectedActions: anObject [
-	self privateState attributeAt: #affectedActions put: anObject
+	self attributeAt: #affectedActions put: anObject
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

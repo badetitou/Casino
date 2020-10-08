@@ -6,11 +6,6 @@ CSNPage >> addBusinessPage: aBusinessPage [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNPage >> childrenSelectors [
-	^ (super childrenSelectors , { #'businessPage' })
-]
-
-{ #category : #'*Casino-Model-Extension' }
 CSNPage >> name [
 	^ name 
 ]

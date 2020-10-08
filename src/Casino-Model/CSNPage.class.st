@@ -5,7 +5,7 @@ Class {
 	#name : #CSNPage,
 	#superclass : #CSNContainer,
 	#instVars : [
-		'#businessPage => FMMany type: #CSNBusinessPage opposite: #pageContainers',
+		'#businessPage => FMMany type: #CSNBusinessPage opposite: #pageContainer',
 		'#caller => FMMany type: #CSNActionAppel opposite: #call',
 		'#codePhase => FMProperty',
 		'#codeValue => FMProperty',
@@ -34,7 +34,7 @@ CSNPage >> addCaller: anObject [
 
 { #category : #accessing }
 CSNPage >> businessPage [
-	"Relation named: #businessPage type: #CSNBusinessPage opposite: #pageContainers"
+	"Relation named: #businessPage type: #CSNBusinessPage opposite: #pageContainer"
 
 	<generated>
 	<derived>
@@ -52,7 +52,7 @@ CSNPage >> businessPage: anObject [
 CSNPage >> businessPageGroup [
 	<generated>
 	<navigation: 'BusinessPage'>
-	^ MooseGroup withAll: self businessPage asSet
+	^ MooseSpecializedGroup withAll: self businessPage asSet
 ]
 
 { #category : #accessing }
@@ -75,7 +75,7 @@ CSNPage >> caller: anObject [
 CSNPage >> callerGroup [
 	<generated>
 	<navigation: 'Caller'>
-	^ MooseGroup withAll: self caller asSet
+	^ MooseSpecializedGroup withAll: self caller asSet
 ]
 
 { #category : #accessing }

@@ -103,14 +103,17 @@ CSNWidget >> hierarchalAttributes [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> id [
 	| dic |
-	dic := self rootNode privateState cacheAt: #widgetUniqueName ifAbsentPut: [ {(self -> self variable name)} asDictionary ].
+	dic := self rootNode
+		cacheAt: #widgetUniqueName
+		ifAbsentPut: [ {(self -> self variable name)} asDictionary ].
 	^ dic
 		at: self
 		ifAbsentPut: [ | index potentialName |
 			index := 0.
 			potentialName := self variable name.
 			[ dic includes: potentialName ]
-				whileTrue: [ potentialName := (potentialName removeSuffix: index asString) , (index + 1) asString.
+				whileTrue: [ potentialName := (potentialName removeSuffix: index asString)
+						, (index + 1) asString.
 					index := index + 1 ].
 			potentialName ]
 ]

@@ -70,7 +70,8 @@ MooseAbstractGroup >> allCSNWidget [
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNWidgetExceptPage [
 	<navigation: 'Sub-Widget ExceptPage'>
-	^ self privateState
+	^ self
 		cacheAt: 'Sub-Widget ExceptPage'
-		ifAbsentPut: [ (self allWithSubTypesOf: CSNWidget) reject: [ :el | (el isOfType: CSNPage) or: [ el isOfType: CSNBusinessPage ] ] ]
+		ifAbsentPut: [ (self allWithSubTypesOf: CSNWidget)
+				reject: [ :el | (el isOfType: CSNPage) or: [ el isOfType: CSNBusinessPage ] ] ]
 ]

@@ -9,7 +9,7 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner [
 	<derived>
 	<FMProperty: #carrefourOnFailureOwner type: #CSNBCall opposite: #onFailure>
 	<package: #'Casino-Behavior-Model'>
-	^ self privateState attributeAt: #carrefourOnFailureOwner ifAbsent: [ nil ]
+	^ self attributeAt: #carrefourOnFailureOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
@@ -35,7 +35,7 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner [
 	<derived>
 	<FMProperty: #carrefourOnSuccessOwner type: #CSNBCall opposite: #onSuccess>
 	<package: #'Casino-Behavior-Model'>
-	^ self privateState attributeAt: #carrefourOnSuccessOwner ifAbsent: [ nil ]
+	^ self attributeAt: #carrefourOnSuccessOwner ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }

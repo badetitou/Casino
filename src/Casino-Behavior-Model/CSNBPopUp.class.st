@@ -23,21 +23,21 @@ CSNBPopUp >> data [
 	<generated>
 	<FMComment: 'The data that will be displayed in the popUp'>
 	<FMProperty: #data type: #FASTExpression opposite: #carrefourPopUpOwner>
-	^ self privateState attributeAt: #data ifAbsent: [ nil ]
+	^ self attributeAt: #data ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBPopUp >> data: anObject [
-
 	<generated>
-	(self privateState attributeAt: #data ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self data.
-		self privateState attributeAt: #data put: anObject.
-		otherSide carrefourPopUpOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #data put: anObject.
-		anObject carrefourPopUpOwner: self ]
+	(self attributeAt: #data ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self data.
+			self privateState attributeAt: #data put: anObject.
+			otherSide carrefourPopUpOwner: nil ]
+		ifNotNil: [ self attributeAt: #data put: anObject.
+			anObject carrefourPopUpOwner: self ]
 ]
 
 { #category : #navigation }

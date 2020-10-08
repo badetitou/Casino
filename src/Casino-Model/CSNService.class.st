@@ -37,7 +37,7 @@ CSNService >> actions: anObject [
 CSNService >> actionsGroup [
 	<generated>
 	<navigation: 'Actions'>
-	^ MooseGroup withAll: self actions asSet
+	^ MooseSpecializedGroup withAll: self actions asSet
 ]
 
 { #category : #adding }

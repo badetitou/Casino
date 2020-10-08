@@ -52,21 +52,21 @@ CSNLLayout >> container [
 	<generated>
 	<container>
 	<FMProperty: #container type: #CSNContainer opposite: #layout>
-	^ self privateState attributeAt: #container ifAbsent: [ nil ]
+	^ self attributeAt: #container ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNLLayout >> container: anObject [
-
 	<generated>
-	(self privateState attributeAt: #container ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self container.
-		self privateState attributeAt: #container put: anObject.
-		otherSide layout: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #container put: anObject.
-		anObject layout: self ]
+	(self attributeAt: #container ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self container.
+			self privateState attributeAt: #container put: anObject.
+			otherSide layout: nil ]
+		ifNotNil: [ self attributeAt: #container put: anObject.
+			anObject layout: self ]
 ]
 
 { #category : #navigation }

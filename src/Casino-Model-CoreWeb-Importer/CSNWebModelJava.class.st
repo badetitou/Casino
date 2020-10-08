@@ -183,12 +183,15 @@ CSNWebModelJava >> applicationSource [
 CSNWebModelJava >> buisinessPageWithSources [
 	"I extract this method for optimisations purpose"
 
-	^ self model privateState cacheAt: #buisinessPageWithSources ifAbsentPut: [ self model allCSNPageMetier reject: [ :businessPage | businessPage sources isEmpty ] ]
+	^ self model
+		cacheAt: #buisinessPageWithSources
+		ifAbsentPut: [ self model allCSNPageMetier
+				reject: [ :businessPage | businessPage sources isEmpty ] ]
 ]
 
 { #category : #'private - postImport' }
 CSNWebModelJava >> cleanImportCache [
-	self model privateState removeCache: #buisinessPageWithSources
+	self model removeCache: #buisinessPageWithSources
 ]
 
 { #category : #adding }

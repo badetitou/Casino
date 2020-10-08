@@ -45,21 +45,21 @@ CSNLCell >> widget [
 
 	<generated>
 	<FMProperty: #widget type: #CSNWidget opposite: #cellOwner>
-	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
+	^ self attributeAt: #widget ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNLCell >> widget: anObject [
-
 	<generated>
-	(self privateState attributeAt: #widget ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self widget.
-		self privateState attributeAt: #widget put: anObject.
-		otherSide cellOwner: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #widget put: anObject.
-		anObject cellOwner: self ]
+	(self attributeAt: #widget ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self widget.
+			self privateState attributeAt: #widget put: anObject.
+			otherSide cellOwner: nil ]
+		ifNotNil: [ self attributeAt: #widget put: anObject.
+			anObject cellOwner: self ]
 ]
 
 { #category : #navigation }

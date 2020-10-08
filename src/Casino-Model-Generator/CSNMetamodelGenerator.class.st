@@ -105,11 +105,11 @@ example: in a JavaProgram and in a XML file'.
 
 { #category : #definition }
 CSNMetamodelGenerator >> defineRelations [
-	((container property: #widgets) <>-* (widget property: #widgetContainer)) withNavigation.
-	((widget property: #actions) <>-* (action property: #caller)) withNavigation.
-	((widget property: #attributes) <>-* (attribute property: #widget)) withNavigation.
-	((page property: #caller) <>-* (actionAppel property: #call)) withNavigation.
-	((page property: #businessPage) *-* (businessPage property: #pageContainers)) withNavigation.
-	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)) withNavigation.
-	((serviceAPI property: #parameters) <>-* (serviceAPIParameter property: #serviceAPIOwner)) withNavigation.
+	((container property: #widgets) <>-* (widget property: #widgetContainer)).
+	((widget property: #actions) <>-* (action property: #caller)).
+	((widget property: #attributes) <>-* (attribute property: #widget)).
+	((page property: #caller) <>-* (actionAppel property: #call)).
+	((page property: #businessPage) <>-* (businessPage property: #pageContainer)).
+	((service property: #actions) <>-* (serviceAPI property: #serviceOwner)).
+	((serviceAPI property: #parameters) <>-* (serviceAPIParameter property: #serviceAPIOwner)).
 ]

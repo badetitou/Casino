@@ -36,5 +36,5 @@ CSNServiceAPIParameter >> serviceAPIOwner: anObject [
 CSNServiceAPIParameter >> serviceAPIOwnerGroup [
 	<generated>
 	<navigation: 'ServiceAPIOwner'>
-	^ MooseGroup with: self serviceAPIOwner
+	^ MooseSpecializedGroup with: self serviceAPIOwner
 ]

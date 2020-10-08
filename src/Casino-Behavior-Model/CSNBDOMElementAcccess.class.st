@@ -24,12 +24,18 @@ CSNBDOMElementAcccess >> widget [
 
 	<generated>
 	<FMProperty: #widget type: #CSNWidget opposite: #behavioralAccess>
-	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
+	^ self attributeAt: #widget ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBDOMElementAcccess >> widget: anObject [
-
 	<generated>
-	self privateState attributeAt: #widget put: (FMMultivalueLink on: self update: #behavioralAccess from: self widget to: anObject).
+	self
+		attributeAt: #widget
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #behavioralAccess
+				from: self widget
+				to: anObject)
 ]

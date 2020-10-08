@@ -7,12 +7,18 @@ CSNServiceAPI >> dataType [
 	<generated>
 	<FMProperty: #dataType type: #CSNBuDTO opposite: #usedInServices>
 	<package: #'Casino-Business-Model'>
-	^ self privateState attributeAt: #dataType ifAbsent: [ nil ]
+	^ self attributeAt: #dataType ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Business-Model-accessing' }
 CSNServiceAPI >> dataType: anObject [
-
 	<generated>
-	self privateState attributeAt: #dataType put: (FMMultivalueLink on: self update: #usedInServices from: self dataType to: anObject).
+	self
+		attributeAt: #dataType
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #usedInServices
+				from: self dataType
+				to: anObject)
 ]

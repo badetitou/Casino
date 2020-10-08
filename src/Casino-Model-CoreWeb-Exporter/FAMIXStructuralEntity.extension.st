@@ -3,7 +3,10 @@ Extension { #name : #FAMIXStructuralEntity }
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FAMIXStructuralEntity >> uniqueName [
 	| dic |
-	dic := ((self allAtScope: FamixTClass) detect: [:class | class parents anyOneIfOnlyOneElement isNamespace]) privateState cacheAt: #uniqueName ifAbsentPut: [ {(self -> self name)} asDictionary ].
+	dic := ((self allAtScope: FamixTClass)
+		detect: [ :class | class parents anyOneIfOnlyOneElement isNamespace ])
+		cacheAt: #uniqueName
+		ifAbsentPut: [ {(self -> self name)} asDictionary ].
 	^ dic
 		at: self
 		ifAbsentPut: [ | index potentialName |

@@ -113,8 +113,11 @@ CSNBuDTO >> usedAsParameterType [
 
 	<generated>
 	<derived>
-	<FMProperty: #usedAsParameterType type: #CSNServiceAPIParameter opposite: #dataType>
-	^ self privateState attributeAt: #usedAsParameterType ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+	<FMProperty: #usedAsParameterType type: #CSNServiceAPIParameter
+	opposite: #dataType>
+	^ self
+		attributeAt: #usedAsParameterType
+		ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
 ]
 
 { #category : #accessing }
@@ -147,7 +150,9 @@ CSNBuDTO >> usedInServices [
 	<generated>
 	<derived>
 	<FMProperty: #usedInServices type: #CSNServiceAPI opposite: #dataType>
-	^ self privateState attributeAt: #usedInServices ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+	^ self
+		attributeAt: #usedInServices
+		ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
 ]
 
 { #category : #accessing }

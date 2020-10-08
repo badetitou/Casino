@@ -2,7 +2,8 @@ Extension { #name : #CSNBusinessPage }
 
 { #category : #'*Casino-Model-Exporter' }
 CSNBusinessPage >> container [
-	^ self pageContainers ifNotEmpty: [ self pageContainers at: 1] ifEmpty:  [ self widgetContainer ifNil: [ self cellOwner ] ]
+	^ self pageContainer
+		ifNil: [ self widgetContainer ifNil: [ self cellOwner ] ]
 ]
 
 { #category : #'*Casino-Model-Exporter' }

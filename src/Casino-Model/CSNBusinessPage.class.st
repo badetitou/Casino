@@ -5,7 +5,7 @@ Class {
 	#name : #CSNBusinessPage,
 	#superclass : #CSNContainer,
 	#instVars : [
-		'#pageContainers => FMMany type: #CSNPage opposite: #businessPage',
+		'#pageContainer => FMOne type: #CSNPage opposite: #businessPage',
 		'#title => FMProperty'
 	],
 	#category : #'Casino-Model-Entities'
@@ -20,12 +20,6 @@ CSNBusinessPage class >> annotation [
 	^self
 ]
 
-{ #category : #adding }
-CSNBusinessPage >> addPageContainer: anObject [
-	<generated>
-	^ self pageContainers add: anObject
-]
-
 { #category : #'as yet unclassified' }
 CSNBusinessPage >> gtActionsTSCodeIn: composite [
 	<gtInspectorPresentationOrder: 1012>
@@ -37,25 +31,26 @@ CSNBusinessPage >> gtActionsTSCodeIn: composite [
 ]
 
 { #category : #accessing }
-CSNBusinessPage >> pageContainers [
-	"Relation named: #pageContainers type: #CSNPage opposite: #businessPage"
+CSNBusinessPage >> pageContainer [
+	"Relation named: #pageContainer type: #CSNPage opposite: #businessPage"
 
 	<generated>
-	^ pageContainers
+	<container>
+	^ pageContainer
 ]
 
 { #category : #accessing }
-CSNBusinessPage >> pageContainers: anObject [
+CSNBusinessPage >> pageContainer: anObject [
 
 	<generated>
-	pageContainers value: anObject
+	pageContainer := anObject
 ]
 
 { #category : #navigation }
-CSNBusinessPage >> pageContainersGroup [
+CSNBusinessPage >> pageContainerGroup [
 	<generated>
-	<navigation: 'PageContainers'>
-	^ MooseGroup withAll: self pageContainers asSet
+	<navigation: 'PageContainer'>
+	^ MooseSpecializedGroup with: self pageContainer
 ]
 
 { #category : #accessing }

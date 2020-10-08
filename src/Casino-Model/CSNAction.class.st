@@ -39,5 +39,5 @@ CSNAction >> caller: anObject [
 CSNAction >> callerGroup [
 	<generated>
 	<navigation: 'Caller'>
-	^ MooseGroup with: self caller
+	^ MooseSpecializedGroup with: self caller
 ]

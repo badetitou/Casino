@@ -43,7 +43,7 @@ CSNServiceAPI >> parameters: anObject [
 CSNServiceAPI >> parametersGroup [
 	<generated>
 	<navigation: 'Parameters'>
-	^ MooseGroup withAll: self parameters asSet
+	^ MooseSpecializedGroup withAll: self parameters asSet
 ]
 
 { #category : #accessing }
@@ -66,5 +66,5 @@ CSNServiceAPI >> serviceOwner: anObject [
 CSNServiceAPI >> serviceOwnerGroup [
 	<generated>
 	<navigation: 'ServiceOwner'>
-	^ MooseGroup with: self serviceOwner
+	^ MooseSpecializedGroup with: self serviceOwner
 ]

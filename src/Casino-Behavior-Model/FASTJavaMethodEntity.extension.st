@@ -7,12 +7,18 @@ FASTJavaMethodEntity >> ui [
 	<generated>
 	<FMProperty: #ui type: #CSNAction opposite: #behavior>
 	<package: #'Casino-Behavior-Model'>
-	^ self privateState attributeAt: #ui ifAbsent: [ nil ]
+	^ self attributeAt: #ui ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTJavaMethodEntity >> ui: anObject [
-
 	<generated>
-	self privateState attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).
+	self
+		attributeAt: #ui
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #behavior
+				from: self ui
+				to: anObject)
 ]

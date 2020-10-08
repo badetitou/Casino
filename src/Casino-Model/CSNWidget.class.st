@@ -42,7 +42,7 @@ CSNWidget >> actions: anObject [
 CSNWidget >> actionsGroup [
 	<generated>
 	<navigation: 'Actions'>
-	^ MooseGroup withAll: self actions asSet
+	^ MooseSpecializedGroup withAll: self actions asSet
 ]
 
 { #category : #adding }
@@ -77,7 +77,7 @@ CSNWidget >> attributes: anObject [
 CSNWidget >> attributesGroup [
 	<generated>
 	<navigation: 'Attributes'>
-	^ MooseGroup withAll: self attributes asSet
+	^ MooseSpecializedGroup withAll: self attributes asSet
 ]
 
 { #category : #accessing }
@@ -100,5 +100,5 @@ CSNWidget >> widgetContainer: anObject [
 CSNWidget >> widgetContainerGroup [
 	<generated>
 	<navigation: 'WidgetContainer'>
-	^ MooseGroup with: self widgetContainer
+	^ MooseSpecializedGroup with: self widgetContainer
 ]

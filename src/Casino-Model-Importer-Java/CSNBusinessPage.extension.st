@@ -2,9 +2,15 @@ Extension { #name : #CSNBusinessPage }
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNBusinessPage >> addingPosition [
-	^ self privateState
+	^ self
 		attributeAt: #addingPosition
-		ifAbsent: (self affectedActions ifNil: [ ^ 0] ifNotNil: [:affect | affect sourceAnchor ifNil: [ ^ 0 ] ifNotNil: [ :sourceText | sourceText startPos ] ])
+		ifAbsent:
+			(self affectedActions
+				ifNil: [ ^ 0 ]
+				ifNotNil: [ :affect | 
+					affect sourceAnchor
+						ifNil: [ ^ 0 ]
+						ifNotNil: [ :sourceText | sourceText startPos ] ])
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

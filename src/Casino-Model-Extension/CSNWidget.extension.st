@@ -3,14 +3,20 @@ Extension { #name : #CSNWidget }
 { #category : #'*Casino-Model-Extension' }
 CSNWidget >> addingPosition [
 	<MSEProperty: #addingPosition type: #Number>
-	^ self privateState
+	^ self
 		attributeAt: #addingPosition
-		ifAbsent: ((self source) ifNil: [ 0 ] ifNotNil: [ :widgetSource | widgetSource sourceAnchor ifNil: [ 0 ] ifNotNil: [ :sourceText | sourceText startPos ] ] )
+		ifAbsent:
+			(self source
+				ifNil: [ 0 ]
+				ifNotNil: [ :widgetSource | 
+					widgetSource sourceAnchor
+						ifNil: [ 0 ]
+						ifNotNil: [ :sourceText | sourceText startPos ] ])
 ]
 
 { #category : #'*Casino-Model-Extension' }
 CSNWidget >> addingPosition: anObject [
-	self privateState attributeAt: #addingPosition put: anObject
+	self attributeAt: #addingPosition put: anObject
 ]
 
 { #category : #'*Casino-Model-Extension' }

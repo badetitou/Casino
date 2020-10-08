@@ -26,16 +26,16 @@ CSNLPosition >> widget [
 
 { #category : #accessing }
 CSNLPosition >> widget: anObject [
-
 	<generated>
-	(self privateState attributeAt: #widget ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
-	anObject ifNil: [ | otherSide |
-		otherSide :=  self widget.
-		self privateState attributeAt: #widget put: anObject.
-		otherSide position: nil ]
-	ifNotNil: [ 
-		self privateState attributeAt: #widget put: anObject.
-		anObject position: self ]
+	(self attributeAt: #widget ifAbsentPut: [ nil ]) == anObject
+		ifTrue: [ ^ anObject ].
+	anObject
+		ifNil: [ | otherSide |
+			otherSide := self widget.
+			self privateState attributeAt: #widget put: anObject.
+			otherSide position: nil ]
+		ifNotNil: [ self attributeAt: #widget put: anObject.
+			anObject position: self ]
 ]
 
 { #category : #navigation }
