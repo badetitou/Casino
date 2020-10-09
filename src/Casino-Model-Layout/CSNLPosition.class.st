@@ -21,7 +21,7 @@ CSNLPosition >> widget [
 	<container>
 	<derived>
 	<FMProperty: #widget type: #CSNWidget opposite: #position>
-	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
+	^ self attributeAt: #widget ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }

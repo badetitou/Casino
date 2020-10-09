@@ -16,7 +16,7 @@ CSNBuModelImporterFactory class >> in: aModelInWhichCreateElement [
 
 { #category : #creating }
 CSNBuModelImporterFactory >> create: aCSNBuClass [
-	^ self model add: aCSNBuClass new
+	^ self model silentlyAdd: aCSNBuClass new
 ]
 
 { #category : #accessing }
