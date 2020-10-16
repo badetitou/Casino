@@ -120,14 +120,13 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'TinyLogger' 'Casino-Helper') ];
 		package: 'Casino-Model-Importer-Tests' with: [ spec requires: #('Casino-Model-Importer') ];
-		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Casino-Model-Toolkit' 'Carrefour') ];
+		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model-UI-SubEntities' 'Casino-Model' 'Casino-Model-CoreWeb-Generator') ];
 		package: 'Casino-Model-CoreWeb-Generator' with: [ spec requires: #('Casino-Model-UI-SubEntities-Generator' 'Casino-Model-Generator') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('PetitParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
-		package: 'Casino-Model-Toolkit' with: [ spec requires: #('Casino-Model-CoreWeb') ];
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-Omaje' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
