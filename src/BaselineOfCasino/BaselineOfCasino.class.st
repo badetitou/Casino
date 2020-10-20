@@ -89,8 +89,8 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'business' with: #('Casino-Business-Model' 'Casino-Business-Model-Importer-CoreWeb' 'Casino-Business-Model-Exporter-CoreWeb');
 		
 		"bl migration"
-		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl');
-		group: 'rh' with: #('Casino-Migration-RH' 'behavior-bl');
+		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl' 'business');
+		group: 'rh' with: #('Casino-Migration-RH' 'behavior-bl' 'business');
 		
 		"export java"
 		group: 'rest-java' with: #('Casino-BL-GWT-ServiceRest-Exporter')
