@@ -15,7 +15,7 @@ FAMIXAccess >> allUsages [
 { #category : #'*Casino-Model-Importer-Java' }
 FAMIXAccess >> endAffectationPos [
 	^ ((self source allAtScope: FamixTClass)
-		select: [ :class | class isNotNil and: [ class hasSourceAnchor ] ])
+		select: [ :class | class isNotNil and: [ class hasSourceAnchor and: [ class isInnerClass not ] ] ])
 		anyOneIfOnlyOneElement sourceAnchor completeText
 		findNext: $;
 		for: self sourceAnchor startPos
