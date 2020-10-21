@@ -116,7 +116,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Exporter';
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'Casino-Exporter' 'Casino-Helper') ];
 		package: 'Casino-Model-Exporter-Angular'
-			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-Model-Toolkit' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
+			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
 		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'TinyLogger' 'Casino-Helper') ];
 		package: 'Casino-Model-Importer-Tests' with: [ spec requires: #('Casino-Model-Importer') ];
