@@ -35,20 +35,32 @@ CSNWebModelJavaPageTest >> setUp [
 { #category : #tests }
 CSNWebModelJavaPageTest >> testGeneratePhase [
 	uiImporter generatePhase.
-	self assert: (uiImporter model allWithType: CSNPage) size equals: 3
+	self assert: (uiImporter model allWithType: CSNPage) size equals: 3.
+	self
+		assert:
+			(((uiImporter model allWithType: CSNPage) collect: #codePhase)
+				includesAll: {#PHASE_HOME . #PAGE_CONSOLE . #PAGE_LOG}).
+	self
+		assert:
+			(((uiImporter model allWithType: CSNPage) collect: #codeValue)
+				includesAll: {#PHASE_HOME_ . #PAGE_CONSOLE_ . #PAGE_LOG_}).
+	self
+		assert:
+			(((uiImporter model allWithType: CSNPage) collect: #realClassName)
+				includesAll: {#'STUB C/S' . #'csn::core::PageConsole' . #'csn::core::PageLog'})
 ]
 
 { #category : #resources }
 CSNWebModelJavaPageTest >> xmlContent [
 	^ '<application name="example" version="1.0">
 	<module name="BL_HOME_PHASE_MODULE">
-		<phase codePhase="PHASE_HOME" codeValue="PHASE_HOME" raccourci="###" />
+		<phase codePhase="PHASE_HOME" codeValue="PHASE_HOME_" raccourci="###" />
 	</module>
 	<module name="Core">
 		<!-- comment -->	
-		<phase codePhase="PAGE_CONSOLE" codeValue="PAGE_CONSOLE" className="csn.core.PageConsole" raccourci="###" />
+		<phase codePhase="PAGE_CONSOLE" codeValue="PAGE_CONSOLE_" className="csn.core.PageConsole" raccourci="###" />
 		<!-- other comment -->	
-		<phase codePhase="PAGE_LOG" codeValue="PAGE_LOG" className="csn.core.PageLog" raccourci="LOG" />
+		<phase codePhase="PAGE_LOG" codeValue="PAGE_LOG_" className="csn.core.PageLog" raccourci="LOG" />
 		</module>
 </application>'
 ]
