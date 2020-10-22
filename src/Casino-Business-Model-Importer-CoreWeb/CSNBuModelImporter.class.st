@@ -136,6 +136,8 @@ CSNBuModelImporter >> visitEnum: aParameterType [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitParameter: aParameter [
+	"in case the declaredType is not extracted because verveineJ has failed (or the class is not present in our model)"
+	aParameter declaredType ifNil: [ ^ self factory create: CSNBuDTO ].
 	^ aParameter declaredType accept: self
 ]
 
