@@ -224,9 +224,10 @@ CSNWebModelJava >> customWidgetClassDictionnary [
 	^ customWidgetClassDictionnary
 		ifNil: [ customWidgetClassDictionnary := (CSNMultiValueDictionary
 				newFrom:
-					((self model allWithType: CSNUICustomWidget)
-						reject: [ :widget | widget source isClass ]
-						thenCollect: [ :custom | (custom source target first atScope: FamixTClass) anyOne -> custom ]))
+				((self model allWithType: CSNUICustomWidget)
+				reject: [ :widget | widget source isClass ]
+				thenCollect:
+					[ :custom | (custom source target first atScope: FamixTClass) anyOne -> custom ]))
 				removeKey: nil ifAbsent: [  ];
 				yourself ]
 ]
@@ -235,7 +236,8 @@ CSNWebModelJava >> customWidgetClassDictionnary [
 CSNWebModelJava >> domBuildingMethods [
 	"setWidgetDetail and setListe are for the ListAndDetails"
 
-	^ {'setWidget(' . 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'}
+	^ {'setWidget(' . 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'.
+	'initWidget('}
 ]
 
 { #category : #'private - actions' }
@@ -490,13 +492,20 @@ CSNWebModelJava >> linkPageMetierToPageMetier [
 
 { #category : #private }
 CSNWebModelJava >> linkXmlUiPhaseAndPageMetier [
-	^  (self modelPhases , self modelPageMetier) asSet select: [ :a | a superclass mooseName endsWith: 'Ui' ] thenCollect: [ :a | a superclass -> a ]
+	^ (self modelPhases , self modelPageMetier) asSet
+		select: [ :a | a superclass mooseName endsWith: 'Ui' ]
+		thenCollect: [ :a | a superclass -> a ]
 ]
 
 { #category : #adding }
 CSNWebModelJava >> linkXmlUiWidget [
 	^ self modelWidget
-		flatCollect: [ :widget | widget superclassHierarchy select: [ :class | (self isElementFromApplication: class) or: [class mooseName endsWith: 'Ui'] ] thenCollect: [ :class | class -> widget ] ]
+		flatCollect: [ :widget | 
+			widget superclassHierarchy
+				select: [ :class | 
+					(self isElementFromApplication: class)
+						or: [ class mooseName endsWith: 'Ui' ] ]
+				thenCollect: [ :class | class -> widget ] ]
 ]
 
 { #category : #'private - accessing' }
