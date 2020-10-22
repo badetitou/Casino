@@ -7,9 +7,18 @@ class BusinessClassA extends AbstractPersistentObjectGWT {
 "
 Class {
 	#name : #CSNBuModelImporterCreateDTOTest,
-	#superclass : #CSNBuModelImporterTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'buModelImporter',
+		'famixModel'
+	],
 	#category : #'Casino-Business-Model-Importer-CoreWeb-Tests'
 }
+
+{ #category : #running }
+CSNBuModelImporterCreateDTOTest >> createInFamixModel: aClass [
+	^ buModelImporter famixModel add: aClass new
+]
 
 { #category : #running }
 CSNBuModelImporterCreateDTOTest >> famixModel [
@@ -34,6 +43,16 @@ CSNBuModelImporterCreateDTOTest >> famixModel [
 		declaredType: integerPrimitiveType.
 
 	^ model
+]
+
+{ #category : #running }
+CSNBuModelImporterCreateDTOTest >> setUp [
+	super setUp.
+	buModelImporter := CSNBuModelImporter new.
+	buModelImporter famixModel: FAMIXModel new.
+	self famixModel.
+	buModelImporter buModel: CSNBuModel new.
+	buModelImporter import
 ]
 
 { #category : #running }
