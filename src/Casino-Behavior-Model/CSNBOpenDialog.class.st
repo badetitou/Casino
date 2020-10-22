@@ -22,12 +22,18 @@ CSNBOpenDialog >> dialog [
 
 	<generated>
 	<FMProperty: #dialog type: #CSNUICWDialog opposite: #opener>
-	^ self privateState attributeAt: #dialog ifAbsent: [ nil ]
+	^ self attributeAt: #dialog ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBOpenDialog >> dialog: anObject [
-
 	<generated>
-	self privateState attributeAt: #dialog put: (FMMultivalueLink on: self update: #opener from: self dialog to: anObject).
+	self
+		attributeAt: #dialog
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #opener
+				from: self dialog
+				to: anObject)
 ]

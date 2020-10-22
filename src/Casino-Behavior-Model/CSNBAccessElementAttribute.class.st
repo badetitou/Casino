@@ -22,12 +22,18 @@ CSNBAccessElementAttribute >> attribute [
 
 	<generated>
 	<FMProperty: #attribute type: #CSNAttribute opposite: #behavioralAccess>
-	^ self privateState attributeAt: #attribute ifAbsent: [ nil ]
+	^ self attributeAt: #attribute ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNBAccessElementAttribute >> attribute: anObject [
-
 	<generated>
-	self privateState attributeAt: #attribute put: (FMMultivalueLink on: self update: #behavioralAccess from: self attribute to: anObject).
+	self
+		attributeAt: #attribute
+		put:
+			(FMMultivalueLink
+				on: self
+				update: #behavioralAccess
+				from: self attribute
+				to: anObject)
 ]

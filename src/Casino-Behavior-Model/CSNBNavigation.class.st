@@ -29,7 +29,9 @@ CSNBNavigation >> arguments [
 	<generated>
 	<derived>
 	<FMProperty: #arguments type: #FASTExpression opposite: #navigation>
-	^ self privateState attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
+	^ self
+		attributeAt: #arguments
+		ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 
 { #category : #accessing }
