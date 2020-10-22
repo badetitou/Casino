@@ -10,7 +10,7 @@ Class {
 	#category : #'Casino-Model-CoreWeb-Importer-Tests'
 }
 
-{ #category : #test }
+{ #category : #setUp }
 CSNWebModelJavaTest >> setUp [
 	super setUp.
 	uiImporter := CSNWebModelJava new.

@@ -4,9 +4,9 @@ Class {
 	#category : #'Casino-Model-CoreWeb-Importer-Tests'
 }
 
-{ #category : #running }
+{ #category : #setUp }
 CSNWebModelJavaPageTest >> setUp [
-	| pageConsole pageLog csnNamespace coreNamespace |
+	| pageConsole pageLog csnNamespace coreNamespace abstractHomeClass homePage inheritance |
 	super setUp.
 	uiImporter xml: (PPXmlParser parse: self xmlContent).
 	pageConsole := FAMIXClass new
@@ -15,8 +15,20 @@ CSNWebModelJavaPageTest >> setUp [
 	pageLog := FAMIXClass new
 		name: #PageLog;
 		yourself.
+	abstractHomeClass := FAMIXClass new
+		name: #HomePhaseController;
+		yourself.
+	homePage := FAMIXClass new
+		name: #HomePage;
+		yourself.
+	inheritance := FAMIXInheritance new
+		superclass: abstractHomeClass;
+		subclass: homePage;
+		yourself.
 	csnNamespace := FAMIXNamespace new
 		name: #csn;
+		addType: homePage;
+		addType: abstractHomeClass;
 		yourself.
 	coreNamespace := FAMIXNamespace new
 		name: #core;
@@ -29,7 +41,10 @@ CSNWebModelJavaPageTest >> setUp [
 			{pageConsole.
 			pageLog.
 			csnNamespace.
-			coreNamespace}
+			coreNamespace.
+			homePage.
+			abstractHomeClass.
+			inheritance}
 ]
 
 { #category : #tests }
@@ -46,8 +61,12 @@ CSNWebModelJavaPageTest >> testGeneratePhase [
 				includesAll: {#PHASE_HOME_ . #PAGE_CONSOLE_ . #PAGE_LOG_}).
 	self
 		assert:
+			(((uiImporter model allWithType: CSNPage) collect: #shortcut)
+				includesAll: {#'###' . #'###' . #LOG}).
+	self
+		assert:
 			(((uiImporter model allWithType: CSNPage) collect: #realClassName)
-				includesAll: {#'STUB C/S' . #'csn::core::PageConsole' . #'csn::core::PageLog'})
+				includesAll: {#'csn::HomePage' . #'csn::core::PageConsole' . #'csn::core::PageLog'})
 ]
 
 { #category : #resources }

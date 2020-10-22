@@ -21,7 +21,6 @@ CSNWidgetFactoryAngularOmaje >> createPageFromXMLElement: xmlElement [
 		shortcut: (xmlElement attributeAt: #raccourci);
 		name: (xmlElement attributeAt: #codeValue).
 	blPhase realClassName = 'STUB C/S'
-		ifTrue: [ blPhase ]
 		ifFalse: [ blPhase
 				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
