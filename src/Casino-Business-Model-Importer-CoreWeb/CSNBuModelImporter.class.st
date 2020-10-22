@@ -81,6 +81,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 
 { #category : #importing }
 CSNBuModelImporter >> importCollectionType: aClass [
+	aClass arguments ifEmpty: [ ^ self factory create: CSNBuDTO ].
 	^ (self factory create: CSNBuCollectionType)
 		type: (aClass arguments anyOne accept: self);
 		yourself
@@ -89,6 +90,7 @@ CSNBuModelImporter >> importCollectionType: aClass [
 { #category : #importing }
 CSNBuModelImporter >> importDictionaryType: aClass [
 	| dictionary |
+	aClass arguments ifEmpty: [ ^ self factory create: CSNBuDTO ].
 	dictionary := self factory create: CSNBuDictionaryType.
 	dictionary key: (aClass arguments first accept: self).
 	dictionary value: ((aClass arguments asOrderedCollection at: 2 ifAbsent: [ aClass arguments first ]) accept: self).
