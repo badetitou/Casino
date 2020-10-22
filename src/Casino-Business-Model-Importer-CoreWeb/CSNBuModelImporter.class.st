@@ -168,7 +168,6 @@ CSNBuModelImporter >> visitParameterizedType: aClass [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitPrimitiveType: aPrimitiveType [
-	"Probably a complex Type"
 
 	^ self importPrimitiveType: aPrimitiveType
 ]
