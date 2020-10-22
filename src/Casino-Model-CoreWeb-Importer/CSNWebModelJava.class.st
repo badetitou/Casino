@@ -231,7 +231,7 @@ CSNWebModelJava >> domBuildingMethods [
 ]
 
 { #category : #'private - actions' }
-CSNWebModelJava >> generateBLActionAppel [
+CSNWebModelJava >> generateActionAppel [
 	self linkFromWidgetActionAppel
 		do: [ :el | 
 			| action |
@@ -377,7 +377,7 @@ CSNWebModelJava >> import [
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
 	self execute: [ self addLinkBetweenWidgets ] recordedAs: '8/15 addLinkBetweenWidgets'.
 	self execute: [ self addPPPToWidget ] recordedAs: '9/15 addPPPToWidget'.
-	self execute: [ self generateBLActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
+	self execute: [ self generateActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
 	self execute: [ self generateService ] recordedAs: '11/15 generateService'.
 	self execute: [ self generateServiceAction ] recordedAs: '12/15 generateServiceAction'.
 	self execute: [ self generateServiceAPIParameter ] recordedAs: '12/15 generateServiceAPIParameter'.
