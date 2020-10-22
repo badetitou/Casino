@@ -32,6 +32,29 @@ CSNBuModelImporterTest >> setUp [
 ]
 
 { #category : #test }
+CSNBuModelImporterTest >> testImportClass [
+	| sourceClass |
+	sourceClass := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessType'.
+	buModelImporter importClass: sourceClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 1.
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testImportClassTwice [
+	| sourceClass |
+	sourceClass := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessType'.
+	buModelImporter importClass: sourceClass.
+	buModelImporter importClass: sourceClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 1.
+]
+
+{ #category : #test }
 CSNBuModelImporterTest >> testImportCollectionType [
 	| sourceClass argument |
 	sourceClass := (self createInFamixModel: FAMIXParameterizedType)
@@ -153,4 +176,38 @@ CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 	buModelImporter importPrimitiveType: sourceClass.
 	buModelImporter buModel resetPrivateState.
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testImportSeveralClasses [
+	| sourceClass sourceClassA sourceClassB |
+	sourceClass := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessType'.
+	sourceClassA := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessTypeA'.
+	sourceClassB := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessTypeB'.
+	buModelImporter importClass: sourceClass.
+	buModelImporter importClass: sourceClassA.
+	buModelImporter importClass: sourceClassB.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 3
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testImportSeveralClassesWithDuplicate [
+	| sourceClass sourceClassA sourceClassB |
+	sourceClass := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessType'.
+	sourceClassA := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessType'.
+	sourceClassB := (self createInFamixModel: FAMIXClass)
+		name: 'aBusinessTypeB'.
+	buModelImporter importClass: sourceClass.
+	buModelImporter importClass: sourceClassA.
+	buModelImporter importClass: sourceClassB.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 2
 ]
