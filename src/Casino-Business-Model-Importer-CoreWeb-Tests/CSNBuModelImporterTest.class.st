@@ -211,3 +211,182 @@ CSNBuModelImporterTest >> testImportSeveralClassesWithDuplicate [
 		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
 		equals: 2
 ]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClass [
+	"default is the class is a business class"
+
+	| abstractClass businessClassA |
+	abstractClass := (self createInFamixModel: FAMIXClass)
+		name: buModelImporter dtoAbstractName;
+		yourself.
+	businessClassA := (self createInFamixModel: FAMIXClass)
+		name: 'businessClassA';
+		yourself.
+	(self createInFamixModel: FAMIXInheritance)
+		superclass: abstractClass;
+		subclass: businessClassA.
+	buModelImporter visitClass: businessClassA.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 1.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) anyOne name
+		equals: #businessClassA
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassBoolean [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Boolean;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassByte [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Byte;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassDate [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Date;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassDouble [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Double;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassFloat [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Float;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassInteger [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Integer;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassLong [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #Long;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassString [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #String;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 1
+]
+
+{ #category : #test }
+CSNBuModelImporterTest >> testVisitClassUnknow [
+	"default is the class is a business class"
+
+	| stringClass |
+	stringClass := (self createInFamixModel: FAMIXClass)
+		name: #UnknowClass;
+		yourself.
+	buModelImporter visitClass: stringClass.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuBusinessType) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size
+		equals: 0.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuDTO) size
+		equals: 1
+]

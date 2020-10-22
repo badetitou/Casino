@@ -121,7 +121,7 @@ CSNBuModelImporter >> initialize [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitClass: aClass [
-	^ ({'String' . 'Date' . 'Boolean' . 'Integer' . 'Double'} includes: aClass name)
+	^ ({#String . #Date . #Boolean . #Integer . #Double . #Long . #Float . #Byte } includes: aClass name)
 		ifTrue: [ self importPrimitiveType: aClass ]
 		ifFalse: [ (aClass superclassHierarchy anySatisfy: [ :class | class name = self dtoAbstractName ])
 				ifTrue: [ self importClass: aClass ]
