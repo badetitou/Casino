@@ -410,7 +410,9 @@ CSNWebModelJava >> isInFactory: invocationOrClass [
 { #category : #accessing }
 CSNWebModelJava >> isWidgetFromApplication: e [
 	^ (self isElementFromApplication: e)
-		and: [ (e name endsWith: 'Ui') not and: [ ((self model allCSNPage , self model allCSNPageMetier collect: #source) includes: e) not ] ]
+		and: [ (e name endsWith: 'Ui') not
+				and: [ ((self model allCSNPage , self model allCSNPageMetier
+						collect: #source) includes: e) not ] ]
 ]
 
 { #category : #private }
@@ -514,8 +516,9 @@ CSNWebModelJava >> modelWidget [
 		ifNil: [ modelWidgetCache := self sourceModel allClasses
 				select: [ :e | 
 					(e superclassHierarchy anySatisfy: [ :a | a name = 'Widget' ])
-						and: [ (e container mooseName beginsWithAnyOf: self widgetNamespaces )  or: [ (e container mooseName beginsWith: self gwtWidgetNamespace )
-								or: [ self isWidgetFromApplication: e ] ] ] ] ]
+						and: [ (e container mooseName beginsWithAnyOf: self widgetNamespaces)
+								or: [ (e container mooseName beginsWith: self gwtWidgetNamespace)
+										or: [ self isWidgetFromApplication: e ] ] ] ] ]
 ]
 
 { #category : #api }
