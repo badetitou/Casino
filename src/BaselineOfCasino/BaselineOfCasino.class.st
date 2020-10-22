@@ -43,7 +43,8 @@ BaselineOfCasino >> defineBusinessPackages: spec [
 		package: 'Casino-Business-Model' with: [ spec requires: #('Casino-Business-Model-Generator') ];
 		package: 'Casino-Business-Model-Generator';
 		package: 'Casino-Business-Model-Importer-CoreWeb' with: [ spec requires: #('Casino-Business-Model' 'Famix2Java') ];
-		package: 'Casino-Business-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Business-Model' 'Casino-Exporter') ]
+		package: 'Casino-Business-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Business-Model' 'Casino-Exporter') ];
+		package: 'Casino-Business-Model-Importer-CoreWeb-Tests' with: [ spec requires: #('Casino-Business-Model-Importer-CoreWeb') ]
 ]
 
 { #category : #baselines }
