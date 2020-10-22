@@ -75,7 +75,7 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
 		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
 		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
-		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests');
+		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests' 'business-tests');
 		group: 'ui-bl' with: #('bl' 'tests');
 		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
 		group: 'behavior' with: #('ui-bl' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model');
@@ -88,6 +88,7 @@ BaselineOfCasino >> defineGroups: spec [
 		
 		"business"
 		group: 'business' with: #('Casino-Business-Model' 'Casino-Business-Model-Importer-CoreWeb' 'Casino-Business-Model-Exporter-CoreWeb');
+		group: 'business-tests' with: #('business' 'Casino-Business-Model-Importer-CoreWeb-Tests');
 		
 		"bl migration"
 		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl' 'business');
