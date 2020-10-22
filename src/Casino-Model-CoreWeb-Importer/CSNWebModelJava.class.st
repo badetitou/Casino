@@ -243,8 +243,13 @@ CSNWebModelJava >> generateBLActionAppel [
 { #category : #'private - actions' }
 CSNWebModelJava >> generatePageMetier [
 	sourceModel allModelClasses
-		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | a name = 'IPageMetier' ]) and: [ ('*XMLUi' match: e name) not ] ]
-		thenDo: [ :aPageMetier | self factory createBusinessPageFromFAMIXClass: aPageMetier ]
+		detect: [ :class | class name = #IPageMetier ]
+		ifFound: [ :iPageMetierClass | 
+			iPageMetierClass subclassHierarchy
+				reject: [ :class | class isStub or: [ class name endsWith: 'XMLUi' ] ]
+				thenDo:
+					[ :aPageMetier | self factory createBusinessPageFromFAMIXClass: aPageMetier ] ]
+		ifNone: [ Exception signal: 'No IPageMetier abstract class found' ]
 ]
 
 { #category : #'private - actions' }
@@ -310,11 +315,7 @@ CSNWebModelJava >> getClassNamed: aClassName [
 
 { #category : #accessing }
 CSNWebModelJava >> getCustomWidgetFromClass: aClass [
-	^ self customWidgetClassDictionnary at: aClass ifAbsent: [ nil ].
-	"((self model allWithType: CSNUICustomWidget) reject: [ :widget | widget source isClass ])
-		detect: [ :custom | (custom source target first atScope: FamixTClass) anyOne = aClass ]
-		ifFound: [ :founded | 1h. {founded}	""need to return a collection to follow the other getPage and getBusinessPage"" ]
-		ifNone: [ nil ]"
+	^ self customWidgetClassDictionnary at: aClass ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
