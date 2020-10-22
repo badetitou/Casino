@@ -88,7 +88,7 @@ CSNBuModelImporter >> importCollectionType: aClass [
 
 { #category : #importing }
 CSNBuModelImporter >> importDictionaryType: aClass [
-	| dictionary arguments |
+	| dictionary |
 	dictionary := self factory create: CSNBuDictionaryType.
 	dictionary key: (aClass arguments first accept: self).
 	dictionary value: ((aClass arguments asOrderedCollection at: 2 ifAbsent: [ aClass arguments first ]) accept: self).
@@ -139,6 +139,14 @@ CSNBuModelImporter >> visitParameter: aParameter [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitParameterType: aParameterType [
+	self flag: 'Stil not suported'.
+	^ self factory create: CSNBuDTO
+]
+
+{ #category : #visiting }
+CSNBuModelImporter >> visitParameterizableClass: aClass [
+	"ParametrizedType but we do not know the parameters..."
+	
 	self flag: 'Stil not suported'.
 	^ self factory create: CSNBuDTO
 ]
