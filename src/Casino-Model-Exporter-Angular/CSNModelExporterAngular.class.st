@@ -493,6 +493,7 @@ CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
 		<<
 			'
 } from ''@angular/core'';
+import { Router } from ''@angular/router'';
 import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
 import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
 import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
@@ -538,8 +539,8 @@ export class ';
 		<<
 			'
 
-    constructor(protected phaseService: DesktopStateService) {
-        super(phaseService);
+    constructor(protected phaseService: DesktopStateService, protected router: Router) {
+        super(phaseService, router);
     }
 
     public ngOnInit(): void {
