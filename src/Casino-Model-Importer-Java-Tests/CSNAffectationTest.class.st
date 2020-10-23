@@ -32,6 +32,17 @@ CSNAffectationTest >> simpleAffectationExample [
 }'
 ]
 
+{ #category : #resources }
+CSNAffectationTest >> simpleAffectationToAttributeExample [
+	^ 'class A {
+	Widget w;
+	
+	sourceMethod(){
+		w = new Widget();
+	}
+}'
+]
+
 { #category : #test }
 CSNAffectationTest >> testAffectation [
 	"test the affectation of a new Widget to a variable.
@@ -96,4 +107,44 @@ CSNAffectationTest >> testAffectationInParameter [
 	sourceMethod localVariables: {localVariable}.
 	self assert: invocationWidget affectation equals: localVariable.
 	self assert: invocationLabel affectation equals: nil
+]
+
+{ #category : #test }
+CSNAffectationTest >> testAffectationToAttribute [
+	"test the affectation of a new Widget to an attribute.
+	
+	example source code is here: simpleAffectationToAttributeExample"
+
+	| sourceMethod invocation sourceClassSourceAnchor sourceMethodSourceAnchor indexedAnchor attribute class |
+	sourceClassSourceAnchor := (self createInModel: FAMIXSourceTextAnchor)
+		source: self simpleAffectationToAttributeExample;
+		yourself.
+	class := (self createInModel: FAMIXClass)
+		name: 'A';
+		sourceAnchor: sourceClassSourceAnchor;
+		yourself.
+	sourceMethodSourceAnchor := (self
+		createInModel: FAMIXSourceTextAnchor)
+		startPos: 25;
+		endPos: 62;
+		source: (self simpleAffectationToAttributeExample copyFrom: 25 to: 62)
+		yourself.
+	sourceMethod := (self createInModel: FAMIXMethod)
+		name: 'sourceMethod';
+		parentType: class;
+		sourceAnchor: sourceMethodSourceAnchor;
+		yourself.
+	indexedAnchor := (self createInModel: FAMIXSourceTextAnchor)
+		startPos: 47;
+		endPos: 58;
+		source: (self simpleAffectationToAttributeExample copyFrom: 47 to: 58);
+		yourself.
+	invocation := (self createInModel: FAMIXInvocation)
+		source: sourceMethod;
+		sourceAnchor: indexedAnchor.
+	attribute := (self createInModel: FAMIXAttribute)
+		name: 'w';
+		yourself.
+	class addAttribute: attribute.
+	self assert: invocation affectation equals: attribute
 ]
