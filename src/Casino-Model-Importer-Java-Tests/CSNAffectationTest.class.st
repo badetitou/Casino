@@ -7,6 +7,13 @@ Class {
 	#category : #'Casino-Model-Importer-Java-Tests'
 }
 
+{ #category : #resources }
+CSNAffectationTest >> affectationInParameter [
+	^ 'sourceMethod(){
+    Widget w = new Widget(new Label());
+}'
+]
+
 { #category : #helper }
 CSNAffectationTest >> createInModel: aClass [
 	^ model add: aClass new
@@ -52,4 +59,41 @@ CSNAffectationTest >> testAffectation [
 		yourself.
 	sourceMethod localVariables: {localVariable}.
 	self assert: invocation affectation equals: localVariable
+]
+
+{ #category : #test }
+CSNAffectationTest >> testAffectationInParameter [
+	"We are testing that the Invocation 'new Label()' is not affected to Widget w.
+	
+	example source code is here: affectationInParameter"
+
+	| sourceMethod invocationWidget sourceMethodSourceAnchor indexedAnchorInvocationWidget localVariable invocationLabel indexedAnchorInvocationLabel |
+	sourceMethodSourceAnchor := (self
+		createInModel: FAMIXSourceTextAnchor)
+		source: self affectationInParameter;
+		yourself.
+	sourceMethod := (self createInModel: FAMIXMethod)
+		name: 'sourceMethod';
+		sourceAnchor: sourceMethodSourceAnchor;
+		yourself.
+	indexedAnchorInvocationWidget := (self createInModel: FAMIXIndexedFileAnchor)
+		startPos: 32;
+		endPos: 55;
+		yourself.
+	invocationWidget := (self createInModel: FAMIXInvocation)
+		source: sourceMethod;
+		sourceAnchor: indexedAnchorInvocationWidget.
+	indexedAnchorInvocationLabel := (self createInModel: FAMIXIndexedFileAnchor)
+		startPos: 43;
+		endPos: 54;
+		yourself.
+	invocationLabel := (self createInModel: FAMIXInvocation)
+		source: sourceMethod;
+		sourceAnchor: indexedAnchorInvocationLabel.
+	localVariable := (self createInModel: FAMIXLocalVariable)
+		name: 'w';
+		yourself.
+	sourceMethod localVariables: {localVariable}.
+	self assert: invocationWidget affectation equals: localVariable.
+	self assert: invocationLabel affectation equals: nil
 ]
