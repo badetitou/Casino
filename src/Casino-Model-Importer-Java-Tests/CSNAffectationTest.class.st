@@ -43,6 +43,19 @@ CSNAffectationTest >> simpleAffectationToAttributeExample [
 }'
 ]
 
+{ #category : #resources }
+CSNAffectationTest >> simpleAffectationToSuperClassAttributeExample [
+	"and
+class B {
+	Widget w;
+}"
+	^ 'class A extends B {	
+	sourceMethod(){
+		w = new Widget();
+	}
+}'
+]
+
 { #category : #test }
 CSNAffectationTest >> testAffectation [
 	"test the affectation of a new Widget to a variable.
@@ -146,5 +159,56 @@ CSNAffectationTest >> testAffectationToAttribute [
 		name: 'w';
 		yourself.
 	class addAttribute: attribute.
+	self assert: invocation affectation equals: attribute
+]
+
+{ #category : #test }
+CSNAffectationTest >> testAffectationToSuperClassAttribute [
+	"test the affectation of a new Widget to an attribute.
+	
+	example source code is here: simpleAffectationToSuperClassAttributeExample"
+
+	| sourceMethod invocation sourceClassSourceAnchor sourceMethodSourceAnchor indexedAnchor attribute class classB |
+	sourceClassSourceAnchor := (self createInModel: FAMIXSourceTextAnchor)
+		source: self simpleAffectationToSuperClassAttributeExample;
+		yourself.
+	class := (self createInModel: FAMIXClass)
+		name: 'A';
+		sourceAnchor: sourceClassSourceAnchor;
+		yourself.
+	classB := (self createInModel: FAMIXClass)
+		name: 'B';
+		yourself.
+	(self createInModel: FAMIXInheritance)
+		superclass: classB;
+		subclass: class.
+	sourceMethodSourceAnchor := (self
+		createInModel: FAMIXSourceTextAnchor)
+		startPos: 23;
+		endPos: 60;
+		source:
+			(self simpleAffectationToSuperClassAttributeExample
+				copyFrom: 23
+				to: 60) yourself.
+	sourceMethod := (self createInModel: FAMIXMethod)
+		name: 'sourceMethod';
+		parentType: class;
+		sourceAnchor: sourceMethodSourceAnchor;
+		yourself.
+	indexedAnchor := (self createInModel: FAMIXSourceTextAnchor)
+		startPos: 45;
+		endPos: 56;
+		source:
+			(self simpleAffectationToSuperClassAttributeExample
+				copyFrom: 45
+				to: 56);
+		yourself.
+	invocation := (self createInModel: FAMIXInvocation)
+		source: sourceMethod;
+		sourceAnchor: indexedAnchor.
+	attribute := (self createInModel: FAMIXAttribute)
+		name: 'w';
+		yourself.
+	classB addAttribute: attribute.
 	self assert: invocation affectation equals: attribute
 ]
