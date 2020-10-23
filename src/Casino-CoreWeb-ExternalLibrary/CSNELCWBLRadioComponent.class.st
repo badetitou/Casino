@@ -38,5 +38,5 @@ CSNELCWBLRadioComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLRadioComponent class >> subModulePath [
-	^ 'radio-button/radio-button.component'
+	^ '/components/radio-button/radio-button.component'
 ]

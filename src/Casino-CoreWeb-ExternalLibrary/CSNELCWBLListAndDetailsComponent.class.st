@@ -39,5 +39,5 @@ CSNELCWBLListAndDetailsComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLListAndDetailsComponent class >> subModulePath [
-	^ 'liste-et-detail/liste-et-detail.component'
+	^ '/components/liste-et-detail/liste-et-detail.component'
 ]

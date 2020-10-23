@@ -38,5 +38,5 @@ CSNELCWBLButtonLinkComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLButtonLinkComponent class >> subModulePath [
-	^ 'link-button/button-link/button-link.component'
+	^ '/components/link-button/button-link/button-link.component'
 ]

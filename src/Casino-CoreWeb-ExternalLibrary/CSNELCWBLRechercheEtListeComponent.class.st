@@ -69,5 +69,5 @@ CSNELCWBLRechercheEtListeComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLRechercheEtListeComponent class >> subModulePath [
-	^ 'recherche-et-liste/recherche-et-liste.component'
+	^ '/components/recherche-et-liste/recherche-et-liste.component'
 ]

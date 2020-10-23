@@ -19,5 +19,5 @@ CSNELCWBLSelectMultiple class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLSelectMultiple class >> subModulePath [
-	^ 'selectmultiple/selectmultiple.component'
+	^ '/components/selectmultiple/selectmultiple.component'
 ]

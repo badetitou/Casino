@@ -11,7 +11,7 @@ CoreWebBLComponent class >> isNative [
 
 { #category : #accessing }
 CoreWebBLComponent class >> modulePath [
-	^ 'app/components/components/' , self subModulePath
+	^ 'app/projects/bl-shell/src/lib' , self subModulePath
 ]
 
 { #category : #accessing }

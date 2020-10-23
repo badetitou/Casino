@@ -38,5 +38,5 @@ CSNELCWBLQuickSearch class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLQuickSearch class >> subModulePath [
-	^ 'quicksearch/quicksearch.component'
+	^ '/components/quicksearch/quicksearch.component'
 ]

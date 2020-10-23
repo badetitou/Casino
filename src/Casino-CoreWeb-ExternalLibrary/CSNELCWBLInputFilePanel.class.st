@@ -38,5 +38,5 @@ CSNELCWBLInputFilePanel class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLInputFilePanel class >> subModulePath [
-	^ 'file-upload/file-upload-panel/file-upload-panel.component'
+	^ '/components/file-upload/file-upload-panel/file-upload-panel.component'
 ]

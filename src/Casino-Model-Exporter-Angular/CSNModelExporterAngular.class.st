@@ -172,10 +172,9 @@ import { DEMOS_ROUTES } from ''./';
 		<< aModel name uncapitalized;
 		<<
 			'.routing'';
+import { ComponentsModule, Phase, PHASES } from ''app/projects/bl-shell/src/public-api'';
 import { IndexComponent } from ''./components/index/index.component'';
-import { ComponentsModule } from ''../components/components.module'';
 import { TranslateModule } from ''@ngx-translate/core'';
-import { Phase, PHASES } from ''../components/service/model/phase/phase.model'';
 '.
 	(aModel allCSNService sorted: #uniqueName ascending)
 		do: [ :service | 
@@ -246,7 +245,7 @@ CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
 			'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
-import { ComponentsModule } from ''../../../components/components.module'';
+import { Phase, PhaseService, ComponentsModule } from ''app/projects/bl-shell/src/public-api'';
 import { ';
 		<< aCSNPage componentName;
 		<< ' } from ''./components/';
@@ -309,19 +308,19 @@ import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
 import { IndexComponent } from ''./components/index/index.component'';
 
 const routes: Routes = [
-	{ path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
-	{ path: ''desktop'', component: IndexComponent, children: [';
+    { path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
+    { path: ''desktop'', component: IndexComponent, children: [';
      << String crlf.
   aModel allCSNPage do: [:phase |  currentWriteStream
-           << '		{ path: ''';
+           << '        { path: ''';
            << phase name;
-           << ''', loadChildren: () => import(''./phases/';
+           << '/:id'', loadChildren: () => import(''./phases/';
            << phase getLocalModulePath;
 			  << ''').then(m => m.';
 			  << phase getModuleClassName;
 			  << ')},';
            << String crlf ].
-  currentWriteStream << ']}
+  currentWriteStream << '    ]}
 ];
 export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: false });'
 ]
@@ -357,13 +356,9 @@ export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	self writeBusinessPageImportList.
+	aBLPageMetier collectPhaseCalled
+		ifNotEmpty: [ self writeImportForNavigation ].
 	currentWriteStream
-		<<
-			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
-import { Phase } from ''app/components/service/model/phase/phase.model'';
-import { PhaseService } from ''app/components/service/phase.service'';
-' ]);
 		<< (String crlf join: aBLPageMetier widgetsDependencies);
 		<<
 			'
@@ -395,13 +390,17 @@ export class ';
 		<<
 			'
 ';
-		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
+		<<
+			(aBLPageMetier recursiveWidgets removeDuplicates flattened
+				flatCollect: #getVariables);
 		<<
 			'
 
     constructor('.
 	aBLPageMetier collectPhaseCalled
-		ifNotEmpty: [ currentWriteStream << 'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+		ifNotEmpty: [ currentWriteStream
+				<<
+					'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
 	currentWriteStream
 		<<
 			') {
@@ -422,7 +421,9 @@ export class ';
 
     public ngOnInit(): void {
 ';
-		<< (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
+		<<
+			(aBLPageMetier recursiveWidgets flattened
+				flatCollect: #getInitializations);
 		<<
 			'
     }
@@ -430,14 +431,10 @@ export class ';
     public ngOnDestroy(): void {
 
     }
-';
-		<<
-			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ String crlf
-						,
-							'    public openPhase(phase: Phase): void {
-        this._desktopStateService.selectPhase(phase);
-    }' ]);
+'.
+	aBLPageMetier collectPhaseCalled
+		ifNotEmpty: [ self writeOpenPhaseMethod ].
+	currentWriteStream
 		<<
 			'
 
@@ -451,9 +448,7 @@ export class ';
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForModel: aModel [
   currentWriteStream << 'import { Component, OnInit } from ''@angular/core'';
-import { Phase } from ''../../../components/service/model/phase/phase.model'';
-
-import { PhaseService } from ''../../../components/service/phase.service'';
+import { Phase, PhaseService } from ''app/projects/bl-shell/src/public-api'';
 
 @Component({
     selector: ''app-index'',
@@ -494,9 +489,9 @@ CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
 			'
 } from ''@angular/core'';
 import { Router } from ''@angular/router'';
-import { PhaseComponent } from ''../../../../../components/service/model/phase/phase-component.model'';
-import { AbstractPhaseComponent } from ''../../../../../components/components/phase/abstract-phase.component'';
-import { DesktopStateService } from ''../../../../../components/service/desktop-state.service'';
+import { PhaseComponent } from ''app/projects/bl-shell/src/public-api'';
+import { AbstractPhaseComponent } from ''app/projects/bl-shell/src/public-api'';
+import { DesktopStateService } from ''app/projects/bl-shell/src/public-api'';
 '.
 	aCSNPage hasMultiplePageMetier
 		ifTrue: [ currentWriteStream
@@ -539,7 +534,7 @@ export class ';
 		<<
 			'
 
-    constructor(protected phaseService: DesktopStateService, protected router: Router) {
+    constructor(public phaseService: DesktopStateService, public router: Router) {
         super(phaseService, router);
     }
 
@@ -984,4 +979,22 @@ CSNModelExporterAngular >> writeBusinessPageImportList [
 { #category : #accessing }
 CSNModelExporterAngular >> writeFile: aFileReference withCode: theSourceCode [
 	aFileReference writeStreamDo: [ :aWriteStream | aWriteStream nextPutAll: theSourceCode ]
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> writeImportForNavigation [
+	^ currentWriteStream
+		<<
+			'import { DesktopStateService, Phase, PhaseService } from ''app/projects/bl-shell/src/public-api'';';
+		crlf
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> writeOpenPhaseMethod [
+	currentWriteStream
+		crlf;
+		<<
+			'    public openPhase(phase: Phase): void {
+        this._desktopStateService.selectPhase({id: undefined, phase: phase});
+    }'
 ]

@@ -16,5 +16,5 @@ CSNELCWBLTabManagerComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLTabManagerComponent class >> subModulePath [
-	^ 'tab/tabs/tabs.component'
+	^ '/components/tab/tabs/tabs.component'
 ]

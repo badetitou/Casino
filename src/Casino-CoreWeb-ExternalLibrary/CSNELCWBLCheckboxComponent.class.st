@@ -38,5 +38,5 @@ CSNELCWBLCheckboxComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLCheckboxComponent class >> subModulePath [
-	^ 'checkbox/checkbox.component'
+	^ '/components/checkbox/checkbox.component'
 ]

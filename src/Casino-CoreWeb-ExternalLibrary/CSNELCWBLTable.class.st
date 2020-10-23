@@ -67,5 +67,5 @@ CSNELCWBLTable class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLTable class >> subModulePath [
-	^ 'table/table.component'
+	^ '/components/table/table.component'
 ]

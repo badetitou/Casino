@@ -55,18 +55,18 @@ CSNModelExporterAngularBLSpecific >> businessExporter [
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	self writeBusinessPageImportList.
+	aBLPageMetier collectPhaseCalled
+		ifNotEmpty: [ self writeImportForNavigation ].
 	currentWriteStream
-		<<
-			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ 'import { DesktopStateService } from ''app/components/service/desktop-state.service'';
-import { Phase } from ''app/components/service/model/phase/phase.model'';
-import { PhaseService } from ''app/components/service/phase.service'';
-' ]);
 		<<
 			(String crlf
 				join:
 					(aBLPageMetier widgetsDependencies
-						, (aBLPageMetier calledBehavior flatCollect: [ :behavior | self behaviorImportExporter export: behavior withContext: self context ]) flattened) asSet);
+						,
+							(aBLPageMetier calledBehavior
+								flatCollect:
+									[ :behavior | self behaviorImportExporter export: behavior withContext: self context ])
+								flattened) asSet);
 		<<
 			'
 
@@ -86,38 +86,57 @@ export class ';
 			' implements OnInit, OnDestroy {
 
 ';
-		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);
+		<<
+			(aBLPageMetier collectPhaseCalled
+				flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);
 		<<
 			((aBLPageMetier calledBehavior
-				flatCollect: [ :action | action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet
-				collect: [ :widget | widget idViewChild ]) asOrderedCollection;
+				flatCollect: [ :action | 
+					action behavior
+						flatCollect:
+							[ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
+				asSet collect: [ :widget | widget idViewChild ])
+				asOrderedCollection;
 		<<
 			'
 ';
-		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
+		<<
+			(aBLPageMetier recursiveWidgets removeDuplicates flattened
+				flatCollect: #getVariables);
 		<<
 			'
 
     constructor(';
-		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
+		<<
+			(aBLPageMetier collectPhaseCalled
+				ifNotEmpty:
+					[ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
 		<<
 			(', '
 				join:
-					((aBLPageMetier calledBehavior collect: [ :behavior | self behaviorInitializeVariableExporter export: behavior withContext: self context ]) flattened
-						reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
+					((aBLPageMetier calledBehavior
+						collect: [ :behavior | 
+							self behaviorInitializeVariableExporter
+								export: behavior
+								withContext: self context ]) flattened reject: #isEmpty)
+						flattened asOrderedCollection removeDuplicates);
 		<<
 			') {
 ';
 		<<
 			(aBLPageMetier collectPhaseCalled
-				flatCollect: [ :phase | '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
+				flatCollect: [ :phase | 
+					'        this.' , phase name , ' = this._phaseService.getPhase('''
+						, phase name , ''');' , String crlf ]);
 		<<
 			'
     }
 
     public ngOnInit(): void {
 ';
-		<< (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
+		<<
+			(aBLPageMetier recursiveWidgets flattened
+				flatCollect: #getInitializations);
 		<<
 			'
     }
@@ -125,27 +144,28 @@ export class ';
     public ngOnDestroy(): void {
 
     }
-';
-		<<
-			(aBLPageMetier collectPhaseCalled
-				ifNotEmpty: [ String crlf
-						,
-							'    public openPhase(phase: Phase): void {
-        this._desktopStateService.selectPhase(phase);
-    }' ]);
+'.
+	aBLPageMetier collectPhaseCalled
+		ifNotEmpty: [ self writeOpenPhaseMethod ].
+	currentWriteStream
 		<<
 			'
 
 '.
-	((aBLPageMetier calledBehavior asOrderedCollection reject: [ :action | action behavior isEmpty ])
-		sort: [ :action1 :action2 | (action1 behavior anyOne uniqueNameInPage: aBLPageMetier) < (action2 behavior anyOne uniqueNameInPage: aBLPageMetier) ])
+	((aBLPageMetier calledBehavior asOrderedCollection
+		reject: [ :action | action behavior isEmpty ])
+		sort: [ :action1 :action2 | 
+			(action1 behavior anyOne uniqueNameInPage: aBLPageMetier)
+				< (action2 behavior anyOne uniqueNameInPage: aBLPageMetier) ])
 		do: [ :action | 
 			action behavior
 				do: [ :behaveMethod | 
 					self
 						<<< '/*';
 						crlf.
-					(self behaviorModelExporter on: self currentWriteStream withIndentLevel: 1)
+					(self behaviorModelExporter
+						on: self currentWriteStream
+						withIndentLevel: 1)
 						currentPage: aBLPageMetier;
 						export: behaveMethod.
 					self
@@ -189,7 +209,7 @@ import { first, map } from ''rxjs/operators'';
 
 import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
 import { ObjectMapper } from ''jackson-js'';
-import { MapToStringJsonConverterService } from ''app/components/service/util/map-to-string-json-converter.service'';
+import { MapToStringJsonConverterService } from ''app/projects/bl-shell/src/public-api'';
 ';
 				crlf;
 				crlf.

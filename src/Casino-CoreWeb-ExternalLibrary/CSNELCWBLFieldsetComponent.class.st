@@ -38,5 +38,5 @@ CSNELCWBLFieldsetComponent class >> moduleName [
 
 { #category : #accessing }
 CSNELCWBLFieldsetComponent class >> subModulePath [
-	^ 'fieldset/fieldset.component'
+	^ '/components/fieldset/fieldset.component'
 ]

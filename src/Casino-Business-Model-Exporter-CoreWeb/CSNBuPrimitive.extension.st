@@ -19,7 +19,7 @@ CSNBuPrimitive >> printJsonClassOn: aCSNExporter [
 CSNBuPrimitive >> printJsonClassTypeOn: aCSNExporter [
 	"is a number"
 
-	({'Integer' . 'int' . 'float' . 'Float' . 'Double' . 'double' . 'long'} includes: self name)
+	({'Integer' . 'int' . 'float' . 'Float' . 'Double' . 'double' . 'Long'. 'long'} includes: self name)
 		ifTrue: [ aCSNExporter <<< 'Number'.
 			^ self ].
 
