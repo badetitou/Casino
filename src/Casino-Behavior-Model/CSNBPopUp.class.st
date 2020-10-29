@@ -28,21 +28,21 @@ CSNBPopUp >> data [
 
 { #category : #accessing }
 CSNBPopUp >> data: anObject [
+
 	<generated>
-	(self attributeAt: #data ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self data.
-			self privateState attributeAt: #data put: anObject.
-			otherSide carrefourPopUpOwner: nil ]
-		ifNotNil: [ self attributeAt: #data put: anObject.
-			anObject carrefourPopUpOwner: self ]
+	(self attributeAt: #data ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self data.
+		self attributeAt: #data put: anObject.
+		otherSide carrefourPopUpOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #data put: anObject.
+		anObject carrefourPopUpOwner: self ]
 ]
 
 { #category : #navigation }
 CSNBPopUp >> dataGroup [
 	<generated>
 	<navigation: 'Data'>
-	^ MooseGroup with: self data
+	^ MooseSpecializedGroup with: self data
 ]

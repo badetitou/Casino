@@ -27,13 +27,7 @@ CSNBOpenDialog >> dialog [
 
 { #category : #accessing }
 CSNBOpenDialog >> dialog: anObject [
+
 	<generated>
-	self
-		attributeAt: #dialog
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #opener
-				from: self dialog
-				to: anObject)
+	self attributeAt: #dialog put: (FMMultivalueLink on: self update: #opener from: self dialog to: anObject).
 ]

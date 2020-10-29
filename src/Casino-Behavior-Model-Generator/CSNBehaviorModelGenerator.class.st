@@ -30,7 +30,8 @@ Class {
 		'onFocus',
 		'onLoad',
 		'onOver',
-		'onOut'
+		'onOut',
+		'onBlur'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -77,6 +78,11 @@ CSNBehaviorModelGenerator >> commentForDOMElementAccess [
 { #category : #comments }
 CSNBehaviorModelGenerator >> commentForNavigation [
 	^ 'I represent a special call that lead to the navigation to another page of the application'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnBlur [
+	^ 'Event is fired when a dom element lose the focus'
 ]
 
 { #category : #comments }
@@ -176,7 +182,8 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onFocus := builder newClassNamed: #OnFocus comment: self commentForOnFocus.
 	onLoad := builder newClassNamed: #OnLoad comment: self commentForOnLoad.
 	onOver := builder newClassNamed: #OnOver comment: self commentForOnOver.
-	onOut := builder newClassNamed: #OnOut comment: self commentForOnOut
+	onOut := builder newClassNamed: #OnOut comment: self commentForOnOut.
+	onBlur := builder newClassNamed: #OnBlur comment: self commentForOnBlur
 ]
 
 { #category : #definition }
@@ -203,7 +210,8 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	onFocus --|> action.
 	onLoad --|> action.
 	onOver --|> action.
-	onOut --|> action
+	onOut --|> action.
+	onBlur --|> action.
 ]
 
 { #category : #definition }

@@ -27,13 +27,7 @@ CSNBAccessElementAttribute >> attribute [
 
 { #category : #accessing }
 CSNBAccessElementAttribute >> attribute: anObject [
+
 	<generated>
-	self
-		attributeAt: #attribute
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #behavioralAccess
-				from: self attribute
-				to: anObject)
+	self attributeAt: #attribute put: (FMMultivalueLink on: self update: #behavioralAccess from: self attribute to: anObject).
 ]

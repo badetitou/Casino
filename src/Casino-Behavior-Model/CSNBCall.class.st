@@ -29,15 +29,9 @@ CSNBCall >> distantService [
 
 { #category : #accessing }
 CSNBCall >> distantService: anObject [
+
 	<generated>
-	self
-		attributeAt: #distantService
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #callers
-				from: self distantService
-				to: anObject)
+	self attributeAt: #distantService put: (FMMultivalueLink on: self update: #callers from: self distantService to: anObject).
 ]
 
 { #category : #accessing }
@@ -52,23 +46,23 @@ CSNBCall >> onFailure [
 
 { #category : #accessing }
 CSNBCall >> onFailure: anObject [
+
 	<generated>
-	(self attributeAt: #onFailure ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self onFailure.
-			self privateState attributeAt: #onFailure put: anObject.
-			otherSide carrefourOnFailureOwner: nil ]
-		ifNotNil: [ self attributeAt: #onFailure put: anObject.
-			anObject carrefourOnFailureOwner: self ]
+	(self attributeAt: #onFailure ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self onFailure.
+		self attributeAt: #onFailure put: anObject.
+		otherSide carrefourOnFailureOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #onFailure put: anObject.
+		anObject carrefourOnFailureOwner: self ]
 ]
 
 { #category : #navigation }
 CSNBCall >> onFailureGroup [
 	<generated>
 	<navigation: 'OnFailure'>
-	^ MooseGroup with: self onFailure
+	^ MooseSpecializedGroup with: self onFailure
 ]
 
 { #category : #accessing }
@@ -83,21 +77,21 @@ CSNBCall >> onSuccess [
 
 { #category : #accessing }
 CSNBCall >> onSuccess: anObject [
+
 	<generated>
-	(self attributeAt: #onSuccess ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self onSuccess.
-			self privateState attributeAt: #onSuccess put: anObject.
-			otherSide carrefourOnSuccessOwner: nil ]
-		ifNotNil: [ self attributeAt: #onSuccess put: anObject.
-			anObject carrefourOnSuccessOwner: self ]
+	(self attributeAt: #onSuccess ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self onSuccess.
+		self attributeAt: #onSuccess put: anObject.
+		otherSide carrefourOnSuccessOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #onSuccess put: anObject.
+		anObject carrefourOnSuccessOwner: self ]
 ]
 
 { #category : #navigation }
 CSNBCall >> onSuccessGroup [
 	<generated>
 	<navigation: 'OnSuccess'>
-	^ MooseGroup with: self onSuccess
+	^ MooseSpecializedGroup with: self onSuccess
 ]

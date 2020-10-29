@@ -14,19 +14,16 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
+
 	<generated>
-	(self attributeAt: #carrefourOnFailureOwner ifAbsentPut: [ nil ])
-		== anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self carrefourOnFailureOwner.
-			self privateState
-				attributeAt: #carrefourOnFailureOwner
-				put: anObject.
-			otherSide onFailure: nil ]
-		ifNotNil: [ self attributeAt: #carrefourOnFailureOwner put: anObject.
-			anObject onFailure: self ]
+	(self attributeAt: #carrefourOnFailureOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourOnFailureOwner.
+		self attributeAt: #carrefourOnFailureOwner put: anObject.
+		otherSide onFailure: nil ]
+	ifNotNil: [ 
+		self attributeAt: #carrefourOnFailureOwner put: anObject.
+		anObject onFailure: self ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
@@ -43,19 +40,16 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
+
 	<generated>
-	(self attributeAt: #carrefourOnSuccessOwner ifAbsentPut: [ nil ])
-		== anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self carrefourOnSuccessOwner.
-			self privateState
-				attributeAt: #carrefourOnSuccessOwner
-				put: anObject.
-			otherSide onSuccess: nil ]
-		ifNotNil: [ self attributeAt: #carrefourOnSuccessOwner put: anObject.
-			anObject onSuccess: self ]
+	(self attributeAt: #carrefourOnSuccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourOnSuccessOwner.
+		self attributeAt: #carrefourOnSuccessOwner put: anObject.
+		otherSide onSuccess: nil ]
+	ifNotNil: [ 
+		self attributeAt: #carrefourOnSuccessOwner put: anObject.
+		anObject onSuccess: self ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
@@ -65,12 +59,12 @@ FASTBehaviouralEntity >> ui [
 	<generated>
 	<FMProperty: #ui type: #CSNAction opposite: #behavior>
 	<package: #'Casino-Behavior-Model'>
-	^ self privateState attributeAt: #ui ifAbsent: [ nil ]
+	^ self attributeAt: #ui ifAbsent: [ nil ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTBehaviouralEntity >> ui: anObject [
 
 	<generated>
-	self privateState attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).
+	self attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).
 ]

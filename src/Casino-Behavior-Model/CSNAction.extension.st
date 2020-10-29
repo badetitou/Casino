@@ -8,9 +8,7 @@ CSNAction >> behavior [
 	<derived>
 	<FMProperty: #behavior type: #FASTBehaviouralEntity opposite: #ui>
 	<package: #'Casino-Behavior-Model'>
-	^ self
-		attributeAt: #behavior
-		ifAbsentPut: [ FMMultivalueLink on: self opposite: #ui: ]
+	^ self attributeAt: #behavior ifAbsentPut: [ FMMultivalueLink on: self opposite: #ui: ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }

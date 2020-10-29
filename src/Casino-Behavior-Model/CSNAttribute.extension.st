@@ -6,12 +6,9 @@ CSNAttribute >> behavioralAccess [
 
 	<generated>
 	<derived>
-	<FMProperty: #behavioralAccess type: #CSNBAccessElementAttribute
-	opposite: #attribute>
+	<FMProperty: #behavioralAccess type: #CSNBAccessElementAttribute opposite: #attribute>
 	<package: #'Casino-Behavior-Model'>
-	^ self
-		attributeAt: #behavioralAccess
-		ifAbsentPut: [ FMMultivalueLink on: self opposite: #attribute: ]
+	^ self attributeAt: #behavioralAccess ifAbsentPut: [ FMMultivalueLink on: self opposite: #attribute: ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }

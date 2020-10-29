@@ -14,17 +14,16 @@ FASTExpression >> carrefourPopUpOwner [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTExpression >> carrefourPopUpOwner: anObject [
+
 	<generated>
-	(self attributeAt: #carrefourPopUpOwner ifAbsentPut: [ nil ])
-		== anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self carrefourPopUpOwner.
-			self privateState attributeAt: #carrefourPopUpOwner put: anObject.
-			otherSide data: nil ]
-		ifNotNil: [ self attributeAt: #carrefourPopUpOwner put: anObject.
-			anObject data: self ]
+	(self attributeAt: #carrefourPopUpOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self carrefourPopUpOwner.
+		self attributeAt: #carrefourPopUpOwner put: anObject.
+		otherSide data: nil ]
+	ifNotNil: [ 
+		self attributeAt: #carrefourPopUpOwner put: anObject.
+		anObject data: self ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
@@ -40,13 +39,7 @@ FASTExpression >> navigation [
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTExpression >> navigation: anObject [
+
 	<generated>
-	self
-		attributeAt: #navigation
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #arguments
-				from: self navigation
-				to: anObject)
+	self attributeAt: #navigation put: (FMMultivalueLink on: self update: #arguments from: self navigation to: anObject).
 ]

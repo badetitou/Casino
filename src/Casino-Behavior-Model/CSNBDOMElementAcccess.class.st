@@ -29,13 +29,7 @@ CSNBDOMElementAcccess >> widget [
 
 { #category : #accessing }
 CSNBDOMElementAcccess >> widget: anObject [
+
 	<generated>
-	self
-		attributeAt: #widget
-		put:
-			(FMMultivalueLink
-				on: self
-				update: #behavioralAccess
-				from: self widget
-				to: anObject)
+	self attributeAt: #widget put: (FMMultivalueLink on: self update: #behavioralAccess from: self widget to: anObject).
 ]

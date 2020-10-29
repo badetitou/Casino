@@ -8,9 +8,7 @@ CSNUICWDialog >> opener [
 	<derived>
 	<FMProperty: #opener type: #CSNBOpenDialog opposite: #dialog>
 	<package: #'Casino-Behavior-Model'>
-	^ self
-		attributeAt: #opener
-		ifAbsentPut: [ FMMultivalueLink on: self opposite: #dialog: ]
+	^ self attributeAt: #opener ifAbsentPut: [ FMMultivalueLink on: self opposite: #dialog: ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
