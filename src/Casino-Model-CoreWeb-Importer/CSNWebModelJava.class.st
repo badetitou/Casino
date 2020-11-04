@@ -109,6 +109,18 @@ CSNWebModelJava >> addPPPToWidget [
 			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
 ]
 
+{ #category : #'private - adding' }
+CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
+	| foundAndInvocationOrNil |
+	foundAndInvocationOrNil := self
+		getWidgetContainerOfWidgetWithoutAffectation: widget.
+	foundAndInvocationOrNil
+		ifNotNil: [ foundAndInvocationOrNil first
+				addWidget: widget
+				withInvocationOfAdd: foundAndInvocationOrNil second
+				usingFactory: self factory ]
+]
+
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
 	^ widget affectedActions
@@ -116,22 +128,17 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 			| usages |
 			usages := widget affectedActions allUsages.
 			usages := usages , (usages flatCollect: [ :el | el allContainers ])
-				reject:
-					[ :el | (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
+				reject: [ :el | 
+					(el receiver isNotNil
+						and: [ el receiver name includesSubstring: 'content' ])
+						or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
 			responsabilityHandlerForUsages
 				handleAddLinkedFromVariable: usages asOrderedCollection
 				to: widget
 				withXmlui: xmlUiWidgetLink
 				andImporter: self ]
-		ifNil: [ | containerInvocation |
-			containerInvocation := widget source container.
-			[ containerInvocation isNotNil ]
-				whileTrue: [ | found |
-					found := self widgetInVariable: containerInvocation receiver.
-					found
-						ifNotNil: [ found addWidget: widget withInvocationOfAdd: containerInvocation usingFactory: self factory.
-							containerInvocation := nil ]
-						ifNil: [ containerInvocation := containerInvocation container ] ] ]
+		ifNil:
+			[ self addParentOfWidgetWithoutAffected: widget ]
 ]
 
 { #category : #adding }
@@ -369,6 +376,19 @@ CSNWebModelJava >> getPhaseFromClass: aClass [
 { #category : #private }
 CSNWebModelJava >> getPhaseNamed: aCodePhase [
 	^ self model allCSNPage detect: [ :e | e codePhase = aCodePhase ] ifNone: [ nil ]
+]
+
+{ #category : #'private - adding' }
+CSNWebModelJava >> getWidgetContainerOfWidgetWithoutAffectation: widget [
+	| containerInvocation found |
+	containerInvocation := widget source container.
+	[ containerInvocation isNotNil ]
+		whileTrue: [ found := self widgetInVariable: containerInvocation receiver.
+			found
+				ifNotNil: [ ^ {found.
+					containerInvocation} ]
+				ifNil: [ containerInvocation := containerInvocation container ] ].
+	^ nil
 ]
 
 { #category : #accessing }
