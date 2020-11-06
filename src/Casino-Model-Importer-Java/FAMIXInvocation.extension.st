@@ -8,20 +8,35 @@ FAMIXInvocation >> affectation [
 "
 
 	self container ifNotNil: [ ^ nil ].
-	"we do not believe in isInitializer"
-	(self source hasSourceAnchor and: [ self source name ~= '<Initializer>' ])
-		ifTrue: [ self source generateFastIfNotDoneAndBind.
-			(self fast atAnyScope: {FASTJavaAssignementExpression . FASTJavaVariableDeclarator})
-				ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ].
-	^ ((self source localVariables select: [ :el | el sourceAnchor isNotNil ])
-		select: [ :localVariable | localVariable sourceAnchor startPos < self sourceAnchor startPos and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
+	self source hasSourceAnchor
+		ifTrue: [ self source name = '<Initializer>'
+				ifFalse: [ "Normal method" self source generateFastIfNotDoneAndBind ]
+				ifTrue:
+					[ "method initialize... We must generate and bind the class" (self source atScope: FAMIXClass) anyOne generateFastIfNotDoneAndBind ].
+			(self fast
+				atAnyScope:
+					{FASTJavaAssignementExpression.
+					FASTJavaVariableDeclarator})
+				ifNotEmpty:
+					[ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ].
+
+	"old way can be executed if new way fail"
+	^ ((self source localVariables
+		select: [ :el | el sourceAnchor isNotNil ])
+		select: [ :localVariable | 
+			localVariable sourceAnchor startPos < self sourceAnchor startPos
+				and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
 		at: 1
 		ifAbsent: [ ((self source accesses select: #isWrite)
-				select: [ :access | access sourceAnchor startPos < self sourceAnchor startPos and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
+				select: [ :access | 
+					access sourceAnchor startPos < self sourceAnchor startPos
+						and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
 				at: 1
 				ifAbsent: [ self source isInstanciationInitializer
-						ifTrue: [ (((self source atScope: FAMIXClass) anyOneIfOnlyOneElement) attributes
-								select: [ :attribute | attribute sourceAnchor startPos < self sourceAnchor startPos and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
+						ifTrue: [ ((self source atScope: FAMIXClass) anyOneIfOnlyOneElement attributes
+								select: [ :attribute | 
+									attribute sourceAnchor startPos < self sourceAnchor startPos
+										and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
 								at: 1
 								ifAbsent: [ ^ nil ] ] ] ]
 ]

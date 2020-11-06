@@ -133,7 +133,7 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 						and: [ el receiver name includesSubstring: 'content' ])
 						or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
 			responsabilityHandlerForUsages
-				handleAddLinkedFromVariable: usages asOrderedCollection
+				handleAddLinkedFromVariable: usages
 				to: widget
 				withXmlui: xmlUiWidgetLink
 				andImporter: self ]
