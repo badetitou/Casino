@@ -1,11 +1,5 @@
 "
-""LOAD FAST""
-
-""Reset Work""
-MooseModel resetRoot.
-MooseModel resetMeta.
-BLMetamodelGenerator resetMetamodel.
-
+```
 
 ""Generate BlApp""
 mooseModel := MooseModel importFromMSEStream:  'D:\Users\benoit.verhaeghe\Documents\PFE\GeneralXmlui.mse' asFileReference readStream.
@@ -22,6 +16,7 @@ MooseModel root add: model.
 
 model := BLModelExample generateModelWithTwoPhasesAndThreePageMetierAnd1Widget.
 BLModelExporterAngular export: model.
+```
 "
 Class {
 	#name : #CSNModelExporterAngular,

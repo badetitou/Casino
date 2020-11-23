@@ -1,9 +1,7 @@
 "
-| generator |
-generator := BLMetamodelGenerator new.
-generator builder traitsFlattening: true.
-generator generate.
-BLMetamodelGenerator resetMetamodel.
+I am the generator of the UI meta-model.
+
+I am used to represent Widgets, their attributes, and their events 
 "
 Class {
 	#name : #CSNMetamodelGenerator,

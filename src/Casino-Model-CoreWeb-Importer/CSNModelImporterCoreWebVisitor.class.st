@@ -1,3 +1,6 @@
+"
+I'am the visitor for the application of Berger-Levrault
+"
 Class {
 	#name : #CSNModelImporterCoreWebVisitor,
 	#superclass : #CSNModelImporterVisitor,

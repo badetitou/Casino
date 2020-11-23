@@ -1,6 +1,6 @@
 "
 return nil if fail
-return the created entioty elsewhere
+return the created entity elsewhere
 "
 Class {
 	#name : #CSNModelImporterVisitor,
