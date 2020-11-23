@@ -1,6 +1,6 @@
 # Casino
 
-Master: [Build Pass](https://github.com/badetitou/Casino/workflows/CI/badge.svg)
+Master: ![Build Pass](https://github.com/badetitou/Casino/workflows/CI/badge.svg)
 
 
 This repository contains the main packages of Casino.
