@@ -1,11 +1,12 @@
 "
-I'm the abstract Importer of CasinI 
+I'm the abstract Importer of Casino
 
-At least extends import
-we can extend 
-	#createFactory if you want you're own
-	#preImport to execute some code before the import
-	#postImport to execute some code after the import
+At least extends `#import`
+we can extend
+
+- `#createFactory` if you want you're own
+- `#preImport` to execute some code before the import
+- `#postImport` to execute some code after the import
 "
 Class {
 	#name : #CSNWebModel,
