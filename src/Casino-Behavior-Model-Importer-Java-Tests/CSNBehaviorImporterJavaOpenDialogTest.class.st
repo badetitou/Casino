@@ -263,7 +263,7 @@ public class Hello {
 { #category : #running }
 CSNBehaviorImporterJavaOpenDialogTest >> resourcesFileReference [
 	| repo filePath |
-	filePath := '/home/travis/build/badetitou/Casino'.
+	filePath := '/home/runner/work/Casino/Casino'.
 	repo := filePath asFileReference exists
 		ifTrue: [ filePath asFileReference ]
 		ifFalse: [ (IceRepository registry
