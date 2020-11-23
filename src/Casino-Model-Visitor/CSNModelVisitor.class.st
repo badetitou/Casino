@@ -1,3 +1,6 @@
+"
+I am a visitor on all the entities define in `CSNMetamodelGenerator`, `CSNLayoutMetamodelGenerator`, and `CSNUISubEntitiesGenerator`
+"
 Class {
 	#name : #CSNModelVisitor,
 	#superclass : #Object,

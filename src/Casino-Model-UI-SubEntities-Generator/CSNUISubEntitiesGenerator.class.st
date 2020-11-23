@@ -1,3 +1,8 @@
+"
+I am the generator of the **widgets meta-model**
+
+I define the [w3school](https://www.w3schools.com/tags/default.asp) UI widgets and attributes
+"
 Class {
 	#name : #CSNUISubEntitiesGenerator,
 	#superclass : #FamixMetamodelGenerator,

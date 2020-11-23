@@ -1,7 +1,11 @@
 "
-| generator |
-generator := CSNLayoutMetamodelGenerator new generate.
+I represent the layout meta-model generator.
+I define the main entities such as Horizontal and Vertical layout
+
+```
+CSNLayoutMetamodelGenerator generate.
 CSNLayoutMetamodelGenerator resetMetamodel.
+```
 "
 Class {
 	#name : #CSNLayoutMetamodelGenerator,
