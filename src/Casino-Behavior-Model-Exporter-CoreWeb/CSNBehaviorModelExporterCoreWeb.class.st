@@ -76,9 +76,9 @@ CSNBehaviorModelExporterCoreWeb >> visitOpenDialog: anOpenDialog [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitPopUp: aPopUp [
-	self <<< 'this._toastrService.success('.
+	self <<< 'this._snackBar.open('.
 	self accept: aPopUp data.
-	self <<< ')'
+	self <<< ', "Fermer")'
 ]
 
 { #category : #generated }
