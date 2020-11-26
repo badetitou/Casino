@@ -26,5 +26,5 @@ CSNModelInitializeVariableExporter >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNModelInitializeVariableExporter >> visitPopUp: aPopUp [
-	^ 'private _toastrService: ToastrService'
+	^ 'private _snackBar: MatSnackBar'
 ]

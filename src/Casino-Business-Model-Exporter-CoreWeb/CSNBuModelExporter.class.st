@@ -7,6 +7,11 @@ Class {
 }
 
 { #category : #export }
+CSNBuModelExporter >> attributeInExceptionList: attribute [
+	^ attribute name = #id
+]
+
+{ #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
 	attribute attributeType printJsonClassOn: self.
 	self << '@JsonProperty() ' <<< attribute name <<< ': '.
@@ -42,27 +47,31 @@ CSNBuModelExporter >> exportAttributeSetter: attribute [
 
 { #category : #export }
 CSNBuModelExporter >> exportBusinessType: aBusinessType [
+
 	self printImports.
 	self printImportDependencenciesOf: aBusinessType.
 	(self << '@JsonTypeName({value: ''' <<< aBusinessType name)
 		<<< '''})';
 		crlf.
 	self << 'export class ' <<< aBusinessType name <<< ' extends AbstractDTO '.
-	self
-		inBraces: [ (aBusinessType attributes asOrderedCollection sorted: #name ascending) do: [ :attribute | self exportAttribute: attribute ] separatedBy: [ self crlf ].
-			self
-				crlf;
-				crlf.
-			(aBusinessType attributes asOrderedCollection sorted: #name ascending)
-				do: [ :attribute | 
-					self exportAttributeGetter: attribute.
-					self
-						crlf;
-						crlf.
-					self exportAttributeSetter: attribute ]
-				separatedBy: [ self
-						crlf;
-						crlf ] ].
+	self inBraces: [ 
+		((aBusinessType attributes asOrderedCollection sorted: #name ascending) reject: [ :attribute | self attributeInExceptionList: attribute ])
+			do: [ :attribute | self exportAttribute: attribute ]
+			separatedBy: [ self crlf ].
+		self
+			crlf;
+			crlf.
+		((aBusinessType attributes asOrderedCollection sorted: #name ascending) reject: [ :attribute | self attributeInExceptionList: attribute ])
+			do: [ :attribute | 
+				self exportAttributeGetter: attribute.
+				self
+					crlf;
+					crlf.
+				self exportAttributeSetter: attribute ]
+			separatedBy: [ 
+				self
+					crlf;
+					crlf ] ].
 	self crlf
 ]
 

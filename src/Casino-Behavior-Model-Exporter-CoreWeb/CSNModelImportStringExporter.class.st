@@ -26,5 +26,5 @@ CSNModelImportStringExporter >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNModelImportStringExporter >> visitPopUp: aPopUp [
-	^ 'import { ToastrService } from ''ngx-toastr'';'
+	^ 'import { MatSnackBar } from ''@angular/material'';'
 ]
