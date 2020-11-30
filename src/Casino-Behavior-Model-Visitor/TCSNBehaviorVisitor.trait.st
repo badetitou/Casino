@@ -14,6 +14,12 @@ TCSNBehaviorVisitor >> visitAsynchroneCall: anAsynchroneCall [
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnBlur: aCSNOnBlur [
+	"see UI model"
+	^ self visitCSNAction: aCSNOnBlur
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnChange: aCSNBOnChange [
 	"see UI model"
 	^ self visitCSNAction: aCSNBOnChange
