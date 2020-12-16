@@ -55,12 +55,11 @@ BaselineOfCasino >> defineDependencies: spec [
 				loads: #('smacc' 'visitor');
 				repository: 'github://moosetechnology/FAST-Java:master/src' ].
 	spec
-		baseline: 'PetitParser'
+		baseline: 'XMLParser'
 		with: [ spec
-				loads: #('Xml');
-				repository: 'github://moosetechnology/PetitParser:development/src' ].
+				repository: 'github://pharo-contributions/XML-XMLParser/src' ].
 	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
-	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour/src' ].
+	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour:v1.0.7/src' ].
 	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
 	spec baseline: 'Famix2Java' with: [ spec repository: 'github://moosetechnology/FAMIX2Java:v1.0.0/src' ]
 ]
@@ -127,7 +126,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model-UI-SubEntities' 'Casino-Model' 'Casino-Model-CoreWeb-Generator') ];
 		package: 'Casino-Model-CoreWeb-Generator' with: [ spec requires: #('Casino-Model-UI-SubEntities-Generator' 'Casino-Model-Generator') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
-		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('PetitParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
+		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('XMLParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];

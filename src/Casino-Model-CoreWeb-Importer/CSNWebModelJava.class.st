@@ -271,10 +271,8 @@ CSNWebModelJava >> generatePageMetier [
 
 { #category : #'private - actions' }
 CSNWebModelJava >> generatePhase [
-	xml
-		nodesDo: [ :aXmlNode | 
-			(aXmlNode isElement and: [ aXmlNode name localName = 'phase' ])
-				ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ].
+
+	xml allNodesDo: [ :aXmlNode | (aXmlNode isElement and: [ aXmlNode name = 'phase' ]) ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ]
 ]
 
 { #category : #'private - actions' }

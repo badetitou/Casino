@@ -27,26 +27,27 @@ CSNWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
+
 	| blPhase |
 	blPhase := (self create: CSNPage)
-		realClassName:
-			((xmlElement attributeAt: #className)
-				ifNotNil:
-					[ :a | (a copyReplaceAll: '.' with: '::') copyReplaceAll: ' ' with: '' ]
-				ifNil: [ (xmlElement parent attributeAt: 'name') = self moduleHomeName
-						ifTrue: [ self importer sourceModel allModelClasses
-								detect: [ :class | class name = #HomePhaseController ]
-								ifFound:
-									[ :abstractHomePhase | abstractHomePhase subclassHierarchy first mooseName ]
-								ifNone: [ 'STUB C/S' ] ]
-						ifFalse: [ 'STUB C/S' ] ]);
-		codePhase: (xmlElement attributeAt: #codePhase);
-		codeValue: (xmlElement attributeAt: #codeValue);
-		shortcut: (xmlElement attributeAt: #raccourci);
-		name: (xmlElement attributeAt: #codeValue).
+		           realClassName: ((xmlElement attributeAt: #className)
+				            ifNotEmpty: [ :a | (a copyReplaceAll: '.' with: '::') copyReplaceAll: ' ' with: '' ]
+				            ifEmpty: [ 
+					            (xmlElement parent attributeAt: 'name') = self moduleHomeName
+						            ifTrue: [ 
+							            self importer sourceModel allModelClasses
+								            detect: [ :class | class name = #HomePhaseController ]
+								            ifFound: [ :abstractHomePhase | abstractHomePhase subclassHierarchy first mooseName ]
+								            ifNone: [ 'STUB C/S' ] ]
+						            ifFalse: [ 'STUB C/S' ] ]);
+		           codePhase: (xmlElement attributeAt: #codePhase);
+		           codeValue: (xmlElement attributeAt: #codeValue);
+		           shortcut: (xmlElement attributeAt: #raccourci);
+		           name: (xmlElement attributeAt: #codeValue).
 	blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
-		ifFalse: [ blPhase
+		ifFalse: [ 
+			blPhase
 				source: (self importer getClassNamed: blPhase realClassName);
 				computeTitle;
 				computeSubtitle ].
