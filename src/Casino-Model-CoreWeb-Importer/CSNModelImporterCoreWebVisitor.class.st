@@ -501,21 +501,15 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputText: aCSNUIInputText [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputTime: aCSNUIInputTime [
+
 	^ 'BLTextBoxTime' = source invokedClassName
-		ifTrue: [ | inputTime |
-			inputTime := (self createWidgetInput: aCSNUIInputTime)
-				yourself.
-			source parameters
-				ifNotEmpty: [ source parameters size >= 4
-						ifTrue: [ inputTime
-								addAttribute:
-									((self create: CSNUIValue)
-										attributeValue:
-											(source parameters
-												at: 4;
-												yourself)) ] ].
-			inputTime ]
-		ifFalse: [ nil ]
+		  ifTrue: [ 
+			  | inputTime |
+			  inputTime := (self createWidgetInput: aCSNUIInputTime) yourself.
+			  source parameters ifNotEmpty: [ 
+				  source parameters size >= 4 ifTrue: [ inputTime addAttribute: ((self create: CSNUIValue) attributeValue: (source parameters at: 4)) ] ].
+			  inputTime ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
