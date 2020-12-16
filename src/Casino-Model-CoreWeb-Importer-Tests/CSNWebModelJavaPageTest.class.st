@@ -8,7 +8,7 @@ Class {
 CSNWebModelJavaPageTest >> setUp [
 	| pageConsole pageLog csnNamespace coreNamespace abstractHomeClass homePage inheritance |
 	super setUp.
-	uiImporter xml: (PPXmlParser parse: self xmlContent).
+	uiImporter xml: (XMLDOMParser parse: self xmlContent).
 	pageConsole := FAMIXClass new
 		name: #PageConsole;
 		yourself.
