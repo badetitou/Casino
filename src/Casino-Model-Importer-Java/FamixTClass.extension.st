@@ -1,7 +1,7 @@
-Extension { #name : #FAMIXClass }
+Extension { #name : #FamixTClass }
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> affectation [
+FamixTClass >> affectation [
 	| selfSourceAnchor |
 	"Compatibility with invocation for the creation of the widget"
 	self isAnonymousClass
@@ -33,7 +33,7 @@ FAMIXClass >> affectation [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> allUsages [
+FamixTClass >> allUsages [
 	^ (self isAnonymousClass and: [ self sourceAnchor isNotNil ])
 		ifTrue: [ (self parentPackage ifNil: [ self parents ifNotEmpty: #anyOne ifEmpty: [ nil ] ]) queryAllOutgoingInvocations
 				select: [ :el | el sourceAnchor isNotNil and: [ el sourceAnchor startPos < self sourceAnchor startPos and: [ el sourceAnchor endPos > self sourceAnchor endPos ] ] ] ]
@@ -41,13 +41,13 @@ FAMIXClass >> allUsages [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> findAttributeNamed: anAttributeName [
+FamixTClass >> findAttributeNamed: anAttributeName [
 	(self attributes select: [ :localVariable | localVariable name = anAttributeName ]) ifNotEmpty: [ :results | ^ results at: 1 ].
 	^ nil
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> from [
+FamixTClass >> from [
 	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
 	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"
 
@@ -55,14 +55,14 @@ FAMIXClass >> from [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> incomingInstanciations [
+FamixTClass >> incomingInstanciations [
 	^ (self methods
 		select: [ :method | method isConstructor or: [ method signature includesSubstring: method belongsTo name ] ]
 		thenCollect: #incomingInvocations) flattened
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> invokedClass [
+FamixTClass >> invokedClass [
 	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
 	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"
 
@@ -70,7 +70,7 @@ FAMIXClass >> invokedClass [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> invokedClassName [
+FamixTClass >> invokedClassName [
 	^ self isAnonymousClass
 		ifTrue: [ 
 			self name copyFrom: (self name findString: '(') + 1
@@ -79,24 +79,25 @@ FAMIXClass >> invokedClassName [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> isHandlerClass [
+FamixTClass >> isHandlerClass [
 	^ '_Anonymous(ClickHandler)' match: self name 
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> parameters [
+FamixTClass >> parameters [
+
 	"I try to extract the initial parameter of an Anonymous class declaration"
+
 	| subString |
-	subString :=(self container sourceText
-		copyFrom: 1
-		to: (self container sourceText findString: self sourceText)) ifEmpty: [^ {}].
+	subString := (self typeContainer sourceText copyFrom: 1 to: (self typeContainer sourceText findString: self sourceText)) ifEmpty: [ ^ {  } ].
 	^ (subString copyFrom: (subString findLastOccurrenceOfString: 'new' startingAt: 1) to: subString size) extractParameters
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXClass >> source [
+FamixTClass >> source [
+
 	"I define this method for compatibility purpose with Invocation for method BLWebModel>>#widgetInstance 
 	The goal is juste to find if an Anonymous class belongs to the widget namespace or not"
 
-	^ self container
+	^ self typeContainer
 ]

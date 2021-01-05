@@ -20,8 +20,3 @@ FAMIXMethod >> findAttributeNamed: anAttributeName [
 
 	
 ]
-
-{ #category : #'*Casino-Model-Importer-Java' }
-FAMIXMethod >> isInstanciationInitializer [
-	^ '<Initializer>' match: self name
-]

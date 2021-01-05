@@ -539,13 +539,12 @@ CSNWebModelJava >> modelPhases [
 
 { #category : #'private - accessing' }
 CSNWebModelJava >> modelWidget [
-	^ modelWidgetCache
-		ifNil: [ modelWidgetCache := self sourceModel allClasses
-				select: [ :e | 
-					(e superclassHierarchy anySatisfy: [ :a | a name = 'Widget' ])
-						and: [ (e container mooseName beginsWithAnyOf: self widgetNamespaces)
-								or: [ (e container mooseName beginsWith: self gwtWidgetNamespace)
-										or: [ self isWidgetFromApplication: e ] ] ] ] ]
+
+	^ modelWidgetCache ifNil: [ 
+		  modelWidgetCache := self sourceModel allClasses select: [ :e | 
+			                      (e superclassHierarchy anySatisfy: [ :a | a name = 'Widget' ]) and: [ 
+				                      (e typeContainer mooseName beginsWithAnyOf: self widgetNamespaces) or: [ 
+					                      (e typeContainer mooseName beginsWith: self gwtWidgetNamespace) or: [ self isWidgetFromApplication: e ] ] ] ] ]
 ]
 
 { #category : #api }
