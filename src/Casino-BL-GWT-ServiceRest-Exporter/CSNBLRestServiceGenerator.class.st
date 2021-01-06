@@ -221,7 +221,7 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-	(aAttribute declaredType isPrimitiveType or: [ aAttribute modifiers includes: 'static' ])
+	(aAttribute declaredType isNil or: [ aAttribute declaredType isPrimitiveType or: [ aAttribute modifiers includes: 'static' ]])
 		ifFalse: [ self
 				<< '@Autowired';
 				crlf ].
