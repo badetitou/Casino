@@ -278,7 +278,7 @@ CSNWebModelJava >> generatePhase [
 { #category : #'private - actions' }
 CSNWebModelJava >> generateService [
 	| interfaceService |
-	interfaceService := self sourceModel allTypes asSet
+	interfaceService := self sourceModel allModelClasses asSet
 		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | #('RestService' 'RemoteService') includes: a name ]) and: [ e isInterface ] ].
 	interfaceService addAll: ((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ]) collect: #declaredType).
 	interfaceService reject: [ :service | service name endsWith:  'Async' ] thenDo: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
@@ -378,14 +378,19 @@ CSNWebModelJava >> getPhaseNamed: aCodePhase [
 
 { #category : #'private - adding' }
 CSNWebModelJava >> getWidgetContainerOfWidgetWithoutAffectation: widget [
+
 	| containerInvocation found |
-	containerInvocation := widget source container.
-	[ containerInvocation isNotNil ]
-		whileTrue: [ found := self widgetInVariable: containerInvocation receiver.
-			found
-				ifNotNil: [ ^ {found.
-					containerInvocation} ]
-				ifNil: [ containerInvocation := containerInvocation container ] ].
+	containerInvocation := widget source isType
+		                       ifTrue: [ widget source typeContainer ]
+		                       ifFalse: [ widget source container ].
+	[ containerInvocation isNotNil ] whileTrue: [ 
+		found := self widgetInVariable: containerInvocation receiver.
+		found
+			ifNotNil: [ 
+				^ { 
+					  found.
+					  containerInvocation } ]
+			ifNil: [ containerInvocation := containerInvocation container ] ].
 	^ nil
 ]
 

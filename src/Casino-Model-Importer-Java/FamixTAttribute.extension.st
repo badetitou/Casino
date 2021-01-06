@@ -1,7 +1,7 @@
-Extension { #name : #FAMIXAttribute }
+Extension { #name : #FamixTAttribute }
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXAttribute >> allUsages [
+FamixTAttribute >> allUsages [
 	"check the usage of the variable in the method it is invoked"
 
 	| methodsToUsages methods invocations return |

@@ -1,7 +1,7 @@
-Extension { #name : #FAMIXParameter }
+Extension { #name : #FamixTParameter }
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXParameter >> allUsages [
+FamixTParameter >> allUsages [
 	"All the invocations the parameter is involved"
 
 	| posUsages |

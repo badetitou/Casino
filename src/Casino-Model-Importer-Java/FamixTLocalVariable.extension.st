@@ -1,7 +1,7 @@
-Extension { #name : #FAMIXLocalVariable }
+Extension { #name : #FamixTLocalVariable }
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXLocalVariable >> allUsages [
+FamixTLocalVariable >> allUsages [
 	"All the invocations the localVariable involved"
 
 	| posUsages |

@@ -1,12 +1,12 @@
-Extension { #name : #FAMIXAccess }
+Extension { #name : #FamixTAccess }
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXAccess >> allUsages [
+FamixTAccess >> allUsages [
 	^ self variable allUsages
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXAccess >> endAffectationPos [
+FamixTAccess >> endAffectationPos [
 	^ ((self source allAtScope: FamixTClass)
 		select: [ :class | class isNotNil and: [ class hasSourceAnchor and: [ class isInnerClass not ] ] ])
 		anyOneIfOnlyOneElement sourceAnchor completeText
@@ -15,7 +15,7 @@ FAMIXAccess >> endAffectationPos [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-FAMIXAccess >> isReturned [
+FamixTAccess >> isReturned [
 	^ self source declaredType isNotNil
 		and: [ self source declaredType isPrimitiveType not
 				and: [ ((self source accesses asOrderedCollection select: [ :access | access sourceAnchor isNotNil ])
