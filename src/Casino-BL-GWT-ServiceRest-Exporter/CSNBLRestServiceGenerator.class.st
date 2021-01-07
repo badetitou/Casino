@@ -82,8 +82,9 @@ CSNBLRestServiceGenerator >> convertBusinessType: serviceParameter [
 	(self << serviceParameter name)
 		<<< 'Json.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
 		crlf.
+	serviceParameter source declaredType ifNotNil: [ 
 	self << serviceParameter source declaredType name <<< ' ' <<< serviceParameter name <<< ' = ' <<< serviceParameter name <<< 'Json.getValueAs('
-		<<< serviceParameter source declaredType name <<< '.class);'
+		<<< serviceParameter source declaredType name <<< '.class);' ] ifNil: [  self << '// FIX: ' <<< serviceParameter name ]
 ]
 
 { #category : #convert }
@@ -295,6 +296,7 @@ CSNBLRestServiceGenerator >> visitNamespace: aNamespace [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	| aMethod |
+	aServiceAPI name record.
 	aMethod := aServiceAPI source.
 	aMethod isStub ifTrue: [ ^ self ].
 	"Printing method annotations"
@@ -336,7 +338,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		<< String crlf.
 	self indentPlus.
 	self printConvertParametersOf: aServiceAPI.
-	aMethod methodsOverriding do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ].
+	aMethod methodsOverriding ifNotEmpty: [ :methods | methods do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ] ]  ifEmpty: [ self << '// Error body not found ' ].
 	self
 		crlf;
 		indentMinus;
