@@ -24,7 +24,7 @@ CSNBuDTO >> printJsonClassOn: aCSNExporter [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printJsonClassTypeOn: aCSNExporter [
-	aCSNExporter <<< ''
+	aCSNExporter <<< 'Object'
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
