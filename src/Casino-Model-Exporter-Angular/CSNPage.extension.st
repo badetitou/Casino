@@ -41,6 +41,7 @@ CSNPage >> getMetadata [
 { 
     id: 'phase1_2',
     code: 'phase1',
+    codePhase: 'a long name',
     label: 'Phase 1 - 2',
     link: 'phase1',
     subLabel: 'Bienvenue sur la phase 1 - 2',
@@ -51,7 +52,8 @@ CSNPage >> getMetadata [
 
 	^ '{
     id: ''' , self name ,''',
-    code: ''' , self name,''',
+    code: ''' , self codeValue,''',
+    codePhase: ''' , (self codePhase ifNil: ['']) protectQuote,''',
     label: ''' , (self title ifNil: ['']) protectQuote ,''',
     link: ''' , self name,''',
     subLabel: ''' , (self subtitle ifNil: ['']) protectQuote, ''',
