@@ -239,7 +239,11 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-	(aAttribute declaredType isNil or: [ aAttribute declaredType isPrimitiveType or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ]) includes: 'static' ]])
+	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired'. ])
+		or: [ aAttribute declaredType isNil
+				or: [ aAttribute declaredType isPrimitiveType
+						or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ])
+								includes: 'static' ] ] ])
 		ifFalse: [ self
 				<< '@Autowired';
 				crlf ].
@@ -332,7 +336,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 			self
 				<<< modifier;
 				space ]
-		ifEmpty: [ self <<< 'public' ].
+		ifEmpty: [ self <<< 'public'; space ].
 	"Printing return type for method"
 	aMethod declaredType
 		ifNotNil: [ :declaredType | 
