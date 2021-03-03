@@ -36,7 +36,7 @@ CSNLCell >> layoutOwner: anObject [
 CSNLCell >> layoutOwnerGroup [
 	<generated>
 	<navigation: 'LayoutOwner'>
-	^ MooseGroup with: self layoutOwner
+	^ MooseSpecializedGroup with: self layoutOwner
 ]
 
 { #category : #accessing }
@@ -50,21 +50,21 @@ CSNLCell >> widget [
 
 { #category : #accessing }
 CSNLCell >> widget: anObject [
+
 	<generated>
-	(self attributeAt: #widget ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self widget.
-			self privateState attributeAt: #widget put: anObject.
-			otherSide cellOwner: nil ]
-		ifNotNil: [ self attributeAt: #widget put: anObject.
-			anObject cellOwner: self ]
+	(self attributeAt: #widget ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self widget.
+		self attributeAt: #widget put: anObject.
+		otherSide cellOwner: nil ]
+	ifNotNil: [ 
+		self attributeAt: #widget put: anObject.
+		anObject cellOwner: self ]
 ]
 
 { #category : #navigation }
 CSNLCell >> widgetGroup [
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup with: self widget
+	^ MooseSpecializedGroup with: self widget
 ]

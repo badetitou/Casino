@@ -13,14 +13,14 @@ CSNContainer >> layout [
 
 { #category : #'*Casino-Model-Layout-accessing' }
 CSNContainer >> layout: anObject [
+
 	<generated>
-	(self attributeAt: #layout ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self layout.
-			self privateState attributeAt: #layout put: anObject.
-			otherSide container: nil ]
-		ifNotNil: [ self attributeAt: #layout put: anObject.
-			anObject container: self ]
+	(self attributeAt: #layout ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self layout.
+		self attributeAt: #layout put: anObject.
+		otherSide container: nil ]
+	ifNotNil: [ 
+		self attributeAt: #layout put: anObject.
+		anObject container: self ]
 ]

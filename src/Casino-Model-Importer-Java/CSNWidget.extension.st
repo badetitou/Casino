@@ -9,7 +9,7 @@ CSNWidget >> addDefaultAttribute [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNWidget >> affectedActions [
-	<MSEProperty: #affectedActions type: #Object>
+	<FMProperty: #affectedActions type: #Object>
 	^ self attributeAt: #affectedActions ifAbsent: nil
 ]
 

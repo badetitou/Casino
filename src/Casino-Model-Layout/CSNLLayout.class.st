@@ -42,7 +42,7 @@ CSNLLayout >> cell: anObject [
 CSNLLayout >> cellGroup [
 	<generated>
 	<navigation: 'Cell'>
-	^ MooseGroup withAll: self cell asSet
+	^ MooseSpecializedGroup withAll: self cell asSet
 ]
 
 { #category : #accessing }
@@ -57,21 +57,21 @@ CSNLLayout >> container [
 
 { #category : #accessing }
 CSNLLayout >> container: anObject [
+
 	<generated>
-	(self attributeAt: #container ifAbsentPut: [ nil ]) == anObject
-		ifTrue: [ ^ anObject ].
-	anObject
-		ifNil: [ | otherSide |
-			otherSide := self container.
-			self privateState attributeAt: #container put: anObject.
-			otherSide layout: nil ]
-		ifNotNil: [ self attributeAt: #container put: anObject.
-			anObject layout: self ]
+	(self attributeAt: #container ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	anObject ifNil: [ | otherSide |
+		otherSide :=  self container.
+		self attributeAt: #container put: anObject.
+		otherSide layout: nil ]
+	ifNotNil: [ 
+		self attributeAt: #container put: anObject.
+		anObject layout: self ]
 ]
 
 { #category : #navigation }
 CSNLLayout >> containerGroup [
 	<generated>
 	<navigation: 'Container'>
-	^ MooseGroup with: self container
+	^ MooseSpecializedGroup with: self container
 ]
