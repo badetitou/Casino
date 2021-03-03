@@ -24,7 +24,8 @@ Class {
 	#traits : 'TCSNExporter',
 	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
-		'currentPath'
+		'currentPath',
+		'exporterAngularConfiguration'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -53,6 +54,16 @@ CSNModelExporterAngular >> currentPath [
 { #category : #accessing }
 CSNModelExporterAngular >> currentPath: anObject [
 	currentPath := anObject
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> exporterAngularConfiguration [
+	^ exporterAngularConfiguration
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> exporterAngularConfiguration: anObject [
+	exporterAngularConfiguration := anObject
 ]
 
 { #category : #visiting }
