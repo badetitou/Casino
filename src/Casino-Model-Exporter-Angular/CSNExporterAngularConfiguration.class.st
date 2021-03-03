@@ -8,8 +8,22 @@ Class {
 }
 
 { #category : #initialization }
+CSNExporterAngularConfiguration >> angularRepresentationOf: aCSNWidget [
+	aCSNWidget class withAllSuperclasses
+		do: [:class | mapping
+				at: class
+				ifPresent: [ :widgetRepresentation | ^ widgetRepresentation ] ].
+	^ WidgetRepresentation new
+]
+
+{ #category : #initialization }
+CSNExporterAngularConfiguration >> at: aWidgetClass put: aWidgetRepresentationInstance [
+	mapping at: aWidgetClass put: aWidgetRepresentationInstance
+]
+
+{ #category : #initialization }
 CSNExporterAngularConfiguration >> defaultConfiguration [
-	^ { CSNWidget -> WidgetRepresentation } asDictionary
+	^ { CSNWidget -> WidgetRepresentation new } asDictionary
 ]
 
 { #category : #initialization }

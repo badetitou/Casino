@@ -77,7 +77,7 @@ BaselineOfCasino >> defineDependencies: spec [
 BaselineOfCasino >> defineGroups: spec [
 	spec
 		group: 'default' with: #('core-extented' 'Casino-Model-Exporter-Angular' 'Casino-Model-Importer-Java' 'Casino-Helper' );
-		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests' 'Casino-Model-Importer-Tests' 'Casino-Model-Extension-Tests');
+		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests' 'Casino-Model-Importer-Tests' 'Casino-Model-Extension-Tests' 'Casino-Model-Exporter-Angular-Tests');
 		group: 'model' with: #('Casino-Model' 'Casino-Core-ExternalLibrary' 'Casino-Model-Extension');
 		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer');
 		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
@@ -127,6 +127,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'Casino-Exporter' 'Casino-Helper') ];
 		package: 'Casino-Model-Exporter-Angular'
 			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
+		package: 'Casino-Model-Exporter-Angular-Tests' with: ['Casino-Model-Exporter-Angular' ];
 		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'TinyLogger' 'Casino-Helper') ];
 		package: 'Casino-Model-Importer-Tests' with: [ spec requires: #('Casino-Model-Importer') ];
