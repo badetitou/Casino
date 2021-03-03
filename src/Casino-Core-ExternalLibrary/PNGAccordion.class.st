@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGAccordion class >> moduleName [
+PNGAccordion >> moduleName [
 	^ 'AccordionModule'
 ]
 
 { #category : #accessing }
-PNGAccordion class >> modulePath [
+PNGAccordion >> modulePath [
 	^ 'primeng/accordion'
 ]

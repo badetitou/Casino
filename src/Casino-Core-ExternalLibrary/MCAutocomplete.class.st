@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-MCAutocomplete class >> getSelector [
+MCAutocomplete >> getSelector [
 	^ 'mat-autocomplete'
 ]
 
 { #category : #accessing }
-MCAutocomplete class >> moduleName [
+MCAutocomplete >> moduleName [
 	^ 'MatAutocompleteModule'
 ]
 
 { #category : #accessing }
-MCAutocomplete class >> modulePath [
+MCAutocomplete >> modulePath [
 	^ '@angular/material/autocomplete'
 ]

@@ -2,7 +2,7 @@ Extension { #name : #CSNUICWRichTextArea }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNUICWRichTextArea >> angularComponent [
-	^ PNGEditor
+	^ PNGEditor new
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCTabGroup class >> getSelector [
+MCTabGroup >> getSelector [
 	^ 'mat-tab-group'
 ]
 
 { #category : #accessing }
-MCTabGroup class >> moduleName [
+MCTabGroup >> moduleName [
 	^ 'MatTabsModule'
 ]
 
 { #category : #accessing }
-MCTabGroup class >> modulePath [
+MCTabGroup >> modulePath [
 	^ '@angular/material/tabs'
 ]

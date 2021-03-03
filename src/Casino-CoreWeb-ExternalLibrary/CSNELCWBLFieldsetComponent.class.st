@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLFieldsetComponent class >> getSelector [
+CSNELCWBLFieldsetComponent >> getSelector [
 	^ 'bl-fieldset'
 ]
 
 { #category : #accessing }
-CSNELCWBLFieldsetComponent class >> moduleName [
+CSNELCWBLFieldsetComponent >> moduleName [
 	^ 'FieldsetComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLFieldsetComponent class >> subModulePath [
+CSNELCWBLFieldsetComponent >> subModulePath [
 	^ '/components/fieldset/fieldset.component'
 ]

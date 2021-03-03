@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLQuickSearch class >> getSelector [
+CSNELCWBLQuickSearch >> getSelector [
 	^ 'bl-quicksearch'
 ]
 
 { #category : #accessing }
-CSNELCWBLQuickSearch class >> moduleName [
+CSNELCWBLQuickSearch >> moduleName [
 	^ 'QuicksearchComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLQuickSearch class >> subModulePath [
+CSNELCWBLQuickSearch >> subModulePath [
 	^ '/components/quicksearch/quicksearch.component'
 ]

@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCExpansionModule class >> getSelector [
+MCExpansionModule >> getSelector [
 	^ 'mat-expansion-panel'
 ]
 
 { #category : #accessing }
-MCExpansionModule class >> moduleName [
+MCExpansionModule >> moduleName [
 	^ 'MatExpansionModule'
 ]
 
 { #category : #accessing }
-MCExpansionModule class >> modulePath [
+MCExpansionModule >> modulePath [
 	^ '@angular/material/expansion'
 ]

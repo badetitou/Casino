@@ -5,22 +5,22 @@ Class {
 }
 
 { #category : #accessing }
-PrimeNGComponent class >> isLocal [
+PrimeNGComponent >> isLocal [
 	^ false
 ]
 
 { #category : #accessing }
-PrimeNGComponent class >> isNative [
+PrimeNGComponent >> isNative [
 	"The widget is part of the html standard"
 	^ false
 ]
 
 { #category : #accessing }
-PrimeNGComponent class >> moduleName [
+PrimeNGComponent >> moduleName [
 	self subclassResponsibility 
 ]
 
 { #category : #accessing }
-PrimeNGComponent class >> modulePath [
+PrimeNGComponent >> modulePath [
 	^ self subclassResponsibility 
 ]

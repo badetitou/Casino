@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLButtonLinkComponent class >> getSelector [
+CSNELCWBLButtonLinkComponent >> getSelector [
 	^ 'bl-button-link'
 ]
 
 { #category : #accessing }
-CSNELCWBLButtonLinkComponent class >> moduleName [
+CSNELCWBLButtonLinkComponent >> moduleName [
 	^ 'BlButtonLinkComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLButtonLinkComponent class >> subModulePath [
+CSNELCWBLButtonLinkComponent >> subModulePath [
 	^ '/components/link-button/button-link/button-link.component'
 ]

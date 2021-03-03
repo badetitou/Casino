@@ -2,7 +2,7 @@ Extension { #name : #CSNUICWSplitButton }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNUICWSplitButton >> angularComponent [
-	^ PNGSplitButton
+	^ PNGSplitButton new
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }

@@ -689,7 +689,7 @@ CSNModelExporterAngular >> serviceRoot [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNAttribute: aCSNAttribute [
 	aCSNAttribute widget
-		ifNil: [ WidgetRepresentation exportAttribute: aCSNAttribute with: self ]
+		ifNil: [ WidgetRepresentation new exportAttribute: aCSNAttribute with: self ]
 		ifNotNil: [ :widget | widget exportAttribute: aCSNAttribute with: self ]
 ]
 

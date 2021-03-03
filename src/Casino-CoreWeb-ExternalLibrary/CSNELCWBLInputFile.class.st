@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLInputFile class >> getSelector [
+CSNELCWBLInputFile >> getSelector [
 	^ 'bl-file-upload'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputFile class >> moduleName [
+CSNELCWBLInputFile >> moduleName [
 	^ 'FileUploadComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputFile class >> subModulePath [
+CSNELCWBLInputFile >> subModulePath [
 	^ '/components/file-upload/file-upload.component'
 ]

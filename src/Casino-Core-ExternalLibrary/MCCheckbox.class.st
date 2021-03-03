@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCCheckbox class >> getSelector [
+MCCheckbox >> getSelector [
 	^ 'mat-checkbox'
 ]
 
 { #category : #accessing }
-MCCheckbox class >> moduleName [
+MCCheckbox >> moduleName [
 	^ 'MatCheckboxModule'
 ]
 
 { #category : #accessing }
-MCCheckbox class >> modulePath [
+MCCheckbox >> modulePath [
 	^ '@angular/material/checkbox'
 ]

@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCTable class >> getSelector [
+MCTable >> getSelector [
 	^ 'mat-table'
 ]
 
 { #category : #accessing }
-MCTable class >> moduleName [
+MCTable >> moduleName [
 	^ 'MatTableModule'
 ]
 
 { #category : #accessing }
-MCTable class >> modulePath [
+MCTable >> modulePath [
 	^ '@angular/material/table'
 ]

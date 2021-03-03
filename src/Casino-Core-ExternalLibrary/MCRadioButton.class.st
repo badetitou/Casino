@@ -5,26 +5,26 @@ Class {
 }
 
 { #category : #export }
-MCRadioButton class >> componentAttributeOn: anExporter [
+MCRadioButton >> componentAttributeOn: anExporter [
 	anExporter <<< ' type="radio" '
 ]
 
 { #category : #export }
-MCRadioButton class >> exportContentOf: aWidget with: anExporter [
+MCRadioButton >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes detect: [ :att | att isOfType: CSNUILabel ] ifFound: [ :att | anExporter visit: att ]
 ]
 
 { #category : #accessing }
-MCRadioButton class >> getSelector [
+MCRadioButton >> getSelector [
 	^ 'mat-radio-button'
 ]
 
 { #category : #accessing }
-MCRadioButton class >> moduleName [
+MCRadioButton >> moduleName [
 	^ 'MatRadioModule'
 ]
 
 { #category : #accessing }
-MCRadioButton class >> modulePath [
+MCRadioButton >> modulePath [
 	^ '@angular/material/radio'
 ]

@@ -27,24 +27,24 @@ Class {
 }
 
 { #category : #'accessing - export' }
-CSNELCWBLInputSelectComponent class >> attributeDictionary [
+CSNELCWBLInputSelectComponent >> attributeDictionary [
 	^ super attributeDictionary
 		at: CSNUIWidth put: 'style';
 		yourself
 ]
 
 { #category : #export }
-CSNELCWBLInputSelectComponent class >> attributeOf: aWidget [
+CSNELCWBLInputSelectComponent >> attributeOf: aWidget [
 	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
 
 { #category : #export }
-CSNELCWBLInputSelectComponent class >> export: aWidget with: anExporter [
+CSNELCWBLInputSelectComponent >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter
 ]
 
 { #category : #export }
-CSNELCWBLInputSelectComponent class >> exportAttribute: attribute with: anExporter [
+CSNELCWBLInputSelectComponent >> exportAttribute: attribute with: anExporter [
 	attribute class = CSNUIWidth
 		ifTrue: [ anExporter
 				<<< attribute name;
@@ -55,23 +55,23 @@ CSNELCWBLInputSelectComponent class >> exportAttribute: attribute with: anExport
 ]
 
 { #category : #export }
-CSNELCWBLInputSelectComponent class >> exportHeaderOf: aWidget with: anExporter [
+CSNELCWBLInputSelectComponent >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter <<< '/>'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputSelectComponent class >> getSelector [
+CSNELCWBLInputSelectComponent >> getSelector [
 	^ 'select'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputSelectComponent class >> isNative [
+CSNELCWBLInputSelectComponent >> isNative [
 	^ true
 ]
 
 { #category : #accessing }
-CSNELCWBLInputSelectComponent class >> modulePath [
+CSNELCWBLInputSelectComponent >> modulePath [
 	^ '@angular/core'
 ]

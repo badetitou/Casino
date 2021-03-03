@@ -27,7 +27,7 @@ Class {
 }
 
 { #category : #export }
-MCDatePicker class >> exportContentOf: aWidget with: anExporter [
+MCDatePicker >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		<< '<'.
@@ -42,7 +42,7 @@ MCDatePicker class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-MCDatePicker class >> exportFooterOf: aWidget with: anExporter [
+MCDatePicker >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-datepicker-toggle matSuffix [for]="';
 		<<< (self variableFor: aWidget);
@@ -54,7 +54,7 @@ MCDatePicker class >> exportFooterOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-MCDatePicker class >> exportHeaderOf: aWidget with: anExporter [
+MCDatePicker >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';
 		crlf.
@@ -72,26 +72,26 @@ MCDatePicker class >> exportHeaderOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-MCDatePicker class >> getSelector [
+MCDatePicker >> getSelector [
 	^ 'input'
 ]
 
 { #category : #accessing }
-MCDatePicker class >> internalDependencies [
-	^ { MCDateAdapter }
+MCDatePicker >> internalDependencies [
+	^ { MCDateAdapter new }
 ]
 
 { #category : #accessing }
-MCDatePicker class >> moduleName [
+MCDatePicker >> moduleName [
 	^ 'MatDatepickerModule'
 ]
 
 { #category : #accessing }
-MCDatePicker class >> modulePath [
+MCDatePicker >> modulePath [
 	^ '@angular/material/datepicker'
 ]
 
 { #category : #accessing }
-MCDatePicker class >> variableFor: widget [
+MCDatePicker >> variableFor: widget [
 	^ 'picker', widget mooseID printString
 ]

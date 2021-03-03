@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCSlideToggle class >> getSelector [
+MCSlideToggle >> getSelector [
 	^ 'mat-slide-toggle'
 ]
 
 { #category : #accessing }
-MCSlideToggle class >> moduleName [
+MCSlideToggle >> moduleName [
 	^ 'MatSlideToggleModule'
 ]
 
 { #category : #accessing }
-MCSlideToggle class >> modulePath [
+MCSlideToggle >> modulePath [
 	^ '@angular/material/slide-toggle'
 ]

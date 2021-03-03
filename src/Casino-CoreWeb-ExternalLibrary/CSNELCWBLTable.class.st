@@ -27,7 +27,7 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLTable class >> exportContentOf: aWidget with: anExporter [
+CSNELCWBLTable >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		crlf;
@@ -56,16 +56,16 @@ CSNELCWBLTable class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-CSNELCWBLTable class >> getSelector [
+CSNELCWBLTable >> getSelector [
 	^ 'bl-table'
 ]
 
 { #category : #accessing }
-CSNELCWBLTable class >> moduleName [
+CSNELCWBLTable >> moduleName [
 	^ 'BlTableComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLTable class >> subModulePath [
+CSNELCWBLTable >> subModulePath [
 	^ '/components/table/table.component'
 ]

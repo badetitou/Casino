@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLInputFilePanel class >> getSelector [
+CSNELCWBLInputFilePanel >> getSelector [
 	^ 'bl-file-upload-panel'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputFilePanel class >> moduleName [
+CSNELCWBLInputFilePanel >> moduleName [
 	^ 'FileUploadPanelComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputFilePanel class >> subModulePath [
+CSNELCWBLInputFilePanel >> subModulePath [
 	^ '/components/file-upload/file-upload-panel/file-upload-panel.component'
 ]

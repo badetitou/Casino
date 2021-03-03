@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGEditor class >> getSelector [
+PNGEditor >> getSelector [
 	^ 'p-editor'
 ]
 
 { #category : #accessing }
-PNGEditor class >> moduleName [
+PNGEditor >> moduleName [
 	^ 'EditorModule'
 ]
 
 { #category : #accessing }
-PNGEditor class >> modulePath [
+PNGEditor >> modulePath [
 	^ 'primeng/editor'
 ]

@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGFileUpload class >> moduleName [
+PNGFileUpload >> moduleName [
 	^ 'FileUploadModule'
 ]
 
 { #category : #accessing }
-PNGFileUpload class >> modulePath [
+PNGFileUpload >> modulePath [
 	^ 'primeng/fileupload'
 ]

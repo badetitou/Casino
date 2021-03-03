@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGInputText class >> getSelector [
+PNGInputText >> getSelector [
 	^ 'input'
 ]
 
 { #category : #accessing }
-PNGInputText class >> moduleName [
+PNGInputText >> moduleName [
 	^ 'InputTextModule'
 ]
 
 { #category : #accessing }
-PNGInputText class >> modulePath [
+PNGInputText >> modulePath [
 	^ 'primeng/inputtext'
 ]

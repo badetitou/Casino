@@ -2,7 +2,7 @@ Extension { #name : #CSNUIFieldset }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNUIFieldset >> angularComponent [
-	^ CSNELCWBLFieldsetComponent
+	^ CSNELCWBLFieldsetComponent new
 	"^ MCCard"
 ]
 

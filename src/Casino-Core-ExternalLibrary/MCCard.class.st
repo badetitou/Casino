@@ -27,7 +27,7 @@ Class {
 }
 
 { #category : #export }
-MCCard class >> exportFooterOf: aWidget with: anExporter [
+MCCard >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		crlf;
 		<< '</mat-card-content>';
@@ -40,7 +40,7 @@ MCCard class >> exportFooterOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-MCCard class >> exportHeaderOf: aWidget with: anExporter [
+MCCard >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter <<< '>'.
@@ -62,16 +62,16 @@ MCCard class >> exportHeaderOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-MCCard class >> getSelector [
+MCCard >> getSelector [
 	^ 'mat-card'
 ]
 
 { #category : #accessing }
-MCCard class >> moduleName [
+MCCard >> moduleName [
 	^ 'MatCardModule'
 ]
 
 { #category : #accessing }
-MCCard class >> modulePath [
+MCCard >> modulePath [
 	^ '@angular/material/card'
 ]

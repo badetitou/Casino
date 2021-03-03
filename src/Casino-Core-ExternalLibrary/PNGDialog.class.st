@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGDialog class >> getSelector [
+PNGDialog >> getSelector [
 	^ 'p-dialog'
 ]
 
 { #category : #accessing }
-PNGDialog class >> moduleName [
+PNGDialog >> moduleName [
 	^ 'DialogModule'
 ]
 
 { #category : #accessing }
-PNGDialog class >> modulePath [
+PNGDialog >> modulePath [
 	^ 'primeng/dialog'
 ]

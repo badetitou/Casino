@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGChart class >> moduleName [
+PNGChart >> moduleName [
 	^ 'ChartModule'
 ]
 
 { #category : #accessing }
-PNGChart class >> modulePath [
+PNGChart >> modulePath [
 	^ 'primeng/chart'
 ]

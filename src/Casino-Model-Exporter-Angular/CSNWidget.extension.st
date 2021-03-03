@@ -8,7 +8,7 @@ CSNWidget >> actionsTag [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> angularComponent [
-	^ WidgetRepresentation
+	^ WidgetRepresentation new
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

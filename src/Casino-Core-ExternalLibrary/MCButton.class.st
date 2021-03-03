@@ -27,12 +27,12 @@ Class {
 }
 
 { #category : #export }
-MCButton class >> componentAttributeOn: anExporter [
+MCButton >> componentAttributeOn: anExporter [
 	anExporter <<< ' mat-stroked-button '
 ]
 
 { #category : #export }
-MCButton class >> exportContentOf: aWidget with: anExporter [
+MCButton >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes detect: [ :attribute | attribute isOfType: CSNUILabel ] ifFound: [ :attribute | anExporter visit: attribute ].
 	aWidget widgets
 		do: [ :widget | 
@@ -45,21 +45,21 @@ MCButton class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-MCButton class >> getSelector [
+MCButton >> getSelector [
 	^ 'button'
 ]
 
 { #category : #accessing }
-MCButton class >> isNative [
+MCButton >> isNative [
 	^ true
 ]
 
 { #category : #accessing }
-MCButton class >> moduleName [
+MCButton >> moduleName [
 	^ 'MatButtonModule'
 ]
 
 { #category : #accessing }
-MCButton class >> modulePath [
+MCButton >> modulePath [
 	^ '@angular/material/button'
 ]

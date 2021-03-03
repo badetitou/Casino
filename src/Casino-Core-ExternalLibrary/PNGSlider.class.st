@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGSlider class >> getSelector [
+PNGSlider >> getSelector [
 	^ 'p-slider'
 ]
 
 { #category : #accessing }
-PNGSlider class >> moduleName [
+PNGSlider >> moduleName [
 	^ 'SliderModule'
 ]
 
 { #category : #accessing }
-PNGSlider class >> modulePath [
+PNGSlider >> modulePath [
 	^ 'primeng/slider'
 ]

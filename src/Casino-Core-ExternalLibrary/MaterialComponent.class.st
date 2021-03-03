@@ -27,22 +27,22 @@ Class {
 }
 
 { #category : #accessing }
-MaterialComponent class >> isLocal [
+MaterialComponent >> isLocal [
 	^ false
 ]
 
 { #category : #accessing }
-MaterialComponent class >> isNative [
+MaterialComponent >> isNative [
 	"The widget is part of the html standard"
 	^ false
 ]
 
 { #category : #accessing }
-MaterialComponent class >> moduleName [
+MaterialComponent >> moduleName [
 	self subclassResponsibility 
 ]
 
 { #category : #accessing }
-MaterialComponent class >> modulePath [
+MaterialComponent >> modulePath [
 	^ self subclassResponsibility 
 ]

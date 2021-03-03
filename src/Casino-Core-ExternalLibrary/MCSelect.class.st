@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCSelect class >> getSelector [
+MCSelect >> getSelector [
 	^ 'mat-select'
 ]
 
 { #category : #accessing }
-MCSelect class >> moduleName [
+MCSelect >> moduleName [
 	^ 'MatSelectModule'
 ]
 
 { #category : #accessing }
-MCSelect class >> modulePath [
+MCSelect >> modulePath [
 	^ '@angular/material/select'
 ]

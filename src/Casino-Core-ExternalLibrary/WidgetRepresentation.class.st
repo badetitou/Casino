@@ -5,26 +5,26 @@ Class {
 }
 
 { #category : #'accessing - export' }
-WidgetRepresentation class >> attributeDictionary [
+WidgetRepresentation >> attributeDictionary [
 	^ {  } asDictionary
 ]
 
 { #category : #export }
-WidgetRepresentation class >> attributeNameInComponent: attribute [
+WidgetRepresentation >> attributeNameInComponent: attribute [
 	^ self attributeDictionary at: attribute class ifAbsent: [ attribute name ]
 ]
 
 { #category : #export }
-WidgetRepresentation class >> attributeOf: aWidget [
+WidgetRepresentation >> attributeOf: aWidget [
 	^ aWidget computeSelfAttributes
 ]
 
 { #category : #export }
-WidgetRepresentation class >> componentAttributeOn: anExporter [
+WidgetRepresentation >> componentAttributeOn: anExporter [
 ]
 
 { #category : #export }
-WidgetRepresentation class >> componentAttributeOn: anExporter forWidget: aWidget [
+WidgetRepresentation >> componentAttributeOn: anExporter forWidget: aWidget [
 	| attributes |
 	attributes := self attributeOf: aWidget.
 	self exportAttributes: attributes with: anExporter.
@@ -32,19 +32,19 @@ WidgetRepresentation class >> componentAttributeOn: anExporter forWidget: aWidge
 ]
 
 { #category : #export }
-WidgetRepresentation class >> export: aWidget with: anExporter [
+WidgetRepresentation >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter.
 	self exportContentOf: aWidget with: anExporter.
 	self exportFooterOf: aWidget with: anExporter.
 ]
 
 { #category : #export }
-WidgetRepresentation class >> exportAttribute: attribute with: anExporter [
+WidgetRepresentation >> exportAttribute: attribute with: anExporter [
 	anExporter <<< (anExporter protectString: attribute attributeValue asString)
 ]
 
 { #category : #export }
-WidgetRepresentation class >> exportAttributes: attributes with: anExporter [
+WidgetRepresentation >> exportAttributes: attributes with: anExporter [
 	^ (attributes flattened groupedBy: [ :attribute | self attributeNameInComponent: attribute ]) asDictionary
 		associationsDo: [ :mapAttributeNameValues | 
 			anExporter
@@ -56,7 +56,7 @@ WidgetRepresentation class >> exportAttributes: attributes with: anExporter [
 ]
 
 { #category : #export }
-WidgetRepresentation class >> exportContentOf: aWidget with: anExporter [
+WidgetRepresentation >> exportContentOf: aWidget with: anExporter [
 	aWidget widgets
 		do: [ :widget | 
 			anExporter
@@ -68,7 +68,7 @@ WidgetRepresentation class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-WidgetRepresentation class >> exportFooterOf: aWidget with: anExporter [
+WidgetRepresentation >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		crlf;
 		<< '</';
@@ -77,46 +77,46 @@ WidgetRepresentation class >> exportFooterOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-WidgetRepresentation class >> exportHeaderOf: aWidget with: anExporter [
+WidgetRepresentation >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter <<< '>'
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> getSelector [
+WidgetRepresentation >> getSelector [
 	^ 'div'
 ]
 
 { #category : #export }
-WidgetRepresentation class >> importString [
+WidgetRepresentation >> importString [
 	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> internalDependencies [
+WidgetRepresentation >> internalDependencies [
 	^ {  }
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> isLocal [
+WidgetRepresentation >> isLocal [
 	"The widget is NOT imported from a distant library
 	It is already part of the exported project"
 	^ true
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> isNative [
+WidgetRepresentation >> isNative [
 	"The widget is part of the html standard"
 	^ true
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> moduleName [
+WidgetRepresentation >> moduleName [
 	^ 'ElementRef'
 ]
 
 { #category : #accessing }
-WidgetRepresentation class >> modulePath [
+WidgetRepresentation >> modulePath [
 	^ '@angular/core'
 ]
