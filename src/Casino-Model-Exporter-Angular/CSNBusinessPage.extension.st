@@ -93,7 +93,7 @@ CSNBusinessPage >> getTag [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> idViewChild [
+CSNBusinessPage >> idViewChildFrom: anExporter [
 	^ (self variable isNil or: [ self variable isInvocation ])
 		  ifTrue: [ '' ]
 		  ifFalse: [ 
@@ -117,8 +117,8 @@ CSNBusinessPage >> rootFromExporter: anExporter [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> widgetsDependencies [
-	^ ((self recursiveWidgets flattened collect: #getExternalDependencies)
+CSNBusinessPage >> widgetsDependenciesFrom: anExporter [
+	^ ((self recursiveWidgets flattened collect: [:el | el getExternalDependenciesFrom: anExporter])
 		flattened asSet asOrderedCollection
 		collect: [ :dependency | dependency importString ]
 		as: Set) asOrderedCollection

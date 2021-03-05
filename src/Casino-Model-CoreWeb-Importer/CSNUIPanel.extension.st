@@ -8,7 +8,7 @@ CSNUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory:
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNUIPanel >> getSelector [
+CSNUIPanel >> getSelectorFrom: anExporter [
 	^ (self layout isNotNil and: [ self layout specificSelector ])
 		ifTrue: [ self layout getSelector ]
 		ifFalse: [ 'bl-panel' ]

@@ -41,11 +41,14 @@ CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPag
 		<<
 			(String crlf
 				join:
-					(aBLPageMetier widgetsDependencies
+					((aBLPageMetier widgetsDependenciesFrom: self)
 						,
 							(aBLPageMetier calledBehavior
-								flatCollect:
-									[ :behavior | self behaviorImportExporter export: behavior withContext: self context ])
+								flatCollect: [ :behavior | 
+									self behaviorImportExporter
+										export: behavior
+										withContext: self context
+										andConfiguration: self exporterAngularConfiguration ])
 								flattened) asSet);
 		<<
 			'
@@ -75,7 +78,7 @@ export class ';
 					action behavior
 						flatCollect:
 							[ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
-				asSet collect: [ :widget | widget idViewChild ])
+				asSet collect: [ :widget | (widget idViewChildFrom: self) ])
 				asOrderedCollection;
 		<<
 			'
@@ -98,8 +101,10 @@ export class ';
 						collect: [ :behavior | 
 							self behaviorInitializeVariableExporter
 								export: behavior
-								withContext: self context ]) flattened reject: #isEmpty)
-						flattened asOrderedCollection removeDuplicates);
+								withContext: self context
+								andConfiguration: self exporterAngularConfiguration ])
+						flattened reject: #isEmpty) flattened asOrderedCollection
+						removeDuplicates);
 		<<
 			') {
 ';
@@ -146,6 +151,7 @@ export class ';
 					(self behaviorModelExporter
 						on: self currentWriteStream
 						withIndentLevel: 1)
+						exporterAngularConfiguration: self exporterAngularConfiguration;
 						currentPage: aBLPageMetier;
 						export: behaveMethod.
 					self

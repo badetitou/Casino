@@ -40,7 +40,7 @@ CSNWidget >> container [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> exportAttribute: normalyOneOfMyWidget with: anExporter [
-	self angularComponent exportAttribute: normalyOneOfMyWidget with: anExporter
+	(anExporter angularRepresentationOf: self) exportAttribute: normalyOneOfMyWidget with: anExporter
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -51,21 +51,21 @@ CSNWidget >> generateDefaultClassAttribute [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> getExternalDependencies [
-	^ {self getExternalDependency.
-	self getExternalDependency collect: #internalDependencies}
+CSNWidget >> getExternalDependenciesFrom: anExporter [
+	^ {self getExternalDependencyFrom: anExporter.
+	(self getExternalDependencyFrom: anExporter) collect: #internalDependencies}
 		flattened
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> getExternalDependency [
-	^ { self angularComponent }
+CSNWidget >> getExternalDependencyFrom: anExporter [
+	^ { anExporter angularRepresentationOf: self }
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
-	anExporter <<< self getSelector.
-	self angularComponent componentAttributeOn: anExporter forWidget: self.
+	anExporter <<< (self getSelectorFrom: anExporter).
+	(anExporter angularRepresentationOf: self) componentAttributeOn: anExporter forWidget: self.
 	anExporter <<< self actionsTag.
 	anExporter <<< self idTag
 ]
@@ -81,8 +81,8 @@ CSNWidget >> getPositionAttribute [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> getSelector [
-	^ self angularComponent getSelector
+CSNWidget >> getSelectorFrom: anExporter [
+	^ (anExporter angularRepresentationOf: self) getSelector
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -124,12 +124,12 @@ CSNWidget >> idTag [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> idViewChild [
+CSNWidget >> idViewChildFrom: anExporter [
 	^ (self variable isNil or: [ self variable isInvocation ])
 		  ifTrue: [ '' ]
 		  ifFalse: [ 
 			  '    @ViewChild(''' , self id , ''', { static: false}) ' , self id , ': '
-			  , self angularComponent moduleName , ';' , String crlf ]
+			  , (anExporter angularRepresentationOf: self) moduleName , ';' , String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

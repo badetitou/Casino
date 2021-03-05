@@ -34,7 +34,7 @@ MCCard >> exportFooterOf: aWidget with: anExporter [
 		indentMinus;
 		crlf;
 		<< '</';
-		<<< aWidget getSelector;
+		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>';
 		indentMinus
 ]

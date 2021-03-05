@@ -6,6 +6,6 @@ CSNUIFieldset >> angularComponent [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNUIFieldset >> getSelector [
-	^ self angularComponent getSelector
+CSNUIFieldset >> getSelectorFrom: anExporter [
+	^ (anExporter angularRepresentationOf: self) getSelector
 ]

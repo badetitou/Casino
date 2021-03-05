@@ -72,7 +72,7 @@ WidgetRepresentation >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		crlf;
 		<< '</';
-		<<< aWidget getSelector;
+		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>'
 ]
 
