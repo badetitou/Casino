@@ -677,12 +677,15 @@ export class ';
 
 { #category : #initialization }
 CSNModelExporterAngular >> initialize [
-	indentLevel := 0
+	indentLevel := 0.
 ]
 
 { #category : #api }
 CSNModelExporterAngular >> prepareExport [
-	context := CSNContext new root: (FileSystem disk workingDirectory / model name) asFileReference; yourself.
+	super prepareExport.
+	context := CSNContext new
+		root: (FileSystem disk workingDirectory / model name) asFileReference;
+		yourself
 ]
 
 { #category : #api }
