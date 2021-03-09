@@ -225,7 +225,7 @@ import { MatTabsModule } from ''@angular/material/tabs'';
 import { MatToolbarModule } from ''@angular/material/toolbar'';
 import { MatTooltipModule } from ''@angular/material/tooltip'';
 import { MatTreeModule } from ''@angular/material/tree'';
-import { MatPaginatorModule } from ''@angular/material'';
+import { MatPaginatorModule } from ''@angular/material/paginator'';
 import {OverlayModule} from ''@angular/cdk/overlay'';
 
 @NgModule({
@@ -451,7 +451,7 @@ const routes: Routes = [
            << String crlf ].
   currentWriteStream << '    ]}
 ];
-export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: false });'
+export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
 ]
 
 { #category : #generate }
@@ -478,7 +478,7 @@ const routes: Routes = [
     }
 ];
 
-export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
+export const PHASE_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forChild(routes);
 '
 ]
 
@@ -1007,7 +1007,7 @@ CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
            crlf ].
   self
      << '</';
-     <<< aBLUIParagraph getSelector;
+     <<< (self angularRepresentationOf: aBLUIParagraph) getSelector;
      <<< '>'
 ]
 
