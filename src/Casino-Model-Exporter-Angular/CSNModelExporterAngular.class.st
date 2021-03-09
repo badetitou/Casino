@@ -37,6 +37,13 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 	^ anObject 
 ]
 
+{ #category : #actions }
+CSNModelExporterAngular class >> export: aBLMooseModel [
+	self new model: aBLMooseModel; 
+		exporterAngularConfiguration: CSNExporterAngularConfiguration;
+		 export
+]
+
 { #category : #accessing }
 CSNModelExporterAngular >> angularRepresentationOf: aCSNWidget [
 	^ self exporterAngularConfiguration angularRepresentationOf: aCSNWidget	
@@ -581,7 +588,7 @@ export class IndexComponent implements OnInit {
     public phaseHome: Phase;
 
     constructor(private _phaseService: PhaseService) {
-        this.phaseHome = this._phaseService.getPhase(''PHASE_INCUBATOR_HOME'');
+        this.phaseHome = this._phaseService.getPhase(''PHASE_OMAJE_HOME'');
     }
 
     public ngOnInit(): void {

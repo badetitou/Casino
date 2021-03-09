@@ -12,6 +12,14 @@ Class {
 	#category : #'Casino-Model-CoreWeb-Exporter'
 }
 
+{ #category : #actions }
+CSNModelExporterAngularBLSpecific class >> export: aBLMooseModel [
+	self new
+		model: aBLMooseModel;
+		exporterAngularConfiguration: CSNExporterAngularCoreWeb2Configuration;
+		export
+]
+
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> behaviorImportExporter [
 	^ CSNModelImportStringExporter
