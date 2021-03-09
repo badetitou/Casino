@@ -35,8 +35,7 @@ MCCard >> exportFooterOf: aWidget with: anExporter [
 		crlf;
 		<< '</';
 		<<< (aWidget getSelectorFrom: anExporter);
-		<<< '>';
-		indentMinus
+		<<< '>'
 ]
 
 { #category : #export }

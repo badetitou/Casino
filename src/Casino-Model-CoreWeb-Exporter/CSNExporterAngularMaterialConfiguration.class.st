@@ -25,6 +25,8 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 			(CSNUIInputRange -> MCSlider new).
 			(CSNUISelect -> MCSelect new).
 			(CSNUITab -> MCTab new).
-			(CSNUITabManager -> MCTabGroup new)} asDictionary;
+			(CSNUITabManager -> MCTabGroup new).
+			
+			(CSNUIImage -> HTMLImgComponent new).} asDictionary;
 		yourself
 ]
