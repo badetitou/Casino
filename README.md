@@ -116,13 +116,24 @@ gwtModel allCSNServiceAPI do: [ :serviceAPI |
 6. Export the UI and its behavior
 
 ```st
-CSNModelExporterAngularBLSpecific export: gwtModel.
+"Create an exporter"
+exporter := CSNModelExporterAngularBLSpecific new.
+exporter model: gwtModel.
+
+"Use the material.angular.io as target library"
+exporter exporterAngularConfiguration: CSNExporterAngularMaterialConfiguration new.
+exporter prepareExport.
+
+"Select export location"
+exporter context root: '/path/for/export' asFileReference.
+exporter runExport.
+"
 ```
 
 7. Export the data models (DTO)
 
 ```st
-root := (FileSystem disk workingDirectory / gwtModel name / 'models') asFileReference ensureCreateDirectory.
+root := (exporter context root / 'models') asFileReference ensureCreateDirectory.
 businessExporter := CSNBusinessExporter new modelRoot: root.
 businessExporter export: gwtModel.
 ```
