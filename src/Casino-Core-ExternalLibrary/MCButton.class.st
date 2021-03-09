@@ -23,12 +23,17 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #MCButton,
 	#superclass : #MaterialComponent,
+	#instVars : [
+		'isLink'
+	],
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
 { #category : #export }
 MCButton >> componentAttributeOn: anExporter [
-	anExporter <<< ' mat-stroked-button '
+	self isLink
+		ifTrue: [ anExporter <<< ' mat-button ' ]
+		ifFalse: [ anExporter <<< ' mat-stroked-button ' ]
 ]
 
 { #category : #export }
@@ -46,12 +51,34 @@ MCButton >> exportContentOf: aWidget with: anExporter [
 
 { #category : #accessing }
 MCButton >> getSelector [
+	self isLink ifTrue: [ ^ 'a' ].
 	^ 'button'
+]
+
+{ #category : #accessing }
+MCButton >> initialize [
+	super initialize.
+	isLink := false
+]
+
+{ #category : #accessing }
+MCButton >> isLink [
+	^ isLink
+]
+
+{ #category : #accessing }
+MCButton >> isLink: aBoolean [
+	isLink := aBoolean
 ]
 
 { #category : #accessing }
 MCButton >> isNative [
 	^ true
+]
+
+{ #category : #accessing }
+MCButton >> isNotLink [
+	isLink := false
 ]
 
 { #category : #accessing }

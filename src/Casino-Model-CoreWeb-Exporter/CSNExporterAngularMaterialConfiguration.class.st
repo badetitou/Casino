@@ -26,7 +26,11 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 			(CSNUISelect -> MCSelect new).
 			(CSNUITab -> MCTab new).
 			(CSNUITabManager -> MCTabGroup new).
-			
-			(CSNUIImage -> HTMLImgComponent new).} asDictionary;
+			(CSNUILink
+				->
+					(MCButton new
+						isLink: true;
+						yourself)).
+			(CSNUIImage -> HTMLImgComponent new)} asDictionary;
 		yourself
 ]
