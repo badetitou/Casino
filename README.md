@@ -65,13 +65,13 @@ There are three main parts:
 
 1. Load a Moose model
 
-```st
+```Smalltalk
 'path/to/model.mse' asFileReference readStreamDo: [ :stream | famixModel := FAMIXModel new importFromMSEStream: stream ]
 ```
 
 2. Create a Casino model
 
-```st
+```Smalltalk
 "create a metamodel with Casino UI, Behavioral, Business, and FAMIX ref"
 metamodel := FMMetaModelBuilder metamodelFromPackages: CSNBModel packagesToProcessToCreateMetamodel , CRFModel packagesToProcessToCreateMetamodel, CSNBuModel packagesToProcessToCreateMetamodel.
 "Create a model"
@@ -84,7 +84,7 @@ gwtModel metamodel: metamodel.
 
 For GWT application:
 
-```st
+```Smalltalk
 xml := (XMLDOMParser parse: 'path/to/myApp.module.xml' asFileReference).
 
 CSNWebModelJava new
@@ -95,7 +95,7 @@ CSNWebModelJava new
 
 4. Extract the behavior of the UI
 
-```st
+```Smalltalk
 behavioralModel := CSNBehaviorModelImporterJava new 
   uiModel: gwtModel;
   sourceCodeModel: famixModel;
@@ -104,7 +104,7 @@ behavioralModel := CSNBehaviorModelImporterJava new
 
 5. Extract the business concept (DTO) from services usage
 
-```st
+```Smalltalk
 businessImporter := CSNBuModelImporter new.
 businessImporter buModel: gwtModel.
 businessImporter famixModel: famixModel.
@@ -115,7 +115,7 @@ gwtModel allCSNServiceAPI do: [ :serviceAPI |
 
 6. Export the UI and its behavior
 
-```st
+```Smalltalk
 "Create an exporter"
 exporter := CSNModelExporterAngularBLSpecific new.
 exporter model: gwtModel.
@@ -132,7 +132,7 @@ exporter runExport.
 
 7. Export the data models (DTO)
 
-```st
+```Smalltalk
 root := (exporter context root / 'models') asFileReference ensureCreateDirectory.
 businessExporter := CSNBusinessExporter new modelRoot: root.
 businessExporter export: gwtModel.
