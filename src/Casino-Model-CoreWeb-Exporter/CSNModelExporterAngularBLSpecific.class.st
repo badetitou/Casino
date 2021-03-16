@@ -251,7 +251,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	aServiceAPI printParameterIn: self.
 
 	self <<< '): Observable<'.
-	aServiceAPI dataType writeBusinessTypeOn: self.
+	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
 	self <<< '> {'.
 	self indentPlus.
 	aServiceAPI isGET
@@ -261,7 +261,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	self << 'return this.http.'.
 	aServiceAPI printRestTypeIn: self.
 	self <<< '<'.
-	aServiceAPI dataType writeBusinessTypeOn: self.
+	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
 	self <<< '>(''/ws/' <<< aServiceAPI serviceOwner targetPoint asKebabCase <<< '/' <<< aServiceAPI name asKebabCase <<< ''''.
 	self indentPlus.
 	aServiceAPI isPOST
@@ -273,7 +273,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 		<<< ', {';
 		crlf.
 	self << 'withCredentials: true'.
-	(aServiceAPI isGET and: [ aServiceAPI source parameters isNotEmpty ])
+	(aServiceAPI isGET and: [ aServiceAPI source isNotNil and: [ aServiceAPI source parameters isNotEmpty ] ])
 		ifTrue: [ self
 				<<< ',';
 				crlf;
@@ -282,7 +282,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 		crlf;
 		indentMinus;
 		<< '}).pipe(first()'.
-	aServiceAPI dataType innerType isBusinessType
+	aServiceAPI dataType ifNotNil: [:dateType | dateType innerType isBusinessType
 		ifTrue: [ self
 				<<< ',';
 				crlf;
@@ -291,7 +291,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 				inBraces: [ self << 'return '.
 					aServiceAPI dataType printServiceDeserializeOn: self ];
 				<<< ')';
-				indentMinus ].
+				indentMinus ]].
 	self
 		crlf;
 		<< ');';

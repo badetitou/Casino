@@ -2,8 +2,8 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> hasOnlyPrimitiveParameter [
-	^ (self source parameters collect: #declaredType)
-		allSatisfy: [ :type | type isPrimitiveType or: [ {'String' . 'Long' . 'Integer' . 'Double' . 'Boolean'} includes: type name ] ]
+	^ self source ifNotNil: [ (self source parameters collect: #declaredType)
+		allSatisfy: [ :type | type isPrimitiveType or: [ {'String' . 'Long' . 'Integer' . 'Double' . 'Boolean'} includes: type name ] ] ] ifNil: [ true ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -24,7 +24,7 @@ CSNServiceAPI >> isPOST [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printCreateFormDataIn: aStream [
-	self source parameters
+	self source ifNotNil: [ :source | source  parameters
 		ifNotEmpty: [ aStream crlf.
 			aStream
 				<< 'const formData = new FormData();';
@@ -36,13 +36,14 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 						ifFalse: [ aStream <<< 'JSON.stringify(' ]
 						ifTrue: [ aStream <<< 'this.mapToStringConverter.convertMapToJsonString(' ].
 					aStream <<< parameter name <<< '));' ]
-				separatedBy: [ aStream crlf ] ]
+				separatedBy: [ aStream crlf ] ] 
+			]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printCreateParamIn: aCSNExporter [
-	self source parameters
-		ifNotEmpty: [ aCSNExporter crlf.
+	(self source isNotNil and: [  self source parameters isNotEmpty ])
+		ifTrue: [ aCSNExporter crlf.
 			aCSNExporter
 				<< 'let params = new HttpParams();';
 				crlf.
@@ -56,7 +57,7 @@ CSNServiceAPI >> printParameterIn: aStream [
 	self sortedParameters
 		do: [ :parameter | 
 			aStream <<< parameter name <<< ': '.
-			parameter dataType writeBusinessTypeOn: aStream ]
+			parameter dataType ifNotNil: [ :dataType | dataType writeBusinessTypeOn: aStream ] ifNil: [ aStream << 'any' ] ]
 		separatedBy: [ aStream <<< ', ' ]
 ]
 
@@ -69,7 +70,7 @@ CSNServiceAPI >> printRestTypeIn: aStream [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> sortedParameters [
-	^ self parameters sorted: [ :p1 :p2 | p1 source sourceAnchor startPos < p2 source sourceAnchor startPos ]
+	^ self parameters sorted: [ :p1 :p2 | (p1 source ifNil: [ 0 ] ifNotNil: [ :source | source sourceAnchor startPos ] ) < (p2 source ifNil: [ 0 ] ifNotNil: [ :source | source sourceAnchor startPos ] ) ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
