@@ -26,7 +26,7 @@ In Casino, there are two existing configuration:
 
 Each configuration has a mapping dictionary that link, a casino widget *class* to an Angular widget representation *instance*.
 
-```st
+```SmallTalk
 CSNExporterAngularMaterialConfiguration >> #defaultConfiguration
   ^ super defaultConfiguration
     addAll:
@@ -58,7 +58,7 @@ For the example, we will add a [slide toogle](https://material.angular.io/compon
 
 First, we create a Pharo class that will represent the component.
 
-```st
+```SmallTalk
 MaterialComponent subclass: #MCSlideToggle
   instanceVariableNames: ''
   classVariableNames: ''
@@ -73,7 +73,7 @@ Then, we must implement five methods:
   - `true` if the component is defined in the target Angular project
   - `false` if the component is imported from an external project (*It is our case*)
 
-  ```st
+  ```SmallTalk
   isLocal
    ^ false
   ```
@@ -82,29 +82,29 @@ Then, we must implement five methods:
   - `true` if the component is part of the html standard (*e.g.*, `<p>`, `<img/>`, *etc*.)
   - `false` instead
 
-  ```st
+  ```SmallTalk
   isNative
- "The widget is part of the html standard"
- ^ false
+    "The widget is part of the html standard"
+    ^ false
   ```
 
 - `moduleName` returns the name of the Angular Module to import to access this component
 
-  ```st
+  ```SmallTalk
   moduleName
    ^ 'MatSlideToggleModule'
   ```
 
 - `modulePath` returns the path to access the module
 
-  ```st
+  ```SmallTalk
   modulePath
     ^ '@angular/material/slide-toggle'
   ```
 
 - `getSelector` returns the tag name (*i.e.*, `<tag-name>`)
 
-  ```st
+  ```SmallTalk
   getSelector
    ^ 'mat-slide-toggle'
   ```
@@ -113,7 +113,7 @@ Once all these methods are implemented, it is possible to use the component in a
 
 For instance, the `MCSlideToggle` component is added as follow:
 
-```st
+```SmallTalk
 CSNExporterAngularMaterialConfiguration >> #defaultConfiguration
   ^ super defaultConfiguration
     addAll:
@@ -148,7 +148,7 @@ In the following, we present how we adapted the component using the `WidgetRepre
 
 First, we created a helper method that gives us a name for the datepicker (`[matDatepicker]="the name"`)
 
-```st
+```SmallTalk
 MCDatePicker >> #variableFor: widget
   ^ 'picker', widget mooseID printString
 ```
@@ -159,7 +159,7 @@ Then, we modified the header and the footer.
 
 For the *header*, we extended the existing `#exportHeaderOf:with:` method.
 
-```st
+```SmallTalk
 MCDatePicker >> #exportHeaderOf: aWidget with: anExporter
   anExporter << '<mat-form-field appearance="fill">'; crlf.
   aWidget attributes
@@ -185,7 +185,7 @@ As you can see, the `exporter` also has a nice API to adds/removes indentations 
 
 For the *footer*, we extended the existing `#exportFooterOf:with:` method.
 
-```st
+```SmallTalk
 MCDatePicker >> #exportFooterOf: aWidget with: anExporter
   anExporter
     << '<mat-datepicker-toggle matSuffix [for]="';
@@ -205,7 +205,7 @@ In particular, it closes the `mat-form-field` opened in the header.
 Then, we default way to export the content of the widget to add the `matDatepicker` information.
 As for the header and footer, we extended a preexisting method: `#exportContentOf:with:`.
 
-```st
+```SmallTalk
 MCDatePicker >> #exportContentOf: aWidget with: anExporter
   anExporter indentPlus; << '<'.
   aWidget getListPropertiesAsStringWith: anExporter.
@@ -224,7 +224,7 @@ Finally, we declared a that our `MCDatePicker` has a `MCDateAdapter` as dependen
 Dependencies are also handled by Casino.
 Thus, we only need to extend the following method:
 
-```st
+```SmallTalk
 MCDatePicker >> #internalDependencies
   ^ { MCDateAdapter new }
 ```
@@ -236,15 +236,18 @@ However, it is possible to add default attribute to components.
 To do so, two methods exist:
 
 - `#componentAttributeOn:` allows to hard code an attribute that will be added in a tag. The attribute can be absent of the Casino model and can not respect the "key -> value" attribute structure
-  ```st
+
+  ```SmallTalk
   MCInput >> #componentAttributeOn: anExporter
     "Example for the MCInput"
     "<input matInput type=""radio""/>"
     anExporter <<< ' matInput '
   ```
+
 - `#attributeOf:` allows to add a Casino Attribute at generation time (not added in the model). This option is the one used when adding value to multi-value attribute such as `style` or `class`
-  ```st
+
+  ```SmallTalk
   CSNELCWBLInputComponent >> #attributeOf: aWidget
-    "An example coming from our industrial partner"
+    "An example coming from our industrial
     ^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
   ```
