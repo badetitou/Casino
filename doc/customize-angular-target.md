@@ -21,7 +21,7 @@ This class is responsible for the mapping between Casino widgets and Angular wid
 
 In Casino, there are two existing configuration:
 
-- `CSNExporterAngularMaterialConfiguration` is the configuration that uses most of the [angular.material.io](https://angular.material.io) components set
+- `CSNExporterAngularMaterialConfiguration` is the configuration that uses most of the [material.angular.io](https://material.angular.io/) components set
 - `CSNExporterAngularCoreWeb2Configuration` is specific industrial partner of this project
 
 Each configuration has a mapping dictionary that link, a casino widget *class* to an Angular widget representation *instance*.
