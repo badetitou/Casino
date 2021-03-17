@@ -248,6 +248,6 @@ To do so, two methods exist:
 
   ```SmallTalk
   CSNELCWBLInputComponent >> #attributeOf: aWidget
-    "An example coming from our industrial
+    "An example coming from our industrial"
     ^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
   ```
