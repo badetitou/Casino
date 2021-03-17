@@ -14,6 +14,13 @@ Other importers and exporters are [available](https://github.com/badetitou?tab=r
 - [Installation](#installation)
 - [Repository architecture](#repository-architecture)
 - [Example of Casino usage](#example-of-casino-usage)
+  - [Extraction](#extraction)
+    - [For GWT application](#for-gwt-application)
+    - [Existing JSON file](#existing-json-file)
+    - [Other existing importers](#other-existing-importers)
+  - [Generate](#generate)
+    - [Angular application](#angular-application)
+    - [Other generators](#other-generators)
 - [Developers](#developers)
 - [Links](#links)
   - [Other documentation (might be outdated):](#other-documentation-might-be-outdated)
@@ -63,6 +70,10 @@ There are three main parts:
 
 ## Example of Casino usage
 
+### Extraction
+
+#### For GWT application
+
 1. Load a Moose model
 
 ```Smalltalk
@@ -82,7 +93,7 @@ gwtModel metamodel: metamodel.
 
 3. Extract the UI with an [extractor]((https://github.com/badetitou?tab=repositories&q=Casino&type=&language=)).
 
-For GWT application:
+
 
 ```Smalltalk
 xml := (XMLDOMParser parse: 'path/to/myApp.module.xml' asFileReference).
@@ -113,6 +124,29 @@ gwtModel allCSNServiceAPI do: [ :serviceAPI |
 ].
 ```
 
+#### Existing JSON file
+
+```st
+"create a metamodel with Casino UI, Behavioral, Business, and FAMIX ref"
+metamodel := FMMetaModelBuilder metamodelFromPackages: CSNBModel packagesToProcessToCreateMetamodel , CRFModel packagesToProcessToCreateMetamodel, CSNBuModel packagesToProcessToCreateMetamodel.
+
+"Create a model"
+casinoModel := CSNUICWModel new name: 'MyModel'; yourself.
+
+"fix the metamodel of the model"
+casinoModel metamodel: metamodel.
+
+'/path/to/model.json' readStreamDo: [:stream | casinoModel importFromJSONStream: stream ].
+```
+
+#### Other existing importers
+
+[In GitHub](https://github.com/search?q=Casino-+-Importer)
+
+### Generate
+
+#### Angular application
+
 6. Export the UI and its behavior
 
 ```Smalltalk
@@ -137,6 +171,10 @@ root := (exporter context root / 'models') asFileReference ensureCreateDirectory
 businessExporter := CSNBusinessExporter new modelRoot: root.
 businessExporter export: gwtModel.
 ```
+
+#### Other generators
+
+[In GitHub](https://github.com/search?q=Casino-+-Exporter)
 
 ## Developers
 
