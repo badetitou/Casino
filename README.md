@@ -2,9 +2,8 @@
 
 ![Build Pass](https://github.com/badetitou/Casino/workflows/CI/badge.svg)
 [![Moose version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
-[![Moose version](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
-This project aims to ease the migration of application front-end using meta-models.
+This project aims to ease the migration of application front-end using metamodels.
 To do so, it extracts the UI model of an application and generates the target application from the model.
 
 This repository includes the whole work needed to migrate a GWT application to an Angular one.
@@ -34,9 +33,9 @@ Other importers and exporters are [available](https://github.com/badetitou?tab=r
 This repository contains the main packages of Casino.
 It includes:
 
-- A meta-model to represent the front-end of an application
-- An Importer for this meta-model
-- An Exporter for this meta-model
+- A metamodel to represent the front-end of an application
+- An Importer for this metamodel
+- An Exporter for this metamodel
 - A Specific Importer for Java (GWT)
 - A Specific Exporter to Angular
 
@@ -180,6 +179,10 @@ businessExporter export: gwtModel.
 
 If you want to implement your importer, you should look at the `CSNWebModel` class.
 This is the abstract importer of Casino.
+
+Here, we will only give hints on the main Casino project, with the GWT importer and Angular Exporter.
+
+- [Add/Customize Angular target widget](./doc/customize-angular-target.md)
 
 ## Links
 
