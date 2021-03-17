@@ -125,7 +125,7 @@ gwtModel allCSNServiceAPI do: [ :serviceAPI |
 
 #### Existing JSON file
 
-```st
+```SmallTalk
 "create a metamodel with Casino UI, Behavioral, Business, and FAMIX ref"
 metamodel := FMMetaModelBuilder metamodelFromPackages: CSNBModel packagesToProcessToCreateMetamodel , CRFModel packagesToProcessToCreateMetamodel, CSNBuModel packagesToProcessToCreateMetamodel.
 
