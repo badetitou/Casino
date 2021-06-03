@@ -188,7 +188,7 @@ Here, we will only give hints on the main Casino project, with the GWT importer 
 
 ### Other documentation (might be outdated):
 
-- [Personal website page](https://badetitou.github.io/projects/Casino/Casino/)
+- [Personal website page](https://badetitou.github.io/projects/Casino/)
 
 ### Linked research papers
 
