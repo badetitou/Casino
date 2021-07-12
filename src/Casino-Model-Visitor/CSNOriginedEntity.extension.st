@@ -1,7 +1,7 @@
 Extension { #name : #CSNOriginedEntity }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNOriginedEntity class >> accept: aCSNModelVisitor [
+CSNOriginedEntity classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNOriginedEntity: self
 ]

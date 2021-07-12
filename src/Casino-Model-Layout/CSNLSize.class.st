@@ -21,20 +21,20 @@ CSNLSize >> widget [
 	<container>
 	<derived>
 	<FMProperty: #widget type: #CSNWidget opposite: #size>
-	^ self privateState attributeAt: #widget ifAbsent: [ nil ]
+	^ self attributeAt: #widget ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
 CSNLSize >> widget: anObject [
 
 	<generated>
-	(self privateState attributeAt: #widget ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
+	(self attributeAt: #widget ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
 	anObject ifNil: [ | otherSide |
 		otherSide :=  self widget.
-		self privateState attributeAt: #widget put: anObject.
+		self attributeAt: #widget put: anObject.
 		otherSide size: nil ]
 	ifNotNil: [ 
-		self privateState attributeAt: #widget put: anObject.
+		self attributeAt: #widget put: anObject.
 		anObject size: self ]
 ]
 
@@ -42,5 +42,5 @@ CSNLSize >> widget: anObject [
 CSNLSize >> widgetGroup [
 	<generated>
 	<navigation: 'Widget'>
-	^ MooseGroup with: self widget
+	^ MooseSpecializedGroup with: self widget
 ]

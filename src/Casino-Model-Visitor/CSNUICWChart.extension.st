@@ -6,6 +6,6 @@ CSNUICWChart >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWChart class >> accept: aVisitor [
+CSNUICWChart classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWChart: self
 ]

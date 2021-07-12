@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWDynamicFieldset }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWDynamicFieldset class >> accept: aVisitor [
+CSNUICWDynamicFieldset classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWDynamicFieldset: self
 ]
 

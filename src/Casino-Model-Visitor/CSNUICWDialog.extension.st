@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWDialog }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWDialog class >> accept: aVisitor [
+CSNUICWDialog classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWDialog: self
 ]
 

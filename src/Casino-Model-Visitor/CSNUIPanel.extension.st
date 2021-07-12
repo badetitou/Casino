@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIPanel }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIPanel class >> accept: aCSNModelVisitor [
+CSNUIPanel classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIPanel: self
 ]

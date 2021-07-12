@@ -27,12 +27,12 @@ Class {
 }
 
 { #category : #export }
-MCInput class >> componentAttributeOn: anExporter [
+MCInput >> componentAttributeOn: anExporter [
 	anExporter <<< ' matInput '
 ]
 
 { #category : #export }
-MCInput class >> exportContentOf: aWidget with: anExporter [
+MCInput >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		<< '<'.
@@ -44,12 +44,12 @@ MCInput class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #export }
-MCInput class >> exportFooterOf: aWidget with: anExporter [
+MCInput >> exportFooterOf: aWidget with: anExporter [
 	anExporter << '</mat-form-field>'
 ]
 
 { #category : #export }
-MCInput class >> exportHeaderOf: aWidget with: anExporter [
+MCInput >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';
 		crlf.
@@ -67,22 +67,22 @@ MCInput class >> exportHeaderOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-MCInput class >> getSelector [
+MCInput >> getSelector [
 	^ 'input'
 ]
 
 { #category : #accessing }
-MCInput class >> isNative [
+MCInput >> isNative [
 	"The widget is part of the html standard"
 	^ true
 ]
 
 { #category : #accessing }
-MCInput class >> moduleName [
+MCInput >> moduleName [
 	^ 'MatInputModule'
 ]
 
 { #category : #accessing }
-MCInput class >> modulePath [
+MCInput >> modulePath [
 	^ '@angular/material/input'
 ]

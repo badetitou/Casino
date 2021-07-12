@@ -7,7 +7,7 @@ CSNLAbsolutePosition >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAbsolutePosition class >> accept: aCSNModelVisitor [
+CSNLAbsolutePosition classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLAbsolutePosition: self
 ]

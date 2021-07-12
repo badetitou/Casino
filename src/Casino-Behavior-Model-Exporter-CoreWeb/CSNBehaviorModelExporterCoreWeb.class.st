@@ -10,7 +10,8 @@ CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
 		ifNotNil: [ :widget | 
 			| accessVariable |
 			accessVariable := 'this.' , widget id.
-			widget angularComponent isNative
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				isNative
 				ifTrue: [ self
 						inParenthesis: [ self <<< ('<any>' , accessVariable) ];
 						<<< '.nativeElement' ]

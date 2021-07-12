@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICustomWidget }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUICustomWidget class >> accept: aCSNModelVisitor [
+CSNUICustomWidget classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUICustomWidget: self
 ]

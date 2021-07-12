@@ -41,6 +41,7 @@ CSNPage >> getMetadata [
 { 
     id: 'phase1_2',
     code: 'phase1',
+    codePhase: 'a long name',
     label: 'Phase 1 - 2',
     link: 'phase1',
     subLabel: 'Bienvenue sur la phase 1 - 2',
@@ -51,7 +52,8 @@ CSNPage >> getMetadata [
 
 	^ '{
     id: ''' , self name ,''',
-    code: ''' , self name,''',
+    code: ''' , self codeValue,''',
+    codePhase: ''' , (self codePhase ifNil: ['']) protectQuote,''',
     label: ''' , (self title ifNil: ['']) protectQuote ,''',
     link: ''' , self name,''',
     subLabel: ''' , (self subtitle ifNil: ['']) protectQuote, ''',
@@ -102,25 +104,25 @@ CSNPage >> sortedPageMetiers [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> widgetsDependencies [
+CSNPage >> widgetsDependenciesFrom: anExporter [
 	"At the level of the Phase, we don't need recursive external import (for the module file)... It's only in the TS file"
 
-	^ ((self recursiveMetiers collect: #recursiveWidgets) flattened collect: #getExternalDependency)
+	^ ((self recursiveMetiers collect: #recursiveWidgets) flattened collect: [:el | el getExternalDependencyFrom: anExporter ])
 		flattened asSet asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> widgetsDependenciesImportInstruction [
+CSNPage >> widgetsDependenciesImportInstructionFrom: anExporter [
 	^ ''
 		,
-			(((self widgetsDependencies reject: [:a | a isLocal ])
+			((((self widgetsDependenciesFrom: anExporter) reject: [:a | a isLocal ])
 				collect: [ :dependency | dependency importString , String crlf ]) as: Set) asOrderedCollection flatten
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> widgetsDependenciesName [
+CSNPage >> widgetsDependenciesNameFrom: anExporter [
 	^ ''
 		,
-			((self widgetsDependencies reject: [:a | a isLocal ])
+			(((self widgetsDependenciesFrom: anExporter) reject: [:a | a isLocal ])
 				flatCollect: [ :dependency | '        ', dependency moduleName , ',' , String crlf ])
 ]

@@ -24,7 +24,8 @@ Class {
 	#traits : 'TCSNExporter',
 	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
-		'currentPath'
+		'currentPath',
+		'exporterAngularConfiguration'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -34,6 +35,18 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 	anObject isString
 		ifTrue: [ ^ '"' , anObject , '"' ].
 	^ anObject 
+]
+
+{ #category : #actions }
+CSNModelExporterAngular class >> export: aBLMooseModel [
+	self new model: aBLMooseModel; 
+		exporterAngularConfiguration: CSNExporterAngularConfiguration;
+		 export
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> angularRepresentationOf: aCSNWidget [
+	^ self exporterAngularConfiguration angularRepresentationOf: aCSNWidget	
 ]
 
 { #category : #generate }
@@ -53,6 +66,16 @@ CSNModelExporterAngular >> currentPath [
 { #category : #accessing }
 CSNModelExporterAngular >> currentPath: anObject [
 	currentPath := anObject
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> exporterAngularConfiguration [
+	^ exporterAngularConfiguration
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> exporterAngularConfiguration: anObject [
+	exporterAngularConfiguration := anObject
 ]
 
 { #category : #visiting }
@@ -202,7 +225,7 @@ import { MatTabsModule } from ''@angular/material/tabs'';
 import { MatToolbarModule } from ''@angular/material/toolbar'';
 import { MatTooltipModule } from ''@angular/material/tooltip'';
 import { MatTreeModule } from ''@angular/material/tree'';
-import { MatPaginatorModule } from ''@angular/material'';
+import { MatPaginatorModule } from ''@angular/material/paginator'';
 import {OverlayModule} from ''@angular/cdk/overlay'';
 
 @NgModule({
@@ -364,7 +387,7 @@ import { PHASE_ROUTES } from ''./';
 		<< aCSNPage getAcceptedName;
 		<< '.route'';';
 		<< String crlf;
-		<< aCSNPage widgetsDependenciesImportInstruction;
+		<< (aCSNPage widgetsDependenciesImportInstructionFrom: self);
 		<< (aCSNPage businessPage flatCollect: [ :aBusinessPage | aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
 		<<
 			'
@@ -387,7 +410,7 @@ export const COMPONENTS: any[] = [
         CommonModule,
         PHASE_ROUTES,
 ';
-		<< aCSNPage widgetsDependenciesName;
+		<< (aCSNPage widgetsDependenciesNameFrom: self);
 		<<
 			'
         ComponentsModule,
@@ -428,7 +451,7 @@ const routes: Routes = [
            << String crlf ].
   currentWriteStream << '    ]}
 ];
-export const DEMOS_ROUTES: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: false });'
+export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
 ]
 
 { #category : #generate }
@@ -455,7 +478,7 @@ const routes: Routes = [
     }
 ];
 
-export const PHASE_ROUTES: ModuleWithProviders = RouterModule.forChild(routes);
+export const PHASE_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forChild(routes);
 '
 ]
 
@@ -465,7 +488,7 @@ CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	aBLPageMetier collectPhaseCalled
 		ifNotEmpty: [ self writeImportForNavigation ].
 	currentWriteStream
-		<< (String crlf join: aBLPageMetier widgetsDependencies);
+		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self));
 		<<
 			'
 
@@ -565,7 +588,7 @@ export class IndexComponent implements OnInit {
     public phaseHome: Phase;
 
     constructor(private _phaseService: PhaseService) {
-        this.phaseHome = this._phaseService.getPhase(''PHASE_INCUBATOR_HOME'');
+        this.phaseHome = this._phaseService.getPhase(''PHASE_OMAJE_HOME'');
     }
 
     public ngOnInit(): void {
@@ -635,7 +658,7 @@ export class ';
 					'    @ViewChild(BusinessPageContainerComponent, { static: false }) public container: BusinessPageContainerComponent;
 ';
 				<< String crlf ].
-	aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [ :metier | currentWriteStream << metier idViewChild << String crlf ] ].
+	aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [ :metier | currentWriteStream << (metier idViewChildFrom: self) << String crlf ] ].
 	currentWriteStream
 		<<
 			'
@@ -661,12 +684,15 @@ export class ';
 
 { #category : #initialization }
 CSNModelExporterAngular >> initialize [
-	indentLevel := 0
+	indentLevel := 0.
 ]
 
 { #category : #api }
 CSNModelExporterAngular >> prepareExport [
-	context := CSNContext new root: (FileSystem disk workingDirectory / model name) asFileReference; yourself.
+	super prepareExport.
+	context := CSNContext new
+		root: (FileSystem disk workingDirectory / model name) asFileReference;
+		yourself
 ]
 
 { #category : #api }
@@ -689,7 +715,7 @@ CSNModelExporterAngular >> serviceRoot [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNAttribute: aCSNAttribute [
 	aCSNAttribute widget
-		ifNil: [ WidgetRepresentation exportAttribute: aCSNAttribute with: self ]
+		ifNil: [ WidgetRepresentation new exportAttribute: aCSNAttribute with: self ]
 		ifNotNil: [ :widget | widget exportAttribute: aCSNAttribute with: self ]
 ]
 
@@ -721,12 +747,14 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
+	| angularRepresentation |
+	angularRepresentation := self angularRepresentationOf: aBLUIContainer.
 	aBLUIContainer layout
 		ifNotNil: [ :layout | 
-			aBLUIContainer angularComponent exportHeaderOf: aBLUIContainer with: self.
+			angularRepresentation exportHeaderOf: aBLUIContainer with: self.
 			self visit: layout.
-			aBLUIContainer angularComponent exportFooterOf: aBLUIContainer with: self ]
-		ifNil: [ aBLUIContainer angularComponent export: aBLUIContainer with: self ]
+			angularRepresentation exportFooterOf: aBLUIContainer with: self ]
+		ifNil: [ angularRepresentation export: aBLUIContainer with: self ]
 ]
 
 { #category : #visiting }
@@ -872,7 +900,7 @@ CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
   aBLSplitButton getListPropertiesAsStringWith: self.
   self
      <<< '></';
-     <<< aBLSplitButton getSelector;
+     <<< (aBLSplitButton getSelectorFrom: self);
      <<< '>'
 ]
 
@@ -894,7 +922,7 @@ CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
   aBLUIInputCheckbox getListPropertiesAsStringWith: self.
   self
      <<< ' type="checkbox"></';
-     <<< aBLUIInputCheckbox getSelector;
+     <<< (aBLUIInputCheckbox getSelectorFrom: self);
      <<< '>'
 ]
 
@@ -979,7 +1007,7 @@ CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
            crlf ].
   self
      << '</';
-     <<< aBLUIParagraph getSelector;
+     <<< (self angularRepresentationOf: aBLUIParagraph) getSelector;
      <<< '>'
 ]
 
@@ -1010,7 +1038,7 @@ CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
      <<< '>';
      crlf;
      << '</';
-     <<< aBLUISelect getSelector;
+     <<< (aBLUISelect getSelectorFrom: self);
      <<< '>'
 ]
 
@@ -1021,7 +1049,7 @@ CSNModelExporterAngular >> visitCSNUITitle: aBLUITitle [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNWidget: aBLWidget [
-	aBLWidget angularComponent export: aBLWidget with: self
+	(self angularRepresentationOf: aBLWidget) export: aBLWidget with: self
 ]
 
 { #category : #visiting }

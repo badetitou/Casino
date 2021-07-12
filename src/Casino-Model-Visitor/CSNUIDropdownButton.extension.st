@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIDropdownButton }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUIDropdownButton class >> accept: aCSNModelVisitor [
+CSNUIDropdownButton classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIDropdownButton: self
 ]

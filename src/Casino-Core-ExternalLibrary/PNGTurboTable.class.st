@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGTurboTable class >> getSelector [
+PNGTurboTable >> getSelector [
 	^ 'p-table'
 ]
 
 { #category : #accessing }
-PNGTurboTable class >> moduleName [
+PNGTurboTable >> moduleName [
 	^ 'TableModule'
 ]
 
 { #category : #accessing }
-PNGTurboTable class >> modulePath [
+PNGTurboTable >> modulePath [
 	^ 'primeng/table'
 ]

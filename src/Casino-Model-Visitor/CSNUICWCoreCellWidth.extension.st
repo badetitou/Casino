@@ -6,6 +6,6 @@ CSNUICWCoreCellWidth >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWCoreCellWidth class >> accept: aVisitor [
+CSNUICWCoreCellWidth classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWCoreCellWidth: self
 ]

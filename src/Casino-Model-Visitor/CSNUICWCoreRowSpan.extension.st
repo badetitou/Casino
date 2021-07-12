@@ -6,6 +6,6 @@ CSNUICWCoreRowSpan >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWCoreRowSpan class >> accept: aVisitor [
+CSNUICWCoreRowSpan classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWCoreRowSpan: self
 ]

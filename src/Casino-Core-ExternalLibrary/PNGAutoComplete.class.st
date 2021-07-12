@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGAutoComplete class >> getSelector [
+PNGAutoComplete >> getSelector [
 	^ 'p-autoComplete'
 ]
 
 { #category : #accessing }
-PNGAutoComplete class >> moduleName [
+PNGAutoComplete >> moduleName [
 	^ 'AutoCompleteModule'
 ]
 
 { #category : #accessing }
-PNGAutoComplete class >> modulePath [
+PNGAutoComplete >> modulePath [
 	^ 'primeng/autocomplete'
 ]

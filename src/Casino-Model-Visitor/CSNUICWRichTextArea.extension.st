@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWRichTextArea }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWRichTextArea class >> accept: aVisitor [
+CSNUICWRichTextArea classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWRichTextArea: self 
 ]
 

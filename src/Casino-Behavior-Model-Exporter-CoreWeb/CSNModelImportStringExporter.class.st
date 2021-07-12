@@ -16,7 +16,7 @@ CSNModelImportStringExporter >> visitCall: aCall [
 
 { #category : #generated }
 CSNModelImportStringExporter >> visitDOMElementAcccess: aDOMElementAcccess [
-	^ aDOMElementAcccess widget angularComponent importString
+	^ (self exporterAngularConfiguration angularRepresentationOf: aDOMElementAcccess widget) importString
 ]
 
 { #category : #generated }
@@ -26,5 +26,5 @@ CSNModelImportStringExporter >> visitNavigation: aNavigation [
 
 { #category : #generated }
 CSNModelImportStringExporter >> visitPopUp: aPopUp [
-	^ 'import { MatSnackBar } from ''@angular/material'';'
+	^ 'import { MatSnackBar } from ''@angular/material/snack-bar'';'
 ]

@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-MCProgressBar class >> getSelector [
+MCProgressBar >> getSelector [
 	^ 'mat-progress-bar'
 ]
 
 { #category : #accessing }
-MCProgressBar class >> moduleName [
+MCProgressBar >> moduleName [
 	^ 'MatProgressBarModule'
 ]
 
 { #category : #accessing }
-MCProgressBar class >> modulePath [
+MCProgressBar >> modulePath [
 	^ '@angular/material/progress-bar'
 ]

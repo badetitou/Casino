@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGListbox class >> moduleName [
+PNGListbox >> moduleName [
 	^ 'ListboxModule'
 ]
 
 { #category : #accessing }
-PNGListbox class >> modulePath [
+PNGListbox >> modulePath [
 	^ 'primeng/listbox'
 ]

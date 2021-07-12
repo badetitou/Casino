@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLListAndDetailsComponent class >> exportContentOf: aWidget with: anExporter [
+CSNELCWBLListAndDetailsComponent >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		crlf;
@@ -28,16 +28,16 @@ CSNELCWBLListAndDetailsComponent class >> exportContentOf: aWidget with: anExpor
 ]
 
 { #category : #accessing }
-CSNELCWBLListAndDetailsComponent class >> getSelector [
+CSNELCWBLListAndDetailsComponent >> getSelector [
 	^ 'bl-liste-et-detail'
 ]
 
 { #category : #accessing }
-CSNELCWBLListAndDetailsComponent class >> moduleName [
+CSNELCWBLListAndDetailsComponent >> moduleName [
 	^ 'ListeEtDetailComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLListAndDetailsComponent class >> subModulePath [
+CSNELCWBLListAndDetailsComponent >> subModulePath [
 	^ '/components/liste-et-detail/liste-et-detail.component'
 ]

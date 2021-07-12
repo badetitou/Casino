@@ -2,8 +2,8 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNServiceAPI >> dependencies [
-	^ (((self parameters collect: #dataType) , {self dataType}) asSet
-		collect: [ :dataType | 
+	^ (((self parameters collect: #dataType) , {self dataType}) asSet reject: #isNil 
+		thenCollect: [ :dataType | 
 			dataType isBusinessType
 				ifTrue: [ dataType ]
 				ifFalse: [ dataType isComplexType

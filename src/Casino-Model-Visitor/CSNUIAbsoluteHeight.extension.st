@@ -7,7 +7,7 @@ CSNUIAbsoluteHeight >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIAbsoluteHeight class >> accept: aCSNModelVisitor [
+CSNUIAbsoluteHeight classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIAbsoluteHeight: self
 ]

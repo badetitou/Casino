@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLSelectMultiple class >> getSelector [
+CSNELCWBLSelectMultiple >> getSelector [
 	^ 'bl-selectmultiple'
 ]
 
 { #category : #accessing }
-CSNELCWBLSelectMultiple class >> moduleName [
+CSNELCWBLSelectMultiple >> moduleName [
 	^ 'BlSelectMultipleComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLSelectMultiple class >> subModulePath [
+CSNELCWBLSelectMultiple >> subModulePath [
 	^ '/components/selectmultiple/selectmultiple.component'
 ]

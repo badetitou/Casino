@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-MCDateAdapter class >> moduleName [
+MCDateAdapter >> moduleName [
 	^ 'MatNativeDateModule'
 ]
 
 { #category : #accessing }
-MCDateAdapter class >> modulePath [
+MCDateAdapter >> modulePath [
 	^ '@angular/material/core'
 ]

@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLTabComponent class >> getSelector [
+CSNELCWBLTabComponent >> getSelector [
 	^ 'bl-tab'
 ]
 
 { #category : #accessing }
-CSNELCWBLTabComponent class >> moduleName [
+CSNELCWBLTabComponent >> moduleName [
 	^ 'TabComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLTabComponent class >> subModulePath [
+CSNELCWBLTabComponent >> subModulePath [
 	^ '/components/tab/tab/tab.component'
 ]

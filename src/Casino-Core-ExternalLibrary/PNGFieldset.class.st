@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGFieldset class >> moduleName [
+PNGFieldset >> moduleName [
 	^ 'FieldsetModule'
 ]
 
 { #category : #accessing }
-PNGFieldset class >> modulePath [
+PNGFieldset >> modulePath [
 	^ 'primeng/fieldset'
 ]

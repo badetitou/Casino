@@ -7,7 +7,7 @@ CSNLEastAlignement >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLEastAlignement class >> accept: aCSNModelVisitor [
+CSNLEastAlignement classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLEastAlignement: self
 ]

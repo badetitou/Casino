@@ -27,7 +27,7 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLRechercheEtListeComponent class >> exportContentOf: aWidget with: anExporter [
+CSNELCWBLRechercheEtListeComponent >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		crlf;
@@ -58,16 +58,16 @@ CSNELCWBLRechercheEtListeComponent class >> exportContentOf: aWidget with: anExp
 ]
 
 { #category : #accessing }
-CSNELCWBLRechercheEtListeComponent class >> getSelector [
+CSNELCWBLRechercheEtListeComponent >> getSelector [
 	^ 'bl-recherche-et-liste'
 ]
 
 { #category : #accessing }
-CSNELCWBLRechercheEtListeComponent class >> moduleName [
+CSNELCWBLRechercheEtListeComponent >> moduleName [
 	^ 'RechercheEtListeComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLRechercheEtListeComponent class >> subModulePath [
+CSNELCWBLRechercheEtListeComponent >> subModulePath [
 	^ '/components/recherche-et-liste/recherche-et-liste.component'
 ]

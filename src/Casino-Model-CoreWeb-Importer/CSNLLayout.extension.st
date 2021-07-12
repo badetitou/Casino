@@ -1,17 +1,17 @@
 Extension { #name : #CSNLLayout }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNLLayout class >> canHandle: anInvocation [
+CSNLLayout classSide >> canHandle: anInvocation [
 	^ true
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNLLayout class >> createCoreLayoutFor: anInvocation [
+CSNLLayout classSide >> createCoreLayoutFor: anInvocation [
 	^ self new
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNLLayout class >> newCoreLayoutFor: anInvocation [
+CSNLLayout classSide >> newCoreLayoutFor: anInvocation [
 	self subclasses
 		do: [ :subclass | 
 			| try |

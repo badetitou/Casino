@@ -5,33 +5,33 @@ Class {
 }
 
 { #category : #export }
-CSNELCWBLInputComponent class >> attributeOf: aWidget [
+CSNELCWBLInputComponent >> attributeOf: aWidget [
 	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
 
 { #category : #export }
-CSNELCWBLInputComponent class >> export: aWidget with: anExporter [
+CSNELCWBLInputComponent >> export: aWidget with: anExporter [
 	self exportHeaderOf: aWidget with: anExporter
 ]
 
 { #category : #export }
-CSNELCWBLInputComponent class >> exportHeaderOf: aWidget with: anExporter [
+CSNELCWBLInputComponent >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter <<< '/>'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputComponent class >> getSelector [
+CSNELCWBLInputComponent >> getSelector [
 	^ 'input'
 ]
 
 { #category : #accessing }
-CSNELCWBLInputComponent class >> isNative [
+CSNELCWBLInputComponent >> isNative [
 	^ true
 ]
 
 { #category : #accessing }
-CSNELCWBLInputComponent class >> modulePath [
+CSNELCWBLInputComponent >> modulePath [
 	^ '@angular/core'
 ]

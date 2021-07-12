@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIButton }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIButton class >> accept: aCSNModelVisitor [
+CSNUIButton classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIButton: self
 ]

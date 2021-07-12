@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #export }
-CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter [
+CSNELCWBLSimpleLinkComponent >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
 		ifFound: [ :label | 
@@ -26,16 +26,16 @@ CSNELCWBLSimpleLinkComponent class >> exportContentOf: aWidget with: anExporter 
 ]
 
 { #category : #accessing }
-CSNELCWBLSimpleLinkComponent class >> getSelector [
+CSNELCWBLSimpleLinkComponent >> getSelector [
 	^ 'bl-simple-link'
 ]
 
 { #category : #accessing }
-CSNELCWBLSimpleLinkComponent class >> moduleName [
+CSNELCWBLSimpleLinkComponent >> moduleName [
 	^ 'BlSimpleLinkComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLSimpleLinkComponent class >> subModulePath [
+CSNELCWBLSimpleLinkComponent >> subModulePath [
 	^ '/components/link-button/simple-link/simple-link.component'
 ]

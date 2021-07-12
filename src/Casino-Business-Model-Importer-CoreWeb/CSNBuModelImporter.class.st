@@ -47,11 +47,11 @@ CSNBuModelImporter >> famixModel: anObject [
 
 { #category : #importing }
 CSNBuModelImporter >> import [
-	self famixModel allClasses
+	self famixModel allClasses asOrderedCollection
 		detect: [ :class | class name = self dtoAbstractName ]
 		ifFound: [ :class |
 			class subclassHierarchy
-				reject: [ :a | a isStub or: [ a isAbstract ] ]
+				reject: [ :a | a isStub or: [ a isAbstract isNotNil and: [ a isAbstract ]] ]
 				thenDo: [ :concreteClass | self importClass: concreteClass ] ]
 		ifNone: [ Error signal: 'Abstract class not found' ]
 ]

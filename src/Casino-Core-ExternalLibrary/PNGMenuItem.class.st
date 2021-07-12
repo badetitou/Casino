@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGMenuItem class >> moduleName [
+PNGMenuItem >> moduleName [
 	^ 'MenuItem'
 ]
 
 { #category : #accessing }
-PNGMenuItem class >> modulePath [
+PNGMenuItem >> modulePath [
 	^ 'primeng/api'
 ]

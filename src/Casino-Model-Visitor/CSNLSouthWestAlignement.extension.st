@@ -1,7 +1,7 @@
 Extension { #name : #CSNLSouthWestAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLSouthWestAlignement class >> accept: aCSNModelVisitor [
+CSNLSouthWestAlignement classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLSouthWestAlignement: self
 ]

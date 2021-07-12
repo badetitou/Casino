@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGColorPicker class >> moduleName [
+PNGColorPicker >> moduleName [
 	^ 'ColorPickerModule'
 ]
 
 { #category : #accessing }
-PNGColorPicker class >> modulePath [
+PNGColorPicker >> modulePath [
 	^ 'primeng/colorpicker'
 ]

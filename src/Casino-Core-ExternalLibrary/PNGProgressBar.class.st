@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGProgressBar class >> getSelector [
+PNGProgressBar >> getSelector [
 	^ 'p-progressBar'
 ]
 
 { #category : #accessing }
-PNGProgressBar class >> moduleName [
+PNGProgressBar >> moduleName [
 	^ 'ProgressBarModule'
 ]
 
 { #category : #accessing }
-PNGProgressBar class >> modulePath [
+PNGProgressBar >> modulePath [
 	^ 'primeng/progressbar'
 ]

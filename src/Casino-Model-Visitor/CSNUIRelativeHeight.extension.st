@@ -7,7 +7,7 @@ CSNUIRelativeHeight >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIRelativeHeight class >> accept: aCSNModelVisitor [
+CSNUIRelativeHeight classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIRelativeHeight: self
 ]

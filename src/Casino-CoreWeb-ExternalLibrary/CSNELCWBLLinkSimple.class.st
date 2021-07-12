@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLLinkSimple class >> getSelector [
+CSNELCWBLLinkSimple >> getSelector [
 	^ 'bl-link-simple'
 ]
 
 { #category : #accessing }
-CSNELCWBLLinkSimple class >> moduleName [
+CSNELCWBLLinkSimple >> moduleName [
 	^ 'LinkSimpleComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLLinkSimple class >> subModulePath [
+CSNELCWBLLinkSimple >> subModulePath [
 	^ '/components/link-simple/link-simple.component'
 ]

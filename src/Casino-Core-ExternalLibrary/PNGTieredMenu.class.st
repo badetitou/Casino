@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGTieredMenu class >> internalDependencies [
-	^ { PNGMenuItem }
+PNGTieredMenu >> internalDependencies [
+	^ { PNGMenuItem new }
 ]
 
 { #category : #accessing }
-PNGTieredMenu class >> moduleName [
+PNGTieredMenu >> moduleName [
 	^ 'TieredMenuModule'
 ]
 
 { #category : #accessing }
-PNGTieredMenu class >> modulePath [
+PNGTieredMenu >> modulePath [
 	^ 'primeng/tieredmenu'
 ]

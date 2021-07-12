@@ -7,7 +7,7 @@ CSNUIInputReset >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputReset class >> accept: aCSNModelVisitor [
+CSNUIInputReset classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputReset: self
 ]

@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGPanelMenu class >> internalDependencies [
-	^ { PNGMenuItem }
+PNGPanelMenu >> internalDependencies [
+	^ { PNGMenuItem new }
 ]
 
 { #category : #accessing }
-PNGPanelMenu class >> moduleName [
+PNGPanelMenu >> moduleName [
 	^ 'PanelMenuModule'
 ]
 
 { #category : #accessing }
-PNGPanelMenu class >> modulePath [
+PNGPanelMenu >> modulePath [
 	^ 'primeng/panelmenu'
 ]

@@ -7,7 +7,8 @@ Class {
 	#name : #CSNBLRestServiceGenerator,
 	#superclass : #FAMIX2JavaVisitor,
 	#instVars : [
-		'service'
+		'service',
+		'rootNamespace'
 	],
 	#category : #'Casino-BL-GWT-ServiceRest-Exporter'
 }
@@ -82,8 +83,9 @@ CSNBLRestServiceGenerator >> convertBusinessType: serviceParameter [
 	(self << serviceParameter name)
 		<<< 'Json.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
 		crlf.
+	serviceParameter source declaredType ifNotNil: [ 
 	self << serviceParameter source declaredType name <<< ' ' <<< serviceParameter name <<< ' = ' <<< serviceParameter name <<< 'Json.getValueAs('
-		<<< serviceParameter source declaredType name <<< '.class);'
+		<<< serviceParameter source declaredType name <<< '.class);' ] ifNil: [  self << '// FIX: ' <<< serviceParameter name ]
 ]
 
 { #category : #convert }
@@ -123,6 +125,11 @@ CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> createNamespaceFolderForClass: class [
 	self visitNamespace: (class atScope: FAMIXNamespace) anyOne
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> defaultRootNamespace [
+	^ 'fr/bl/server/omaje/ws/rest'
 ]
 
 { #category : #accessing }
@@ -210,8 +217,19 @@ import java.io.IOException;
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> reset [
+	super reset.
+	self initialize
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> rootNamespace [
-	^ 'fr/bl/server/omaje/ws/rest'
+	^ rootNamespace ifNil: [ rootNamespace := self defaultRootNamespace ]
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> rootNamespace: aNamespace [
+	rootNamespace := aNamespace
 ]
 
 { #category : #accessing }
@@ -221,7 +239,11 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-	(aAttribute declaredType isPrimitiveType or: [ aAttribute modifiers includes: 'static' ])
+	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired'. ])
+		or: [ aAttribute declaredType isNil
+				or: [ aAttribute declaredType isPrimitiveType
+						or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ])
+								includes: 'static' ] ] ])
 		ifFalse: [ self
 				<< '@Autowired';
 				crlf ].
@@ -231,7 +253,8 @@ CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitClass: aClass [
 	| file |
-	file := self rootFolder / ('Rest' , (aClass name removePrefix: 'IGwt') , '.java').
+	file := self rootFolder
+		/ ('Rest' , (aClass name removePrefix: 'IGwt') , '.java').
 	file deleteIfAbsent: [  ].
 	file
 		writeStreamDo: [ :stream | 
@@ -239,7 +262,9 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 			"Printing class package and imports if the class is not an inner class"
 			aClass container isNamespace
 				ifTrue: [ self << 'package '.
-					aClass container fullNameLowerCasePrintOn: currentStream.
+					aClass container
+						fullNameLowerCasePrintOn: currentStream
+						fromRoot: (self rootNamespace copyReplaceAll: '/' with: '.').
 					self
 						<<< ';';
 						crlf;
@@ -251,7 +276,6 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 						crlf;
 						crlf ].
 			"Printing class annotations"
-
 			self addAuthors.
 			self crlf.
 			self addAnnotation.
@@ -264,17 +288,19 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 				<< String crlf.
 			"Printing Attributs"
 			tabs := tabs + 1.
-			(aClass attributes, aClass subclassHierarchyGroup collect: #attributes) flattened
+			(aClass attributes , aClass subclassHierarchyGroup
+				collect: #attributes) flattened
 				do: [ :attribute | 
 					self clone visit: attribute.
-					self crlf; crlf ].
+					self
+						crlf;
+						crlf ].
 			"Closing Class"
 			service actions
 				do: [ :action | self visitServiceAPI: action ]
 				separatedBy: [ self
 						crlf;
 						crlf ].
-
 			currentStream
 				<< String crlf;
 				<< '}' ]
@@ -295,6 +321,7 @@ CSNBLRestServiceGenerator >> visitNamespace: aNamespace [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	| aMethod |
+	aServiceAPI name record.
 	aMethod := aServiceAPI source.
 	aMethod isStub ifTrue: [ ^ self ].
 	"Printing method annotations"
@@ -304,12 +331,12 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	self addAnnotationForServiceAPI: aServiceAPI.
 	"Printing modifiers of method ex: static,public/private/protected"
 	self indent.
-	aMethod modifiers
+	(aMethod cacheAt: #modifiers ifAbsent: [( aMethod respondsTo:  #modifiers) ifTrue: [ aMethod modifiers ] ifFalse: [ {  } ] ])
 		ifNotEmptyDo: [ :modifier | 
 			self
 				<<< modifier;
 				space ]
-		ifEmpty: [ self <<< 'public' ].
+		ifEmpty: [ self <<< 'public'; space ].
 	"Printing return type for method"
 	aMethod declaredType
 		ifNotNil: [ :declaredType | 
@@ -336,7 +363,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		<< String crlf.
 	self indentPlus.
 	self printConvertParametersOf: aServiceAPI.
-	aMethod methodsOverriding do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ].
+	aMethod methodsOverriding ifNotEmpty: [ :methods | methods do: [ :methodOverriding | self << methodOverriding bodySourceText ] separatedBy: [ self crlf ] ]  ifEmpty: [ self << '// Error body not found ' ].
 	self
 		crlf;
 		indentMinus;

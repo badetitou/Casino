@@ -1,7 +1,7 @@
 Extension { #name : #CSNLSouthAlignement }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNLSouthAlignement class >> generateWithHorizontal: horizontal [
+CSNLSouthAlignement classSide >> generateWithHorizontal: horizontal [
 	^ horizontal = 'HasHorizontalAlignment.ALIGN_LEFT'
 		ifTrue: [ CSNLSouthWestAlignement new ]
 		ifFalse: [ horizontal = 'HasHorizontalAlignment.ALIGN_RIGHT'

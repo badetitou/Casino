@@ -23,16 +23,21 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #MCButton,
 	#superclass : #MaterialComponent,
+	#instVars : [
+		'isLink'
+	],
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
 { #category : #export }
-MCButton class >> componentAttributeOn: anExporter [
-	anExporter <<< ' mat-stroked-button '
+MCButton >> componentAttributeOn: anExporter [
+	self isLink
+		ifTrue: [ anExporter <<< ' mat-button ' ]
+		ifFalse: [ anExporter <<< ' mat-stroked-button ' ]
 ]
 
 { #category : #export }
-MCButton class >> exportContentOf: aWidget with: anExporter [
+MCButton >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes detect: [ :attribute | attribute isOfType: CSNUILabel ] ifFound: [ :attribute | anExporter visit: attribute ].
 	aWidget widgets
 		do: [ :widget | 
@@ -45,21 +50,43 @@ MCButton class >> exportContentOf: aWidget with: anExporter [
 ]
 
 { #category : #accessing }
-MCButton class >> getSelector [
+MCButton >> getSelector [
+	self isLink ifTrue: [ ^ 'a' ].
 	^ 'button'
 ]
 
 { #category : #accessing }
-MCButton class >> isNative [
+MCButton >> initialize [
+	super initialize.
+	isLink := false
+]
+
+{ #category : #accessing }
+MCButton >> isLink [
+	^ isLink
+]
+
+{ #category : #accessing }
+MCButton >> isLink: aBoolean [
+	isLink := aBoolean
+]
+
+{ #category : #accessing }
+MCButton >> isNative [
 	^ true
 ]
 
 { #category : #accessing }
-MCButton class >> moduleName [
+MCButton >> isNotLink [
+	isLink := false
+]
+
+{ #category : #accessing }
+MCButton >> moduleName [
 	^ 'MatButtonModule'
 ]
 
 { #category : #accessing }
-MCButton class >> modulePath [
+MCButton >> modulePath [
 	^ '@angular/material/button'
 ]

@@ -7,7 +7,7 @@ CSNUIInputColor >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputColor class >> accept: aCSNModelVisitor [
+CSNUIInputColor classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputColor: self
 ]

@@ -7,7 +7,7 @@ CSNUIMaxlength >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIMaxlength class >> accept: aCSNModelVisitor [
+CSNUIMaxlength classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIMaxlength: self
 ]

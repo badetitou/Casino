@@ -1,13 +1,13 @@
 Extension { #name : #CSNUISrc }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUISrc class >> accept: aCSNModelVisitor [
+CSNUISrc >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUISrc: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUISrc >> accept: aCSNModelVisitor [
+CSNUISrc classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUISrc: self
 ]

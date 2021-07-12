@@ -1,13 +1,13 @@
 Extension { #name : #CSNUIInputRadio }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputRadio class >> accept: aCSNModelVisitor [
+CSNUIInputRadio >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputRadio: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputRadio >> accept: aCSNModelVisitor [
+CSNUIInputRadio classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputRadio: self
 ]

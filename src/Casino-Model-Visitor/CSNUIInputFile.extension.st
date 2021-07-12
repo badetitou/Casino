@@ -7,12 +7,12 @@ CSNUIInputFile >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputFile class >> accept: aCSNModelVisitor [
+CSNUIInputFile classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputFile: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
 CSNUIInputFile >> angularComponent [
-	^ CSNELCWBLInputFile 
+	^ CSNELCWBLInputFile new
 ]

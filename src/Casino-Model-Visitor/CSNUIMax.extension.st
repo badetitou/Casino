@@ -7,7 +7,7 @@ CSNUIMax >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIMax class >> accept: aCSNModelVisitor [
+CSNUIMax classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIMax: self
 ]

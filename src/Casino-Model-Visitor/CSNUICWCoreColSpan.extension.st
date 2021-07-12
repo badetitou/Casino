@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWCoreColSpan }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWCoreColSpan class >> accept: aVisitor [
+CSNUICWCoreColSpan classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWCoreColSpan: self
 ]
 

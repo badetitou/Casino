@@ -6,6 +6,6 @@ CSNUICWFileUploadPanel >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWFileUploadPanel class >> accept: aVisitor [
+CSNUICWFileUploadPanel classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWFileUploadPanel: self
 ]

@@ -21,7 +21,7 @@ CSNModelExporter >> context [
 { #category : #run }
 CSNModelExporter >> export [
 	self prepareExport.
-	self visit: model.
+	self runExport.
 	self postExport 
 ]
 
@@ -40,7 +40,7 @@ CSNModelExporter >> postExport [
 	"can do something here"
 ]
 
-{ #category : #api }
+{ #category : #run }
 CSNModelExporter >> prepareExport [
 	"can be override"
 ]
@@ -48,6 +48,11 @@ CSNModelExporter >> prepareExport [
 { #category : #accessing }
 CSNModelExporter >> root [
 	^ self context root
+]
+
+{ #category : #run }
+CSNModelExporter >> runExport [
+	self visit: model. 
 ]
 
 { #category : #visiting }

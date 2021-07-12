@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLCheckboxComponent class >> getSelector [
+CSNELCWBLCheckboxComponent >> getSelector [
 	^ 'bl-checkbox'
 ]
 
 { #category : #accessing }
-CSNELCWBLCheckboxComponent class >> moduleName [
+CSNELCWBLCheckboxComponent >> moduleName [
 	^ 'BlCheckboxComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLCheckboxComponent class >> subModulePath [
+CSNELCWBLCheckboxComponent >> subModulePath [
 	^ '/components/checkbox/checkbox.component'
 ]

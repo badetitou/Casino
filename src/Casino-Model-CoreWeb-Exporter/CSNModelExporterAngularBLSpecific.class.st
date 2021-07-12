@@ -12,6 +12,14 @@ Class {
 	#category : #'Casino-Model-CoreWeb-Exporter'
 }
 
+{ #category : #actions }
+CSNModelExporterAngularBLSpecific class >> export: aBLMooseModel [
+	self new
+		model: aBLMooseModel;
+		exporterAngularConfiguration: CSNExporterAngularCoreWeb2Configuration;
+		export
+]
+
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> behaviorImportExporter [
 	^ CSNModelImportStringExporter
@@ -41,11 +49,14 @@ CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPag
 		<<
 			(String crlf
 				join:
-					(aBLPageMetier widgetsDependencies
+					((aBLPageMetier widgetsDependenciesFrom: self)
 						,
 							(aBLPageMetier calledBehavior
-								flatCollect:
-									[ :behavior | self behaviorImportExporter export: behavior withContext: self context ])
+								flatCollect: [ :behavior | 
+									self behaviorImportExporter
+										export: behavior
+										withContext: self context
+										andConfiguration: self exporterAngularConfiguration ])
 								flattened) asSet);
 		<<
 			'
@@ -75,7 +86,7 @@ export class ';
 					action behavior
 						flatCollect:
 							[ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
-				asSet collect: [ :widget | widget idViewChild ])
+				asSet collect: [ :widget | (widget idViewChildFrom: self) ])
 				asOrderedCollection;
 		<<
 			'
@@ -98,8 +109,10 @@ export class ';
 						collect: [ :behavior | 
 							self behaviorInitializeVariableExporter
 								export: behavior
-								withContext: self context ]) flattened reject: #isEmpty)
-						flattened asOrderedCollection removeDuplicates);
+								withContext: self context
+								andConfiguration: self exporterAngularConfiguration ])
+						flattened reject: #isEmpty) flattened asOrderedCollection
+						removeDuplicates);
 		<<
 			') {
 ';
@@ -146,6 +159,7 @@ export class ';
 					(self behaviorModelExporter
 						on: self currentWriteStream
 						withIndentLevel: 1)
+						exporterAngularConfiguration: self exporterAngularConfiguration;
 						currentPage: aBLPageMetier;
 						export: behaveMethod.
 					self
@@ -237,7 +251,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	aServiceAPI printParameterIn: self.
 
 	self <<< '): Observable<'.
-	aServiceAPI dataType writeBusinessTypeOn: self.
+	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
 	self <<< '> {'.
 	self indentPlus.
 	aServiceAPI isGET
@@ -247,7 +261,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 	self << 'return this.http.'.
 	aServiceAPI printRestTypeIn: self.
 	self <<< '<'.
-	aServiceAPI dataType writeBusinessTypeOn: self.
+	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
 	self <<< '>(''/ws/' <<< aServiceAPI serviceOwner targetPoint asKebabCase <<< '/' <<< aServiceAPI name asKebabCase <<< ''''.
 	self indentPlus.
 	aServiceAPI isPOST
@@ -259,7 +273,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 		<<< ', {';
 		crlf.
 	self << 'withCredentials: true'.
-	(aServiceAPI isGET and: [ aServiceAPI source parameters isNotEmpty ])
+	(aServiceAPI isGET and: [ aServiceAPI source isNotNil and: [ aServiceAPI source parameters isNotEmpty ] ])
 		ifTrue: [ self
 				<<< ',';
 				crlf;
@@ -268,7 +282,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 		crlf;
 		indentMinus;
 		<< '}).pipe(first()'.
-	aServiceAPI dataType innerType isBusinessType
+	aServiceAPI dataType ifNotNil: [:dateType | dateType innerType isBusinessType
 		ifTrue: [ self
 				<<< ',';
 				crlf;
@@ -277,7 +291,7 @@ CSNModelExporterAngularBLSpecific >> visitCSNServiceAPI: aServiceAPI [
 				inBraces: [ self << 'return '.
 					aServiceAPI dataType printServiceDeserializeOn: self ];
 				<<< ')';
-				indentMinus ].
+				indentMinus ]].
 	self
 		crlf;
 		<< ');';

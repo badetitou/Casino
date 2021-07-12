@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-MCSlider class >> getSelector [
+MCSlider >> getSelector [
 	^ 'mat-slider'
 ]
 
 { #category : #accessing }
-MCSlider class >> moduleName [
+MCSlider >> moduleName [
 	^ 'MatSliderModule'
 ]
 
 { #category : #accessing }
-MCSlider class >> modulePath [
+MCSlider >> modulePath [
 	^ '@angular/material/slider'
 ]

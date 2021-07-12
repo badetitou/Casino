@@ -27,16 +27,16 @@ Class {
 }
 
 { #category : #accessing }
-CSNELCWBLRadioComponent class >> getSelector [
+CSNELCWBLRadioComponent >> getSelector [
 	^ 'bl-radio-button'
 ]
 
 { #category : #accessing }
-CSNELCWBLRadioComponent class >> moduleName [
+CSNELCWBLRadioComponent >> moduleName [
 	^ 'BlRadioButtonComponent'
 ]
 
 { #category : #accessing }
-CSNELCWBLRadioComponent class >> subModulePath [
+CSNELCWBLRadioComponent >> subModulePath [
 	^ '/components/radio-button/radio-button.component'
 ]

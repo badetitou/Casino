@@ -7,7 +7,7 @@ CSNLRelativeSize >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLRelativeSize class >> accept: aCSNModelVisitor [
+CSNLRelativeSize classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLRelativeSize: self
 ]

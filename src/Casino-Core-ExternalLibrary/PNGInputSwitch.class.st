@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-PNGInputSwitch class >> getSelector [
+PNGInputSwitch >> getSelector [
 	^ 'p-inputSwitch'
 ]
 
 { #category : #accessing }
-PNGInputSwitch class >> moduleName [
+PNGInputSwitch >> moduleName [
 	^ 'InputSwitchModule'
 ]
 
 { #category : #accessing }
-PNGInputSwitch class >> modulePath [
+PNGInputSwitch >> modulePath [
 	^ 'primeng/inputswitch'
 ]

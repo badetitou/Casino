@@ -5,21 +5,21 @@ Class {
 }
 
 { #category : #accessing }
-PNGSplitButton class >> getSelector [
+PNGSplitButton >> getSelector [
 	^ 'p-splitButton'
 ]
 
 { #category : #accessing }
-PNGSplitButton class >> internalDependencies [
-	^ { PNGMenuItem }
+PNGSplitButton >> internalDependencies [
+	^ { PNGMenuItem new }
 ]
 
 { #category : #accessing }
-PNGSplitButton class >> moduleName [
+PNGSplitButton >> moduleName [
 	^ 'SplitButtonModule'
 ]
 
 { #category : #accessing }
-PNGSplitButton class >> modulePath [
+PNGSplitButton >> modulePath [
 	^ 'primeng/splitbutton'
 ]

@@ -6,6 +6,6 @@ CSNUICWGroupFieldset >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWGroupFieldset class >> accept: aVisitor [
+CSNUICWGroupFieldset classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWGroupFieldset: self
 ]

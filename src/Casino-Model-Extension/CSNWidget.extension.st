@@ -2,7 +2,7 @@ Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Extension' }
 CSNWidget >> addingPosition [
-	<MSEProperty: #addingPosition type: #Number>
+	<FMProperty: #addingPosition type: #Number>
 	^ self
 		attributeAt: #addingPosition
 		ifAbsent:
@@ -77,7 +77,7 @@ CSNWidget >> name [
 
 { #category : #'*Casino-Model-Extension' }
 CSNWidget >> realClass [
-	<MSEProperty: #realClass type: #Object>
+	<FMProperty: #realClass type: #Object>
 	^ realClass
 ]
 

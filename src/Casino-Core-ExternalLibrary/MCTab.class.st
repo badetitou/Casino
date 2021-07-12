@@ -27,23 +27,23 @@ Class {
 }
 
 { #category : #'accessing - export' }
-MCTab class >> attributeDictionary [
+MCTab >> attributeDictionary [
 	^ super attributeDictionary
 		at: CSNUITitle put: 'label';
 		yourself
 ]
 
 { #category : #accessing }
-MCTab class >> getSelector [
+MCTab >> getSelector [
 	^ 'mat-tab'
 ]
 
 { #category : #accessing }
-MCTab class >> moduleName [
+MCTab >> moduleName [
 	^ 'MatTabsModule'
 ]
 
 { #category : #accessing }
-MCTab class >> modulePath [
+MCTab >> modulePath [
 	^ '@angular/material/tabs'
 ]

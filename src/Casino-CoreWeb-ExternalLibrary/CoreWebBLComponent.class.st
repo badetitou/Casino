@@ -5,16 +5,16 @@ Class {
 }
 
 { #category : #accessing }
-CoreWebBLComponent class >> isNative [
+CoreWebBLComponent >> isNative [
 	^ false
 ]
 
 { #category : #accessing }
-CoreWebBLComponent class >> modulePath [
+CoreWebBLComponent >> modulePath [
 	^ 'app/projects/bl-shell/src/lib' , self subModulePath
 ]
 
 { #category : #accessing }
-CoreWebBLComponent class >> subModulePath [
+CoreWebBLComponent >> subModulePath [
 	^ self subclassResponsibility
 ]

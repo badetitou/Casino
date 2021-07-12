@@ -2,15 +2,17 @@ Class {
 	#name : #CSNModelDependencyExporter,
 	#superclass : #CSNBehaviorModelExporter,
 	#instVars : [
-		'context'
+		'context',
+		'exporterAngularConfiguration'
 	],
 	#category : #'Casino-Behavior-Model-Exporter-CoreWeb'
 }
 
 { #category : #export }
-CSNModelDependencyExporter class >> export: behavior withContext: aContext [
+CSNModelDependencyExporter class >> export: behavior withContext: aContext andConfiguration: aAngularConfiguration [
 	^ self new
 		context: aContext;
+		exporterAngularConfiguration: aAngularConfiguration; 
 		export: behavior
 ]
 
@@ -27,6 +29,16 @@ CSNModelDependencyExporter >> context: anObject [
 { #category : #accessing }
 CSNModelDependencyExporter >> export: aBehaviorMethod [
 	^ self accept: aBehaviorMethod
+]
+
+{ #category : #accessing }
+CSNModelDependencyExporter >> exporterAngularConfiguration [
+	^ exporterAngularConfiguration
+]
+
+{ #category : #accessing }
+CSNModelDependencyExporter >> exporterAngularConfiguration: anObject [
+	exporterAngularConfiguration := anObject
 ]
 
 { #category : #generated }

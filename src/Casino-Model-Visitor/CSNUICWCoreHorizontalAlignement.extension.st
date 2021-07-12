@@ -6,6 +6,6 @@ CSNUICWCoreHorizontalAlignement >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWCoreHorizontalAlignement class >> accept: aVisitor [
+CSNUICWCoreHorizontalAlignement classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWCoreHorizontalAlignement: self
 ]

@@ -6,6 +6,6 @@ CSNUICWHTML >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWHTML class >> accept: aVisitor [
+CSNUICWHTML classSide >> accept: aVisitor [
 	^ aVisitor visitCSNUICWHTML: self
 ]

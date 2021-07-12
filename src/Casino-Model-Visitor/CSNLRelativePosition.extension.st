@@ -7,7 +7,7 @@ CSNLRelativePosition >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLRelativePosition class >> accept: aCSNModelVisitor [
+CSNLRelativePosition classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLRelativePosition: self
 ]

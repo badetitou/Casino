@@ -5,11 +5,11 @@ Class {
 }
 
 { #category : #accessing }
-PNGCalendar class >> moduleName [
+PNGCalendar >> moduleName [
 	^ 'CalendarModule'
 ]
 
 { #category : #accessing }
-PNGCalendar class >> modulePath [
+PNGCalendar >> modulePath [
 	^ 'primeng/calendar'
 ]

@@ -10,7 +10,8 @@ Class {
 	#name : #CSNBehaviorModelExporterAngular,
 	#superclass : #CSNBehaviorModelExporter,
 	#instVars : [
-		'currentPage'
+		'currentPage',
+		'exporterAngularConfiguration'
 	],
 	#category : #'Casino-Behavior-Model-Exporter-Angular'
 }
@@ -23,6 +24,16 @@ CSNBehaviorModelExporterAngular >> currentPage [
 { #category : #accessing }
 CSNBehaviorModelExporterAngular >> currentPage: anObject [
 	currentPage := anObject
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporterAngular >> exporterAngularConfiguration [
+	^ exporterAngularConfiguration
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporterAngular >> exporterAngularConfiguration: anObject [
+	exporterAngularConfiguration := anObject
 ]
 
 { #category : #generated }

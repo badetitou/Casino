@@ -7,7 +7,7 @@ CSNUIOrderedList >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIOrderedList class >> accept: aCSNModelVisitor [
+CSNUIOrderedList classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIOrderedList: self
 ]

@@ -7,7 +7,7 @@ CSNUIInputText >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputText class >> accept: aCSNModelVisitor [
+CSNUIInputText classSide >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputText: self
 ]
