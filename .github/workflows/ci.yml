@@ -34,7 +34,7 @@ jobs:
 
       - name: Build meta-model planuml image
         run: |
-          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "FileLocator home / 'uml.uml' writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
+          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'uml.uml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
     
       - name: check directory
         run: ls
@@ -46,7 +46,7 @@ jobs:
       - name: Generate PNG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng $HOME/uml.uml
+            args: -v -tpng uml.uml
       
       - name: check directory
         run: ls
