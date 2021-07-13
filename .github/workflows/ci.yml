@@ -10,6 +10,7 @@ on:
       - main
       - v*
       - master
+      - test
 
 jobs:
   build:
@@ -22,9 +23,28 @@ jobs:
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
+      
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-version: ${{ matrix.smalltalk }}
+      
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         shell: bash
         timeout-minutes: 15
+
+      - name: Build meta-model planuml image
+        run: |
+          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "FileLocator home / 'uml.uml' writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
+    
+      - name: check directory
+        run: ls
+      
+      - name: Generate PNG Diagrams
+        uses: cloudbees/plantuml-github-action@master
+        with:
+            args: -v -tpng uml.uml
+      
+      - name: check directory
+        run: ls
+      
+      
