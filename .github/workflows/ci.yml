@@ -46,7 +46,7 @@ jobs:
       - name: Generate PNG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng ~/uml.uml
+            args: -v -tpng $HOME/uml.uml
       
       - name: check directory
         run: ls
