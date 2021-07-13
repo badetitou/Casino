@@ -35,23 +35,18 @@ jobs:
       - name: Build meta-model planuml image
         run: |
           $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'uml.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
-    
-      - name: check directory
-        run: ls
-      
-      - name: check home directory
-        run: ls ~
-      
-      
+
       - name: Generate PNG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
             args: -v -tpng uml.puml
-      
-      - name: check directory
-        run: ls
-        
-      - name: check home directory
-        run: ls ~
-      
-      
+            
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          # Artifact name
+          name: uml.png # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: uml.png
+
+
