@@ -19,7 +19,7 @@ jobs:
       PROJECT_NAME: PharoLanguageServer
     strategy:
       matrix:
-        smalltalk: [ Moose64-8.0]
+        smalltalk: [ Moose64-9.0]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
