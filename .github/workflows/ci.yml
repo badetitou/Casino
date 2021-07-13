@@ -40,13 +40,22 @@ jobs:
         uses: cloudbees/plantuml-github-action@master
         with:
             args: -v -tpng uml.puml
-            
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
+          
+      - name: Move artifact
+        run: |
+          mkdir doc-uml
+          mv uml.png doc-uml
+      
+      # Careful, this can kill your project
+      - name: Force push to destination branch
+        uses: ad-m/github-push-action@v0.5.0
         with:
-          # Artifact name
-          name: uml.png # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: uml.png
+          # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Destination branch to push changes
+          branch: doc
+          # We have to push from the folder where files were generated.
+          # Same were the new repo was initialized in the previous step
+          directory: ./doc-uml
 
 
