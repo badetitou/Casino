@@ -39,12 +39,19 @@ jobs:
       - name: check directory
         run: ls
       
+      - name: check home directory
+        run: ls ~
+      
+      
       - name: Generate PNG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng uml.uml
+            args: -v -tpng ~/uml.uml
       
       - name: check directory
         run: ls
+        
+      - name: check home directory
+        run: ls ~
       
       
