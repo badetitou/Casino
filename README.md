@@ -21,6 +21,7 @@ Other importers and exporters are [available](https://github.com/badetitou?tab=r
     - [Angular application](#angular-application)
     - [Other generators](#other-generators)
 - [Developers](#developers)
+  - [UML](#uml)
 - [Links](#links)
   - [Other documentation (might be outdated):](#other-documentation-might-be-outdated)
   - [Linked research papers](#linked-research-papers)
@@ -183,6 +184,12 @@ This is the abstract importer of Casino.
 Here, we will only give hints on the main Casino project, with the GWT importer and Angular Exporter.
 
 - [Add/Customize Angular target widget](./doc/customize-angular-target.md)
+
+### UML
+
+This is the UML of the core meta-model of Casino
+
+![CSNModel meta-model](https://raw.githubusercontent.com/badetitou/Casino/doc/uml.png)
 
 ## Links
 
