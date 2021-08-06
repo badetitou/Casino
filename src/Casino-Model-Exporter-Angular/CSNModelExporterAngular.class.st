@@ -39,9 +39,11 @@ CSNModelExporterAngular class >> convertIfString: anObject [
 
 { #category : #actions }
 CSNModelExporterAngular class >> export: aBLMooseModel [
-	self new model: aBLMooseModel; 
-		exporterAngularConfiguration: CSNExporterAngularConfiguration;
-		 export
+
+	self new
+		model: aBLMooseModel;
+		exporterAngularConfiguration: CSNExporterAngularConfiguration new;
+		export
 ]
 
 { #category : #accessing }

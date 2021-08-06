@@ -68,24 +68,6 @@ CSNBehaviorModelExporterAngular >> visitCall: aCall [
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTBooleanLiteral: aFASTBooleanLiteral [
-	self <<< aFASTBooleanLiteral value
-]
-
-{ #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTEntity: aFASTEntity [
-	self debugMode
-		ifTrue: [ self error: 'You need to implement a visitor because we must not export an ''Entity''' ]
-		ifFalse: [ super visitFASTEntity: aFASTEntity ]
-]
-
-{ #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTExpressionStatement: aFASTExpressionStatement [
-	(self accept: aFASTExpressionStatement expression).
-	self <<< ';'
-]
-
-{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaArrayAccess: aFASTJavaArrayAccess [
 	self accept: aFASTJavaArrayAccess array.
 	self <<< '['.
@@ -314,7 +296,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self
 		<<< '''';
-		<<< aFASTJavaStringLiteral value protectQuote;
+		<<< aFASTJavaStringLiteral primitiveValue protectQuote;
 		<<< ''''
 ]
 
@@ -377,23 +359,41 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaWhileStatement: aFASTJavaWhileSt
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTLiteral: aFASTLiteral [
-	self <<< aFASTLiteral value
+CSNBehaviorModelExporterAngular >> visitFASTTBooleanLiteral: aFASTBooleanLiteral [
+	self <<< aFASTBooleanLiteral value
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTNamedEntity: aFASTNamedEntity [
+CSNBehaviorModelExporterAngular >> visitFASTTEntity: aFASTEntity [
+	self debugMode
+		ifTrue: [ self error: 'You need to implement a visitor because we must not export an ''Entity''' ]
+		ifFalse: [ super visitFASTEntity: aFASTEntity ]
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTTExpressionStatement: aFASTExpressionStatement [
+	(self accept: aFASTExpressionStatement expression).
+	self <<< ';'
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTTLiteral: aFASTLiteral [
+	self <<< aFASTLiteral primitiveValue
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTTNamedEntity: aFASTNamedEntity [
 	self <<< aFASTNamedEntity name
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTStatement: aFASTStatement [
+CSNBehaviorModelExporterAngular >> visitFASTTStatement: aFASTStatement [
 	self indent.
 	aFASTStatement orderedChildren do: [ :child | self accept: child ]
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock [
+CSNBehaviorModelExporterAngular >> visitFASTTStatementBlock: aFASTStatementBlock [
 	self
 		<<< ' {';
 		indentPlus;
@@ -412,7 +412,7 @@ CSNBehaviorModelExporterAngular >> visitFASTStatementBlock: aFASTStatementBlock 
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTVariableExpression: aFASTVariableExpression [
+CSNBehaviorModelExporterAngular >> visitFASTTVariableExpression: aFASTVariableExpression [
 	self
 		<<<
 			(aFASTVariableExpression famixVariable

@@ -5,5 +5,5 @@ Class {
 }
 
 { #category : #generated }
-CSNBehaviorNullModelExporterAngular >> visitFASTEntity: aFASTEntity [
+CSNBehaviorNullModelExporterAngular >> visitFASTTEntity: aFASTEntity [
 ]

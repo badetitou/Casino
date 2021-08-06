@@ -7,7 +7,7 @@ FASTJavaMethodInvocation >> uniqueName [
 
 { #category : #'*Casino-Behavior-Model-Exporter-Angular' }
 FASTJavaMethodInvocation >> uniqueNameInPage: aPage [
-	^ (self famix isNotNil and: [ self famix candidates anyOne fast isNotNil ])
-		ifTrue: [ self famix candidates anyOne uniqueNameInPage: aPage ]
+	^ (self famixInvocation isNotNil and: [ self famixInvocation candidates anyOne fast isNotNil ])
+		ifTrue: [ self famixInvocation candidates anyOne uniqueNameInPage: aPage ]
 		ifFalse: [ self name ]
 ]

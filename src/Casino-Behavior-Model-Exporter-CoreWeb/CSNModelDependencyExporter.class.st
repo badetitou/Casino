@@ -57,7 +57,7 @@ CSNModelDependencyExporter >> visitDOMElementAcccess: aDOMElementAcccess [
 ]
 
 { #category : #generated }
-CSNModelDependencyExporter >> visitFASTEntity: aFASTEntity [
+CSNModelDependencyExporter >> visitFASTTEntity: aFASTEntity [
 	| scopes |
 	scopes := (CSNBModel metamodel packages select: [ :package | 
 		           package name = CSNBehaviorModelGenerator packageName ])

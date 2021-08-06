@@ -75,12 +75,12 @@ TCSNBehaviorVisitor >> visitCSNBOnSubmitSuccess: aCSNBOnSubmitSuccess [
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCall: aCall [
-	^ self visitFASTExpression: aCall
+	^ self visitFASTTExpression: aCall
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitDOMElementAcccess: aDOMElementAcccess [
-	^ self visitFASTExpression: aDOMElementAcccess
+	^ self visitFASTTExpression: aDOMElementAcccess
 ]
 
 { #category : #visiting }
@@ -90,17 +90,17 @@ TCSNBehaviorVisitor >> visitGetElementAttribute: aSetElementAttribute [
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitNavigation: aNavigation [
-	^ self visitFASTExpression: aNavigation
+	^ self visitFASTTExpression: aNavigation
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitOpenDialog: anOpenDialog [
-	^ self visitFASTExpression: anOpenDialog
+	^ self visitFASTTExpression: anOpenDialog
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitPopUp: aPopUp [
-	^ self visitFASTExpression: aPopUp
+	^ self visitFASTTExpression: aPopUp
 ]
 
 { #category : #visiting }

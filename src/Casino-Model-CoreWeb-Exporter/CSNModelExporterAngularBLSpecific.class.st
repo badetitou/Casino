@@ -16,7 +16,7 @@ Class {
 CSNModelExporterAngularBLSpecific class >> export: aBLMooseModel [
 	self new
 		model: aBLMooseModel;
-		exporterAngularConfiguration: CSNExporterAngularCoreWeb2Configuration;
+		exporterAngularConfiguration: CSNExporterAngularCoreWeb2Configuration new;
 		export
 ]
 
