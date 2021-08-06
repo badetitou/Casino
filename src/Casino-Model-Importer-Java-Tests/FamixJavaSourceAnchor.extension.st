@@ -1,21 +1,21 @@
-Extension { #name : #FAMIXSourceTextAnchor }
+Extension { #name : #FamixJavaSourceAnchor }
 
 { #category : #'*Casino-Model-Importer-Java-Tests' }
-FAMIXSourceTextAnchor >> endPos [
+FamixJavaSourceAnchor >> endPos [
 	^ self attributeAt: #endPos ifAbsent: [ self source size ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java-Tests' }
-FAMIXSourceTextAnchor >> endPos: endPos [
+FamixJavaSourceAnchor >> endPos: endPos [
 	self attributeAt: #endPos ifAbsentPut: endPos
 ]
 
 { #category : #'*Casino-Model-Importer-Java-Tests' }
-FAMIXSourceTextAnchor >> startPos [
+FamixJavaSourceAnchor >> startPos [
 	^ self attributeAt: #startPos ifAbsent: [ 0 ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java-Tests' }
-FAMIXSourceTextAnchor >> startPos: aStartPos [
+FamixJavaSourceAnchor >> startPos: aStartPos [
 	self attributeAt: #startPos ifAbsentPut: aStartPos
 ]

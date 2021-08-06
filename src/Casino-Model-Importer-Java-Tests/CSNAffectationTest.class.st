@@ -22,7 +22,7 @@ CSNAffectationTest >> createInModel: aClass [
 { #category : #setUp }
 CSNAffectationTest >> setUp [ 
 	super setUp.
-	model := FAMIXModel new
+	model := FamixJavaModel new
 ]
 
 { #category : #resources }
@@ -64,21 +64,21 @@ CSNAffectationTest >> testAffectation [
 
 	| sourceMethod invocation sourceMethodSourceAnchor indexedAnchor localVariable |
 	sourceMethodSourceAnchor := (self
-		createInModel: FAMIXSourceTextAnchor)
+		createInModel: FamixJavaSourceTextAnchor)
 		source: self simpleAffectationExample;
 		yourself.
-	sourceMethod := (self createInModel: FAMIXMethod)
+	sourceMethod := (self createInModel: FamixJavaMethod)
 		name: 'sourceMethod';
 		sourceAnchor: sourceMethodSourceAnchor;
 		yourself.
-	indexedAnchor := (self createInModel: FAMIXIndexedFileAnchor)
+	indexedAnchor := (self createInModel: FamixJavaIndexedFileAnchor)
 		startPos: 32;
 		endPos: 44;
 		yourself.
-	invocation := (self createInModel: FAMIXInvocation)
+	invocation := (self createInModel: FamixJavaInvocation)
 		source: sourceMethod;
 		sourceAnchor: indexedAnchor.
-	localVariable := (self createInModel: FAMIXLocalVariable)
+	localVariable := (self createInModel: FamixJavaLocalVariable)
 		name: 'w';
 		yourself.
 	sourceMethod localVariables: {localVariable}.
@@ -93,28 +93,28 @@ CSNAffectationTest >> testAffectationInParameter [
 
 	| sourceMethod invocationWidget sourceMethodSourceAnchor indexedAnchorInvocationWidget localVariable invocationLabel indexedAnchorInvocationLabel |
 	sourceMethodSourceAnchor := (self
-		createInModel: FAMIXSourceTextAnchor)
+		createInModel: FamixJavaSourceTextAnchor)
 		source: self affectationInParameter;
 		yourself.
-	sourceMethod := (self createInModel: FAMIXMethod)
+	sourceMethod := (self createInModel: FamixJavaMethod)
 		name: 'sourceMethod';
 		sourceAnchor: sourceMethodSourceAnchor;
 		yourself.
-	indexedAnchorInvocationWidget := (self createInModel: FAMIXIndexedFileAnchor)
+	indexedAnchorInvocationWidget := (self createInModel: FamixJavaIndexedFileAnchor)
 		startPos: 32;
 		endPos: 55;
 		yourself.
-	invocationWidget := (self createInModel: FAMIXInvocation)
+	invocationWidget := (self createInModel: FamixJavaInvocation)
 		source: sourceMethod;
 		sourceAnchor: indexedAnchorInvocationWidget.
-	indexedAnchorInvocationLabel := (self createInModel: FAMIXIndexedFileAnchor)
+	indexedAnchorInvocationLabel := (self createInModel: FamixJavaIndexedFileAnchor)
 		startPos: 43;
 		endPos: 54;
 		yourself.
-	invocationLabel := (self createInModel: FAMIXInvocation)
+	invocationLabel := (self createInModel: FamixJavaInvocation)
 		source: sourceMethod;
 		sourceAnchor: indexedAnchorInvocationLabel.
-	localVariable := (self createInModel: FAMIXLocalVariable)
+	localVariable := (self createInModel: FamixJavaLocalVariable)
 		name: 'w';
 		yourself.
 	sourceMethod localVariables: {localVariable}.
@@ -129,33 +129,33 @@ CSNAffectationTest >> testAffectationToAttribute [
 	example source code is here: simpleAffectationToAttributeExample"
 
 	| sourceMethod invocation sourceClassSourceAnchor sourceMethodSourceAnchor indexedAnchor attribute class |
-	sourceClassSourceAnchor := (self createInModel: FAMIXSourceTextAnchor)
+	sourceClassSourceAnchor := (self createInModel: FamixJavaSourceTextAnchor)
 		source: self simpleAffectationToAttributeExample;
 		yourself.
-	class := (self createInModel: FAMIXClass)
+	class := (self createInModel: FamixJavaClass)
 		name: 'A';
 		sourceAnchor: sourceClassSourceAnchor;
 		yourself.
 	sourceMethodSourceAnchor := (self
-		createInModel: FAMIXSourceTextAnchor)
+		createInModel: FamixJavaSourceTextAnchor)
 		startPos: 25;
 		endPos: 62;
 		source: (self simpleAffectationToAttributeExample copyFrom: 25 to: 62)
 		yourself.
-	sourceMethod := (self createInModel: FAMIXMethod)
+	sourceMethod := (self createInModel: FamixJavaMethod)
 		name: 'sourceMethod';
 		parentType: class;
 		sourceAnchor: sourceMethodSourceAnchor;
 		yourself.
-	indexedAnchor := (self createInModel: FAMIXSourceTextAnchor)
+	indexedAnchor := (self createInModel: FamixJavaSourceTextAnchor)
 		startPos: 47;
 		endPos: 58;
 		source: (self simpleAffectationToAttributeExample copyFrom: 47 to: 58);
 		yourself.
-	invocation := (self createInModel: FAMIXInvocation)
+	invocation := (self createInModel: FamixJavaInvocation)
 		source: sourceMethod;
 		sourceAnchor: indexedAnchor.
-	attribute := (self createInModel: FAMIXAttribute)
+	attribute := (self createInModel: FamixJavaAttribute)
 		name: 'w';
 		yourself.
 	class addAttribute: attribute.
@@ -164,51 +164,45 @@ CSNAffectationTest >> testAffectationToAttribute [
 
 { #category : #test }
 CSNAffectationTest >> testAffectationToSuperClassAttribute [
+
 	"test the affectation of a new Widget to an attribute.
 	
 	example source code is here: simpleAffectationToSuperClassAttributeExample"
 
 	| sourceMethod invocation sourceClassSourceAnchor sourceMethodSourceAnchor indexedAnchor attribute class classB |
-	sourceClassSourceAnchor := (self createInModel: FAMIXSourceTextAnchor)
-		source: self simpleAffectationToSuperClassAttributeExample;
-		yourself.
-	class := (self createInModel: FAMIXClass)
-		name: 'A';
-		sourceAnchor: sourceClassSourceAnchor;
-		yourself.
-	classB := (self createInModel: FAMIXClass)
-		name: 'B';
-		yourself.
-	(self createInModel: FAMIXInheritance)
+	sourceClassSourceAnchor := (self createInModel: FamixJavaSourceTextAnchor)
+		                           source: self simpleAffectationToSuperClassAttributeExample;
+		                           yourself.
+	class := (self createInModel: FamixJavaClass)
+		         name: 'A';
+		         sourceAnchor: sourceClassSourceAnchor;
+		         yourself.
+	classB := (self createInModel: FamixJavaClass)
+		          name: 'B';
+		          yourself.
+	(self createInModel: FamixJavaInheritance)
 		superclass: classB;
 		subclass: class.
-	sourceMethodSourceAnchor := (self
-		createInModel: FAMIXSourceTextAnchor)
-		startPos: 23;
-		endPos: 60;
-		source:
-			(self simpleAffectationToSuperClassAttributeExample
-				copyFrom: 23
-				to: 60) yourself.
-	sourceMethod := (self createInModel: FAMIXMethod)
-		name: 'sourceMethod';
-		parentType: class;
-		sourceAnchor: sourceMethodSourceAnchor;
-		yourself.
-	indexedAnchor := (self createInModel: FAMIXSourceTextAnchor)
-		startPos: 45;
-		endPos: 56;
-		source:
-			(self simpleAffectationToSuperClassAttributeExample
-				copyFrom: 45
-				to: 56);
-		yourself.
-	invocation := (self createInModel: FAMIXInvocation)
-		source: sourceMethod;
-		sourceAnchor: indexedAnchor.
-	attribute := (self createInModel: FAMIXAttribute)
-		name: 'w';
-		yourself.
+	sourceMethodSourceAnchor := (self createInModel: FamixJavaSourceTextAnchor)
+		                            startPos: 23;
+		                            endPos: 60;
+		                            source: (self simpleAffectationToSuperClassAttributeExample copyFrom: 23 to: 60) yourself.
+	sourceMethod := (self createInModel: FamixJavaMethod)
+		                name: 'sourceMethod';
+		                parentType: class;
+		                sourceAnchor: sourceMethodSourceAnchor;
+		                yourself.
+	indexedAnchor := (self createInModel: FamixJavaSourceTextAnchor)
+		                 startPos: 45;
+		                 endPos: 56;
+		                 source: (self simpleAffectationToSuperClassAttributeExample copyFrom: 45 to: 56);
+		                 yourself.
+	invocation := (self createInModel: FamixJavaInvocation)
+		              source: sourceMethod;
+		              sourceAnchor: indexedAnchor.
+	attribute := (self createInModel: FamixJavaAttribute)
+		             name: 'w';
+		             yourself.
 	classB addAttribute: attribute.
 	self assert: invocation affectation equals: attribute
 ]
