@@ -74,11 +74,11 @@ CSNBehaviorPatternDOMAccessSetAttribute >> run [
 	(self model allWithType: CSNBDOMElementAcccess) asOrderedCollection
 		select: [ :elementAccess | 
 			(elementAccess parentNode isOfType: FASTJavaMethodInvocation) and: [ 
-				elementAccess parentNode famix isNotNil ] ]
+				elementAccess parentNode famixInvocation isNotNil ] ]
 		thenDo: [ :elementAccess | 
 			canHandleVisitor
 				entity: elementAccess widget;
-				source: elementAccess parentNode famix.
+				source: elementAccess parentNode famixInvocation.
 			CSNAttribute subclasses
 				detect: [ :attributeType | attributeType accept: canHandleVisitor ]
 				ifFound: [ :attributeType | 
