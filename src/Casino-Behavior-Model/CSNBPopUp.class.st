@@ -3,14 +3,16 @@ I represent a call which will create a pop up with the data as inside it (it cor
 "
 Class {
 	#name : #CSNBPopUp,
-	#superclass : #FASTExpression,
+	#superclass : #CSNBEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBPopUp class >> annotation [
 
-	<FMClass: #PopUp super: #FASTExpression>
+	<FMClass: #PopUp super: #CSNBEntity>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -18,11 +20,11 @@ CSNBPopUp class >> annotation [
 
 { #category : #accessing }
 CSNBPopUp >> data [
-	"Relation named: #data type: #FASTExpression opposite: #carrefourPopUpOwner"
+	"Relation named: #data type: #FASTTExpression opposite: #carrefourPopUpOwner"
 
 	<generated>
 	<FMComment: 'The data that will be displayed in the popUp'>
-	<FMProperty: #data type: #FASTExpression opposite: #carrefourPopUpOwner>
+	<FMProperty: #data type: #FASTTExpression opposite: #carrefourPopUpOwner>
 	^ self attributeAt: #data ifAbsent: [ nil ]
 ]
 

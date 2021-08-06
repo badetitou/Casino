@@ -3,14 +3,16 @@ I represent a call which will create a dialog with the data as inside it (it cor
 "
 Class {
 	#name : #CSNBOpenDialog,
-	#superclass : #FASTExpression,
+	#superclass : #CSNBEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBOpenDialog class >> annotation [
 
-	<FMClass: #OpenDialog super: #FASTExpression>
+	<FMClass: #OpenDialog super: #CSNBEntity>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self

@@ -3,14 +3,16 @@ I represent a special call that lead to the navigation to another page of the ap
 "
 Class {
 	#name : #CSNBNavigation,
-	#superclass : #FASTExpression,
+	#superclass : #CSNBEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBNavigation class >> annotation [
 
-	<FMClass: #Navigation super: #FASTExpression>
+	<FMClass: #Navigation super: #CSNBEntity>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -24,11 +26,11 @@ CSNBNavigation >> addArgument: anObject [
 
 { #category : #accessing }
 CSNBNavigation >> arguments [
-	"Relation named: #arguments type: #FASTExpression opposite: #navigation"
+	"Relation named: #arguments type: #FASTTExpression opposite: #navigation"
 
 	<generated>
 	<derived>
-	<FMProperty: #arguments type: #FASTExpression opposite: #navigation>
+	<FMProperty: #arguments type: #FASTTExpression opposite: #navigation>
 	^ self attributeAt: #arguments ifAbsentPut: [ FMMultivalueLink on: self opposite: #navigation: ]
 ]
 

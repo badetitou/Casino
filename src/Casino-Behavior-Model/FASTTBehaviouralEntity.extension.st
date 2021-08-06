@@ -1,7 +1,7 @@
-Extension { #name : #FASTBehaviouralEntity }
+Extension { #name : #FASTTBehaviouralEntity }
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> carrefourOnFailureOwner [
+FASTTBehaviouralEntity >> carrefourOnFailureOwner [
 	"Relation named: #carrefourOnFailureOwner type: #CSNBCall opposite: #onFailure"
 
 	<generated>
@@ -13,7 +13,7 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
+FASTTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
 
 	<generated>
 	(self attributeAt: #carrefourOnFailureOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -27,7 +27,7 @@ FASTBehaviouralEntity >> carrefourOnFailureOwner: anObject [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> carrefourOnSuccessOwner [
+FASTTBehaviouralEntity >> carrefourOnSuccessOwner [
 	"Relation named: #carrefourOnSuccessOwner type: #CSNBCall opposite: #onSuccess"
 
 	<generated>
@@ -39,7 +39,7 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
+FASTTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
 
 	<generated>
 	(self attributeAt: #carrefourOnSuccessOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -53,7 +53,7 @@ FASTBehaviouralEntity >> carrefourOnSuccessOwner: anObject [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> ui [
+FASTTBehaviouralEntity >> ui [
 	"Relation named: #ui type: #CSNAction opposite: #behavior"
 
 	<generated>
@@ -63,7 +63,7 @@ FASTBehaviouralEntity >> ui [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTBehaviouralEntity >> ui: anObject [
+FASTTBehaviouralEntity >> ui: anObject [
 
 	<generated>
 	self attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).

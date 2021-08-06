@@ -5,14 +5,16 @@ Since I'm abstract, I should not be instanciate (but, it is a reasonnable soluti
 "
 Class {
 	#name : #CSNBCall,
-	#superclass : #FASTExpression,
+	#superclass : #CSNBEntity,
+	#traits : 'FASTTExpression',
+	#classTraits : 'FASTTExpression classTrait',
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBCall class >> annotation [
 
-	<FMClass: #Call super: #FASTExpression>
+	<FMClass: #Call super: #CSNBEntity>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self
@@ -36,11 +38,11 @@ CSNBCall >> distantService: anObject [
 
 { #category : #accessing }
 CSNBCall >> onFailure [
-	"Relation named: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner"
+	"Relation named: #onFailure type: #FASTTBehaviouralEntity opposite: #carrefourOnFailureOwner"
 
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ko'''>
-	<FMProperty: #onFailure type: #FASTBehaviouralEntity opposite: #carrefourOnFailureOwner>
+	<FMProperty: #onFailure type: #FASTTBehaviouralEntity opposite: #carrefourOnFailureOwner>
 	^ self attributeAt: #onFailure ifAbsent: [ nil ]
 ]
 
@@ -67,11 +69,11 @@ CSNBCall >> onFailureGroup [
 
 { #category : #accessing }
 CSNBCall >> onSuccess [
-	"Relation named: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner"
+	"Relation named: #onSuccess type: #FASTTBehaviouralEntity opposite: #carrefourOnSuccessOwner"
 
 	<generated>
 	<FMComment: 'The statement executed if the call return ''ok'''>
-	<FMProperty: #onSuccess type: #FASTBehaviouralEntity opposite: #carrefourOnSuccessOwner>
+	<FMProperty: #onSuccess type: #FASTTBehaviouralEntity opposite: #carrefourOnSuccessOwner>
 	^ self attributeAt: #onSuccess ifAbsent: [ nil ]
 ]
 

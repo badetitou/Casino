@@ -18,7 +18,7 @@ CSNBehaviorImporterJavaServiceCallTest class >> isAbstract [
 { #category : #running }
 CSNBehaviorImporterJavaServiceCallTest >> createModel [
 	| newClass invoc success fail namedEntity methodInvoc1 classProperty expression type successParameter successParameterType successParameterTypeName successVariableExpression failParameter failParameterType failParameterTypeName failVariableExpression |
-	expression := FASTExpressionStatement new.
+	expression := FASTJavaExpressionStatement new.
 	invoc := FASTJavaMethodInvocation new
 		name: 'generateError';
 		yourself.

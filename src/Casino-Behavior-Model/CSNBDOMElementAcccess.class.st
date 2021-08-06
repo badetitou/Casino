@@ -3,16 +3,16 @@ Access to a DOM element
 "
 Class {
 	#name : #CSNBDOMElementAcccess,
-	#superclass : #FASTExpression,
-	#traits : 'FASTJavaTReceiver',
-	#classTraits : 'FASTJavaTReceiver classTrait',
+	#superclass : #CSNBEntity,
+	#traits : 'FASTJavaTReceiver + FASTTExpression',
+	#classTraits : 'FASTJavaTReceiver classTrait + FASTTExpression classTrait',
 	#category : #'Casino-Behavior-Model-Entities'
 }
 
 { #category : #meta }
 CSNBDOMElementAcccess class >> annotation [
 
-	<FMClass: #DOMElementAcccess super: #FASTExpression>
+	<FMClass: #DOMElementAcccess super: #CSNBEntity>
 	<package: #'Casino-Behavior-Model'>
 	<generated>
 	^self

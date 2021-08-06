@@ -12,7 +12,7 @@ CSNBehaviorImporterJavaPopUpTest >> setUp [
 	alert := FASTJavaMethodInvocation new name: 'alert';yourself.
 	arg := FASTJavaStringLiteral new.
 	alert arguments add: arg.
-	expression := FASTExpressionStatement new.
+	expression := FASTJavaExpressionStatement new.
 	alert receiver: window.
 	expression expression: alert.
 	

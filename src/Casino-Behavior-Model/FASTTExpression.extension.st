@@ -1,7 +1,7 @@
-Extension { #name : #FASTExpression }
+Extension { #name : #FASTTExpression }
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTExpression >> carrefourPopUpOwner [
+FASTTExpression >> carrefourPopUpOwner [
 	"Relation named: #carrefourPopUpOwner type: #CSNBPopUp opposite: #data"
 
 	<generated>
@@ -13,7 +13,7 @@ FASTExpression >> carrefourPopUpOwner [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTExpression >> carrefourPopUpOwner: anObject [
+FASTTExpression >> carrefourPopUpOwner: anObject [
 
 	<generated>
 	(self attributeAt: #carrefourPopUpOwner ifAbsentPut: [nil]) == anObject ifTrue: [ ^ anObject ].
@@ -27,7 +27,7 @@ FASTExpression >> carrefourPopUpOwner: anObject [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTExpression >> navigation [
+FASTTExpression >> navigation [
 	"Relation named: #navigation type: #CSNBNavigation opposite: #arguments"
 
 	<generated>
@@ -38,7 +38,7 @@ FASTExpression >> navigation [
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
-FASTExpression >> navigation: anObject [
+FASTTExpression >> navigation: anObject [
 
 	<generated>
 	self attributeAt: #navigation put: (FMMultivalueLink on: self update: #arguments from: self navigation to: anObject).

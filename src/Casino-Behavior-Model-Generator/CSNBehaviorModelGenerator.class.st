@@ -161,9 +161,9 @@ CSNBehaviorModelGenerator >> defineClasses [
 	accessElementAttribute := builder newClassNamed: #AccessElementAttribute comment: 'access the attribute value of an element accessed'.
 	setElementAttribute := builder newClassNamed: #SetElementAttribute comment: 'set the attribute value of an element accessed'.
 	getElementAttribute := builder newClassNamed: #GetElementAttribute comment: 'set the attribute value of an element accessed'.
-	expression := self remoteEntity: #Expression withPrefix: #FAST.
-	fastBehaviouralEntity := self remoteEntity: #BehaviouralEntity withPrefix: #FAST.
-	statement := self remoteEntity: #Statement withPrefix: #FAST.
+	expression := self remoteTrait: #TExpression withPrefix: #FAST.
+	fastBehaviouralEntity := self remoteTrait: #TBehaviouralEntity withPrefix: #FAST.
+	statement := self remoteTrait: #TStatement withPrefix: #FAST.
 	
 	action := self remoteEntity: #Action withPrefix: #CSN.
 	csnWidget := self remoteEntity: #Widget withPrefix: #CSN.

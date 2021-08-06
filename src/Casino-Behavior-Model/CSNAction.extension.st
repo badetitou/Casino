@@ -2,11 +2,11 @@ Extension { #name : #CSNAction }
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 CSNAction >> behavior [
-	"Relation named: #behavior type: #FASTBehaviouralEntity opposite: #ui"
+	"Relation named: #behavior type: #FASTTBehaviouralEntity opposite: #ui"
 
 	<generated>
 	<derived>
-	<FMProperty: #behavior type: #FASTBehaviouralEntity opposite: #ui>
+	<FMProperty: #behavior type: #FASTTBehaviouralEntity opposite: #ui>
 	<package: #'Casino-Behavior-Model'>
 	^ self attributeAt: #behavior ifAbsentPut: [ FMMultivalueLink on: self opposite: #ui: ]
 ]
