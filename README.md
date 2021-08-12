@@ -1,7 +1,7 @@
 # Casino <!-- omit in toc -->
 
 ![Build Pass](https://github.com/badetitou/Casino/workflows/CI/badge.svg)
-[![Moose version](https://img.shields.io/badge/Moose-8-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
+[![Moose version 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
 This project aims to ease the migration of application front-end using metamodels.
 To do so, it extracts the UI model of an application and generates the target application from the model.
