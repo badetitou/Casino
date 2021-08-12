@@ -42,22 +42,16 @@ CSNBehaviorPatternServiceCall >> newSynchroneCall [
 
 { #category : #running }
 CSNBehaviorPatternServiceCall >> run [
+
 	self uiModel ifNil: [ ^ self ].
-	(self model allWithType: FASTJavaVariableExpression)
-		asOrderedCollection do: [ :namedEntity | 
-		(self uiModel allCSNService select: [ :service | 
-			 service name = namedEntity name ])
-			ifEmpty: [ false ]
-			ifNotEmpty: [ :service | 
-				service first actions
+	(self model allWithType: FASTJavaVariableExpression) asOrderedCollection do: [ :namedEntity | 
+		self uiModel allCSNService asOrderedCollection 
+			detect: [ :service | service source name = namedEntity name ]
+			ifFound: [ :service | 
+				service actions
 					select: [ :action | 
 						namedEntity parentNode isNotNil and: [ 
 							namedEntity parentNode parentNode isNotNil and: [ 
-								namedEntity parentNode parentNode parentNode isNotNil and: [ 
-									action name
-									= namedEntity parentNode parentNode parentNode name ] ] ] ]
-					thenDo: [ :action |
-						self
-							createAsynchroneCallFrom: namedEntity
-							withDistantService: action ] ] ]
+								namedEntity parentNode parentNode parentNode isNotNil and: [ action name = namedEntity parentNode parentNode parentNode name ] ] ] ]
+					thenDo: [ :action | self createAsynchroneCallFrom: namedEntity withDistantService: action ] ] ]
 ]

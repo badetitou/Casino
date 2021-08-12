@@ -293,6 +293,11 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaParameter: aFASTJavaParameter [
+	^ self visitFASTTVariableExpression: aFASTJavaParameter variable
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self
 		<<< '''';

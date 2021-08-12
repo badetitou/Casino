@@ -6,16 +6,22 @@ Class {
 
 { #category : #running }
 CSNBehaviorImporterJavaHasServiceCallTest >> createUiModel [
+
 	| service serviceApi |
 	uiModel := CSNUICWModel new.
 	service := CSNService new
-		name: 'IGwtServiceIncubator';
-		yourself.
+		           name: 'ServiceIncubator';
+		           yourself.
 	serviceApi := CSNServiceAPI new
-		name: 'generateError';
-		yourself.
+		              name: 'generateError';
+		              yourself.
+	service addSource: (FamixJavaClass new
+			 name: 'IGwtServiceIncubator';
+			 yourself).
 	serviceApi serviceOwner: service.
-	uiModel addAll: {service . serviceApi}
+	uiModel addAll: { 
+			service.
+			serviceApi }
 ]
 
 { #category : #tests }

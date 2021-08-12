@@ -21,5 +21,8 @@ FamixTStructuralEntity >> uniqueName [
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FamixTStructuralEntity >> uniqueName: aString [
-	((self allAtScope: FamixTClass) detect: [:class | class parents anyOneIfOnlyOneElement isNamespace]) privateState cacheAt: #uniqueName put: {(self -> aString)} asDictionary
+
+	((self allAtScope: FamixTClass) detect: [ :class | class parents anyOneIfOnlyOneElement isNamespace ])
+		cacheAt: #uniqueName
+		put: { (self -> aString) } asDictionary
 ]

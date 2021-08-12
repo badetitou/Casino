@@ -31,7 +31,7 @@ CSNBehaviorModelExporterAngularTest >> testMethodCorrectlyExported [
 			(String
 				streamContents: [ :stream | 
 					stream
-						<< 'onClick(noname) {';
+						<< 'onClick(event) {';
 						crlf;
 						<< '    let b = [cbDataCollect.getValue(), cbDataCodeNet.getValue()];';
 						crlf;
