@@ -202,7 +202,7 @@ import { Observable } from ''rxjs'';
 import { first, map } from ''rxjs/operators'';
 
 import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
-import { ObjectMapper } from ''jackson-js'';
+import { ObjectMapper } from ''@outfoxx/jackson-js'';
 import { MapToStringJsonConverterService } from ''app/projects/bl-shell/src/public-api'';
 ';
 				crlf;
