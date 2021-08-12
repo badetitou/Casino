@@ -89,9 +89,11 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 
 { #category : #export }
 CSNBuModelExporter >> printImports [
+
 	self
-		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''jackson-js'';';
+		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
 		crlf;
 		<< 'import { AbstractDTO } from ''app/projects/bl-shell/src/public-api'';';
+		crlf;
 		crlf
 ]
