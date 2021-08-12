@@ -8,5 +8,11 @@ SmalltalkCISpec {
       #onConflict : #useIncoming,
       #onUpgrade : #useIncoming
     }
-  ]
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'Casino.*' ],
+      #format : #lcov
+    }
+  }
 }
