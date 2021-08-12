@@ -21,5 +21,5 @@ CSNUICWSplitButton >> getInitializations [
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNUICWSplitButton >> getVariables [
-	^'    items' , self mooseID asString , ': MenuItem[];'
+	^'    items' , self mooseID asString , ': [];'
 ]
