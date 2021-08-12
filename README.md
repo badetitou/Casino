@@ -1,6 +1,5 @@
 # Casino <!-- omit in toc -->
-
-![Build Pass](https://github.com/badetitou/Casino/workflows/CI/badge.svg)
+[![CI](https://github.com/badetitou/Casino/actions/workflows/blank.yml/badge.svg?branch=v2)](https://github.com/badetitou/Casino/actions/workflows/blank.yml)
 [![Moose version 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
 This project aims to ease the migration of application front-end using metamodels.
