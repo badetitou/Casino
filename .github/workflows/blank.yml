@@ -2,6 +2,9 @@
 
 name: CI
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the development branch
 on:
@@ -18,13 +21,54 @@ jobs:
       PROJECT_NAME: PharoLanguageServer
     strategy:
       matrix:
-        smalltalk: [ Moose64-8.0]
+        smalltalk: [ Moose64-9.0]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
+      
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-version: ${{ matrix.smalltalk }}
+      
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         shell: bash
         timeout-minutes: 15
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build meta-model planuml image
+        run: |
+          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'uml.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
+      - name: Generate PNG Diagrams
+        uses: cloudbees/plantuml-github-action@master
+        with:
+            args: -v -tpng uml.puml
+          
+      - name: Move artifact
+        run: |
+          mkdir doc-uml
+          mv uml.png doc-uml
+      
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          cd doc-uml/
+          git init
+          git add -A
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m 'update doc'
+          
+      # Careful, this can kill your project
+      - name: Force push to destination branch
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+          # Destination branch to push changes
+          branch: v2-doc
+          # We have to push from the folder where files were generated.
+          # Same were the new repo was initialized in the previous step
+          directory: ./doc-uml
