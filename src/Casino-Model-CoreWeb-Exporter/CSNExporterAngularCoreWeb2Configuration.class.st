@@ -13,17 +13,17 @@ CSNExporterAngularCoreWeb2Configuration >> defaultConfiguration [
 		addAll:
 			{(CSNUIButton -> CSNELCWBLButtonLinkComponent new).
 			(CSNUICWAutoComplete -> CSNELCWBLQuickSearch new).
-			(CSNUICWChart -> PNGChart new).
-			(CSNUICWDialog -> PNGDialog new).
+			"(CSNUICWChart -> PNGChart new)."
+			"(CSNUICWDialog -> PNGDialog new)."
 			(CSNUICWFileUploadPanel -> CSNELCWBLInputFilePanel new).
 			(CSNUICWLinkSimple -> CSNELCWBLLinkSimple new).
 			(CSNUICWListAndDetails -> CSNELCWBLListAndDetailsComponent new).
 			(CSNUICWProgressBar -> MCProgressBar new).
 			(CSNUICWRechercheEtListe -> CSNELCWBLRechercheEtListeComponent new).
-			(CSNUICWSplitButton -> PNGSplitButton new).
+			"(CSNUICWSplitButton -> PNGSplitButton new)."
 			(CSNUIFieldset -> CSNELCWBLFieldsetComponent new).
 			(CSNUIInput -> CSNELCWBLInputComponent new).
-			(CSNUICWRichTextArea -> PNGEditor new).
+			"(CSNUICWRichTextArea -> PNGEditor new)."
 			(CSNUICWSwitch -> MCSlideToggle new).
 			(CSNUIInputCheckbox -> CSNELCWBLCheckboxComponent new).
 			(CSNUIInputColor -> MCInput new).
