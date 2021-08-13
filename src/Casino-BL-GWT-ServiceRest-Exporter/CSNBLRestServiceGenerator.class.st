@@ -124,7 +124,7 @@ CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> createNamespaceFolderForClass: class [
-	self visitNamespace: (class atScope: FAMIXNamespace) anyOne
+	self visitNamespace: (class atScope: FamixTNamespace) anyOne
 ]
 
 { #category : #accessing }
@@ -217,6 +217,25 @@ import java.io.IOException;
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> printSetterOf: aAttribute [
+
+	self << 'public void set' <<< aAttribute name capitalized <<< ' ('.
+	self printDeclaredType: aAttribute declaredType.
+	(self <<< ' ' <<< aAttribute name)
+		<<< ') {';
+		crlf.
+	self
+		indentPlus;
+		indent.
+	(self <<< 'this.' <<< aAttribute name <<< ' = ' <<< aAttribute name)
+		<<< ';';
+		crlf.
+	self
+		indentMinus;
+		<< '}'
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> reset [
 	super reset.
 	self initialize
@@ -239,71 +258,63 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired'. ])
-		or: [ aAttribute declaredType isNil
-				or: [ aAttribute declaredType isPrimitiveType
-						or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ])
-								includes: 'static' ] ] ])
-		ifFalse: [ self
-				<< '@Autowired';
-				crlf ].
-	super visitAttribute: aAttribute
+
+	super visitAttribute: aAttribute.
+	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired' ]) or: [ 
+		 aAttribute declaredType isNil or: [ 
+			 aAttribute declaredType isPrimitiveType or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ]) includes: 'static' ] ] ]) ifFalse: [ 
+		self crlf.
+		self printSetterOf: aAttribute ]
 ]
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitClass: aClass [
+
 	| file |
-	file := self rootFolder
-		/ ('Rest' , (aClass name removePrefix: 'IGwt') , '.java').
+	file := self rootFolder / ('Rest' , (aClass name removePrefix: 'IGwt') , '.java').
 	file deleteIfAbsent: [  ].
-	file
-		writeStreamDo: [ :stream | 
-			currentStream := stream.
-			"Printing class package and imports if the class is not an inner class"
-			aClass container isNamespace
-				ifTrue: [ self << 'package '.
-					aClass container
-						fullNameLowerCasePrintOn: currentStream
-						fromRoot: (self rootNamespace copyReplaceAll: '/' with: '.').
-					self
-						<<< ';';
-						crlf;
-						crlf.
-					self printImports: aClass.
-					self crlf.
-					self printRESTImports.
-					self
-						crlf;
-						crlf ].
-			"Printing class annotations"
-			self addAuthors.
+	file writeStreamDo: [ :stream | 
+		currentStream := stream.
+		"Printing class package and imports if the class is not an inner class"
+		aClass typeContainer isNamespace ifTrue: [ 
+			self << 'package '.
+			aClass typeContainer fullNameLowerCasePrintOn: currentStream fromRoot: (self rootNamespace copyReplaceAll: '/' with: '.').
+			self
+				<<< ';';
+				crlf;
+				crlf.
+			self printImports: aClass.
 			self crlf.
-			self addAnnotation.
-			"Printing Class declaration"
-			currentStream << 'public '.
-			currentStream << 'class '.
-			currentStream << 'Rest' << (aClass name removePrefix: 'IGwt').
-			currentStream
-				<< ' {';
-				<< String crlf.
-			"Printing Attributs"
-			tabs := tabs + 1.
-			(aClass attributes , aClass subclassHierarchyGroup
-				collect: #attributes) flattened
-				do: [ :attribute | 
-					self clone visit: attribute.
-					self
-						crlf;
-						crlf ].
-			"Closing Class"
-			service actions
-				do: [ :action | self visitServiceAPI: action ]
-				separatedBy: [ self
-						crlf;
-						crlf ].
-			currentStream
-				<< String crlf;
-				<< '}' ]
+			self printRESTImports.
+			self
+				crlf;
+				crlf ].
+		"Printing class annotations"
+		self addAuthors.
+		self crlf.
+		self addAnnotation.
+		"Printing Class declaration"
+		currentStream << 'public '.
+		currentStream << 'class '.
+		currentStream << 'Rest' << (aClass name removePrefix: 'IGwt').
+		currentStream
+			<< ' {';
+			<< String crlf.
+		"Printing Attributs"
+		tabs := tabs + 1.
+		(aClass attributes , aClass subclassHierarchyGroup collect: #attributes) flattened do: [ :attribute | 
+			self clone visit: attribute.
+			self
+				crlf;
+				crlf ].
+		"Closing Class"
+		service actions do: [ :action | self visitServiceAPI: action ] separatedBy: [ 
+			self
+				crlf;
+				crlf ].
+		currentStream
+			<< String crlf;
+			<< '}' ]
 ]
 
 { #category : #accessing }
