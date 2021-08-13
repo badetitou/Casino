@@ -46,20 +46,20 @@ jobs:
           $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'full.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new withModel: CSNModel ; withModel: CSNUIModel andColor: Color lightBlue; withModel: CSNLModel andColor: Color lightGreen; withModel: CSNUICWModel andColor: Color lightRed; withModel: CSNBModel andColor: Color lightOrange; withModel: CSNBuModel andColor: Color tan; generatePlantUMLModelWithout: { CSNModel . CSNUIModel. CSNLModel. CSNUICWModel . CSNBModel . CSNBuModel. CSNEntity . CSNOriginedEntity }.)]."
 
 
-      - name: Generate PNG Diagrams
+      - name: Generate SVG Core Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng uml.puml
-      - name: Generate PNG Diagrams
+            args: -v -tsvg uml.puml
+      - name: Generate SVG Full Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
-            args: -v -tpng full.puml
+            args: -v -tsvg full.puml
           
       - name: Move artifact
         run: |
           mkdir doc-uml
-          mv uml.png doc-uml
-          mv full.png doc-uml
+          mv uml.svg doc-uml
+          mv full.svg doc-uml
       
       - name: Init new repo in dist folder and commit generated files
         run: |
