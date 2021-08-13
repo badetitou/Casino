@@ -61,7 +61,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
 	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour:v3/src' ].
 	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
-	spec baseline: 'Famix2Java' with: [ spec repository: 'github://moosetechnology/FAMIX2Java:v1.0.x/src' ]
+	spec baseline: 'Famix2Java' with: [ spec repository: 'github://moosetechnology/FAMIX2Java:v2/src' ]
 ]
 
 { #category : #baselines }
