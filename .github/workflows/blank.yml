@@ -41,15 +41,25 @@ jobs:
       - name: Build meta-model planuml image
         run: |
           $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'uml.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new model: CSNModel; beWithStub; generatePlantUMLModel)]."
+      - name: Build full meta-model planuml image
+        run: |
+          $SMALLTALK_CI_VM  $SMALLTALK_CI_IMAGE eval "'full.puml' asFileReference writeStreamDo: [ :stream | stream nextPutAll:  (FamixMMUMLDocumentor new withModel: CSNModel ; withModel: CSNUIModel andColor: Color lightBlue; withModel: CSNLModel andColor: Color lightGreen; withModel: CSNUICWModel andColor: Color lightRed; withModel: CSNBModel andColor: Color lightOrange; withModel: CSNBuModel andColor: Color tan; generatePlantUMLModelWithout: { CSNModel . CSNUIModel. CSNLModel. CSNUICWModel . CSNBModel . CSNBuModel. CSNEntity . CSNOriginedEntity }.)]."
+
+
       - name: Generate PNG Diagrams
         uses: cloudbees/plantuml-github-action@master
         with:
             args: -v -tpng uml.puml
+      - name: Generate PNG Diagrams
+        uses: cloudbees/plantuml-github-action@master
+        with:
+            args: -v -tpng full.puml
           
       - name: Move artifact
         run: |
           mkdir doc-uml
           mv uml.png doc-uml
+          mv full.png doc-uml
       
       - name: Init new repo in dist folder and commit generated files
         run: |
