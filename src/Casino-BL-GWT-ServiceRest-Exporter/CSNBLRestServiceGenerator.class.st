@@ -258,13 +258,15 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-
-	super visitAttribute: aAttribute.
-	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired' ]) or: [ 
-		 aAttribute declaredType isNil or: [ 
-			 aAttribute declaredType isPrimitiveType or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ]) includes: 'static' ] ] ]) ifFalse: [ 
-		self crlf.
-		self printSetterOf: aAttribute ]
+	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired'. ])
+		or: [ aAttribute declaredType isNil
+				or: [ aAttribute declaredType isPrimitiveType
+						or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ])
+								includes: 'static' ] ] ])
+		ifFalse: [ self
+				<< '@Autowired';
+				crlf ].
+	super visitAttribute: aAttribute
 ]
 
 { #category : #accessing }
