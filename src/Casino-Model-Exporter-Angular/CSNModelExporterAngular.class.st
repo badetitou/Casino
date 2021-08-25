@@ -444,7 +444,7 @@ const routes: Routes = [
      << String crlf.
   aModel allCSNPage do: [:phase |  currentWriteStream
            << '        { path: ''';
-           << phase name;
+           << phase name asRealCamelCase;
            << '/:id'', loadChildren: () => import(''./phases/';
            << phase getLocalModulePath;
 			  << ''').then(m => m.';
@@ -1099,7 +1099,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 		do: [ :aPage | 
 			self
 				execute: [ self clone
-						currentPath: self rootPhases / aPage name;
+						currentPath: self rootPhases / aPage name asRealCamelCase;
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
 		displayingProgress: [ :page | 'export page: ' , page codePhase asString ].

@@ -27,7 +27,7 @@ CSNPage >> getLocalComponentPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalModulePath [
-	^ self name, '/' , self getAcceptedName , '.module'
+	^ self name asRealCamelCase, '/' , self getAcceptedName , '.module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
