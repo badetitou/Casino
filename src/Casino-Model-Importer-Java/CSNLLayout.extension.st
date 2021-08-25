@@ -22,12 +22,6 @@ CSNLLayout >> childAttributeFor: aCell [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNLLayout >> getSelector [
-	"must be implemented if specific selector is used"
-	^ 'bl-panel'
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
 CSNLLayout >> postImport [
 	"If we need to order some of the cell"
 ]

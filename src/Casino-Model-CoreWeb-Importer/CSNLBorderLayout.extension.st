@@ -1,6 +1,6 @@
 Extension { #name : #CSNLBorderLayout }
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
-CSNLBorderLayout classSide >> canHandle: anInvocation [
+CSNLBorderLayout class >> canHandle: anInvocation [
 	^ false
 ]

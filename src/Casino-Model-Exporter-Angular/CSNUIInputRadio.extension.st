@@ -8,5 +8,10 @@ CSNUIInputRadio >> angularComponent [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNUIInputRadio >> computeSelfAttributes [
-	^ {self attributes. self getPositionAttribute. {self generateDefaultClassAttribute}. self containedElementAttribute } flattened asOrderedCollection 
+
+	^ { 
+		  self attributes.
+		  self getPositionAttribute.
+		  self generateDefaultClassAttribute.
+		  self containedElementAttribute } flattened asOrderedCollection
 ]
