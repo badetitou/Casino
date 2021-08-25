@@ -26,7 +26,7 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 		<<< '('.
 	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
 	self
-		<<< ') {';
+		<<< ') {/*';
 		indentPlus;
 		crlf.
 	aFASTJavaMethodEntity statements
@@ -39,7 +39,7 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 	self
 		crlf;
 		indentMinus;
-		<< '}'
+		<< '*/}'
 ]
 
 { #category : #generated }

@@ -4,5 +4,5 @@ Extension { #name : #CSNBOnFocus }
 CSNBOnFocus >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(focus)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '()"' ]
+		ifNotEmpty: [ :behaviors | '(focus)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '($event)"' ]
 ]

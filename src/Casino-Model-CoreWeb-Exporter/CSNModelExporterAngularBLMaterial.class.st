@@ -16,9 +16,51 @@ CSNModelExporterAngularBLMaterial class >> export: aBLMooseModel [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngularBLMaterial >> behaviorImportExporter [
+	^ CSNModelImportStringExporter
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> behaviorInitializeVariableExporter [
+	^ CSNModelInitializeVariableExporter
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> behaviorModelExporter [
+	^ CSNBehaviorModelExporterCoreWeb
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> businessExporter [
+	^ CSNBusinessExporter
+]
+
+{ #category : #visiting }
 CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
 
 	currentWriteStream << aCSNPage businessPage anyOne getTag
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
+  aBLPageMetier metiers ifNotEmpty: [ currentWriteStream
+           << '<mat-tab-group>';
+           << String crlf.
+        aBLPageMetier metiers do: [:metier |  currentWriteStream
+                 << '     <mat-tab label=';
+                 << (self class convertIfString: (self protectString: metier title));
+                 << '>';
+                 << String crlf;
+                 << '        ';
+                 << metier getTag;
+                 << String crlf;
+                 << '    </mat-tab>';
+                 << String crlf ].
+        currentWriteStream
+           << '</mat-tab-group>';
+           << String crlf ].
+  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  self visit: widget.
+        currentWriteStream << String crlf ]
 ]
 
 { #category : #visiting }
@@ -37,7 +79,7 @@ CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForMultiplePageMetier
 			<< String crlf;
 			<< '            </mat-tab>';
 			<< String crlf ].
-	currentWriteStream << '    </<mat-tab-group>>'
+	currentWriteStream << '</<mat-tab-group>>'
 ]
 
 { #category : #visiting }
@@ -153,11 +195,11 @@ CSNModelExporterAngularBLMaterial >> generateRouteSourceCodeForModel: aModel [
   currentWriteStream
      << 'import { ModuleWithProviders } from ''@angular/core'';
 import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
-import { IndexComponent } from ''./components/index/index.component'';
+import { MainComponent } from "./main.component";
 
-const routes: Routes = [
-    { path: '''', pathMatch: ''full'', redirectTo: ''home'' },
-    { path: ''desktop'', component: IndexComponent, children: [';
+export const ROUTES_MICRO_FRONTEND: Routes = [
+    {path:"",component:MainComponent,children:[
+        {path:"",pathMatch:"full",redirectTo:"home"},';
      << String crlf.
   aModel allCSNPage do: [:phase |  currentWriteStream
            << '        { path: ''';
@@ -169,8 +211,80 @@ const routes: Routes = [
 			  << ')},';
            << String crlf ].
   currentWriteStream << '    ]}
-];
-export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
+];'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
+
+	self writeBusinessPageImportList.
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeImportForNavigation ].
+	currentWriteStream
+		<< (String crlf join: ((aBLPageMetier widgetsDependenciesFrom: self) , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+								   self behaviorImportExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened) asSet);
+		<< '
+
+@Component({
+    selector: ''';
+		<< aBLPageMetier getSelector;
+		<< ''',
+    templateUrl: ''./';
+		<< aBLPageMetier getHTMLName;
+		<< '''
+})
+export class ';
+		<< aBLPageMetier componentName;
+		<< ' implements OnInit, OnDestroy {
+
+';
+		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);
+		<< ((aBLPageMetier calledBehavior flatCollect: [ :action | 
+					  action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet collect: [ :widget | 
+					 widget idViewChildFrom: self ]) asOrderedCollection;
+		<< '
+';
+		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
+		<< '
+
+    constructor(';
+		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
+		<< (', ' join: ((aBLPageMetier calledBehavior collect: [ :behavior | 
+							   self behaviorInitializeVariableExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened 
+						  reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
+		<< ') {
+';
+		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
+					 '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
+		<< '
+    }
+
+    public ngOnInit(): void {
+';
+		<< (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
+		<< '
+    }
+
+    public ngOnDestroy(): void {
+
+    }
+'.
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeOpenPhaseMethod ].
+	currentWriteStream << '
+
+'.
+	((aBLPageMetier calledBehavior asOrderedCollection reject: [ :action | action behavior isEmpty ]) sort: [ :action1 :action2 | 
+		 (action1 behavior anyOne uniqueNameInPage: aBLPageMetier) < (action2 behavior anyOne uniqueNameInPage: aBLPageMetier) ]) do: [ :action | 
+		action behavior do: [ :behaveMethod | 
+			self crlf.
+			(self behaviorModelExporter on: self currentWriteStream withIndentLevel: 1)
+				exporterAngularConfiguration: self exporterAngularConfiguration;
+				currentPage: aBLPageMetier;
+				export: behaveMethod.
+			self crlf ] ].
+	self
+		crlf;
+		<<< '}';
+		crlf
 ]
 
 { #category : #visiting }

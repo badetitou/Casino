@@ -5,7 +5,7 @@ CSNAction >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ self inform: #ThisShouldBeFixed.
 			'' ]
-		ifNotEmpty: [ :behaviors | '(unknow)="' , behaviors anyOne uniqueName , '()"' ]
+		ifNotEmpty: [ :behaviors | '(unknow)="' , behaviors anyOne uniqueName , '($event)"' ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

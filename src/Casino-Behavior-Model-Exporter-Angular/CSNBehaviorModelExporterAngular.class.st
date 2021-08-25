@@ -197,9 +197,10 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 		<<< '('.
 	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
 	self
-		<<< ') {';
+		<<< ') { ';
 		indentPlus;
 		crlf.
+		
 	aFASTJavaMethodEntity statements
 		do: [ :statement | 
 			self indent.
