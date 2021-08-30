@@ -4,7 +4,7 @@ Extension { #name : #FamixTStructuralEntity }
 FamixTStructuralEntity >> uniqueName [
 	| dic |
 	dic := ((self allAtScope: FamixTClass)
-		detect: [ :class | class parents anyOneIfOnlyOneElement isNamespace ])
+		detect: [ :class | class parents anyOneIfOnlyOneElement isPackage ])
 		cacheAt: #uniqueName
 		ifAbsentPut: [ {(self -> self name)} asDictionary ].
 	^ dic
@@ -22,7 +22,7 @@ FamixTStructuralEntity >> uniqueName [
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FamixTStructuralEntity >> uniqueName: aString [
 
-	((self allAtScope: FamixTClass) detect: [ :class | class parents anyOneIfOnlyOneElement isNamespace ])
+	((self allAtScope: FamixTClass) detect: [ :class | class parents anyOneIfOnlyOneElement isPackage ])
 		cacheAt: #uniqueName
 		put: { (self -> aString) } asDictionary
 ]
