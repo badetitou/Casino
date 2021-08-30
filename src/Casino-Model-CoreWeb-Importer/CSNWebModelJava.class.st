@@ -654,7 +654,7 @@ CSNWebModelJava >> widgetNamespaces [
 CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level [
 	| found |
 	level = maxLevel ifTrue: [ ^ {} ].
-	(invocation isNil or: [ invocation isNamespace ]) ifTrue: [ ^ {} ].
+	(invocation isNil or: [ invocation isPackage ]) ifTrue: [ ^ {} ].
 	invocation isClass
 		ifFalse: [ (invocation atScope: FamixTClass) ifEmpty: [ ^ {} ].
 			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) anyOneIfOnlyOneElement maxLevel: maxLevel level: level + 1 ]
