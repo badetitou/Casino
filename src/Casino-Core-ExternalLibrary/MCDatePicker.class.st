@@ -33,7 +33,7 @@ MCDatePicker >> exportContentOf: aWidget with: anExporter [
 		<< '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
 	anExporter
-		<<< ' [matDatepicker]="';
+		<<< ' matInput [matDatepicker]="';
 		<<< (self variableFor: aWidget);
 		<<< '"';
 		<<< '>';
@@ -43,13 +43,16 @@ MCDatePicker >> exportContentOf: aWidget with: anExporter [
 
 { #category : #export }
 MCDatePicker >> exportFooterOf: aWidget with: anExporter [
+
 	anExporter
+		indentPlus;
 		<< '<mat-datepicker-toggle matSuffix [for]="';
 		<<< (self variableFor: aWidget);
 		<<< '"></mat-datepicker-toggle>';
 		crlf;
 		<< '<mat-datepicker #picker></mat-datepicker>';
 		crlf;
+		indentMinus;
 		<< '</mat-form-field>'
 ]
 
@@ -77,7 +80,7 @@ MCDatePicker >> getSelector [
 ]
 
 { #category : #accessing }
-MCDatePicker >> internalDependencies [
+MCDatePicker >> internalDependenciesOf: aWidgetInstance [
 	^ { MCDateAdapter new }
 ]
 

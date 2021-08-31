@@ -105,24 +105,25 @@ CSNPage >> sortedPageMetiers [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> widgetsDependenciesFrom: anExporter [
-	"At the level of the Phase, we don't need recursive external import (for the module file)... It's only in the TS file"
 
-	^ ((self recursiveMetiers collect: #recursiveWidgets) flattened collect: [:el | el getExternalDependencyFrom: anExporter ])
-		flattened asSet asOrderedCollection
+	^ (((self recursiveMetiers collect: #recursiveWidgets) , { 
+		    self.
+		    self recursiveMetiers }) flattened collect: [ :el | el getExternalDependenciesFrom: anExporter ]) flattened asSet asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> widgetsDependenciesImportInstructionFrom: anExporter [
 	^ ''
 		,
-			((((self widgetsDependenciesFrom: anExporter) reject: [:a | a isLocal ])
-				collect: [ :dependency | dependency importString , String crlf ]) as: Set) asOrderedCollection flatten
+			(((((self widgetsDependenciesFrom: anExporter) reject: [:a | a isLocal ])
+				collect: [ :dependency | dependency importString , String crlf ]) as: Set) asOrderedCollection sorted: [ :a :b | a < b ]) flatten
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> widgetsDependenciesNameFrom: anExporter [
+
 	^ ''
-		,
-			(((self widgetsDependenciesFrom: anExporter) reject: [:a | a isLocal ])
-				flatCollect: [ :dependency | '        ', dependency moduleName , ',' , String crlf ])
+	  ,
+		 ((((self widgetsDependenciesFrom: anExporter) reject: [ :a | a isLocal ]) collect: [ :dependency | '        ' , dependency moduleName , ',' , String crlf ])
+			  asSet asOrderedCollection sorted: [ :a :b | a < b ]) flatten
 ]

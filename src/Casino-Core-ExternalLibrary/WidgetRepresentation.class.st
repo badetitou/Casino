@@ -94,7 +94,7 @@ WidgetRepresentation >> importString [
 ]
 
 { #category : #accessing }
-WidgetRepresentation >> internalDependencies [
+WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
 	^ {  }
 ]
 

@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-PNGPanelMenu >> internalDependencies [
+PNGPanelMenu >> internalDependenciesOf: aWidgetInstance [
 	^ { PNGMenuItem new }
 ]
 

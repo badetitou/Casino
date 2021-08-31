@@ -118,10 +118,10 @@ CSNBusinessPage >> rootFromExporter: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> widgetsDependenciesFrom: anExporter [
-	^ ((self recursiveWidgets flattened collect: [:el | el getExternalDependenciesFrom: anExporter])
-		flattened asSet asOrderedCollection
-		collect: [ :dependency | dependency importString ]
-		as: Set) asOrderedCollection
+
+	^ (((self recursiveWidgets , {self}) flattened collect: [ :el | el getExternalDependenciesFrom: anExporter ]) flattened asSet asOrderedCollection
+		   collect: [ :dependency | dependency importString ]
+		   as: Set) asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

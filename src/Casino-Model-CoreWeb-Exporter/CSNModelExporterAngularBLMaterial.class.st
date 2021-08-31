@@ -21,7 +21,7 @@ CSNModelExporterAngularBLMaterial >> angularActionRepresentationOf: anAction [
 	^ anAction isActionAppel
 		  ifTrue: [ 
 			  anAction call ifNil: [ ^ '' ].
-			  ^ '(click)="openPhase(''' , anAction call name , ''')"' ]
+			  ^ '(click)="openPhase(''/omaje/' , anAction call name asRealCamelCase , ''')"' ]
 		  ifFalse: [ anAction getAngularRepresentation ]
 ]
 
@@ -143,36 +143,33 @@ export let menus: MenuItem[] = [
 
 { #category : #visiting }
 CSNModelExporterAngularBLMaterial >> generateModuleSourceCodeForPage: aCSNPage [
+
 	currentWriteStream
-		<<
-			'import { NgModule } from ''@angular/core'';
+		<< 'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
-import { CommonModule } from ''@angular/common'';
+import { CommonModule } from ''@angular/common''
+import { MatSnackBarModule } from ''@angular/material/snack-bar'';
 import { ';
 		<< aCSNPage componentName;
 		<< ' } from ''./components/';
 		<< aCSNPage getFolderName;
 		<< '/';
 		<< aCSNPage getAcceptedName;
-		<<
-			'.component'';
+		<< '.component'';
 import { PHASE_ROUTES } from ''./';
 		<< aCSNPage getAcceptedName;
 		<< '.route'';';
 		<< String crlf;
 		<< (aCSNPage widgetsDependenciesImportInstructionFrom: self);
 		<< (aCSNPage businessPage flatCollect: [ :aBusinessPage | aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
-		<<
-			'
+		<< '
 export const COMPONENTS: any[] = [
     ';
 		<< aCSNPage componentName;
-		<<
-			',
+		<< ',
 ';
 		<< aCSNPage getComponentsPageMetierListName;
-		<<
-			'
+		<< '
 ];
 
 @NgModule({
@@ -183,15 +180,14 @@ export const COMPONENTS: any[] = [
         PHASE_ROUTES,
 ';
 		<< (aCSNPage widgetsDependenciesNameFrom: self);
-		<<
-			'        
+		<< '
+        MatSnackBarModule,
         TranslateModule
     ],
     entryComponents: [
         ';
 		<< aCSNPage componentName;
-		<<
-			'
+		<< '
     ]
 })
 export class ';
@@ -230,8 +226,9 @@ CSNModelExporterAngularBLMaterial >> generateTSSourceCodeForBusinessPage: aBLPag
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeImportForNavigation ].
 	currentWriteStream
-		<< (String crlf join: ((aBLPageMetier widgetsDependenciesFrom: self) , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
-								   self behaviorImportExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened) asSet);
+		<< (String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self) , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+								    self behaviorImportExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened) asSet
+						  asOrderedCollection sorted: [ :a :d | a < d ]));
 		<< '
 
 @Component({
@@ -248,7 +245,9 @@ export class ';
 
 ';
 		"<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);"
-		<< ((aBLPageMetier calledBehavior flatCollect: [ :action | 
+	
+		<<
+			((aBLPageMetier calledBehavior flatCollect: [ :action | 
 					  action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet collect: [ :widget | 
 					 widget idViewChildFrom: self ]) asOrderedCollection;
 		<< '

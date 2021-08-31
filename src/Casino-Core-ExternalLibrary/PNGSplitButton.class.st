@@ -10,7 +10,7 @@ PNGSplitButton >> getSelector [
 ]
 
 { #category : #accessing }
-PNGSplitButton >> internalDependencies [
+PNGSplitButton >> internalDependenciesOf: aWidgetInstance [
 	^ { PNGMenuItem new }
 ]
 

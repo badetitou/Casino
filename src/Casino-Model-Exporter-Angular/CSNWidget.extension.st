@@ -69,9 +69,10 @@ CSNWidget >> generateDefaultClassAttribute [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getExternalDependenciesFrom: anExporter [
-	^ {self getExternalDependencyFrom: anExporter.
-	(self getExternalDependencyFrom: anExporter) collect: #internalDependencies}
-		flattened
+
+	^ { 
+		  (self getExternalDependencyFrom: anExporter).
+		  ((self getExternalDependencyFrom: anExporter) collect: [ :representation | representation internalDependenciesOf: self ]) } flattened
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
