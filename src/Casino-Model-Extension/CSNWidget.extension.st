@@ -20,6 +20,25 @@ CSNWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> csnActionsIn: aBuilder [
+
+	<inspectorPresentationOrder: 1003 title: 'Actions'>
+	^ aBuilder newTable
+		  addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
+		  items: self actions asOrderedCollection
+]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNWidget >> csnAttributesIn: aBuilder [
+
+	<inspectorPresentationOrder: 1001 title: 'Attributes'>
+	^ aBuilder newTable
+		  items: self attributes asOrderedCollection;
+		  addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
+		  addColumn: (SpStringTableColumn title: 'Value' evaluated: #attributeValue)
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> csnSourceCodeIn: aBuilder [
 
 	<inspectorPresentationOrder: 1002 title: 'Source code'>
@@ -34,34 +53,11 @@ CSNWidget >> csnSourceCodeIn: aBuilder [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-CSNWidget >> gtActionsIn: composite [
-	<gtInspectorPresentationOrder: 1001>
-	^ composite table
-		title: 'Actions';
-		display: [ :anObject | anObject mooseInterestingEntity actions ];
-		sorted: [ :x :y | x name asString < y name asString ];
-		column: 'Names' evaluated: [ :each | each name ];
-		when: [ :anObject | anObject mooseInterestingEntity isWidget and: [ anObject actions isNotEmpty ] ]
-]
+CSNWidget >> csnSourcesIn: aBuilder [
 
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> gtAttributesIn: composite [
-	<gtInspectorPresentationOrder: 1001>
-	^ composite table
-		title: 'Attributes';
-		display: [ :anObject | anObject mooseInterestingEntity attributes ];
-		sorted: [ :x :y | x name asString < y name asString ];
-		column: 'Names' evaluated: [ :each | each name ];
-		column: 'Attribute Value' evaluated: [ :each :anObject | each attributeValue ];
-		when: [ :anObject | (anObject mooseInterestingEntity isWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
-]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> gtSourcesIn: composite [
-	<gtInspectorPresentationOrder: 1001>
-	^ composite list
-		title: 'Sources';
-		display: [ :anObject | anObject mooseInterestingEntity sources ]
+	<inspectorPresentationOrder: 100 title: 'Sources'>
+	^ aBuilder newList
+		items: self sources
 ]
 
 { #category : #'*Casino-Model-Extension' }

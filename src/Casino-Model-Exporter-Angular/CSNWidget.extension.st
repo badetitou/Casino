@@ -39,6 +39,23 @@ CSNWidget >> container [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> csnInAngular: aBuilder [
+
+	<inspectorPresentationOrder: 1008 title: 'Angular HTML'>
+	^ (self isPageMetier not and: [ (self isKindOf: CSNPage) not ])
+		  ifTrue: [ 
+			  aBuilder newCode
+				  text: (String streamContents: [ :s | 
+							   (CSNModelExporterAngular on: s)
+								   exporterAngularConfiguration: CSNExporterAngularConfiguration new;
+								   visit: self ]);
+				  beNotEditable;
+				  withLineNumbers;
+				  withoutSyntaxHighlight ]
+		  ifFalse: [ aBuilder newText text: 'Not supported' ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> exportAttribute: normalyOneOfMyWidget with: anExporter [
 	(anExporter angularRepresentationOf: self) exportAttribute: normalyOneOfMyWidget with: anExporter
 ]
