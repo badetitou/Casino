@@ -20,6 +20,20 @@ CSNWidget >> addingPosition: anObject [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> csnSourceCodeIn: aBuilder [
+
+	<inspectorPresentationOrder: 1002 title: 'Source code'>
+	^ (self sources isNotEmpty and: [ self sources anyOne sourceAnchor isNotNil ])
+		  ifTrue: [ 
+			  aBuilder newCode
+				  text: self sources anyOne sourceAnchor sourceText;
+				  beNotEditable;
+				  withLineNumbers;
+				  withoutSyntaxHighlight ]
+		  ifFalse: [ aBuilder newText text: 'Not supported' ]
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> gtActionsIn: composite [
 	<gtInspectorPresentationOrder: 1001>
 	^ composite table
@@ -40,21 +54,6 @@ CSNWidget >> gtAttributesIn: composite [
 		column: 'Names' evaluated: [ :each | each name ];
 		column: 'Attribute Value' evaluated: [ :each :anObject | each attributeValue ];
 		when: [ :anObject | (anObject mooseInterestingEntity isWidget) or: [ anObject mooseInterestingEntity isKindOf: CSNLLayout ] ].
-]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNWidget >> gtSourceCodeIn: composite [
-	<gtInspectorPresentationOrder: 1002>
-	^ composite text
-		  title: 'Source Code';
-		  display: [ :anObject | 
-			  anObject mooseInterestingEntity sources anyOne sourceAnchor
-				  sourceText ];
-		  when: [ :anObject | 
-			  anObject mooseInterestingEntity sources isNotEmpty and: [ 
-					  anObject mooseInterestingEntity sources anyOne sourceAnchor
-						  isNotNil ] ];
-		  withLineNumbers: true
 ]
 
 { #category : #'*Casino-Model-Extension' }
