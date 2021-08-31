@@ -47,6 +47,11 @@ CSNModelExporterAngular class >> export: aBLMooseModel [
 ]
 
 { #category : #accessing }
+CSNModelExporterAngular >> angularActionRepresentationOf: anAction [
+	^ anAction getAngularRepresentation
+]
+
+{ #category : #accessing }
 CSNModelExporterAngular >> angularRepresentationOf: aCSNWidget [
 	^ self exporterAngularConfiguration angularRepresentationOf: aCSNWidget	
 ]

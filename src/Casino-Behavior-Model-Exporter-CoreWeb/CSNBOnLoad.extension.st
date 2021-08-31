@@ -4,5 +4,5 @@ Extension { #name : #CSNBOnLoad }
 CSNBOnLoad >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(load)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '($event)"' ]
+		ifNotEmpty: [ :behaviors | '(load)="' , (behaviors anyOne uniqueNameInPage: (self caller atAnyScope: {CSNPage. CSNBusinessPage }) anyOne), '($event)"' ]
 ]

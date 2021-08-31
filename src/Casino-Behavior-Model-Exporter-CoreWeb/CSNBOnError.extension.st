@@ -4,5 +4,5 @@ Extension { #name : #CSNBOnError }
 CSNBOnError >> getAngularRepresentation [
 	^ self behavior
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: self caller rootNode) , '($event)"' ]
+		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: (self caller atAnyScope: {CSNPage. CSNBusinessPage }) anyOne) , '($event)"' ]
 ]

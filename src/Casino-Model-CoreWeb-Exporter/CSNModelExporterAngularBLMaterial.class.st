@@ -16,13 +16,23 @@ CSNModelExporterAngularBLMaterial class >> export: aBLMooseModel [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngularBLMaterial >> angularActionRepresentationOf: anAction [
+
+	^ anAction isActionAppel
+		  ifTrue: [ 
+			  anAction call ifNil: [ ^ '' ].
+			  ^ '(click)="openPhase(''' , anAction call name , ''')"' ]
+		  ifFalse: [ anAction getAngularRepresentation ]
+]
+
+{ #category : #visiting }
 CSNModelExporterAngularBLMaterial >> behaviorImportExporter [
-	^ CSNModelImportStringExporter
+	^ CSNModelNullImportStringExporter
 ]
 
 { #category : #visiting }
 CSNModelExporterAngularBLMaterial >> behaviorInitializeVariableExporter [
-	^ CSNModelInitializeVariableExporter
+	^ CSNModelNullInitializeVariableExporter
 ]
 
 { #category : #visiting }
@@ -79,7 +89,7 @@ CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForMultiplePageMetier
 			<< String crlf;
 			<< '            </mat-tab>';
 			<< String crlf ].
-	currentWriteStream << '</<mat-tab-group>>'
+	currentWriteStream << '</mat-tab-group>'
 ]
 
 { #category : #visiting }
@@ -174,7 +184,7 @@ export const COMPONENTS: any[] = [
 ';
 		<< (aCSNPage widgetsDependenciesNameFrom: self);
 		<<
-			'
+			'        
         TranslateModule
     ],
     entryComponents: [
@@ -237,7 +247,7 @@ export class ';
 		<< ' implements OnInit, OnDestroy {
 
 ';
-		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);
+		"<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);"
 		<< ((aBLPageMetier calledBehavior flatCollect: [ :action | 
 					  action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet collect: [ :widget | 
 					 widget idViewChildFrom: self ]) asOrderedCollection;
@@ -247,14 +257,14 @@ export class ';
 		<< '
 
     constructor(';
-		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
+		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' private router: Router, ' ]);
 		<< (', ' join: ((aBLPageMetier calledBehavior collect: [ :behavior | 
 							   self behaviorInitializeVariableExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened 
 						  reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
 		<< ') {
 ';
-		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
-					 '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);
+		"<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
+					 '        this.' , phase name , ' = this._phaseService.getPhase(''' , phase name , ''');' , String crlf ]);"
 		<< '
     }
 
@@ -489,4 +499,22 @@ CSNModelExporterAngularBLMaterial >> visitMooseModel: aMooseModel [
 	(self root / 'menu.ts') asFileReference writeStreamDo: [ :stream | 
 		currentWriteStream := stream.
 		self generateMenu: aMooseModel ]
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> writeImportForNavigation [
+
+	^ currentWriteStream
+		  << 'import { Router } from ''@angular/router''';
+		  crlf
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLMaterial >> writeOpenPhaseMethod [
+	currentWriteStream
+		crlf;
+		<<
+			'    public openPhase(phase: string): void {
+        this.router.navigate([phase])
+    }'
 ]

@@ -1,9 +1,9 @@
 Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> actionsTag [
-	^ self actions
-		flatCollect: [ :actionAppel | ' ' , actionAppel getAngularRepresentation ]
+CSNWidget >> actionsTagFrom: anExporter [
+
+	^ self actions flatCollect: [ :action | ' ' , (anExporter angularActionRepresentationOf: action) ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -66,7 +66,7 @@ CSNWidget >> getExternalDependencyFrom: anExporter [
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
 	anExporter <<< (self getSelectorFrom: anExporter).
 	(anExporter angularRepresentationOf: self) componentAttributeOn: anExporter forWidget: self.
-	anExporter <<< self actionsTag.
+	anExporter <<< (self actionsTagFrom: anExporter).
 	anExporter <<< self idTag
 ]
 

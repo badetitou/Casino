@@ -9,7 +9,7 @@ CSNWidget >> gtActionsAngularCodeIn: composite [
 				streamContents: [ :s | 
 					| exporter |
 					exporter := (CSNBehaviorModelExporterCoreWeb on: s)
-						currentPage: self rootNode pageContainers anyOne;
+						currentPage: self rootNode anyOne;
 						yourself.
 					self actions anyOne behavior do: [ :behavior | exporter export: behavior ] ] ];
 		withLineNumbers: true;

@@ -93,5 +93,5 @@ MCDatePicker >> modulePath [
 
 { #category : #accessing }
 MCDatePicker >> variableFor: widget [
-	^ 'picker', widget mooseID printString
+	^ widget affectedActions uniqueName
 ]
