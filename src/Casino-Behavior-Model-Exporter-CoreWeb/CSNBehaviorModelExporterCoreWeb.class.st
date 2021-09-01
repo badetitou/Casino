@@ -21,25 +21,32 @@ CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
+
 	self
 		<< (aFASTJavaMethodEntity uniqueNameInPage: self currentPage);
 		<<< '('.
 	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
+	self <<< ') {'.
+	aFASTJavaMethodEntity rootNode = aFASTJavaMethodEntity ifTrue: [ self <<< '/*' ].
 	self
-		<<< ') {/*';
 		indentPlus;
 		crlf.
 	aFASTJavaMethodEntity statements
 		do: [ :statement | 
 			self indent.
 			self accept: statement ]
-		separatedBy: [ self
+		separatedBy: [ 
+			self
 				writeErrorIfSome;
 				crlf ].
 	self
 		crlf;
 		indentMinus;
-		<< '*/}'
+		indent.
+	aFASTJavaMethodEntity rootNode = aFASTJavaMethodEntity ifTrue: [ 
+		self
+			<<< '*/' ].
+	self <<< '}'
 ]
 
 { #category : #generated }
