@@ -93,6 +93,12 @@ WidgetRepresentation >> importString [
 	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
 ]
 
+{ #category : #export }
+WidgetRepresentation >> importStringOf: aWidget [
+
+	^ self importString
+]
+
 { #category : #accessing }
 WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
 	^ {  }

@@ -4,9 +4,14 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #testing }
+{ #category : #accessing }
 BLMBusinessPage >> importString [
 	^ ''
+]
+
+{ #category : #accessing }
+BLMBusinessPage >> importStringOf: aWidget [
+	^  'import { ' , aWidget componentName , ' } from ''.' , aWidget getLocalComponentPath , ''';'
 ]
 
 { #category : #accessing }
