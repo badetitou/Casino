@@ -17,12 +17,11 @@ CSNModelExporterAngularBLMaterial class >> export: aBLMooseModel [
 
 { #category : #visiting }
 CSNModelExporterAngularBLMaterial >> angularActionRepresentationOf: anAction [
-
 	^ anAction isActionAppel
 		  ifTrue: [ 
 			  anAction call ifNil: [ ^ '' ].
 			  ^ '(click)="openPhase(''/omaje/' , anAction call name asRealCamelCase , ''')"' ]
-		  ifFalse: [ anAction getAngularRepresentation ]
+		  ifFalse: [ anAction getAngularRepresentationWith: self ]
 ]
 
 { #category : #visiting }

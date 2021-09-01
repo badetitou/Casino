@@ -1,7 +1,7 @@
 Extension { #name : #CSNActionAppel }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNActionAppel >> getAngularRepresentation [
+CSNActionAppel >> getAngularRepresentationWith: anExporter [
 	self call ifNil: [ ^ '' ].
 	^ '(click)="openPhase(' , self call name , ')"'
 ]

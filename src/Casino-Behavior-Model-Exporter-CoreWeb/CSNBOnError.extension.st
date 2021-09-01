@@ -1,8 +1,8 @@
 Extension { #name : #CSNBOnError }
 
 { #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
-CSNBOnError >> getAngularRepresentation [
+CSNBOnError >> getAngularRepresentationWith: anExporter [
 	^ self behavior
 		ifEmpty: [ '' ]
-		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: (self caller atAnyScope: {CSNPage. CSNBusinessPage }) anyOne) , '($event)"' ]
+		ifNotEmpty: [ :behaviors | '(error)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage) , '($event)"' ]
 ]

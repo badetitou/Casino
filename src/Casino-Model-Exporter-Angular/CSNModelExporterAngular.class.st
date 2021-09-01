@@ -25,6 +25,7 @@ Class {
 	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
 		'currentPath',
+		'currentPage',
 		'exporterAngularConfiguration'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
@@ -48,7 +49,8 @@ CSNModelExporterAngular class >> export: aBLMooseModel [
 
 { #category : #accessing }
 CSNModelExporterAngular >> angularActionRepresentationOf: anAction [
-	^ anAction getAngularRepresentation
+
+	^ anAction getAngularRepresentationWith: self
 ]
 
 { #category : #accessing }
@@ -63,6 +65,18 @@ CSNModelExporterAngular >> businessPageImportList [
     OnInit,
     Renderer2,
     ViewChild'
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> currentPage [
+
+	^ currentPage
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> currentPage: anObject [
+
+	currentPage := anObject
 ]
 
 { #category : #accessing }
@@ -728,6 +742,7 @@ CSNModelExporterAngular >> visitCSNAttribute: aCSNAttribute [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
+
 	| pageMetierRoot |
 	pageMetierRoot := self currentPath.
 	[ pageMetierRoot ensureCreateDirectory ]
@@ -736,20 +751,20 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 
 	"Write pageMetier.module.ts"
 	currentWriteStream := (pageMetierRoot / aBLPageMetier getHTMLName) asFileReference writeStream.
-	[ self generateHTMLSourceCodeForBusinessPage: aBLPageMetier.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
+	[ 
+	self generateHTMLSourceCodeForBusinessPage: aBLPageMetier.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 
 	"Write pageMetier.route.ts"
 	currentWriteStream := (pageMetierRoot / aBLPageMetier getTSName) asFileReference writeStream.
-	[ self generateTSSourceCodeForBusinessPage: aBLPageMetier.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
-	aBLPageMetier metiers
-		do: [ :metier | 
-			self clone
-				currentPath: pageMetierRoot / 'components' / metier getFolderName;
-				visit: metier ]
+	[ 
+	self generateTSSourceCodeForBusinessPage: aBLPageMetier.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
+	aBLPageMetier metiers do: [ :metier | 
+		self clone
+			currentPage: metier;
+			currentPath: pageMetierRoot / 'components' / metier getFolderName;
+			visit: metier ]
 ]
 
 { #category : #visiting }
@@ -838,19 +853,20 @@ CSNModelExporterAngular >> visitCSNLeaf: aCSNLeaf [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNPage: aBLPhase [
+
 	| phaseRoot componentsRoot indexRoot |
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
 	currentWriteStream := (phaseRoot / aBLPhase getModuleName) asFileReference writeStream.
-	[ self generateModuleSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
+	[ 
+	self generateModuleSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write phase.route.ts"
 	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream.
-	[ self generateRouteSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
+	[ 
+	self generateRouteSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write components"
 	componentsRoot := self currentPath / 'components'.
 	componentsRoot ensureCreateDirectory.
@@ -858,20 +874,20 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	indexRoot ensureCreateDirectory.
 
 	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream.
-	[ self generateTSSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
+	[ 
+	self generateTSSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 
 	currentWriteStream := (indexRoot / aBLPhase getHTMLName) asFileReference writeStream.
-	[ self generateHTMLSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ]
-		ensure: [ currentWriteStream close ].
+	[ 
+	self generateHTMLSourceCodeForPage: aBLPhase.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 
-	aBLPhase businessPage
-		do: [ :metier | 
-			self clone
-				currentPath: componentsRoot / metier getAcceptedName;
-				visit: metier ]
+	aBLPhase businessPage do: [ :metier | 
+		self clone
+			currentPage: metier;
+			currentPath: componentsRoot / metier getAcceptedName;
+			visit: metier ]
 ]
 
 { #category : #visiting }
@@ -1105,6 +1121,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 			self
 				execute: [ self clone
 						currentPath: self rootPhases / aPage name asRealCamelCase;
+						currentPage: aPage;
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
 		displayingProgress: [ :page | 'export page: ' , page codePhase asString ].

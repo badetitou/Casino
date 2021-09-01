@@ -1,7 +1,7 @@
 Extension { #name : #CSNAction }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNAction >> getAngularRepresentation [
+CSNAction >> getAngularRepresentationWith: anExporter [
 	^ self behavior
 		ifEmpty: [ self inform: #ThisShouldBeFixed.
 			'' ]

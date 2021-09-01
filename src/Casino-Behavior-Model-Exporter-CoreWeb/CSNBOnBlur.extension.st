@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnBlur }
 
 { #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
-CSNBOnBlur >> getAngularRepresentation [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(blur)="' , (behaviors anyOne uniqueNameInPage: (self caller atAnyScope: {CSNPage. CSNBusinessPage }) anyOne), '($event)"' ]
+CSNBOnBlur >> getAngularRepresentationWith: anExporter [
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(blur)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage), '($event)"' ]
 ]
