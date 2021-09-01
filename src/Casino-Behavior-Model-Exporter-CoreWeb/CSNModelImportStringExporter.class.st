@@ -16,7 +16,7 @@ CSNModelImportStringExporter >> visitCall: aCall [
 
 { #category : #generated }
 CSNModelImportStringExporter >> visitDOMElementAcccess: aDOMElementAcccess [
-	^ (self exporterAngularConfiguration angularRepresentationOf: aDOMElementAcccess widget) importString
+	^ (self exporterAngularConfiguration angularRepresentationOf: aDOMElementAcccess widget) importStringOf: aDOMElementAcccess widget
 ]
 
 { #category : #generated }
