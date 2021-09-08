@@ -32,16 +32,44 @@ CSNModelServiceExporterAngularBLMaterial >> effectsFolder [
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 	self actionsFolder ensureCreateDirectory.
+	self actionsFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
 ]
 
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateEffect: aCSNService [
+
 	self effectsFolder ensureCreateDirectory.
+	self effectsFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | 
+		self currentWriteStream: stream.
+		self
+			<< 'import { Injectable } from "@angular/core";
+import { SpinnerActions, ToasterActions,ToasterType } from "@bl/bl-app-layout";
+import { GlobalStoreService } from "@bl/shared";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { of } from "rxjs";
+import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
+			crlf;
+			crlf;
+			<< '@Injectable();';
+			crlf;
+			<< 'export class ';
+			<<< (aCSNService uniqueName , 'Effects').
+		self inBraces: [ 
+			self
+				<< 'constructor(private actions$: Actions, private booksService: BooksService,  private globalStoreService: GlobalStoreService) {}';
+				crlf;
+				crlf.
+			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateServiceEffectAPI: action ] separatedBy: [ 
+				self
+					crlf;
+					crlf ] ] ]
 ]
 
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
+
 	self reducersFolder ensureCreateDirectory.
+	self reducersFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
 ]
 
 { #category : #api }
@@ -111,15 +139,182 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceAPI: aServiceAPI [
 		crlf
 ]
 
+{ #category : #'generating - effect' }
+CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectAPI: aServiceAPI [
+
+	self generateServiceEffectDefaultAPI: aServiceAPI.
+	self crlf crlf.
+	self generateServiceEffectSuccessAPI: aServiceAPI.
+	self crlf crlf.
+	self generateServiceEffectFailAPI: aServiceAPI.
+	self crlf crlf
+]
+
+{ #category : #'generating - effect' }
+CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aServiceAPI [
+	"effect"
+	self << aServiceAPI uniqueName <<< '$ = createEffect'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			<<< '() =>';
+			crlf;
+			<< 'this.actions$.pipe'.
+		self
+			inParenthesis: [ 
+				self
+					indentPlus;
+					crlf;
+					<< 'ofType(';
+					<<< aServiceAPI uniqueName;
+					<<< '),';
+					crlf;
+					<< 'switchMap'.
+				self
+					inParenthesis: [ 
+						self indentPlus.
+						self
+							<<< '({data}) => {';
+							indentPlus;
+							crlf;
+							<< 'this.globalStoreService.emitAction(SpinnerActions.show.type,{hidding:false})';
+							crlf;
+							<< 'return this.';
+							<<< aServiceAPI serviceOwner uniqueName;
+							<<< '.';
+							<<< aServiceAPI uniqueName;
+							<<< '(data)';
+							<<< '.pipe'.
+						self inParenthesis: [ 
+							self
+								indentPlus;
+								crlf.
+							self << 'switchMap(async (data: any)=>'.
+							self inBraces: [ 
+								self
+									<< 'return ';
+									<<< (aServiceAPI uniqueName , 'Success');
+									<<< '({data});' ].
+							self
+								<<< '),';
+								crlf;
+								<< 'catchError((error: string) => of(';
+								<<< (aServiceAPI uniqueName , 'Fail');
+								<<< '({error})))'.
+							self
+								indentMinus;
+								crlf ].
+						self
+							crlf;
+							indentMinus;
+							<< '}'.
+						self
+							indentMinus;
+							crlf ];
+					indentMinus;
+					crlf ];
+			indentMinus;
+			crlf ]
+]
+
+{ #category : #'generating - effect' }
+CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectFailAPI: aServiceAPI [
+	"effect"
+	self << aServiceAPI uniqueName <<< 'Fail$ = createEffect'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			<<< '() =>';
+			crlf;
+			<< 'this.actions$.pipe'.
+		self
+			inParenthesis: [ 
+				self
+					indentPlus;
+					crlf;
+					<< 'ofType(';
+					<<< aServiceAPI uniqueName;
+					<<< 'Fail';
+					<<< '),';
+					crlf;
+					<< 'map'.
+				self
+					inParenthesis: [ 
+						self indentPlus.
+						self
+							<<< '({error}) => {';
+							indentPlus;
+							crlf;
+							<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.error, message: "Erreur : " + error})';
+							crlf;
+							<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
+						self
+							crlf;
+							indentMinus;
+							<< '}'.
+						self
+							indentMinus;
+							crlf ];
+					indentMinus;
+					crlf ];
+			indentMinus;
+			crlf ]
+]
+
+{ #category : #'generating - effect' }
+CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectSuccessAPI: aServiceAPI [
+
+	"effect"
+
+	self << aServiceAPI uniqueName <<< 'Success' <<< '$ = createEffect'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			<<< '() =>';
+			crlf;
+			<< 'this.actions$.pipe'.
+		self
+			inParenthesis: [ 
+				self
+					indentPlus;
+					crlf;
+					<< 'ofType(';
+					<<< (aServiceAPI uniqueName , 'Success');
+					<<< '),';
+					crlf;
+					<< 'map'.
+				self
+					inParenthesis: [ 
+						self indentPlus.
+						self
+							<<< '() => {';
+							indentPlus;
+							crlf.
+						self
+							<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.success, message: "Success"})';
+							crlf;
+							<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
+						self
+							crlf;
+							indentMinus;
+							<< '}'.
+						self
+							indentMinus;
+							crlf ];
+					indentMinus;
+					crlf ];
+			indentMinus;
+			crlf ]
+]
+
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateServiceFile: aCSNService [
+
 	self serviceFolder ensureCreateDirectory.
-	self serviceFolder / aCSNService getTSName
-		writeStreamDo: [ :stream | 
-			self currentWriteStream: stream.
-			self
-				<<
-					'import { Injectable } from ''@angular/core'';
+	self serviceFolder / aCSNService getTSName writeStreamDo: [ :stream | 
+		self currentWriteStream: stream.
+		self
+			<< 'import { Injectable } from ''@angular/core'';
 
 import { Observable } from ''rxjs'';
 import { first, map } from ''rxjs/operators'';
@@ -128,22 +323,18 @@ import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
 import { ObjectMapper } from ''@outfoxx/jackson-js'';
 import { MapToStringJsonConverterService } from ''app/projects/bl-shell/src/public-api'';
 ';
-				crlf;
-				crlf.
+			crlf;
+			crlf.
 
-			self printServiceDependencies: aCSNService.
+		self printServiceDependencies: aCSNService.
 
-			self
-				<<
-					'/**
+		self << '/**
  * Generated By Casino
  *
  * @author Benoît Verhaeghe
  */
 @Injectable()
-export class ' << aCSNService uniqueName
-				<<
-					' {
+export class ' << aCSNService uniqueName << ' {
 
     private objectMapper: ObjectMapper;
 
@@ -154,15 +345,15 @@ export class ' << aCSNService uniqueName
     }
 
 '.
-			(aCSNService actions sorted: #uniqueName ascending)
-				do: [ :action | 
-					self indentPlus.
-					action accept: self.
-					self indentMinus ]
-				separatedBy: [ self crlf ].
-			self
-				<< '}';
-				crlf ]
+		(aCSNService actions sorted: #uniqueName ascending)
+			do: [ :action | 
+				self indentPlus.
+				self generateServiceAPI: action.
+				self indentMinus ]
+			separatedBy: [ self crlf ].
+		self
+			<< '}';
+			crlf ]
 ]
 
 { #category : #generating }
