@@ -9,7 +9,7 @@ CSNModelExporterAngularBLSpecific export: gwtModel.
 Class {
 	#name : #CSNModelExporterAngularBLSpecific,
 	#superclass : #CSNModelExporterAngular,
-	#category : #'Casino-Model-CoreWeb-Exporter'
+	#category : #'Casino-Model-CoreWeb-Exporter-CoreWeb'
 }
 
 { #category : #actions }

@@ -4,7 +4,7 @@ The coreweb2 configuration uses a mix of re-created component, html component, a
 Class {
 	#name : #CSNExporterAngularCoreWeb2Configuration,
 	#superclass : #CSNExporterAngularConfiguration,
-	#category : #'Casino-Model-CoreWeb-Exporter'
+	#category : #'Casino-Model-CoreWeb-Exporter-CoreWeb'
 }
 
 { #category : #initialization }

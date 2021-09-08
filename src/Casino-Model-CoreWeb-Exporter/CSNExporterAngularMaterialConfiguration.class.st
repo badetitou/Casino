@@ -5,7 +5,7 @@ It is more present for demonstration than real usage
 Class {
 	#name : #CSNExporterAngularMaterialConfiguration,
 	#superclass : #CSNExporterAngularConfiguration,
-	#category : #'Casino-Model-CoreWeb-Exporter'
+	#category : #'Casino-Model-CoreWeb-Exporter-BLMaterial'
 }
 
 { #category : #initialization }
