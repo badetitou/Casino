@@ -31,8 +31,74 @@ CSNModelServiceExporterAngularBLMaterial >> effectsFolder [
 
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
+
 	self actionsFolder ensureCreateDirectory.
-	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
+	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | 
+		self currentWriteStream: stream.
+		self << 'import { createAction, props } from "@ngrx/store"'.
+		(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateActionAPI: action ] separatedBy: [ self crlf ] ]
+]
+
+{ #category : #generating }
+CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
+
+	(self << '// ')
+		<<< action name asUpperSnakeCase;
+		crlf.
+	(self << 'export const ' << action name asUpperSnakeCase <<< ' = "' <<< action name asUpperSnakeCase)
+		<<< '"';
+		crlf.
+	(self << 'export const ' << action name asUpperSnakeCase <<< '_SUCCESS = "' <<< action name asUpperSnakeCase)
+		<<< '_SUCCESS"';
+		crlf.
+	(self << 'export const ' << action name asUpperSnakeCase <<< '_FAIL = "' <<< action name asUpperSnakeCase)
+		<<< '_FAIL"';
+		crlf;
+		crlf.
+	self <<< 'export const ' <<< action name <<< ' = createAction'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			crlf.
+		(self << action name asUpperSnakeCase)
+			<<< ',';
+			crlf.
+		self << 'props<{ data?:any}>()'.
+		self
+			indentMinus;
+			crlf ].
+
+	self crlf.
+
+	self <<< 'export const ' <<< action name <<< 'Success = createAction'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			crlf.
+		(self << action name asUpperSnakeCase)
+			<<< '_SUCCESS,';
+			crlf.
+		self << 'props<{ data?:any}>()'.
+		self
+			indentMinus;
+			crlf ].
+
+	self crlf.
+
+	self <<< 'export const ' <<< action name <<< 'Fail = createAction'.
+	self inParenthesis: [ 
+		self
+			indentPlus;
+			crlf.
+		(self << action name asUpperSnakeCase)
+			<<< '_FAIL,';
+			crlf.
+		self << 'props<{ error:string}>()'.
+		self
+			indentMinus;
+			crlf ].
+
+	self crlf
 ]
 
 { #category : #generating }
