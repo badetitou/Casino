@@ -121,6 +121,8 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
+		self crlf.
+		self << 'import { ' <<< aCSNService uniqueName <<< ' } from "../services/' <<< aCSNService getServiceName <<< '";'.
 		self
 			crlf;
 			crlf;
@@ -129,8 +131,11 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			<< 'export class ';
 			<<< (aCSNService uniqueName , 'Effects').
 		self inBraces: [ 
+			self << 'constructor(private actions$: Actions, private globalStoreService: GlobalStoreService, '.
+			self <<< 'private ' <<< aCSNService name uncapitalized <<< ': ' <<< aCSNService name.
+
 			self
-				<< 'constructor(private actions$: Actions, private booksService: BooksService,  private globalStoreService: GlobalStoreService) {}';
+				<<< ') {}';
 				crlf;
 				crlf.
 			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateServiceEffectAPI: action ] separatedBy: [ 
@@ -335,7 +340,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 							<< 'this.globalStoreService.emitAction(SpinnerActions.show.type,{hidding:false})';
 							crlf;
 							<< 'return this.';
-							<<< aServiceAPI serviceOwner uniqueName;
+							<<< aServiceAPI serviceOwner uniqueName uncapitalized;
 							<<< '.';
 							<<< aServiceAPI uniqueName;
 							<<< '(data)';
