@@ -32,14 +32,14 @@ CSNModelServiceExporterAngularBLMaterial >> effectsFolder [
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 	self actionsFolder ensureCreateDirectory.
-	self actionsFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
+	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
 ]
 
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateEffect: aCSNService [
 
 	self effectsFolder ensureCreateDirectory.
-	self effectsFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | 
+	self effectsFolder / (aCSNService uniqueName , '.effects.ts') writeStreamDo: [ :stream | 
 		self currentWriteStream: stream.
 		self
 			<< 'import { Injectable } from "@angular/core";
@@ -50,7 +50,7 @@ import { of } from "rxjs";
 import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			crlf;
 			crlf;
-			<< '@Injectable();';
+			<< '@Injectable()';
 			crlf;
 			<< 'export class ';
 			<<< (aCSNService uniqueName , 'Effects').
@@ -69,7 +69,80 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 
 	self reducersFolder ensureCreateDirectory.
-	self reducersFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | self currentWriteStream: stream ]
+	self reducersFolder / (aCSNService uniqueName , '.reducer.ts') writeStreamDo: [ :stream | 
+		self currentWriteStream: stream.
+		self
+			<< 'import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";';
+			crlf;
+			crlf;
+			<< 'const _';
+			<<< aCSNService uniqueName uncapitalized;
+			<<< 'Reducer = createReducer'.
+		self inParenthesis: [ 
+			self
+				indentPlus;
+				crlf.
+			(self << 'initial' <<< aCSNService uniqueName)
+				<<< 'State,';
+				crlf.
+			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateReducerAPI: action ] separatedBy: [ 
+				self
+					<<< ',';
+					crlf ].
+			self <<< ')'.
+			self
+				indentMinus;
+				crlf ].
+		self
+			crlf;
+			crlf.
+		self << 'export function ' <<< aCSNService uniqueName uncapitalized <<< 'Reducer (state: any, action:Action) '.
+		self inBraces: [ self << 'return _' <<< aCSNService uniqueName uncapitalized <<< 'Reducer (state,action)' ].
+		'}' ]
+]
+
+{ #category : #generating }
+CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
+
+	self << 'on(' <<< action name <<< ', (state, {data}) =>'.
+	self inBraces: [ 
+		self << 'return '.
+		self inBraces: [ 
+			self
+				<< '...state,';
+				crlf.
+			self
+				<< 'data,';
+				crlf.
+			self << 'loading: true' ] ].
+	self
+		<<< '),';
+		crlf.
+	self << 'on(' <<< action name <<< 'Success, (state, {data}) =>'.
+	self inBraces: [ 
+		self << 'return '.
+		self inBraces: [ 
+			self
+				<< '...state,';
+				crlf.
+			self
+				<< 'data,';
+				crlf.
+			self << 'loading: false' ] ].
+	self
+		<<< '),';
+		crlf.
+	self << 'on(' <<< action name <<< 'Fail, (state, {error}) =>'.
+	self inBraces: [ 
+		self << 'return '.
+		self inBraces: [ 
+			self
+				<< '...state,';
+				crlf.
+			self
+				<< 'error,';
+				crlf.
+			self << 'loading: false' ] ].
 ]
 
 { #category : #api }
