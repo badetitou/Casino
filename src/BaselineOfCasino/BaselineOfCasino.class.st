@@ -92,6 +92,7 @@ BaselineOfCasino >> defineGroups: spec [
 		"bl migration"
 		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl' 'business');
 		group: 'rh' with: #('Casino-Migration-RH' 'behavior-bl' 'business');
+		group: 'office' with: #('Casino-Migration-PostOffice' 'behavior-bl' 'business');
 		
 		"export java"
 		group: 'rest-java' with: #('Casino-BL-GWT-ServiceRest-Exporter')

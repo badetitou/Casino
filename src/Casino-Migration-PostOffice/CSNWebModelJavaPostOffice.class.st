@@ -43,10 +43,10 @@ CSNWebModelJavaPostOffice >> createFactory [
 
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> generatePhase [
-	xml
-		nodesDo: [ :aXmlNode | 
-			(aXmlNode isElement and: [ aXmlNode name localName = 'phase' and: [ (aXmlNode attributeAt: #className ifAbsent:  [ '' ]) beginsWith: 'fr.bl.client.thot.phase' ] ])
-				ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ].
+
+	xml allNodesDo: [ :aXmlNode | 
+		(aXmlNode isElement and: [ aXmlNode name = 'phase' and: [ (aXmlNode attributeAt: #className ifAbsent: [ '' ]) beginsWith: 'fr.bl.client.thot.phase' ] ]) 
+			ifTrue: [ self factory createPageFromXMLElement: aXmlNode ] ]
 ]
 
 { #category : #accessing }

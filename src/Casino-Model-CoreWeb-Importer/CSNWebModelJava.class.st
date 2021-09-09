@@ -484,19 +484,18 @@ CSNWebModelJava >> linkFromWidgetActionAppelCase1: anInvocation [
 
 { #category : #private }
 CSNWebModelJava >> linkFromWidgetActionAppelCase2: anInvocation [
+
 	"Return the found association
 	case 2
 	var i = new Widget ()
 	i.addHandler..(BlBl)"
 
 	anInvocation source parentType isHandlerClass ifFalse: [ ^ nil ].
-	(self
-		widgetInVariable:
-			(anInvocation source parentType container outgoingInvocations
-				detect: [ :invoc | 
-					invoc sourceAnchor isNotNil
-						and: [ invoc sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]
-				ifNone: [ ^ nil ]) receiver)
+	(self widgetInVariable: (anInvocation source parentType typeContainer outgoingInvocations
+			  detect: [ :invoc | 
+				  invoc sourceAnchor isNotNil and: [ 
+					  invoc sourceAnchor startPos < anInvocation sourceAnchor startPos and: [ invoc sourceAnchor endPos > anInvocation sourceAnchor endPos ] ] ]
+			  ifNone: [ ^ nil ]) receiver)
 		ifNotNil: [ :widgetContainer | ^ widgetContainer -> (self searchCalledPhaseFromInvocation: anInvocation) ]
 		ifNil: [ ^ nil ]
 ]
