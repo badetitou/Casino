@@ -115,6 +115,13 @@ import { GlobalStoreService } from "@bl/shared";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
+			crlf.
+		self << 'import { '.
+		(aCSNService actions sorted: #uniqueName ascending)
+			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
+			separatedBy: [ self <<< ', ' ].
+		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
+		self
 			crlf;
 			crlf;
 			<< '@Injectable()';
@@ -143,7 +150,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			crlf.
 		self << 'import { '.
 		(aCSNService actions sorted: #uniqueName ascending)
-			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail,' <<< action name <<< 'Success' ]
+			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
 		self
