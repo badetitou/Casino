@@ -45,13 +45,14 @@ CSNBehaviorPatternServiceCall >> run [
 
 	self uiModel ifNil: [ ^ self ].
 	(self model allWithType: FASTJavaVariableExpression) asOrderedCollection do: [ :namedEntity | 
-		self uiModel allCSNService asOrderedCollection 
+		self uiModel allCSNService asOrderedCollection
 			detect: [ :service | service source name = namedEntity name ]
 			ifFound: [ :service | 
 				service actions
 					select: [ :action | 
 						namedEntity parentNode isNotNil and: [ 
 							namedEntity parentNode parentNode isNotNil and: [ 
-								namedEntity parentNode parentNode parentNode isNotNil and: [ action name = namedEntity parentNode parentNode parentNode name ] ] ] ]
+								namedEntity parentNode parentNode parentNode isNotNil and: [ 
+									action name = namedEntity parentNode parentNode parentNode name and: [ namedEntity parentNode parentNode parentNode parentNode isNotNil ] ] ] ] ]
 					thenDo: [ :action | self createAsynchroneCallFrom: namedEntity withDistantService: action ] ] ]
 ]

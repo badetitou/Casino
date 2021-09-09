@@ -22,7 +22,7 @@ CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactor
 			self layout
 				ifNotNil: [ :layout | layout addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory ]
 				ifNil: [ self addWidget: aWidget ] ]
-		ifTrue: [ ('CSNCOntainer - AddWidgetWithInvocation: ' , aWidget printString , ' is already present in the hierarchy') record ]
+		ifTrue: [ ('CSNContainer - AddWidgetWithInvocation: ' , aWidget printString , ' is already present in the hierarchy') record ]
 ]
 
 { #category : #'*Casino-Model-Importer' }
