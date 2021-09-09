@@ -36,6 +36,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | 
 		self currentWriteStream: stream.
 		self << 'import { createAction, props } from "@ngrx/store"'.
+		
 		(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateActionAPI: action ] separatedBy: [ self crlf ] ]
 ]
 
@@ -139,6 +140,13 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 		self currentWriteStream: stream.
 		self
 			<< 'import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";';
+			crlf.
+		self << 'import { '.
+		(aCSNService actions sorted: #uniqueName ascending)
+			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail,' <<< action name <<< 'Success' ]
+			separatedBy: [ self <<< ', ' ].
+		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
+		self
 			crlf;
 			crlf;
 			<< 'const _';
@@ -155,7 +163,6 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 				self
 					<<< ',';
 					crlf ].
-			self <<< ')'.
 			self
 				indentMinus;
 				crlf ].
@@ -208,7 +215,9 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 			self
 				<< 'error,';
 				crlf.
-			self << 'loading: false' ] ].
+			self << 'loading: false' ].
+		 ].
+	self <<< ')'
 ]
 
 { #category : #api }
