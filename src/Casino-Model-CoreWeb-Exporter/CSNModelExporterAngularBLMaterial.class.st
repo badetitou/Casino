@@ -45,6 +45,46 @@ CSNModelExporterAngularBLMaterial >> businessExporter [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngularBLMaterial >> generateCoreStoreModule: aMooseModel [
+
+	self << 'import { NgModule } from ''@angular/core'';
+import { CommonModule } from ''@angular/common'';
+import { StoreModule } from ''@ngrx/store'';
+import { EffectsModule } from ''@ngrx/effects'';
+import { SharedModule } from ''../../shared/shared.module'';'.
+
+	self crlf crlf.
+	self << '@NgModule('.
+	self inBraces: [ 
+		self << 'imports: '.
+		self inBrakets: [ 
+			self
+				<< 'CommonModule,';
+				crlf.
+			self
+				<< 'SharedModule,';
+				crlf.
+			self << 'EffectsModule.forFeature(['.
+			aMooseModel allCSNService do: [ :service | self <<< service uniqueName <<< 'Effects' ] separatedBy: [ self <<< ', ' ].
+			self
+				<<< ']),';
+				crlf ].
+		self
+			<<< ',';
+			crlf.
+		self << 'providers: '.
+		self inBrakets: [ 
+			aMooseModel allCSNService do: [ :service | self << service uniqueName ] separatedBy: [ 
+				self
+					<<< ',';
+					crlf ] ] ].
+	self
+		<<< ')';
+		crlf.
+	self << 'export class CoreStoreModule { }'
+]
+
+{ #category : #visiting }
 CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
 
 	currentWriteStream << aCSNPage businessPage anyOne getTag
@@ -379,71 +419,15 @@ CSNModelExporterAngularBLMaterial >> visitCSNService: aCSNService [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngularBLMaterial >> visitCSNServiceAPI: aServiceAPI [
-	self
-		<< '// TODO: Please check this service';
-		crlf.
-	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
-	aServiceAPI printParameterIn: self.
-
-	self <<< '): Observable<'.
-	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
-	self <<< '> {'.
-	self indentPlus.
-	aServiceAPI isGET
-		ifTrue: [ aServiceAPI printCreateParamIn: self ]
-		ifFalse: [ aServiceAPI printCreateFormDataIn: self ].
-	self crlf.
-	self << 'return this.http.'.
-	aServiceAPI printRestTypeIn: self.
-	self <<< '<'.
-	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
-	self <<< '>(''/ws/' <<< aServiceAPI serviceOwner targetPoint asKebabCase <<< '/' <<< aServiceAPI name asKebabCase <<< ''''.
-	self indentPlus.
-	aServiceAPI isPOST
-		ifTrue: [ self
-				<<< ',';
-				crlf;
-				<< 'formData' ].
-	self
-		<<< ', {';
-		crlf.
-	self << 'withCredentials: true'.
-	(aServiceAPI isGET and: [ aServiceAPI source isNotNil and: [ aServiceAPI source parameters isNotEmpty ] ])
-		ifTrue: [ self
-				<<< ',';
-				crlf;
-				<< 'params: params' ].
-	self
-		crlf;
-		indentMinus;
-		<< '}).pipe(first()'.
-	aServiceAPI dataType ifNotNil: [:dateType | dateType innerType isBusinessType
-		ifTrue: [ self
-				<<< ',';
-				crlf;
-				indentPlus;
-				<< 'map(res => ';
-				inBraces: [ self << 'return '.
-					aServiceAPI dataType printServiceDeserializeOn: self ];
-				<<< ')';
-				indentMinus ]].
-	self
-		crlf;
-		<< ');';
-		crlf;
-		indentMinus;
-		<< '}';
-		crlf
-]
-
-{ #category : #visiting }
 CSNModelExporterAngularBLMaterial >> visitMooseModel: aMooseModel [
 
 	super visitMooseModel: aMooseModel.
 	(self root / 'menu.ts') asFileReference writeStreamDo: [ :stream | 
 		currentWriteStream := stream.
-		self generateMenu: aMooseModel ]
+		self generateMenu: aMooseModel ].
+	(self serviceRoot / 'core-store.module.ts') asFileReference writeStreamDo: [ :stream | 
+		currentWriteStream := stream.
+		self generateCoreStoreModule: aMooseModel ]
 ]
 
 { #category : #visiting }

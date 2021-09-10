@@ -36,7 +36,10 @@ CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | 
 		self currentWriteStream: stream.
 		self << 'import { createAction, props } from "@ngrx/store"'.
-		
+		self
+			crlf;
+			crlf.
+
 		(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateActionAPI: action ] separatedBy: [ self crlf ] ]
 ]
 
@@ -64,7 +67,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 		(self << action name asUpperSnakeCase)
 			<<< ',';
 			crlf.
-		self << 'props<{ data?:any}>()'.
+		self << 'props<{ data?: any }>()'.
 		self
 			indentMinus;
 			crlf ].
@@ -79,7 +82,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 		(self << action name asUpperSnakeCase)
 			<<< '_SUCCESS,';
 			crlf.
-		self << 'props<{ data?:any}>()'.
+		self << 'props<{ data?: any }>()'.
 		self
 			indentMinus;
 			crlf ].
@@ -94,7 +97,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 		(self << action name asUpperSnakeCase)
 			<<< '_FAIL,';
 			crlf.
-		self << 'props<{ error:string}>()'.
+		self << 'props<{ error: string }>()'.
 		self
 			indentMinus;
 			crlf ].
@@ -129,18 +132,17 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			<< '@Injectable()';
 			crlf;
 			<< 'export class ';
-			<<< (aCSNService uniqueName , 'Effects').
+			<<< (aCSNService uniqueName , 'Effects ').
 		self inBraces: [ 
 			self << 'constructor(private actions$: Actions, private globalStoreService: GlobalStoreService, '.
 			self <<< 'private ' <<< aCSNService name uncapitalized <<< ': ' <<< aCSNService name.
 
 			self
-				<<< ') {}';
+				<<< ') { }';
 				crlf;
 				crlf.
 			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateServiceEffectAPI: action ] separatedBy: [ 
 				self
-					crlf;
 					crlf ] ] ]
 ]
 
@@ -158,6 +160,19 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
+		self
+			crlf;
+			crlf.
+		self << 'export const initial' <<< aCSNService uniqueName <<< 'State = '.
+		self inBraces: [ 
+			self
+				<< 'loading: false,';
+				crlf.
+			self
+				<< 'error: undefined,';
+				crlf.
+			self
+				<< 'data: []' ].
 		self
 			crlf;
 			crlf;
@@ -307,7 +322,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectAPI: aServiceAP
 	self generateServiceEffectSuccessAPI: aServiceAPI.
 	self crlf crlf.
 	self generateServiceEffectFailAPI: aServiceAPI.
-	self crlf crlf
+	self crlf
 ]
 
 { #category : #'generating - effect' }
@@ -379,7 +394,9 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 
 { #category : #'generating - effect' }
 CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectFailAPI: aServiceAPI [
+
 	"effect"
+
 	self << aServiceAPI uniqueName <<< 'Fail$ = createEffect'.
 	self inParenthesis: [ 
 		self
@@ -387,36 +404,37 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectFailAPI: aServi
 			<<< '() =>';
 			crlf;
 			<< 'this.actions$.pipe'.
+		self inParenthesis: [ 
+			self
+				indentPlus;
+				crlf;
+				<< 'ofType(';
+				<<< aServiceAPI uniqueName;
+				<<< 'Fail';
+				<<< '),';
+				crlf;
+				<< 'map'.
+			self
+				inParenthesis: [ 
+					self indentPlus.
+					self
+						<<< '({error}) => {';
+						indentPlus;
+						crlf;
+						<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.error, message: "Erreur : " + error})';
+						crlf;
+						<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
+					self
+						crlf;
+						indentMinus;
+						<< '}'.
+					self
+						indentMinus;
+						crlf ];
+				indentMinus;
+				crlf ].
+		self <<< ',{dispatch:false}'.
 		self
-			inParenthesis: [ 
-				self
-					indentPlus;
-					crlf;
-					<< 'ofType(';
-					<<< aServiceAPI uniqueName;
-					<<< 'Fail';
-					<<< '),';
-					crlf;
-					<< 'map'.
-				self
-					inParenthesis: [ 
-						self indentPlus.
-						self
-							<<< '({error}) => {';
-							indentPlus;
-							crlf;
-							<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.error, message: "Erreur : " + error})';
-							crlf;
-							<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
-						self
-							crlf;
-							indentMinus;
-							<< '}'.
-						self
-							indentMinus;
-							crlf ];
-					indentMinus;
-					crlf ];
 			indentMinus;
 			crlf ]
 ]
@@ -433,36 +451,37 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectSuccessAPI: aSe
 			<<< '() =>';
 			crlf;
 			<< 'this.actions$.pipe'.
+		self inParenthesis: [ 
+			self
+				indentPlus;
+				crlf;
+				<< 'ofType(';
+				<<< (aServiceAPI uniqueName , 'Success');
+				<<< '),';
+				crlf;
+				<< 'map'.
+			self
+				inParenthesis: [ 
+					self indentPlus.
+					self
+						<<< '() => {';
+						indentPlus;
+						crlf.
+					self
+						<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.success, message: "Success"})';
+						crlf;
+						<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
+					self
+						crlf;
+						indentMinus;
+						<< '}'.
+					self
+						indentMinus;
+						crlf ];
+				indentMinus;
+				crlf ].
 		self
-			inParenthesis: [ 
-				self
-					indentPlus;
-					crlf;
-					<< 'ofType(';
-					<<< (aServiceAPI uniqueName , 'Success');
-					<<< '),';
-					crlf;
-					<< 'map'.
-				self
-					inParenthesis: [ 
-						self indentPlus.
-						self
-							<<< '() => {';
-							indentPlus;
-							crlf.
-						self
-							<< 'this.globalStoreService.emitAction(ToasterActions.showToaster.type, {toasterType: ToasterType.success, message: "Success"})';
-							crlf;
-							<< 'this.globalStoreService.emitAction(SpinnerActions.hide.type, {})'.
-						self
-							crlf;
-							indentMinus;
-							<< '}'.
-						self
-							indentMinus;
-							crlf ];
-					indentMinus;
-					crlf ];
+			<<< ',{dispatch:false}';
 			indentMinus;
 			crlf ]
 ]
