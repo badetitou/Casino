@@ -53,6 +53,21 @@ import { StoreModule } from ''@ngrx/store'';
 import { EffectsModule } from ''@ngrx/effects'';
 import { SharedModule } from ''../../shared/shared.module'';'.
 
+	self crlf.
+
+	(aMooseModel allCSNService sorted: #uniqueName ascending)
+		do: [ :service | 
+			(self << 'import { ' <<< service uniqueName <<< ' } from ''./services/' <<< service getServiceName)
+				<<< ''';';
+				crlf.
+			(self << 'import { ' <<< service uniqueName <<< 'Effects } from ''./effects/' <<< service uniqueName)
+				<<< '.effects'';';
+				crlf.
+			(self << 'import { ' <<< service uniqueName uncapitalized <<< 'Reducer, ' <<< service uniqueName uncapitalized <<< 'StateName } from ''./reducers/'
+			 <<< service uniqueName)
+				<<< '.reducer'';';
+				crlf ].
+
 	self crlf crlf.
 	self << '@NgModule('.
 	self inBraces: [ 
@@ -64,6 +79,10 @@ import { SharedModule } from ''../../shared/shared.module'';'.
 			self
 				<< 'SharedModule,';
 				crlf.
+			aMooseModel allCSNService do: [ :service | 
+				(self << 'StoreModule.forFeature(' <<< service uniqueName uncapitalized <<< 'StateName, ' <<< service uniqueName uncapitalized)
+					<<< 'Reducer),';
+					crlf ].
 			self << 'EffectsModule.forFeature(['.
 			aMooseModel allCSNService do: [ :service | self <<< service uniqueName <<< 'Effects' ] separatedBy: [ self <<< ', ' ].
 			self

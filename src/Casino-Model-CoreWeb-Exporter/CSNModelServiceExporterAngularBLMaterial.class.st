@@ -163,6 +163,10 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 		self
 			crlf;
 			crlf.
+		self << 'export const ' <<< aCSNService uniqueName uncapitalized <<< 'StateName = "_' <<< aCSNService uniqueName uncapitalized <<< 'State"'.
+		self
+			crlf;
+			crlf.
 		self << 'export const initial' <<< aCSNService uniqueName <<< 'State = '.
 		self inBraces: [ 
 			self
@@ -171,8 +175,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			self
 				<< 'error: undefined,';
 				crlf.
-			self
-				<< 'data: []' ].
+			self << 'data: []' ].
 		self
 			crlf;
 			crlf;
@@ -198,7 +201,12 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			crlf.
 		self << 'export function ' <<< aCSNService uniqueName uncapitalized <<< 'Reducer (state: any, action:Action) '.
 		self inBraces: [ self << 'return _' <<< aCSNService uniqueName uncapitalized <<< 'Reducer (state,action)' ].
-		'}' ]
+		'}'.
+		self
+			crlf;
+			crlf.
+
+		self << 'export const get' <<< aCSNService uniqueName <<< 'State = createFeatureSelector<any>(' <<< aCSNService uniqueName uncapitalized <<< 'StateName)' ]
 ]
 
 { #category : #generating }
