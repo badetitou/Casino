@@ -335,7 +335,9 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectAPI: aServiceAP
 
 { #category : #'generating - effect' }
 CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aServiceAPI [
+
 	"effect"
+
 	self << aServiceAPI uniqueName <<< '$ = createEffect'.
 	self inParenthesis: [ 
 		self
@@ -356,8 +358,10 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 				self
 					inParenthesis: [ 
 						self indentPlus.
+						self <<< '({'.
+						aServiceAPI printArgumentsIn: self.
 						self
-							<<< '({data}) => {';
+							<<< '}) => {';
 							indentPlus;
 							crlf;
 							<< 'this.globalStoreService.emitAction(SpinnerActions.show.type,{hidding:false})';
@@ -366,7 +370,10 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 							<<< aServiceAPI serviceOwner uniqueName uncapitalized;
 							<<< '.';
 							<<< aServiceAPI uniqueName;
-							<<< '(data)';
+							<<< '('.
+						aServiceAPI printArgumentsIn: self.
+						self
+							<<< ')';
 							<<< '.pipe'.
 						self inParenthesis: [ 
 							self
