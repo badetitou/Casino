@@ -28,6 +28,7 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 			(CSNUITabManager -> MCTabGroup new).
 			(CSNBusinessPage -> BLMBusinessPage new).
 			(CSNPage -> BLMPage new).
+			(CSNUIInputFile -> BLMAttachment new).
 			(CSNUILink
 				->
 					(MCButton new
