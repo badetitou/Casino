@@ -2,5 +2,8 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Visualisation' }
 CSNServiceAPI >> allUsedType [
-	^ { self dataType toBussinessType . self parameters collect: #allUsedType } flattened asSet
+
+	^ { 
+		  (#returnType -> self dataType toBussinessType).
+		  (#parameters -> (self parameters collect: #allUsedType) flattened) } asDictionary
 ]
