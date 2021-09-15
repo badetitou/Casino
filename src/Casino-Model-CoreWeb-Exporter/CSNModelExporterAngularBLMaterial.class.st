@@ -236,6 +236,7 @@ export const COMPONENTS: any[] = [
     ],
     imports: [
         PHASE_ROUTES,
+        CommonModule,
 ';
 		<< (aCSNPage widgetsDependenciesNameFrom: self);
 		<< '

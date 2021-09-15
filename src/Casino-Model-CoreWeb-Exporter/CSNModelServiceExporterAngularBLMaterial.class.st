@@ -36,9 +36,9 @@ CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 	self actionsFolder / (aCSNService uniqueName , '.actions.ts') writeStreamDo: [ :stream | 
 		self currentWriteStream: stream.
 		self << 'import { createAction, props } from "@ngrx/store"'.
-		self
-			crlf;
-			crlf.
+		self crlf.
+		self printServiceDependencies: aCSNService.
+		self crlf crlf.
 
 		(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateActionAPI: action ] separatedBy: [ self crlf ] ]
 ]
@@ -47,39 +47,43 @@ CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 
 	(self << '// ')
-		<<< action name asUpperSnakeCase;
+		<<< action uniqueName asUpperSnakeCase;
 		crlf.
-	(self << 'export const ' << action name asUpperSnakeCase <<< ' = "' <<< action name asUpperSnakeCase)
+	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< ' = "' <<< action uniqueName asUpperSnakeCase)
 		<<< '"';
 		crlf.
-	(self << 'export const ' << action name asUpperSnakeCase <<< '_SUCCESS = "' <<< action name asUpperSnakeCase)
+	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< '_SUCCESS = "' <<< action uniqueName asUpperSnakeCase)
 		<<< '_SUCCESS"';
 		crlf.
-	(self << 'export const ' << action name asUpperSnakeCase <<< '_FAIL = "' <<< action name asUpperSnakeCase)
+	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< '_FAIL = "' <<< action uniqueName asUpperSnakeCase)
 		<<< '_FAIL"';
 		crlf;
 		crlf.
-	self <<< 'export const ' <<< action name <<< ' = createAction'.
+	self <<< 'export const ' <<< action uniqueName <<< ' = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action name asUpperSnakeCase)
+		(self << action uniqueName asUpperSnakeCase)
 			<<< ',';
 			crlf.
-		self << 'props<{ data?: any }>()'.
+		self << 'props<{ '.
+		action parameters
+			ifNotEmpty: [ self printParameterOf: action ]
+			ifEmpty: [ self <<< 'data?: any' ].
+		self <<< ' }>()'.
 		self
 			indentMinus;
 			crlf ].
 
 	self crlf.
 
-	self <<< 'export const ' <<< action name <<< 'Success = createAction'.
+	self <<< 'export const ' <<< action uniqueName <<< 'Success = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action name asUpperSnakeCase)
+		(self << action uniqueName asUpperSnakeCase)
 			<<< '_SUCCESS,';
 			crlf.
 		self << 'props<{ data?: any }>()'.
@@ -89,12 +93,12 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 
 	self crlf.
 
-	self <<< 'export const ' <<< action name <<< 'Fail = createAction'.
+	self <<< 'export const ' <<< action uniqueName <<< 'Fail = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action name asUpperSnakeCase)
+		(self << action uniqueName asUpperSnakeCase)
 			<<< '_FAIL,';
 			crlf.
 		self << 'props<{ error: string }>()'.
@@ -121,7 +125,7 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			crlf.
 		self << 'import { '.
 		(aCSNService actions sorted: #uniqueName ascending)
-			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
+			do: [ :action | self <<< action uniqueName <<< ', ' <<< action uniqueName <<< 'Fail, ' <<< action uniqueName <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
 		self crlf.
@@ -157,7 +161,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			crlf.
 		self << 'import { '.
 		(aCSNService actions sorted: #uniqueName ascending)
-			do: [ :action | self <<< action name <<< ', ' <<< action name <<< 'Fail, ' <<< action name <<< 'Success' ]
+			do: [ :action | self <<< action uniqueName <<< ', ' <<< action uniqueName <<< 'Fail, ' <<< action uniqueName <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
 		self
@@ -212,21 +216,26 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 
-	self << 'on(' <<< action name <<< ', (state, {data}) =>'.
+	self << 'on(' <<< action uniqueName <<< ', (state, {'.
+	self printArgumentsOf: action.
+	self <<< '}) =>'.
 	self inBraces: [ 
 		self << 'return '.
 		self inBraces: [ 
 			self
 				<< '...state,';
 				crlf.
-			self
-				<< 'data,';
-				crlf.
+			action sortedParameters do: [ :parameter | 
+				(self << (parameter name = 'type'
+						  ifTrue: [ 'type0' ]
+						  ifFalse: [ parameter name ]))
+					<<< ',';
+					crlf ].
 			self << 'loading: true' ] ].
 	self
 		<<< '),';
 		crlf.
-	self << 'on(' <<< action name <<< 'Success, (state, {data}) =>'.
+	self << 'on(' <<< action uniqueName <<< 'Success, (state, {data}) =>'.
 	self inBraces: [ 
 		self << 'return '.
 		self inBraces: [ 
@@ -240,7 +249,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 	self
 		<<< '),';
 		crlf.
-	self << 'on(' <<< action name <<< 'Fail, (state, {error}) =>'.
+	self << 'on(' <<< action uniqueName <<< 'Fail, (state, {error}) =>'.
 	self inBraces: [ 
 		self << 'return '.
 		self inBraces: [ 
@@ -250,8 +259,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 			self
 				<< 'error,';
 				crlf.
-			self << 'loading: false' ].
-		 ].
+			self << 'loading: false' ] ].
 	self <<< ')'
 ]
 
@@ -269,7 +277,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceAPI: aServiceAPI [
 		<< '// TODO: Please check this service';
 		crlf.
 	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
-	aServiceAPI printParameterIn: self.
+	self printParameterOf: aServiceAPI.
 
 	self <<< '): Observable<'.
 	aServiceAPI dataType ifNotNil: [ aServiceAPI dataType writeBusinessTypeOn: self] .
@@ -359,7 +367,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 					inParenthesis: [ 
 						self indentPlus.
 						self <<< '({'.
-						aServiceAPI printArgumentsIn: self.
+						self printArgumentsOf: aServiceAPI.
 						self
 							<<< '}) => {';
 							indentPlus;
@@ -371,7 +379,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 							<<< '.';
 							<<< aServiceAPI uniqueName;
 							<<< '('.
-						aServiceAPI printArgumentsIn: self.
+						self printArgumentsOf: aServiceAPI.
 						self
 							<<< ')';
 							<<< '.pipe'.
@@ -515,7 +523,7 @@ import { first, map } from ''rxjs/operators'';
 
 import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
 import { ObjectMapper } from ''@outfoxx/jackson-js'';
-import { MapToStringJsonConverterService } from ''app/projects/bl-shell/src/public-api'';
+import { MapToStringJsonConverterService } from ''src/app/main/shared/services/map-to-string-json-converter.service'';
 ';
 			crlf;
 			crlf.
@@ -548,6 +556,21 @@ export class ' << aCSNService uniqueName << ' {
 		self
 			<< '}';
 			crlf ]
+]
+
+{ #category : #generating }
+CSNModelServiceExporterAngularBLMaterial >> printArgumentsOf: action [
+
+	action sortedParameters do: [ :parameter | self <<< (parameter name = 'type' ifTrue: [ 'type0' ] ifFalse: [ parameter name ]) ] separatedBy: [ self <<< ', ' ]
+]
+
+{ #category : #generating }
+CSNModelServiceExporterAngularBLMaterial >> printParameterOf: action [
+	action sortedParameters
+		do: [ :parameter | 
+			self <<< (parameter name = 'type' ifTrue: [ 'type0' ] ifFalse: [ parameter name ]) <<< ': '.
+			parameter dataType ifNotNil: [ :dataType | dataType writeBusinessTypeOn: self ] ifNil: [ self << 'any' ] ]
+		separatedBy: [ self <<< ', ' ]
 ]
 
 { #category : #generating }

@@ -23,14 +23,6 @@ CSNServiceAPI >> isPOST [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNServiceAPI >> printArgumentsIn: aStream [
-	self sortedParameters
-		do: [ :parameter | 
-			aStream <<< parameter name ]
-		separatedBy: [ aStream <<< ', ' ]
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printCreateFormDataIn: aStream [
 	self source ifNotNil: [ :source | source  parameters
 		ifNotEmpty: [ aStream crlf.
