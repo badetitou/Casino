@@ -93,7 +93,7 @@ CSNBuModelExporter >> printImports [
 	self
 		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
 		crlf;
-		<< 'import { AbstractDTO } from ''app/projects/bl-shell/src/public-api'';';
+		<< 'import { AbstractDTO } from ''src/app/main/shared/composants/dto/user/abstract-dto.model'';';
 		crlf;
 		crlf
 ]

@@ -10,30 +10,27 @@ Class {
 
 { #category : #initialization }
 CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
+
 	^ super defaultConfiguration
-		addAll:
-			{(CSNUIButton -> MCButton new).
-			(CSNUICWAutoComplete -> MCAutocomplete new).
-			(CSNUICWLinkSimple -> MCButton new).
-			(CSNUICWProgressBar -> MCProgressBar new).
-			(CSNUIFieldset -> MCCard new).
-			(CSNUIInput -> MCInput new).
-			(CSNUICWSwitch -> MCSlideToggle new).
-			(CSNUIInputCheckbox -> MCCheckbox new).
-			(CSNUIInputDate -> MCDatePicker new).
-			(CSNUIInputRadio -> MCRadioButton new).
-			(CSNUIInputRange -> MCSlider new).
-			(CSNUISelect -> MCSelect new).
-			(CSNUITab -> MCTab new).
-			(CSNUITabManager -> MCTabGroup new).
-			(CSNBusinessPage -> BLMBusinessPage new).
-			(CSNPage -> BLMPage new).
-			(CSNUIInputFile -> BLMAttachment new).
-			(CSNUILink
-				->
-					(MCButton new
-						isLink: true;
-						yourself)).
-			(CSNUIImage -> HTMLImgComponent new)} asDictionary;
-		yourself
+		  addAll: { 
+				  (CSNUIButton -> MCButton new).
+				  (CSNUICWAutoComplete -> MCAutocomplete new).
+				  (CSNUICWLinkSimple -> MCButton new).
+				  (CSNUICWProgressBar -> MCProgressBar new).
+				  (CSNUIFieldset -> MCCard new).
+				  (CSNUIInput -> MCInput new).
+				  (CSNUICWSwitch -> MCSlideToggle new).
+				  (CSNUIInputCheckbox -> MCCheckbox new).
+				  (CSNUIInputDate -> MCDatePicker new).
+				  (CSNUIInputRadio -> MCRadioButton new).
+				  (CSNUIInputRange -> MCSlider new).
+				  (CSNUISelect -> MCSelect new).
+				  (CSNUITab -> MCTab new).
+				  (CSNUITabManager -> MCTabGroup new).
+				  (CSNBusinessPage -> BLMBusinessPage new).
+				  (CSNPage -> BLMPage new).
+				  (CSNUIInputFile -> BLMAttachment new).
+				  (CSNUILink -> BLMHyperlink new).
+				  (CSNUIImage -> HTMLImgComponent new) } asDictionary;
+		  yourself
 ]
