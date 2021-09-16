@@ -32,6 +32,11 @@ MCTable >> getSelector [
 ]
 
 { #category : #accessing }
+MCTable >> internalDependenciesOf: aWidgetInstance [
+	^ { MCSortModule new . MCPaginatorModule new }
+]
+
+{ #category : #accessing }
 MCTable >> moduleName [
 	^ 'MatTableModule'
 ]

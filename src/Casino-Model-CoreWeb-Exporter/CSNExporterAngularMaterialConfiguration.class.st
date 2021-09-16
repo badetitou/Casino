@@ -31,6 +31,10 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNPage -> BLMPage new).
 				  (CSNUIInputFile -> BLMAttachment new).
 				  (CSNUILink -> BLMHyperlink new).
+				  (CSNUICWDynamicFieldset -> MCExpansionModule new).
+				  (CSNUICWDialog -> MCDialog new).
+				  (CSNUICWProgressBar -> BLMHorizontalGauge new).
+				  (CSNUITable -> MCTable new).
 				  (CSNUIImage -> HTMLImgComponent new) } asDictionary;
 		  yourself
 ]
