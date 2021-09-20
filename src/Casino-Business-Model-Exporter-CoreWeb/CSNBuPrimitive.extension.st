@@ -17,33 +17,32 @@ CSNBuPrimitive >> printJsonClassOn: aCSNExporter [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> printJsonClassTypeOn: aCSNExporter [
+
 	"is a number"
 
-	({'Integer' . 'int' . 'float' . 'Float' . 'Double' . 'double' . 'Long'. 'long'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'Number'.
-			^ self ].
+	({ 'Integer'. 'int'. 'float'. 'Float'. 'Double'. 'double'. 'Long'. 'long' } includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'Number'.
+		^ self ].
 
 	"is a boolean"
-	({'Boolean' . 'boolean'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'Boolean'.
-			^ self ].
+	({ 'Boolean'. 'boolean' } includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'Boolean'.
+		^ self ].
 
 	"is a String"
-	({'String'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'String'.
-			^ self ].
+	({ 'String'. 'char' } includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'String'.
+		^ self ].
 
 	"is a Date"
-	({'Date'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'Date'.
-			^ self ].
+	({ 'Date' } includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'Date'.
+		^ self ].
 
 	"is a byte"
-	({'byte' . 'void'} includes: self name)
-		ifTrue: [ 
-			"not really supported"
-			aCSNExporter <<< 'any'.
-			^ self ].
+	({ 'byte'. 'Byte'. 'void' } includes: self name) ifTrue: [ "not really supported"
+		aCSNExporter <<< 'any'.
+		^ self ].
 
 	Error signal: 'Unknow type of primitive type'
 ]
@@ -62,7 +61,7 @@ CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 			^ self ].
 
 	"is a String"
-	({'String'} includes: self name)
+	({'String'. 'char'} includes: self name)
 		ifTrue: [ aCSNExporter <<< 'string'.
 			^ self ].
 
@@ -72,7 +71,7 @@ CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
 			^ self ].
 
 	"is a byte"
-	({'byte' . 'void'} includes: self name)
+	({'byte' .'Byte'. 'void'} includes: self name)
 		ifTrue: [ 
 			"not really supported"
 			aCSNExporter <<< 'any'.
