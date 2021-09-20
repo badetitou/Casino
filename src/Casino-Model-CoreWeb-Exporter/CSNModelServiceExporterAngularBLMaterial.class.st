@@ -12,7 +12,8 @@ Class {
 	#traits : 'TCSNExporter',
 	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
-		'rootFolder'
+		'rootFolder',
+		'serviceAPINameDictionnary'
 	],
 	#category : #'Casino-Model-CoreWeb-Exporter-BLMaterial'
 }
@@ -47,24 +48,24 @@ CSNModelServiceExporterAngularBLMaterial >> generateAction: aCSNService [
 CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 
 	(self << '// ')
-		<<< action uniqueName asUpperSnakeCase;
+		<<< (self uniqueNameOfAPI: action) asUpperSnakeCase;
 		crlf.
-	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< ' = "' <<< action uniqueName asUpperSnakeCase)
+	(self << 'export const ' << (self uniqueNameOfAPI: action) asUpperSnakeCase <<< ' = "' <<< (self uniqueNameOfAPI: action) asUpperSnakeCase)
 		<<< '"';
 		crlf.
-	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< '_SUCCESS = "' <<< action uniqueName asUpperSnakeCase)
+	(self << 'export const ' << (self uniqueNameOfAPI: action) asUpperSnakeCase <<< '_SUCCESS = "' <<< (self uniqueNameOfAPI: action) asUpperSnakeCase)
 		<<< '_SUCCESS"';
 		crlf.
-	(self << 'export const ' << action uniqueName asUpperSnakeCase <<< '_FAIL = "' <<< action uniqueName asUpperSnakeCase)
+	(self << 'export const ' << (self uniqueNameOfAPI: action) asUpperSnakeCase <<< '_FAIL = "' <<< (self uniqueNameOfAPI: action) asUpperSnakeCase)
 		<<< '_FAIL"';
 		crlf;
 		crlf.
-	self <<< 'export const ' <<< action uniqueName <<< ' = createAction'.
+	self <<< 'export const ' <<< (self uniqueNameOfAPI: action) <<< ' = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action uniqueName asUpperSnakeCase)
+		(self << (self uniqueNameOfAPI: action) asUpperSnakeCase)
 			<<< ',';
 			crlf.
 		self << 'props<{ '.
@@ -78,12 +79,12 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 
 	self crlf.
 
-	self <<< 'export const ' <<< action uniqueName <<< 'Success = createAction'.
+	self <<< 'export const ' <<< (self uniqueNameOfAPI: action) <<< 'Success = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action uniqueName asUpperSnakeCase)
+		(self << (self uniqueNameOfAPI: action) asUpperSnakeCase)
 			<<< '_SUCCESS,';
 			crlf.
 		self << 'props<{ data?: any }>()'.
@@ -93,12 +94,12 @@ CSNModelServiceExporterAngularBLMaterial >> generateActionAPI: action [
 
 	self crlf.
 
-	self <<< 'export const ' <<< action uniqueName <<< 'Fail = createAction'.
+	self <<< 'export const ' <<< (self uniqueNameOfAPI: action) <<< 'Fail = createAction'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
 			crlf.
-		(self << action uniqueName asUpperSnakeCase)
+		(self << (self uniqueNameOfAPI: action) asUpperSnakeCase)
 			<<< '_FAIL,';
 			crlf.
 		self << 'props<{ error: string }>()'.
@@ -124,8 +125,8 @@ import { of } from "rxjs";
 import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 			crlf.
 		self << 'import { '.
-		(aCSNService actions sorted: #uniqueName ascending)
-			do: [ :action | self <<< action uniqueName <<< ', ' <<< action uniqueName <<< 'Fail, ' <<< action uniqueName <<< 'Success' ]
+		(aCSNService actions sorted: [ :action | (self uniqueNameOfAPI: action) ] ascending)
+			do: [ :action | self <<< (self uniqueNameOfAPI: action) <<< ', ' <<< (self uniqueNameOfAPI: action) <<< 'Fail, ' <<< (self uniqueNameOfAPI: action) <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
 		self crlf.
@@ -145,7 +146,7 @@ import { catchError, concatMap, map, switchMap } from "rxjs/operators";';
 				<<< ') { }';
 				crlf;
 				crlf.
-			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateServiceEffectAPI: action ] separatedBy: [ 
+			(aCSNService actions sorted: [ :action | (self uniqueNameOfAPI: action) ] ascending) do: [ :action | self generateServiceEffectAPI: action ] separatedBy: [ 
 				self
 					crlf ] ] ]
 ]
@@ -160,8 +161,8 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			<< 'import { Action, createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";';
 			crlf.
 		self << 'import { '.
-		(aCSNService actions sorted: #uniqueName ascending)
-			do: [ :action | self <<< action uniqueName <<< ', ' <<< action uniqueName <<< 'Fail, ' <<< action uniqueName <<< 'Success' ]
+		(aCSNService actions sorted: [ :action | (self uniqueNameOfAPI: action) ] ascending)
+			do: [ :action | self <<< (self uniqueNameOfAPI: action) <<< ', ' <<< (self uniqueNameOfAPI: action) <<< 'Fail, ' <<< (self uniqueNameOfAPI: action) <<< 'Success' ]
 			separatedBy: [ self <<< ', ' ].
 		self <<< '} from "../actions/' <<< aCSNService uniqueName <<< '.actions";'.
 		self
@@ -193,7 +194,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 			(self << 'initial' <<< aCSNService uniqueName)
 				<<< 'State,';
 				crlf.
-			(aCSNService actions sorted: #uniqueName ascending) do: [ :action | self generateReducerAPI: action ] separatedBy: [ 
+			(aCSNService actions sorted: [ :action | (self uniqueNameOfAPI: action) ] ascending) do: [ :action | self generateReducerAPI: action ] separatedBy: [ 
 				self
 					<<< ',';
 					crlf ].
@@ -216,7 +217,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducer: aCSNService [
 { #category : #generating }
 CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 
-	self << 'on(' <<< action uniqueName <<< ', (state, {'.
+	self << 'on(' <<< (self uniqueNameOfAPI: action) <<< ', (state, {'.
 	self printArgumentsOf: action.
 	self <<< '}) =>'.
 	self inBraces: [ 
@@ -235,7 +236,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 	self
 		<<< '),';
 		crlf.
-	self << 'on(' <<< action uniqueName <<< 'Success, (state, {data}) =>'.
+	self << 'on(' <<< (self uniqueNameOfAPI: action) <<< 'Success, (state, {data}) =>'.
 	self inBraces: [ 
 		self << 'return '.
 		self inBraces: [ 
@@ -249,7 +250,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateReducerAPI: action [
 	self
 		<<< '),';
 		crlf.
-	self << 'on(' <<< action uniqueName <<< 'Fail, (state, {error}) =>'.
+	self << 'on(' <<< (self uniqueNameOfAPI: action) <<< 'Fail, (state, {error}) =>'.
 	self inBraces: [ 
 		self << 'return '.
 		self inBraces: [ 
@@ -276,7 +277,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceAPI: aServiceAPI [
 		self
 		<< '// TODO: Please check this service';
 		crlf.
-	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
+	self << 'public ' <<< (self uniqueNameOfAPI: aServiceAPI) <<< '('.
 	self printParameterOf: aServiceAPI.
 
 	self <<< '): Observable<'.
@@ -346,7 +347,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 
 	"effect"
 
-	self << aServiceAPI uniqueName <<< '$ = createEffect'.
+	self << (self uniqueNameOfAPI: aServiceAPI) <<< '$ = createEffect'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
@@ -359,7 +360,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 					indentPlus;
 					crlf;
 					<< 'ofType(';
-					<<< aServiceAPI uniqueName;
+					<<< (self uniqueNameOfAPI: aServiceAPI);
 					<<< '),';
 					crlf;
 					<< 'switchMap'.
@@ -377,7 +378,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 							<< 'return this.';
 							<<< aServiceAPI serviceOwner uniqueName uncapitalized;
 							<<< '.';
-							<<< aServiceAPI uniqueName;
+							<<< (self uniqueNameOfAPI: aServiceAPI);
 							<<< '('.
 						self printArgumentsOf: aServiceAPI.
 						self
@@ -391,13 +392,13 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectDefaultAPI: aSe
 							self inBraces: [ 
 								self
 									<< 'return ';
-									<<< (aServiceAPI uniqueName , 'Success');
+									<<< ((self uniqueNameOfAPI: aServiceAPI) , 'Success');
 									<<< '({data});' ].
 							self
 								<<< '),';
 								crlf;
 								<< 'catchError((error: string) => of(';
-								<<< (aServiceAPI uniqueName , 'Fail');
+								<<< ((self uniqueNameOfAPI: aServiceAPI) , 'Fail');
 								<<< '({error})))'.
 							self
 								indentMinus;
@@ -420,7 +421,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectFailAPI: aServi
 
 	"effect"
 
-	self << aServiceAPI uniqueName <<< 'Fail$ = createEffect'.
+	self << (self uniqueNameOfAPI: aServiceAPI) <<< 'Fail$ = createEffect'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
@@ -432,7 +433,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectFailAPI: aServi
 				indentPlus;
 				crlf;
 				<< 'ofType(';
-				<<< aServiceAPI uniqueName;
+				<<< (self uniqueNameOfAPI: aServiceAPI);
 				<<< 'Fail';
 				<<< '),';
 				crlf;
@@ -467,7 +468,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectSuccessAPI: aSe
 
 	"effect"
 
-	self << aServiceAPI uniqueName <<< 'Success' <<< '$ = createEffect'.
+	self << (self uniqueNameOfAPI: aServiceAPI) <<< 'Success' <<< '$ = createEffect'.
 	self inParenthesis: [ 
 		self
 			indentPlus;
@@ -479,7 +480,7 @@ CSNModelServiceExporterAngularBLMaterial >> generateServiceEffectSuccessAPI: aSe
 				indentPlus;
 				crlf;
 				<< 'ofType(';
-				<<< (aServiceAPI uniqueName , 'Success');
+				<<< ((self uniqueNameOfAPI: aServiceAPI) , 'Success');
 				<<< '),';
 				crlf;
 				<< 'map'.
@@ -547,7 +548,7 @@ export class ' << aCSNService uniqueName << ' {
     }
 
 '.
-		(aCSNService actions sorted: #uniqueName ascending)
+		(aCSNService actions sorted: [ :action | (self uniqueNameOfAPI: action) ] ascending)
 			do: [ :action | 
 				self indentPlus.
 				self generateServiceAPI: action.
@@ -556,6 +557,12 @@ export class ' << aCSNService uniqueName << ' {
 		self
 			<< '}';
 			crlf ]
+]
+
+{ #category : #generating }
+CSNModelServiceExporterAngularBLMaterial >> initialize [
+	super initialize.
+	serviceAPINameDictionnary := Dictionary new
 ]
 
 { #category : #generating }
@@ -612,4 +619,23 @@ CSNModelServiceExporterAngularBLMaterial >> rootFolder: anObject [
 CSNModelServiceExporterAngularBLMaterial >> serviceFolder [
 
 	^ self rootFolder / 'services'
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularBLMaterial >> uniqueNameOfAPI: aServiceAPI [
+
+	^ serviceAPINameDictionnary at: aServiceAPI ifAbsentPut: [ 
+		| index potentialName |
+		index := 0.
+		potentialName := aServiceAPI name.
+		[ (serviceAPINameDictionnary includes: potentialName) or: [ self uniqueNameOfAPIReservedName includes: potentialName ] ] whileTrue: [ 
+			potentialName := (potentialName removeSuffix: index asString) , index asString.
+			index := index + 1 ].
+		potentialName ]
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularBLMaterial >> uniqueNameOfAPIReservedName [
+
+	^ { 'delete' }
 ]
