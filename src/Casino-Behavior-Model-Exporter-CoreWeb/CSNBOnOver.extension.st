@@ -2,5 +2,7 @@ Extension { #name : #CSNBOnOver }
 
 { #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnOver >> getAngularRepresentationWith: anExporter [
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(mouseover)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage), '($event)"' ]
+
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | 
+		  '(mouseover)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage) , (behaviors anyOne parameters ifEmpty: [ '()"' ] ifNotEmpty: [ '($event)"' ]) ]
 ]

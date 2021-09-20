@@ -3,5 +3,6 @@ Extension { #name : #CSNBOnChange }
 { #category : #'*Casino-Behavior-Model-Exporter-CoreWeb' }
 CSNBOnChange >> getAngularRepresentationWith: anExporter [
 
-	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | '(change)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage) , '($event)"' ]
+	^ self behavior ifEmpty: [ '' ] ifNotEmpty: [ :behaviors | 
+		  '(change)="' , (behaviors anyOne uniqueNameInPage: anExporter currentPage) , (behaviors anyOne parameters ifEmpty: [ '()"' ] ifNotEmpty: [ '($event)"' ]) ]
 ]
