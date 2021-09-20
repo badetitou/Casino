@@ -71,6 +71,11 @@ MCInput >> getSelector [
 	^ 'input'
 ]
 
+{ #category : #export }
+MCInput >> internalDependenciesOf: aWidgetInstance [
+	^ { MCFormFieldModule new }
+]
+
 { #category : #accessing }
 MCInput >> isNative [
 	"The widget is part of the html standard"

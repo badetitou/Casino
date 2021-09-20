@@ -12,7 +12,7 @@ BLMHorizontalGauge >> getSelector [
 { #category : #testing }
 BLMHorizontalGauge >> moduleName [
 
-	^ 'HorizontalGauge'
+	^ 'HorizontalGaugeModule'
 ]
 
 { #category : #testing }
