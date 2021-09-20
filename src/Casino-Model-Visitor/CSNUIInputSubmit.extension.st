@@ -7,7 +7,7 @@ CSNUIInputSubmit >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputSubmit classSide >> accept: aCSNModelVisitor [
+CSNUIInputSubmit class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputSubmit: self
 ]

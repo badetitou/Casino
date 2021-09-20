@@ -7,7 +7,7 @@ CSNLCenterAlignement >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLCenterAlignement classSide >> accept: aCSNModelVisitor [
+CSNLCenterAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLCenterAlignement: self
 ]

@@ -1,7 +1,7 @@
 Extension { #name : #CSNLHorizontalLayout }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLHorizontalLayout classSide >> accept: aCSNModelVisitor [
+CSNLHorizontalLayout class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLHorizontalLayout: self
 ]

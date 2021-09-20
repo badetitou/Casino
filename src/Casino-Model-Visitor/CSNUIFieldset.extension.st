@@ -7,7 +7,7 @@ CSNUIFieldset >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIFieldset classSide >> accept: aCSNModelVisitor [
+CSNUIFieldset class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIFieldset: self
 ]

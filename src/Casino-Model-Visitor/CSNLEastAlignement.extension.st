@@ -1,13 +1,13 @@
 Extension { #name : #CSNLEastAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLEastAlignement >> accept: aCSNModelVisitor [
+CSNLEastAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLEastAlignement: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLEastAlignement classSide >> accept: aCSNModelVisitor [
+CSNLEastAlignement >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLEastAlignement: self
 ]

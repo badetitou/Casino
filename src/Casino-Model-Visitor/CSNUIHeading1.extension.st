@@ -7,7 +7,7 @@ CSNUIHeading1 >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIHeading1 classSide >> accept: aCSNModelVisitor [
+CSNUIHeading1 class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIHeading1: self
 ]

@@ -7,13 +7,13 @@ CSNLAlignement >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAlignement classSide >> accept: aCSNModelVisitor [
+CSNLAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLAlignement: self
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNLAlignement classSide >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
+CSNLAlignement class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
 	aCollectionOfImporter
 		do: [ :importer | 
 			importer
@@ -22,7 +22,7 @@ CSNLAlignement classSide >> initializeImporters: aCollectionOfImporter withInvoc
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNLAlignement classSide >> newFrom: anAlignementIdentifier withImporters: visitorImporters [
+CSNLAlignement class >> newFrom: anAlignementIdentifier withImporters: visitorImporters [
 	| updatedVisitor |
 	updatedVisitor := visitorImporters collect: [ :visitor | visitor clone source: anAlignementIdentifier; yourself ].
 	self subclasses 

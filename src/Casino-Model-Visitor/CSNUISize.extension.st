@@ -7,7 +7,7 @@ CSNUISize >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUISize classSide >> accept: aCSNModelVisitor [
+CSNUISize class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUISize: self
 ]

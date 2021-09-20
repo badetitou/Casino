@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIReadonly }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIReadonly classSide >> accept: aCSNModelVisitor [
+CSNUIReadonly class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIReadonly: self
 ]

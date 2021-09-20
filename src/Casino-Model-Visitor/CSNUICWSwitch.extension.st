@@ -6,6 +6,6 @@ CSNUICWSwitch >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWSwitch classSide >> accept: aVisitor [
+CSNUICWSwitch class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWSwitch: self 
 ]

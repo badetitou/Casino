@@ -7,7 +7,7 @@ CSNLWestAlignement >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLWestAlignement classSide >> accept: aCSNModelVisitor [
+CSNLWestAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLWestAlignement: self
 ]

@@ -1,7 +1,7 @@
 Extension { #name : #CSNLCell }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLCell classSide >> accept: aCSNModelVisitor [
+CSNLCell class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLCell: self
 ]

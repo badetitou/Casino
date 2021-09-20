@@ -7,7 +7,7 @@ CSNLVerticalLayout >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLVerticalLayout classSide >> accept: aCSNModelVisitor [
+CSNLVerticalLayout class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLVerticalLayout: self
 ]

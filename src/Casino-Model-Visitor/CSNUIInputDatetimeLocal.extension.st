@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIInputDatetimeLocal }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInputDatetimeLocal classSide >> accept: aCSNModelVisitor [
+CSNUIInputDatetimeLocal class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInputDatetimeLocal: self
 ]

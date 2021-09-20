@@ -971,16 +971,6 @@ CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputRange: aCSNUIInputRange [
-  self << '<'.
-  aCSNUIInputRange getListPropertiesAsStringWith: self.
-  self
-     <<< ' type="range"></';
-     <<< aCSNUIInputRange getSelector;
-     <<< '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
   self << '<'.
   aBLUIInputTime getListPropertiesAsStringWith: self.

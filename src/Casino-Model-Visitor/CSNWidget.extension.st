@@ -7,7 +7,7 @@ CSNWidget >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNWidget classSide >> accept: aCSNModelVisitor [
+CSNWidget class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNWidget: self
 ]

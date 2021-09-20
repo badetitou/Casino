@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIInput }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIInput classSide >> accept: aCSNModelVisitor [
+CSNUIInput class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIInput: self
 ]

@@ -1,7 +1,7 @@
 Extension { #name : #CSNUILabel }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUILabel classSide >> accept: aCSNModelVisitor [
+CSNUILabel class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUILabel: self
 ]

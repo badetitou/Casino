@@ -1,7 +1,7 @@
 Extension { #name : #CSNAttribute }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNAttribute classSide >> accept: aCSNModelVisitor [
+CSNAttribute class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNAttribute: self
 ]

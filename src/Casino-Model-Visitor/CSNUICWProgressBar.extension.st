@@ -1,7 +1,7 @@
 Extension { #name : #CSNUICWProgressBar }
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWProgressBar classSide >> accept: aVisitor [
+CSNUICWProgressBar class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWProgressBar: self 
 ]
 

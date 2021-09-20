@@ -7,7 +7,7 @@ CSNUIWidth >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIWidth classSide >> accept: aCSNModelVisitor [
+CSNUIWidth class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIWidth: self
 ]

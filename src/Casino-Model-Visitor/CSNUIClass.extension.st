@@ -1,7 +1,7 @@
 Extension { #name : #CSNUIClass }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNUIClass classSide >> accept: aCSNModelVisitor [
+CSNUIClass class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNUIClass: self
 ]

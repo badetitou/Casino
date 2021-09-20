@@ -6,6 +6,6 @@ CSNUICWAutoComplete >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWAutoComplete classSide >> accept: aVisitor [
+CSNUICWAutoComplete class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWAutoComplete: self
 ]

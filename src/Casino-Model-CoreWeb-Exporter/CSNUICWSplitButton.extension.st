@@ -1,11 +1,6 @@
 Extension { #name : #CSNUICWSplitButton }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
-CSNUICWSplitButton >> angularComponent [
-	^ PNGSplitButton new
-]
-
-{ #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNUICWSplitButton >> getInitializations [
 	^ '        this.items' , self mooseID asString
 		,

@@ -6,6 +6,6 @@ CSNUICWRechercheEtListe >> accept: aVisitor [
 ]
 
 { #category : #'*Casino-Model-Visitor' }
-CSNUICWRechercheEtListe classSide >> accept: aVisitor [
+CSNUICWRechercheEtListe class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWRechercheEtListe: self 
 ]
