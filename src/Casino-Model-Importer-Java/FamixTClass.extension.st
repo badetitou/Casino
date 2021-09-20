@@ -16,7 +16,7 @@ FamixTClass >> affectation [
 	^ ((self typeContainer localVariables select: #hasSourceAnchor) select: [ :localVariable | 
 		   localVariable sourceAnchor startPos < selfSourceAnchor startPos and: [ localVariable sourceAnchor endPos > selfSourceAnchor endPos ] ]) at: 1 ifAbsent: [ 
 		  ((self typeContainer accesses select: #isWrite) select: [ :access | 
-			   access sourceAnchor startPos < selfSourceAnchor startPos and: [ access endAffectationPos > selfSourceAnchor endPos ] ]) at: 1 ifAbsent: [ ^ self ] ]
+			   access sourceAnchor startPos < selfSourceAnchor startPos and: [ access endAffectationPos > selfSourceAnchor endPos ] ]) ifEmpty: [ self ] ifNotEmpty: [ :accessCollection | accessCollection anyOneIfOnlyOneElement variable ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
