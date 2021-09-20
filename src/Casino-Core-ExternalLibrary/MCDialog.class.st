@@ -16,5 +16,5 @@ MCDialog >> moduleName [
 
 { #category : #accessing }
 MCDialog >> modulePath [
-	^ '@angular/material'
+	^ '@angular/material/dialog'
 ]
