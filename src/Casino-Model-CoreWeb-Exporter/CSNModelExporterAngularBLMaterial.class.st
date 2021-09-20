@@ -171,8 +171,12 @@ CSNModelExporterAngularBLMaterial >> generateMenu: aModel [
 
 export let menus: MenuItem[] = [
   {
-    key: ''omaje'',
-    path: ''/omaje'',
+    key: '''.
+currentWriteStream << aModel name asLowercase. 
+currentWriteStream << ''',
+    path: ''/'.
+currentWriteStream << aModel name asLowercase.
+currentWriteStream << ''',
     icon: ''fal fa-home'',
     currentTraduction:undefined,
     withHeadTitle: true,
@@ -182,7 +186,7 @@ export let menus: MenuItem[] = [
 			currentWriteStream
 				<< '        { '; crlf.
 				currentWriteStream << '            key: '''; << phase name asRealCamelCase; << ''','; crlf.
-				currentWriteStream << '            path: ''/omaje/'; << phase name asRealCamelCase; << ''','; crlf.
+				currentWriteStream << '            path: ''/' <<  aModel name asLowercase << '/'; << phase name asRealCamelCase; << ''','; crlf.
 				currentWriteStream << '            currentTraduction: '''; << phase name asRealCamelCase; << ''','; crlf.
 				currentWriteStream << '            icon: ''fal fa-home'','; crlf.
 				currentWriteStream << '            subMenus: [ ] '; crlf.
