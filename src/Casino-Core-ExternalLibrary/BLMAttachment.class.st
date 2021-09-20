@@ -11,19 +11,18 @@ BLMAttachment >> exportContentOf: aWidget with: anExporter [
 		indentPlus;
 		<< '<'.
 	aWidget getListPropertiesAsStringWith: anExporter.
-	anExporter
-		<<< ' #';
-		<<< (self variableFor: aWidget);
-		<<< '>';
-		crlf;
-		indentMinus
+	anExporter <<< '>'
 ]
 
 { #category : #accessing }
 BLMAttachment >> exportFooterOf: aWidget with: anExporter [
 
 	anExporter
-		indentPlus;
+		<<< '</';
+		<<< (aWidget getSelectorFrom: anExporter);
+		<<< '>'.
+	anExporter
+		crlf;
 		<< '<bl-attachment-chooser matSuffix [for]="';
 		<<< (self variableFor: aWidget);
 		<<< '"></bl-attachment-chooser>';
@@ -53,6 +52,11 @@ BLMAttachment >> exportHeaderOf: aWidget with: anExporter [
 { #category : #accessing }
 BLMAttachment >> getSelector [
 	^ 'bl-attachment'
+]
+
+{ #category : #accessing }
+BLMAttachment >> internalDependenciesOf: aWidgetInstance [
+	^ { MCFormFieldModule new }
 ]
 
 { #category : #accessing }
