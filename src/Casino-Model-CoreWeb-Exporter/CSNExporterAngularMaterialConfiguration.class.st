@@ -16,7 +16,6 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUIButton -> MCButton new).
 				  (CSNUICWAutoComplete -> MCAutocomplete new).
 				  (CSNUICWLinkSimple -> MCButton new).
-				  (CSNUICWProgressBar -> MCProgressBar new).
 				  (CSNUIFieldset -> MCCard new).
 				  (CSNUIInput -> MCInput new).
 				  (CSNUICWSwitch -> MCSlideToggle new).
