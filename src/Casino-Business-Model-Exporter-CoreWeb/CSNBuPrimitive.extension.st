@@ -7,7 +7,7 @@ CSNBuPrimitive >> innerName [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> printJsonClassOn: aCSNExporter [
-	({'byte' . 'void'} includes: self name)
+	({'byte' . 'Byte'. 'void'} includes: self name)
 		ifFalse: [ aCSNExporter << '@JsonClassType({type: () => ['.
 			self printJsonClassTypeOn: aCSNExporter.
 			aCSNExporter
