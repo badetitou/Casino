@@ -7,13 +7,13 @@ Class {
 { #category : #test }
 CSNWebModelJavaPageMetierTest >> testGeneratePageMetier [
 	| iBusinessPage concretePageMetier inheritance |
-	iBusinessPage := FAMIXClass new
+	iBusinessPage := FamixJavaClass new
 		name: #IPageMetier;
 		yourself.
-	concretePageMetier := FAMIXClass new
+	concretePageMetier := FamixJavaClass new
 		name: #ConcretePageMetier;
 		yourself.
-	inheritance := FAMIXInheritance new
+	inheritance := FamixJavaInheritance new
 		superclass: iBusinessPage;
 		subclass: concretePageMetier;
 		yourself.
@@ -31,13 +31,13 @@ CSNWebModelJavaPageMetierTest >> testGeneratePageMetier [
 { #category : #test }
 CSNWebModelJavaPageMetierTest >> testGeneratePageMetierXMLUi [
 	| iBusinessPage concretePageMetier inheritance |
-	iBusinessPage := FAMIXClass new
+	iBusinessPage := FamixJavaClass new
 		name: #IPageMetier;
 		yourself.
-	concretePageMetier := FAMIXClass new
+	concretePageMetier := FamixJavaClass new
 		name: #ConcretePageMetierXMLUi;
 		yourself.
-	inheritance := FAMIXInheritance new
+	inheritance := FamixJavaInheritance new
 		superclass: iBusinessPage;
 		subclass: concretePageMetier;
 		yourself.
@@ -55,10 +55,10 @@ CSNWebModelJavaPageMetierTest >> testGeneratePageMetierXMLUi [
 { #category : #test }
 CSNWebModelJavaPageMetierTest >> testGeneratePageMetierXMLUiWithoutSuperClass [
 	| concretePageMetier iBusinessPage |
-	iBusinessPage := FAMIXClass new
+	iBusinessPage := FamixJavaClass new
 		name: #IPageMetier;
 		yourself.
-	concretePageMetier := FAMIXClass new
+	concretePageMetier := FamixJavaClass new
 		name: #ConcretePageMetierXMLUi;
 		yourself.
 	uiImporter sourceModel

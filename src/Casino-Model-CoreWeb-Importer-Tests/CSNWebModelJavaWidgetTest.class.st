@@ -7,24 +7,24 @@ Class {
 { #category : #setUp }
 CSNWebModelJavaWidgetTest >> createGWTNamespace [
 	| com google gwt user client ui |
-	com := FAMIXNamespace new
+	com := FamixJavaPackage new
 		name: #com;
 		yourself.
-	google := FAMIXNamespace new
+	google := FamixJavaPackage new
 		name: #google;
-		parentScope: com.
-	gwt := FAMIXNamespace new
+		parentPackage: com.
+	gwt := FamixJavaPackage new
 		name: #gwt;
-		parentScope: google.
-	user := FAMIXNamespace new
+		parentPackage: google.
+	user := FamixJavaPackage new
 		name: #user;
-		parentScope: gwt.
-	client := FAMIXNamespace new
+		parentPackage: gwt.
+	client := FamixJavaPackage new
 		name: #client;
-		parentScope: user.
-	ui := FAMIXNamespace new
+		parentPackage: user.
+	ui := FamixJavaPackage new
 		name: #ui;
-		parentScope: client.
+		parentPackage: client.
 	uiImporter sourceModel
 		silentlyAddAll:
 			{com.
@@ -39,27 +39,27 @@ CSNWebModelJavaWidgetTest >> createGWTNamespace [
 { #category : #setUp }
 CSNWebModelJavaWidgetTest >> createWidgetNamespaces [
 	| fr bl client core refui sedit refui2 |
-	fr := FAMIXNamespace new
+	fr := FamixJavaPackage new
 		name: #fr;
 		yourself.
-	bl := FAMIXNamespace new
+	bl := FamixJavaPackage new
 		name: #bl;
-		parentScope: fr.
-	client := FAMIXNamespace new
+		parentPackage: fr.
+	client := FamixJavaPackage new
 		name: #client;
-		parentScope: bl.
-	core := FAMIXNamespace new
+		parentPackage: bl.
+	core := FamixJavaPackage new
 		name: #core;
-		parentScope: client.
-	refui := FAMIXNamespace new
+		parentPackage: client.
+	refui := FamixJavaPackage new
 		name: #refui;
-		parentScope: core.
-	sedit := FAMIXNamespace new
+		parentPackage: core.
+	sedit := FamixJavaPackage new
 		name: #sedit;
-		parentScope: client.
-	refui2 := FAMIXNamespace new
+		parentPackage: client.
+	refui2 := FamixJavaPackage new
 		name: #refui;
-		parentScope: sedit.
+		parentPackage: sedit.
 	uiImporter sourceModel
 		silentlyAddAll:
 			{fr.
@@ -77,7 +77,7 @@ CSNWebModelJavaWidgetTest >> createWidgetNamespaces [
 CSNWebModelJavaWidgetTest >> inheritanceWithSuperclass: aFAMIXClass andSubclass: aFAMIXClass2 [
 	uiImporter sourceModel
 		add:
-			(FAMIXInheritance new
+			(FamixJavaInheritance new
 				superclass: aFAMIXClass;
 				subclass: aFAMIXClass2;
 				yourself)
@@ -89,22 +89,22 @@ CSNWebModelJavaWidgetTest >> setUp [
 	super setUp.
 	refuiCol := self createWidgetNamespaces.
 	gwtNamespace := self createGWTNamespace.
-	abstractWidget := FAMIXClass new
+	abstractWidget := FamixJavaClass new
 		name: #Widget;
 		yourself.
-	gwtWidget := FAMIXClass new
+	gwtWidget := FamixJavaClass new
 		name: #GWTWidget;
 		yourself.
-	coreWidget := FAMIXClass new
+	coreWidget := FamixJavaClass new
 		name: #CoreWidget;
 		yourself.
-	seditWidget := FAMIXClass new
+	seditWidget := FamixJavaClass new
 		name: #SeditWidget;
 		yourself.
-	anOutscopeWidgetSubclass := FAMIXClass new
+	anOutscopeWidgetSubclass := FamixJavaClass new
 		name: #OutscopeWidgetSubclass;
 		yourself.
-	anInscopeNotWidgetSubclass := FAMIXClass new
+	anInscopeNotWidgetSubclass := FamixJavaClass new
 		name: #InscopeNotWidgetSubclass;
 		yourself.
 	gwtNamespace addType: gwtWidget.

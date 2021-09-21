@@ -6,45 +6,45 @@ Class {
 
 { #category : #setUp }
 CSNWebModelJavaPageTest >> setUp [
+
 	| pageConsole pageLog csnNamespace coreNamespace abstractHomeClass homePage inheritance |
 	super setUp.
 	uiImporter xml: (XMLDOMParser parse: self xmlContent).
-	pageConsole := FAMIXClass new
-		name: #PageConsole;
-		yourself.
-	pageLog := FAMIXClass new
-		name: #PageLog;
-		yourself.
-	abstractHomeClass := FAMIXClass new
-		name: #HomePhaseController;
-		yourself.
-	homePage := FAMIXClass new
-		name: #HomePage;
-		yourself.
-	inheritance := FAMIXInheritance new
-		superclass: abstractHomeClass;
-		subclass: homePage;
-		yourself.
-	csnNamespace := FAMIXNamespace new
-		name: #csn;
-		addType: homePage;
-		addType: abstractHomeClass;
-		yourself.
-	coreNamespace := FAMIXNamespace new
-		name: #core;
-		parentScope: csnNamespace;
-		addType: pageConsole;
-		addType: pageLog;
-		yourself.
-	uiImporter sourceModel
-		silentlyAddAll:
-			{pageConsole.
+	pageConsole := FamixJavaClass new
+		               name: #PageConsole;
+		               yourself.
+	pageLog := FamixJavaClass new
+		           name: #PageLog;
+		           yourself.
+	abstractHomeClass := FamixJavaClass new
+		                     name: #HomePhaseController;
+		                     yourself.
+	homePage := FamixJavaClass new
+		            name: #HomePage;
+		            yourself.
+	inheritance := FamixJavaInheritance new
+		               superclass: abstractHomeClass;
+		               subclass: homePage;
+		               yourself.
+	csnNamespace := FamixJavaPackage new
+		                name: #csn;
+		                addType: homePage;
+		                addType: abstractHomeClass;
+		                yourself.
+	coreNamespace := FamixJavaPackage new
+		                 name: #core;
+		                 parentPackage: csnNamespace;
+		                 addType: pageConsole;
+		                 addType: pageLog;
+		                 yourself.
+	uiImporter sourceModel silentlyAddAll: { 
+			pageConsole.
 			pageLog.
 			csnNamespace.
 			coreNamespace.
 			homePage.
 			abstractHomeClass.
-			inheritance}
+			inheritance }
 ]
 
 { #category : #tests }

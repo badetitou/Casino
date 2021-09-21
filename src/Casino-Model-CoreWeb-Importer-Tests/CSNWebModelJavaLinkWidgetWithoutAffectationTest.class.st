@@ -12,24 +12,24 @@ CSNWebModelJavaLinkWidgetWithoutAffectationTest >> setUp [
 { #category : #test }
 CSNWebModelJavaLinkWidgetWithoutAffectationTest >> testGetWidgetContainerOfWidgetWithoutAffectation [
 	| invocationSonAnchor invocationSon widgetChild attributeParent intermediateInvocationAnchor intermediateInvocation widgetParent methodOwner |
-	methodOwner := FAMIXMethod new.
-	invocationSonAnchor := FAMIXIndexedFileAnchor new
+	methodOwner := FamixJavaMethod new.
+	invocationSonAnchor := FamixJavaIndexedFileAnchor new
 		startPos: 4895;
 		endPos: 4950;
 		yourself.
-	invocationSon := FAMIXInvocation new
+	invocationSon := FamixJavaInvocation new
 		sourceAnchor: invocationSonAnchor;
 		source: methodOwner;
 		yourself.
 	widgetChild := CSNWidget new
 		addSource: invocationSon;
 		yourself.
-	attributeParent := FAMIXAttribute new.
-	intermediateInvocationAnchor := FAMIXIndexedFileAnchor new
+	attributeParent := FamixJavaAttribute new.
+	intermediateInvocationAnchor := FamixJavaIndexedFileAnchor new
 		startPos: 4867;
 		endPos: 5027;
 		yourself.
-	intermediateInvocation := FAMIXInvocation new
+	intermediateInvocation := FamixJavaInvocation new
 		receiver: attributeParent;
 		source: methodOwner;
 		sourceAnchor: intermediateInvocationAnchor;

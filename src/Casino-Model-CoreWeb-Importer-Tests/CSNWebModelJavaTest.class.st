@@ -10,11 +10,11 @@ Class {
 	#category : #'Casino-Model-CoreWeb-Importer-Tests'
 }
 
-{ #category : #setUp }
+{ #category : #running }
 CSNWebModelJavaTest >> setUp [
 	super setUp.
 	uiImporter := CSNWebModelJava new.
-	uiImporter sourceModel: FAMIXModel new.
+	uiImporter sourceModel: FamixJavaModel new.
 	uiImporter model: CSNUICWModel new.
 	uiImporter preImport
 ]
