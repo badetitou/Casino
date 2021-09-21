@@ -81,6 +81,18 @@ CSNWebModelJavaAddParentTest >> prepareAffectationInParameter [
 	labelWidget := (self createInUIModel: CSNUIParagraph) affectedActions: localVariableLabel
 ]
 
+{ #category : #resources }
+CSNWebModelJavaAddParentTest >> resourcesFileReference [
+	| repo filePath |
+	filePath := '/home/runner/work/Casino/Casino'.
+	repo := filePath asFileReference exists
+		ifTrue: [ filePath asFileReference ]
+		ifFalse: [ (IceRepository registry
+				detect: [ :each | each includesPackageNamed: self class package name ]
+				ifNone: [ self error: 'Please add a clone of this project to Iceberg to access to the resources' ]) location ].
+	^ repo / 'tests-resources'
+]
+
 { #category : #running }
 CSNWebModelJavaAddParentTest >> setUp [
 
@@ -97,4 +109,22 @@ CSNWebModelJavaAddParentTest >> testAddParentToWithHandlerForUsages [
 	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget).
+]
+
+{ #category : #resources }
+CSNWebModelJavaAddParentTest >> twoMethodsAffectation [
+	^ 'package hello;
+
+public class Hello {
+    
+    void sourceMethod(){
+        Widget w = new Widget();
+        Label l = new Label();
+        anotherMethod();
+    }
+
+    void anotherMethod() {
+        w.add(l);
+    }
+}'
 ]
