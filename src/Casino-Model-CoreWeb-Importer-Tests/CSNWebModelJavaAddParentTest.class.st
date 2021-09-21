@@ -2,7 +2,12 @@ Class {
 	#name : #CSNWebModelJavaAddParentTest,
 	#superclass : #CSNWebModelJavaTest,
 	#instVars : [
-		'responsabilityHandlerForUsages'
+		'responsabilityHandlerForUsages',
+		'containerWidget',
+		'labelWidget'
+	],
+	#classInstVars : [
+		'invocationLabel'
 	],
 	#category : #'Casino-Model-CoreWeb-Importer-Tests'
 }
@@ -10,7 +15,9 @@ Class {
 { #category : #resources }
 CSNWebModelJavaAddParentTest >> affectationInParameter [
 	^ 'sourceMethod(){
-    Widget w = new Widget(new Label());
+    Widget w = new Widget();
+    Label l = new Label();
+    w.add(l);
 }'
 ]
 
@@ -19,35 +26,59 @@ CSNWebModelJavaAddParentTest >> createInSourceModel: aClass [
 	^ uiImporter sourceModel add: aClass new
 ]
 
+{ #category : #helpers }
+CSNWebModelJavaAddParentTest >> createInUIModel: aClass [
+	^ uiImporter model add: aClass new
+]
+
 { #category : #resources }
 CSNWebModelJavaAddParentTest >> prepareAffectationInParameter [
-| sourceMethodSourceAnchor sourceMethod indexedAnchorInvocationWidget invocationWidget indexedAnchorInvocationLabel invocationLabel localVariable |
-sourceMethodSourceAnchor := (self
-		createInSourceModel: FamixJavaSourceTextAnchor)
-		source: self affectationInParameter;
-		yourself.
+
+	| sourceMethodSourceAnchor sourceMethod indexedAnchorInvocationWidget invocationWidget indexedAnchorInvocationLabel invocationLabel localVariable localVariableLabel addInvocation addInvocationAnchor |
+	sourceMethodSourceAnchor := (self createInSourceModel: FamixJavaSourceTextAnchor)
+		                            source: self affectationInParameter;
+		                            yourself.
 	sourceMethod := (self createInSourceModel: FamixJavaMethod)
-		name: 'sourceMethod';
-		sourceAnchor: sourceMethodSourceAnchor;
-		yourself.
+		                name: 'sourceMethod';
+		                sourceAnchor: sourceMethodSourceAnchor;
+		                yourself.
 	indexedAnchorInvocationWidget := (self createInSourceModel: FamixJavaIndexedFileAnchor)
-		startPos: 32;
-		endPos: 55;
-		yourself.
+		                                 startPos: 32;
+		                                 endPos: 43;
+		                                 yourself.
 	invocationWidget := (self createInSourceModel: FamixJavaInvocation)
-		source: sourceMethod;
-		sourceAnchor: indexedAnchorInvocationWidget.
+		                    source: sourceMethod;
+		                    signature: 'Widget()';
+		                    sourceAnchor: indexedAnchorInvocationWidget.
 	indexedAnchorInvocationLabel := (self createInSourceModel: FamixJavaIndexedFileAnchor)
-		startPos: 43;
-		endPos: 54;
-		yourself.
+		                                startPos: 60;
+		                                endPos: 70;
+		                                yourself.
 	invocationLabel := (self createInSourceModel: FamixJavaInvocation)
-		source: sourceMethod;
-		sourceAnchor: indexedAnchorInvocationLabel.
+		                   source: sourceMethod;
+		                   signature: 'Label()';
+		                   sourceAnchor: indexedAnchorInvocationLabel.
 	localVariable := (self createInSourceModel: FamixJavaLocalVariable)
-		name: 'w';
-		yourself.
-	sourceMethod localVariables: {localVariable}.
+		                 name: 'w';
+		                 yourself.
+	localVariableLabel := (self createInSourceModel: FamixJavaLocalVariable)
+		                      name: 'l';
+		                      yourself.
+	addInvocationAnchor := (self createInSourceModel: FamixJavaIndexedFileAnchor)
+		                       startPos: 67;
+		                       endPos: 84;
+		                       yourself.
+	addInvocation := (self createInSourceModel: FamixJavaInvocation)
+		                 signature: 'add(l)';
+		                 source: sourceMethod;
+		                 sourceAnchor: addInvocationAnchor;
+		                 receiver: localVariable.
+	sourceMethod localVariables: { 
+			localVariable.
+			localVariableLabel }.
+
+	containerWidget := (self createInUIModel: CSNContainer) affectedActions: localVariable.
+	labelWidget := (self createInUIModel: CSNUIParagraph) affectedActions: localVariableLabel
 ]
 
 { #category : #running }
@@ -60,5 +91,10 @@ CSNWebModelJavaAddParentTest >> setUp [
 { #category : #testing }
 CSNWebModelJavaAddParentTest >> testAddParentToWithHandlerForUsages [
 
-	self prepareAffectationInParameter
+	self prepareAffectationInParameter.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget).
 ]
