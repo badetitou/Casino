@@ -17,6 +17,37 @@ CSNWebModelJavaAddParentFromSourceTest >> createInUIModel: aClass [
 ]
 
 { #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> prepareSetWidget [
+
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::SetWidget.build().w' ]);
+		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::SetWidget.build()' ] ]);
+		                   yourself.
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::SetWidget.build()' ] ]);
+		               yourself
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> prepareSimplestCase [
+
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::SimplestCase.sourceMethod().w' ]);
+		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::SimplestCase.sourceMethod()' ] ]);
+		                   yourself.
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               affectedActions: ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::SimplestCase.sourceMethod().l' ]);
+		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::SimplestCase.sourceMethod()' ] ]);
+		               yourself
+]
+
+{ #category : #testing }
 CSNWebModelJavaAddParentFromSourceTest >> prepareSuperClassSubClass [
 	containerWidget := (self createInUIModel: CSNContainer)
 		                   affectedActions: ((uiImporter sourceModel allWithType: FamixJavaAttribute ) detect: [ :var | var name = 'widgetInSuperClass' ]);
@@ -66,6 +97,28 @@ CSNWebModelJavaAddParentFromSourceTest >> setUp [
 	uiImporter xmlUiWidgetLink: CSNMultiValueDictionary new.
 	(self resourcesFileReference / 'tests.json') readStreamDo: [ :stream | uiImporter sourceModel importFromJSONStream: stream ].
 	uiImporter sourceModel rootFolder: self resourcesFileReference
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesSetWidget [
+
+	self prepareSetWidget.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesSimplestCase [
+
+	self prepareSimplestCase.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
 ]
 
 { #category : #testing }

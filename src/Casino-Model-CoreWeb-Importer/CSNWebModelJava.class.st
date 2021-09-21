@@ -114,14 +114,11 @@ CSNWebModelJava >> addPPPToWidget [
 
 { #category : #'private - adding' }
 CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
+
 	| foundAndInvocationOrNil |
-	foundAndInvocationOrNil := self
-		getWidgetContainerOfWidgetWithoutAffectation: widget.
-	foundAndInvocationOrNil
-		ifNotNil: [ foundAndInvocationOrNil first
-				addWidget: widget
-				withInvocationOfAdd: foundAndInvocationOrNil second
-				usingFactory: self factory ]
+	foundAndInvocationOrNil := self getWidgetContainerOfWidgetWithoutAffectation: widget.
+	foundAndInvocationOrNil ifNotNil: [ 
+		foundAndInvocationOrNil first addWidget: widget withInvocationOfAdd: foundAndInvocationOrNil second usingFactory: self factory ]
 ]
 
 { #category : #adding }
@@ -384,7 +381,7 @@ CSNWebModelJava >> getWidgetContainerOfWidgetWithoutAffectation: widget [
 		                       ifTrue: [ widget source typeContainer ]
 		                       ifFalse: [ widget source container ].
 	[ containerInvocation isNotNil ] whileTrue: [ 
-		found := self widgetInVariable: containerInvocation receiver.
+		found := (self widgetInVariable: containerInvocation affectation) ifNil: [ self widgetInVariable: containerInvocation receiver ].
 		found
 			ifNotNil: [ 
 				^ { 
