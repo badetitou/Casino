@@ -42,3 +42,9 @@ FamixJavaInvocation >> attributeName [
 FamixJavaInvocation >> parameters [
 	^ signature extractParameters 
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixJavaInvocation >> positionParameterNamed: aString [
+
+	^ self parameters indexOf: aString
+]

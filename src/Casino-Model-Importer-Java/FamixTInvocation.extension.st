@@ -23,7 +23,7 @@ FamixTInvocation >> container [
 
 { #category : #'*Casino-Model-Importer-Java' }
 FamixTInvocation >> invokedClass [
-	^ (self candidates at: 1) parentType 
+	^ self invokedMethod parentType 
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
@@ -32,6 +32,11 @@ FamixTInvocation >> invokedClassName [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
+FamixTInvocation >> invokedMethod [
+	^ self candidates anyOneIfOnlyOneElement
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 FamixTInvocation >> isGetter [
-	^ self signature prefixMatchesRegex: 'get'.
+	^ self signature beginsWith: 'get'.
 ]

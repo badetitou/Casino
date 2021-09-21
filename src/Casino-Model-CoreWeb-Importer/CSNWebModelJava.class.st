@@ -92,9 +92,12 @@ CSNWebModelJava >> addLinkPhaseToPageMetier [
 ]
 
 { #category : #adding }
-CSNWebModelJava >> addLinkXmlUi [ 
+CSNWebModelJava >> addLinkXmlUi [
+
 	xmlUiLink := CSNMultiValueDictionary newFrom: self linkXmlUiPhaseAndPageMetier.
-	xmlUiWidgetLink := (CSNMultiValueDictionary newFrom: self linkXmlUiWidget) addAllMulti:  xmlUiLink; yourself.
+	xmlUiWidgetLink := (CSNMultiValueDictionary newFrom: self linkXmlUiWidget)
+		                   addAllMulti: xmlUiLink;
+		                   yourself
 ]
 
 { #category : #adding }
@@ -123,22 +126,19 @@ CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
 
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
+
 	^ widget affectedActions
-		ifNotNil: [ :affectedActions | 
-			| usages |
-			usages := widget affectedActions allUsages.
-			usages := usages , (usages flatCollect: [ :el | el allContainers ])
-				reject: [ :el | 
-					(el receiver isNotNil
-						and: [ el receiver name includesSubstring: 'content' ])
-						or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
-			responsabilityHandlerForUsages
-				handleAddLinkedFromVariable: usages
-				to: widget
-				withXmlui: xmlUiWidgetLink
-				andImporter: self ]
-		ifNil:
-			[ self addParentOfWidgetWithoutAffected: widget ]
+		  ifNotNil: [ :affectedActions | 
+			  | usages |
+			  usages := widget affectedActions allUsages.
+			  usages := usages , (usages flatCollect: [ :el | el allContainers ]) reject: [ :el | 
+				            (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
+			  responsabilityHandlerForUsages
+				  handleAddLinkedFromVariable: usages
+				  to: widget
+				  withXmlui: xmlUiWidgetLink
+				  andImporter: self ]
+		  ifNil: [ self addParentOfWidgetWithoutAffected: widget ]
 ]
 
 { #category : #adding }
@@ -678,4 +678,16 @@ CSNWebModelJava >> xml [
 { #category : #accessing }
 CSNWebModelJava >> xml: anObject [
 	xml := anObject
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> xmlUiWidgetLink [
+
+	^ xmlUiWidgetLink
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> xmlUiWidgetLink: anObject [
+
+	xmlUiWidgetLink := anObject
 ]

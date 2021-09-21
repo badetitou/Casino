@@ -6,7 +6,7 @@ Class {
 
 { #category : #handlers }
 CSNLinkWidgetResponsabilitiesParameterHandler >> handleAddLinkedFromVariable: aCollectionOfUsages to: widgetContainer withXmlui: xmluiLinkTable andImporter: theCurrentImporter [
-	((aCollectionOfUsages collect: #receiver thenSelect: [ :receiver | receiver class = FAMIXParameter ])
+	((aCollectionOfUsages collect: #receiver thenSelect: [ :receiver | receiver class = FamixJavaParameter ])
 		ifEmpty: [ false ]
 		ifNotEmpty: [ :collection | 
 			| parametersName invocations variables |

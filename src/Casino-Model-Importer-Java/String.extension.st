@@ -21,10 +21,9 @@ String >> allRangesOfSubstringNoSurrouned: aSubstring [
 
 { #category : #'*Casino-Model-Importer-Java' }
 String >> extractParameters [
-	^ ((self
-		copyFrom: (self findString: '(') + 1
-		to: (self findLastOccurrenceOfString: ')' startingAt: 1) - 1)
-		findTokens: ',' escapedAndKeepBy: '"' )  collect: [ :string | ((string trim withoutPrefix: '"') withoutSuffix: '"' ) ]
+
+	^ ((self copyFrom: (self findString: '(') + 1 to: (self findLastOccurrenceOfString: ')' startingAt: 1) - 1) findTokens: ',' escapedAndKeepBy: '"') collect: [ 
+		  :string | (string trim withoutPrefix: '"') withoutSuffix: '"' ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
