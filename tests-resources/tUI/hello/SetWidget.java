@@ -6,5 +6,6 @@ import lib.Widget;
 public class SetWidget {
     void build () {
         Widget w = new Widget().add(new Label());
+        System.out.println("hello");
     }
 }
