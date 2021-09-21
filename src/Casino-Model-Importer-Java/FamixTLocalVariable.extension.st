@@ -17,7 +17,10 @@ FamixTLocalVariable >> allUsages [
 			                       el hasSourceAnchor and: [ el sourceAnchor intervalAsCharPos rangeIncludes: usage ] ] ].
 	localInvocation := invocationsInvolved select: [ :invoc | 
 		                   invoc receiver ~= self and: [ invoc parameters anySatisfy: [ :param | param beginsWith: self name ] ] ].
-	externalInvocation := localInvocation collect: [ :invoc | (invoc invokedMethod parameterAtIndex: (invoc positionParameterNamed: self name)) allUsages ].
+	externalInvocation := localInvocation collect: [ :invoc | 
+		                      invoc invokedMethod isStub
+			                      ifTrue: [ {  } ]
+			                      ifFalse: [ (invoc invokedMethod parameterAtIndex: (invoc positionParameterNamed: self name)) allUsages ] ].
 	^ { 
 		  localInvocation.
 		  externalInvocation } flattened ifEmpty: [ self parentBehaviouralEntity allUsages reject: [ :invoc | invoc receiver = self ] ]

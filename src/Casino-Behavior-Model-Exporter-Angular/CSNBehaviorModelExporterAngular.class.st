@@ -192,20 +192,22 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaInfixOperation: aFASTJavaInfixOp
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaMethodEntity: aFASTJavaMethodEntity [
+
 	self
-		<< (aFASTJavaMethodEntity name);
+		<< aFASTJavaMethodEntity name;
 		<<< '('.
 	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
 	self
-		<<< ') { ';
+		<<< ') {';
 		indentPlus;
 		crlf.
-		
+
 	aFASTJavaMethodEntity statements
 		do: [ :statement | 
 			self indent.
 			self accept: statement ]
-		separatedBy: [ self
+		separatedBy: [ 
+			self
 				writeErrorIfSome;
 				crlf ].
 	self

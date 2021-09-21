@@ -72,7 +72,8 @@ CSNWebModelJavaAddParentTest >> prepareAffectationInParameter [
 		                 signature: 'add(l)';
 		                 source: sourceMethod;
 		                 sourceAnchor: addInvocationAnchor;
-		                 receiver: localVariable.
+		                 receiver: localVariable;
+		                 addCandidate: ((self createInSourceModel: FamixJavaMethod) isStub: true).
 	sourceMethod localVariables: { 
 			localVariable.
 			localVariableLabel }.
