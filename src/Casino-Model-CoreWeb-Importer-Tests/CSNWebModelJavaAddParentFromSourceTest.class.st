@@ -34,12 +34,13 @@ CSNWebModelJavaAddParentFromSourceTest >> prepareSuperClassSubClass [
 CSNWebModelJavaAddParentFromSourceTest >> prepareTwoMethodsAffectation [
 
 	containerWidget := (self createInUIModel: CSNContainer)
-		                   affectedActions: ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var name = 'w' ]);
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::Hello.sourceMethod().w' ]);
 		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
 					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::Hello.sourceMethod()' ] ]);
 		                   yourself.
 	labelWidget := (self createInUIModel: CSNUIParagraph)
-		               affectedActions: ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var name = 'l' ]);
+		               affectedActions: ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::Hello.sourceMethod().l' ]);
 		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
 					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::Hello.sourceMethod()' ] ]);
 		               yourself
