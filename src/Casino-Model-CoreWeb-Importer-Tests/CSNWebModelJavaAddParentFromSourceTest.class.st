@@ -17,6 +17,38 @@ CSNWebModelJavaAddParentFromSourceTest >> createInUIModel: aClass [
 ]
 
 { #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> prepareMethodReturn [
+
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::MethodReturn.build().w' ]);
+		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::MethodReturn.build()' ] ]);
+		                   yourself.
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               affectedActions:
+			               ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::MethodReturn.newLabel().l' ]);
+		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::MethodReturn.newLabel()' ] ]);
+		               yourself
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> prepareMethodReturnDirect [
+
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | var mooseName = #'hello::MethodReturnDirect.build().w' ]);
+		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::MethodReturnDirect.build()' ] ]);
+		                   yourself.
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::MethodReturnDirect.newLabel()' ] ]);
+		               yourself
+]
+
+{ #category : #testing }
 CSNWebModelJavaAddParentFromSourceTest >> prepareSetWidget [
 
 	containerWidget := (self createInUIModel: CSNContainer)
@@ -97,6 +129,28 @@ CSNWebModelJavaAddParentFromSourceTest >> setUp [
 	uiImporter xmlUiWidgetLink: CSNMultiValueDictionary new.
 	(self resourcesFileReference / 'tests.json') readStreamDo: [ :stream | uiImporter sourceModel importFromJSONStream: stream ].
 	uiImporter sourceModel rootFolder: self resourcesFileReference
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMethodReturn [
+
+	self prepareMethodReturn.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMethodReturnDirect [
+
+	self prepareMethodReturnDirect.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
 ]
 
 { #category : #testing }

@@ -79,7 +79,10 @@ CSNWebModelJavaAddParentTest >> prepareAffectationInParameter [
 			localVariableLabel }.
 
 	containerWidget := (self createInUIModel: CSNContainer) affectedActions: localVariable.
-	labelWidget := (self createInUIModel: CSNUIParagraph) affectedActions: localVariableLabel
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               affectedActions: localVariableLabel;
+		               source: invocationLabel;
+		               yourself
 ]
 
 { #category : #resources }
