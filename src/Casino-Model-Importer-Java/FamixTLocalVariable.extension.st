@@ -18,7 +18,7 @@ FamixTLocalVariable >> allUsages [
 	localInvocation := invocationsInvolved select: [ :invoc | 
 		                   invoc receiver ~= self and: [ invoc parameters anySatisfy: [ :param | param beginsWith: self name ] ] ].
 	externalInvocation := localInvocation collect: [ :invoc | 
-		                      invoc invokedMethod isStub
+		                      (invoc invokedMethod isStub or: [ (invoc positionParameterNamed: self name) = 0 ])
 			                      ifTrue: [ {  } ]
 			                      ifFalse: [ (invoc invokedMethod parameterAtIndex: (invoc positionParameterNamed: self name)) allUsages ] ].
 	^ { 
