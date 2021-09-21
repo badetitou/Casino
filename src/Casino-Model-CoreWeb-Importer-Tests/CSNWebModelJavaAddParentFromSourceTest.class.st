@@ -49,6 +49,25 @@ CSNWebModelJavaAddParentFromSourceTest >> prepareMethodReturnDirect [
 ]
 
 { #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> prepareMethodReturnNearlyDirect [
+
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | 
+					                    var mooseName = #'hello::MethodReturnNearlyDirect.build().w' ]);
+		                   source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'Widget()' and: [ invoc sender mooseName = #'hello::MethodReturnNearlyDirect.build()' ] ]);
+		                   yourself.
+	labelWidget := (self createInUIModel: CSNUIParagraph)
+		               affectedActions:
+			               ((uiImporter sourceModel allWithType: FamixJavaLocalVariable) detect: [ :var | 
+					                var mooseName = #'hello::MethodReturnNearlyDirect.newLabel().l' ]);
+		               source: ((uiImporter sourceModel allWithType: FamixJavaInvocation) detect: [ :invoc | 
+					                invoc signature = 'Label()' and: [ invoc sender mooseName = #'hello::MethodReturnNearlyDirect.newLabel()' ] ]);
+		               yourself
+]
+
+{ #category : #testing }
 CSNWebModelJavaAddParentFromSourceTest >> prepareSetWidget [
 
 	containerWidget := (self createInUIModel: CSNContainer)
@@ -146,6 +165,17 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMet
 CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMethodReturnDirect [
 
 	self prepareMethodReturnDirect.
+	self assert: labelWidget widgetContainer equals: nil.
+	self assert: containerWidget widgets isEmpty.
+	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: labelWidget widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
+]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMethodReturnNearlyDirect [
+
+	self prepareMethodReturnNearlyDirect.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
 	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
