@@ -9,16 +9,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":2,
 	"element": {"ref": 22},
-	"endPos":212,
+	"endPos":202,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":93
+	"startPos":87
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":3,
 	"element": {"ref": 232},
-	"endPos":115,
+	"endPos":109,
 	"fileName":"hello/SuperClass.java",
-	"startPos":98
+	"startPos":92
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":4,
@@ -29,9 +29,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":5,
 	"element": {"ref": 249},
-	"endPos":130,
+	"endPos":124,
 	"fileName":"hello/SuperClass.java",
-	"startPos":119
+	"startPos":113
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":6,
@@ -61,9 +61,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":10,
 	"element": {"ref": 169},
-	"endPos":184,
+	"endPos":176,
 	"fileName":"hello/SuperClass.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":11,
@@ -74,9 +74,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":12,
 	"element": {"ref": 91},
-	"endPos":146,
+	"endPos":139,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":135
+	"startPos":128
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":13,
@@ -88,9 +88,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":14,
 	"element": {"ref": 206},
-	"endPos":151,
+	"endPos":143,
 	"fileName":"hello/Hello.java",
-	"startPos":140
+	"startPos":132
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":15,
@@ -100,9 +100,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":16,
 	"element": {"ref": 178},
-	"endPos":140,
+	"endPos":133,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":129
+	"startPos":122
 	},{
 	"FM3":"Famix-Java-Entities.LocalVariable",
 	"id":17,
@@ -113,9 +113,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":18,
 	"element": {"ref": 177},
-	"endPos":185,
+	"endPos":177,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":171
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.ImplicitVariable",
 	"id":19,
@@ -166,9 +166,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":26,
 	"element": {"ref": 53},
-	"endPos":235,
+	"endPos":223,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":235
+	"startPos":223
 	},{
 	"FM3":"Famix-Java-Entities.Package",
 	"id":27,
@@ -199,9 +199,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":31,
 	"element": {"ref": 140},
-	"endPos":175,
+	"endPos":167,
 	"fileName":"hello/SetWidget.java",
-	"startPos":166
+	"startPos":158
 	},{
 	"FM3":"Famix-Java-Entities.Method",
 	"id":32,
@@ -216,9 +216,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":33,
 	"element": {"ref": 240},
-	"endPos":130,
+	"endPos":124,
 	"fileName":"hello/SuperClass.java",
-	"startPos":98
+	"startPos":92
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":34,
@@ -261,9 +261,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":40,
 	"element": {"ref": 75},
-	"endPos":215,
+	"endPos":204,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":41,
@@ -274,16 +274,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":42,
 	"element": {"ref": 164},
-	"endPos":146,
+	"endPos":139,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":135
+	"startPos":128
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":43,
 	"element": {"ref": 143},
-	"endPos":138,
+	"endPos":134,
 	"fileName":"hello/SubClass.java",
-	"startPos":92
+	"startPos":88
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":44,
@@ -333,16 +333,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":50,
 	"element": {"ref": 210},
-	"endPos":166,
+	"endPos":159,
 	"fileName":"hello/SuperClass.java",
-	"startPos":144
+	"startPos":137
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":51,
 	"element": {"ref": 262},
-	"endPos":224,
+	"endPos":213,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":214
+	"startPos":203
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":52,
@@ -360,9 +360,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":54,
 	"element": {"ref": 173},
-	"endPos":192,
+	"endPos":184,
 	"fileName":"hello/SetWidget.java",
-	"startPos":166
+	"startPos":158
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":55,
@@ -373,16 +373,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":56,
 	"element": {"ref": 99},
-	"endPos":232,
+	"endPos":220,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":179
+	"startPos":169
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":57,
 	"element": {"ref": 225},
-	"endPos":192,
+	"endPos":183,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":122
+	"startPos":115
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":58,
@@ -395,9 +395,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":59,
 	"element": {"ref": 165},
-	"endPos":221,
+	"endPos":210,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":211
+	"startPos":200
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":60,
@@ -407,23 +407,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":61,
 	"element": {"ref": 215},
-	"endPos":138,
+	"endPos":131,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":138
+	"startPos":131
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":62,
 	"element": {"ref": 266},
-	"endPos":249,
+	"endPos":237,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":235
+	"startPos":223
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":63,
 	"element": {"ref": 44},
-	"endPos":130,
+	"endPos":124,
 	"fileName":"hello/SuperClass.java",
-	"startPos":119
+	"startPos":113
 	},{
 	"FM3":"Famix-Java-Entities.SourceLanguage",
 	"id":64,
@@ -431,16 +431,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":65,
 	"element": {"ref": 89},
-	"endPos":235,
+	"endPos":222,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":66,
 	"element": {"ref": 6},
-	"endPos":184,
+	"endPos":176,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":157
+	"startPos":149
 	},{
 	"FM3":"Famix-Java-Entities.Method",
 	"id":67,
@@ -455,9 +455,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":68,
 	"element": {"ref": 28},
-	"endPos":125,
+	"endPos":118,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":125
+	"startPos":118
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":69,
@@ -535,30 +535,30 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":80,
 	"element": {"ref": 88},
-	"endPos":204,
+	"endPos":195,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":197
+	"startPos":188
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":81,
 	"element": {"ref": 134},
-	"endPos":151,
+	"endPos":143,
 	"fileName":"hello/Hello.java",
-	"startPos":140
+	"startPos":132
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":82,
 	"element": {"ref": 136},
-	"endPos":156,
+	"endPos":149,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":125
+	"startPos":118
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":83,
 	"element": {"ref": 105},
-	"endPos":153,
+	"endPos":146,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":142
+	"startPos":135
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":84,
@@ -603,9 +603,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":90,
 	"element": {"ref": 153},
-	"endPos":224,
+	"endPos":213,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":214
+	"startPos":203
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":91,
@@ -617,9 +617,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":92,
 	"element": {"ref": 20},
-	"endPos":122,
+	"endPos":115,
 	"fileName":"hello/SetWidget.java",
-	"startPos":122
+	"startPos":115
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":93,
@@ -630,9 +630,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":94,
 	"element": {"ref": 247},
-	"endPos":161,
+	"endPos":154,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":152
+	"startPos":145
 	},{
 	"FM3":"Famix-Java-Entities.ImplicitVariable",
 	"id":95,
@@ -643,9 +643,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":96,
 	"element": {"ref": 52},
-	"endPos":168,
+	"endPos":160,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":157
+	"startPos":149
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":97,
@@ -675,16 +675,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":100,
 	"element": {"ref": 216},
-	"endPos":214,
+	"endPos":204,
 	"fileName":"hello/Hello.java",
-	"startPos":196
+	"startPos":186
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":101,
 	"element": {"ref": 258},
-	"endPos":200,
+	"endPos":191,
 	"fileName":"hello/SetWidget.java",
-	"startPos":90
+	"startPos":84
 	},{
 	"FM3":"Famix-Java-Entities.Attribute",
 	"id":102,
@@ -696,16 +696,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":103,
 	"element": {"ref": 155},
-	"endPos":180,
+	"endPos":173,
 	"fileName":"hello/SuperClass.java",
-	"startPos":170
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":104,
 	"element": {"ref": 129},
-	"endPos":294,
+	"endPos":280,
 	"fileName":"hello/Hello.java",
-	"startPos":287
+	"startPos":273
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":105,
@@ -715,9 +715,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":106,
 	"element": {"ref": 224},
-	"endPos":153,
+	"endPos":146,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":138
+	"startPos":131
 	},{
 	"FM3":"Famix-Java-Entities.ImplicitVariable",
 	"id":107,
@@ -734,16 +734,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":109,
 	"element": {"ref": 7},
-	"endPos":264,
+	"endPos":251,
 	"fileName":"hello/Hello.java",
-	"startPos":257
+	"startPos":244
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":110,
 	"element": {"ref": 37},
-	"endPos":288,
+	"endPos":274,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":288
+	"startPos":274
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":111,
@@ -761,37 +761,37 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":113,
 	"element": {"ref": 41},
-	"endPos":136,
+	"endPos":128,
 	"fileName":"hello/Hello.java",
-	"startPos":136
+	"startPos":128
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":114,
 	"element": {"ref": 4},
-	"endPos":207,
+	"endPos":196,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":207
+	"startPos":196
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":115,
 	"element": {"ref": 11},
-	"endPos":293,
+	"endPos":279,
 	"fileName":"hello/Hello.java",
-	"startPos":293
+	"startPos":279
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":116,
 	"element": {"ref": 72},
-	"endPos":137,
+	"endPos":133,
 	"fileName":"hello/SubClass.java",
-	"startPos":115
+	"startPos":111
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":117,
 	"element": {"ref": 49},
-	"endPos":137,
+	"endPos":130,
 	"fileName":"hello/SetWidget.java",
-	"startPos":126
+	"startPos":119
 	},{
 	"FM3":"Famix-Java-Entities.Package",
 	"id":118,
@@ -812,9 +812,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":121,
 	"element": {"ref": 120},
-	"endPos":154,
+	"endPos":147,
 	"fileName":"hello/SetWidget.java",
-	"startPos":126
+	"startPos":119
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":122,
@@ -838,16 +838,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":125,
 	"element": {"ref": 98},
-	"endPos":155,
+	"endPos":148,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":146
+	"startPos":139
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":126,
 	"element": {"ref": 1},
-	"endPos":137,
+	"endPos":130,
 	"fileName":"hello/SetWidget.java",
-	"startPos":126
+	"startPos":119
 	},{
 	"FM3":"Famix-Java-Entities.Package",
 	"id":127,
@@ -858,9 +858,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":128,
 	"element": {"ref": 198},
-	"endPos":183,
+	"endPos":174,
 	"fileName":"hello/Hello.java",
-	"startPos":173
+	"startPos":164
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":129,
@@ -872,9 +872,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":130,
 	"element": {"ref": 67},
-	"endPos":296,
+	"endPos":281,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":201
+	"startPos":190
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":131,
@@ -891,9 +891,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":133,
 	"element": {"ref": 154},
-	"endPos":273,
+	"endPos":260,
 	"fileName":"hello/Hello.java",
-	"startPos":267
+	"startPos":254
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":134,
@@ -903,9 +903,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":135,
 	"element": {"ref": 71},
-	"endPos":146,
+	"endPos":141,
 	"fileName":"hello/SubClass.java",
-	"startPos":67
+	"startPos":64
 	},{
 	"FM3":"Famix-Java-Entities.LocalVariable",
 	"id":136,
@@ -916,23 +916,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":137,
 	"element": {"ref": 222},
-	"endPos":287,
+	"endPos":273,
 	"fileName":"hello/Hello.java",
-	"startPos":287
+	"startPos":273
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":138,
 	"element": {"ref": 9},
-	"endPos":169,
+	"endPos":160,
 	"fileName":"hello/Hello.java",
-	"startPos":169
+	"startPos":160
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":139,
 	"element": {"ref": 141},
-	"endPos":184,
+	"endPos":176,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":153
+	"startPos":145
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":140,
@@ -962,23 +962,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":144,
 	"element": {"ref": 260},
-	"endPos":156,
+	"endPos":149,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":129
+	"startPos":122
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":145,
 	"element": {"ref": 38},
-	"endPos":213,
+	"endPos":203,
 	"fileName":"hello/Hello.java",
-	"startPos":213
+	"startPos":203
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":146,
 	"element": {"ref": 70},
-	"endPos":197,
+	"endPos":188,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":197
+	"startPos":188
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":147,
@@ -1003,9 +1003,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":150,
 	"element": {"ref": 131},
-	"endPos":180,
+	"endPos":173,
 	"fileName":"hello/SuperClass.java",
-	"startPos":170
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":151,
@@ -1015,9 +1015,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":152,
 	"element": {"ref": 79},
-	"endPos":185,
+	"endPos":177,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":175
+	"startPos":167
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":153,
@@ -1046,16 +1046,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":157,
 	"element": {"ref": 102},
-	"endPos":180,
+	"endPos":173,
 	"fileName":"hello/SuperClass.java",
-	"startPos":144
+	"startPos":137
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":158,
 	"element": {"ref": 217},
-	"endPos":210,
+	"endPos":200,
 	"fileName":"hello/Hello.java",
-	"startPos":210
+	"startPos":200
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":159,
@@ -1066,9 +1066,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":160,
 	"element": {"ref": 124},
-	"endPos":251,
+	"endPos":237,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":161,
@@ -1104,9 +1104,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":166,
 	"element": {"ref": 228},
-	"endPos":307,
+	"endPos":290,
 	"fileName":"hello/Hello.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":167,
@@ -1158,23 +1158,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":174,
 	"element": {"ref": 93},
-	"endPos":149,
+	"endPos":143,
 	"fileName":"hello/SubClass.java",
-	"startPos":19
+	"startPos":17
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":175,
 	"element": {"ref": 55},
-	"endPos":203,
+	"endPos":193,
 	"fileName":"hello/SetWidget.java",
-	"startPos":60
+	"startPos":55
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":176,
 	"element": {"ref": 85},
-	"endPos":269,
+	"endPos":256,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":261
+	"startPos":248
 	},{
 	"FM3":"Famix-Java-Entities.LocalVariable",
 	"id":177,
@@ -1196,9 +1196,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":180,
 	"element": {"ref": 74},
-	"endPos":162,
+	"endPos":155,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":135
+	"startPos":128
 	},{
 	"FM3":"Famix-Java-Entities.Package",
 	"id":181,
@@ -1213,23 +1213,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":183,
 	"element": {"ref": 46},
-	"endPos":302,
+	"endPos":287,
 	"fileName":"hello/Hello.java",
-	"startPos":231
+	"startPos":218
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":184,
 	"element": {"ref": 223},
-	"endPos":153,
+	"endPos":146,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":142
+	"startPos":135
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":185,
 	"element": {"ref": 119},
-	"endPos":153,
+	"endPos":146,
 	"fileName":"hello/SetWidget.java",
-	"startPos":143
+	"startPos":136
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":186,
@@ -1239,9 +1239,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":187,
 	"element": {"ref": 58},
-	"endPos":183,
+	"endPos":175,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":174
+	"startPos":166
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":188,
@@ -1258,16 +1258,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":190,
 	"element": {"ref": 194},
-	"endPos":203,
+	"endPos":194,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":203
+	"startPos":194
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":191,
 	"element": {"ref": 86},
-	"endPos":269,
+	"endPos":256,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":261
+	"startPos":248
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":192,
@@ -1278,9 +1278,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":193,
 	"element": {"ref": 17},
-	"endPos":151,
+	"endPos":143,
 	"fileName":"hello/Hello.java",
-	"startPos":136
+	"startPos":128
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":194,
@@ -1291,9 +1291,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":195,
 	"element": {"ref": 122},
-	"endPos":221,
+	"endPos":210,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":211
+	"startPos":200
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":196,
@@ -1314,37 +1314,37 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":199,
 	"element": {"ref": 35},
-	"endPos":162,
+	"endPos":155,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":131
+	"startPos":124
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":200,
 	"element": {"ref": 265},
-	"endPos":130,
+	"endPos":124,
 	"fileName":"hello/SuperClass.java",
-	"startPos":119
+	"startPos":113
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":201,
 	"element": {"ref": 25},
-	"endPos":180,
+	"endPos":173,
 	"fileName":"hello/SuperClass.java",
-	"startPos":170
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":202,
 	"element": {"ref": 168},
-	"endPos":109,
+	"endPos":105,
 	"fileName":"hello/SubClass.java",
-	"startPos":92
+	"startPos":88
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":203,
 	"element": {"ref": 45},
-	"endPos":222,
+	"endPos":211,
 	"fileName":"hello/Hello.java",
-	"startPos":92
+	"startPos":85
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":204,
@@ -1382,9 +1382,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":209,
 	"element": {"ref": 32},
-	"endPos":164,
+	"endPos":156,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":93
+	"startPos":87
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":210,
@@ -1402,9 +1402,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":212,
 	"element": {"ref": 159},
-	"endPos":249,
+	"endPos":237,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":239
+	"startPos":227
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":213,
@@ -1498,9 +1498,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":227,
 	"element": {"ref": 163},
-	"endPos":153,
+	"endPos":145,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":153
+	"startPos":145
 	},{
 	"FM3":"Famix-Java-Entities.Class",
 	"id":228,
@@ -1525,9 +1525,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":231,
 	"element": {"ref": 245},
-	"endPos":154,
+	"endPos":147,
 	"fileName":"hello/SetWidget.java",
-	"startPos":122
+	"startPos":115
 	},{
 	"FM3":"Famix-Java-Entities.Access",
 	"id":232,
@@ -1544,37 +1544,37 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":234,
 	"element": {"ref": 23},
-	"endPos":221,
+	"endPos":210,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":207
+	"startPos":196
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":235,
 	"element": {"ref": 255},
-	"endPos":170,
+	"endPos":162,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":99
+	"startPos":93
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":236,
 	"element": {"ref": 241},
-	"endPos":248,
+	"endPos":235,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":173
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":237,
 	"element": {"ref": 142},
-	"endPos":185,
+	"endPos":177,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":175
+	"startPos":167
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":238,
 	"element": {"ref": 30},
-	"endPos":183,
+	"endPos":174,
 	"fileName":"hello/Hello.java",
-	"startPos":169
+	"startPos":160
 	},{
 	"FM3":"Famix-Java-Entities.Inheritance",
 	"id":239,
@@ -1614,9 +1614,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":244,
 	"element": {"ref": 211},
-	"endPos":249,
+	"endPos":237,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":239
+	"startPos":227
 	},{
 	"FM3":"Famix-Java-Entities.LocalVariable",
 	"id":245,
@@ -1627,9 +1627,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":246,
 	"element": {"ref": 242},
-	"endPos":131,
+	"endPos":124,
 	"fileName":"hello/MethodReturnDirect.java",
-	"startPos":131
+	"startPos":124
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":247,
@@ -1642,9 +1642,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":248,
 	"element": {"ref": 69},
-	"endPos":140,
+	"endPos":133,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":129
+	"startPos":122
 	},{
 	"FM3":"Famix-Java-Entities.Invocation",
 	"id":249,
@@ -1667,23 +1667,23 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":252,
 	"element": {"ref": 97},
-	"endPos":153,
+	"endPos":146,
 	"fileName":"hello/SetWidget.java",
-	"startPos":143
+	"startPos":136
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":253,
 	"element": {"ref": 204},
-	"endPos":171,
+	"endPos":163,
 	"fileName":"hello/SimplestCase.java",
-	"startPos":171
+	"startPos":163
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":254,
 	"element": {"ref": 213},
-	"endPos":240,
+	"endPos":228,
 	"fileName":"hello/MethodReturn.java",
-	"startPos":240
+	"startPos":228
 	},{
 	"FM3":"Famix-Java-Entities.Method",
 	"id":255,
@@ -1707,9 +1707,9 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":257,
 	"element": {"ref": 188},
-	"endPos":299,
+	"endPos":283,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":77
+	"startPos":71
 	},{
 	"FM3":"Famix-Java-Entities.Method",
 	"id":258,
@@ -1751,16 +1751,16 @@
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":263,
 	"element": {"ref": 84},
-	"endPos":183,
+	"endPos":174,
 	"fileName":"hello/Hello.java",
-	"startPos":173
+	"startPos":164
 	},{
 	"FM3":"Famix-Java-Entities.IndexedFileAnchor",
 	"id":264,
 	"element": {"ref": 182},
-	"endPos":168,
+	"endPos":160,
 	"fileName":"hello/MethodReturnNearlyDirect.java",
-	"startPos":157
+	"startPos":149
 	},{
 	"FM3":"Famix-Java-Entities.Reference",
 	"id":265,
