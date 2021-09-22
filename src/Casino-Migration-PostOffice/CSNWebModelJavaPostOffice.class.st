@@ -66,7 +66,7 @@ CSNWebModelJavaPostOffice >> webRoot [
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> widgetFactoryInvocation [
 	^ (((self sourceModel allModelClasses
-		select: [ :a | #(#FactoryBLLabel #ComponentUtils #AbstractPhaseBurAdminUi) includes: a name ])
+		select: [ :a | #(#FactoryBLLabel #ComponentUtils #AbstractPhaseBurAdminUi #SideBarIconFactory #EtatImageFactory #ImageContactFactory) includes: a name ])
 		flatCollect: #methods)
 		select: [ :m | m name = 'create' or: [ m name beginsWithAnyOf: #('getLibelleItem' 'createBLLinkLabel') ] ]
 		thenCollect: #incomingInvocations) flatten
