@@ -74,5 +74,7 @@ CSNWebModelJavaPostOffice >> widgetFactoryInvocation [
 
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> widgetNamespaces [
-	^ {'fr::bl::client::core::refui' . 'fr::bl::client::thot::widgets'}
+
+	^ super widgetNamespaces asOrderedCollection addAll: { 'fr::bl::client::thot::widgets'. 'fr::bl::client::thot::composant' };
+		  yourself
 ]

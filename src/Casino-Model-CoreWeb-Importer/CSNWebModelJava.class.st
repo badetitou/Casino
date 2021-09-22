@@ -647,7 +647,8 @@ THIS CANNOT BE IN THE OTHER WAY"
 
 { #category : #accessing }
 CSNWebModelJava >> widgetNamespaces [
-	^ {'fr::bl::client::core::refui' . 'fr::bl::client::sedit::refui'}
+
+	^ { 'fr::bl::client::core::refui'. 'fr::bl::client::core::tasks'. 'fr::bl::client::core::phasecontrol::impl'. 'fr::bl::client::sedit::refui' }
 ]
 
 { #category : #accessing }
