@@ -54,6 +54,26 @@ CSNModelExporterAngularBLIdentity >> businessExporter [
 	^ CSNBusinessExporter
 ]
 
+{ #category : #export }
+CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
+
+	context := self context clone
+		           root: self root / aCSNIModule name;
+		           yourself.
+	self root ensureCreateDirectory.
+
+	aCSNIModule pages
+		do: [ :aPage | 
+			self
+				execute: [ 
+					self clone
+						currentPath: self rootPhases / aPage name asRealCamelCase;
+						currentPage: aPage;
+						visit: aPage ]
+				recordedAs: 'export ' , aPage name asString ]
+		displayingProgress: [ :page | 'export page: ' , page codePhase asString ]
+]
+
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> generateCoreStoreModule: aMooseModel [
 
@@ -445,6 +465,7 @@ CSNModelExporterAngularBLIdentity >> rootPhases [
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> runExport [
 	identityConfiguration modules do: [ :module | 
+		self exportModule: module.
 		 ]
 ]
 
