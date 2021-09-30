@@ -64,6 +64,16 @@ CSNModelExporterAngularBLIdentity >> configRepository: pathToRepo forModule: aCS
 ]
 
 { #category : #export }
+CSNModelExporterAngularBLIdentity >> configShellLocated: shellRoot [
+
+
+	CSNIShellConfigurator new
+		location: shellRoot;
+		modules: identityConfiguration modules;
+		configure
+]
+
+{ #category : #export }
 CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 
 	| moduleRoot |
@@ -97,6 +107,20 @@ CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
 		displayingProgress: [ :page | 'export page: ' , page codePhase asString ]
+]
+
+{ #category : #export }
+CSNModelExporterAngularBLIdentity >> exportShell [
+
+	| shellRoot |
+	shellRoot := self root / (self root basename asLowercase , '-shell').
+	shellRoot ensureDeleteAll.
+	IceGitClone new
+		location: shellRoot;
+		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/shell.git';
+		execute.
+	self configShellLocated: shellRoot.
+
 ]
 
 { #category : #visiting }
@@ -513,7 +537,8 @@ CSNModelExporterAngularBLIdentity >> rootPhases [
 CSNModelExporterAngularBLIdentity >> runExport [
 	identityConfiguration modules do: [ :module | 
 		self exportModule: module.
-		 ]
+		 ].
+	self exportShell
 ]
 
 { #category : #accessing }

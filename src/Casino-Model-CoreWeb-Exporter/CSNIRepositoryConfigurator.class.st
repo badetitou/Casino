@@ -83,11 +83,5 @@ CSNIRepositoryConfigurator >> location: anObject [
 { #category : #accessing }
 CSNIRepositoryConfigurator >> port [
 
-	^ port ifNil: [ port := 4202 ]
-]
-
-{ #category : #accessing }
-CSNIRepositoryConfigurator >> port: anObject [
-
-	port := anObject
+	^ self csniModule port
 ]

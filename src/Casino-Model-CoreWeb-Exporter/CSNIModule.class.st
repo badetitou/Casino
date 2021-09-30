@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'pages',
-		'name'
+		'name',
+		'port'
 	],
 	#category : #'Casino-Model-CoreWeb-Exporter-BLIdentity'
 }
@@ -36,4 +37,16 @@ CSNIModule >> pages [
 CSNIModule >> pages: anObject [
 
 	pages := anObject
+]
+
+{ #category : #accessing }
+CSNIModule >> port [
+
+	^ port ifNil: [ port := 4202 ]
+]
+
+{ #category : #accessing }
+CSNIModule >> port: anObject [
+
+	port := anObject
 ]
