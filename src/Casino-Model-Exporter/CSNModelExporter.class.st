@@ -18,6 +18,12 @@ CSNModelExporter >> context [
 	^ context
 ]
 
+{ #category : #accessing }
+CSNModelExporter >> context: anObject [
+
+	context := anObject
+]
+
 { #category : #run }
 CSNModelExporter >> export [
 	self prepareExport.

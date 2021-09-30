@@ -56,18 +56,18 @@ CSNModelExporterAngularBLIdentity >> businessExporter [
 
 { #category : #export }
 CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
-
-	context := self context clone
-		           root: self root / aCSNIModule name;
-		           yourself.
-	self root ensureCreateDirectory.
+	(self root / (self root basename asLowercase, '-', aCSNIModule name)) ensureDeleteAll.
+	IceGitClone new
+		location: self root / (self root basename asLowercase, '-', aCSNIModule name);
+		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
+		execute.
 
 	aCSNIModule pages
 		do: [ :aPage | 
 			self
 				execute: [ 
 					self clone
-						currentPath: self rootPhases / aPage name asRealCamelCase;
+						currentPath: self root / (self root basename asLowercase, '-', aCSNIModule name) / 'src/app/main/features' / aPage name asRealCamelCase;
 						currentPage: aPage;
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
