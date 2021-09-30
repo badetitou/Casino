@@ -26,7 +26,7 @@ CSNIShellConfigurator >> fixLookupService [
 			              do: [ :module | 
 				              stream << '{'.
 				              stream
-					              << '    "typee":"Module",';
+					              << '    "type":"Module",';
 					              << String crlf;
 					              << '    "remoteEntry":"http://localhost:';
 					              << module port printString;
