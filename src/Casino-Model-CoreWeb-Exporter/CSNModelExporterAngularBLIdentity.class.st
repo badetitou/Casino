@@ -55,12 +55,22 @@ CSNModelExporterAngularBLIdentity >> businessExporter [
 ]
 
 { #category : #export }
+CSNModelExporterAngularBLIdentity >> configRepository: pathToRepo forModule: aCSNIModule [
+
+	CSNIRepositoryConfigurator new
+		location: pathToRepo;
+		csniModule: aCSNIModule;
+		configure
+]
+
+{ #category : #export }
 CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 	(self root / (self root basename asLowercase, '-', aCSNIModule name)) ensureDeleteAll.
 	IceGitClone new
 		location: self root / (self root basename asLowercase, '-', aCSNIModule name);
 		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
 		execute.
+	self configRepository: (self root / (self root basename asLowercase, '-', aCSNIModule name)) forModule: aCSNIModule.
 
 	aCSNIModule pages
 		do: [ :aPage | 
