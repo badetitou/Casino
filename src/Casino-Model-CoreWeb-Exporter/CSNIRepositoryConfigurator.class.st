@@ -13,6 +13,7 @@ Class {
 CSNIRepositoryConfigurator >> configure [
 	self fixAngularJSON.
 	self fixPackageJSON.
+	self fixAppConfig
 ]
 
 { #category : #accessing }
@@ -32,7 +33,7 @@ CSNIRepositoryConfigurator >> fixAngularJSON [
 	| old new |
 	old := (location / 'angular.json') contents.
 	new := old copyReplaceAll: 'microfrontend' with: (csniModule name asLowercase).
-	new := new copyReplaceAll: '4201' with: self port.
+	new := new copyReplaceAll: '4201' with: self port asString.
 	(location / 'angular.json') delete.
 	(location / 'angular.json') writeStreamDo: [ :stream | stream nextPutAll: new ]
 ]

@@ -65,19 +65,34 @@ CSNModelExporterAngularBLIdentity >> configRepository: pathToRepo forModule: aCS
 
 { #category : #export }
 CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
-	(self root / (self root basename asLowercase, '-', aCSNIModule name)) ensureDeleteAll.
+
+	| moduleRoot |
+	moduleRoot := self root / (self root basename asLowercase , '-' , aCSNIModule name).
+	moduleRoot ensureDeleteAll.
 	IceGitClone new
-		location: self root / (self root basename asLowercase, '-', aCSNIModule name);
+		location: moduleRoot;
 		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
 		execute.
-	self configRepository: (self root / (self root basename asLowercase, '-', aCSNIModule name)) forModule: aCSNIModule.
+	self configRepository: moduleRoot forModule: aCSNIModule.
 
+	(moduleRoot / 'src' / 'app' / 'configuration' / 'menu.ts') asFileReference
+		delete;
+		writeStreamDo: [ :stream | 
+			currentWriteStream := stream.
+			self generateMenu: aCSNIModule ].
+	"Write app.route.ts"
+	(moduleRoot / 'src/app/main/main.routing.ts') asFileReference
+		delete;
+		writeStreamDo: [ :stream | 
+			currentWriteStream := stream.
+			self generateRouteSourceCodeForModel: aCSNIModule ].
+	(moduleRoot / 'src/app/main/features') ensureDeleteAll.
 	aCSNIModule pages
 		do: [ :aPage | 
 			self
 				execute: [ 
 					self clone
-						currentPath: self root / (self root basename asLowercase, '-', aCSNIModule name) / 'src/app/main/features' / aPage name asRealCamelCase;
+						currentPath: moduleRoot / 'src/app/main/features' / aPage name asRealCamelCase;
 						currentPage: aPage;
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
@@ -205,34 +220,56 @@ CSNModelExporterAngularBLIdentity >> generateHTMLSourceCodeForPage: aBLPhase [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngularBLIdentity >> generateMenu: aModel [
+CSNModelExporterAngularBLIdentity >> generateMenu: aCSNIModule [
 
 	currentWriteStream << 'import {MenuItem} from ''@bl/bl-app-layout'';
 
 export let menus: MenuItem[] = [
   {
-    key: ''omaje'',
-    path: ''/omaje'',
+   key: '''.
+	currentWriteStream << aCSNIModule name asLowercase.
+	currentWriteStream << ''',
+    path: ''/'.
+	currentWriteStream << aCSNIModule name asLowercase.
+	currentWriteStream << ''',
     icon: ''fal fa-home'',
     currentTraduction:undefined,
     withHeadTitle: true,
     subMenus: ['.
-	aModel allCSNPage
-		do: [ :phase | 
+	aCSNIModule pages
+		do: [ :page | 
 			currentWriteStream
-				<< '        { '; crlf.
-				currentWriteStream << '            key: '''; << phase name asRealCamelCase; << ''','; crlf.
-				currentWriteStream << '            path: ''/omaje/'; << phase name asRealCamelCase; << ''','; crlf.
-				currentWriteStream << '            currentTraduction: '''; << phase name asRealCamelCase; << ''','; crlf.
-				currentWriteStream << '            icon: ''fal fa-home'','; crlf.
-				currentWriteStream << '            subMenus: [ ] '; crlf.
-				currentWriteStream << '        }'
-				 ]
+				<< '        { ';
+				crlf.
+			currentWriteStream
+				<< '            key: ''';
+				<< page name asRealCamelCase;
+				<< ''',';
+				crlf.
+			currentWriteStream << '            path: ''/'.
+				currentWriteStream << aCSNIModule name asLowercase.
+			currentWriteStream
+				<< '/';
+				<< page name asRealCamelCase;
+				<< ''',';
+				crlf.
+			currentWriteStream
+				<< '            currentTraduction: ''';
+				<< page name asRealCamelCase;
+				<< ''',';
+				crlf.
+			currentWriteStream
+				<< '            icon: ''fal fa-home'',';
+				crlf.
+			currentWriteStream
+				<< '            subMenus: [ ] ';
+				crlf.
+			currentWriteStream << '        }' ]
 		separatedBy: [ 
 			currentWriteStream
 				<< ',';
-				crlf ]. 
-		currentWriteStream << '
+				crlf ].
+	currentWriteStream << '
     ]
   },
 ];
@@ -306,13 +343,13 @@ export const ROUTES_MICRO_FRONTEND: Routes = [
     {path:"",component:MainComponent,children:[
         {path:"",pathMatch:"full",redirectTo:"home"},';
      << String crlf.
-  aModel allCSNPage do: [:phase |  currentWriteStream
+  aModel pages do: [:page |  currentWriteStream
            << '        { path: ''';
-           << phase name asRealCamelCase;
+           << page name asRealCamelCase;
            << ''', loadChildren: () => import(''./features/';
-           << phase getLocalModulePath;
+           << page getLocalModulePath;
 			  << ''').then(m => m.';
-			  << phase getModuleClassName;
+			  << page getModuleClassName;
 			  << ')},';
            << String crlf ].
   currentWriteStream << '    ]}
