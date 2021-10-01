@@ -34,7 +34,7 @@ CSNIShellConfigurator >> fixLookupService [
 					              << String crlf.
 				              stream
 					              << '    "remoteName": "';
-					              << module name;
+					              << module name asLowercase;
 					              << '",';
 					              << String crlf.
 				              stream

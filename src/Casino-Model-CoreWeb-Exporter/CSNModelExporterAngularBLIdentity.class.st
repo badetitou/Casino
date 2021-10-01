@@ -81,7 +81,7 @@ CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 	moduleRoot ensureDeleteAll.
 	IceGitClone new
 		location: moduleRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
+		url: 'https://gitlab.forge.berger-levrault.com/Benoit.VERHAEGHE/microfrontend.git';
 		execute.
 	self configRepository: moduleRoot forModule: aCSNIModule.
 
@@ -123,7 +123,7 @@ CSNModelExporterAngularBLIdentity >> exportShell [
 	shellRoot ensureDeleteAll.
 	IceGitClone new
 		location: shellRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/shell.git';
+		url: 'https://gitlab.forge.berger-levrault.com/Benoit.VERHAEGHE/Shell.git';
 		execute.
 	self configShellLocated: shellRoot.
 
@@ -416,7 +416,8 @@ import { MainComponent } from "./main.component";
 export const ROUTES_MICRO_FRONTEND: Routes = [
     {path: "", component: MainComponent, children:[
         {path: "", pathMatch:"full", redirectTo: "'.
-	(currentWriteStream << aModel pages anyOne name asRealCamelCase currentWriteStream)
+	currentWriteStream << aModel pages anyOne name asRealCamelCase.
+	currentWriteStream
 		<< '"},';
 		<< String crlf.
 	aModel pages do: [ :page | 
