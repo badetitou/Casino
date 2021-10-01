@@ -60,7 +60,7 @@ CSNIShellConfigurator >> fixLookupService [
 					              << '    "iconName": "fal fa-home",';
 					              << String crlf.
 				              stream
-					              << '    "protected": true';
+					              << '    "protected": false';
 					              << String crlf;
 					              << '}' ]
 			              separatedBy: [ stream << ',' ] ].

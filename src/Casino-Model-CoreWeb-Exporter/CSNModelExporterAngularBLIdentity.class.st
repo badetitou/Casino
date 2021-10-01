@@ -90,12 +90,18 @@ CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 		writeStreamDo: [ :stream | 
 			currentWriteStream := stream.
 			self generateMenu: aCSNIModule ].
-	"Write app.route.ts"
+	"Write main.routing.ts"
 	(moduleRoot / 'src/app/main/main.routing.ts') asFileReference
 		delete;
 		writeStreamDo: [ :stream | 
 			currentWriteStream := stream.
 			self generateRouteSourceCodeForModel: aCSNIModule ].
+	"Write main.module.ts"
+	(moduleRoot / 'src/app/main/main.module.ts') asFileReference
+		delete;
+		writeStreamDo: [ :stream | 
+			currentWriteStream := stream.
+			self generateModuleSourceCodeForModel: aCSNIModule ].
 	(moduleRoot / 'src/app/main/features') ensureDeleteAll.
 	aCSNIModule pages
 		do: [ :aPage | 
@@ -259,6 +265,7 @@ export let menus: MenuItem[] = [
     icon: ''fal fa-home'',
     currentTraduction:undefined,
     withHeadTitle: true,
+    main:false,
     subMenus: ['.
 	aCSNIModule pages
 		do: [ :page | 
@@ -278,9 +285,7 @@ export let menus: MenuItem[] = [
 				<< ''',';
 				crlf.
 			currentWriteStream
-				<< '            currentTraduction: ''';
-				<< page name asRealCamelCase;
-				<< ''',';
+				<< '            currentTraduction: undefined,';
 				crlf.
 			currentWriteStream
 				<< '            icon: ''fal fa-home'',';
@@ -297,6 +302,51 @@ export let menus: MenuItem[] = [
     ]
   },
 ];
+'
+]
+
+{ #category : #visiting }
+CSNModelExporterAngularBLIdentity >> generateModuleSourceCodeForModel: aModel [
+
+	currentWriteStream << 'import { Injector, NgModule } from ''@angular/core'';
+import { MainComponent } from ''./main.component'';
+import { RouterModule } from ''@angular/router'';
+import { TranslateLoader, TranslateModule } from ''@ngx-translate/core'';
+import { environment } from ''src/environments/environment'';
+import { createCustomElement } from ''@angular/elements'';
+import { ROUTES_MICRO_FRONTEND } from ''./main.routing'';
+import { StoreModule } from ''@ngrx/store'';
+import { EffectsModule } from ''@ngrx/effects'';
+import { CoreModule } from ''./core/core.module'';
+import { CustomTranslateLoader } from ''./core/services/layout/custom_translate_loader.service'';
+
+@NgModule({
+  imports: [
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: CustomTranslateLoader
+      }
+    }),
+    RouterModule.forChild(ROUTES_MICRO_FRONTEND),
+    StoreModule,
+    EffectsModule,
+    CoreModule
+  ],
+  providers:[],
+  declarations: [MainComponent],
+  bootstrap:[]
+})
+export class MainModule {
+  constructor(private injector: Injector) {
+    console.log("Main module loaded")
+  }
+
+  ngDoBootstrap() {
+    const ce = createCustomElement(MainComponent, {injector: this.injector});
+    customElements.define(environment.appName+''-element'', ce);
+  }
+}
 '
 ]
 
@@ -358,25 +408,28 @@ export class ';
 
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> generateRouteSourceCodeForModel: aModel [
-  currentWriteStream
-     << 'import { ModuleWithProviders } from ''@angular/core'';
+
+	currentWriteStream << 'import { ModuleWithProviders } from ''@angular/core'';
 import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
 import { MainComponent } from "./main.component";
 
 export const ROUTES_MICRO_FRONTEND: Routes = [
-    {path:"",component:MainComponent,children:[
-        {path:"",pathMatch:"full",redirectTo:"home"},';
-     << String crlf.
-  aModel pages do: [:page |  currentWriteStream
-           << '        { path: ''';
-           << page name asRealCamelCase;
-           << ''', loadChildren: () => import(''./features/';
-           << page getLocalModulePath;
-			  << ''').then(m => m.';
-			  << page getModuleClassName;
-			  << ')},';
-           << String crlf ].
-  currentWriteStream << '    ]}
+    {path: "", component: MainComponent, children:[
+        {path: "", pathMatch:"full", redirectTo: "'.
+	(currentWriteStream << aModel pages anyOne name asRealCamelCase currentWriteStream)
+		<< '"},';
+		<< String crlf.
+	aModel pages do: [ :page | 
+		currentWriteStream
+			<< '        { path: ''';
+			<< page name asRealCamelCase;
+			<< ''', loadChildren: () => import(''./features/';
+			<< page getLocalModulePath;
+			<< ''').then(m => m.';
+			<< page getModuleClassName;
+			<< ')},';
+			<< String crlf ].
+	currentWriteStream << '    ]}
 ];'
 ]
 
