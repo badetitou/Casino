@@ -334,8 +334,9 @@ CSNWebModelJava >> getCustomWidgetFromClass: aClass [
 
 { #category : #accessing }
 CSNWebModelJava >> getFromSource: listofSourcedElement forClass: aClass [
-	^ (xmlUiLink at: aClass ifAbsent: [ ^ (listofSourcedElement select: [ :a | a source = aClass ]) ifEmpty: [ ^ nil ] ifNotEmpty: [ :a | {(a at: 1)} ] ])
-		collect: [ :class | (listofSourcedElement select: [ :a | a source = class ]) ifEmpty: [ ^ nil ] ifNotEmpty: [ :a | a at: 1 ] ]
+
+	^ (xmlUiLink at: aClass ifAbsent: [ ^ (listofSourcedElement select: [ :a | a source = aClass ]) ifEmpty: [ ^ nil ] ifNotEmpty: [ :a | { (a at: 1) } ] ]) 
+		  collect: [ :class | (listofSourcedElement select: [ :a | a source = class ]) ifEmpty: [ ^ nil ] ifNotEmpty: [ :a | a at: 1 ] ]
 ]
 
 { #category : #accessing }
@@ -515,20 +516,19 @@ CSNWebModelJava >> linkPageMetierToPageMetier [
 
 { #category : #private }
 CSNWebModelJava >> linkXmlUiPhaseAndPageMetier [
+
 	^ (self modelPhases , self modelPageMetier) asSet
-		select: [ :a | a superclass mooseName endsWith: 'Ui' ]
-		thenCollect: [ :a | a superclass -> a ]
+		  select: [ :a | a superclass mooseName endsWith: 'Ui' ]
+		  thenCollect: [ :a | a superclass -> a ]
 ]
 
 { #category : #adding }
 CSNWebModelJava >> linkXmlUiWidget [
-	^ self modelWidget
-		flatCollect: [ :widget | 
-			widget superclassHierarchy
-				select: [ :class | 
-					(self isElementFromApplication: class)
-						or: [ class mooseName endsWith: 'Ui' ] ]
-				thenCollect: [ :class | class -> widget ] ]
+
+	^ self modelWidget flatCollect: [ :widget | 
+		  widget superclassHierarchy
+			  select: [ :class | (self isElementFromApplication: class) or: [ class mooseName endsWith: 'Ui' ] ]
+			  thenCollect: [ :class | class -> widget ] ]
 ]
 
 { #category : #'private - accessing' }
@@ -655,7 +655,7 @@ CSNWebModelJava >> widgetNamespaces [
 CSNWebModelJava >> widgetOwnerCase1: invocation maxLevel: maxLevel level: level [
 	| found |
 	level = maxLevel ifTrue: [ ^ {} ].
-	(invocation isNil or: [ invocation isPackage ]) ifTrue: [ ^ {} ].
+	(invocation isNil or: [ invocation isOfType: FamixTPackage ]) ifTrue: [ ^ {} ].
 	invocation isClass
 		ifFalse: [ (invocation atScope: FamixTClass) ifEmpty: [ ^ {} ].
 			^ self widgetOwnerCase1: (invocation atScope: FamixTClass) anyOneIfOnlyOneElement maxLevel: maxLevel level: level + 1 ]
@@ -680,6 +680,18 @@ CSNWebModelJava >> xml [
 { #category : #accessing }
 CSNWebModelJava >> xml: anObject [
 	xml := anObject
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> xmlUiLink [
+
+	^ xmlUiLink
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> xmlUiLink: anObject [
+
+	xmlUiLink := anObject
 ]
 
 { #category : #accessing }

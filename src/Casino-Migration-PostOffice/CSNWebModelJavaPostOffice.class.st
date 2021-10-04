@@ -50,12 +50,19 @@ CSNWebModelJavaPostOffice >> linkFromWidgetActionAppel [
 
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiPhaseAndPageMetier [
-	^ (self modelPhases , self modelPageMetier) asSet select: [ :a | a superclass mooseName endsWith: 'Ui' ] thenCollect: [ :a | a superclass -> a ]
+
+	^ (self modelPhases , self modelPageMetier) asSet
+		  select: [ :a | a superclass mooseName endsWith: 'Ui' ]
+		  thenCollect: [ :a | a superclass -> a ]
 ]
 
 { #category : #accessing }
 CSNWebModelJavaPostOffice >> linkXmlUiWidget [
-  ^self modelWidget flatCollect: [:widget |  widget superclassHierarchy select: [:class |  self isElementFromApplication: class ] thenCollect: [:class |  class -> widget ] ]
+
+	^ self modelWidget flatCollect: [ :widget | 
+		  widget superclassHierarchy
+			  select: [ :class | self isElementFromApplication: class ]
+			  thenCollect: [ :class | class -> widget ] ]
 ]
 
 { #category : #accessing }
