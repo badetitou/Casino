@@ -42,16 +42,37 @@ CSNWidget >> container [
 CSNWidget >> csnInAngular: aBuilder [
 
 	<inspectorPresentationOrder: 1008 title: 'Angular HTML'>
+	| config code |
+	config := CSNExporterAngularConfiguration.
+	code := aBuilder newCode
+		        text: (String streamContents: [ :s | 
+					         (CSNModelExporterAngular on: s)
+						         currentPage: (self atScope: CSNPage) anyOne;
+						         exporterAngularConfiguration: config new;
+						         visit: self ]);
+		        beNotEditable;
+		        withLineNumbers;
+		        withoutSyntaxHighlight.
 	^ (self isPageMetier not and: [ (self isKindOf: CSNPage) not ])
 		  ifTrue: [ 
-			  aBuilder newCode
-				  text: (String streamContents: [ :s | 
-							   (CSNModelExporterAngular on: s)
-								   exporterAngularConfiguration: CSNExporterAngularConfiguration new;
-								   visit: self ]);
-				  beNotEditable;
-				  withLineNumbers;
-				  withoutSyntaxHighlight ]
+			  aBuilder newPresenter layout: (aBuilder newBoxLayoutTopToBottom
+					   add: (aBuilder newButtonBar
+							    add: (aBuilder newDropList
+									     extent: 800 @ 25;
+									     items: CSNExporterAngularConfiguration withAllSubclasses;
+									     display: [ :aClass | aClass name ];
+									     whenSelectedItemChangedDo: [ :aClass | 
+										     config := aClass.
+										     code text: (String streamContents: [ :s | 
+														      (CSNModelExporterAngular on: s)
+															      exporterAngularConfiguration: config new;
+															      currentPage: (self atScope: CSNPage) anyOne;
+															      visit: self ]) ];
+									     yourself);
+							    yourself)
+					   expand: false;
+					   add: code;
+					   yourself) ]
 		  ifFalse: [ aBuilder newText text: 'Not supported' ]
 ]
 
