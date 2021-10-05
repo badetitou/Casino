@@ -38,15 +38,17 @@ MCButton >> componentAttributeOn: anExporter [
 
 { #category : #export }
 MCButton >> exportContentOf: aWidget with: anExporter [
-	aWidget attributes detect: [ :attribute | attribute isOfType: CSNUILabel ] ifFound: [ :attribute | anExporter visit: attribute ].
-	aWidget widgets
-		do: [ :widget | 
-			anExporter
-				crlf;
-				indentPlus.
-			anExporter
-				visit: widget;
-				indentMinus ]
+
+	aWidget attributes
+		detect: [ :attribute | attribute isOfType: CSNUILabel ]
+		ifFound: [ :attribute | anExporter visit: attribute ].
+	aWidget widgets do: [ :widget | 
+		anExporter
+			crlf;
+			indentPlus.
+		anExporter
+			visit: widget;
+			indentMinus ]
 ]
 
 { #category : #accessing }
