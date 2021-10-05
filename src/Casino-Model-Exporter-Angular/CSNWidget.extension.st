@@ -56,19 +56,17 @@ CSNWidget >> csnInAngular: aBuilder [
 	^ (self isPageMetier not and: [ (self isKindOf: CSNPage) not ])
 		  ifTrue: [ 
 			  aBuilder newPresenter layout: (aBuilder newBoxLayoutTopToBottom
-					   add: (aBuilder newButtonBar
-							    add: (aBuilder newDropList
-									     extent: 800 @ 25;
-									     items: CSNExporterAngularConfiguration withAllSubclasses;
-									     display: [ :aClass | aClass name ];
-									     whenSelectedItemChangedDo: [ :aClass | 
-										     config := aClass.
-										     code text: (String streamContents: [ :s | 
-														      (CSNModelExporterAngular on: s)
-															      exporterAngularConfiguration: config new;
-															      currentPage: (self atScope: CSNPage) anyOne;
-															      visit: self ]) ];
-									     yourself);
+					   add: (aBuilder newDropList
+							    extent: 800 @ 25;
+							    items: CSNExporterAngularConfiguration withAllSubclasses;
+							    display: [ :aClass | aClass name ];
+							    whenSelectedItemChangedDo: [ :aClass | 
+								    config := aClass.
+								    code text: (String streamContents: [ :s | 
+												     (CSNModelExporterAngular on: s)
+													     exporterAngularConfiguration: config new;
+													     currentPage: (self atScope: CSNPage) anyOne;
+													     visit: self ]) ];
 							    yourself)
 					   expand: false;
 					   add: code;
