@@ -31,7 +31,15 @@ Class {
 		'onLoad',
 		'onOver',
 		'onOut',
-		'onBlur'
+		'onBlur',
+		'onKeyup',
+		'onMouseout',
+		'onKeydown',
+		'onKeypress',
+		'onDoubleclick',
+		'onMouseup',
+		'onDrop',
+		'onMousemove'
 	],
 	#category : #'Casino-Behavior-Model-Generator'
 }
@@ -96,6 +104,16 @@ CSNBehaviorModelGenerator >> commentForOnClick [
 ]
 
 { #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnDoubleclick [
+	^ 'Execute a JavaScript when an element is double-clicked'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnDrop [
+	^ 'Is fired when an element is drop on the element having the action'
+]
+
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnError [
 	^ 'Should happen when the error event is fired'
 ]
@@ -106,8 +124,38 @@ CSNBehaviorModelGenerator >> commentForOnFocus [
 ]
 
 { #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnKeydown [
+	^ 'Execute a JavaScript when a user is pressing a key'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnKeypress [
+	^ 'Execute a JavaScript when a user presses a key'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnKeyup [
+	^ 'Execute when a keypress is finished.'
+]
+
+{ #category : #comments }
 CSNBehaviorModelGenerator >> commentForOnLoad [
 	^ 'Is fired when a page and all its components is loaded'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnMousemove [
+	^ 'Execute a JavaScript when releasing a mouse move over an element'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnMouseout [
+	^ 'Triggered when the mouse pointer is moved out of the element.'
+]
+
+{ #category : #comments }
+CSNBehaviorModelGenerator >> commentForOnMouseup [
+	^ 'Execute a JavaScript when releasing a mouse button over an element'
 ]
 
 { #category : #comments }
@@ -183,7 +231,15 @@ CSNBehaviorModelGenerator >> defineClasses [
 	onLoad := builder newClassNamed: #OnLoad comment: self commentForOnLoad.
 	onOver := builder newClassNamed: #OnOver comment: self commentForOnOver.
 	onOut := builder newClassNamed: #OnOut comment: self commentForOnOut.
-	onBlur := builder newClassNamed: #OnBlur comment: self commentForOnBlur
+	onBlur := builder newClassNamed: #OnBlur comment: self commentForOnBlur.
+	onKeyup := builder newClassNamed: #OnKeyup comment: self commentForOnKeyup.
+	onMouseout := builder newClassNamed: #OnMouseout comment: self commentForOnMouseout.
+	onKeydown := builder newClassNamed: #OnKeydown comment: self commentForOnKeydown.
+	onKeypress := builder newClassNamed: #OnKeypress comment: self commentForOnKeypress.
+	onDoubleclick := builder newClassNamed: #OnDoubleclick comment: self commentForOnDoubleclick.
+	onMouseup := builder newClassNamed: #OnMouseup comment: self commentForOnMouseup.
+	onDrop := builder newClassNamed: #OnDrop comment: self commentForOnDrop.
+	onMousemove := builder newClassNamed: #OnMousemove comment: self commentForOnMousemove
 ]
 
 { #category : #definition }
@@ -212,6 +268,14 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 	onOver --|> action.
 	onOut --|> action.
 	onBlur --|> action.
+	onKeyup --|> action.
+	onMouseout --|> action.
+	onMouseup --|> action.	
+	onKeydown --|> action.
+	onKeypress --|> action.
+	onDoubleclick --|> action.
+	onDrop --|> action.
+	onMousemove --|> action
 ]
 
 { #category : #definition }

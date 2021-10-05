@@ -1,3 +1,6 @@
+"
+I am a visitor for CSNAction
+"
 Trait {
 	#name : #TCSNBehaviorVisitor,
 	#category : #'Casino-Behavior-Model-Visitor'
@@ -14,62 +17,127 @@ TCSNBehaviorVisitor >> visitAsynchroneCall: anAsynchroneCall [
 ]
 
 { #category : #visiting }
-TCSNBehaviorVisitor >> visitCSNBOnBlur: aCSNOnBlur [
-	"see UI model"
-	^ self visitCSNAction: aCSNOnBlur
+TCSNBehaviorVisitor >> visitCSNAction: aCSNAction [
+	^ self subclassResponsibility
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNActionAppel: aCSNActionAppel [
+	<generated>
+	^ self visitCSNAction: aCSNActionAppel
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNActionService: aCSNActionService [
+	<generated>
+	^ self visitCSNAction: aCSNActionService
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnBlur: aCSNBOnBlur [
+	<generated>
+	^ self visitCSNAction: aCSNBOnBlur
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnChange: aCSNBOnChange [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnChange
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnClick: aCSNBOnClick [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnClick
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnDoubleclick: aCSNBOnDoubleclick [
+	<generated>
+	^ self visitCSNAction: aCSNBOnDoubleclick
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnDrop: aCSNBOnDrop [
+	<generated>
+	^ self visitCSNAction: aCSNBOnDrop
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnError: aCSNBOnError [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnError
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnFocus: aCSNBOnFocus [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnFocus
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnKeydown: aCSNBOnKeydown [
+	<generated>
+	^ self visitCSNAction: aCSNBOnKeydown
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnKeypress: aCSNBOnKeypress [
+	<generated>
+	^ self visitCSNAction: aCSNBOnKeypress
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnKeyup: aCSNBOnKeyup [
+	<generated>
+	^ self visitCSNAction: aCSNBOnKeyup
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnLoad: aCSNBOnLoad [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnLoad
 ]
 
 { #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnMousemove: aCSNBOnMousemove [
+	<generated>
+	^ self visitCSNAction: aCSNBOnMousemove
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnMouseout: aCSNBOnMouseout [
+	<generated>
+	^ self visitCSNAction: aCSNBOnMouseout
+]
+
+{ #category : #visiting }
+TCSNBehaviorVisitor >> visitCSNBOnMouseup: aCSNBOnMouseup [
+	<generated>
+	^ self visitCSNAction: aCSNBOnMouseup
+]
+
+{ #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnOut: aCSNBOnOut [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnOut
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnOver: aCSNBOnOver [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnOver
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnSubmit: aCSNBOnSubmit [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnSubmit
 ]
 
 { #category : #visiting }
 TCSNBehaviorVisitor >> visitCSNBOnSubmitSuccess: aCSNBOnSubmitSuccess [
-	"see UI model"
+	<generated>
 	^ self visitCSNAction: aCSNBOnSubmitSuccess
 ]
 

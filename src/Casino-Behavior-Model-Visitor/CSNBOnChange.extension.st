@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnChange }
 
-{ #category : #'*Casino-Behavior-Model-Visitor' }
-CSNBOnChange >> accept: aBehaviorVisitor [
-	^ aBehaviorVisitor visitCSNBOnChange: self 
+{ #category : #'*Casino-Behavior-Model-Visitor-generated' }
+CSNBOnChange >> accept: aTCSNBehaviorVisitor [
+	^ aTCSNBehaviorVisitor visitCSNBOnChange: self
 ]

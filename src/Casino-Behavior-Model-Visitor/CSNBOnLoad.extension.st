@@ -1,6 +1,6 @@
 Extension { #name : #CSNBOnLoad }
 
-{ #category : #'*Casino-Behavior-Model-Visitor' }
-CSNBOnLoad >> accept: aBehaviorVisitor [
-	^ aBehaviorVisitor visitCSNBOnLoad: self
+{ #category : #'*Casino-Behavior-Model-Visitor-generated' }
+CSNBOnLoad >> accept: aTCSNBehaviorVisitor [
+	^ aTCSNBehaviorVisitor visitCSNBOnLoad: self
 ]
