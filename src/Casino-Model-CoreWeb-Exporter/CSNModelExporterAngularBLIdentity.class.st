@@ -81,7 +81,7 @@ CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 	moduleRoot ensureDeleteAll.
 	IceGitClone new
 		location: moduleRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/Benoit.VERHAEGHE/microfrontend.git';
+		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
 		execute.
 	self configRepository: moduleRoot forModule: aCSNIModule.
 
@@ -123,7 +123,7 @@ CSNModelExporterAngularBLIdentity >> exportShell [
 	shellRoot ensureDeleteAll.
 	IceGitClone new
 		location: shellRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/Benoit.VERHAEGHE/Shell.git';
+		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/shell.git';
 		execute.
 	self configShellLocated: shellRoot.
 
@@ -314,11 +314,12 @@ import { RouterModule } from ''@angular/router'';
 import { TranslateLoader, TranslateModule } from ''@ngx-translate/core'';
 import { environment } from ''src/environments/environment'';
 import { createCustomElement } from ''@angular/elements'';
-import { ROUTES_MICRO_FRONTEND } from ''./main.routing'';
+import { ROUTES_MAIN_WRAPPER, ROUTES_MICRO_FRONTEND } from ''./main.routing'';
 import { StoreModule } from ''@ngrx/store'';
 import { EffectsModule } from ''@ngrx/effects'';
 import { CoreModule } from ''./core/core.module'';
-import { CustomTranslateLoader } from ''./core/services/layout/custom_translate_loader.service'';
+import { CustomTranslateLoader } from ''./core/services/override/custom_translate_loader.service'';
+import { SharedModule } from ''./shared/shared.module'';
 
 @NgModule({
   imports: [
@@ -328,8 +329,9 @@ import { CustomTranslateLoader } from ''./core/services/layout/custom_translate_
         useClass: CustomTranslateLoader
       }
     }),
-    RouterModule.forChild(ROUTES_MICRO_FRONTEND),
+    RouterModule.forChild(ROUTES_MAIN_WRAPPER),
     StoreModule,
+    SharedModule,
     EffectsModule,
     CoreModule
   ],
@@ -409,7 +411,8 @@ export class ';
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> generateRouteSourceCodeForModel: aModel [
 
-	currentWriteStream << 'import { ModuleWithProviders } from ''@angular/core'';
+	currentWriteStream
+	<< 'import { ModuleWithProviders } from ''@angular/core'';
 import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
 import { MainComponent } from "./main.component";
 
@@ -431,7 +434,15 @@ export const ROUTES_MICRO_FRONTEND: Routes = [
 			<< ')},';
 			<< String crlf ].
 	currentWriteStream << '    ]}
-];'
+];
+
+export const ROUTES_MAIN_WRAPPER: Routes = [
+    {path: "", component: MainComponent, canActivate: [], children: [
+        ...ROUTES_MICRO_FRONTEND
+        ]
+    }
+]
+'
 ]
 
 { #category : #visiting }

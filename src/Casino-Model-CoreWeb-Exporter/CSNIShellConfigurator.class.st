@@ -20,7 +20,8 @@ CSNIShellConfigurator >> configure [
 CSNIShellConfigurator >> fixLookupService [
 
 	| old new newRemotes startRemote |
-	old := (location / 'src' / 'app' / 'services' / 'lookup.service.ts') contents.
+	old := (location / 'src' / 'app' / 'services' / 'override'
+	        / 'custom_lookup.service.ts') contents.
 	newRemotes := String streamContents: [ :stream | 
 		              modules
 			              do: [ :module | 
@@ -45,14 +46,14 @@ CSNIShellConfigurator >> fixLookupService [
 					              << module name;
 					              << '",';
 					              << String crlf.
-				              stream
-					              << '    "routePath": "';
+				              "stream
+					              << '    ""routePath"": ""';
 					              << module name asLowercase;
-					              << '",';
+					              << '"",';
 					              << String crlf.
 				              stream
-					              << '    "ngModuleName": "MainModule",';
-					              << String crlf.
+					              << '    ""ngModuleName"": ""MainModule"",';
+					              << String crlf."
 				              stream
 					              << '    "elementName": "",';
 					              << String crlf.
@@ -63,10 +64,19 @@ CSNIShellConfigurator >> fixLookupService [
 					              << '    "protected": false';
 					              << String crlf;
 					              << '}' ]
-			              separatedBy: [ stream << ',' ] ].
-	startRemote := (old findString: ' Promise.resolve([') + ' Promise.resolve([' size.
-	new := old copyReplaceFrom: startRemote + 1 to: (old findString: ']' startingAt: startRemote) - 1 with: newRemotes.
-	(location / 'src' / 'app' / 'services' / 'lookup.service.ts')
+			              separatedBy: [ stream << ',' ].
+		              stream << String crlf ].
+
+	startRemote := (old findString: 'return of([') + 'return of([' size.
+	new := old
+		       copyReplaceFrom: startRemote + 1
+		       to:
+		       (old
+			        findString: '] as Microfrontend[]'
+			        startingAt: startRemote) - 1
+		       with: newRemotes.
+	(location / 'src' / 'app' / 'services' / 'override'
+	 / 'custom_lookup.service.ts')
 		delete;
 		writeStreamDo: [ :stream | stream nextPutAll: new ]
 ]
