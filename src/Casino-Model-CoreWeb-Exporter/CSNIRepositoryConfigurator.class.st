@@ -63,7 +63,7 @@ CSNIRepositoryConfigurator >> fixWebPackConfig [
 
 	| old new |
 	old := (location / 'webpack.config.js') contents.
-	new := old copyReplaceAll: 'microfrontend' with: csniModule name.
+	new := old copyReplaceAll: 'microfrontend' with: csniModule name asLowercase.
 	(location / 'webpack.config.js') delete.
 	location / 'webpack.config.js' writeStreamDo: [ :stream | stream nextPutAll: new ]
 ]
