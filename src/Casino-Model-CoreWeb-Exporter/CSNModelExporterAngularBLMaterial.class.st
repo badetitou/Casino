@@ -51,22 +51,26 @@ CSNModelExporterAngularBLMaterial >> generateCoreStoreModule: aMooseModel [
 import { CommonModule } from ''@angular/common'';
 import { StoreModule } from ''@ngrx/store'';
 import { EffectsModule } from ''@ngrx/effects'';
-import { SharedModule } from ''../../shared/shared.module'';'.
+import { SharedModule } from ''../../shared/shared.module'';
+import { HttpClientModule } from ''@angular/common/http'';'.
 
 	self crlf.
 
-	(aMooseModel allCSNService sorted: #uniqueName ascending)
-		do: [ :service | 
-			(self << 'import { ' <<< service uniqueName <<< ' } from ''./services/' <<< service getServiceName)
-				<<< ''';';
-				crlf.
-			(self << 'import { ' <<< service uniqueName <<< 'Effects } from ''./effects/' <<< service uniqueName)
-				<<< '.effects'';';
-				crlf.
-			(self << 'import { ' <<< service uniqueName uncapitalized <<< 'Reducer, ' <<< service uniqueName uncapitalized <<< 'StateName } from ''./reducers/'
-			 <<< service uniqueName)
-				<<< '.reducer'';';
-				crlf ].
+	(aMooseModel allCSNService sorted: #uniqueName ascending) do: [ 
+		:service | 
+		(self << 'import { ' <<< service uniqueName
+		 <<< ' } from ''./services/' <<< service getServiceName)
+			<<< ''';';
+			crlf.
+		(self << 'import { ' <<< service uniqueName
+		 <<< 'Effects } from ''./effects/' <<< service uniqueName)
+			<<< '.effects'';';
+			crlf.
+		(self << 'import { ' <<< service uniqueName uncapitalized
+		 <<< 'Reducer, ' <<< service uniqueName uncapitalized
+		 <<< 'StateName } from ''./reducers/' <<< service uniqueName)
+			<<< '.reducer'';';
+			crlf ].
 
 	self crlf crlf.
 	self << '@NgModule('.
@@ -77,14 +81,21 @@ import { SharedModule } from ''../../shared/shared.module'';'.
 				<< 'CommonModule,';
 				crlf.
 			self
+				<< 'HttpClientModule,';
+				crlf.
+			self
 				<< 'SharedModule,';
 				crlf.
 			aMooseModel allCSNService do: [ :service | 
-				(self << 'StoreModule.forFeature(' <<< service uniqueName uncapitalized <<< 'StateName, ' <<< service uniqueName uncapitalized)
+				(self << 'StoreModule.forFeature('
+				 <<< service uniqueName uncapitalized <<< 'StateName, '
+				 <<< service uniqueName uncapitalized)
 					<<< 'Reducer),';
 					crlf ].
 			self << 'EffectsModule.forFeature(['.
-			aMooseModel allCSNService do: [ :service | self <<< service uniqueName <<< 'Effects' ] separatedBy: [ self <<< ', ' ].
+			aMooseModel allCSNService
+				do: [ :service | self <<< service uniqueName <<< 'Effects' ]
+				separatedBy: [ self <<< ', ' ].
 			self
 				<<< ']),';
 				crlf ].
@@ -93,10 +104,12 @@ import { SharedModule } from ''../../shared/shared.module'';'.
 			crlf.
 		self << 'providers: '.
 		self inBrakets: [ 
-			aMooseModel allCSNService do: [ :service | self << service uniqueName ] separatedBy: [ 
-				self
-					<<< ',';
-					crlf ] ] ].
+			aMooseModel allCSNService
+				do: [ :service | self << service uniqueName ]
+				separatedBy: [ 
+					self
+						<<< ',';
+						crlf ] ] ].
 	self
 		<<< ')';
 		crlf.
