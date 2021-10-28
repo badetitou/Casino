@@ -12,7 +12,7 @@ HTMLInputComponent >> export: aWidget with: anExporter [
 { #category : #accessing }
 HTMLInputComponent >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
-	aWidget getListPropertiesAsStringWith: anExporter.
+	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter <<< '/>'
 ]
 

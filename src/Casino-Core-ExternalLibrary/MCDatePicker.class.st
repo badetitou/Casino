@@ -28,10 +28,11 @@ Class {
 
 { #category : #export }
 MCDatePicker >> exportContentOf: aWidget with: anExporter [
+
 	anExporter
 		indentPlus;
 		<< '<'.
-	aWidget getListPropertiesAsStringWith: anExporter.
+	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter
 		<<< ' matInput [matDatepicker]="';
 		<<< (self variableFor: aWidget);
@@ -50,7 +51,9 @@ MCDatePicker >> exportFooterOf: aWidget with: anExporter [
 		<<< (self variableFor: aWidget);
 		<<< '"></mat-datepicker-toggle>';
 		crlf;
-		<< '<mat-datepicker #picker></mat-datepicker>';
+		<< '<mat-datepicker #';
+		<<< (self variableFor: aWidget);
+		<<< '></mat-datepicker>';
 		crlf;
 		indentMinus;
 		<< '</mat-form-field>'
@@ -72,6 +75,14 @@ MCDatePicker >> exportHeaderOf: aWidget with: anExporter [
 				crlf;
 				<< '</mat-label>';
 				indentMinus ]
+]
+
+{ #category : #export }
+MCDatePicker >> exportListPropertiesOf: aWidget asStringWith: anExporter [
+
+	anExporter <<< (aWidget getSelectorFrom: anExporter).
+	self componentAttributeOn: anExporter forWidget: aWidget.
+	anExporter <<< (aWidget actionsTagFrom: anExporter)
 ]
 
 { #category : #accessing }

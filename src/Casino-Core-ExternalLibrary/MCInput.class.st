@@ -36,7 +36,7 @@ MCInput >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
 		<< '<'.
-	aWidget getListPropertiesAsStringWith: anExporter.
+	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter
 		<<< '>';
 		crlf;

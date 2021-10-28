@@ -79,8 +79,17 @@ WidgetRepresentation >> exportFooterOf: aWidget with: anExporter [
 { #category : #export }
 WidgetRepresentation >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
-	aWidget getListPropertiesAsStringWith: anExporter.
+	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter <<< '>'
+]
+
+{ #category : #export }
+WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter [
+
+	anExporter <<< (aWidget getSelectorFrom: anExporter).
+	self componentAttributeOn: anExporter forWidget: aWidget.
+	anExporter <<< (aWidget actionsTagFrom: anExporter).
+	anExporter <<< aWidget idTag
 ]
 
 { #category : #accessing }
