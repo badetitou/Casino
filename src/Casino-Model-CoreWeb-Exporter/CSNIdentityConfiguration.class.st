@@ -33,6 +33,11 @@ CSNIdentityConfiguration >> initialize [
 ]
 
 { #category : #accessing }
+CSNIdentityConfiguration >> moduleOfPage: aCSNPage [
+	^ self modules detect: [ :aModule | aModule pages anySatisfy: [ :page | page = aCSNPage ] ]
+]
+
+{ #category : #accessing }
 CSNIdentityConfiguration >> modules [
 
 	^ modules

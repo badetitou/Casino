@@ -5,7 +5,8 @@ Class {
 	#name : #CSNModelExporterAngularBLIdentity,
 	#superclass : #CSNModelExporterAngular,
 	#instVars : [
-		'identityConfiguration'
+		'identityConfiguration',
+		'currentModule'
 	],
 	#category : #'Casino-Model-CoreWeb-Exporter-BLIdentity'
 }
@@ -27,10 +28,15 @@ CSNModelExporterAngularBLIdentity class >> export: aBLMooseModel withIdentityCon
 
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> angularActionRepresentationOf: anAction [
+
 	^ anAction isActionAppel
 		  ifTrue: [ 
 			  anAction call ifNil: [ ^ '' ].
-			  ^ '(click)="openPhase(''/omaje/' , anAction call name asRealCamelCase , ''')"' ]
+			  ^ '(click)="openPhase(''/'
+			    ,
+			    (self identityConfiguration moduleOfPage: anAction call)
+				   name asLowercase , '/' , anAction call name asRealCamelCase
+			    , ''')"' ]
 		  ifFalse: [ anAction getAngularRepresentationWith: self ]
 ]
 
@@ -46,7 +52,7 @@ CSNModelExporterAngularBLIdentity >> behaviorInitializeVariableExporter [
 
 { #category : #accessing }
 CSNModelExporterAngularBLIdentity >> behaviorModelExporter [
-	^ CSNBehaviorModelExporterCoreWeb
+	^ CSNBehaviorModelExporterIdentity
 ]
 
 { #category : #accessing }
@@ -73,10 +79,23 @@ CSNModelExporterAngularBLIdentity >> configShellLocated: shellRoot [
 		configure
 ]
 
+{ #category : #accessing }
+CSNModelExporterAngularBLIdentity >> currentModule [
+
+	^ currentModule
+]
+
+{ #category : #accessing }
+CSNModelExporterAngularBLIdentity >> currentModule: anObject [
+
+	currentModule := anObject
+]
+
 { #category : #export }
 CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 
 	| moduleRoot |
+	currentModule := aCSNIModule.
 	moduleRoot := self root / (self root basename asLowercase , '-' , aCSNIModule name).
 	moduleRoot ensureDeleteAll.
 	IceGitClone new
@@ -526,6 +545,7 @@ export class ';
 			(self behaviorModelExporter on: self currentWriteStream withIndentLevel: 1)
 				exporterAngularConfiguration: self exporterAngularConfiguration;
 				currentPage: aBLPageMetier;
+				currentModule: self currentModule;
 				export: behaveMethod.
 			self crlf ] ].
 	self
