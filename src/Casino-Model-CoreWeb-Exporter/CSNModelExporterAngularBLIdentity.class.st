@@ -352,6 +352,7 @@ import { EffectsModule } from ''@ngrx/effects'';
 import { CoreModule } from ''./core/core.module'';
 import { CustomTranslateLoader } from ''./core/services/override/custom_translate_loader.service'';
 import { SharedModule } from ''./shared/shared.module'';
+import { CommonModule } from ''@angular/common'';
 
 @NgModule({
   imports: [
@@ -363,6 +364,7 @@ import { SharedModule } from ''./shared/shared.module'';
     }),
     RouterModule.forChild(ROUTES_MAIN_WRAPPER),
     StoreModule,
+    CommonModule,
     SharedModule,
     EffectsModule,
     CoreModule
