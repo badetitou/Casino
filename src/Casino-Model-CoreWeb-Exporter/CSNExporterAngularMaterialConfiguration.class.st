@@ -29,7 +29,9 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNBusinessPage -> BLMBusinessPage new).
 				  (CSNPage -> BLMPage new).
 				  (CSNUIInputFile -> BLMAttachment new).
+				  (CSNUICWFileUploadPanel -> BLMAttachment new).
 				  (CSNUILink -> BLMHyperlink new).
+				  (CSNUITextarea -> MCTextArea new).
 				  (CSNUICWDynamicFieldset -> MCExpansionModule new).
 				  (CSNUICWDialog -> MCDialog new).
 				  (CSNUICWProgressBar -> BLMHorizontalGauge new).

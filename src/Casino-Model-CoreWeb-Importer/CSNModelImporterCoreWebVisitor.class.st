@@ -553,8 +553,8 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
 
 	^ (#( 'BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils'
-	      'InlineLabel' 'BLLabelItem' 'BLTextInputItem' 'BLLabelDate' ) 
-		   includes: source invokedClassName)
+	      'InlineLabel' 'BLLabelItem' 'BLTextInputItem' 'BLLabelDate'
+	      'BLLabelBoolean' ) includes: source invokedClassName)
 		  ifTrue: [ 
 			  | paragraph |
 			  paragraph := self createWidget: aCSNUIParagraph.
