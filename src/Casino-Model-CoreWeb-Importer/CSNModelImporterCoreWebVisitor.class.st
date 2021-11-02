@@ -298,11 +298,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWFileUploadPanel: aCSNUICWFileUploa
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWHTML: aCSNHTML [
-	^ 'HTML' = source invokedClassName
-		ifTrue: [ (self createWidget: aCSNHTML)
-				addWidget: ((self create: CSNLeaf) text: (source parameters at: 1 ifAbsent: [ '' ]));
-				yourself ]
-		ifFalse: [ nil ]
+
+	^ (#( 'HTML' 'HTMLPanel' ) includes: source invokedClassName)
+		  ifTrue: [ 
+			  (self createWidget: aCSNHTML)
+				  addWidget: ((self create: CSNLeaf) text:
+							   (source parameters at: 1 ifAbsent: [ '' ]));
+				  yourself ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
