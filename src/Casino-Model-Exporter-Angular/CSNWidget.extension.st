@@ -47,7 +47,7 @@ CSNWidget >> csnInAngular: aBuilder [
 	code := aBuilder newCode
 		        text: (String streamContents: [ :s | 
 					         (CSNModelExporterAngular on: s)
-						         currentPage: (self atScope: CSNPage) anyOne;
+						         currentPage: (self atAnyScope: {CSNPage. CSNBusinessPage}) anyOne;
 						         exporterAngularConfiguration: config new;
 						         visit: self ]);
 		        beNotEditable;
@@ -65,7 +65,7 @@ CSNWidget >> csnInAngular: aBuilder [
 								    code text: (String streamContents: [ :s | 
 												     (CSNModelExporterAngular on: s)
 													     exporterAngularConfiguration: config new;
-													     currentPage: (self atScope: CSNPage) anyOne;
+													     currentPage: (self atAnyScope: {CSNPage. CSNBusinessPage }) anyOne;
 													     visit: self ]) ];
 							    yourself)
 					   expand: false;
