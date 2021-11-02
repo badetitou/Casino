@@ -73,6 +73,18 @@ TCSNExporter >> inBrakets: aBlock [
 ]
 
 { #category : #streaming }
+TCSNExporter >> inIndented: aBlock [
+
+	self
+		indentPlus;
+		crlf.
+	aBlock value.
+	self
+		indentMinus;
+		crlf
+]
+
+{ #category : #streaming }
 TCSNExporter >> inParenthesis: aBlock [
 	self <<< '('.
 	aBlock value.
