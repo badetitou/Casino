@@ -19,12 +19,6 @@ MooseAbstractGroup >> allCSNAttributes [
 ]
 
 { #category : #'*Casino-Model-Extension' }
-MooseAbstractGroup >> allCSNCell [
-	<navigation: 'BL Cell'>
-	^ self allWithSubTypesOf: CSNLCell 
-]
-
-{ #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNLayout [
 	<navigation: 'Sub-Layout'>
 	^ self allWithSubTypesOf: CSNLLayout
