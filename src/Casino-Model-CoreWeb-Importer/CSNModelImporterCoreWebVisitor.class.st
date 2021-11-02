@@ -91,6 +91,15 @@ CSNModelImporterCoreWebVisitor >> getAttributeValueFrom: anInvocation [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNContainer: aCSNContainer [
+
+	"This method is used for the widget without a nice 1-* mapping
+	For instance, it deals with the leaf element in the source app that should be mapped to a container"
+
+	^ (self visitTryBLItem: aCSNContainer) ifNil: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNLGridLayout: aCSNLGridLayout [
 	^ (#('BLFlexTable' 'FlexTable' 'BLGrid') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
 		ifTrue: [ self create: aCSNLGridLayout ]
@@ -542,12 +551,34 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
-  ^(#('BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils' 'InlineLabel' 'BLLabelItem' 'BLTextInputItem') includes: source invokedClassName) ifTrue: [ | paragraph |
-        paragraph := self createWidget: aCSNUIParagraph.
-        'ComponentUtils' = source invokedClassName ifTrue: [ self attributeFor: paragraph fromComponentUtilsForInvocation: source ] ifFalse: [ paragraph
-                 addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-                 addAttribute: ((self create: CSNUIClass) attributeValue: ((source parameters size = 2 ifTrue: [ ((source parameters at: 2) prefixMatchesRegex: 'BLLabel\..*') ifTrue: [ source parameters at: 2 ] ifFalse: [ 'NIVEAU2' ] ] ifFalse: [ source parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ]) removePrefix: 'BLLabel.')) ].
-        paragraph ] ifFalse: [ nil ]
+
+	^ (#( 'BLLabel' 'Label' 'FactoryBLLabel' 'ComponentUtils'
+	      'InlineLabel' 'BLLabelItem' 'BLTextInputItem' 'BLLabelDate' ) 
+		   includes: source invokedClassName)
+		  ifTrue: [ 
+			  | paragraph |
+			  paragraph := self createWidget: aCSNUIParagraph.
+			  'ComponentUtils' = source invokedClassName
+				  ifTrue: [ 
+					  self
+						  attributeFor: paragraph
+						  fromComponentUtilsForInvocation: source ]
+				  ifFalse: [ 
+					  paragraph
+						  addAttribute: ((self create: CSNUILabel) attributeValue:
+									   (source parameters at: 1 ifAbsent: [ '' ]));
+						  addAttribute: ((self create: CSNUIClass) attributeValue:
+									   ((source parameters size = 2
+										     ifTrue: [ 
+											     ((source parameters at: 2) prefixMatchesRegex:
+													      'BLLabel\..*')
+												     ifTrue: [ source parameters at: 2 ]
+												     ifFalse: [ 'NIVEAU2' ] ]
+										     ifFalse: [ 
+											     source parameters at: 3 ifAbsent: [ 'NIVEAU2' ] ]) 
+										    removePrefix: 'BLLabel.')) ].
+			  paragraph ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
@@ -635,4 +666,20 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIWidth: aCSNUIWidth [
 				name: 'width';
 				yourself ]
 		ifFalse: [ nil ]
+]
+
+{ #category : #'visiting - leaf-container' }
+CSNModelImporterCoreWebVisitor >> visitTryBLItem: aCSNContainer [
+
+	^ 'BLItem' = source invokedClassName
+		  ifTrue: [ 
+			  | container paragraph |
+			  container := self createWidget: CSNContainer.
+			  paragraph := self createWidget: CSNUIParagraph.
+			  container addWidget: paragraph.
+			  paragraph addAttribute:
+				  ((self create: CSNUILabel) attributeValue:
+					   (source parameters at: 1 ifAbsent: [ '' ]) , ' : ').
+			  ^ container ]
+		  ifFalse: [ ^ nil ]
 ]
