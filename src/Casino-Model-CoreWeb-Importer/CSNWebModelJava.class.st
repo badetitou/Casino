@@ -611,13 +611,20 @@ CSNWebModelJava >> widgetAnonymousSubclasses [
 
 { #category : #accessing }
 CSNWebModelJava >> widgetConstructorsInvocation [
+
 	"Get the constructor and try to determine the stub constructor"
 
-	^ (self modelWidget
-		collect: [ :widget | 
-			widget methods
-				select: #isConstructor
-				thenCollect: #incomingInvocations ]) flattened asSet
+	^ (self modelWidget collect: [ :widget | 
+		   widget methods
+			   select: #isConstructor
+			   thenCollect: #incomingInvocations ]) flattened asSet reject: [ 
+		  :invoc | 
+			"I reject the BLLabel that will be added in ComponentUtils
+			Stuff like `ComponentUtils.getLibelleItem(new BLLabel(""Blabla""));`			
+"
+		  (invoc signature beginsWith: 'BLLabel') and: [ 
+			  invoc container isNotNil and: [ 
+				  invoc container signature beginsWith: 'getLibelleItem' ] ] ]
 ]
 
 { #category : #accessing }
@@ -625,7 +632,7 @@ CSNWebModelJava >> widgetFactoryInvocation [
 	^ (((self sourceModel allModelClasses
 		select: [ :a | #(#FactoryBLLabel #ComponentUtils) includes: a name ])
 		flatCollect: #methods)
-		select: [ :m | m name = 'create' or: [ m name beginsWith: 'getLibelleItem' ] ]
+		select: [ :m | m name = 'create' or: [ m name beginsWith: 'getLibelleItem'] ]
 		thenCollect: #incomingInvocations) flatten
 ]
 

@@ -9,24 +9,33 @@ Class {
 
 { #category : #private }
 CSNModelImporterCoreWebVisitor >> attributeFor: widget fromComponentUtilsForInvocation: anInvocation [
-	"used by CSNUIParagraph"
-	widget
-		addAttribute:
-			((self create: CSNUILabel)
-				attributeValue:
-					(anInvocation parameters at: 1 ifAbsent: [ '' ])
-						,
-							((anInvocation parameters at: 2 ifAbsent: [ '' ]) = 'true'
-								ifTrue: [ '*' ]
-								ifFalse: [ '' ])
-						,
-							((anInvocation parameters at: 5 ifAbsent: [ 'true' ]) = 'true'
-								ifTrue: [ ':' ]
-								ifFalse: [ '' ])).
-	widget
-		addAttribute:
-			((self create: CSNUIClass)
-				attributeValue: ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) removePrefix: 'BLLabel.'))
+
+	| firstParam originalLabel |
+	"used by CSNUIParagraph when having the form:
+	`ComponentUtils.getLibelleItem(""someText"",someparam);`
+	""Two possibilities: 
+	1. `ComponentUtils.getLibelleItem(""someText"",someparam);`
+	1. `ComponentUtils.getLibelleItem(new BLLabel(""Some Text""),someparam);`
+	"
+	anInvocation parameters at: 1 ifAbsent: [ ^ nil ].
+	firstParam := anInvocation parameters at: 1.
+	originalLabel := (firstParam trimLeft beginsWith: 'new ')
+		                 ifTrue: [ "case: new BLLabel" 
+			                 (firstParam substrings: '"')
+				                 at: 2
+				                 ifAbsent: [ firstParam ] ]
+		                 ifFalse: [ "case: direct String" firstParam ].
+	widget addAttribute:
+		((self create: CSNUILabel) attributeValue: originalLabel
+			 , ((anInvocation parameters at: 2 ifAbsent: [ '' ]) = 'true'
+					  ifTrue: [ '*' ]
+					  ifFalse: [ '' ])
+			 , ((anInvocation parameters at: 5 ifAbsent: [ 'true' ]) = 'true'
+					  ifTrue: [ ':' ]
+					  ifFalse: [ '' ])).
+	widget addAttribute: ((self create: CSNUIClass) attributeValue:
+			 ((anInvocation parameters at: 3 ifAbsent: [ 'NIVEAU2' ]) 
+				  removePrefix: 'BLLabel.'))
 ]
 
 { #category : #private }
