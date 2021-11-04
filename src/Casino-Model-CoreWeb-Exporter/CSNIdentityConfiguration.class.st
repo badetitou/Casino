@@ -19,9 +19,11 @@ CSNIdentityConfiguration class >> fromXML: anXMLFile andModel: aCSNModel [
 		configModule := CSNIModule new
 			                name: (xmlModule attributeAt: #name);
 			                yourself.
-		xmlModule
-			descendantElementsNamed: #phase
-			do: [ :xmlPhase | configModule pages add: (aCSNModel allCSNPage detect: [ :csnPage | csnPage codePhase = (xmlPhase attributeAt: #codePhase) ]) ].
+		xmlModule descendantElementsNamed: #phase do: [ :xmlPhase | 
+			aCSNModel allCSNPage
+				detect: [ :csnPage | 
+				csnPage codePhase = (xmlPhase attributeAt: #codePhase) ]
+				ifOne: [ :page | configModule pages add: page ] ].
 		instance modules add: configModule ].
 	^ instance
 ]
