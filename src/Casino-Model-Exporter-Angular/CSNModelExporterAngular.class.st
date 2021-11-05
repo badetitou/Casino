@@ -21,12 +21,13 @@ BLModelExporterAngular export: model.
 Class {
 	#name : #CSNModelExporterAngular,
 	#superclass : #CSNModelExporter,
-	#traits : 'TCSNExporter',
-	#classTraits : 'TCSNExporter classTrait',
+	#traits : 'TCSNExporter + TAngularExporter',
+	#classTraits : 'TCSNExporter classTrait + TAngularExporter classTrait',
 	#instVars : [
 		'currentPath',
 		'currentPage',
-		'exporterAngularConfiguration'
+		'exporterAngularConfiguration',
+		'attributeExporter'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -43,6 +44,7 @@ CSNModelExporterAngular class >> export: aBLMooseModel [
 
 	self new
 		model: aBLMooseModel;
+		attributeExporter: CSNExporterAngularAttribute new;
 		exporterAngularConfiguration: CSNExporterAngularConfiguration new;
 		export
 ]
@@ -56,6 +58,18 @@ CSNModelExporterAngular >> angularActionRepresentationOf: anAction [
 { #category : #accessing }
 CSNModelExporterAngular >> angularRepresentationOf: aCSNWidget [
 	^ self exporterAngularConfiguration angularRepresentationOf: aCSNWidget	
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> attributeExporter [
+
+	^ attributeExporter
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> attributeExporter: anObject [
+
+	attributeExporter := anObject
 ]
 
 { #category : #generate }
@@ -87,6 +101,12 @@ CSNModelExporterAngular >> currentPath [
 { #category : #accessing }
 CSNModelExporterAngular >> currentPath: anObject [
 	currentPath := anObject
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> exportAttributeValue: aCSNAttribute [
+	self attributeExporter currentWriteStream: self currentWriteStream.
+	self attributeExporter visit: aCSNAttribute
 ]
 
 { #category : #accessing }
@@ -708,19 +728,12 @@ CSNModelExporterAngular >> initialize [
 	indentLevel := 0.
 ]
 
-{ #category : #api }
+{ #category : #run }
 CSNModelExporterAngular >> prepareExport [
 	super prepareExport.
 	context := CSNContext new
 		root: (FileSystem disk workingDirectory / model name) asFileReference;
 		yourself
-]
-
-{ #category : #api }
-CSNModelExporterAngular >> protectString: aString [
-	^ aString
-		ifNotNil: [ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' ]
-		ifNil: [ '' ]
 ]
 
 { #category : #accessing }
@@ -891,20 +904,6 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIAbsoluteHeight: aBLUIAbsoluteHeight [
-  self
-     <<< (self protectString: aBLUIAbsoluteHeight attributeValue);
-     <<< 'px'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIAbsoluteWidth: aBLUIAbsoluteWidth [
-	self
-		<<< (self protectString: aBLUIAbsoluteWidth attributeValue);
-		<<< 'px'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
 	self visitCSNAction: aCSNClickHandler
 ]
@@ -925,11 +924,6 @@ CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
      <<< '></';
      <<< (aBLSplitButton getSelectorFrom: self);
      <<< '>'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIHeight: aBLUIHeight [
-  self <<< (self protectString: aBLUIHeight attributeValue)
 ]
 
 { #category : #visiting }
@@ -978,16 +972,6 @@ CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUILabel: aBLUILabel [
-  self <<< (self protectString: aBLUILabel attributeValue)
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIName: aBLUIName [
-  self <<< (self protectString: aBLUIName attributeValue)
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
  	self visitCSNContainer:  aBLUIPanel
 	"aBLUIPanel layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self
@@ -1025,25 +1009,6 @@ CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIPlaceholder: aBLUIPlaceholder [
-	self <<<  (self protectString: aBLUIPlaceholder attributeValue)
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIRelativeHeight: aBLUIRelativeHeight [
-  self
-     <<< (self protectString: aBLUIRelativeHeight attributeValue);
-     <<< '%'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIRelativeWidth: aBLUIRelativeWidth [
-  self
-     <<< (self protectString: aBLUIRelativeWidth attributeValue);
-     <<< '%'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
   self << '<'.
   aBLUISelect getListPropertiesAsStringWith: self.
@@ -1053,11 +1018,6 @@ CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
      << '</';
      <<< (aBLUISelect getSelectorFrom: self);
      <<< '>'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUITitle: aBLUITitle [
-	self <<< (self protectString: aBLUITitle attributeValue) 
 ]
 
 { #category : #visiting }
@@ -1129,11 +1089,6 @@ CSNModelExporterAngular >> writeBusinessPageImportList [
 			'
 } from ''@angular/core'';
 '
-]
-
-{ #category : #accessing }
-CSNModelExporterAngular >> writeFile: aFileReference withCode: theSourceCode [
-	aFileReference writeStreamDo: [ :aWriteStream | aWriteStream nextPutAll: theSourceCode ]
 ]
 
 { #category : #generate }
