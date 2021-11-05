@@ -4,6 +4,13 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #accessing }
+MCTextArea >> attributeOf: aWidget [
+
+	^ aWidget computeSelfAttributes reject: [ :attribute | "Label are used in the content" 
+		  attribute isKindOf: CSNUILabel ]
+]
+
 { #category : #export }
 MCTextArea >> componentAttributeOn: anExporter [
 	anExporter <<< ' matInput '
@@ -11,18 +18,24 @@ MCTextArea >> componentAttributeOn: anExporter [
 
 { #category : #export }
 MCTextArea >> exportContentOf: aWidget with: anExporter [
+
 	anExporter
 		indentPlus;
 		<< '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
+	anExporter <<< '>'.
 	anExporter
-		<<< '>';
+		<< '</';
+		<<< (aWidget getSelectorFrom: anExporter);
+		<<< '>'.
+	anExporter
 		crlf;
 		indentMinus
 ]
 
 { #category : #export }
 MCTextArea >> exportFooterOf: aWidget with: anExporter [
+
 	anExporter << '</mat-form-field>'
 ]
 
