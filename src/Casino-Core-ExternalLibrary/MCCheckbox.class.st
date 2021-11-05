@@ -35,7 +35,13 @@ MCCheckbox >> attributeOf: aWidget [
 
 { #category : #accessing }
 MCCheckbox >> exportContentOf: aWidget with: anExporter [
-	aWidget attributes detect: [ :att | att isOfType: CSNUILabel ] ifFound: [ :att | anExporter visit: att ]
+
+	aWidget attributes
+		detect: [ :att | att isKindOf: CSNUILabel ]
+		ifFound: [ :att | 
+			anExporter crlf; indentPlus; indent.
+			anExporter visit: att.
+			anExporter indentMinus ]
 ]
 
 { #category : #accessing }

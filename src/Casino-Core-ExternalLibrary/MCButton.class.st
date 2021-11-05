@@ -48,8 +48,11 @@ MCButton >> exportContentOf: aWidget with: anExporter [
 
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
-		ifFound: [ :attribute |
-		anExporter inIndented: [ anExporter visit: attribute ] ].
+		ifFound: [ :attribute | 
+			anExporter inIndented: [ 
+				anExporter
+					indent;
+					visit: attribute ] ].
 	aWidget widgets do: [ :widget | 
 		anExporter inIndented: [ anExporter visit: widget ] ]
 ]

@@ -934,16 +934,6 @@ CSNModelExporterAngular >> visitCSNUIImage: aBLUIImage [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputCheckbox: aBLUIInputCheckbox [
-  self << '<'.
-  aBLUIInputCheckbox getListPropertiesAsStringWith: self.
-  self
-     <<< ' type="checkbox"></';
-     <<< (aBLUIInputCheckbox getSelectorFrom: self);
-     <<< '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIInputColor: aBLUIInputColor [
 	self << '<'.
 	aBLUIInputColor getListPropertiesAsStringWith: self.
