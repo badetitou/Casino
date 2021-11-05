@@ -27,6 +27,18 @@ Class {
 }
 
 { #category : #accessing }
+MCCheckbox >> attributeOf: aWidget [
+
+	^ aWidget computeSelfAttributes reject: [ :attribute | "Label are used in the content" 
+		  attribute isKindOf: CSNUILabel ]
+]
+
+{ #category : #accessing }
+MCCheckbox >> exportContentOf: aWidget with: anExporter [
+	aWidget attributes detect: [ :att | att isOfType: CSNUILabel ] ifFound: [ :att | anExporter visit: att ]
+]
+
+{ #category : #accessing }
 MCCheckbox >> getSelector [
 	^ 'mat-checkbox'
 ]

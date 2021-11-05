@@ -30,6 +30,13 @@ Class {
 }
 
 { #category : #export }
+MCButton >> attributeOf: aWidget [
+
+	^ aWidget computeSelfAttributes reject: [ :attribute | "Label are used in the content" 
+		  attribute isKindOf: CSNUILabel ]
+]
+
+{ #category : #export }
 MCButton >> componentAttributeOn: anExporter [
 	self isLink
 		ifTrue: [ anExporter <<< ' mat-button ' ]

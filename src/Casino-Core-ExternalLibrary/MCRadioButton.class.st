@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #export }
+MCRadioButton >> attributeOf: aWidget [
+
+	^ aWidget computeSelfAttributes reject: [ :attribute | "Label are used in the content" 
+		  attribute isKindOf: CSNUILabel ]
+]
+
+{ #category : #export }
 MCRadioButton >> componentAttributeOn: anExporter [
 	anExporter <<< ' type="radio" '
 ]

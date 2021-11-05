@@ -92,7 +92,10 @@ MCDatePicker >> getSelector [
 
 { #category : #accessing }
 MCDatePicker >> internalDependenciesOf: aWidgetInstance [
-	^ { MCDateAdapter new }
+
+	^ { 
+		  MCDateAdapter new.
+		  MCFormFieldModule new }
 ]
 
 { #category : #accessing }
