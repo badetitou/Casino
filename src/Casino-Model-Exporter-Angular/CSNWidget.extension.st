@@ -42,12 +42,16 @@ CSNWidget >> container [
 CSNWidget >> csnInAngular: aBuilder [
 
 	<inspectorPresentationOrder: 1008 title: 'Angular HTML'>
-	| config code |
+	| config code attributeExporter |
 	config := CSNExporterAngularConfiguration.
+	attributeExporter := CSNExporterAngularAttribute.
 	code := aBuilder newCode
 		        text: (String streamContents: [ :s | 
 					         (CSNModelExporterAngular on: s)
-						         currentPage: (self atAnyScope: {CSNPage. CSNBusinessPage}) anyOne;
+						         currentPage: (self atAnyScope: { 
+										          CSNPage.
+										          CSNBusinessPage }) anyOne;
+						         attributeExporter: attributeExporter new;
 						         exporterAngularConfiguration: config new;
 						         visit: self ]);
 		        beNotEditable;
@@ -65,7 +69,10 @@ CSNWidget >> csnInAngular: aBuilder [
 								    code text: (String streamContents: [ :s | 
 												     (CSNModelExporterAngular on: s)
 													     exporterAngularConfiguration: config new;
-													     currentPage: (self atAnyScope: {CSNPage. CSNBusinessPage }) anyOne;
+													     attributeExporter: attributeExporter new;
+													     currentPage: (self atAnyScope: { 
+																	      CSNPage.
+																	      CSNBusinessPage }) anyOne;
 													     visit: self ]) ];
 							    yourself)
 					   expand: false;

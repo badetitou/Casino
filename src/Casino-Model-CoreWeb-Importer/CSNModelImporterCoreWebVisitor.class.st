@@ -391,18 +391,31 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIDisabled: aCSNUIDisabled [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
-	^ (#('BLFieldSetPanelDynamic' 'BLGroupBoxPanel' 'BLFieldSetPanel' 'BLPortlet') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
-		ifTrue: [ | panel |
-			panel := (self createWidgetPanel: aCSNUIFieldset)
-				addAttribute: ((self create: CSNUITitle) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ]));
-				yourself.
 
-			((source invokedClass withSuperclassHierarchy collect: #invokedClassName) includes: 'BLFieldSetPanelDynamic')
-				ifTrue: [ panel addAttribute: (self create: CSNUICWDynamicFieldset).
-					(source parameters at: 2 ifAbsent: [ '' ]) = 'true' ifTrue: [ panel addAttribute: (self create: CSNUICWLightFieldset) ] ].
-			((source invokedClass withSuperclassHierarchy collect: #invokedClassName) includes: 'BLGroupBoxPanel') ifTrue: [ panel addAttribute: (self create: CSNUICWGroupFieldset) ].
-			^ panel ]
-		ifFalse: [ nil ]
+	^ (#( 'BLFieldSetPanelDynamic' 'BLGroupBoxPanel' 'BLFieldSetPanel'
+	      'BLPortlet' ) includesAny:
+		   (source invokedClass withSuperclassHierarchy collect:
+			    #invokedClassName))
+		  ifTrue: [ 
+			  | panel |
+			  panel := self createWidgetPanel: aCSNUIFieldset.
+			  source parameters at: 1 ifPresent: [ :param | 
+				  panel addAttribute: ((self create: CSNUITitle)
+						   attributeValue: param;
+						   yourself) ].
+
+
+			  ((source invokedClass withSuperclassHierarchy collect:
+				    #invokedClassName) includes: 'BLFieldSetPanelDynamic') 
+				  ifTrue: [ 
+					  panel addAttribute: (self create: CSNUICWDynamicFieldset).
+					  (source parameters at: 2 ifAbsent: [ '' ]) = 'true' ifTrue: [ 
+						  panel addAttribute: (self create: CSNUICWLightFieldset) ] ].
+			  ((source invokedClass withSuperclassHierarchy collect:
+				    #invokedClassName) includes: 'BLGroupBoxPanel') ifTrue: [ 
+				  panel addAttribute: (self create: CSNUICWGroupFieldset) ].
+			  ^ panel ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
