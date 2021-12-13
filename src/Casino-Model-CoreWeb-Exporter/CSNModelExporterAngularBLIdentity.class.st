@@ -300,7 +300,6 @@ export let menus: MenuItem[] = [
 	currentWriteStream << aCSNIModule name asLowercase.
 	currentWriteStream << ''',
     icon: ''fal fa-home'',
-    currentTraduction:undefined,
     withHeadTitle: true,
     main:false,
     subMenus: ['.
@@ -350,11 +349,11 @@ import { environment } from ''src/environments/environment'';
 import { createCustomElement } from ''@angular/elements'';
 import { ROUTES_MAIN_WRAPPER, ROUTES_MICRO_FRONTEND } from ''./main.routing'';
 import { StoreModule } from ''@ngrx/store'';
-import { EffectsModule } from ''@ngrx/effects'';
 import { CoreModule } from ''./core/core.module'';
 import { CustomTranslateLoader } from ''./core/services/override/custom_translate_loader.service'';
 import { SharedModule } from ''./shared/shared.module'';
 import { CommonModule } from ''@angular/common'';
+import { InitModule } from ''./core/init.module'';
 
 @NgModule({
   imports: [
@@ -368,7 +367,7 @@ import { CommonModule } from ''@angular/common'';
     StoreModule,
     CommonModule,
     SharedModule,
-    EffectsModule,
+    InitModule,
     CoreModule
   ],
   providers:[],
