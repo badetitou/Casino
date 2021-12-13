@@ -322,9 +322,6 @@ export let menus: MenuItem[] = [
 				<< ''',';
 				crlf.
 			currentWriteStream
-				<< '            currentTraduction: undefined,';
-				crlf.
-			currentWriteStream
 				<< '            icon: ''fal fa-home'',';
 				crlf.
 			currentWriteStream
