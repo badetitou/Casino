@@ -56,6 +56,11 @@ CSNModelExporterAngularBLIdentity >> behaviorModelExporter [
 ]
 
 { #category : #accessing }
+CSNModelExporterAngularBLIdentity >> blIdentityVersion [
+	^ '#v12.2.9'
+]
+
+{ #category : #accessing }
 CSNModelExporterAngularBLIdentity >> businessExporter [
 	^ CSNBusinessExporter
 ]
@@ -100,7 +105,7 @@ CSNModelExporterAngularBLIdentity >> exportModule: aCSNIModule [
 	moduleRoot ensureDeleteAll.
 	IceGitClone new
 		location: moduleRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git';
+		url: ('https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/microfrontend.git', self blIdentityVersion);
 		execute.
 	self configRepository: moduleRoot forModule: aCSNIModule.
 
@@ -142,7 +147,7 @@ CSNModelExporterAngularBLIdentity >> exportShell [
 	shellRoot ensureDeleteAll.
 	IceGitClone new
 		location: shellRoot;
-		url: 'https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/shell.git';
+		url: ('https://gitlab.forge.berger-levrault.com/bl-drit/bl-identite-v2/shell.git', self blIdentityVersion);
 		execute.
 	self configShellLocated: shellRoot.
 

@@ -72,7 +72,7 @@ CSNIShellConfigurator >> fixLookupService [
 		       copyReplaceFrom: startRemote + 1
 		       to:
 		       (old
-			        findString: '] as Microfrontend[]'
+			        findString: ']);'
 			        startingAt: startRemote) - 1
 		       with: newRemotes.
 	(location / 'src' / 'app' / 'services' / 'override'
