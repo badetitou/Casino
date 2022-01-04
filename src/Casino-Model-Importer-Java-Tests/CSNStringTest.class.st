@@ -166,3 +166,37 @@ CSNStringTest >> testTwoNumbersParam [
 	self assert: (string extractParameters at: 1) equals: '1'.
 	self assert: (string extractParameters at: 2) equals: '2'.
 ]
+
+{ #category : #tests }
+CSNStringTest >> testWithInnerClass [
+
+	| string |
+	string := 'addChangeHandler(new ChangeHandler(){
+  @Override public void onChange(  ChangeEvent event){
+    if (lsEnteteRubrique.getValue() != null) {
+      setLigneModifiable(lbCarriere,lsEnteteRubrique,tbLibelle,ftDate,ftVariable,false,false);
+      EnteteRubriqueGWT enteteRubriqueGWT=new EnteteRubriqueGWT();
+      enteteRubriqueGWT.setId(((EnteteRubriqueDTOGWT)lsEnteteRubrique.getValue()).getId());
+      IGwtServiceCoeur.Util.getInstance().prepareElementPaieSimplifieForEnteteRubrique(enteteRubriqueGWT,collectivite,agent,lbCarriere.getSelectedValue(),new SecureAsyncCallback<ElementPaieSimplifieGWT>(){
+        @Override public void onSuccess(        final ElementPaieSimplifieGWT elementPaieSimplifieGWT){
+          cbActif.setValue(elementPaieSimplifieGWT.getListErreur().isEmpty());
+          listCols.set(1,elementPaieSimplifieGWT);
+          buildFtVariable(ftVariable,elementPaieSimplifieGWT);
+          buildFtDate(ftDate,elementPaieSimplifieGWT,true);
+          ((PopupMoisActifs)listCols.get(7)).setToForm(elementPaieSimplifieGWT);
+          ((PopupAffectations)listCols.get(8)).setToForm(elementPaieSimplifieGWT);
+          setLigneModifiable(lbCarriere,lsEnteteRubrique,tbLibelle,ftDate,ftVariable,cbActif.getValue(),true);
+          if (!(elementPaieSimplifieGWT.getListWarn().isEmpty())) {
+            for (            String message : elementPaieSimplifieGWT.getListWarn()) {
+              BLEventPopup.displayInfo(message);
+            }
+          }
+        }
+      }
+);
+    }
+  }
+}
+)'.
+	self assert: string extractParameters size equals: 1.
+]

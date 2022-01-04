@@ -22,8 +22,12 @@ String >> allRangesOfSubstringNoSurrouned: aSubstring [
 { #category : #'*Casino-Model-Importer-Java' }
 String >> extractParameters [
 
-	^ ((self copyFrom: (self findString: '(') + 1 to: (self findLastOccurrenceOfString: ')' startingAt: 1) - 1) findTokens: ',' escapedAndKeepBy: '"') collect: [ 
-		  :string | (string trim withoutPrefix: '"') withoutSuffix: '"' ]
+	^ ((self
+		    copyFrom: (self findString: '(') + 1
+		    to: (self findLastOccurrenceOfString: ')' startingAt: 1) - 1)
+		   findTokens: ','
+		   escapedAndKeepBy: #( '""' '()' '{}' )) collect: [ :string | 
+		  (string trim withoutPrefix: '"') withoutSuffix: '"' ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
@@ -41,7 +45,8 @@ String >> findNext: aCharacter for: startIndex [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [ 
+String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [
+
 	"Answer a collection of Strings separated by the delimiters, where  
 	delimiters is a Character or collection of characters. Two delimiters in a  
 	row produce an empty string (compare this to #findTokens, which  
@@ -57,37 +62,41 @@ String >> findTokens: delimiters escapedAndKeepBy: quoteDelimiters [
 	 
 	This method is useful for parsing comma separated variable strings for  
 	spreadsheet import and export."
+
 	| tokens rs activeEscapeCharacter ts char token delimiterChars quoteChars |
-	delimiterChars := (delimiters 
-		ifNil: [ '' ]
-		ifNotNil: [ delimiters ]) asString.
-	quoteChars := (quoteDelimiters 
-		ifNil: [ '' ]
-		ifNotNil: [ quoteDelimiters ]) asString.
+	delimiterChars := (delimiters ifNil: [ '' ] ifNotNil: [ delimiters ])
+		                  asString.
+	quoteChars := quoteDelimiters
+		              ifNil: [ {  } ]
+		              ifNotNil: [ quoteDelimiters ].
 	tokens := OrderedCollection new.
 	rs := self readStream.
-	activeEscapeCharacter := nil.
+	activeEscapeCharacter := Stack new.
 	ts := String new writeStream.
-	[ rs atEnd ] whileFalse: 
-		[ char := rs next.
-		activeEscapeCharacter 
-			ifNil: 
-				[ (quoteChars includes: char) 
-					ifTrue: [ activeEscapeCharacter := char.ts nextPut: char
-						 ]
-					ifFalse: 
-						[ (delimiterChars includes: char) 
-							ifTrue: 
-								[ token := ts contents.
+	[ rs atEnd ] whileFalse: [ 
+		char := rs next.
+		activeEscapeCharacter isEmpty
+			ifTrue: [ 
+				quoteChars
+					detect: [ :array | array first == char ]
+					ifOne: [ :array | 
+						activeEscapeCharacter push: array second.
+						ts nextPut: char ]
+					ifNone: [ 
+						(delimiterChars includes: char)
+							ifTrue: [ 
+								token := ts contents.
 								tokens add: token.
 								ts := String new writeStream ]
 							ifFalse: [ ts nextPut: char ] ] ]
-			ifNotNil: 
-				[ char == activeEscapeCharacter 
-					ifTrue: 
-						[ rs peek == activeEscapeCharacter 
+			ifFalse: [ 
+				char == activeEscapeCharacter top
+					ifTrue: [ 
+						rs peek == activeEscapeCharacter
 							ifTrue: [ ts nextPut: rs next ]
-							ifFalse: [ ts nextPut: char.activeEscapeCharacter := nil ] ]
+							ifFalse: [ 
+								ts nextPut: char.
+								activeEscapeCharacter pop ] ]
 					ifFalse: [ ts nextPut: char ] ] ].
 	token := ts contents.
 	(tokens isEmpty and: [ token isEmpty ]) ifFalse: [ tokens add: token ].

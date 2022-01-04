@@ -11,7 +11,7 @@ FamixJavaInvocation >> affectation [
 	self container ifNotNil: [ ^ nil ].
 	self source hasSourceAnchor ifTrue: [ 
 		self source name = '<Initializer>'
-			ifFalse: [ "Normal method" self source generateFastIfNotDoneAndBind ]
+			ifFalse: [ "Normal method" self source generateFastIfNotDoneAndBind "self source generateFastAndBind" ]
 			ifTrue: [ "method initialize... We must generate and bind the class" (self source atScope: FamixTClass) anyOne generateFastIfNotDoneAndBind ].
 		(self fast atAnyScope: { 
 				 FASTJavaAssignementExpression.
