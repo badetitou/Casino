@@ -108,84 +108,95 @@ CSNLGridLayout >> determineXandYfrom: anInvocation andPrevious: anPreviousInvoca
 
 { #category : #private }
 CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation [
+
 	| aYValue |
 	"The first check of is array is used in debug if we try to re determine some values"
 	aYValue := anInvocation isArray
-		ifTrue: [ anInvocation second ]
-		ifFalse: [ anInvocation parameters second ].
+		           ifTrue: [ anInvocation second ]
+		           ifFalse: [ 
+			           anInvocation parameters size >= 2
+				           ifTrue: [ anInvocation parameters second ]
+				           ifFalse: [ 0 ] ].
 	^ aYValue asInteger
-		ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
-			| currentYValue |
-			(aYValue includesSubstring: 'getCellCount')
-				ifTrue: [ ^ (self atLevel: aYValue parameters first asInteger) size ].
+		  ifNil: [ "in case of setWidget(row,0).. Then setWidget(row++,1)"
+			  | currentYValue |
+			  (aYValue includesSubstring: 'getCellCount') ifTrue: [ 
+				  ^ (self atLevel: aYValue parameters first asInteger) size ].
 
-			"determine current var value"
-			currentYValue := (self
-				attributeAt: #addGridVariable
-				ifAbsentPut: [ Dictionary new ])
-				at: ((aYValue removePrefix: '++') removeSuffix: '++')
-				ifAbsent: [ nil ].
+			  "determine current var value"
+			  currentYValue := (self
+				                    attributeAt: #addGridVariable
+				                    ifAbsentPut: [ Dictionary new ])
+				                   at:
+				                   ((aYValue removePrefix: '++') removeSuffix:
+					                    '++')
+				                   ifAbsent: [ nil ].
 
-			"If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
+			  "If currentValue is not nil. It means we've already seen the variable. We can try to find the other usage of the variable to detect the potentiel var++ or ++var alone in the code.
 			Else, we'll say it's the max level (but we do not have arguments)"
-			currentYValue
-				ifNotNil: [ (anInvocation source localVariables
-						select:
-							[ :localVariable | localVariable name = ((aYValue removePrefix: '++') removeSuffix: '++') ])
-						ifNotEmpty: [ :localVariable | 
-							| positions |
-							positions := anInvocation source sourceAnchor
-								findAllOccurrencesOfVariableNamed: localVariable first name.
-							positions := positions
-								select: [ :val | 
-									val < anInvocation sourceAnchor startPos
-										and: [ val
-												>
-													(anPreviousInvocation
-														ifNil: [ 0 ]
-														ifNotNil: [ anPreviousInvocation sourceAnchor endPos ]) ] ].
-							positions
-								do: [ :val | 
-									"if the usage is something like ++var or var++, we increment the currentXValue"
-									((anInvocation from sourceAnchor
-										copyFrom: val - 2
-										to: val + localVariable first name size - 1)
-										= ('++' , localVariable first name)
-										or: [ (anInvocation from sourceAnchor
-												copyFrom: val
-												to: val + localVariable first name size - 1 + 2)
-												= (localVariable first name , '++') ])
-										ifTrue: [ currentYValue := currentYValue + 1 ]
-										ifFalse: [ self
-												haltIf: [ localVariable first incomingAccesses
-														anySatisfy: [ :access | access sourceAnchor startPos = val ] ] ] ] ] ]
-				ifNil: [ currentYValue := (self atLevel: self maxLevel) size ].
+			  currentYValue
+				  ifNotNil: [ 
+					  (anInvocation source localVariables select: [ :localVariable | 
+						   localVariable name
+						   = ((aYValue removePrefix: '++') removeSuffix: '++') ]) 
+						  ifNotEmpty: [ :localVariable | 
+							  | positions |
+							  positions := anInvocation source sourceAnchor 
+								               findAllOccurrencesOfVariableNamed:
+								               localVariable first name.
+							  positions := positions select: [ :val | 
+								               val < anInvocation sourceAnchor startPos and: [ 
+									               val > (anPreviousInvocation
+										                ifNil: [ 0 ]
+										                ifNotNil: [ 
+										                anPreviousInvocation sourceAnchor endPos ]) ] ].
+							  positions do: [ :val | "if the usage is something like ++var or var++, we increment the currentXValue"
+								  ((anInvocation from sourceAnchor
+									    copyFrom: val - 2
+									    to: val + localVariable first name size - 1)
+								   = ('++' , localVariable first name) or: [ 
+									   (anInvocation from sourceAnchor
+										    copyFrom: val
+										    to: val + localVariable first name size - 1 + 2)
+									   = (localVariable first name , '++') ])
+									  ifTrue: [ currentYValue := currentYValue + 1 ]
+									  ifFalse: [ 
+										  self haltIf: [ 
+											  localVariable first incomingAccesses anySatisfy: [ 
+												  :access | access sourceAnchor startPos = val ] ] ] ] ] ]
+				  ifNil: [ currentYValue := (self atLevel: self maxLevel) size ].
 
 
-			"widget.setWidget(++var, ..)"
-			(aYValue beginsWith: '++')
-				ifTrue: [ currentYValue := currentYValue + 1.
-					(self privateState
-						attributeAt: #addGridVariable
-						ifAbsentPut: [ Dictionary new ])
-						at: (aYValue removePrefix: '++')
-						put: currentYValue ]
-				ifFalse: [ (aYValue endsWith: '++')
-						ifTrue: [ (self privateState
-								attributeAt: #addGridVariable
-								ifAbsentPut: [ Dictionary new ])
-								at: (aYValue removeSuffix: '++')
-								put: currentYValue + 1 ]
-						ifFalse: [ (self attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ])
-								at: aYValue
-								put: currentYValue ] ].
-			"	yValue
+			  "widget.setWidget(++var, ..)"
+			  (aYValue beginsWith: '++')
+				  ifTrue: [ 
+					  currentYValue := currentYValue + 1.
+					  (self privateState
+						   attributeAt: #addGridVariable
+						   ifAbsentPut: [ Dictionary new ])
+						  at: (aYValue removePrefix: '++')
+						  put: currentYValue ]
+				  ifFalse: [ 
+					  (aYValue endsWith: '++')
+						  ifTrue: [ 
+							  (self
+								   attributeAt: #addGridVariable
+								   ifAbsentPut: [ Dictionary new ])
+								  at: (aYValue removeSuffix: '++')
+								  put: currentYValue + 1 ]
+						  ifFalse: [ 
+							  (self
+								   attributeAt: #addGridVariable
+								   ifAbsentPut: [ Dictionary new ])
+								  at: aYValue
+								  put: currentYValue ] ].
+			  "	yValue
 				ifNil: [ yValue := (self privateState attributeAt: #addGridVariable ifAbsentPut: [ Dictionary new ]) at: aYValue ifAbsentPut: [ 0 ].
 					yValue = 0
 						ifTrue: [ yValue := (self atLevel: self maxLevel) size ] ].
 			yValue ifNil: [ yValue := (self atLevel: self maxLevel) size ]."
-			^ currentYValue ]
-		ifNotNil: [ ^ aYValue asInteger ]
+			  ^ currentYValue ]
+		  ifNotNil: [ ^ aYValue asInteger ]
 ]
 
 { #category : #accessing }

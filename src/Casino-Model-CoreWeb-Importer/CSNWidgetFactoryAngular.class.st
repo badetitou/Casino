@@ -13,7 +13,7 @@ CSNWidgetFactoryAngular >> createActionFromClass: aClass for: widget [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
-	^ (self createAttributeFor: nil from: invoc) ifNotNil: [ :attribute | widget layout at: invoc setAttribute: attribute ]
+	^ (self createAttributeFor: nil from: invoc) ifNotNil: [ :attribute | "at scope in case the widget is not a container (bug)" (widget atScope: CSNContainer) anyOne layout at: invoc setAttribute: attribute ]
 ]
 
 { #category : #factory }

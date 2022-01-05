@@ -383,7 +383,7 @@ CSNWebModelJava >> getWidgetContainerOfWidgetWithoutAffectation: widget [
 		                       ifTrue: [ 
 			                       widget source typeContainer isInitializer
 				                       ifTrue: [ widget source ]
-				                       ifFalse: [ widget source typeContainer ] ]
+				                       ifFalse: [ (widget source typeContainer atScope: FamixTClass) anyOne incomingInstanciations anyOne ] ]
 		                       ifFalse: [ 
 			                       widget source isReturned
 				                       ifTrue: [ 
