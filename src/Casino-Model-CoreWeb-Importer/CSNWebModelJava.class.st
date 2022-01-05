@@ -380,13 +380,21 @@ CSNWebModelJava >> getWidgetContainerOfWidgetWithoutAffectation: widget [
 
 	| containerInvocation found |
 	containerInvocation := widget source isType
-		                       ifTrue: [ widget source typeContainer ]
+		                       ifTrue: [ 
+			                       widget source typeContainer isInitializer
+				                       ifTrue: [ widget source ]
+				                       ifFalse: [ widget source typeContainer ] ]
 		                       ifFalse: [ 
 			                       widget source isReturned
-				                       ifTrue: [ widget source sender allUsages anyOne ]
+				                       ifTrue: [ 
+					                       widget source sender allUsages
+						                       ifNotEmpty: [ :col | col anyOne ]
+						                       ifEmpty: [ nil ] ]
 				                       ifFalse: [ widget source container ] ].
 	[ containerInvocation isNotNil ] whileTrue: [ 
-		found := (self widgetInVariable: containerInvocation affectation) ifNil: [ self widgetInVariable: containerInvocation receiver ].
+		found := (self widgetInVariable: containerInvocation affectation) 
+			         ifNil: [ 
+			         self widgetInVariable: containerInvocation receiver ].
 		found
 			ifNotNil: [ 
 				^ { 

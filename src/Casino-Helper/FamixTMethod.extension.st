@@ -2,9 +2,12 @@ Extension { #name : #FamixTMethod }
 
 { #category : #'*Casino-Helper' }
 FamixTMethod >> isInitializer [
+
 	^ self mooseModel isSmalltalk
-		ifTrue: [ (('*initialize*' match: self category) or: [ '*initialize*' match: self name ]) or: [ self isConstructor ] ]
-		ifFalse: [ self isConstructor ]
+		  ifTrue: [ 
+			  (('*initialize*' match: self category) or: [ 
+				   '*initialize*' match: self name ]) or: [ self isConstructor ] ]
+		  ifFalse: [ self name = '<Initializer>' or: [ self isConstructor ] ]
 ]
 
 { #category : #'*Casino-Helper' }
