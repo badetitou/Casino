@@ -29,7 +29,7 @@ Class {
 { #category : #accessing }
 MCCheckbox >> attributeOf: aWidget [
 
-	^ aWidget computeSelfAttributes reject: [ :attribute | "Label are used in the content" 
+	^ (super attributeOf: aWidget) reject: [ :attribute | "Label are used in the content" 
 		  attribute isKindOf: CSNUILabel ]
 ]
 

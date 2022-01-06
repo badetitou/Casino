@@ -16,7 +16,12 @@ WidgetRepresentation >> attributeNameInComponent: attribute [
 
 { #category : #export }
 WidgetRepresentation >> attributeOf: aWidget [
-	^ aWidget computeSelfAttributes
+
+	| attributes |
+	attributes := aWidget computeSelfAttributes.
+	aWidget variable ifNotNil: [ :variable | 
+		attributes add: (CSNUIId new attributeValue: aWidget id) ].
+	^ attributes
 ]
 
 { #category : #export }

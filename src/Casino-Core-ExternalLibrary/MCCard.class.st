@@ -28,7 +28,8 @@ Class {
 
 { #category : #accessing }
 MCCard >> attributeOf: aWidget [
-	^ aWidget computeSelfAttributes flattened reject: [ :attribute | "Title is used in the header" 
+
+	^ (super attributeOf: aWidget) flattened reject: [ :attribute | "Title is used in the header" 
 		  attribute isKindOf: CSNUITitle ]
 ]
 

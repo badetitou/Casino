@@ -27,6 +27,6 @@ CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactor
 
 { #category : #'*Casino-Model-Importer' }
 CSNContainer >> computeSelfAttributes [
-	^ self layout ifNil: [ super computeSelfAttributes ] ifNotNil: [:lay | ^ {super computeSelfAttributes. lay getLayoutAttribute} ]
+	^ self layout ifNil: [ super computeSelfAttributes ] ifNotNil: [:lay | ^ {super computeSelfAttributes. lay getLayoutAttribute} asOrderedCollection ]
 
 ]
