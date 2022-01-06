@@ -154,6 +154,7 @@ exporter model: gwtModel.
 
 "Use the material.angular.io as target library"
 exporter exporterAngularConfiguration: CSNExporterAngularMaterialConfiguration new.
+exporter attributeExporter: CSNExporterAngularAttribute new.
 exporter prepareExport.
 
 "Select export location"
