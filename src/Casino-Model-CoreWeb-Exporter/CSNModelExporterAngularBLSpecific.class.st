@@ -153,18 +153,12 @@ export class ';
 		do: [ :action | 
 			action behavior
 				do: [ :behaveMethod | 
-					self
-						<<< '/*';
-						crlf.
 					(self behaviorModelExporter
 						on: self currentWriteStream
 						withIndentLevel: 1)
 						exporterAngularConfiguration: self exporterAngularConfiguration;
 						currentPage: aBLPageMetier;
-						export: behaveMethod.
-					self
-						<<< '*/';
-						crlf ] ].
+						export: behaveMethod ] ].
 	self
 		crlf;
 		<<< '}';
