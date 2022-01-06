@@ -2,8 +2,16 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> hasOnlyPrimitiveParameter [
-	^ self source ifNotNil: [ (self source parameters collect: #declaredType)
-		allSatisfy: [ :type | type isPrimitiveType or: [ {'String' . 'Long' . 'Integer' . 'Double' . 'Boolean'} includes: type name ] ] ] ifNil: [ true ]
+
+	^ self source
+		  ifNotNil: [ 
+			  (self source parameters collect: #declaredType) allSatisfy: [ 
+				  :type | 
+				  type isNotNil and: [ 
+					  type isPrimitiveType or: [ 
+						  { 'String'. 'Long'. 'Integer'. 'Double'. 'Boolean' } 
+							  includes: type name ] ] ] ]
+		  ifNil: [ true ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

@@ -2,11 +2,18 @@ Extension { #name : #FamixTClass }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 FamixTClass >> shortName [
+
 	^ self isAnonymousClass
-		ifTrue: [ self name
-				copyFrom: (self name findString: '(') + 1
-				to: (self name findLastOccurrenceOfString: ')' startingAt: 0) - 1 ]
-		ifFalse: [ self name ]
+		  ifTrue: [ 
+			  | begin end |
+			  begin := (self name findString: '(') + 1.
+			  end := (self name findLastOccurrenceOfString: ')' startingAt: 0)
+			         - 1.
+			  "If this is really anonymous? - some strange case exist"
+			  begin < end
+				  ifTrue: [ self name copyFrom: begin to: end ]
+				  ifFalse: [ self name ] ]
+		  ifFalse: [ self name ]
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }

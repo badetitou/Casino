@@ -25,6 +25,12 @@ CSNBuModelImporter >> buModel: anObject [
 	self factory model: buModel
 ]
 
+{ #category : #visiting }
+CSNBuModelImporter >> createDefaultDTOEntity [
+
+	^ self factory create: CSNBuDTO
+]
+
 { #category : #accessing }
 CSNBuModelImporter >> dtoAbstractName [
 	^ 'AbstractPersistentObjectGWT'
@@ -74,7 +80,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 			| buAttribute |
 			buAttribute := self factory create: CSNBuAttribute.
 			buAttribute name: attribute name.
-			buAttribute attributeType: (attribute declaredType accept: self).
+			buAttribute attributeType: (attribute declaredType ifNotNil: [ :declaredType | declaredType accept: self ] ifNil: [ self createDefaultDTOEntity ]).
 			businessType addAttribute: buAttribute ].
 	^ businessType
 ]
@@ -130,8 +136,9 @@ CSNBuModelImporter >> visitClass: aClass [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitEnum: aParameterType [
+
 	self flag: 'Stil not suported'.
-	^ self factory create: CSNBuDTO
+	^ self createDefaultDTOEntity
 ]
 
 { #category : #visiting }
@@ -143,16 +150,18 @@ CSNBuModelImporter >> visitParameter: aParameter [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitParameterType: aParameterType [
+
 	self flag: 'Stil not suported'.
-	^ self factory create: CSNBuDTO
+	^ self createDefaultDTOEntity
 ]
 
 { #category : #visiting }
 CSNBuModelImporter >> visitParameterizableClass: aClass [
+
 	"ParametrizedType but we do not know the parameters..."
-	
+
 	self flag: 'Stil not suported'.
-	^ self factory create: CSNBuDTO
+	^ self createDefaultDTOEntity
 ]
 
 { #category : #visiting }
@@ -174,6 +183,7 @@ CSNBuModelImporter >> visitPrimitiveType: aPrimitiveType [
 
 { #category : #visiting }
 CSNBuModelImporter >> visitType: aType [
+
 	self flag: 'Stil not suported'.
-	^ self factory create: CSNBuDTO
+	^ self createDefaultDTOEntity
 ]
