@@ -55,7 +55,7 @@ CSNPage >> getMetadata [
     code: ''' , self codeValue,''',
     codePhase: ''' , (self codePhase ifNil: ['']) protectQuote,''',
     label: ''' , (self title ifNil: ['']) protectQuote ,''',
-    link: ''' , self name,''',
+    link: ''' , self name asRealCamelCase,''',
     subLabel: ''' , (self subtitle ifNil: ['']) protectQuote, ''',
     icon: ''address-book'',
     datas: {},
