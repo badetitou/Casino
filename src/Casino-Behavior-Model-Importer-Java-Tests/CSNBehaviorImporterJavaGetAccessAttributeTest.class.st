@@ -308,16 +308,22 @@ CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttribute [
 
 { #category : #tests }
 CSNBehaviorImporterJavaGetAccessAttributeTest >> testImportGetElementAttributeChildren [
+
 	"test I have the good children"
+
 	self
-		assert: (model allWithType: CSNBGetElementAttribute) anyOne children anyOne
+		assert:
+		(model allWithType: CSNBGetElementAttribute) anyOne children anyOne
 		equals:
-			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | access widget affectedActions name = '_llTestModalDialog' ] ifNone: [ self error ]).
+			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | 
+				 access widget affectedActions name = '_llTestModalDialog' ]).
 	"test my children have me as parent"
 	self
 		assert: (model allWithType: CSNBGetElementAttribute) anyOne
 		equals:
-			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | access widget affectedActions name = '_llTestModalDialog' ] ifNone: [ self error ]) parentNode
+			((model allWithType: CSNBDOMElementAcccess) detect: [ :access | 
+				 access widget affectedActions name = '_llTestModalDialog' ])
+				parentNode
 ]
 
 { #category : #tests }
