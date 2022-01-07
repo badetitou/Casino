@@ -92,6 +92,13 @@ TCSNExporter >> inParenthesis: aBlock [
 ]
 
 { #category : #streaming }
+TCSNExporter >> inParenthesisNoIndent: aBlock [
+	self <<< '('.
+	aBlock value.
+	self <<< ')'
+]
+
+{ #category : #streaming }
 TCSNExporter >> indent [
   1 to: self indentLevel * self indentNumber do: [:i |  currentWriteStream << self indentCharacter ]
 ]

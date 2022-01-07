@@ -13,7 +13,7 @@ CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				isNative
 				ifTrue: [ self
-						inParenthesis: [ self <<< ('<any>' , accessVariable) ];
+						inParenthesisNoIndent: [ self <<< ('<any>' , accessVariable) ];
 						<<< '.nativeElement' ]
 				ifFalse: [ self <<< accessVariable ] ]
 		ifNil: [ self <<< 'ERROR DOM ELEMENT ACCESS' ]
