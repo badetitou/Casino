@@ -1,13 +1,13 @@
 Extension { #name : #CSNLAlignement }
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAlignement >> accept: aCSNModelVisitor [
+CSNLAlignement class >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLAlignement: self
 ]
 
 { #category : #'*Casino-Model-Visitor-generated' }
-CSNLAlignement class >> accept: aCSNModelVisitor [
+CSNLAlignement >> accept: aCSNModelVisitor [
 	<generated>
 	^ aCSNModelVisitor visitCSNLAlignement: self
 ]
@@ -23,12 +23,14 @@ CSNLAlignement class >> initializeImporters: aCollectionOfImporter withInvocatio
 
 { #category : #'*Casino-Model-Visitor' }
 CSNLAlignement class >> newFrom: anAlignementIdentifier withImporters: visitorImporters [
+
 	| updatedVisitor |
-	updatedVisitor := visitorImporters collect: [ :visitor | visitor clone source: anAlignementIdentifier; yourself ].
-	self subclasses 
-		do: [ :subclass | updatedVisitor 
-			do: [ :importer | (subclass accept: importer) ifNotNil: [ :newWidget | ^ newWidget ] 
-				] 
-			].
+	updatedVisitor := visitorImporters collect: [ :visitor | 
+		                  visitor clone
+			                  source: anAlignementIdentifier;
+			                  yourself ].
+	self subclasses do: [ :subclass | 
+		updatedVisitor do: [ :importer | 
+			(subclass accept: importer) ifNotNil: [ :newWidget | ^ newWidget ] ] ].
 	^ nil
 ]
