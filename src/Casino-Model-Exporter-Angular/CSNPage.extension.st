@@ -37,6 +37,7 @@ CSNPage >> getLocalPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getMetadata [
+
 	" asString :
 { 
     id: 'phase1_2',
@@ -51,12 +52,14 @@ CSNPage >> getMetadata [
    "
 
 	^ '{
-    id: ''' , self name ,''',
-    code: ''' , self codeValue,''',
-    codePhase: ''' , (self codePhase ifNil: ['']) protectQuote,''',
-    label: ''' , (self title ifNil: ['']) protectQuote ,''',
-    link: ''' , self name asRealCamelCase,''',
-    subLabel: ''' , (self subtitle ifNil: ['']) protectQuote, ''',
+    id: ''' , self name , ''',
+    code: ''' , (self codeValue ifNil: [ self name asRealCamelCase ])
+	  , ''',
+    codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
+	  , ''',
+    label: ''' , (self title ifNil: [ '' ]) protectQuote , ''',
+    link: ''' , self name asRealCamelCase , ''',
+    subLabel: ''' , (self subtitle ifNil: [ '' ]) protectQuote , ''',
     icon: ''address-book'',
     datas: {},
 }'
