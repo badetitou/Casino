@@ -39,7 +39,10 @@ MCCheckbox >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :att | att isKindOf: CSNUILabel ]
 		ifFound: [ :att | 
-			anExporter crlf; indentPlus; indent.
+			anExporter
+				crlf;
+				indentPlus;
+				indent.
 			anExporter visit: att.
 			anExporter indentMinus ]
 ]

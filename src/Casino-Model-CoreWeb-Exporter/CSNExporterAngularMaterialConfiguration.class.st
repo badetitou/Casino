@@ -36,6 +36,7 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUICWDialog -> MCDialog new).
 				  (CSNUICWProgressBar -> BLMHorizontalGauge new).
 				  (CSNUITable -> MCTable new).
-				  (CSNUIImage -> HTMLImgComponent new) } asDictionary;
+				  (CSNUIImage -> HTMLImgComponent new).
+				  (CSNUIMenu -> MCMenu new) } asDictionary;
 		  yourself
 ]
