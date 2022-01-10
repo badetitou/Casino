@@ -54,7 +54,14 @@ CSNWidgetFactory >> createLayoutFor: theWidgetSource withParent: parent [
 
 { #category : #creating }
 CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
-	^ (CSNWidget newFrom: theWidgetSource for: parent withImporters: visitorImporters) ifNil: [ (self create: CSNContainer) source: theWidgetSource; yourself ]
+
+	^ (CSNWidget
+		   newFrom: theWidgetSource
+		   for: parent
+		   withImporters: visitorImporters) ifNil: [ 
+		  (self create: CSNContainer)
+			  source: theWidgetSource;
+			  yourself ]
 ]
 
 { #category : #accessing }
