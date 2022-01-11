@@ -793,6 +793,83 @@ CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
+
+	"export other cell (propably special ones), then north cell, then center, then south"
+
+	self
+		crlf;
+		indentPlus;
+		<< '<tbody>';
+		crlf;
+		indentPlus.
+	aCSNLBorderLayout cell
+		select: [ :cell | cell position isNil ]
+		thenDo: [ :cell | 
+			self
+				<< '<tr>';
+				inIndented: [ 
+					self << '<td'.
+					cell attributesTagWith: self.
+					self
+						<<< '>';
+						inIndented: [ self visit: cell ];
+						<< '</td>';
+						crlf ];
+				<< '</tr>' ].
+	aCSNLBorderLayout cell
+		select: [ :cell | 
+		cell position isNotNil and: [ cell position isNorth ] ]
+		thenDo: [ :cell | 
+			self
+				<< '<tr>';
+				inIndented: [ 
+					self << '<td'.
+					cell attributesTagWith: self.
+					self
+						<<< '>';
+						inIndented: [ self visit: cell ];
+						<< '</td>';
+						crlf ];
+				<< '</tr>' ].
+	aCSNLBorderLayout cell
+		select: [ :cell | 
+		cell position isNotNil and: [ cell position isCenter ] ]
+		thenDo: [ :cell | 
+			self
+				<< '<tr>';
+				inIndented: [ 
+					self << '<td'.
+					cell attributesTagWith: self.
+					self
+						<<< '>';
+						inIndented: [ self visit: cell ];
+						<< '</td>';
+						crlf ];
+				<< '</tr>' ].
+	aCSNLBorderLayout cell
+		select: [ :cell | 
+		cell position isNotNil and: [ cell position isSouth ] ]
+		thenDo: [ :cell | 
+			self
+				<< '<tr>';
+				inIndented: [ 
+					self << '<td'.
+					cell attributesTagWith: self.
+					self
+						<<< '>';
+						inIndented: [ self visit: cell ];
+						<< '</td>';
+						crlf ];
+				<< '</tr>' ].
+	self
+		indentMinus;
+		<< '</tbody>';
+		indentMinus;
+		crlf
+]
+
+{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNLCell: aBLCell [
 	aBLCell layoutOwner container = aBLCell widget ifTrue: [ ^ '' ].
 	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
