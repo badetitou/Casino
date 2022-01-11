@@ -146,24 +146,35 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 
 { #category : #generate }
 CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
-  aBLPageMetier metiers ifNotEmpty: [ currentWriteStream
-           << '<bl-tabs>';
-           << String crlf.
-        aBLPageMetier metiers do: [:metier |  currentWriteStream
-                 << '    <bl-tab title=';
-                 << (self class convertIfString: (self protectString: metier title));
-                 << '>';
-                 << String crlf;
-                 << '        ';
-                 << metier getTag;
-                 << String crlf;
-                 << '    </bl-tab>';
-                 << String crlf ].
-        currentWriteStream
-           << '</bl-tabs>';
-           << String crlf ].
-  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  self visit: widget.
-        currentWriteStream << String crlf ]
+
+	aBLPageMetier metiers ifNotEmpty: [ 
+		currentWriteStream
+			<< '<bl-tabs>';
+			<< String crlf.
+		aBLPageMetier metiers do: [ :metier | 
+			currentWriteStream
+				<< '    <bl-tab title=';
+				<<
+					(self class convertIfString: (self protectString: metier title));
+				<< '>';
+				<< String crlf;
+				<< '        ';
+				<< metier getTag;
+				<< String crlf;
+				<< '    </bl-tab>';
+				<< String crlf ].
+		currentWriteStream
+			<< '</bl-tabs>';
+			<< String crlf ].
+
+	aBLPageMetier layout
+		ifNotNil: [ self visit: aBLPageMetier layout ]
+		ifNil: [ 
+			aBLPageMetier widgets
+				reject: [ :widget | widget isPageMetier ]
+				thenDo: [ :widget | 
+					self visit: widget.
+					currentWriteStream << String crlf ] ]
 ]
 
 { #category : #generate }
@@ -797,73 +808,34 @@ CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
 
 	"export other cell (propably special ones), then north cell, then center, then south"
 
+	| unknowCell northCell centerCell southCell |
+	unknowCell := aCSNLBorderLayout cell select: [ :cell | 
+		              cell position isNil ].
+	northCell := aCSNLBorderLayout cell select: [ :cell | 
+		             cell position isNotNil and: [ cell position isNorth ] ].
+	centerCell := aCSNLBorderLayout cell select: [ :cell | 
+		              cell position isNotNil and: [ cell position isCenter ] ].
+	southCell := aCSNLBorderLayout cell select: [ :cell | 
+		             cell position isNotNil and: [ cell position isSouth ] ].
 	self
-		crlf;
-		indentPlus;
 		<< '<tbody>';
-		crlf;
-		indentPlus.
-	aCSNLBorderLayout cell
-		select: [ :cell | cell position isNil ]
-		thenDo: [ :cell | 
-			self
-				<< '<tr>';
-				inIndented: [ 
-					self << '<td'.
-					cell attributesTagWith: self.
-					self
-						<<< '>';
-						inIndented: [ self visit: cell ];
-						<< '</td>';
-						crlf ];
-				<< '</tr>' ].
-	aCSNLBorderLayout cell
-		select: [ :cell | 
-		cell position isNotNil and: [ cell position isNorth ] ]
-		thenDo: [ :cell | 
-			self
-				<< '<tr>';
-				inIndented: [ 
-					self << '<td'.
-					cell attributesTagWith: self.
-					self
-						<<< '>';
-						inIndented: [ self visit: cell ];
-						<< '</td>';
-						crlf ];
-				<< '</tr>' ].
-	aCSNLBorderLayout cell
-		select: [ :cell | 
-		cell position isNotNil and: [ cell position isCenter ] ]
-		thenDo: [ :cell | 
-			self
-				<< '<tr>';
-				inIndented: [ 
-					self << '<td'.
-					cell attributesTagWith: self.
-					self
-						<<< '>';
-						inIndented: [ self visit: cell ];
-						<< '</td>';
-						crlf ];
-				<< '</tr>' ].
-	aCSNLBorderLayout cell
-		select: [ :cell | 
-		cell position isNotNil and: [ cell position isSouth ] ]
-		thenDo: [ :cell | 
-			self
-				<< '<tr>';
-				inIndented: [ 
-					self << '<td'.
-					cell attributesTagWith: self.
-					self
-						<<< '>';
-						inIndented: [ self visit: cell ];
-						<< '</td>';
-						crlf ];
-				<< '</tr>' ].
-	self
-		indentMinus;
+		inIndented: [ 
+			{ 
+				unknowCell.
+				northCell.
+				centerCell.
+				southCell }
+				do: [ :cells | 
+					self << '<tr>'.
+					self inIndented: [ 
+							cells do: [ :cell | 
+									self << '<td'.
+									cell attributesTagWith: self.
+									self <<< '>'.
+									self inIndented: [ self visit: cell ].
+									self << '</td>' ] ].
+					self << '</tr>' ]
+				separatedBy: [ self crlf ] ];
 		<< '</tbody>';
 		indentMinus;
 		crlf

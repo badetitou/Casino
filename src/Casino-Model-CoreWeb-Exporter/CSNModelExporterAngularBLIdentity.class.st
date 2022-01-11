@@ -248,9 +248,15 @@ CSNModelExporterAngularBLIdentity >> generateHTMLSourceCodeForBusinessPage: aBLP
                  << String crlf ].
         currentWriteStream
            << '</mat-tab-group>';
-           << String crlf ].
-  aBLPageMetier widgets reject: [:widget |  widget isPageMetier ] thenDo: [:widget |  self visit: widget.
-        currentWriteStream << String crlf ]
+           << String crlf ]. 
+  aBLPageMetier layout
+		ifNotNil: [ self visit: aBLPageMetier layout ]
+		ifNil: [ 
+			aBLPageMetier widgets
+				reject: [ :widget | widget isPageMetier ]
+				thenDo: [ :widget | 
+					self visit: widget.
+					currentWriteStream << String crlf ] ]
 ]
 
 { #category : #visiting }
