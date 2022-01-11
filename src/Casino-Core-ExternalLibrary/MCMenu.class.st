@@ -16,7 +16,10 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 	aWidget widgets do: [ :widget | 
 		anExporter
 			crlf;
-			<< '<button mat-menu-item>'.
+			<< '<button mat-menu-item'.
+		self componentAttributeOn: anExporter forWidget: widget.
+		anExporter <<< (widget actionsTagFrom: anExporter).
+		anExporter <<< '>'.
 		widget attributes
 			detect: [ :att | att isOfType: CSNUILabel ]
 			ifFound: [ :att | anExporter visit: att ].
