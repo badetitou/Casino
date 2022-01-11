@@ -12,6 +12,12 @@ CSNPage >> addWidget: aWidget [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Importer' }
+CSNPage >> layout [
+	"A page does not have layout, so it relies on the layout of a business page"
+	^ self businessPage ifNotEmpty: [ :aBusinessPage | aBusinessPage anyOne layout ] ifEmpty: [ super layout ] 
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Importer' }
 CSNPage >> layout: aLayout [
 
 	self businessPage
