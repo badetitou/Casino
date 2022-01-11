@@ -24,7 +24,7 @@ CSNWidget >> csnActionsIn: aBuilder [
 
 	<inspectorPresentationOrder: 1003 title: 'Actions'>
 	^ aBuilder newTable
-		  addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
+		  addColumn: (SpStringTableColumn title: 'Name' evaluated: #printString);
 		  items: self actions asOrderedCollection
 ]
 

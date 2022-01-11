@@ -489,6 +489,7 @@ export const ROUTES_MAIN_WRAPPER: Routes = [
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 
+	| calledActions behaviors |
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeImportForNavigation ].
 	currentWriteStream
@@ -547,16 +548,24 @@ export class ';
 	currentWriteStream << '
 
 '.
-	((aBLPageMetier calledBehavior asOrderedCollection reject: [ :action | action behavior isEmpty ]) sort: [ :action1 :action2 | 
-		 (action1 behavior anyOne uniqueNameInPage: aBLPageMetier) < (action2 behavior anyOne uniqueNameInPage: aBLPageMetier) ]) do: [ :action | 
-		action behavior do: [ :behaveMethod | 
-			self crlf.
-			(self behaviorModelExporter on: self currentWriteStream withIndentLevel: 1)
-				exporterAngularConfiguration: self exporterAngularConfiguration;
-				currentPage: aBLPageMetier;
-				currentModule: self currentModule;
-				export: behaveMethod.
-			self crlf ] ].
+	calledActions := (aBLPageMetier calledBehavior asOrderedCollection 
+		                  reject: [ :action | action behavior isEmpty ]) 
+		                 sort: [ :action1 :action2 | 
+			                 (action1 behavior anyOne uniqueNameInPage:
+				                  aBLPageMetier)
+			                 <
+			                 (action2 behavior anyOne uniqueNameInPage:
+				                  aBLPageMetier) ].
+	behaviors := calledActions flatCollect: #behavior.
+	(behaviors asSet asOrderedCollection sorted: [ :b1 :b2 | b1 name < b2 name  ]) do: [ :behaveMethod | 
+		self crlf.
+		(self behaviorModelExporter
+			 on: self currentWriteStream
+			 withIndentLevel: 1)
+			exporterAngularConfiguration: self exporterAngularConfiguration;
+			currentPage: aBLPageMetier;
+			export: behaveMethod.
+		self crlf ].
 	self
 		crlf;
 		<<< '}';

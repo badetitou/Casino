@@ -19,8 +19,3 @@ CSNBusinessPage >> recursiveElements [
 CSNBusinessPage >> recursiveMetiers [
 	^ (self metiers , (self metiers collect: #recursiveMetiers)) flattened
 ]
-
-{ #category : #'*Casino-Model-Extension' }
-CSNBusinessPage >> recursiveWidgets [
-	^ (self widgets , (self widgets collect: #recursiveWidgets))
-]

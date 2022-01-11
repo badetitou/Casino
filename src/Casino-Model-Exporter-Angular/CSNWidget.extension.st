@@ -2,7 +2,6 @@ Extension { #name : #CSNWidget }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> actionsTagFrom: anExporter [
-
 	^ self actions flatCollect: [ :action | ' ' , (anExporter angularActionRepresentationOf: action) ]
 ]
 

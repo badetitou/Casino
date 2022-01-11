@@ -108,7 +108,14 @@ CSNBusinessPage >> isPageMetier [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> recursiveWidgetsWithoutMetiers [
-	^ (self widgetsNotPageMetier  , (self widgetsNotPageMetier  collect: #recursiveWidgets)) flattened
+
+	| wid |
+	wid := self widgetsNotPageMetier.
+	wid addAll: (self layout
+			 ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ]
+			 ifNil: [ {  } ]).
+	wid addAll: (wid collect: #recursiveWidgets).
+	^ wid flattened
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

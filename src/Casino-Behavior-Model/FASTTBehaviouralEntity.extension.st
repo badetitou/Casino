@@ -59,12 +59,12 @@ FASTTBehaviouralEntity >> ui [
 	<generated>
 	<FMProperty: #ui type: #CSNAction opposite: #behavior>
 	<package: #'Casino-Behavior-Model'>
-	^ self attributeAt: #ui ifAbsent: [ nil ]
+	^ self attributeAt: #ui ifAbsentPut: [ FMMultiMultivalueLink on: self opposite: #behavior ]
 ]
 
 { #category : #'*Casino-Behavior-Model-accessing' }
 FASTTBehaviouralEntity >> ui: anObject [
 
 	<generated>
-	self attributeAt: #ui put: (FMMultivalueLink on: self update: #behavior from: self ui to: anObject).
+	self ui value: anObject
 ]

@@ -282,21 +282,18 @@ CSNBehaviorModelGenerator >> defineHierarchy [
 CSNBehaviorModelGenerator >> defineRelations [
 	super defineRelations.
 	((navigation property: #arguments)
-	 <>-* (expression property: #navigation)) withoutPrimaryContainer.
+	 <>-* (expression property: #navigation)).
 	(((call property: #onSuccess) comment:
 		  'The statement executed if the call return ''ok''')
-	 <>- (fastBehaviouralEntity property: #carrefourOnSuccessOwner))
-		withoutPrimaryContainer.
+	 <>- (fastBehaviouralEntity property: #carrefourOnSuccessOwner)).
 	(((call property: #onFailure) comment:
 		  'The statement executed if the call return ''ko''')
-	 <>- (fastBehaviouralEntity property: #carrefourOnFailureOwner))
-		withoutPrimaryContainer.
+	 <>- (fastBehaviouralEntity property: #carrefourOnFailureOwner)).
 	(((popUp property: #data) comment:
 		  'The data that will be displayed in the popUp')
-	 <>- (expression property: #carrefourPopUpOwner))
-		withoutPrimaryContainer.
+	 <>- (expression property: #carrefourPopUpOwner)).
 		
-	(action property: #behavior) -* (fastBehaviouralEntity property: #ui).
+	(action property: #behavior) *-* (fastBehaviouralEntity property: #ui).
 	(navigation property: #page) *- (page property: #navigations).
 	(serviceAPI property: #callers) -* (call property: #distantService).
 	(openDialog property: #dialog) *- (cwDialog property: #opener).
