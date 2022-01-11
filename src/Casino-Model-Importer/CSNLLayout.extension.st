@@ -22,7 +22,19 @@ CSNLLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory:
 ]
 
 { #category : #'*Casino-Model-Importer' }
+CSNLLayout class >> initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance [
+	aCollectionOfImporter
+		do: [ :importer | 
+			importer
+				entity: aWidgetInstance;
+				source: anInvocation ]
+]
+
+{ #category : #'*Casino-Model-Importer' }
 CSNLLayout class >> newFrom: anInvocation for: aWidgetInstance withImporters: aCollectionOfImporter [
-	self subclasses do: [ :subclass | aCollectionOfImporter do: [ :importer | (subclass accept: importer) ifNotNil: [ :newLayout | ^ newLayout ] ] ].
+	self initializeImporters: aCollectionOfImporter withInvocation: anInvocation andFor: aWidgetInstance.
+	self subclasses do: [ :subclass | 
+		aCollectionOfImporter do: [ :importer | 
+			(subclass accept: importer) ifNotNil: [ :newLayout | ^ newLayout ] ] ].
 	^ nil
 ]
