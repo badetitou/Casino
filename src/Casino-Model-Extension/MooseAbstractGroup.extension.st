@@ -2,68 +2,68 @@ Extension { #name : #MooseAbstractGroup }
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNAction [
-	<navigation: 'BL Actions'>
+	<navigation: 'CSN Actions'>
 	^ self allWithSubTypesOf: CSNAction
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNActionAppel [
-	<navigation: #CSNActionAppel>
+	<navigation: #'CSN ActionAppel'>
 	^ self allWithSubTypesOf: CSNActionAppel 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNAttributes [
-	<navigation: 'BL Attributes'>
+	<navigation: 'CSN Attributes'>
 	^ self allWithSubTypesOf: CSNAttribute
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNLayout [
-	<navigation: 'Sub-Layout'>
+	<navigation: 'CSN Sub-Layout'>
 	^ self allWithSubTypesOf: CSNLLayout
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNPage [
-	<navigation: 'BL Page'>
+	<navigation: 'CSN Page'>
 	^ self allWithSubTypesOf: CSNPage
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNPageMetier [
-	<navigation: 'BL Page Metier'>
+	<navigation: 'CSN Page Metier'>
 	^ self allWithSubTypesOf: CSNBusinessPage 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNService [
-	<navigation: 'BL Service'>
+	<navigation: 'CSN Service'>
 	^ self allWithSubTypesOf: CSNService 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNServiceAPI [
-	<navigation: #CSNServiceAPI>
+	<navigation: #'CSN ServiceAPI'>
 	^ self allWithSubTypesOf: CSNServiceAPI
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNUiContainer [
 	
-	<navigation: 'BL UiContainer'>
+	<navigation: 'CSN Container'>
 	^ self allWithSubTypesOf: CSNContainer 
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNWidget [
-	<navigation: 'Sub-Widget'>
+	<navigation: 'CSN Sub-Widget'>
 	^ self allWithSubTypesOf: CSNWidget
 ]
 
 { #category : #'*Casino-Model-Extension' }
 MooseAbstractGroup >> allCSNWidgetExceptPage [
-	<navigation: 'Sub-Widget ExceptPage'>
+	<navigation: 'CSN Sub-Widget ExceptPage'>
 	^ self
 		cacheAt: 'Sub-Widget ExceptPage'
 		ifAbsentPut: [ (self allWithSubTypesOf: CSNWidget)
