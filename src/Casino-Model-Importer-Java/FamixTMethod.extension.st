@@ -30,3 +30,10 @@ FamixTMethod >> isInstanciationInitializer [
 FamixTMethod >> parameterAtIndex: anIndex [
 	^ (self parameters sorted: [ :param1 :param2 | param1 sourceAnchor startPos < param2 sourceAnchor startPos ]) at: anIndex
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixTMethod >> returnedFamixVariable [
+
+	^ (self generateFastIfNotDoneAndBind allWithType:
+		   FASTJavaReturnStatement) anyOne expression famixVariable
+]
