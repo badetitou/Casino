@@ -35,5 +35,11 @@ FamixTMethod >> parameterAtIndex: anIndex [
 FamixTMethod >> returnedFamixVariable [
 
 	^ (self generateFastIfNotDoneAndBind allWithType:
-		   FASTJavaReturnStatement) anyOne expression famixVariable
+		   FASTJavaReturnStatement) asOrderedCollection
+		  ifNotEmpty: [ :returnStatements | 
+			  returnStatements
+				  detect: [ :statement | statement expression isNotNil ]
+				  ifOne: [ :statement | statement expression famixVariable ]
+				  ifNone: [ nil ] ]
+		  ifEmpty: [ nil ]
 ]
