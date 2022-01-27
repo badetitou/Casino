@@ -492,7 +492,7 @@ const routes: Routes = [
     { path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
     { path: ''desktop'', component: IndexComponent, children: [';
      << String crlf.
-  aModel allCSNPage do: [:phase |  currentWriteStream
+  (aModel allCSNPage sorted: #name ascending) do: [:phase |  currentWriteStream
            << '        { path: ''';
            << phase name asRealCamelCase;
            << '/:id'', loadChildren: () => import(''./phases/';
