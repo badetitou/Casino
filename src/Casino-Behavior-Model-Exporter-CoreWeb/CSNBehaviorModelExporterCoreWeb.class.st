@@ -1,8 +1,37 @@
 Class {
 	#name : #CSNBehaviorModelExporterCoreWeb,
 	#superclass : #CSNBehaviorModelExporterAngular,
+	#instVars : [
+		'rootMethod'
+	],
 	#category : #'Casino-Behavior-Model-Exporter-CoreWeb'
 }
+
+{ #category : #generated }
+CSNBehaviorModelExporterCoreWeb >> export: aBehaviorMethod [
+	[ self showUnknowExport ifTrue: [ self errorStream: (WriteStream with: String new) ].
+	self rootMethod: aBehaviorMethod.
+	[ self accept: aBehaviorMethod ]
+		on: Error
+		do: [ :err | 
+			('Err during export of: ' , aBehaviorMethod sourceText) record.
+			err signal ] ]
+		ensure: [ self errorStream
+				flush;
+				close ]
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporterCoreWeb >> rootMethod [
+
+	^ rootMethod
+]
+
+{ #category : #accessing }
+CSNBehaviorModelExporterCoreWeb >> rootMethod: anObject [
+
+	rootMethod := anObject
+]
 
 { #category : #generated }
 CSNBehaviorModelExporterCoreWeb >> visitDOMElementAcccess: aDOMElementAcccess [
@@ -25,9 +54,11 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 	self
 		<< (aFASTJavaMethodEntity uniqueNameInPage: self currentPage);
 		<<< '('.
-	aFASTJavaMethodEntity parameters do: [ :parameter | self accept: parameter ] separatedBy: [ self <<< ', ' ].
+	aFASTJavaMethodEntity parameters
+		do: [ :parameter | self accept: parameter ]
+		separatedBy: [ self <<< ', ' ].
 	self <<< ') {'.
-	aFASTJavaMethodEntity rootNode = aFASTJavaMethodEntity ifTrue: [ self <<< '/*' ].
+	self rootMethod = aFASTJavaMethodEntity ifTrue: [ self <<< '/*' ].
 	self
 		indentPlus;
 		crlf.
@@ -43,9 +74,7 @@ CSNBehaviorModelExporterCoreWeb >> visitFASTJavaMethodEntity: aFASTJavaMethodEnt
 		crlf;
 		indentMinus;
 		indent.
-	aFASTJavaMethodEntity rootNode = aFASTJavaMethodEntity ifTrue: [ 
-		self
-			<<< '*/' ].
+	self rootMethod = aFASTJavaMethodEntity ifTrue: [ self <<< '*/' ].
 	self <<< '}'
 ]
 
