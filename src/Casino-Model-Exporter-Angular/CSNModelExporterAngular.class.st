@@ -360,7 +360,7 @@ import { ComponentsModule, Phase, PHASES } from ''app/projects/bl-shell/src/publ
 import { IndexComponent } from ''./components/index/index.component'';
 import { TranslateModule } from ''@ngx-translate/core'';
 '.
-	(aModel allCSNService sorted: #uniqueName ascending)
+	"(aModel allCSNService sorted: #uniqueName ascending)
 		do: [ :service | 
 			currentWriteStream
 				<< 'import { ';
@@ -368,7 +368,7 @@ import { TranslateModule } from ''@ngx-translate/core'';
 				<< ' } from ''./';
 				<< service getLocalPath;
 				<< ''';';
-				crlf ].
+				crlf ]."
 	currentWriteStream
 		crlf;
 		<<
@@ -401,13 +401,13 @@ import { TranslateModule } from ''@ngx-translate/core'';
     ],
     providers: [
 '.
-	(aModel allCSNService sorted: #uniqueName ascending)
+	"(aModel allCSNService sorted: #uniqueName ascending)
 		do: [ :service | 
 			currentWriteStream
 				<< '        ';
 				<< service uniqueName;
 				<< ',';
-				<< String crlf ].
+				<< String crlf ]."
 	currentWriteStream
 		<<
 			'        { provide: PHASES, useValue: phases } as Provider
@@ -1114,7 +1114,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
 		displayingProgress: [ :page | 'export page: ' , page codePhase asString ].
-	aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]
+	"aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]"
 ]
 
 { #category : #'private-generate' }

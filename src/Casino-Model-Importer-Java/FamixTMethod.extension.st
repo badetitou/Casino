@@ -32,10 +32,29 @@ FamixTMethod >> parameterAtIndex: anIndex [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
+FamixTMethod >> returnedFamixInvocation [
+
+	self generateFastIfNotDoneAndBind.
+	^ (self fast
+		   allToScope: FASTJavaReturnStatement
+		   until: [ :node | node isKindOf: FASTJavaNewClassExpression ])
+		  asOrderedCollection
+		  ifNotEmpty: [ :returnStatements | 
+			  returnStatements
+				  detect: [ :statement | statement expression isNotNil ]
+				  ifOne: [ :statement | statement expression famixInvocation ]
+				  ifNone: [ nil ] ]
+		  ifEmpty: [ nil ]
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 FamixTMethod >> returnedFamixVariable [
 
-	^ (self generateFastIfNotDoneAndBind allWithType:
-		   FASTJavaReturnStatement) asOrderedCollection
+	self generateFastIfNotDoneAndBind.
+	^ (self fast
+		   allToScope: FASTJavaReturnStatement
+		   until: [ :node | node isKindOf: FASTJavaNewClassExpression ])
+		  asOrderedCollection
 		  ifNotEmpty: [ :returnStatements | 
 			  returnStatements
 				  detect: [ :statement | statement expression isNotNil ]
