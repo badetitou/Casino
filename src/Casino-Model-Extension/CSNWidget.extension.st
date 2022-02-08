@@ -97,6 +97,23 @@ CSNWidget >> subWidgets [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> verticalVeryDeepCopy [
+
+	| widgetCopy |
+	widgetCopy := self class new.
+	self mooseModel ifNotNil: [ :model | model add: widgetCopy ].
+	self attributes do: [ :attribute | 
+		| attributeCopy |
+		attributeCopy := attribute class new.
+		attribute mooseModel ifNotNil: [ :model | model add: attribute ].
+		attributeCopy attributeValue: attribute attributeValue.
+		widgetCopy addAttribute: attributeCopy ].
+	self widgets do: [ :widget | 
+		widgetCopy addWidget: widget verticalVeryDeepCopy ].
+	^ widgetCopy
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> widgets [
 	^ { } asOrderedCollection 
 ]
