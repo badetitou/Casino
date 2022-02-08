@@ -43,6 +43,11 @@ CSNOriginedEntity >> parentNode [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNOriginedEntity >> realName [
+	^ name
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> rootNode [
 
 	"I should be overriden in my users"

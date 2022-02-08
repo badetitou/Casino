@@ -110,6 +110,8 @@ CSNWidget >> verticalVeryDeepCopy [
 		widgetCopy addAttribute: attributeCopy ].
 	self widgets do: [ :widget | 
 		widgetCopy addWidget: widget verticalVeryDeepCopy ].
+	widgetCopy source: self source.
+	widgetCopy name: self realName.
 	^ widgetCopy
 ]
 
