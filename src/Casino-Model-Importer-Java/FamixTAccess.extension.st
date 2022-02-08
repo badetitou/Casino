@@ -16,8 +16,11 @@ FamixTAccess >> endAffectationPos [
 
 { #category : #'*Casino-Model-Importer-Java' }
 FamixTAccess >> isReturned [
-	^ self source declaredType isNotNil
-		and: [ self source declaredType isPrimitiveType not
-				and: [ ((self source accesses asOrderedCollection select: [ :access | access sourceAnchor isNotNil ])
-						sort: [ :a :b | a sourceAnchor startPos < b sourceAnchor startPos ]) last = self ] ]
+
+	^ self source declaredType isNotNil and: [ 
+		  self source declaredType isPrimitiveType not and: [ 
+			  ((self source accesses asOrderedCollection select: [ :access | 
+				    access sourceAnchor isNotNil ]) sort: [ :a :b | 
+				   a sourceAnchor startPos < b sourceAnchor startPos ]) last
+			  = self ] ]
 ]

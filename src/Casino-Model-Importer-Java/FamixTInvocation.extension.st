@@ -46,6 +46,8 @@ FamixTInvocation >> isReturned [
 
 	^ self source declaredType isNotNil and: [ 
 		  self source declaredType = self invokedMethod parentType and: [ 
-			  ((self source outgoingInvocations asOrderedCollection select: [ :invoc | invoc sourceAnchor isNotNil ]) sort: [ :a :b | 
-				   a sourceAnchor startPos < b sourceAnchor startPos ]) last = self ] ]
+			  ((self source outgoingInvocations asOrderedCollection select: [ 
+				    :invoc | invoc sourceAnchor isNotNil ]) sort: [ :a :b | 
+				   a sourceAnchor startPos < b sourceAnchor startPos ]) last
+			  = self ] ]
 ]
