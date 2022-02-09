@@ -8,7 +8,6 @@ FamixJavaInvocation >> affectation [
 	The BLLabel affectation must not be service3 (it is wrong)
 "
 
-	self container ifNotNil: [ ^ nil ].
 	self source hasSourceAnchor ifTrue: [ 
 		self source name = '<Initializer>'
 			ifFalse: [ "Normal method" self source generateFastIfNotDoneAndBind "self source generateFastAndBind" ]
