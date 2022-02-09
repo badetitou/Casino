@@ -10,24 +10,40 @@ FamixJavaInvocation >> affectation [
 
 	self source hasSourceAnchor ifTrue: [ 
 		self source name = '<Initializer>'
-			ifFalse: [ "Normal method" self source generateFastIfNotDoneAndBind "self source generateFastAndBind" ]
-			ifTrue: [ "method initialize... We must generate and bind the class" (self source atScope: FamixTClass) anyOne generateFastIfNotDoneAndBind ].
-		(self fast atAnyScope: { 
-				 FASTJavaAssignementExpression.
-				 FASTJavaVariableDeclarator }) ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ].
+			ifFalse: [ "Normal method" 
+				self source generateFastIfNotDoneAndBind "self source generateFastAndBind" ]
+			ifTrue: [ "method initialize... We must generate and bind the class" 
+				(self source atScope: FamixTClass) anyOne
+					generateFastIfNotDoneAndBind ].
+		(self fast
+			 atAnyScope: { 
+					 FASTJavaAssignementExpression.
+					 FASTJavaVariableDeclarator }
+			 until: [ :node | 
+				 self fast ~= node and: [ node isKindOf: FASTJavaNewExpression ] ]) 
+			ifNotEmpty: [ :aScopeWithOneElement | 
+				^ aScopeWithOneElement anyOne variable famixVariable ] ].
 
 	"old way can be executed if new way fail"
-	^ ((self source localVariables select: [ :el | el sourceAnchor isNotNil ]) select: [ :localVariable | 
-		   localVariable sourceAnchor startPos < self sourceAnchor startPos and: [ localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
+	^ ((self source localVariables select: [ :el | 
+		    el sourceAnchor isNotNil ]) select: [ :localVariable | 
+		   localVariable sourceAnchor startPos < self sourceAnchor startPos 
+			   and: [ 
+			   localVariable sourceAnchor endPos > self sourceAnchor endPos ] ])
 		  at: 1
 		  ifAbsent: [ 
 			  ((self source accesses select: #isWrite) select: [ :access | 
-				   access sourceAnchor startPos < self sourceAnchor startPos and: [ access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
-				  ifNotEmpty: [ :accessCollection | accessCollection anyOneIfOnlyOneElement variable ]
+				   access sourceAnchor startPos < self sourceAnchor startPos and: [ 
+					   access sourceAnchor endPos + 5 > self sourceAnchor startPos ] ])
+				  ifNotEmpty: [ :accessCollection | 
+					  accessCollection anyOneIfOnlyOneElement variable ]
 				  ifEmpty: [ 
 					  self source isInstanciationInitializer ifTrue: [ 
-						  ((self source atScope: FamixTClass) anyOneIfOnlyOneElement attributes select: [ :attribute | 
-							   attribute sourceAnchor startPos < self sourceAnchor startPos and: [ attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
+						  ((self source atScope: FamixTClass) anyOneIfOnlyOneElement
+							   attributes select: [ :attribute | 
+							   attribute sourceAnchor startPos < self sourceAnchor startPos 
+								   and: [ 
+								   attribute sourceAnchor endPos > self sourceAnchor endPos ] ])
 							  at: 1
 							  ifAbsent: [ ^ nil ] ] ] ]
 ]
