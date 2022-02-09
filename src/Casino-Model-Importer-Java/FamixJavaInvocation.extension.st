@@ -7,10 +7,11 @@ FamixJavaInvocation >> affectation [
 			TreeItemCopie service3 = new TreeItemCopie(new BLLabel(""SRHA - Se ']' expected ->rvice RH - Absences""));
 	The BLLabel affectation must not be service3 (it is wrong)
 "
+
 	self cacheAt: #affectation ifPresent: [ :value | 
 		^ value isNotFound
-			ifTrue: [ nil ]
-			ifFalse: [ value ] ].
+			  ifTrue: [ nil ]
+			  ifFalse: [ value ] ].
 	self sender isStub ifFalse: [ 
 		self sender name = '<Initializer>'
 			ifFalse: [ "Normal method" 
@@ -30,6 +31,9 @@ FamixJavaInvocation >> affectation [
 					  self cacheAt: #affectation put: variable ]
 					  ifNil: [ self cacheAt: #affectation put: CSNNotFound default ] ] ].
 	"old way can be executed if new way fail"
+	self container ifNotNil: [ 
+		self cacheAt: #affectation put: CSNNotFound default.
+		^ nil ].
 	^ ((self sender localVariables select: [ :el | 
 		    el sourceAnchor isNotNil ]) select: [ :localVariable | 
 		   localVariable sourceAnchor startPos < self sourceAnchor startPos 
