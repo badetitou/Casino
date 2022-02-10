@@ -20,6 +20,7 @@ CSNWidgetTest >> setUp [
 	model := CSNModel new.
 	container := CSNContainer new.
 	container source: 2.
+	container affectedActions: 3.
 	subContainer := CSNContainer new.
 	subContainer name: 'a sub container'.
 	attribute := CSNAttribute new.
@@ -79,6 +80,14 @@ CSNWidgetTest >> testVerticalVeryDeepCopyInSameMooseModel [
 CSNWidgetTest >> testVerticalVeryDeepCopyName [
 
 	self assert: subContainer realName equals: subContainer verticalVeryDeepCopy realName
+]
+
+{ #category : #test }
+CSNWidgetTest >> testVerticalVeryDeepCopyTheAffectedActions [
+
+	| copy |
+	copy := container verticalVeryDeepCopy.
+	self assert: container affectedActions equals: copy affectedActions.
 ]
 
 { #category : #test }
