@@ -111,7 +111,7 @@ CSNWidget >> verticalVeryDeepCopy [
 	self widgets do: [ :widget | 
 		widgetCopy addWidget: widget verticalVeryDeepCopy ].
 	widgetCopy sources: self sources copy.
-	widgetCopy affectedActions: self affectedActions copy.
+	widgetCopy affectedActions: self affectedActions.
 	widgetCopy name: self realName.
 	^ widgetCopy
 ]
