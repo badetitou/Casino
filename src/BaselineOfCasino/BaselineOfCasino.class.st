@@ -66,36 +66,65 @@ BaselineOfCasino >> defineDependencies: spec [
 
 { #category : #baselines }
 BaselineOfCasino >> defineGroups: spec [
+
 	spec
-		group: 'default' with: #('core-extented' 'Casino-Model-Exporter-Angular' 'Casino-Model-Importer-Java' 'Casino-Helper' );
-		group: 'default-tests' with: #('default' 'Casino-Model-Importer-Java-Tests' 'Casino-Model-Importer-Tests' 'Casino-Model-Extension-Tests' 'Casino-Model-Exporter-Angular-Tests');
-		group: 'model' with: #('Casino-Model' 'Casino-Core-ExternalLibrary' 'Casino-Model-Extension');
-		group: 'core' with: #('model' 'Casino-Model-Exporter' 'Casino-Model-Importer');
-		group: 'core-extented' with: #('core' 'Casino-Model-UI-SubEntities' 'Casino-Model-Layout-Extension');
-		group: 'importer-java' with: #('core-extented' 'Casino-Model-Importer-Java');
-		group: 'bl-tests' with: #('bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests');
-		group: 'tests' with: #('bl-tests' 'default-tests' 'behavior-tests' 'business-tests');
-		group: 'ui-bl' with: #('bl' 'tests');
-		group: 'bl' with: #('default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter' 'Casino-Model-CoreWeb-Importer');
-		group: 'behavior' with: #('ui-bl' 'Casino-Behavior-Model-Generator' 'Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model');
-		group: 'behavior-tests' with: #('behavior' 'Casino-Behavior-Model-Importer-Java-Tests');
-		
-		"bl"
-		group: 'behavior-bl' with: #('behavior-importer-java' 'behavior-exporter-angular');
-		group: 'behavior-importer-java' with: #('behavior' 'Casino-Behavior-Model-Importer-Java');
-		group: 'behavior-exporter-angular' with: #('behavior' 'Casino-Behavior-Model-Exporter-CoreWeb' 'Casino-Behavior-Model-Exporter-Angular-Tests');
-		
-		"business"
-		group: 'business' with: #('Casino-Business-Model' 'Casino-Business-Model-Importer-CoreWeb' 'Casino-Business-Model-Exporter-CoreWeb');
-		group: 'business-tests' with: #('business' 'Casino-Business-Model-Importer-CoreWeb-Tests');
-		
-		"bl migration"
-		group: 'omaje' with: #('Casino-Migration-Omaje' 'behavior-bl' 'business');
-		group: 'rh' with: #('Casino-Migration-RH' 'behavior-bl' 'business');
-		group: 'office' with: #('Casino-Migration-PostOffice' 'behavior-bl' 'business');
-		
-		"export java"
-		group: 'rest-java' with: #('Casino-BL-GWT-ServiceRest-Exporter')
+		group: 'default'
+		with: #( 'core-extented' 'Casino-Model-Exporter-Angular'
+			   'Casino-Model-Importer-Java' 'Casino-Helper' );
+		group: 'default-tests'
+		with: #( 'default' 'Casino-Model-Importer-Java-Tests'
+			   'Casino-Model-Importer-Tests' 'Casino-Model-Extension-Tests'
+			   'Casino-Model-Exporter-Angular-Tests'
+			   'Casino-Model-Layout-Tests' );
+		group: 'model'
+		with: #( 'Casino-Model' 'Casino-Core-ExternalLibrary'
+			   'Casino-Model-Extension' );
+		group: 'core'
+		with: #( 'model' 'Casino-Model-Exporter' 'Casino-Model-Importer' );
+		group: 'core-extented'
+		with:
+			#( 'core' 'Casino-Model-UI-SubEntities'
+			   'Casino-Model-Layout-Extension' );
+		group: 'importer-java'
+		with: #( 'core-extented' 'Casino-Model-Importer-Java' );
+		group: 'bl-tests'
+		with:
+			#( 'bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests' );
+		group: 'tests'
+		with:
+			#( 'bl-tests' 'default-tests' 'behavior-tests' 'business-tests' );
+		group: 'ui-bl' with: #( 'bl' 'tests' );
+		group: 'bl'
+		with:
+			#( 'default' 'Casino-Model-CoreWeb' 'Casino-Model-CoreWeb-Exporter'
+			   'Casino-Model-CoreWeb-Importer' );
+		group: 'behavior'
+		with: #( 'ui-bl' 'Casino-Behavior-Model-Generator'
+			   'Casino-Behavior-Model-Importer-Java'
+			   'Casino-Behavior-Model' );
+		group: 'behavior-tests'
+		with: #( 'behavior' 'Casino-Behavior-Model-Importer-Java-Tests' );
+		"bl"group: 'behavior-bl'
+		with: #( 'behavior-importer-java' 'behavior-exporter-angular' );
+		group: 'behavior-importer-java'
+		with: #( 'behavior' 'Casino-Behavior-Model-Importer-Java' );
+		group: 'behavior-exporter-angular'
+		with: #( 'behavior' 'Casino-Behavior-Model-Exporter-CoreWeb'
+			   'Casino-Behavior-Model-Exporter-Angular-Tests' );
+		"business"group: 'business'
+		with:
+			#( 'Casino-Business-Model' 'Casino-Business-Model-Importer-CoreWeb'
+			   'Casino-Business-Model-Exporter-CoreWeb' );
+		group: 'business-tests'
+		with: #( 'business' 'Casino-Business-Model-Importer-CoreWeb-Tests' );
+		"bl migration"group: 'omaje'
+		with: #( 'Casino-Migration-Omaje' 'behavior-bl' 'business' );
+		group: 'rh'
+		with: #( 'Casino-Migration-RH' 'behavior-bl' 'business' );
+		group: 'office'
+		with: #( 'Casino-Migration-PostOffice' 'behavior-bl' 'business' );
+		"export java"group: 'rest-java'
+		with: #( 'Casino-BL-GWT-ServiceRest-Exporter' )
 ]
 
 { #category : #baselines }
@@ -112,6 +141,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-UI-SubEntities-Generator';
 		package: 'Casino-Model-Layout' with: [ spec requires: #('Casino-Model' 'Casino-Model-Layout-Generator') ];
 		package: 'Casino-Model-Layout-Extension' with: [ spec requires: #('Casino-Model-Layout') ];
+		package: 'Casino-Model-Layout-Tests' with: [ spec requires: #('Casino-Model-Layout-Extension') ];
 		package: 'Casino-Model-Layout-Generator';
 		package: 'Casino-Model-Visitor' with: [ spec requires: #('model' 'Casino-Model-CoreWeb') ];
 		package: 'Casino-Model-CoreWeb-Visitor' with: [ spec requires: #('Casino-Model-Visitor' 'Casino-Model-CoreWeb') ];
