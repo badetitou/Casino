@@ -208,3 +208,11 @@ CSNLGridLayout >> maxLevel [
 		ifEmpty: [ ^ 0 ]
 		ifNotEmpty: [ :col | col max ]
 ]
+
+{ #category : #accessing }
+CSNLGridLayout >> notPositionnedCell [
+
+	^ (((self attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) 
+		    reject: [ :position | position isArray ]) associationsCollect:
+		   #yourself) collect: #key
+]

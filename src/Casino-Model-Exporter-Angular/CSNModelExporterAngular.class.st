@@ -147,6 +147,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 { #category : #generate }
 CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
 
+	| angularRepresentation |
 	aBLPageMetier metiers ifNotEmpty: [ 
 		currentWriteStream
 			<< '<bl-tabs>';
@@ -167,14 +168,18 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
 			<< '</bl-tabs>';
 			<< String crlf ].
 
-	aBLPageMetier layout
-		ifNotNil: [ self visit: aBLPageMetier layout ]
-		ifNil: [ 
-			aBLPageMetier widgets
-				reject: [ :widget | widget isPageMetier ]
-				thenDo: [ :widget | 
-					self visit: widget.
-					currentWriteStream << String crlf ] ]
+	aBLPageMetier layout ifNotNil: [ 
+		angularRepresentation := self angularRepresentationOf: aBLPageMetier.
+		angularRepresentation exportHeaderOf: aBLPageMetier with: self.
+		self visit: aBLPageMetier layout.
+		angularRepresentation exportFooterOf: aBLPageMetier with: self.
+		self crlf ].
+
+	aBLPageMetier widgets
+		reject: [ :widget | widget isPageMetier ]
+		thenDo: [ :widget | 
+			self visit: widget.
+			currentWriteStream << String crlf ]
 ]
 
 { #category : #generate }
@@ -799,6 +804,7 @@ CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 		ifNotNil: [ :layout | 
 			angularRepresentation exportHeaderOf: aBLUIContainer with: self.
 			self visit: layout.
+			 angularRepresentation export: aBLUIContainer with: self.
 			angularRepresentation exportFooterOf: aBLUIContainer with: self ]
 		ifNil: [ angularRepresentation export: aBLUIContainer with: self ]
 ]
@@ -849,37 +855,48 @@ CSNModelExporterAngular >> visitCSNLCell: aBLCell [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
+
 	self
-     crlf;
-     indentPlus;
-     << '<tbody>';
-     crlf;
-     indentPlus.
-  0 to: aBLUIGridLayout maxLevel do: [:number |  self
-           << '<tr>';
-           crlf;
-           indentPlus.
-        (aBLUIGridLayout atLevelSorted: number) reject: #isNil thenDo: [:cell |  self << '<td'.
-              cell attributesTagWith: self.
-              self
-                 <<< '>';
-                 crlf.
-              self indentPlus.
-              self visit: cell.
-              self indentMinus.
-              self
-                 crlf;
-                 << '</td>';
-                 crlf ].
-        self
-           indentMinus;
-           << '</tr>';
-           crlf ].
-  self
-     indentMinus;
-     << '</tbody>';
-     indentMinus;
-     crlf
+		crlf;
+		indentPlus;
+		<< '<tbody>';
+		crlf;
+		indentPlus.
+	0 to: aBLUIGridLayout maxLevel do: [ :number | 
+		self
+			<< '<tr>';
+			crlf;
+			indentPlus.
+		(aBLUIGridLayout atLevelSorted: number)
+			reject: #isNil
+			thenDo: [ :cell | 
+				self << '<td'.
+				cell attributesTagWith: self.
+				self
+					<<< '>';
+					crlf.
+				self indentPlus.
+				self visit: cell.
+				self indentMinus.
+				self
+					crlf;
+					<< '</td>';
+					crlf ].
+		self
+			indentMinus;
+			<< '</tr>';
+			crlf ].
+	self
+		indentMinus;
+		<< '</tbody>';
+		indentMinus;
+		crlf.
+
+	aBLUIGridLayout notPositionnedCell ifNotEmpty: [ :cells | 
+		self
+			<< '<!-- not positionned cells -->';
+			crlf.
+		cells do: [ :cell | self visit: cell ] ]
 ]
 
 { #category : #visiting }

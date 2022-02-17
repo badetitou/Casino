@@ -2,7 +2,7 @@ Extension { #name : #CSNLVerticalLayout }
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNLVerticalLayout >> childAttribute [
-	^ CSNUIClass new attributeValue: 'p-col-12'
+	^ CSNUIClass new attributeValue: 'col-12'
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
