@@ -28,7 +28,7 @@ CSNLGridLayout >> atLevel: level [
 { #category : #accessing }
 CSNLGridLayout >> atLevelSorted: level [
 	^ ((((self attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
-		select: [ :position | (position at: 1) = level ])
+		select: [ :position | position isArray and: [ (position at: 1) = level ] ])
 		associationsCollect: #yourself)
 		sort: [ :a :b | a value second < b value second ]) collect: #key
 ]
