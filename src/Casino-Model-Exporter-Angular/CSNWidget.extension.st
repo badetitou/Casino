@@ -46,17 +46,21 @@ CSNWidget >> csnInAngular: aBuilder [
 	attributeExporter := CSNExporterAngularAttribute.
 	code := aBuilder newCode
 		        text: (String streamContents: [ :s | 
-					         (CSNModelExporterAngular on: s)
-						         currentPage: (self atAnyScope: { 
-										          CSNPage.
-										          CSNBusinessPage }) anyOne;
-						         attributeExporter: attributeExporter new;
-						         exporterAngularConfiguration: config new;
-						         visit: self ]);
+					         | exporter |
+					         exporter := (CSNModelExporterAngular on: s)
+						                     currentPage: (self atAnyScope: { 
+										                      CSNPage.
+										                      CSNBusinessPage }) anyOne;
+						                     attributeExporter: attributeExporter new;
+						                     exporterAngularConfiguration: config new.
+					         (self isKindOf: CSNBusinessPage)
+						         ifFalse: [ self accept: exporter ]
+						         ifTrue: [ 
+						         exporter generateHTMLSourceCodeForBusinessPage: self ] ]);
 		        beNotEditable;
 		        withLineNumbers;
 		        withoutSyntaxHighlight.
-	^ (self isPageMetier not and: [ (self isKindOf: CSNPage) not ])
+	^ (self isKindOf: CSNPage) not
 		  ifTrue: [ 
 			  aBuilder newPresenter layout: (aBuilder newBoxLayoutTopToBottom
 					   add: (aBuilder newDropList
@@ -66,13 +70,17 @@ CSNWidget >> csnInAngular: aBuilder [
 							    whenSelectedItemChangedDo: [ :aClass | 
 								    config := aClass.
 								    code text: (String streamContents: [ :s | 
-												     (CSNModelExporterAngular on: s)
-													     exporterAngularConfiguration: config new;
-													     attributeExporter: attributeExporter new;
-													     currentPage: (self atAnyScope: { 
-																	      CSNPage.
-																	      CSNBusinessPage }) anyOne;
-													     visit: self ]) ];
+												     | exporter |
+												     exporter := (CSNModelExporterAngular on: s)
+													                 currentPage: (self atAnyScope: { 
+																	                  CSNPage.
+																	                  CSNBusinessPage }) anyOne;
+													                 attributeExporter: attributeExporter new;
+													                 exporterAngularConfiguration: config new.
+												     (self isKindOf: CSNBusinessPage)
+													     ifFalse: [ self accept: exporter ]
+													     ifTrue: [ 
+													     exporter generateHTMLSourceCodeForBusinessPage: self ] ]) ];
 							    yourself)
 					   expand: false;
 					   add: code;
