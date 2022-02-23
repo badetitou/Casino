@@ -88,8 +88,8 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'importer-java'
 		with: #( 'core-extented' 'Casino-Model-Importer-Java' );
 		group: 'bl-tests'
-		with:
-			#( 'bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests' );
+		with: #( 'bl' 'default-tests' 'Casino-Model-CoreWeb-Importer-Tests'
+			   'Casino-Model-CoreWeb-Exporter-Tests' );
 		group: 'tests'
 		with:
 			#( 'bl-tests' 'default-tests' 'behavior-tests' 'business-tests' );
@@ -158,6 +158,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb' with: [ spec requires: #('Casino-Model-UI-SubEntities' 'Casino-Model' 'Casino-Model-CoreWeb-Generator') ];
 		package: 'Casino-Model-CoreWeb-Generator' with: [ spec requires: #('Casino-Model-UI-SubEntities-Generator' 'Casino-Model-Generator') ];
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
+		package: 'Casino-Model-CoreWeb-Exporter-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Exporter') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('XMLParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
 		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];

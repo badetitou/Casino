@@ -798,13 +798,15 @@ CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
+
 	| angularRepresentation |
 	angularRepresentation := self angularRepresentationOf: aBLUIContainer.
 	aBLUIContainer layout
 		ifNotNil: [ :layout | 
 			angularRepresentation exportHeaderOf: aBLUIContainer with: self.
 			self visit: layout.
-			 angularRepresentation export: aBLUIContainer with: self.
+			aBLUIContainer widgets ifNotEmpty: [ 
+				angularRepresentation export: aBLUIContainer with: self ].
 			angularRepresentation exportFooterOf: aBLUIContainer with: self ]
 		ifNil: [ angularRepresentation export: aBLUIContainer with: self ]
 ]
@@ -889,11 +891,11 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
 	self
 		indentMinus;
 		<< '</tbody>';
-		indentMinus;
-		crlf.
+		indentMinus.
 
 	aBLUIGridLayout notPositionnedCell ifNotEmpty: [ :cells | 
 		self
+			crlf;
 			<< '<!-- not positionned cells -->';
 			crlf.
 		cells do: [ :cell | self visit: cell ] ]

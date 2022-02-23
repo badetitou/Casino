@@ -51,3 +51,8 @@ FamixTInvocation >> isReturned [
 				   a sourceAnchor startPos < b sourceAnchor startPos ]) last
 			  = self ] ]
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixTInvocation >> owningClass [
+	^ self sender parentType 
+]

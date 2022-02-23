@@ -13,3 +13,8 @@ FamixTParameter >> allUsages [
 		   :usage | usage parameters anySatisfy: [ :param | param includesSubstring: self name ] ]) ifEmpty: [ 
 		  self parentBehaviouralEntity allUsages reject: [ :invoc | invoc receiver = self ] ]
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixTParameter >> owningClass [
+	^ self parentType 
+]
