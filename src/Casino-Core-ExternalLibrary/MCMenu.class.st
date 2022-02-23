@@ -38,7 +38,7 @@ MCMenu >> exportFooterOf: aWidget with: anExporter [
 MCMenu >> exportHeaderOf: aWidget with: anExporter [
 
 	anExporter
-		<< '<button mat-button [matMenuTriggerFor]="';
+		<< '<button mat-stroked-button [matMenuTriggerFor]="';
 		<<< (self variableFor: aWidget);
 		<<< '">'.
 	aWidget attributes
@@ -55,6 +55,11 @@ MCMenu >> exportHeaderOf: aWidget with: anExporter [
 { #category : #accessing }
 MCMenu >> getSelector [
 	^ 'mat-menu'
+]
+
+{ #category : #accessing }
+MCMenu >> internalDependenciesOf: aWidgetInstance [
+	^ { MCButton new }
 ]
 
 { #category : #accessing }
