@@ -45,18 +45,6 @@ CSNWidget >> csnInAngular: aBuilder [
 	config := CSNExporterAngularConfiguration.
 	attributeExporter := CSNExporterAngularAttribute.
 	code := aBuilder newCode
-		        text: (String streamContents: [ :s | 
-					         | exporter |
-					         exporter := (CSNModelExporterAngular on: s)
-						                     currentPage: (self atAnyScope: { 
-										                      CSNPage.
-										                      CSNBusinessPage }) anyOne;
-						                     attributeExporter: attributeExporter new;
-						                     exporterAngularConfiguration: config new.
-					         (self isKindOf: CSNBusinessPage)
-						         ifFalse: [ self accept: exporter ]
-						         ifTrue: [ 
-						         exporter generateHTMLSourceCodeForBusinessPage: self ] ]);
 		        beNotEditable;
 		        withLineNumbers;
 		        withoutSyntaxHighlight.
@@ -81,6 +69,7 @@ CSNWidget >> csnInAngular: aBuilder [
 													     ifFalse: [ self accept: exporter ]
 													     ifTrue: [ 
 													     exporter generateHTMLSourceCodeForBusinessPage: self ] ]) ];
+							    selectIndex: 1;
 							    yourself)
 					   expand: false;
 					   add: code;
