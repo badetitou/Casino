@@ -1,0 +1,81 @@
+Class {
+	#name : #CSNModelExporterAngularBLSpecificTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'exporter',
+		'metamodel',
+		'testModel'
+	],
+	#category : #'Casino-Model-CoreWeb-Exporter-Tests'
+}
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> createEntity: aCSNClass [
+
+	^ exporter model add: aCSNClass new
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> setUp [
+
+	super setUp.
+	metamodel := FMMetaModelBuilder metamodelFromPackages:
+		             CSNBModel packagesToProcessToCreateMetamodel
+		             , CRFModel packagesToProcessToCreateMetamodel
+		             , CSNBuModel packagesToProcessToCreateMetamodel.
+	testModel := CSNUICWModel new
+		             name: 'evol';
+		             yourself.
+	testModel metamodel: metamodel.
+	exporter := CSNModelExporterAngularBLSpecific new.
+	exporter exporterAngularConfiguration:
+		CSNExporterAngularCoreWeb2Configuration new.
+	exporter attributeExporter: CSNExporterAngularAttribute new.
+	exporter model: testModel
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidget [
+
+	| result business container |
+	business := self createEntity: CSNBusinessPage.
+	business layout: (self createEntity: CSNLHorizontalLayout).
+	container := self createEntity: CSNContainer.
+	business layout addWidget: container.
+	container addWidget: (self createEntity: CSNUIButton).
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<div class="grid">';
+			          << String crlf;
+			          << '    <div class="col-12">';
+			          << String crlf;
+			          << '        <bl-button-link>';
+			          << String crlf;
+			          << '        </bl-button-link>';
+			          << String crlf;
+			          << '    </div>';
+			          << String crlf;
+			          << '</div>';
+			          << String crlf ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter generateHTMLSourceCodeForBusinessPage: business.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportPanel [
+
+	| result |
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<div>';
+			          << String crlf;
+			          << '</div>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIPanel: CSNUIPanel new.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
