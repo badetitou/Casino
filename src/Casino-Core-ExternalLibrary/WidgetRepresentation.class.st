@@ -4,6 +4,11 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #export }
+WidgetRepresentation >> angularActionRepresentationOf: action forWidget: aWidget using: anExporter [
+	^ anExporter <<< (action getAngularRepresentationWith: anExporter)
+]
+
 { #category : #'accessing - export' }
 WidgetRepresentation >> attributeDictionary [
 	^ {  } asDictionary
@@ -22,6 +27,20 @@ WidgetRepresentation >> attributeOf: aWidget [
 	aWidget variable ifNotNil: [ :variable | 
 		attributes add: (CSNUIId new attributeValue: aWidget id) ].
 	^ attributes
+]
+
+{ #category : #export }
+WidgetRepresentation >> componentActionsOn: anExporter forWidget: aWidget [
+
+	aWidget actions ifNotEmpty: [ 
+		anExporter <<< ' '.
+		aWidget actions
+			do: [ :action | 
+				self
+					angularActionRepresentationOf: action
+					forWidget: aWidget
+					using: anExporter ]
+			separatedBy: [ anExporter <<< ' ' ] ]
 ]
 
 { #category : #export }
@@ -99,7 +118,7 @@ WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter
 
 	anExporter <<< (aWidget getSelectorFrom: anExporter).
 	self componentAttributeOn: anExporter forWidget: aWidget.
-	anExporter <<< (aWidget actionsTagFrom: anExporter).
+	self componentActionsOn: anExporter forWidget: aWidget.
 	anExporter <<< aWidget idTag
 ]
 

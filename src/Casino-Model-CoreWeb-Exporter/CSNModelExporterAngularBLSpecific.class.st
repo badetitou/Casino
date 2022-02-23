@@ -49,13 +49,13 @@ CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPag
 		self writeImportForNavigation ].
 	currentWriteStream
 		<<
-			(String crlf join: ((aBLPageMetier widgetsDependenciesFrom: self)
+			(String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self)
 					  , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
 								   self behaviorImportExporter
 									   export: behavior
 									   withContext: self context
 									   andConfiguration: self exporterAngularConfiguration ])
-							  flattened) asSet);
+							  flattened) asSet  asOrderedCollection sorted: [ :a :d | a < d ]));
 		<< '
 
 @Component({

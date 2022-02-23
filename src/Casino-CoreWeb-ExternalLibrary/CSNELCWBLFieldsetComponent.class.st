@@ -27,6 +27,31 @@ Class {
 }
 
 { #category : #accessing }
+CSNELCWBLFieldsetComponent >> angularActionRepresentationOf: action forWidget: aWidget using: anExporter [
+
+	action isActionAppel ifTrue: [ 
+		action call ifNil: [ "guard" ^ nil ].
+		^ anExporter
+			  <<< '(moreDetails)="openPhase(';
+			  <<< action call name;
+			  <<< ')"' ].
+	anExporter <<< action getAngularRepresentationWith: anExporter
+]
+
+{ #category : #accessing }
+CSNELCWBLFieldsetComponent >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	(aWidget actions anySatisfy: [ :action | action isActionAppel ]) 
+		ifTrue: [ 
+			attributes := attributes , { (CSNAttribute new
+				               name: '[withDetails]';
+				               attributeValue: 'true') } ].
+	^ attributes
+]
+
+{ #category : #accessing }
 CSNELCWBLFieldsetComponent >> getSelector [
 	^ 'bl-fieldset'
 ]

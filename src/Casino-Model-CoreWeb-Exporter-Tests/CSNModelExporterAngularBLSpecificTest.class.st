@@ -65,6 +65,67 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportFieldSet [
+	| result fieldset |
+	fieldset := self createEntity: CSNUIFieldset.
+	
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-fieldset>';
+			          << String crlf;
+			          << '</bl-fieldset>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIFieldset: fieldset.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportFieldSetWithAction [
+
+	| result fieldset |
+	fieldset := self createEntity: CSNUIFieldset.
+	fieldset addAction: ((self createEntity: CSNActionAppel) call:
+			 ((self createEntity: CSNPage)
+				  name: 'Page';
+				  yourself)).
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-fieldset [withDetails]="true" (moreDetails)="openPhase(Page)">';
+			          << String crlf;
+			          << '</bl-fieldset>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIFieldset: fieldset.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportLinkWithAction [
+
+	| result link |
+	link := self createEntity: CSNUILink.
+	link addAction: ((self createEntity: CSNActionAppel) call:
+			 ((self createEntity: CSNPage)
+				  name: 'Page';
+				  yourself)).
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-simple-link (click)="openPhase(Page)">';
+			          << String crlf;
+			          << '</bl-simple-link>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUILink: link.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportPanel [
 
 	| result |
