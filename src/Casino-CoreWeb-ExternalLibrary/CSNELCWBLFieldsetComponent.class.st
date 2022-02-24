@@ -35,7 +35,7 @@ CSNELCWBLFieldsetComponent >> angularActionRepresentationOf: action forWidget: a
 			  <<< '(moreDetails)="openPhase(';
 			  <<< action call name;
 			  <<< ')"' ].
-	anExporter <<< action getAngularRepresentationWith: anExporter
+	anExporter <<< (action getAngularRepresentationWith: anExporter)
 ]
 
 { #category : #accessing }
