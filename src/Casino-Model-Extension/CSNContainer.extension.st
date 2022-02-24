@@ -29,3 +29,13 @@ CSNContainer >> recursiveWidgets [
 CSNContainer >> subWidgets [
 	^ (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [{}])) flattened.
 ]
+
+{ #category : #'*Casino-Model-Extension' }
+CSNContainer >> verticalVeryDeepCopy [
+
+	| widgetCopy |
+	widgetCopy := super verticalVeryDeepCopy.
+	self layout ifNotNil: [ 
+		widgetCopy layout: self layout verticalVeryDeepCopy ].
+	^ widgetCopy
+]
