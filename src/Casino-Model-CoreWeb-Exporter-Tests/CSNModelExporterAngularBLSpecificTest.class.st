@@ -65,6 +65,35 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportExtendedLinkWithTwoActions [
+
+	| result link action2 |
+	link := self createEntity: CSNUICWExtendedLink.
+	link addAction: ((self createEntity: CSNActionAppel) call:
+			 ((self createEntity: CSNPage)
+				  name: 'Page';
+				  yourself)).
+	action2 := (self createEntity: CSNActionAppel) call:
+		            ((self createEntity: CSNPage)
+			             name: 'Page2';
+			             yourself).
+	link addAction: action2.
+	link addAdditionalAction: action2.
+
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-extended-link [secondLink]="true" (click)="openPhase(Page)" (clickSecondLink)="openPhase(Page2)">';
+			          << String crlf;
+			          << '</bl-extended-link>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUILink: link.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportFieldSet [
 	| result fieldset |
 	fieldset := self createEntity: CSNUIFieldset.

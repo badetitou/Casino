@@ -4,6 +4,30 @@ Class {
 	#category : #'Casino-CoreWeb-ExternalLibrary'
 }
 
+{ #category : #accessing }
+CSNELCWBLExtendedLinkComponent >> angularActionRepresentationOf: action forWidget: aWidget using: anExporter [
+
+	(aWidget additionalActions includes: action) ifTrue: [ 
+		^ anExporter
+			  <<< '(clickSecondLink)="openPhase(';
+			  <<< action call name;
+			  <<< ')"' ].
+	^ anExporter <<< (action getAngularRepresentationWith: anExporter)
+]
+
+{ #category : #accessing }
+CSNELCWBLExtendedLinkComponent >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	(aWidget actions anySatisfy: [ :action | 
+		 aWidget additionalActions includes: action ]) ifTrue: [ 
+		attributes := attributes , { (CSNAttribute new
+			               name: '[secondLink]';
+			               attributeValue: 'true') } ].
+	^ attributes
+]
+
 { #category : #export }
 CSNELCWBLExtendedLinkComponent >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes

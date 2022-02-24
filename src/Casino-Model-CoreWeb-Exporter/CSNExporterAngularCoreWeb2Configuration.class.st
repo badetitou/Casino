@@ -46,6 +46,8 @@ CSNExporterAngularCoreWeb2Configuration >> defaultConfiguration [
 				  (CSNUITable -> CSNELCWBLTable new).
 				  (CSNUIImage -> HTMLImgComponent new).
 				  (CSNUIParagraph -> HTMLParagraphComponent new).
-				  (CSNUIMenu -> MCMenu new) } asDictionary;
+				  (CSNUIMenu -> MCMenu new).
+				  (CSNUICWExtendedLink -> CSNELCWBLExtendedLinkComponent new) }
+				  asDictionary;
 		  yourself
 ]
