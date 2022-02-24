@@ -83,7 +83,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportExtendedLinkWithTwoActions [
 
 	result := String streamContents: [ :stream | 
 		          stream
-			          << '<bl-extended-link [secondLink]="true" (click)="openPhase(Page)" (clickSecondLink)="openPhase(Page2)">';
+			          << '<bl-extended-link [secondLink]="true" (clickMainLink)="openPhase(Page)" (clickSecondLink)="openPhase(Page2)">';
 			          << String crlf;
 			          << '</bl-extended-link>' ].
 
