@@ -12,6 +12,10 @@ CSNELCWBLExtendedLinkComponent >> angularActionRepresentationOf: action forWidge
 			  <<< '(clickSecondLink)="openPhase(';
 			  <<< action call name;
 			  <<< ')"' ].
+	(action isKindOf: CSNActionAppel) ifTrue: [ ^ anExporter
+			  <<< '(clickMainLink)="openPhase(';
+			  <<< action call name;
+			  <<< ')"' ].
 	^ anExporter <<< (action getAngularRepresentationWith: anExporter)
 ]
 
