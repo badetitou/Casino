@@ -30,7 +30,10 @@ Class {
 		'table',
 		'multiCombo',
 		'rechercheEtListe',
-		'fileUploadPanel'
+		'fileUploadPanel',
+		'extendedLink',
+		'uiLink',
+		'csnActions'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -71,6 +74,7 @@ CSNUICoreWebGenerator >> defineClasses [
 		comment: 'Correspond to the BLCore class BLAbstractListeEtDetail';
 		yourself.
 	linkSimple := builder newClassNamed: #LinkSimple.
+	extendedLink := builder newClassNamed: #ExtendedLink.
 	multiCombo := builder newClassNamed: #MultiCombo.
 	rechercheEtListe := (builder newClassNamed: #RechercheEtListe)
 		comment: 'Correspond to the BLCore class BLAbstractRechercheEtListe';
@@ -92,9 +96,11 @@ CSNUICoreWebGenerator >> defineClasses [
 	"remotes"
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
+	csnActions := self remoteEntity: #Action withPrefix: #CSN.
 	csnVariableAttribute := self remoteEntity: #VariableAttribute withPrefix: #CSN.
 
-	uiInput := self remoteEntity: #Input withPrefix: #CSNUI
+	uiInput := self remoteEntity: #Input withPrefix: #CSNUI.
+	uiLink := self remoteEntity: #Link withPrefix: #CSNUI
 ]
 
 { #category : #definition }
@@ -114,7 +120,8 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	richTextArea --|> uiInput.
 	splitButton --|> csnContainer.
 	switch --|> uiInput.
-
+	
+	extendedLink --|> uiLink.
 
 	dynamicFieldset --|> csnAttribute.
 	groupFieldset --|> csnAttribute.
@@ -129,4 +136,12 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	header --|> csnAttribute.
 
 	open --|> csnAttribute
+]
+
+{ #category : #definition }
+CSNUICoreWebGenerator >> defineRelations [
+
+	super defineRelations.
+	(extendedLink property: #additionalActions)
+	-* (csnActions property: #linkExtended)
 ]

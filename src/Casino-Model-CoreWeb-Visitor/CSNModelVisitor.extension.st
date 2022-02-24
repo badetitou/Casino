@@ -121,6 +121,17 @@ CSNModelVisitor class >> visitCSNUICWDynamicFieldset: aCSNUICWDynamicFieldset [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor class >> visitCSNUICWExtendedLink: aCSNUICWExtendedLink [
+	<generated>
+	^ self visitCSNUILink: aCSNUICWExtendedLink
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor >> visitCSNUICWExtendedLink: aCSNUICWExtendedLink [
+	^ self visitCSNUILink: aCSNUICWExtendedLink
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
 CSNModelVisitor class >> visitCSNUICWFileUploadPanel: aCSNUICWFileUploadPanel [
 	^ self visitCSNContainer: aCSNUICWFileUploadPanel
 ]
