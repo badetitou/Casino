@@ -65,6 +65,43 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportCheckBox [
+	| result checkbox |
+	checkbox := self createEntity: CSNUIInputCheckbox.
+	
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-checkbox>';
+			          << String crlf;
+			          << '</bl-checkbox>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIInputCheckbox: checkbox.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportCheckBoxWithLabel [
+
+	| result checkbox |
+	checkbox := self createEntity: CSNUIInputCheckbox.
+	checkbox addAttribute: ((self createEntity: CSNUILabel)
+			 attributeValue: 'My Checkbox';
+			 yourself).
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-checkbox label="My Checkbox">';
+			          << String crlf;
+			          << '</bl-checkbox>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIInputCheckbox: checkbox.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportExtendedLinkWithTwoActions [
 
 	| result link action2 |
