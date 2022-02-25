@@ -112,6 +112,7 @@ CSNWidget >> verticalVeryDeepCopy [
 		widgetCopy addWidget: widget verticalVeryDeepCopy ].
 	widgetCopy sources: self sources copy.
 	widgetCopy affectedActions: self affectedActions.
+	widgetCopy realClass: self realClass.
 	widgetCopy name: self realName.
 	^ widgetCopy
 ]
