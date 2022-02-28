@@ -170,6 +170,24 @@ CSNModelExporterAngularBLSpecificTest >> testExportFieldSetWithAction [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportLightFieldSet [
+	| result fieldset |
+	fieldset := self createEntity: CSNUIFieldset.
+	fieldset addAttribute: (self createEntity: CSNUICWLightFieldset).
+	
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-fieldset light="true">';
+			          << String crlf;
+			          << '</bl-fieldset>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIFieldset: fieldset.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportLinkWithAction [
 
 	| result link |
