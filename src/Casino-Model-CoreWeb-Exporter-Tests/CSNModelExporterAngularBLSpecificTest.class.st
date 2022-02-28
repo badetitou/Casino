@@ -269,3 +269,31 @@ CSNModelExporterAngularBLSpecificTest >> testExportPanel [
 		exporter visitCSNUIPanel: CSNUIPanel new.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportTable [
+
+	| result table |
+	table := self createEntity: CSNUITable.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-table>';
+			          << String crlf;
+			          << '    <span slot="bl-table-foot">';
+			          << String crlf;
+			          <<
+				          '        <div class="row" style="float: right; margin-right: 1em;">';
+			          << String crlf;
+			          << String crlf;
+			          << '        </div>';
+			          << String crlf;
+			          << '    </span>';
+			          << String crlf;
+			          << '</bl-table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITable: table.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
