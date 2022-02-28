@@ -196,7 +196,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportGirdBagWithCellsWithColSpan [
 			          << String crlf;
 			          << '            <td colspan="2">';
 			          << String crlf;
-			          << '                <div colspan="2">';
+			          << '                <div>';
 			          << String crlf;
 			          << '                </div>';
 			          << String crlf;

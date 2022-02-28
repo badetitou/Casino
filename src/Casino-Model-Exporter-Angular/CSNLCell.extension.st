@@ -5,5 +5,5 @@ CSNLCell >> hierarchalAttributes [
 
 	^ { 
 		  (self layoutOwner childAttributeFor: self).
-		  self attributes }
+		  self attributes reject: #isCellAttribute }
 ]
