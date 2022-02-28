@@ -6,6 +6,6 @@ Trait {
 { #category : #api }
 TAngularExporter >> protectString: aString [
 	^ aString
-		ifNotNil: [ ((aString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' ]
+		ifNotNil: [ ((aString asString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' ]
 		ifNil: [ '' ]
 ]

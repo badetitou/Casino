@@ -170,6 +170,51 @@ CSNModelExporterAngularBLSpecificTest >> testExportFieldSetWithAction [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportGirdBagWithCellsWithColSpan [
+
+	| result panel grid cell innerPanel |
+	panel := self createEntity: CSNUIPanel.
+	grid := self createEntity: CSNLGridLayout.
+	panel layout: grid.
+	cell := self createEntity: CSNLCell.
+	cell addAttribute: ((self createEntity: CSNUICWCoreColSpan)
+			 attributeValue: 2;
+			 yourself).
+	innerPanel := self createEntity: CSNUIPanel.
+	cell widget: innerPanel.
+	grid addCell: cell.
+	(grid attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
+		at: cell
+		put: #( 0 0 ).
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<table>';
+			          << String crlf;
+			          << '    <tbody>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td colspan="2">';
+			          << String crlf;
+			          << '                <div colspan="2">';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '    </tbody>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIPanel: panel.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportLightFieldSet [
 	| result fieldset |
 	fieldset := self createEntity: CSNUIFieldset.
