@@ -10,6 +10,7 @@ CSNLLayout >> verticalVeryDeepCopy [
 
 	| layoutCopy |
 	layoutCopy := self class new.
+	self mooseModel ifNotNil: [ :model | model add: layoutCopy ].
 	self cell do: [ :aCell | 
 		layoutCopy addCell: aCell verticalVeryDeepCopy ].
 	^ layoutCopy

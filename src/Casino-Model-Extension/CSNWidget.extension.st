@@ -105,7 +105,7 @@ CSNWidget >> verticalVeryDeepCopy [
 	self attributes do: [ :attribute | 
 		| attributeCopy |
 		attributeCopy := attribute class new.
-		attribute mooseModel ifNotNil: [ :model | model add: attribute ].
+		attribute mooseModel ifNotNil: [ :model | model add: attributeCopy ].
 		attributeCopy attributeValue: attribute attributeValue.
 		widgetCopy addAttribute: attributeCopy ].
 	self widgets do: [ :widget | 
