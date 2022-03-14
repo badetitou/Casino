@@ -271,6 +271,71 @@ CSNModelExporterAngularBLSpecificTest >> testExportPanel [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportParagraph [
+	| result paragraph |
+	paragraph := self createEntity: CSNUIParagraph.
+	
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<p></p>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIParagraph: paragraph.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportParagraphWithLabel [
+
+	| result paragraph label |
+	paragraph := self createEntity: CSNUIParagraph.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	paragraph addAttribute: label.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<p>';
+			          << String crlf;
+			          << '    label';
+			          << String crlf;
+			          << '</p>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIParagraph: paragraph.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportParagraphWithLabelAndBoldStyle [
+
+	| result paragraph label boldStyle |
+	paragraph := self createEntity: CSNUIParagraph.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	paragraph addAttribute: label.
+	boldStyle := self createEntity: CSNUIStyle.
+	boldStyle styleAttribute: 'font-weight'.
+	boldStyle attributeValue: 'bold'.
+	paragraph addAttribute: boldStyle.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<p style="font-weight: bold;">';
+			          << String crlf;
+			          << '    label';
+			          << String crlf;
+			          << '</p>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIParagraph: paragraph.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportTable [
 
 	| result table |

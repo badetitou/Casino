@@ -1079,6 +1079,16 @@ CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
 ]
 
 { #category : #visiting }
+CSNModelExporterAngular >> visitCSNUIStyle: aCSNUIStyle [
+
+	self
+		<<< aCSNUIStyle styleAttribute;
+		<<< ': '.
+	self visitCSNAttribute: aCSNUIStyle.
+	self <<< ';'
+]
+
+{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNWidget: aBLWidget [
 	(self angularRepresentationOf: aBLWidget) export: aBLWidget with: self
 ]
