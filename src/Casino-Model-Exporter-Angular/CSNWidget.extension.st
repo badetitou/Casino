@@ -115,6 +115,7 @@ CSNWidget >> getPositionAttribute [
 	^ self position
 		ifNotNil: [ CSNUIStyle new
 				name: 'style';
+				styleAttribute: 'text-align';
 				attributeValue: self position angularValue;
 				yourself ]
 		ifNil: [ {} ]

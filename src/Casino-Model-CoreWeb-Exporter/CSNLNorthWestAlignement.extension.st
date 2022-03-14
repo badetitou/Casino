@@ -7,5 +7,5 @@ CSNLNorthWestAlignement >> angularHorizontalAlignement [
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNLNorthWestAlignement >> angularValue [
-	^ 'text-align: left;'
+	^ 'left'
 ]
