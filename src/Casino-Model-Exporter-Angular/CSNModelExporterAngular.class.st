@@ -1142,7 +1142,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 						currentPage: aPage;
 						visit: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
-		displayingProgress: [ :page | 'export page: ' , page codePhase asString ].
+		displayingProgress: [ :page | 'export page: ' , page name asString ].
 	"aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]"
 ]
 
