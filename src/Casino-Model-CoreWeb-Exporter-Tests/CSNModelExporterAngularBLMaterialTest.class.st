@@ -35,6 +35,44 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportExtendedLinkWithTwoActions [
+
+	| result link action2 |
+	link := self createEntity: CSNUICWExtendedLink.
+	link addAction: ((self createEntity: CSNActionAppel) call:
+			 ((self createEntity: CSNPage)
+				  name: 'Page';
+				  yourself)).
+	action2 := (self createEntity: CSNActionAppel) call:
+		           ((self createEntity: CSNPage)
+			            name: 'Page2';
+			            yourself).
+	link addAction: action2.
+	link addAdditionalAction: action2.
+
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<span class="fa-stack fa-2xs" style="vertical-align: top; float: right;" (click)="openPhase(Page2)">';
+			          << String crlf;
+			          << '    <i class="fa-regular fa-circle fa-stack-2x"></i>';
+			          << String crlf;
+			          << '    <i class="fa-solid fa-file fa-stack-1x"></i>';
+			          << String crlf;
+			          << '</span>';
+			          << String crlf;
+			          << '<bl-hyperlink (click)="openPhase(Page)" >';
+			          << String crlf;
+			          << '</bl-hyperlink>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUILink: link.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportFieldSet [
 	| result fieldset |
 	fieldset := self createEntity: CSNUIFieldset.
@@ -141,5 +179,27 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSetWithTitle [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUIFieldset: fieldset.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
+
+	| result link |
+	link := self createEntity: CSNUICWExtendedLink.
+	link addAction: ((self createEntity: CSNActionAppel) call:
+			 ((self createEntity: CSNPage)
+				  name: 'Page';
+				  yourself)).
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<bl-hyperlink (click)="openPhase(Page)">';
+			          << String crlf;
+			          << '</bl-hyperlink>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUILink: link.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
