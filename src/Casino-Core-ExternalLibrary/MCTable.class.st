@@ -61,10 +61,10 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 
 	(anExporter << widget id)
-		<< 'Source = [];';
+		<<< 'Source = [];';
 		crlf.
 	(anExporter << widget id)
-		<< 'DisplayedColumns : string[] = []';
+		<<< 'DisplayedColumns : string[] = []';
 		crlf
 ]
 
