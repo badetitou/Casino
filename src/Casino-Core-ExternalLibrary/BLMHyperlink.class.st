@@ -38,5 +38,5 @@ BLMHyperlink >> moduleName [
 { #category : #testing }
 BLMHyperlink >> modulePath [
 
-	^ '@bl/elements'
+	^ '@bl-microfront/elements'
 ]

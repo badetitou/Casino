@@ -66,7 +66,8 @@ BLMAttachment >> moduleName [
 
 { #category : #accessing }
 BLMAttachment >> modulePath [
-	^ '@bl/elements'
+
+	^ '@bl-microfront/elements'
 ]
 
 { #category : #accessing }
