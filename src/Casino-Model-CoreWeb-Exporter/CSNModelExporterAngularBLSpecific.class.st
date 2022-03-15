@@ -50,12 +50,13 @@ CSNModelExporterAngularBLSpecific >> generateTSSourceCodeForBusinessPage: aBLPag
 	currentWriteStream
 		<<
 			(String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self)
-					  , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
-								   self behaviorImportExporter
-									   export: behavior
-									   withContext: self context
-									   andConfiguration: self exporterAngularConfiguration ])
-							  flattened) asSet  asOrderedCollection sorted: [ :a :d | a < d ]));
+					   , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+								    self behaviorImportExporter
+									    export: behavior
+									    withContext: self context
+									    andConfiguration: self exporterAngularConfiguration ])
+							   flattened) asSet asOrderedCollection sorted: [ :a :d | 
+							  a < d ]));
 		<< '
 
 @Component({
@@ -79,9 +80,14 @@ export class ';
 				 asSet collect: [ :widget | widget idViewChildFrom: self ])
 				asOrderedCollection;
 		<< '
-';
-		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened 
-				 flatCollect: #getVariables);
+'.
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+			:widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptVariableOf: widget
+				usingExporter: self ] ].
+	self
 		<< '
 
     constructor(';
@@ -129,7 +135,8 @@ export class ';
 			                 (action2 behavior anyOne uniqueNameInPage:
 				                  aBLPageMetier) ].
 	behaviors := calledActions flatCollect: #behavior.
-	(behaviors asSet asOrderedCollection sorted: [ :b1 :b2 | b1 name < b2 name  ]) do: [ :behaveMethod | 
+	(behaviors asSet asOrderedCollection sorted: [ :b1 :b2 | 
+		 b1 name < b2 name ]) do: [ :behaveMethod | 
 		self crlf.
 		(self behaviorModelExporter
 			 on: self currentWriteStream

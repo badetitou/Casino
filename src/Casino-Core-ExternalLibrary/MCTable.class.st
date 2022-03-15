@@ -27,13 +27,61 @@ Class {
 }
 
 { #category : #accessing }
+MCTable >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	attributes := attributes , { (CSNAttribute new
+		 name: '[dataSource]';
+		 attributeValue: aWidget id , 'Source') }.
+	^ attributes
+]
+
+{ #category : #accessing }
+MCTable >> componentAttributeOn: anExporter [
+	anExporter <<< ' mat-table '
+]
+
+{ #category : #accessing }
+MCTable >> exportContentOf: aWidget with: anExporter [
+
+	anExporter inIndented: [ 
+		anExporter
+			<< '<tr mat-header-row *matHeaderRowDef="';
+			<<< aWidget id;
+			<<< 'DisplayedColumns"></tr>';
+			crlf;
+			<< '<tr mat-row *matRowDef="let row; columns: ';
+			<<< aWidget id;
+			<<< 'DisplayedColumns;"></tr>' ].
+	super exportContentOf: aWidget with: anExporter
+]
+
+{ #category : #accessing }
+MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
+
+	(anExporter << widget id)
+		<< 'Source = [];';
+		crlf.
+	(anExporter << widget id)
+		<< 'DisplayedColumns : string[] = []';
+		crlf
+]
+
+{ #category : #accessing }
 MCTable >> getSelector [
-	^ 'mat-table'
+	^ 'table'
 ]
 
 { #category : #accessing }
 MCTable >> internalDependenciesOf: aWidgetInstance [
 	^ { MCSortModule new . MCPaginatorModule new }
+]
+
+{ #category : #accessing }
+MCTable >> isNative [
+	"The widget is part of the html standard"
+	^ true
 ]
 
 { #category : #accessing }

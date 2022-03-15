@@ -4,8 +4,3 @@ Extension { #name : #CSNWidget }
 CSNWidget >> getInitializations [
 	^ ''
 ]
-
-{ #category : #'*Casino-Model-Exporter' }
-CSNWidget >> getVariables [
-	^ ''
-]

@@ -541,92 +541,80 @@ export const PHASE_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forC
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
+
 	self writeBusinessPageImportList.
-	aBLPageMetier collectPhaseCalled
-		ifNotEmpty: [ self writeImportForNavigation ].
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+		self writeImportForNavigation ].
 	currentWriteStream
 		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self));
-		<<
-			'
+		<< '
 
 @Component({
     selector: ''';
 		<< aBLPageMetier getSelector;
-		<<
-			''',
+		<< ''',
     templateUrl: ''./';
 		<< aBLPageMetier getHTMLName;
-		<<
-			'''
+		<< '''
 })
 export class ';
 		<< aBLPageMetier componentName;
-		<<
-			' implements OnInit, OnDestroy {
+		<< ' implements OnInit, OnDestroy {
 
 '.
-	aBLPageMetier collectPhaseCalled
-		do: [ :phase | 
-			currentWriteStream
-				<< '    public ';
-				<< phase name;
-				<< ': Phase;';
-				<< String crlf ].
-	currentWriteStream
-		<<
-			'
-';
-		<<
-			(aBLPageMetier recursiveWidgets removeDuplicates flattened
-				flatCollect: #getVariables);
-		<<
-			'
+	aBLPageMetier collectPhaseCalled do: [ :phase | 
+		currentWriteStream
+			<< '    public ';
+			<< phase name;
+			<< ': Phase;';
+			<< String crlf ].
+	currentWriteStream << '
+'.
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+			:widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptVariableOf: widget
+				usingExporter: self ] ].
+	self << '
 
     constructor('.
-	aBLPageMetier collectPhaseCalled
-		ifNotEmpty: [ currentWriteStream
-				<<
-					'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
-	currentWriteStream
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+		currentWriteStream
 		<<
-			') {
+		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+	currentWriteStream << ') {
 '.
-	aBLPageMetier collectPhaseCalled
-		do: [ :phase | 
-			currentWriteStream
-				<< '        this.';
-				<< phase name;
-				<< ' = this._phaseService.getPhase(''';
-				<< phase name;
-				<< ''');';
-				<< String crlf ].
+	aBLPageMetier collectPhaseCalled do: [ :phase | 
+		currentWriteStream
+			<< '        this.';
+			<< phase name;
+			<< ' = this._phaseService.getPhase(''';
+			<< phase name;
+			<< ''');';
+			<< String crlf ].
 	currentWriteStream
-		<<
-			'
+		<< '
     }
 
     public ngOnInit(): void {
 ';
-		<<
-			(aBLPageMetier recursiveWidgets flattened
-				flatCollect: #getInitializations);
-		<<
-			'
+		<< (aBLPageMetier recursiveWidgets flattened flatCollect:
+					 #getInitializations);
+		<< '
     }
 
     public ngOnDestroy(): void {
 
     }
 '.
-	aBLPageMetier collectPhaseCalled
-		ifNotEmpty: [ self writeOpenPhaseMethod ].
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+		self writeOpenPhaseMethod ].
 	currentWriteStream
-		<<
-			'
+		<< '
 
 ';
-		<<
-			'
+		<< '
 }
 '
 ]
