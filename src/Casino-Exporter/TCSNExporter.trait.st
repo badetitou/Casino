@@ -132,3 +132,8 @@ TCSNExporter >> indentNumber [
 TCSNExporter >> indentPlus [
 	^ indentLevel := self indentLevel + 1
 ]
+
+{ #category : #streaming }
+TCSNExporter >> space [
+  ^ self <<< ' '
+]

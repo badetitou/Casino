@@ -400,3 +400,45 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTypeScriptVariableOfTableWithTwoHeaders [
+
+	| result table header1 label1 header2 label2 |
+	table := self createEntity: CSNUITable.
+
+	table
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'table';
+				 yourself);
+		name: 'table';
+		yourself.
+
+	header1 := self createEntity: CSNUITableHeader.
+	header2 := self createEntity: CSNUITableHeader.
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	label2 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label2';
+		          yourself.
+	header1 addAttribute: label1.
+	header2 addAttribute: label2.
+	table addWidget: header1.
+	table addWidget: header2.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << 'tableSource = [];';
+			          << String crlf;
+			          <<
+				          'tableDisplayedColumns : string[] = [ ''Label1'', ''Label2'' ]';
+			          << String crlf ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		MCTable new
+			exportTypeScriptVariableOf: table
+			usingExporter: exporter.
+		self assert: exporter currentWriteStream contents equals: result ]
+]

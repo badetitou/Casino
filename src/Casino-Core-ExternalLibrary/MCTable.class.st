@@ -67,7 +67,7 @@ MCTable >> exportTableHeader: header with: anExporter [
 
 	| labelName |
 	labelName := (header attributes detect: [ :att | 
-		              att isKindOf: CSNUILabel ]) attributeValue.
+		              att isKindOf: CSNUILabel ] ifFound: [:label | label attributeValue ] ifNone: [ 'header', header mooseID printString ]).
 	anExporter << '<ng-container matColumnDef="' <<< labelName <<< '">'.
 	anExporter inIndented: [ 
 		(anExporter << '<th mat-header-cell *matHeaderCellDef>'
@@ -85,8 +85,22 @@ MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 	(anExporter << widget id)
 		<<< 'Source = [];';
 		crlf.
-	(anExporter << widget id)
-		<<< 'DisplayedColumns : string[] = []';
+	anExporter << widget id <<< 'DisplayedColumns : string[] = ['.
+	(widget widgets select: [ :childWidget | 
+		 childWidget isKindOf: CSNUITableHeader ]) ifNotEmpty: [ :headers | 
+		headers
+			do: [ :header | 
+				anExporter
+					<<< ' ''';
+					<<< (header attributes
+							 detect: [ :att | att isKindOf: CSNUILabel ]
+							 ifFound: [ :label | label attributeValue ]
+							 ifNone: [ 'header' , header mooseID printString ]);
+					<<< '''' ]
+			separatedBy: [ anExporter <<< ',' ].
+		anExporter space ].
+	anExporter
+		<<< ']';
 		crlf
 ]
 
