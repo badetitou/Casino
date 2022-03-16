@@ -209,18 +209,23 @@ CSNModelExporterAngularBLMaterialTest >> testExportTable [
 
 	| result table |
 	table := self createEntity: CSNUITable.
-	table affectedActions: ((self createEntity: FamixJavaAttribute)
-			 name: 'table';
-			 yourself).
+	table
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'table';
+				 yourself);
+		name: 'table';
+		yourself.
 
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
 				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
 			          << String crlf;
-			          << '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
+			          <<
+				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
 			          << String crlf;
-			          << '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
+			          <<
+				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
 			          << String crlf;
 			          << '</table>' ].
 
