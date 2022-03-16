@@ -45,6 +45,10 @@ MCTable >> componentAttributeOn: anExporter [
 { #category : #accessing }
 MCTable >> exportContentOf: aWidget with: anExporter [
 
+	(aWidget widgets select: [ :widget | 
+		 widget isKindOf: CSNUITableHeader ]) do: [ :header | 
+		anExporter inIndented: [ 
+			self exportTableHeader: header with: anExporter ] ].
 	anExporter
 		crlf;
 		indentPlus;
@@ -55,8 +59,24 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 		<< '<tr mat-row *matRowDef="let row; columns: ';
 		<<< aWidget id;
 		<<< 'DisplayedColumns;"></tr>';
-		indentMinus.
-	super exportContentOf: aWidget with: anExporter
+		indentMinus
+]
+
+{ #category : #accessing }
+MCTable >> exportTableHeader: header with: anExporter [
+
+	| labelName |
+	labelName := (header attributes detect: [ :att | 
+		              att isKindOf: CSNUILabel ]) attributeValue.
+	anExporter << '<ng-container matColumnDef="' <<< labelName <<< '">'.
+	anExporter inIndented: [ 
+		(anExporter << '<th mat-header-cell *matHeaderCellDef>'
+		 <<< labelName)
+			<<< '</th>';
+			crlf.
+		anExporter
+		<< '<td mat-cell *matCellDef="let element">{{element}}</td>' ].
+	anExporter << '</ng-container>'
 ]
 
 { #category : #accessing }

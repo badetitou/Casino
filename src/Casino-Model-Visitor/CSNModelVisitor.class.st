@@ -1245,7 +1245,7 @@ CSNModelVisitor >> visitCSNUITable: aCSNUITable [
 { #category : #visiting }
 CSNModelVisitor >> visitCSNUITableHeader: aCSNUITableHeader [
 	<generated>
-	^ self visitCSNContainer: CSNUITableHeader
+	^ self visitCSNContainer: aCSNUITableHeader
 ]
 
 { #category : #visiting }

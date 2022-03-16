@@ -283,3 +283,120 @@ CSNModelExporterAngularBLMaterialTest >> testExportTable [
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneHeader [
+
+	| result table header1 label1 |
+	table := self createEntity: CSNUITable.
+
+	table
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'table';
+				 yourself);
+		name: 'table';
+		yourself.
+
+	header1 := self createEntity: CSNUITableHeader.
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	header1 addAttribute: label1.
+	table addWidget: header1.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+			          << String crlf;
+			          << '    <ng-container matColumnDef="Label1">';
+			          << String crlf;
+			          <<
+				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
+			          << String crlf;
+			          <<
+				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
+			          << String crlf;
+			          << '    </ng-container>';
+			          << String crlf;
+			          << String crlf;
+			          <<
+				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
+			          << String crlf;
+			          <<
+				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITable: table.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
+
+	| result table header1 label1 header2 label2 |
+	table := self createEntity: CSNUITable.
+
+	table
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'table';
+				 yourself);
+		name: 'table';
+		yourself.
+
+	header1 := self createEntity: CSNUITableHeader.
+	header2 := self createEntity: CSNUITableHeader.
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	label2 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label2';
+		          yourself.
+	header1 addAttribute: label1.
+	header2 addAttribute: label2.
+	table addWidget: header1.
+	table addWidget: header2.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+			          << String crlf;
+			          << '    <ng-container matColumnDef="Label1">';
+			          << String crlf;
+			          <<
+				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
+			          << String crlf;
+			          <<
+				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
+			          << String crlf;
+			          << '    </ng-container>';
+			          << String crlf;
+			          << String crlf;
+			          << '    <ng-container matColumnDef="Label2">';
+			          << String crlf;
+			          <<
+				          '        <th mat-header-cell *matHeaderCellDef>Label2</th>';
+			          << String crlf;
+			          <<
+				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
+			          << String crlf;
+			          << '    </ng-container>';
+			          << String crlf;
+			          << String crlf;
+			          <<
+				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
+			          << String crlf;
+			          <<
+				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITable: table.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
