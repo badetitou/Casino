@@ -1055,18 +1055,6 @@ CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUISelect: aBLUISelect [
-  self << '<'.
-  aBLUISelect getListPropertiesAsStringWith: self.
-  self
-     <<< '>';
-     crlf;
-     << '</';
-     <<< (aBLUISelect getSelectorFrom: self);
-     <<< '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIStyle: aCSNUIStyle [
 
 	self

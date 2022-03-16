@@ -205,6 +205,55 @@ CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportSelect [
+
+	| result select |
+	select := self createEntity: CSNUISelect.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<mat-form-field appearance="fill">';
+			          << String crlf;
+			          << '    <mat-select>';
+			          << String crlf;
+			          << '    </mat-select>';
+			          << String crlf;
+			          << '</mat-form-field>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUISelect: select.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportSelectWithLabel [
+
+	| result select label |
+	select := self createEntity: CSNUISelect.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	select addAttribute: label.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<mat-form-field appearance="fill">';
+			          << String crlf;
+			          << '    <mat-label>label</mat-label>';
+			          << String crlf;
+			          << '    <mat-select>';
+			          << String crlf;
+			          << '    </mat-select>';
+			          << String crlf;
+			          << '</mat-form-field>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUISelect: select.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportTable [
 
 	| result table |
