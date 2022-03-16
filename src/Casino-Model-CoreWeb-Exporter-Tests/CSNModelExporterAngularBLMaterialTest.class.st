@@ -432,7 +432,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTypeScriptVariableOfTableWith
 			          << 'tableSource = [];';
 			          << String crlf;
 			          <<
-				          'tableDisplayedColumns : string[] = [ ''Label1'', ''Label2'' ]';
+				          'tableDisplayedColumns : string[] = [ ''Label1'', ''Label2'' ];';
 			          << String crlf ].
 
 	String streamContents: [ :stream | 

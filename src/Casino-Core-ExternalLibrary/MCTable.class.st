@@ -100,7 +100,7 @@ MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 			separatedBy: [ anExporter <<< ',' ].
 		anExporter space ].
 	anExporter
-		<<< ']';
+		<<< '];';
 		crlf
 ]
 
