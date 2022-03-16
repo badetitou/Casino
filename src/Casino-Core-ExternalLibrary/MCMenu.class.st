@@ -74,5 +74,5 @@ MCMenu >> modulePath [
 
 { #category : #accessing }
 MCMenu >> variableFor: widget [
-	^ widget affectedActions uniqueName
+	^ widget id
 ]

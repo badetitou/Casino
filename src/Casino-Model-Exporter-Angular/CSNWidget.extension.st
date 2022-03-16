@@ -146,12 +146,12 @@ CSNWidget >> id [
 	| dic |
 	dic := self rootNode
 		cacheAt: #widgetUniqueName
-		ifAbsentPut: [ {(self -> self variable name)} asDictionary ].
+		ifAbsentPut: [ {(self -> self realName)} asDictionary ].
 	^ dic
 		at: self
 		ifAbsentPut: [ | index potentialName |
 			index := 0.
-			potentialName := self variable name.
+			potentialName := self realName.
 			[ dic includes: potentialName ]
 				whileTrue: [ potentialName := (potentialName removeSuffix: index asString)
 						, (index + 1) asString.
