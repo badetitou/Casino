@@ -39,21 +39,23 @@ MCTable >> attributeOf: aWidget [
 
 { #category : #accessing }
 MCTable >> componentAttributeOn: anExporter [
-	anExporter <<< ' mat-table '
+	anExporter <<< ' mat-table mat-sort'
 ]
 
 { #category : #accessing }
 MCTable >> exportContentOf: aWidget with: anExporter [
 
-	anExporter inIndented: [ 
-		anExporter
-			<< '<tr mat-header-row *matHeaderRowDef="';
-			<<< aWidget id;
-			<<< 'DisplayedColumns"></tr>';
-			crlf;
-			<< '<tr mat-row *matRowDef="let row; columns: ';
-			<<< aWidget id;
-			<<< 'DisplayedColumns;"></tr>' ].
+	anExporter
+		crlf;
+		indentPlus;
+		<< '<tr mat-header-row *matHeaderRowDef="';
+		<<< aWidget id;
+		<<< 'DisplayedColumns"></tr>';
+		crlf;
+		<< '<tr mat-row *matRowDef="let row; columns: ';
+		<<< aWidget id;
+		<<< 'DisplayedColumns;"></tr>';
+		indentMinus.
 	super exportContentOf: aWidget with: anExporter
 ]
 

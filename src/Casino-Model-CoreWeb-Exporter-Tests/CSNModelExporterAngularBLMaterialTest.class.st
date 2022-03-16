@@ -203,3 +203,29 @@ CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 		exporter visitCSNUILink: link.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTable [
+
+	| result table |
+	table := self createEntity: CSNUITable.
+	table affectedActions: ((self createEntity: FamixJavaAttribute)
+			 name: 'table';
+			 yourself).
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+			          << String crlf;
+			          << '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
+			          << String crlf;
+			          << '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITable: table.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
