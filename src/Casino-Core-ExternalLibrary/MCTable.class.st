@@ -66,12 +66,18 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 MCTable >> exportTableHeader: header with: anExporter [
 
 	| labelName |
-	labelName := (header attributes detect: [ :att | 
-		              att isKindOf: CSNUILabel ] ifFound: [:label | label attributeValue ] ifNone: [ 'header', header mooseID printString ]).
+	labelName := header attributes
+		             detect: [ :att | att isKindOf: CSNUILabel ]
+		             ifFound: [ :label | label attributeValue ]
+		             ifNone: [ 'header' , header mooseID printString ].
 	anExporter << '<ng-container matColumnDef="' <<< labelName <<< '">'.
 	anExporter inIndented: [ 
-		(anExporter << '<th mat-header-cell *matHeaderCellDef>'
-		 <<< labelName)
+		anExporter << '<th mat-header-cell *matHeaderCellDef>'.
+		header attributes
+			detect: [ :att | att isKindOf: CSNUILabel ]
+			ifFound: [ :label | anExporter visit: label ]
+			ifNone: [ anExporter <<< 'header' <<< header mooseID printString ].
+		anExporter
 			<<< '</th>';
 			crlf.
 		anExporter
