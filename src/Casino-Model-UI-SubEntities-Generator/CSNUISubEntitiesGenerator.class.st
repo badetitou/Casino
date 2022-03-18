@@ -83,7 +83,8 @@ Class {
 		'uiDropdownButton',
 		'uiMenu',
 		'uiMenuItem',
-		'uiVisibility'
+		'uiVisibility',
+		'uiTableHeader'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -117,6 +118,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiTab := builder newClassNamed: #Tab.
 	uiTabManager := builder newClassNamed: #TabManager.
 	uiTable := builder newClassNamed: #Table.
+	uiTableHeader := builder newClassNamed: #TableHeader.
 	uiTree := builder newClassNamed: #Tree.
 	uiHeading1 := builder newClassNamed: #Heading1.
 	uiHeading2 := builder newClassNamed: #Heading2.
@@ -208,6 +210,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiTab --|> container.
 	uiTabManager --|> container.
 	uiTable --|> container.
+	uiTableHeader --|> container.
 	uiTree --|> container.
 	uiWidgetLabel --|> container.
 	uiHeading1 --|> leaf.

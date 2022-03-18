@@ -26,6 +26,13 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #export }
+MCCard >> angularActionRepresentationOf: action forWidget: aWidget using: anExporter [
+
+	action isActionAppel ifTrue: [ ^ nil ].
+	anExporter <<< (action getAngularRepresentationWith: anExporter)
+]
+
 { #category : #accessing }
 MCCard >> attributeOf: aWidget [
 
@@ -34,12 +41,35 @@ MCCard >> attributeOf: aWidget [
 ]
 
 { #category : #export }
-MCCard >> exportFooterOf: aWidget with: anExporter [
+MCCard >> exportActionAppel: action with: anExporter [
+
 	anExporter
-		crlf;
-		<< '</mat-card-content>';
+		indentPlus;
+		indent;
+		<<<
+			'<span class="fa-stack" style="vertical-align: top; float: right;" (click)="openPhase(';
+			  <<< action call name;
+			  <<< ')">';
+		inIndented: [ 
+			anExporter
+				<< '<i class="fa-regular fa-circle fa-stack-2x"></i>';
+				crlf;
+				<< '<i class="fa-solid fa-folder-open fa-stack-1x"></i>' ];
+		<< '</span>';
 		indentMinus;
-		crlf;
+		crlf
+]
+
+{ #category : #export }
+MCCard >> exportFooterOf: aWidget with: anExporter [
+
+	(aWidget children reject: [ :child | (child isKindOf: CSNAttribute) or: [ child isKindOf: CSNAction ] ]) isNotEmpty ifTrue: [ 
+		anExporter
+			crlf;
+			<< '</mat-card-content>';
+			indentMinus;
+			crlf ].
+	anExporter
 		<< '</';
 		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>'
@@ -47,24 +77,44 @@ MCCard >> exportFooterOf: aWidget with: anExporter [
 
 { #category : #export }
 MCCard >> exportHeaderOf: aWidget with: anExporter [
+
 	anExporter << '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter <<< '>'.
-	anExporter
-		indentPlus;
-		crlf;
-		<< '<mat-card-header>';
-		indentPlus;
-		crlf;
-		<< '<mat-card-title>'.
-	aWidget attributes detect: [ :a | a isOfType: CSNUITitle ] ifFound: [ :attribute | anExporter visit: attribute ].
-	anExporter
-		<<< '</mat-card-title>';
-		crlf;
-		indentMinus;
-		<< '</mat-card-header>';
-		crlf;
-		<< '<mat-card-content>'
+	anExporter crlf.
+	((aWidget attributes anySatisfy: [ :att | att isKindOf: CSNUITitle ]) 
+		 or: [ 
+			 aWidget actions anySatisfy: [ :action | 
+				 action isKindOf: CSNActionAppel ] ]) ifTrue: [ 
+		anExporter
+			indentPlus;
+			<< '<mat-card-header>';
+			crlf.
+
+		aWidget attributes
+			detect: [ :a | a isOfType: CSNUITitle ]
+			ifFound: [ :attribute | 
+				anExporter
+					indentPlus;
+					<< '<mat-card-title>'.
+				anExporter visit: attribute.
+				anExporter
+					<<< '</mat-card-title>';
+					indentMinus;
+					crlf ].
+		(aWidget actions select: [ :action | action isActionAppel ])
+			do: [ :action | self exportActionAppel: action with: anExporter ]
+			separatedBy: [ anExporter crlf ].
+		anExporter
+			<< '</mat-card-header>';
+			crlf;
+			indentMinus ].
+	(aWidget children reject: [ :child | 
+		 (child isKindOf: CSNAttribute) or: [ child isKindOf: CSNAction ] ])
+		isNotEmpty ifTrue: [ 
+		anExporter
+			indentPlus;
+			<< '<mat-card-content>' ]
 ]
 
 { #category : #accessing }

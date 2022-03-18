@@ -122,6 +122,11 @@ WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter
 	anExporter <<< aWidget idTag
 ]
 
+{ #category : #export }
+WidgetRepresentation >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
+	"I export in the TS component of my widget the variables required for its proper working"
+]
+
 { #category : #accessing }
 WidgetRepresentation >> getSelector [
 	^ 'div'

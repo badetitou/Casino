@@ -307,11 +307,18 @@ CSNModelExporterAngularBLMaterial >> generateTSSourceCodeForBusinessPage: aBLPag
 
 	| calledActions behaviors |
 	self writeBusinessPageImportList.
-	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeImportForNavigation ].
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+		self writeImportForNavigation ].
 	currentWriteStream
-		<< (String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self) , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
-								    self behaviorImportExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened) asSet
-						  asOrderedCollection sorted: [ :a :d | a < d ]));
+		<<
+			(String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self)
+					   , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+								    self behaviorImportExporter
+									    export: behavior
+									    withContext: self context
+									    andConfiguration: self exporterAngularConfiguration ])
+							   flattened) asSet asOrderedCollection sorted: [ :a :d | 
+							  a < d ]));
 		<< '
 
 @Component({
@@ -328,21 +335,33 @@ export class ';
 
 ';
 		"<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | '    public ' , phase name , ': Phase;' , String crlf ]);"
-	
-		<<
-			((aBLPageMetier calledBehavior flatCollect: [ :action | 
-					  action behavior flatCollect: [ :behavior | (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ]) asSet collect: [ :widget | 
-					 widget idViewChildFrom: self ]) asOrderedCollection;
+		<< ((aBLPageMetier calledBehavior flatCollect: [ :action | 
+					  action behavior flatCollect: [ :behavior | 
+							  (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
+				 asSet collect: [ :widget | widget idViewChildFrom: self ])
+				asOrderedCollection;
 		<< '
-';
-		<< (aBLPageMetier recursiveWidgets removeDuplicates flattened flatCollect: #getVariables);
+'.
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+			:widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptVariableOf: widget
+				usingExporter: self ] ].
+	self
 		<< '
 
     constructor(';
-		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ ' private router: Router, ' ]);
-		<< (', ' join: ((aBLPageMetier calledBehavior collect: [ :behavior | 
-							   self behaviorInitializeVariableExporter export: behavior withContext: self context andConfiguration: self exporterAngularConfiguration ]) flattened 
-						  reject: #isEmpty) flattened asOrderedCollection removeDuplicates);
+		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+					 ' private router: Router, ' ]);
+		<<
+			(', ' join: ((aBLPageMetier calledBehavior collect: [ :behavior | 
+							   self behaviorInitializeVariableExporter
+								   export: behavior
+								   withContext: self context
+								   andConfiguration: self exporterAngularConfiguration ])
+						  flattened reject: #isEmpty) flattened asOrderedCollection
+						 removeDuplicates);
 		<< ') {
 ';
 		"<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
@@ -352,7 +371,8 @@ export class ';
 
     public ngOnInit(): void {
 ';
-		<< (aBLPageMetier recursiveWidgets flattened flatCollect: #getInitializations);
+		<< (aBLPageMetier recursiveWidgets flattened flatCollect:
+					 #getInitializations);
 		<< '
     }
 
@@ -360,7 +380,8 @@ export class ';
 
     }
 '.
-	aBLPageMetier collectPhaseCalled ifNotEmpty: [ self writeOpenPhaseMethod ].
+	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
+		self writeOpenPhaseMethod ].
 	currentWriteStream << '
 
 '.
@@ -373,7 +394,8 @@ export class ';
 			                 (action2 behavior anyOne uniqueNameInPage:
 				                  aBLPageMetier) ].
 	behaviors := calledActions flatCollect: #behavior.
-	(behaviors asSet asOrderedCollection sorted: [ :b1 :b2 | b1 name < b2 name  ]) do: [ :behaveMethod | 
+	(behaviors asSet asOrderedCollection sorted: [ :b1 :b2 | 
+		 b1 name < b2 name ]) do: [ :behaveMethod | 
 		self crlf.
 		(self behaviorModelExporter
 			 on: self currentWriteStream

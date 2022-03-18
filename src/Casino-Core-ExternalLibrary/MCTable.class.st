@@ -27,13 +27,103 @@ Class {
 }
 
 { #category : #accessing }
+MCTable >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	attributes := attributes , { (CSNAttribute new
+		 name: '[dataSource]';
+		 attributeValue: aWidget id , 'Source') }.
+	^ attributes
+]
+
+{ #category : #accessing }
+MCTable >> componentAttributeOn: anExporter [
+	anExporter <<< ' mat-table mat-sort'
+]
+
+{ #category : #accessing }
+MCTable >> exportContentOf: aWidget with: anExporter [
+
+	(aWidget widgets select: [ :widget | 
+		 widget isKindOf: CSNUITableHeader ]) do: [ :header | 
+		anExporter inIndented: [ 
+			self exportTableHeader: header with: anExporter ] ].
+	anExporter
+		crlf;
+		indentPlus;
+		<< '<tr mat-header-row *matHeaderRowDef="';
+		<<< aWidget id;
+		<<< 'DisplayedColumns"></tr>';
+		crlf;
+		<< '<tr mat-row *matRowDef="let row; columns: ';
+		<<< aWidget id;
+		<<< 'DisplayedColumns;"></tr>';
+		indentMinus
+]
+
+{ #category : #accessing }
+MCTable >> exportTableHeader: header with: anExporter [
+
+	| labelName |
+	labelName := header attributes
+		             detect: [ :att | att isKindOf: CSNUILabel ]
+		             ifFound: [ :label | label attributeValue ]
+		             ifNone: [ 'header' , header mooseID printString ].
+	anExporter << '<ng-container matColumnDef="' <<< labelName <<< '">'.
+	anExporter inIndented: [ 
+		anExporter << '<th mat-header-cell *matHeaderCellDef>'.
+		header attributes
+			detect: [ :att | att isKindOf: CSNUILabel ]
+			ifFound: [ :label | anExporter visit: label ]
+			ifNone: [ anExporter <<< 'header' <<< header mooseID printString ].
+		anExporter
+			<<< '</th>';
+			crlf.
+		anExporter
+		<< '<td mat-cell *matCellDef="let element">{{element}}</td>' ].
+	anExporter << '</ng-container>'
+]
+
+{ #category : #accessing }
+MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
+
+	(anExporter << widget id)
+		<<< 'Source = [];';
+		crlf.
+	anExporter << widget id <<< 'DisplayedColumns : string[] = ['.
+	(widget widgets select: [ :childWidget | 
+		 childWidget isKindOf: CSNUITableHeader ]) ifNotEmpty: [ :headers | 
+		headers
+			do: [ :header | 
+				anExporter
+					<<< ' ''';
+					<<< (header attributes
+							 detect: [ :att | att isKindOf: CSNUILabel ]
+							 ifFound: [ :label | label attributeValue ]
+							 ifNone: [ 'header' , header mooseID printString ]);
+					<<< '''' ]
+			separatedBy: [ anExporter <<< ',' ].
+		anExporter space ].
+	anExporter
+		<<< '];';
+		crlf
+]
+
+{ #category : #accessing }
 MCTable >> getSelector [
-	^ 'mat-table'
+	^ 'table'
 ]
 
 { #category : #accessing }
 MCTable >> internalDependenciesOf: aWidgetInstance [
 	^ { MCSortModule new . MCPaginatorModule new }
+]
+
+{ #category : #accessing }
+MCTable >> isNative [
+	"The widget is part of the html standard"
+	^ true
 ]
 
 { #category : #accessing }

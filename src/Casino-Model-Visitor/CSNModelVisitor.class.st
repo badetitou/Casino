@@ -595,6 +595,12 @@ CSNModelVisitor class >> visitCSNUITable: aCSNUITable [
 ]
 
 { #category : #visiting }
+CSNModelVisitor class >> visitCSNUITableHeader: aCSNUITableHeader [
+	<generated>
+	^ self visitCSNContainer: CSNUITableHeader
+]
+
+{ #category : #visiting }
 CSNModelVisitor class >> visitCSNUITextarea: aCSNUITextarea [
 	<generated>
 	^ self visitCSNLeaf: aCSNUITextarea
@@ -1234,6 +1240,12 @@ CSNModelVisitor >> visitCSNUITabManager: aCSNUITabManager [
 CSNModelVisitor >> visitCSNUITable: aCSNUITable [
 	<generated>
 	^ self visitCSNContainer: aCSNUITable
+]
+
+{ #category : #visiting }
+CSNModelVisitor >> visitCSNUITableHeader: aCSNUITableHeader [
+	<generated>
+	^ self visitCSNContainer: aCSNUITableHeader
 ]
 
 { #category : #visiting }

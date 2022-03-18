@@ -7,5 +7,5 @@ CSNLEastAlignement >> angularHorizontalAlignement [
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNLEastAlignement >> angularValue [
-	^ 'text-align: right;'
+	^ 'right'
 ]

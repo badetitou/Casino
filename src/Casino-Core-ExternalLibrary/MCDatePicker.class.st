@@ -110,5 +110,5 @@ MCDatePicker >> modulePath [
 
 { #category : #accessing }
 MCDatePicker >> variableFor: widget [
-	^ widget affectedActions uniqueName
+	^ widget id
 ]

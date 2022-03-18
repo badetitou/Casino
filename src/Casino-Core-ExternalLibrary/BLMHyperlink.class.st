@@ -5,16 +5,19 @@ Class {
 }
 
 { #category : #testing }
+BLMHyperlink >> angularActionRepresentationOf: action forWidget: aWidget using: anExporter [
+
+	(aWidget additionalActions includes: action) ifTrue: [ ^ nil ].
+	^ anExporter <<< (action getAngularRepresentationWith: anExporter)
+]
+
+{ #category : #testing }
 BLMHyperlink >> exportContentOf: aWidget with: anExporter [
 
-	anExporter
-		crlf;
-		indentPlus;
-		indent.
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
-		ifFound: [ :attribute | anExporter visit: attribute ].
-	anExporter indentMinus.
+		ifFound: [ :attribute | 
+		anExporter inIndented: [ anExporter visit: attribute ] ].
 	aWidget widgets do: [ :widget | 
 		anExporter
 			crlf;
@@ -22,6 +25,27 @@ BLMHyperlink >> exportContentOf: aWidget with: anExporter [
 		anExporter
 			visit: widget;
 			indentMinus ]
+]
+
+{ #category : #export }
+BLMHyperlink >> exportHeaderOf: aWidget with: anExporter [
+
+	aWidget additionalActions
+		do: [ :action | 
+			anExporter
+				<<
+					'<span class="fa-stack fa-2xs" style="vertical-align: top; float: right;" (click)="openPhase(';
+				<<< action call name;
+				<<< ')">';
+				inIndented: [ 
+					anExporter
+						<< '<i class="fa-regular fa-circle fa-stack-2x"></i>';
+						crlf;
+						<< '<i class="fa-solid fa-file fa-stack-1x"></i>' ];
+				<< '</span>';
+				crlf ]
+		separatedBy: [ anExporter crlf ].
+	super exportHeaderOf: aWidget with: anExporter
 ]
 
 { #category : #testing }
@@ -38,5 +62,5 @@ BLMHyperlink >> moduleName [
 { #category : #testing }
 BLMHyperlink >> modulePath [
 
-	^ '@bl/elements'
+	^ '@bl-microfront/elements'
 ]
