@@ -35,6 +35,38 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportDatePicker [
+
+	| result inputDate |
+	inputDate := self createEntity: CSNUIInputDate.
+	inputDate
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'datePicker';
+				 yourself);
+		name: 'datePicker';
+		yourself.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<mat-form-field appearance="fill">';
+			          << String crlf;
+			          <<
+				          '    <input id="datePicker" matInput [matDatepicker]="datePicker">';
+			          << String crlf;
+			          <<
+				          '    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>';
+			          << String crlf;
+			          << '    <mat-datepicker #datePicker></mat-datepicker>';
+			          << String crlf;
+			          << '</mat-form-field>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIInputDate: inputDate.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportExtendedLinkWithTwoActions [
 
 	| result link action2 |

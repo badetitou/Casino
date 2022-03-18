@@ -57,7 +57,10 @@ CSNPage >> getMetadata [
 	  , ''',
     codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
 	  , ''',
-    label: ''' , (self title ifNil: [ '' ]) protectQuote , ''',
+    label: ''' , ((self attributes
+		    detect: [ :att | att isKindOf: CSNUITitle ]
+		    ifFound: [ :attTitle | attTitle attributeValue ]
+		    ifNone: [ self title ]) ifNil: [ '' ]) protectQuote , ''',
     link: ''' , self name asRealCamelCase , ''',
     subLabel: ''' , (self subtitle ifNil: [ '' ]) protectQuote , ''',
     icon: ''address-book'',
