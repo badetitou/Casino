@@ -63,6 +63,11 @@ FamixJavaInvocation >> attributeName [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
+FamixJavaInvocation >> isSuperInvocation [
+	^ self signature beginsWith: #'super('
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 FamixJavaInvocation >> parameters [
 	^ signature extractParameters 
 ]
