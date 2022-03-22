@@ -479,6 +479,34 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTextArea [
+
+	| result textarea |
+	textarea := self createEntity: CSNUITextarea.
+	textarea
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'textarea';
+				 yourself);
+		name: 'textarea';
+		yourself.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<mat-form-field appearance="fill">';
+			          << String crlf;
+			          <<
+				          '    <textarea id="textarea" matInput #textarea></textarea>';
+			          << String crlf;
+			          << '</mat-form-field>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITextarea: textarea.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportTypeScriptVariableOfTableWithTwoHeaders [
 
 	| result table header1 label1 header2 label2 |

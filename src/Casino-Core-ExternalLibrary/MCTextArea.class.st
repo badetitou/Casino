@@ -13,7 +13,7 @@ MCTextArea >> attributeOf: aWidget [
 
 { #category : #export }
 MCTextArea >> componentAttributeOn: anExporter [
-	anExporter <<< ' matInput '
+	anExporter <<< ' matInput'
 ]
 
 { #category : #export }
@@ -25,7 +25,7 @@ MCTextArea >> exportContentOf: aWidget with: anExporter [
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter <<< '>'.
 	anExporter
-		<< '</';
+		<<< '</';
 		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>'.
 	anExporter
