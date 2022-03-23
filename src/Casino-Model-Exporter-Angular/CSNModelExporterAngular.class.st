@@ -109,6 +109,15 @@ CSNModelExporterAngular >> exportAttributeValue: aCSNAttribute [
 	self attributeExporter visit: aCSNAttribute
 ]
 
+{ #category : #api }
+CSNModelExporterAngular >> exportPage: aPage [
+
+	^ self clone
+		  currentPath: self rootPhases / aPage name asRealCamelCase;
+		  currentPage: aPage;
+		  visit: aPage
+]
+
 { #category : #accessing }
 CSNModelExporterAngular >> exporterAngularConfiguration [
 	^ exporterAngularConfiguration
@@ -1071,25 +1080,29 @@ CSNModelExporterAngular >> visitCSNWidget: aBLWidget [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitMooseModel: aMooseModel [
+
 	| rootPhases rootComponents |
 	self root createDirectory.
 
 	"Write app.module.ts"
-	currentWriteStream := (self root / aMooseModel getModuleName) asFileReference writeStream.
+	currentWriteStream := (self root / aMooseModel getModuleName)
+		                      asFileReference writeStream.
 	self generateModuleSourceCodeForModel: aMooseModel.
 	currentWriteStream
 		flush;
 		close.
 
 	"Write defaultmaterial.module.ts"
-	currentWriteStream := (self root / 'material-module.ts') asFileReference writeStream.
+	currentWriteStream := (self root / 'material-module.ts')
+		                      asFileReference writeStream.
 	self generateMaterialModuleSourceCodeForModel: aMooseModel.
 	currentWriteStream
 		flush;
 		close.
-		
+
 	"Write app.route.ts"
-	currentWriteStream := (self root / aMooseModel getRouteName) asFileReference writeStream.
+	currentWriteStream := (self root / aMooseModel getRouteName)
+		                      asFileReference writeStream.
 	self generateRouteSourceCodeForModel: aMooseModel.
 	currentWriteStream
 		flush;
@@ -1098,12 +1111,14 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 	"Write components"
 	rootComponents := self root / 'components' / 'index'.
 	rootComponents ensureCreateDirectory.
-	currentWriteStream := (rootComponents / aMooseModel getHTMLName) asFileReference writeStream.
+	currentWriteStream := (rootComponents / aMooseModel getHTMLName)
+		                      asFileReference writeStream.
 	self generateHTMLSourceCodeForModel: aMooseModel.
 	currentWriteStream
 		flush;
 		close.
-	currentWriteStream := (rootComponents / aMooseModel getTSName) asFileReference writeStream.
+	currentWriteStream := (rootComponents / aMooseModel getTSName)
+		                      asFileReference writeStream.
 	self generateTSSourceCodeForModel: aMooseModel.
 	currentWriteStream
 		flush;
@@ -1113,13 +1128,11 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 	aMooseModel allCSNPage
 		do: [ :aPage | 
 			self
-				execute: [ self clone
-						currentPath: self rootPhases / aPage name asRealCamelCase;
-						currentPage: aPage;
-						visit: aPage ]
+				execute: [ self exportPage: aPage ]
 				recordedAs: 'export ' , aPage name asString ]
 		displayingProgress: [ :page | 'export page: ' , page name asString ].
-	"aMooseModel allCSNService do: [ :rootElement | self visit: rootElement ]"
+	aMooseModel allCSNService do: [ :rootElement | 
+		self visit: rootElement ]
 ]
 
 { #category : #'private-generate' }
