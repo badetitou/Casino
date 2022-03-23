@@ -282,6 +282,33 @@ CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportMenuWithArrow [
+
+	| result menu |
+	menu := self createEntity: CSNUIMenu.
+	menu
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'menu';
+				 yourself);
+		name: 'menu';
+		yourself.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><mat-icon aria-hidden="false" >arrow_drop_down</mat-icon></button>';
+			          << String crlf;
+			          << '<mat-menu #menu="matMenu">';
+			          << String crlf;
+			          << '</mat-menu>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIMenu: menu.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportSelect [
 
 	| result select |

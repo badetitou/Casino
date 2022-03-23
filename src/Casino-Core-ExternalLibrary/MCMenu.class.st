@@ -6,8 +6,16 @@ It includes a special exporter that will convert children as button (_e.g._ Menu
 Class {
 	#name : #MCMenu,
 	#superclass : #MaterialComponent,
+	#instVars : [
+		'withArrow'
+	],
 	#category : #'Casino-Core-ExternalLibrary'
 }
+
+{ #category : #accessing }
+MCMenu >> beWithArrow [
+	withArrow := true
+]
 
 { #category : #accessing }
 MCMenu >> exportContentOf: aWidget with: anExporter [
@@ -23,6 +31,7 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 		widget attributes
 			detect: [ :att | att isOfType: CSNUILabel ]
 			ifFound: [ :att | anExporter visit: att ].
+
 		anExporter <<< '</button>' ].
 
 	anExporter crlf.
@@ -44,6 +53,9 @@ MCMenu >> exportHeaderOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]
 		ifFound: [ :att | anExporter visit: att ].
+	withArrow ifTrue: [ 
+		anExporter
+		<<< '<mat-icon aria-hidden="false" >arrow_drop_down</mat-icon>' ].
 	anExporter <<< '</button>'.
 	anExporter
 		crlf;
@@ -58,8 +70,20 @@ MCMenu >> getSelector [
 ]
 
 { #category : #accessing }
+MCMenu >> initialize [
+	super initialize.
+	withArrow := false
+]
+
+{ #category : #accessing }
 MCMenu >> internalDependenciesOf: aWidgetInstance [
-	^ { MCButton new }
+
+	| dep |
+	dep := (super internalDependenciesOf: aWidgetInstance)
+		       asOrderedCollection.
+	dep add: MCButton new.
+	withArrow ifTrue: [ dep add: MCIcon new ].
+	^ dep
 ]
 
 { #category : #accessing }
