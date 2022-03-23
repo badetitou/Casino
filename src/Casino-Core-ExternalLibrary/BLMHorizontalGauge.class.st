@@ -18,5 +18,5 @@ BLMHorizontalGauge >> moduleName [
 { #category : #testing }
 BLMHorizontalGauge >> modulePath [
 
-	^ '@bl-microfront/elements'
+	^ '@bl/elements'
 ]
