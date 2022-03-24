@@ -25,15 +25,17 @@ CSNBusinessExporter >> businessTypeExporter: anObject [
 
 { #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
-	self modelRoot / self barrelName
-		writeStreamDo: [ :barrelStream | 
-			self writeBarrelCommentOn: barrelStream.
 
-			(aCSNBuModel allWithSubTypesOf: CSNBuBusinessType)
-				do: [ :businessType | 
-					self exportBusinessType: businessType.
-					barrelStream << 'export * from ''./dto/' << businessType name << '.model'';'.
-					barrelStream crlf ] ]
+	self modelRoot / self barrelName writeStreamDo: [ :barrelStream | 
+		self writeBarrelCommentOn: barrelStream.
+
+		((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType)
+			 asOrderedCollection sorted: [ :a :b | a name < b name ]) do: [ 
+			:businessType | 
+			self exportBusinessType: businessType.
+			barrelStream << 'export * from ''./dto/' << businessType name
+			<< '.model'';'.
+			barrelStream crlf ] ]
 ]
 
 { #category : #accessing }
