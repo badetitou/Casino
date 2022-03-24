@@ -135,3 +135,35 @@ CSNServiceAPITest >> testDependenciesReturnTypeNotBusiness [
 	serviceAPI dataType: returnType.
 	self deny: (serviceAPI dependencies includes: returnType)
 ]
+
+{ #category : #test }
+CSNServiceAPITest >> testPrintCreateFormDataIn [
+
+	| result expected |
+	result := String streamContents: [ :stream | 
+		          serviceAPI printCreateFormDataIn: stream ].
+	expected := String crlf join:
+		            #( '' 'const formData = new FormData();' '' ).
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNServiceAPITest >> testPrintCreateFormDataInWithBusinessParam [
+
+	| result expected paramType exporter |
+	paramType := (self create: CSNBuBusinessType) name:
+		             'businessType' yourself.
+	serviceAPI addParameter: ((self create: CSNServiceAPIParameter)
+			 name: paramType name;
+			 dataType: paramType;
+			 yourself).
+
+	exporter := CSNModelExporterAngularBLSpecific new.
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          serviceAPI printCreateFormDataIn: exporter ].
+	expected := String crlf join:
+		            #( '' 'const formData = new FormData();'
+		               'formData.append(''business-type'', JSON.stringify(businessType));' ).
+	self assert: result equals: expected
+]

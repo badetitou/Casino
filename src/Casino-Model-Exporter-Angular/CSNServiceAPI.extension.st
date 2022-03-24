@@ -32,20 +32,21 @@ CSNServiceAPI >> isPOST [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printCreateFormDataIn: aStream [
-	self source ifNotNil: [ :source | source  parameters
-		ifNotEmpty: [ aStream crlf.
-			aStream
-				<< 'const formData = new FormData();';
-				crlf.
-			self sortedParameters
-				do: [ :parameter | 
-					aStream << 'formData.append(''' <<< parameter name asKebabCase <<< ''', '.
-					parameter dataType isDictionaryType
-						ifFalse: [ aStream <<< 'JSON.stringify(' ]
-						ifTrue: [ aStream <<< 'this.mapToStringConverter.convertMapToJsonString(' ].
-					aStream <<< parameter name <<< '));' ]
-				separatedBy: [ aStream crlf ] ] 
-			]
+
+	aStream crlf.
+	aStream
+		<< 'const formData = new FormData();';
+		crlf.
+	self sortedParameters
+		do: [ :parameter | 
+			aStream << 'formData.append(''' <<< parameter name asKebabCase
+			<<< ''', '.
+			parameter dataType isDictionaryType
+				ifFalse: [ aStream <<< 'JSON.stringify(' ]
+				ifTrue: [ 
+				aStream <<< 'this.mapToStringConverter.convertMapToJsonString(' ].
+			aStream <<< parameter name <<< '));' ]
+		separatedBy: [ aStream crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -78,7 +79,14 @@ CSNServiceAPI >> printRestTypeIn: aStream [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> sortedParameters [
-	^ self parameters sorted: [ :p1 :p2 | (p1 source ifNil: [ 0 ] ifNotNil: [ :source | source sourceAnchor startPos ] ) < (p2 source ifNil: [ 0 ] ifNotNil: [ :source | source sourceAnchor startPos ] ) ]
+
+	^ self parameters sorted: [ :p1 :p2 | 
+		  (p1 source
+			   ifNil: [ 0 ]
+			   ifNotNil: [ :source | source sourceAnchor startPos ])
+		  < (p2 source
+				   ifNil: [ 0 ]
+				   ifNotNil: [ :source | source sourceAnchor startPos ]) ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
