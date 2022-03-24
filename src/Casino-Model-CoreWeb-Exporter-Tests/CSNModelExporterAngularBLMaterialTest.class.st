@@ -323,6 +323,54 @@ CSNModelExporterAngularBLMaterialTest >> testExportGirdBag [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportHyperlink [
+
+	| result expected link |
+	link := self createEntity: CSNUICWExtendedLink.
+	link
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'buttonAttribute';
+				 yourself);
+		name: 'buttonAttribute';
+		yourself.
+
+	expected := String crlf join:
+		            #( '<bl-hyperlink id="buttonAttribute" #buttonAttribute>'
+		               '</bl-hyperlink>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUILink: link ].
+	self assert: expected equals: result
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportHyperlinkWithLabel [
+
+	| result expected link label |
+	link := self createEntity: CSNUICWExtendedLink.
+	link
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'buttonAttribute';
+				 yourself);
+		name: 'buttonAttribute';
+		yourself.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	link addAttribute: label.
+
+	expected := String crlf join:
+		            #( '<bl-hyperlink id="buttonAttribute" #buttonAttribute>'
+		'    label'
+		               '</bl-hyperlink>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUILink: link ].
+	self assert: expected equals: result
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 
 	| result link |

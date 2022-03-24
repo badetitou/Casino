@@ -17,7 +17,12 @@ BLMHyperlink >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
 		ifFound: [ :attribute | 
-		anExporter inIndented: [ anExporter visit: attribute ] ].
+			anExporter
+				indentPlus;
+				crlf;
+				indent;
+				visit: attribute;
+				indentMinus ].
 	aWidget widgets do: [ :widget | 
 		anExporter
 			crlf;
