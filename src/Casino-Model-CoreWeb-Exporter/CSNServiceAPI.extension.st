@@ -2,13 +2,13 @@ Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
 CSNServiceAPI >> dependencies [
-	^ (((self parameters collect: #dataType) , {self dataType}) asSet reject: #isNil 
-		thenCollect: [ :dataType | 
-			dataType isBusinessType
-				ifTrue: [ dataType ]
-				ifFalse: [ dataType isComplexType
-						ifTrue: [ dataType isCollectionType
-								ifTrue: [ dataType type ]
-								ifFalse: [ {dataType key . dataType value} ] ]
-						ifFalse: [ {} ] ] ]) flattened select: #isBusinessType
+
+	"I return the CSNBuBusinessType used by this service API"
+
+	| dependencies |
+	dependencies := Set new.
+	self dataType ifNotNil: [ :dataType | dependencies add: dataType innerType ].
+	self parameters do: [ :parameter | 
+		dependencies addAll: parameter dependencies ].
+	^ dependencies select: #isBusinessType
 ]
