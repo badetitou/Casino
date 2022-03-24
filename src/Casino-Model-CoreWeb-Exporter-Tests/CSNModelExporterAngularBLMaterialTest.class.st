@@ -35,6 +35,69 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportButton [
+
+	| result expected button |
+	button := self createEntity: CSNUIButton.
+	button
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'buttonAttribute';
+				 yourself);
+		name: 'buttonAttribute';
+		yourself.
+
+	expected := String crlf join:
+		            #( '<button id="buttonAttribute" mat-stroked-button #buttonAttribute>'
+		               '</button>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUIButton: button ].
+	self assert: expected equals: result
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportButtonWithLabel [
+
+	| result expected button label |
+	button := self createEntity: CSNUIButton.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	button addAttribute: label.
+	button
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'buttonAttribute';
+				 yourself);
+		name: 'buttonAttribute';
+		yourself.
+
+	expected := String crlf join:
+		            #( '<button id="buttonAttribute" mat-stroked-button #buttonAttribute>'
+		               '    label' '</button>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUIButton: button ].
+	self assert: expected equals: result
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportButtonWithoutAttribute [
+
+	| result expected button |
+	button := self createEntity: CSNUIButton.
+
+	expected := String crlf join:
+		            #( '<button mat-stroked-button>'
+		               '</button>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUIButton: button ].
+	self assert: expected equals: result
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportDatePicker [
 
 	| result inputDate |

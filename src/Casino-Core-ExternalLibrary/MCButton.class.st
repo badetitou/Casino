@@ -39,8 +39,8 @@ MCButton >> attributeOf: aWidget [
 { #category : #export }
 MCButton >> componentAttributeOn: anExporter [
 	self isLink
-		ifTrue: [ anExporter <<< ' mat-button ' ]
-		ifFalse: [ anExporter <<< ' mat-stroked-button ' ]
+		ifTrue: [ anExporter <<< ' mat-button' ]
+		ifFalse: [ anExporter <<< ' mat-stroked-button' ]
 ]
 
 { #category : #export }
@@ -49,10 +49,12 @@ MCButton >> exportContentOf: aWidget with: anExporter [
 	aWidget attributes
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
 		ifFound: [ :attribute | 
-			anExporter inIndented: [ 
-				anExporter
-					indent;
-					visit: attribute ] ].
+			anExporter
+				indentPlus;
+				crlf;
+				indent;
+				visit: attribute;
+				indentMinus ].
 	aWidget widgets do: [ :widget | 
 		anExporter inIndented: [ anExporter visit: widget ] ]
 ]
