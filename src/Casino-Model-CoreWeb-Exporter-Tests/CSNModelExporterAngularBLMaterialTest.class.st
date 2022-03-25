@@ -73,6 +73,128 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
+{ #category : #'as yet unclassified' }
+CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
+
+	| result panel borderLayout cell unknowInnerPanel cellNorth northInnerPanel cellSouth southInnerPanel cellCenter centerInnerPanel |
+	panel := self createEntity: CSNUIPanel.
+	borderLayout := self createEntity: CSNLBorderLayout.
+	panel layout: borderLayout.
+
+	cell := self createEntity: CSNLCell.
+	unknowInnerPanel := self createEntity: CSNUIPanel.
+	cell widget: unknowInnerPanel.
+	unknowInnerPanel
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'unknow';
+				 yourself);
+		name: 'unknow';
+		yourself.
+
+	cellNorth := self createEntity: CSNLCell.
+	northInnerPanel := self createEntity: CSNUIPanel.
+	cellNorth widget: northInnerPanel.
+	cellNorth position: (self createEntity: CSNLNorthAlignement).
+	northInnerPanel
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'north';
+				 yourself);
+		name: 'north';
+		yourself.
+
+	cellCenter := self createEntity: CSNLCell.
+	centerInnerPanel := self createEntity: CSNUIPanel.
+	cellCenter widget: centerInnerPanel.
+	cellCenter position: (self createEntity: CSNLCenterAlignement).
+	centerInnerPanel
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'center';
+				 yourself);
+		name: 'center';
+		yourself.
+
+	cellSouth := self createEntity: CSNLCell.
+	southInnerPanel := self createEntity: CSNUIPanel.
+	cellSouth widget: southInnerPanel.
+	cellSouth position: (self createEntity: CSNLSouthAlignement).
+	southInnerPanel
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'south';
+				 yourself);
+		name: 'south';
+		yourself.
+
+
+	borderLayout addCell: cell.
+	borderLayout addCell: cellNorth.
+	borderLayout addCell: cellCenter.
+	borderLayout addCell: cellSouth.
+
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<table>';
+			          << String crlf;
+			          << '    <tbody>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td>';
+			          << String crlf;
+			          << '                <div id="unknow" #unknow>';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td style="text-align: center;">';
+			          << String crlf;
+			          << '                <div id="north" #north>';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td style="text-align: center;">';
+			          << String crlf;
+			          << '                <div id="center" #center>';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td style="text-align: center;">';
+			          << String crlf;
+			          << '                <div id="south" #south>';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '    </tbody>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIPanel: panel.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
 { #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportButton [
 

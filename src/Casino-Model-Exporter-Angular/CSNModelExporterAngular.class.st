@@ -827,31 +827,32 @@ CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
 		indentPlus;
 		<< '<tbody>';
 		inIndented: [ 
-			{ 
-				unknowCell.
-				northCell.
-				centerCell.
-				southCell } do: [ :cells | 
-					cells ifNotEmpty: [ 
-							self << '<tr>'.
-							self inIndented: [ 
-									cells
-										do: [ :cell | 
-											self << '<td'.
-											cell attributesTagWith: self.
-											self <<< '>'.
-											self inIndented: [ self visit: cell ].
-											self << '</td>' ]
-										separatedBy: [ self crlf ] ].
-							self << '</tr>' ] ] ];
+			({ 
+				 unknowCell.
+				 northCell.
+				 centerCell.
+				 southCell } reject: #isEmpty)
+				do: [ :cells | 
+					self << '<tr>'.
+					self inIndented: [ 
+							cells
+								do: [ :cell | 
+									self << '<td'.
+									cell attributesTagWith: self.
+									self <<< '>'.
+									self inIndented: [ self visit: cell ].
+									self << '</td>' ]
+								separatedBy: [ self crlf ] ].
+					self << '</tr>' ]
+				separatedBy: [ self crlf ] ];
 		<< '</tbody>';
 		indentMinus
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNLCell: aBLCell [
-	aBLCell layoutOwner container = aBLCell widget ifTrue: [ ^ '' ].
-	^ self visit: (aBLCell widget ifNil: [ ^ '' ])
+CSNModelExporterAngular >> visitCSNLCell: aCSNLCell [
+	aCSNLCell layoutOwner container = aCSNLCell widget ifTrue: [ ^ '' ].
+	^ self visit: (aCSNLCell widget ifNil: [ ^ '' ])
 ]
 
 { #category : #visiting }
@@ -1031,19 +1032,6 @@ CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
  	self visitCSNContainer:  aBLUIPanel
-	"aBLUIPanel layout ifNotNil: [:layout |  self visit: layout ] ifNil: [ self
-           << '<';
-           <<< (aBLUIPanel getListPropertiesAsStringWith: self);
-           <<< '>'.
-        aBLUIPanel widgets do: [:widget |  self <<< String crlf.
-              self indentPlus.
-              self visit: widget.
-              self indentMinus ].
-        self
-           crlf;
-           << '</';
-           <<< aBLUIPanel getSelector;
-           <<< '>' ]"
 ]
 
 { #category : #visiting }
