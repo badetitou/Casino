@@ -34,6 +34,45 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 	exporter model: testModel
 ]
 
+{ #category : #'as yet unclassified' }
+CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
+
+	| result panel borderLayout cell innerPanel |
+	panel := self createEntity: CSNUIPanel.
+	borderLayout := self createEntity: CSNLBorderLayout.
+	panel layout: borderLayout.
+	cell := self createEntity: CSNLCell.
+	innerPanel := self createEntity: CSNUIPanel.
+	cell widget: innerPanel.
+	borderLayout addCell: cell.
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<table>';
+			          << String crlf;
+			          << '    <tbody>';
+			          << String crlf;
+			          << '        <tr>';
+			          << String crlf;
+			          << '            <td>';
+			          << String crlf;
+			          << '                <div>';
+			          << String crlf;
+			          << '                </div>';
+			          << String crlf;
+			          << '            </td>';
+			          << String crlf;
+			          << '        </tr>';
+			          << String crlf;
+			          << '    </tbody>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIPanel: panel.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
 { #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportButton [
 

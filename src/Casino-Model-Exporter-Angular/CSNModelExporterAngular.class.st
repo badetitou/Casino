@@ -823,27 +823,29 @@ CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
 	southCell := aCSNLBorderLayout cell select: [ :cell | 
 		             cell position isNotNil and: [ cell position isSouth ] ].
 	self
+		crlf;
+		indentPlus;
 		<< '<tbody>';
 		inIndented: [ 
 			{ 
 				unknowCell.
 				northCell.
 				centerCell.
-				southCell }
-				do: [ :cells | 
-					self << '<tr>'.
-					self inIndented: [ 
-							cells do: [ :cell | 
-									self << '<td'.
-									cell attributesTagWith: self.
-									self <<< '>'.
-									self inIndented: [ self visit: cell ].
-									self << '</td>' ] ].
-					self << '</tr>' ]
-				separatedBy: [ self crlf ] ];
+				southCell } do: [ :cells | 
+					cells ifNotEmpty: [ 
+							self << '<tr>'.
+							self inIndented: [ 
+									cells
+										do: [ :cell | 
+											self << '<td'.
+											cell attributesTagWith: self.
+											self <<< '>'.
+											self inIndented: [ self visit: cell ].
+											self << '</td>' ]
+										separatedBy: [ self crlf ] ].
+							self << '</tr>' ] ] ];
 		<< '</tbody>';
-		indentMinus;
-		crlf
+		indentMinus
 ]
 
 { #category : #visiting }

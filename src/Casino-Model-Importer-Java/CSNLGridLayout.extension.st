@@ -40,11 +40,6 @@ CSNLGridLayout >> extractAddingPosition: anAssocWidgetArrayOrArrayValue [
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
-CSNLGridLayout >> getLayoutAttribute [
-	^ {}
-]
-
-{ #category : #'*Casino-Model-Importer-Java' }
 CSNLGridLayout >> postImport [
 	"try to dispose the elements by looking the addMethod position and the call of the met getNumberOfRow"
 

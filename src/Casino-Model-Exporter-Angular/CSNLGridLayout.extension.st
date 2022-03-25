@@ -1,6 +1,11 @@
 Extension { #name : #CSNLGridLayout }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNLGridLayout >> getLayoutAttribute [
+	^ {}
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNLGridLayout >> getSelector [
 	^ 'table'
 ]
