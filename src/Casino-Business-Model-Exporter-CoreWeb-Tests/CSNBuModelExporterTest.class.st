@@ -17,15 +17,59 @@ CSNBuModelExporterTest >> setUp [
 ]
 
 { #category : #test }
-CSNBuModelExporterTest >> testExportAttributeDTO [
+CSNBuModelExporterTest >> testExportAttribute [
 
-	| expected result buAttributeType |
-	"inner setup"
+	| buAttributeType buAttribute expected result |
 	buAttributeType := CSNBuDTO new.
-	expected := 'any'.
+
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+
+	expected := String crlf join:
+		            #( '@JsonProperty() myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
-		          businessExporter exportAttributeDTO: buAttributeType ].
+		          businessExporter exportAttribute: buAttribute ].
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testExportAttributeBusiness [
+
+	| buAttributeType buAttribute expected result |
+	buAttributeType := CSNBuBusinessType new.
+	buAttributeType name: 'Hello'.
+
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+
+	expected := String crlf join:
+		            #( 
+		'@JsonClassType({ type: () => [Hello] })'
+		'@JsonProperty() myAttribute: Hello;' ).
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter exportAttribute: buAttribute ].
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testExportAttributeDTO [
+
+	| buAttributeType buAttribute expected result |
+	buAttributeType := CSNBuDTO new.
+
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+
+	expected := String crlf join:
+		            #( '@JsonProperty() myAttribute: any;' ).
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter exportAttribute: buAttribute ].
 	self assert: result equals: expected
 ]
 

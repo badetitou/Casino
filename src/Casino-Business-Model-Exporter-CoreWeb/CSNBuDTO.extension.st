@@ -15,10 +15,10 @@ CSNBuDTO >> innerType [
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printJsonClassOn: aCSNExporter [
 	(self isBusinessType or: [ self isPrimitive or: [ self isComplexType ] ])
-		ifTrue: [ aCSNExporter << '@JsonClassType({type: () => ['.
+		ifTrue: [ aCSNExporter << '@JsonClassType({ type: () => ['.
 			self printJsonClassTypeOn: aCSNExporter.
 			aCSNExporter
-				<<< ']})';
+				<<< '] })';
 				crlf ]
 ]
 
