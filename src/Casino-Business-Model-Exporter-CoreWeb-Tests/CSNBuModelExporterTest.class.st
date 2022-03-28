@@ -17,6 +17,49 @@ CSNBuModelExporterTest >> setUp [
 ]
 
 { #category : #test }
+CSNBuModelExporterTest >> testExportAttributeDTO [
+
+	| expected result buAttributeType |
+	"inner setup"
+	buAttributeType := CSNBuDTO new.
+	expected := 'any'.
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter exportAttributeDTO: buAttributeType ].
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testExportAttributeDTOBusiness [
+
+	| expected result buAttributeType |
+	"inner setup"
+	buAttributeType := CSNBuBusinessType new.
+	buAttributeType name: 'Hello'.
+	expected := 'Hello'.
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter exportAttributeDTO: buAttributeType ].
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testExportAttributeDTOCollectionOfDTOs [
+
+	| expected result buAttributeType collectionType |
+	"inner setup"
+	collectionType := CSNBuCollectionType new.
+	buAttributeType := CSNBuBusinessType new.
+	buAttributeType name: 'Hello'.
+	collectionType type: buAttributeType.
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter exportAttributeDTO: collectionType ].
+	expected := 'Array<Hello>'.
+	self assert: result equals: expected
+]
+
+{ #category : #test }
 CSNBuModelExporterTest >> testExportAttributeGetter [
 
 	| expected result buAttribute buAttributeType |
