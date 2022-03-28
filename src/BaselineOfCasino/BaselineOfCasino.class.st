@@ -44,7 +44,8 @@ BaselineOfCasino >> defineBusinessPackages: spec [
 		package: 'Casino-Business-Model-Generator';
 		package: 'Casino-Business-Model-Importer-CoreWeb' with: [ spec requires: #('Casino-Business-Model' 'Famix2Java') ];
 		package: 'Casino-Business-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Business-Model' 'Casino-Exporter') ];
-		package: 'Casino-Business-Model-Importer-CoreWeb-Tests' with: [ spec requires: #('Casino-Business-Model-Importer-CoreWeb') ]
+		package: 'Casino-Business-Model-Importer-CoreWeb-Tests' with: [ spec requires: #('Casino-Business-Model-Importer-CoreWeb') ];
+		package: 'Casino-Business-Model-Exporter-CoreWeb-Tests' with: [ spec requires: #('Casino-Business-Model-Exporter-CoreWeb') ]
 ]
 
 { #category : #baselines }
@@ -116,7 +117,8 @@ BaselineOfCasino >> defineGroups: spec [
 			#( 'Casino-Business-Model' 'Casino-Business-Model-Importer-CoreWeb'
 			   'Casino-Business-Model-Exporter-CoreWeb' );
 		group: 'business-tests'
-		with: #( 'business' 'Casino-Business-Model-Importer-CoreWeb-Tests' );
+		with: #( 'business' 'Casino-Business-Model-Importer-CoreWeb-Tests'
+			   'Casino-Business-Model-Exporter-CoreWeb-Tests' );
 		"bl migration"group: 'omaje'
 		with: #( 'Casino-Migration-Omaje' 'behavior-bl' 'business' );
 		group: 'rh'
