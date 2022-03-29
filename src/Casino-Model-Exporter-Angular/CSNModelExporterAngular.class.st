@@ -27,7 +27,8 @@ Class {
 		'currentPath',
 		'currentPage',
 		'exporterAngularConfiguration',
-		'attributeExporter'
+		'attributeExporter',
+		'homePage'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -622,7 +623,9 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngular >> generateTSSourceCodeForModel: aModel [
-  currentWriteStream << 'import { Component, OnInit } from ''@angular/core'';
+
+	currentWriteStream
+	<< 'import { Component, OnInit } from ''@angular/core'';
 import { Phase, PhaseService } from ''app/projects/bl-shell/src/public-api'';
 
 @Component({
@@ -634,7 +637,11 @@ export class IndexComponent implements OnInit {
     public phaseHome: Phase;
 
     constructor(private _phaseService: PhaseService) {
-        this.phaseHome = this._phaseService.getPhase(''PHASE_OMAJE_HOME'');
+        this.phaseHome = this._phaseService.getPhase('''.
+	self homePage
+		ifNotNil: [ :page | self <<< page name asRealCamelCase ]
+		ifNil: [ self <<< '`TODO: Replace By Home Page`' ].
+	self <<< ''');
     }
 
     public ngOnInit(): void {
@@ -726,6 +733,18 @@ export class ';
     }
 }';
 		<< String crlf
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> homePage [
+
+	^ homePage
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> homePage: anObject [
+
+	homePage := anObject
 ]
 
 { #category : #initialization }
