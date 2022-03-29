@@ -213,3 +213,36 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
 	            , String crlfcrlf.
 	self assert: result equals: expected
 ]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentType [
+
+	| aBusinessType buAttributeType buAttribute result expected buAttribute2 buAttribute2Type |
+	aBusinessType := CSNBuBusinessType new
+		                 name: 'HelloBusinessType';
+		                 yourself.
+	buAttributeType := CSNBuBusinessType new
+		                   name: 'HelloAttributeBusinessType';
+		                   yourself.
+	buAttribute2Type := CSNBuBusinessType new
+		                    name: 'Hello2AttributeBusinessType';
+		                    yourself.
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+	buAttribute businessType: aBusinessType.
+	buAttribute2 := CSNBuAttribute new.
+	buAttribute2 name: 'myAttribute2'.
+	buAttribute2 attributeType: buAttribute2Type.
+	buAttribute2 businessType: aBusinessType.
+
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter printImportDependencenciesOf:
+			          aBusinessType ].
+	expected := (String crlf join:
+		             #( 'import { Hello2AttributeBusinessType } from ''..'';'
+		                'import { HelloAttributeBusinessType } from ''..'';' ))
+	            , String crlfcrlf.
+	self assert: result equals: expected
+]
