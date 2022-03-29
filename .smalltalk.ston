@@ -11,7 +11,7 @@ SmalltalkCISpec {
   ],
   #testing : {
     #coverage : {
-      #packages : [ 'Casino.*[^Generator]$' ],
+      #packages : [ 'Casino.*' ],
       #format : #lcov
     }
   }
