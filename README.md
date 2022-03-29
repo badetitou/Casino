@@ -156,6 +156,9 @@ casinoModel metamodel: metamodel.
 exporter := CSNModelExporterAngularBLSpecific new.
 exporter model: gwtModel.
 
+"Set the home page"
+exporter homePage: (evolModel detect: [:page | page name = 'MyHomePage']).
+
 "Use the material.angular.io as target library"
 exporter exporterAngularConfiguration: CSNExporterAngularMaterialConfiguration new.
 exporter attributeExporter: CSNExporterAngularAttribute new.
