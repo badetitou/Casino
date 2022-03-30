@@ -532,6 +532,59 @@ CSNModelExporterAngularBLMaterialTest >> testExportHyperlinkWithLabel [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportInput [
+
+	| result inputText label |
+	inputText := self createEntity: CSNUIInputText.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	inputText addAttribute: label.
+
+	result := String crlf join: #(
+	'<mat-form-field appearance="fill">'
+	'    <mat-label>'
+	'        label'
+	'    </mat-label>'
+	'    <input matInput>'
+	'</mat-form-field>'
+	).
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIInputText: inputText.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportInputWithAffectation [
+
+	| result inputText label |
+	inputText := self createEntity: CSNUIInputText.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	inputText addAttribute: label.
+	inputText affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'myInput';
+				 yourself);
+		name: 'myInput';
+		yourself.
+
+	result := String crlf join: #(
+	'<mat-form-field appearance="fill">'
+	'    <mat-label>'
+	'        label'
+	'    </mat-label>'
+	'    <input id="myInput" matInput #myInput>'
+	'</mat-form-field>'
+	).
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIInputText: inputText.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 
 	| result link |

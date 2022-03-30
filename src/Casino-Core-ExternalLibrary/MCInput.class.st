@@ -28,7 +28,7 @@ Class {
 
 { #category : #export }
 MCInput >> componentAttributeOn: anExporter [
-	anExporter <<< ' matInput '
+	anExporter <<< ' matInput'
 ]
 
 { #category : #export }
@@ -50,6 +50,7 @@ MCInput >> exportFooterOf: aWidget with: anExporter [
 
 { #category : #export }
 MCInput >> exportHeaderOf: aWidget with: anExporter [
+
 	anExporter
 		<< '<mat-form-field appearance="fill">';
 		crlf.
@@ -60,10 +61,14 @@ MCInput >> exportHeaderOf: aWidget with: anExporter [
 				indentPlus;
 				<< '<mat-label>';
 				crlf;
+				indentPlus;
+				indent;
 				visit: att;
+				indentMinus;
 				crlf;
 				<< '</mat-label>';
-				indentMinus ]
+				indentMinus;
+				crlf ]
 ]
 
 { #category : #accessing }

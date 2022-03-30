@@ -26,7 +26,7 @@ CSNBuModelImporterTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 	super setUp.
 	buModelImporter := CSNBuModelImporter new.
-	buModelImporter famixModel: FAMIXModel new.
+	buModelImporter famixModel: FamixJavaModel new.
 	self famixModel.
 	buModelImporter buModel: CSNBuModel new.
 ]
@@ -34,7 +34,7 @@ CSNBuModelImporterTest >> setUp [
 { #category : #test }
 CSNBuModelImporterTest >> testImportClass [
 	| sourceClass |
-	sourceClass := (self createInFamixModel: FAMIXClass)
+	sourceClass := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessType'.
 	buModelImporter importClass: sourceClass.
 	self
@@ -45,7 +45,7 @@ CSNBuModelImporterTest >> testImportClass [
 { #category : #test }
 CSNBuModelImporterTest >> testImportClassTwice [
 	| sourceClass |
-	sourceClass := (self createInFamixModel: FAMIXClass)
+	sourceClass := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessType'.
 	buModelImporter importClass: sourceClass.
 	buModelImporter importClass: sourceClass.
@@ -57,9 +57,9 @@ CSNBuModelImporterTest >> testImportClassTwice [
 { #category : #test }
 CSNBuModelImporterTest >> testImportCollectionType [
 	| sourceClass argument |
-	sourceClass := (self createInFamixModel: FAMIXParameterizedType)
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
 		name: 'List'.
-	argument := (self createInFamixModel: FAMIXPrimitiveType) name: 'int'.
+	argument := (self createInFamixModel: FamixJavaPrimitiveType) name: 'int'.
 	sourceClass addArgument: argument.
 	buModelImporter importCollectionType: sourceClass.
 	self
@@ -76,7 +76,7 @@ CSNBuModelImporterTest >> testImportCollectionType [
 { #category : #test }
 CSNBuModelImporterTest >> testImportCollectionTypeWithoutArgument [
 	| sourceClass |
-	sourceClass := (self createInFamixModel: FAMIXParameterizedType)
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
 		name: 'List'.
 	buModelImporter importCollectionType: sourceClass.
 	self
@@ -90,10 +90,10 @@ CSNBuModelImporterTest >> testImportCollectionTypeWithoutArgument [
 { #category : #test }
 CSNBuModelImporterTest >> testImportDictionaryType [
 	| sourceClass argument argument2 |
-	sourceClass := (self createInFamixModel: FAMIXParameterizedType)
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
 		name: 'Map'.
-	argument := (self createInFamixModel: FAMIXPrimitiveType) name: 'int'.
-	argument2 := (self createInFamixModel: FAMIXPrimitiveType)
+	argument := (self createInFamixModel: FamixJavaPrimitiveType) name: 'int'.
+	argument2 := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'long'.
 	sourceClass addArgument: argument.
 	sourceClass addArgument: argument2.
@@ -119,7 +119,7 @@ CSNBuModelImporterTest >> testImportDictionaryType [
 { #category : #test }
 CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 	| sourceClass |
-	sourceClass := (self createInFamixModel: FAMIXParameterizedType)
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
 		name: 'Map'.
 	buModelImporter importDictionaryType: sourceClass.
 	self
@@ -134,7 +134,7 @@ CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 CSNBuModelImporterTest >> testImportIntPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
-	sourceClass := (self createInFamixModel: FAMIXPrimitiveType)
+	sourceClass := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'int'.
 	buModelImporter importPrimitiveType: sourceClass.
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1.
@@ -145,7 +145,7 @@ CSNBuModelImporterTest >> testImportIntPrimitiveType [
 CSNBuModelImporterTest >> testImportLongPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
-	sourceClass := (self createInFamixModel: FAMIXPrimitiveType)
+	sourceClass := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'long'.
 	buModelImporter importPrimitiveType: sourceClass.
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1.
@@ -156,7 +156,7 @@ CSNBuModelImporterTest >> testImportLongPrimitiveType [
 CSNBuModelImporterTest >> testImportPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
-	sourceClass := (self createInFamixModel: FAMIXPrimitiveType)
+	sourceClass := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'int'.
 	buModelImporter importPrimitiveType: sourceClass.
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1.
@@ -169,7 +169,7 @@ CSNBuModelImporterTest >> testImportPrimitiveType [
 CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 	| sourceClass |
 		"test that we can import an int"
-	sourceClass := (self createInFamixModel: FAMIXPrimitiveType)
+	sourceClass := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'int'.
 	buModelImporter importPrimitiveType: sourceClass.
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1.
@@ -181,11 +181,11 @@ CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 { #category : #test }
 CSNBuModelImporterTest >> testImportSeveralClasses [
 	| sourceClass sourceClassA sourceClassB |
-	sourceClass := (self createInFamixModel: FAMIXClass)
+	sourceClass := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessType'.
-	sourceClassA := (self createInFamixModel: FAMIXClass)
+	sourceClassA := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessTypeA'.
-	sourceClassB := (self createInFamixModel: FAMIXClass)
+	sourceClassB := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessTypeB'.
 	buModelImporter importClass: sourceClass.
 	buModelImporter importClass: sourceClassA.
@@ -198,11 +198,11 @@ CSNBuModelImporterTest >> testImportSeveralClasses [
 { #category : #test }
 CSNBuModelImporterTest >> testImportSeveralClassesWithDuplicate [
 	| sourceClass sourceClassA sourceClassB |
-	sourceClass := (self createInFamixModel: FAMIXClass)
+	sourceClass := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessType'.
-	sourceClassA := (self createInFamixModel: FAMIXClass)
+	sourceClassA := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessType'.
-	sourceClassB := (self createInFamixModel: FAMIXClass)
+	sourceClassB := (self createInFamixModel: FamixJavaClass)
 		name: 'aBusinessTypeB'.
 	buModelImporter importClass: sourceClass.
 	buModelImporter importClass: sourceClassA.
@@ -217,13 +217,13 @@ CSNBuModelImporterTest >> testVisitClass [
 	"default is the class is a business class"
 
 	| abstractClass businessClassA |
-	abstractClass := (self createInFamixModel: FAMIXClass)
+	abstractClass := (self createInFamixModel: FamixJavaClass)
 		name: buModelImporter dtoAbstractName;
 		yourself.
-	businessClassA := (self createInFamixModel: FAMIXClass)
+	businessClassA := (self createInFamixModel: FamixJavaClass)
 		name: 'businessClassA';
 		yourself.
-	(self createInFamixModel: FAMIXInheritance)
+	(self createInFamixModel: FamixJavaInheritance)
 		superclass: abstractClass;
 		subclass: businessClassA.
 	buModelImporter visitClass: businessClassA.
@@ -240,7 +240,7 @@ CSNBuModelImporterTest >> testVisitClassBoolean [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Boolean;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -257,7 +257,7 @@ CSNBuModelImporterTest >> testVisitClassByte [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Byte;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -274,7 +274,7 @@ CSNBuModelImporterTest >> testVisitClassDate [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Date;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -291,7 +291,7 @@ CSNBuModelImporterTest >> testVisitClassDouble [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Double;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -308,7 +308,7 @@ CSNBuModelImporterTest >> testVisitClassFloat [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Float;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -325,7 +325,7 @@ CSNBuModelImporterTest >> testVisitClassInteger [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Integer;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -342,7 +342,7 @@ CSNBuModelImporterTest >> testVisitClassLong [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #Long;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -359,7 +359,7 @@ CSNBuModelImporterTest >> testVisitClassString [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #String;
 		yourself.
 	buModelImporter visitClass: stringClass.
@@ -376,7 +376,7 @@ CSNBuModelImporterTest >> testVisitClassUnknow [
 	"default is the class is a business class"
 
 	| stringClass |
-	stringClass := (self createInFamixModel: FAMIXClass)
+	stringClass := (self createInFamixModel: FamixJavaClass)
 		name: #UnknowClass;
 		yourself.
 	buModelImporter visitClass: stringClass.

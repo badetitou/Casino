@@ -17,6 +17,23 @@ CSNBuModelExporterTest >> setUp [
 ]
 
 { #category : #test }
+CSNBuModelExporterTest >> testDependencenciesOf [
+
+	| aBusinessType buAttributeType buAttribute |
+	aBusinessType := CSNBuBusinessType new
+		                 name: 'HelloBusinessType';
+		                 yourself.
+	buAttributeType := CSNBuBusinessType new
+		                   name: 'HelloAttributeBusinessType';
+		                   yourself.
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+	buAttribute businessType: aBusinessType.
+	self assert: (aBusinessType dependencies includes: buAttributeType)
+]
+
+{ #category : #test }
 CSNBuModelExporterTest >> testExportAttribute [
 
 	| buAttributeType buAttribute expected result |
@@ -142,5 +159,90 @@ CSNBuModelExporterTest >> testExportAttributeSetter [
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttributeSetter: buAttribute ].
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testPrintImportDependencenciesOf [
+
+	| aBusinessType buAttributeType buAttribute result expected |
+	aBusinessType := CSNBuBusinessType new
+		                 name: 'HelloBusinessType';
+		                 yourself.
+	buAttributeType := CSNBuBusinessType new
+		                   name: 'HelloAttributeBusinessType';
+		                   yourself.
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+	buAttribute businessType: aBusinessType.
+
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter printImportDependencenciesOf:
+			          aBusinessType ].
+	expected := 'import { HelloAttributeBusinessType } from ''..'';'
+	            , String crlfcrlf.
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
+
+	| aBusinessType buAttributeType buAttribute result expected buAttribute2 |
+	aBusinessType := CSNBuBusinessType new
+		                 name: 'HelloBusinessType';
+		                 yourself.
+	buAttributeType := CSNBuBusinessType new
+		                   name: 'HelloAttributeBusinessType';
+		                   yourself.
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+	buAttribute businessType: aBusinessType.
+	buAttribute2 := CSNBuAttribute new.
+	buAttribute2 name: 'myAttribute2'.
+	buAttribute2 attributeType: buAttributeType.
+	buAttribute2 businessType: aBusinessType.
+
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter printImportDependencenciesOf:
+			          aBusinessType ].
+	expected := 'import { HelloAttributeBusinessType } from ''..'';'
+	            , String crlfcrlf.
+	self assert: result equals: expected
+]
+
+{ #category : #test }
+CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentType [
+
+	| aBusinessType buAttributeType buAttribute result expected buAttribute2 buAttribute2Type |
+	aBusinessType := CSNBuBusinessType new
+		                 name: 'HelloBusinessType';
+		                 yourself.
+	buAttributeType := CSNBuBusinessType new
+		                   name: 'HelloAttributeBusinessType';
+		                   yourself.
+	buAttribute2Type := CSNBuBusinessType new
+		                    name: 'Hello2AttributeBusinessType';
+		                    yourself.
+	buAttribute := CSNBuAttribute new.
+	buAttribute name: 'myAttribute'.
+	buAttribute attributeType: buAttributeType.
+	buAttribute businessType: aBusinessType.
+	buAttribute2 := CSNBuAttribute new.
+	buAttribute2 name: 'myAttribute2'.
+	buAttribute2 attributeType: buAttribute2Type.
+	buAttribute2 businessType: aBusinessType.
+
+	result := String streamContents: [ :stream | 
+		          businessExporter currentWriteStream: stream.
+		          businessExporter printImportDependencenciesOf:
+			          aBusinessType ].
+	expected := (String crlf join:
+		             #( 'import { Hello2AttributeBusinessType } from ''..'';'
+		                'import { HelloAttributeBusinessType } from ''..'';' ))
+	            , String crlfcrlf.
 	self assert: result equals: expected
 ]
