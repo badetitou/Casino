@@ -1,13 +1,15 @@
 "
 I represent a kind of data created by the developers of the application.
-I am composed of other DTO
+I am composed of other DTO.
 "
 Class {
 	#name : #CSNBuBusinessType,
 	#superclass : #CSNBuDTO,
 	#instVars : [
 		'#attributes => FMMany type: #CSNBuAttribute opposite: #businessType',
-		'#name => FMProperty'
+		'#children => FMMany type: #CSNBuBusinessType opposite: #parent',
+		'#name => FMProperty',
+		'#parent => FMOne type: #CSNBuBusinessType opposite: #children'
 	],
 	#category : #'Casino-Business-Model-Entities'
 }
@@ -25,6 +27,12 @@ CSNBuBusinessType class >> annotation [
 CSNBuBusinessType >> addAttribute: anObject [
 	<generated>
 	^ self attributes add: anObject
+]
+
+{ #category : #adding }
+CSNBuBusinessType >> addChildren: anObject [
+	<generated>
+	^ self children add: anObject
 ]
 
 { #category : #accessing }
@@ -47,7 +55,30 @@ CSNBuBusinessType >> attributes: anObject [
 CSNBuBusinessType >> attributesGroup [
 	<generated>
 	<navigation: 'Attributes'>
-	^ MooseGroup withAll: self attributes asSet
+	^ MooseSpecializedGroup withAll: self attributes asSet
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> children [
+	"Relation named: #children type: #CSNBuBusinessType opposite: #parent"
+
+	<generated>
+	<derived>
+	^ children
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> children: anObject [
+
+	<generated>
+	children value: anObject
+]
+
+{ #category : #navigation }
+CSNBuBusinessType >> childrenGroup [
+	<generated>
+	<navigation: 'Children'>
+	^ MooseSpecializedGroup withAll: self children asSet
 ]
 
 { #category : #testing }
@@ -69,6 +100,29 @@ CSNBuBusinessType >> name [
 CSNBuBusinessType >> name: anObject [
 	<generated>
 	name := anObject
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> parent [
+	"Relation named: #parent type: #CSNBuBusinessType opposite: #children"
+
+	<generated>
+	<container>
+	^ parent
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> parent: anObject [
+
+	<generated>
+	parent := anObject
+]
+
+{ #category : #navigation }
+CSNBuBusinessType >> parentGroup [
+	<generated>
+	<navigation: 'Parent'>
+	^ MooseSpecializedGroup with: self parent
 ]
 
 { #category : #printing }

@@ -5,6 +5,8 @@ I represent any kind of data easy to transfert.
 Class {
 	#name : #CSNBuDTO,
 	#superclass : #CSNBuEntity,
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#asKeyInDictionaryTypes => FMMany type: #CSNBuDictionaryType opposite: #key',
 		'#asValueInDictionaryTypes => FMMany type: #CSNBuDictionaryType opposite: #value',
@@ -109,6 +111,7 @@ CSNBuDTO >> inCollectionTypes: anObject [
 
 { #category : #accessing }
 CSNBuDTO >> usedAsParameterType [
+
 	"Relation named: #usedAsParameterType type: #CSNServiceAPIParameter opposite: #dataType"
 
 	<generated>
@@ -116,8 +119,8 @@ CSNBuDTO >> usedAsParameterType [
 	<FMProperty: #usedAsParameterType type: #CSNServiceAPIParameter
 	opposite: #dataType>
 	^ self
-		attributeAt: #usedAsParameterType
-		ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+		  attributeAt: #usedAsParameterType
+		  ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
 ]
 
 { #category : #accessing }
@@ -145,14 +148,15 @@ CSNBuDTO >> usedInAttributes: anObject [
 
 { #category : #accessing }
 CSNBuDTO >> usedInServices [
+
 	"Relation named: #usedInServices type: #CSNServiceAPI opposite: #dataType"
 
 	<generated>
 	<derived>
 	<FMProperty: #usedInServices type: #CSNServiceAPI opposite: #dataType>
 	^ self
-		attributeAt: #usedInServices
-		ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
+		  attributeAt: #usedInServices
+		  ifAbsentPut: [ FMMultivalueLink on: self opposite: #dataType: ]
 ]
 
 { #category : #accessing }

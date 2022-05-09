@@ -1,5 +1,5 @@
 "
-I represent simple and know type used in many application
+I represent a simple and known type used in many applications.
 "
 Class {
 	#name : #CSNBuPrimitive,

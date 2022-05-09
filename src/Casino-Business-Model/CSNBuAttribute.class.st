@@ -1,5 +1,5 @@
 "
-I represent an attribute of a businessType
+I represent an attribute of a businessType.
 "
 Class {
 	#name : #CSNBuAttribute,
@@ -56,7 +56,7 @@ CSNBuAttribute >> businessType: anObject [
 CSNBuAttribute >> businessTypeGroup [
 	<generated>
 	<navigation: 'BusinessType'>
-	^ MooseGroup with: self businessType
+	^ MooseSpecializedGroup with: self businessType
 ]
 
 { #category : #accessing }

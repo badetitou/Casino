@@ -1,5 +1,5 @@
 "
-I represent a collection of one DataType
+I represent a collection of one DataType.
 "
 Class {
 	#name : #CSNBuCollectionType,

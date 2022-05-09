@@ -1,5 +1,5 @@
 "
-I represent a complex data. Often structural entity such as collection or dictionary
+I represent a complex data. Often structural entity such as collection or dictionary.
 "
 Class {
 	#name : #CSNBuComplexType,
