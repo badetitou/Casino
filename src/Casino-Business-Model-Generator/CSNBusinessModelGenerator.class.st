@@ -109,15 +109,16 @@ CSNBusinessModelGenerator >> defineClasses [
 
 { #category : #definition }
 CSNBusinessModelGenerator >> defineHierarchy [
+
 	super defineHierarchy.
+	dto --|> #TEntityMetaLevelDependency.
+
 	primitive --|> dto.
 	businessType --|> dto.
 	complexType --|> dto.
-	
+
 	collectionType --|> complexType.
-	dictionaryType --|> complexType.
-	
-	
+	dictionaryType --|> complexType
 ]
 
 { #category : #definition }
@@ -131,9 +132,11 @@ CSNBusinessModelGenerator >> defineProperties [
 
 { #category : #definition }
 CSNBusinessModelGenerator >> defineRelations [
+
 	super defineRelations.
 	"local relations"
-	((businessType property: #attributes) <>-* (attribute property: #businessType)).
+	(businessType property: #children) <>-* (businessType property: #parent).
+	(businessType property: #attributes) <>-* (attribute property: #businessType).
 	(attribute property: #attributeType) *- (dto property: #usedInAttributes).
 	(collectionType property: #type) *- (dto property: #inCollectionTypes).
 	(dictionaryType property: #key) *- (dto property: #asKeyInDictionaryTypes).
