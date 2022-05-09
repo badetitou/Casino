@@ -50,12 +50,14 @@ I am composed of other DTO.'
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForCollectionType [
-	^ 'I represent a collection of one DataType'
+
+	^ 'I represent a collection of one DataType.'
 ]
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForComplexType [
-	^ 'I represent a complex data. Often structural entity such as collection or dictionary'
+
+	^ 'I represent a complex data. Often structural entity such as collection or dictionary.'
 ]
 
 { #category : #comments }
