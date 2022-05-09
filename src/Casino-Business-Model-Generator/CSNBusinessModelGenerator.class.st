@@ -37,13 +37,15 @@ CSNBusinessModelGenerator class >> submetamodels [
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForAttribute [
-	^ 'I represent an attribute of a businessType'
+
+	^ 'I represent an attribute of a businessType.'
 ]
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForBusinessType [
+
 	^ 'I represent a kind of data created by the developers of the application.
-I am composed of other DTO'
+I am composed of other DTO.'
 ]
 
 { #category : #comments }
@@ -58,23 +60,27 @@ CSNBusinessModelGenerator >> commentForComplexType [
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForDTO [
+
 	^ '(Data Transfer Object)
 I represent any kind of data easy to transfert.'
 ]
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForDictionaryType [
+
 	^ 'I represent a dictionary of two data type
 key: <dataType> value: <dataType>'
 ]
 
 { #category : #comments }
 CSNBusinessModelGenerator >> commentForPrimitive [
-	^ 'I represent simple and know type used in many application'
+
+	^ 'I represent a simple and known type used in many applications.'
 ]
 
 { #category : #definition }
 CSNBusinessModelGenerator >> defineClasses [
+
 	super defineClasses.
 	dto := builder newClassNamed: #DTO comment: self commentForDTO.
 	attribute := builder newClassNamed: #Attribute comment: self commentForAttribute.
@@ -114,10 +120,11 @@ CSNBusinessModelGenerator >> defineHierarchy [
 
 { #category : #definition }
 CSNBusinessModelGenerator >> defineProperties [
+
 	super defineProperties.
 	businessType property: #name type: #String.
 	attribute property: #name type: #String.
-	primitive property: #name type: #String.
+	primitive property: #name type: #String
 ]
 
 { #category : #definition }
