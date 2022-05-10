@@ -126,6 +126,7 @@ CSNBusinessModelGenerator >> defineProperties [
 
 	super defineProperties.
 	businessType property: #name type: #String.
+	businessType property: #isAbstract type: #Boolean.
 	attribute property: #name type: #String.
 	primitive property: #name type: #String
 ]
