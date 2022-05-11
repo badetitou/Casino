@@ -7,6 +7,10 @@ Class {
 	#instVars : [
 		'#attributeType => FMOne type: #CSNBuDTO opposite: #usedInAttributes',
 		'#businessType => FMOne type: #CSNBuBusinessType opposite: #attributes',
+		'#comment => FMProperty',
+		'#isFinal => FMProperty',
+		'#isStatic => FMProperty',
+		'#isTransient => FMProperty',
 		'#name => FMProperty'
 	],
 	#category : #'Casino-Business-Model-Entities'
@@ -57,6 +61,62 @@ CSNBuAttribute >> businessTypeGroup [
 	<generated>
 	<navigation: 'BusinessType'>
 	^ MooseSpecializedGroup with: self businessType
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> comment [
+
+	<FMProperty: #comment type: #String>
+	<generated>
+	^ comment
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> comment: anObject [
+	<generated>
+	comment := anObject
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isFinal [
+
+	<FMProperty: #isFinal type: #Boolean>
+	<generated>
+	^ isFinal
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isFinal: anObject [
+	<generated>
+	isFinal := anObject
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isStatic [
+
+	<FMProperty: #isStatic type: #Boolean>
+	<generated>
+	^ isStatic
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isStatic: anObject [
+	<generated>
+	isStatic := anObject
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isTransient [
+
+	<FMProperty: #isTransient type: #Boolean>
+	<generated>
+	^ isTransient
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> isTransient: anObject [
+	<generated>
+	isTransient := anObject
 ]
 
 { #category : #accessing }

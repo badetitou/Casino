@@ -8,6 +8,7 @@ Class {
 	#instVars : [
 		'#attributes => FMMany type: #CSNBuAttribute opposite: #businessType',
 		'#children => FMMany type: #CSNBuBusinessType opposite: #parent',
+		'#comment => FMProperty',
 		'#isAbstract => FMProperty',
 		'#name => FMProperty',
 		'#parent => FMOne type: #CSNBuBusinessType opposite: #children'
@@ -80,6 +81,20 @@ CSNBuBusinessType >> childrenGroup [
 	<generated>
 	<navigation: 'Children'>
 	^ MooseSpecializedGroup withAll: self children asSet
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> comment [
+
+	<FMProperty: #comment type: #String>
+	<generated>
+	^ comment
+]
+
+{ #category : #accessing }
+CSNBuBusinessType >> comment: anObject [
+	<generated>
+	comment := anObject
 ]
 
 { #category : #accessing }
