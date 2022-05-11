@@ -28,10 +28,8 @@ CSNBusinessExporter >> export: aCSNBuModel [
 
 	self modelRoot / self barrelName writeStreamDo: [ :barrelStream | 
 		self writeBarrelCommentOn: barrelStream.
-
-		((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType)
-			 asOrderedCollection sorted: [ :a :b | a name < b name ]) do: [ 
-			:businessType | 
+		((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) asArray sorted:
+			 #name ascending) do: [ :businessType | 
 			self exportBusinessType: businessType.
 			barrelStream << 'export * from ''./dto/' << businessType name
 			<< '.model'';'.
@@ -40,11 +38,13 @@ CSNBusinessExporter >> export: aCSNBuModel [
 
 { #category : #accessing }
 CSNBusinessExporter >> exportBusinessType: businessType [
+
 	(self modelRoot / 'dto') ensureCreateDirectory.
-	^ self modelRoot / 'dto' / (businessType name , '.model.ts')
-		writeStreamDo: [ :stream | 
-			self businessTypeExporter currentWriteStream: stream.
-			self businessTypeExporter exportBusinessType: businessType ]
+	^ (self modelRoot / 'dto' / businessType name , 'model.ts')
+		  deleteIfAbsent: nil;
+		  writeStreamDo: [ :stream | 
+			  self businessTypeExporter currentWriteStream: stream.
+			  self businessTypeExporter exportBusinessType: businessType ]
 ]
 
 { #category : #accessing }

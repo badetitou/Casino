@@ -13,8 +13,19 @@ CSNBuModelExporter >> attributeInExceptionList: attribute [
 
 { #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
-	attribute attributeType printJsonClassOn: self.
-	self << '@JsonProperty() ' <<< attribute name <<< ': '.
+
+	attribute comment ifNotNil: [ :comment | 
+		self << comment sourceText.
+		self crlf ].
+	(attribute isStatic or: [ attribute isTransient ]) ifFalse: [ 
+		attribute attributeType printJsonClassOn: self ].
+	attribute isTransient ifTrue: [ 
+		self << '@JsonIgnore()'.
+		self crlf ].
+	self indent.
+	attribute isStatic ifTrue: [ self <<< 'static ' ].
+	attribute isFinal ifTrue: [ self <<< 'readonly ' ].
+	self <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	self <<< ';'
 ]
@@ -50,18 +61,29 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 
 	self printImports.
 	self printImportDependencenciesOf: aBusinessType.
-	(self << '@JsonTypeName({value: ''' <<< aBusinessType name)
-		<<< '''})';
-		crlf.
-	self << 'export class ' <<< aBusinessType name <<< ' extends AbstractDTO '.
-	self inBraces: [ 
-		((aBusinessType attributes asOrderedCollection sorted: #name ascending) reject: [ :attribute | self attributeInExceptionList: attribute ])
+	aBusinessType comment ifNotNil: [ :comment | 
+		self << comment content.
+		self crlf ].
+	self printAnnotationsFor: aBusinessType.
+	self << 'export '.
+	aBusinessType isAbstract ifTrue: [ self <<< 'abstract ' ].
+	self <<< 'class ' <<< aBusinessType name <<< ' extends '.
+	aBusinessType parent
+		ifNotNil: [ :superType | self <<< superType name ]
+		ifNil: [ self <<< 'AbstractDTO' ].
+	self space.
+
+	self inBraces: [ "Class body"
+		((aBusinessType attributes sorted: #name ascending) reject: [ 
+			 :attribute | self attributeInExceptionList: attribute ])
 			do: [ :attribute | self exportAttribute: attribute ]
 			separatedBy: [ self crlf ].
 		self
 			crlf;
 			crlf.
-		((aBusinessType attributes asOrderedCollection sorted: #name ascending) reject: [ :attribute | self attributeInExceptionList: attribute ])
+		((aBusinessType attributes asOrderedCollection sorted:
+			  #name ascending) reject: [ :attribute | 
+			 self attributeInExceptionList: attribute ])
 			do: [ :attribute | 
 				self exportAttributeGetter: attribute.
 				self
@@ -76,15 +98,39 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 ]
 
 { #category : #export }
-CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
-	aBusinessType dependencies
-		ifNotEmpty: [ :dependencies | 
-			(dependencies asOrderedCollection sorted: #name ascending)
-				do: [ :dependency | self << 'import { ' <<< dependency name <<< ' } from ''..'';' ]
-				separatedBy: [ self crlf ].
+CSNBuModelExporter >> printAnnotationsFor: aBusinessType [
+
+	aBusinessType children ifEmpty: [ ^ self ].
+	self
+		<< '@JsonSubTypes(';
+		inBraces: [ 
 			self
-				crlf;
-				crlf ]
+				<< 'types: ';
+				inBrakets: [ 
+					aBusinessType children
+						do: [ :child | 
+							self << '{ class: () => ' <<< child name <<< ' },' ]
+						separatedBy: [ self crlf ] ].
+			self <<< $, ];
+		<<< $);
+		crlf
+]
+
+{ #category : #export }
+CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
+
+	aBusinessType dependencies ifNotEmpty: [ :dependencies | 
+		self << 'import '.
+		self inBraces: [ 
+			(dependencies sorted: #name ascending)
+				do: [ :dependency | self << dependency name ]
+				separatedBy: [ 
+					self <<< $,.
+					self crlf ] ].
+		self <<< ' from "..";'.
+		self
+			crlf;
+			crlf ]
 ]
 
 { #category : #export }
@@ -94,6 +140,20 @@ CSNBuModelExporter >> printImports [
 		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
 		crlf;
 		<< 'import { AbstractDTO } from ''src/app/main/shared/composants/dto/user/abstract-dto.model'';';
+		crlf;
+		crlf
+]
+
+{ #category : #export }
+CSNBuModelExporter >> printImportsFor: aBusinessType [
+
+	self << 'import { JsonClassType'.
+	aBusinessType children ifNotEmpty: [ self <<< ', JsonSubTypes' ].
+	self
+		<<< ' } from "@outfoxx/jackson-js";';
+		crlf;
+		<<
+			'import { AbstractDTO } from "src/app/main/shared/composants/dto/user/abstract-dto.model";';
 		crlf;
 		crlf
 ]

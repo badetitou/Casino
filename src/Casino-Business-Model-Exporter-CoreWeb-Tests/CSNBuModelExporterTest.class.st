@@ -10,13 +10,13 @@ Class {
 	#category : #'Casino-Business-Model-Exporter-CoreWeb-Tests'
 }
 
-{ #category : #test }
+{ #category : #running }
 CSNBuModelExporterTest >> setUp [
 	super setUp.
 	businessExporter := CSNBuModelExporter new
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testDependencenciesOf [
 
 	| aBusinessType buAttributeType buAttribute |
@@ -33,25 +33,28 @@ CSNBuModelExporterTest >> testDependencenciesOf [
 	self assert: (aBusinessType dependencies includes: buAttributeType)
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttribute [
 
 	| buAttributeType buAttribute expected result |
 	buAttributeType := CSNBuDTO new.
 
 	buAttribute := CSNBuAttribute new.
-	buAttribute name: 'myAttribute'.
-	buAttribute attributeType: buAttributeType.
+	buAttribute
+		name: 'myAttribute';
+		isFinal: false;
+		isStatic: false;
+		isTransient: false;
+		attributeType: buAttributeType.
 
-	expected := String crlf join:
-		            #( '@JsonProperty() myAttribute: any;' ).
+	expected := String crlf join: #( 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttribute: buAttribute ].
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeBusiness [
 
 	| buAttributeType buAttribute expected result |
@@ -59,38 +62,44 @@ CSNBuModelExporterTest >> testExportAttributeBusiness [
 	buAttributeType name: 'Hello'.
 
 	buAttribute := CSNBuAttribute new.
-	buAttribute name: 'myAttribute'.
-	buAttribute attributeType: buAttributeType.
+	buAttribute
+		name: 'myAttribute';
+		isFinal: false;
+		isStatic: false;
+		isTransient: false;
+		attributeType: buAttributeType.
 
 	expected := String crlf join:
-		            #( 
-		'@JsonClassType({ type: () => [Hello] })'
-		'@JsonProperty() myAttribute: Hello;' ).
+		            #( '@JsonClassType({ type: () => [Hello] })'
+		               'myAttribute: Hello;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttribute: buAttribute ].
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeDTO [
 
 	| buAttributeType buAttribute expected result |
 	buAttributeType := CSNBuDTO new.
 
 	buAttribute := CSNBuAttribute new.
-	buAttribute name: 'myAttribute'.
-	buAttribute attributeType: buAttributeType.
+	buAttribute
+		name: 'myAttribute';
+		isFinal: false;
+		isStatic: false;
+		isTransient: false;
+		attributeType: buAttributeType.
 
-	expected := String crlf join:
-		            #( '@JsonProperty() myAttribute: any;' ).
+	expected := String crlf join: #( 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttribute: buAttribute ].
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeDTOBusiness [
 
 	| expected result buAttributeType |
@@ -104,7 +113,7 @@ CSNBuModelExporterTest >> testExportAttributeDTOBusiness [
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeDTOCollectionOfDTOs [
 
 	| expected result buAttributeType collectionType |
@@ -120,7 +129,7 @@ CSNBuModelExporterTest >> testExportAttributeDTOCollectionOfDTOs [
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeGetter [
 
 	| expected result buAttribute buAttributeType |
@@ -141,7 +150,7 @@ CSNBuModelExporterTest >> testExportAttributeGetter [
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testExportAttributeSetter [
 
 	| expected result buAttribute buAttributeType |
@@ -162,7 +171,7 @@ CSNBuModelExporterTest >> testExportAttributeSetter [
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testPrintImportDependencenciesOf [
 
 	| aBusinessType buAttributeType buAttribute result expected |
@@ -181,12 +190,13 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf [
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := 'import { HelloAttributeBusinessType } from ''..'';'
-	            , String crlfcrlf.
+	expected := String crlf join:
+		            #( 'import {' '    HelloAttributeBusinessType'
+		               '} from "..";' '' '' ).
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
 
 	| aBusinessType buAttributeType buAttribute result expected buAttribute2 |
@@ -209,12 +219,13 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := 'import { HelloAttributeBusinessType } from ''..'';'
-	            , String crlfcrlf.
+	expected := String crlf join:
+		            #( 'import {' '    HelloAttributeBusinessType'
+		               '} from "..";' '' '' ).
 	self assert: result equals: expected
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentType [
 
 	| aBusinessType buAttributeType buAttribute result expected buAttribute2 buAttribute2Type |
@@ -240,9 +251,9 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentT
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := (String crlf join:
-		             #( 'import { Hello2AttributeBusinessType } from ''..'';'
-		                'import { HelloAttributeBusinessType } from ''..'';' ))
-	            , String crlfcrlf.
+	expected := String crlf join:
+		            #( 'import {' '    Hello2AttributeBusinessType,'
+		               '    HelloAttributeBusinessType'
+		               '} from "..";' '' '' ).
 	self assert: result equals: expected
 ]
