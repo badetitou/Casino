@@ -77,12 +77,28 @@ CSNBuModelImporter >> importClass: concreteClass [
 		ifFound: [ :existingBusinessType | ^ existingBusinessType ].
 	businessType := (self factory create: CSNBuBusinessType)
 		                name: concreteClass name;
+		                comment: (concreteClass comments
+				                 ifEmpty: nil
+				                 ifNotEmpty: [ :comments | comments anyOne ]);
+		                isAbstract: concreteClass isAbstract isNotNil;
 		                yourself.
 
+	"Link with subclasses to preserve the same hierarchy, and they are also DTOs"
+	concreteClass directSubclasses do: [ :subclass | 
+		(self importClass: subclass) parent: businessType ].
+
+	"Handle attributes, which are also DTOs"
 	concreteClass attributes do: [ :attribute | 
 		| buAttribute |
 		buAttribute := self factory create: CSNBuAttribute.
-		buAttribute name: attribute name.
+		buAttribute
+			name: attribute name;
+			comment: (attribute comments
+					 ifEmpty: nil
+					 ifNotEmpty: [ :comments | comments anyOne ]);
+			isFinal: attribute isFinal isNotNil;
+			isStatic: attribute isClassSide;
+			isTransient: attribute isTransient isNotNil.
 		buAttribute attributeType: (attribute declaredType
 				 ifNotNil: [ :declaredType | declaredType accept: self ]
 				 ifNil: [ self createDefaultDTOEntity ]).
@@ -141,8 +157,8 @@ CSNBuModelImporter >> initialize [
 { #category : #visiting }
 CSNBuModelImporter >> visitClass: aClass [
 
-	^ (#( String Date Boolean Integer Double Long Float Byte ) includes:
-		   aClass name)
+	^ (#( Boolean Byte Character Date Double Float Integer Long Short
+	      String Void ) includes: aClass name)
 		  ifTrue: [ self importPrimitiveType: aClass ]
 		  ifFalse: [ 
 			  (aClass superclassHierarchy anySatisfy: [ :class | 
@@ -188,14 +204,12 @@ CSNBuModelImporter >> visitParameterizedType: aClass [
 
 	"Probably a complex Type"
 
-	^ (aClass withSuperclassHierarchy anySatisfy: [ :superclass | 
-		   #( List Set ) includes: superclass name ])
-		  ifTrue: [ self importCollectionType: aClass ]
-		  ifFalse: [ 
-			  (aClass withSuperclassHierarchy anySatisfy: [ :superclass | 
-				   #( Map ) includes: superclass name ])
-				  ifTrue: [ self importDictionaryType: aClass ]
-				  ifFalse: [ self factory create: CSNBuDTO ] ]
+	aClass withSuperclassHierarchy do: [ :superclass | 
+		superclass name = #Collection ifTrue: [ 
+			^ self importCollectionType: aClass ].
+		superclass name = #Map ifTrue: [ 
+			^ self importDictionaryType: aClass ] ].
+	^ self factory create: CSNBuDTO
 ]
 
 { #category : #visiting }
