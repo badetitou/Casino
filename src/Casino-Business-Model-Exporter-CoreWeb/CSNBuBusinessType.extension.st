@@ -2,13 +2,22 @@ Extension { #name : #CSNBuBusinessType }
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> dependencies [
-	^ ((((self attributes collect: #attributeType)
-		collect: [ :type | 
-			type isComplexType
-				ifTrue: [ type isCollectionType
-						ifTrue: [ type type ]
-						ifFalse: [ {type key . type value} ] ]
-				ifFalse: [ type ] ]) flattened select: #isBusinessType) asSet) reject: [ :dep | dep = self ]
+
+	| deps |
+	deps := (attributes collect: #attributeType) collect: [ :type | 
+		        type isComplexType
+			        ifFalse: [ type ]
+			        ifTrue: [ 
+				        type isCollectionType
+					        ifTrue: [ type type ]
+					        ifFalse: [ "dictionary type"
+						        { 
+							        type key.
+							        type value } ] ] ].
+	parent ifNotNil: [ deps add: parent ].
+	deps addAll: children.
+	deps := deps flattened asSet select: #isBusinessType.
+	^ deps reject: [ :dep | dep = self ]
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }

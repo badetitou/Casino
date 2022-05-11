@@ -7,40 +7,41 @@ CSNBuPrimitive >> innerName [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> printJsonClassOn: aCSNExporter [
-	({'byte' . 'Byte'. 'void'} includes: self name)
-		ifFalse: [ aCSNExporter << '@JsonClassType({ type: () => ['.
-			self printJsonClassTypeOn: aCSNExporter.
-			aCSNExporter
-				<<< '] })';
-				crlf ]
+
+	(#( Void ) includes: name) ifTrue: [ ^ self ].
+	aCSNExporter << '@JsonClassType({ type: () => ['.
+	self printJsonClassTypeOn: aCSNExporter.
+	aCSNExporter
+		<<< '] })';
+		crlf
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> printJsonClassTypeOn: aCSNExporter [
 
 	"is a number"
-
-	({ 'Integer'. 'int'. 'float'. 'Float'. 'Double'. 'double'. 'Long'. 'long' } includes: self name) ifTrue: [ 
+	(#( Integer int Float float Double double Long long Short short Byte
+	    byte ) includes: self name) ifTrue: [ 
 		aCSNExporter <<< 'Number'.
 		^ self ].
 
 	"is a boolean"
-	({ 'Boolean'. 'boolean' } includes: self name) ifTrue: [ 
+	(#( Boolean boolean ) includes: self name) ifTrue: [ 
 		aCSNExporter <<< 'Boolean'.
 		^ self ].
 
 	"is a String"
-	({ 'String'. 'char' } includes: self name) ifTrue: [ 
+	(#( String Character char ) includes: self name) ifTrue: [ 
 		aCSNExporter <<< 'String'.
 		^ self ].
 
 	"is a Date"
-	({ 'Date' } includes: self name) ifTrue: [ 
+	(#( Date ) includes: self name) ifTrue: [ 
 		aCSNExporter <<< 'Date'.
 		^ self ].
 
-	"is a byte"
-	({ 'byte'. 'Byte'. 'void' } includes: self name) ifTrue: [ "not really supported"
+	"is unsupported"
+	(#( Void ) includes: self name) ifTrue: [ 
 		aCSNExporter <<< 'any'.
 		^ self ].
 
@@ -49,33 +50,37 @@ CSNBuPrimitive >> printJsonClassTypeOn: aCSNExporter [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuPrimitive >> writeBusinessTypeOn: aCSNExporter [
-	"is a number"
 
-	({'Integer' . 'int' . 'float' . 'Float' . 'Double' . 'double' . 'Long'. 'long'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'number'.
-			^ self ].
+	"is a number"
+	(#( Integer int Float float Double double Long long Short short Byte
+	    byte ) includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'number'.
+		^ self ].
 
 	"is a boolean"
-	({'Boolean' . 'boolean'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'boolean'.
-			^ self ].
+	(#( Boolean boolean ) includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'boolean'.
+		^ self ].
 
 	"is a String"
-	({'String'. 'char'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'string'.
-			^ self ].
+	(#( String Character char ) includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'string'.
+		^ self ].
 
 	"is a Date"
-	({'Date'} includes: self name)
-		ifTrue: [ aCSNExporter <<< 'Date'.
-			^ self ].
+	(#( Date ) includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'Date'.
+		^ self ].
 
-	"is a byte"
-	({'byte' .'Byte'. 'void'} includes: self name)
-		ifTrue: [ 
-			"not really supported"
-			aCSNExporter <<< 'any'.
-			^ self ].
+	"is unsupported"
+	(#( Void ) includes: self name) ifTrue: [ 
+		aCSNExporter <<< 'any'.
+		^ self ].
+
+	"is void"
+	self name = #void ifTrue: [ 
+		aCSNExporter <<< #void.
+		^ self ].
 
 	Error signal: 'Unknow type of primitive type'
 ]

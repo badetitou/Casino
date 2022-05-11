@@ -14,21 +14,25 @@ CSNBuDTO >> innerType [
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printJsonClassOn: aCSNExporter [
-	(self isBusinessType or: [ self isPrimitive or: [ self isComplexType ] ])
-		ifTrue: [ aCSNExporter << '@JsonClassType({ type: () => ['.
-			self printJsonClassTypeOn: aCSNExporter.
-			aCSNExporter
-				<<< '] })';
-				crlf ]
+
+	(self isBusinessType or: [ 
+		 self isPrimitive or: [ self isComplexType ] ]) ifFalse: [ ^ self ].
+	aCSNExporter << '@JsonClassType({ type: () => ['.
+	self printJsonClassTypeOn: aCSNExporter.
+	aCSNExporter
+		<<< '] })';
+		crlf
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printJsonClassTypeOn: aCSNExporter [
+
 	aCSNExporter <<< 'Object'
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printServiceDeserializeOn: aCSNExporter [
+
 	aCSNExporter <<< 'res;'
 ]
 
