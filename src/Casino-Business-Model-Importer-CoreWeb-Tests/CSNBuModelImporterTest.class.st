@@ -31,7 +31,7 @@ CSNBuModelImporterTest >> setUp [
 	buModelImporter buModel: CSNBuModel new.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportClass [
 	| sourceClass |
 	sourceClass := (self createInFamixModel: FamixJavaClass)
@@ -42,7 +42,7 @@ CSNBuModelImporterTest >> testImportClass [
 		equals: 1.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportClassTwice [
 	| sourceClass |
 	sourceClass := (self createInFamixModel: FamixJavaClass)
@@ -54,7 +54,7 @@ CSNBuModelImporterTest >> testImportClassTwice [
 		equals: 1.
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportCollectionType [
 	| sourceClass argument |
 	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
@@ -73,7 +73,7 @@ CSNBuModelImporterTest >> testImportCollectionType [
 		equals: #int
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportCollectionTypeWithoutArgument [
 	| sourceClass |
 	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
@@ -87,7 +87,7 @@ CSNBuModelImporterTest >> testImportCollectionTypeWithoutArgument [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportDictionaryType [
 	| sourceClass argument argument2 |
 	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
@@ -123,7 +123,7 @@ CSNBuModelImporterTest >> testImportDictionaryType [
 		equals: 2
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 	| sourceClass |
 	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
@@ -137,7 +137,7 @@ CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 		equals: 2
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportIntPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
@@ -148,7 +148,7 @@ CSNBuModelImporterTest >> testImportIntPrimitiveType [
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) anyOne name equals: #int
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportLongPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
@@ -159,7 +159,7 @@ CSNBuModelImporterTest >> testImportLongPrimitiveType [
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) anyOne name equals: #long
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportPrimitiveType [
 	| sourceClass |
 		"test that we can import an int"
@@ -172,7 +172,7 @@ CSNBuModelImporterTest >> testImportPrimitiveType [
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 	| sourceClass |
 		"test that we can import an int"
@@ -185,7 +185,7 @@ CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 	self assert: (buModelImporter buModel allWithType: CSNBuPrimitive) size equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportSeveralClasses [
 	| sourceClass sourceClassA sourceClassB |
 	sourceClass := (self createInFamixModel: FamixJavaClass)
@@ -202,7 +202,7 @@ CSNBuModelImporterTest >> testImportSeveralClasses [
 		equals: 3
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportSeveralClassesWithDuplicate [
 	| sourceClass sourceClassA sourceClassB |
 	sourceClass := (self createInFamixModel: FamixJavaClass)
@@ -219,7 +219,7 @@ CSNBuModelImporterTest >> testImportSeveralClassesWithDuplicate [
 		equals: 2
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClass [
 	"default is the class is a business class"
 
@@ -242,7 +242,7 @@ CSNBuModelImporterTest >> testVisitClass [
 		equals: #businessClassA
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassBoolean [
 	"default is the class is a business class"
 
@@ -259,7 +259,7 @@ CSNBuModelImporterTest >> testVisitClassBoolean [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassByte [
 	"default is the class is a business class"
 
@@ -276,7 +276,7 @@ CSNBuModelImporterTest >> testVisitClassByte [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassDate [
 	"default is the class is a business class"
 
@@ -293,7 +293,7 @@ CSNBuModelImporterTest >> testVisitClassDate [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassDouble [
 	"default is the class is a business class"
 
@@ -310,7 +310,7 @@ CSNBuModelImporterTest >> testVisitClassDouble [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassFloat [
 	"default is the class is a business class"
 
@@ -327,7 +327,7 @@ CSNBuModelImporterTest >> testVisitClassFloat [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassInteger [
 	"default is the class is a business class"
 
@@ -344,7 +344,7 @@ CSNBuModelImporterTest >> testVisitClassInteger [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassLong [
 	"default is the class is a business class"
 
@@ -361,7 +361,7 @@ CSNBuModelImporterTest >> testVisitClassLong [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassString [
 	"default is the class is a business class"
 
@@ -378,7 +378,7 @@ CSNBuModelImporterTest >> testVisitClassString [
 		equals: 1
 ]
 
-{ #category : #test }
+{ #category : #tests }
 CSNBuModelImporterTest >> testVisitClassUnknow [
 	"default is the class is a business class"
 
