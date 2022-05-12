@@ -74,8 +74,8 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self space.
 
 	self inBraces: [ "Class body"
-		((aBusinessType attributes sorted: #name ascending) reject: [ 
-			 :attribute | self attributeInExceptionList: attribute ])
+		(aBusinessType sortedAttributes reject: [ :attribute | 
+			 self attributeInExceptionList: attribute ])
 			do: [ :attribute | self exportAttribute: attribute ]
 			separatedBy: [ self crlf ].
 		self
