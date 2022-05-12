@@ -26,14 +26,23 @@ CSNBusinessExporter >> businessTypeExporter: anObject [
 { #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
 
-	self modelRoot / self barrelName writeStreamDo: [ :barrelStream | 
-		self writeBarrelCommentOn: barrelStream.
-		((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) asArray sorted:
-			 #name ascending) do: [ :businessType | 
-			self exportBusinessType: businessType.
-			barrelStream << 'export * from ''./dto/' << businessType name
-			<< '.model'';'.
-			barrelStream crlf ] ]
+	(self modelRoot / self barrelName)
+		deleteIfAbsent: nil;
+		writeStreamDo: [ :barrelStream | 
+			self writeBarrelCommentOn: barrelStream.
+			((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) asArray 
+				 sorted: [ :b1 :b2 | "tri par hiérarchie de classe, superclasses en premier"
+					 (b2 allParents includes: b1)
+						 ifTrue: true
+						 ifFalse: [ 
+							 (b1 allParents includes: b2)
+								 ifTrue: false
+								 ifFalse: [ "pas dans la même hiérarchie -> priorité à une classe mère" 
+									 b2 children isEmpty ] ] ]) do: [ :businessType | 
+					self exportBusinessType: businessType.
+					barrelStream << 'export * from ''./dto/' << businessType name
+					<< '.model'';'.
+					barrelStream crlf ] ]
 ]
 
 { #category : #accessing }
