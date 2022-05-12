@@ -18,7 +18,7 @@ CSNBuModelImporterTest >> createInFamixModel: aClass [
 
 { #category : #running }
 CSNBuModelImporterTest >> famixModel [
-	^ FAMIXModel new
+	^ FamixJavaModel new
 ]
 
 { #category : #running }
