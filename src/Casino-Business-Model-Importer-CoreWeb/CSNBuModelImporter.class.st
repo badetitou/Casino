@@ -121,12 +121,22 @@ CSNBuModelImporter >> importCollectionType: aClass [
 CSNBuModelImporter >> importDictionaryType: aClass [
 
 	| dictionary |
-	aClass arguments ifEmpty: [ ^ self factory create: CSNBuDTO ].
 	dictionary := self factory create: CSNBuDictionaryType.
-	dictionary key: (aClass arguments first accept: self).
-	dictionary value: ((aClass arguments asOrderedCollection
-			  at: 2
-			  ifAbsent: [ aClass arguments first ]) accept: self).
+
+	aClass arguments
+		ifEmpty: [ "If parameters are not declared or not found, use defaults"
+			dictionary key: (factory create: CSNBuDTO).
+			dictionary value: (factory create: CSNBuDTO) ]
+		ifNotEmpty: [ :arguments | "Hack to export the type parameters in the correct order from source text"
+			((aClass typedEntities anyOne sourceText copyAfter: $<) 
+				 beginsWith: arguments first name)
+				ifTrue: [ 
+					dictionary key: (arguments first accept: self).
+					dictionary value: (arguments second accept: self) ]
+				ifFalse: [ 
+					dictionary key: (arguments second accept: self).
+					dictionary value: (arguments first accept: self) ] ].
+
 	^ dictionary
 ]
 

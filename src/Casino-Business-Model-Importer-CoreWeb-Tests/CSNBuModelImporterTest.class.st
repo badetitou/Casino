@@ -97,6 +97,13 @@ CSNBuModelImporterTest >> testImportDictionaryType [
 		name: 'long'.
 	sourceClass addArgument: argument.
 	sourceClass addArgument: argument2.
+	
+	"To satisfy temporary solution to find which parameter is key or value"
+	sourceClass typedEntities: (Array with:
+			 ((self createInFamixModel: FamixJavaAttribute) sourceAnchor:
+				  ((self createInFamixModel: FamixJavaSourceTextAnchor)
+					   source: 'Map<int, long> attr'))).
+	
 	buModelImporter importDictionaryType: sourceClass.
 	self
 		assert: (buModelImporter buModel allWithType: CSNBuDictionaryType) size
@@ -124,10 +131,10 @@ CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 	buModelImporter importDictionaryType: sourceClass.
 	self
 		assert: (buModelImporter buModel allWithType: CSNBuDictionaryType) size
-		equals: 0.
+		equals: 1.
 	self
 		assert: (buModelImporter buModel allWithType: CSNBuDTO) size
-		equals: 1
+		equals: 2
 ]
 
 { #category : #test }
