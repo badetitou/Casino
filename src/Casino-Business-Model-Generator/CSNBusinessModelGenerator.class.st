@@ -5,16 +5,13 @@ Class {
 		'dto',
 		'primitive',
 		'complexType',
-		'booleanType',
-		'dateType',
-		'integerType',
-		'stringType',
 		'collectionType',
 		'dictionaryType',
 		'businessType',
 		'attribute',
 		'serviceAPI',
-		'serviceAPIParameter'
+		'serviceAPIParameter',
+		'tWithSource'
 	],
 	#category : #'Casino-Business-Model-Generator'
 }
@@ -86,8 +83,7 @@ CSNBusinessModelGenerator >> defineClasses [
 	super defineClasses.
 	dto := builder newClassNamed: #DTO comment: self commentForDTO.
 	attribute := builder newClassNamed: #Attribute comment: self commentForAttribute.
-	
-	
+
 	"Kind of Data Type"
 	businessType := builder newClassNamed: #BusinessType comment: self commentForBusinessType.
 	businessType withTesting.
@@ -112,6 +108,8 @@ CSNBusinessModelGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 	dto --|> #TEntityMetaLevelDependency.
+	attribute --|> tWithSource.
+	businessType --|> tWithSource.
 
 	primitive --|> dto.
 	businessType --|> dto.
@@ -136,7 +134,9 @@ CSNBusinessModelGenerator >> defineProperties [
 	attribute property: #isStatic type: #Boolean.
 	attribute property: #isTransient type: #Boolean.
 
-	primitive property: #name type: #String
+	primitive property: #name type: #String.
+
+	tWithSource property: #source type: #Object
 ]
 
 { #category : #definition }
@@ -154,4 +154,10 @@ CSNBusinessModelGenerator >> defineRelations [
 	"remote relations"
 	(serviceAPI property: #dataType) *- (dto property: #usedInServices).
 	(serviceAPIParameter property: #dataType) *- (dto property: #usedAsParameterType)
+]
+
+{ #category : #definition }
+CSNBusinessModelGenerator >> defineTraits [
+
+	tWithSource := builder newTraitNamed: #TWithSource comment: 'I contain a reference to the original source'
 ]

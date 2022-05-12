@@ -77,6 +77,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 		ifFound: [ :existingBusinessType | ^ existingBusinessType ].
 	businessType := (self factory create: CSNBuBusinessType)
 		                name: concreteClass name;
+		                source: concreteClass;
 		                comment: (concreteClass comments
 				                 ifEmpty: nil
 				                 ifNotEmpty: [ :comments | comments anyOne ]);
@@ -93,6 +94,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 		buAttribute := self factory create: CSNBuAttribute.
 		buAttribute
 			name: attribute name;
+			source: attribute;
 			comment: (attribute comments
 					 ifEmpty: nil
 					 ifNotEmpty: [ :comments | comments anyOne ]);

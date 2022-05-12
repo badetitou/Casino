@@ -4,6 +4,8 @@ I represent an attribute of a businessType.
 Class {
 	#name : #CSNBuAttribute,
 	#superclass : #CSNBuEntity,
+	#traits : 'CSNBuTWithSource',
+	#classTraits : 'CSNBuTWithSource classTrait',
 	#instVars : [
 		'#attributeType => FMOne type: #CSNBuDTO opposite: #usedInAttributes',
 		'#businessType => FMOne type: #CSNBuBusinessType opposite: #attributes',
