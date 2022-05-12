@@ -23,21 +23,21 @@ CSNBuModelImporterCreateDTOTest >> createInFamixModel: aClass [
 { #category : #running }
 CSNBuModelImporterCreateDTOTest >> famixModel [
 	| model abstractClass businessClassA integerPrimitiveType |
-	model := FAMIXModel new.
-	abstractClass := (self createInFamixModel: FAMIXClass)
+	model := FamixJavaModel new.
+	abstractClass := (self createInFamixModel: FamixJavaClass)
 		name: buModelImporter dtoAbstractName;
 		yourself.
-	businessClassA := (self createInFamixModel: FAMIXClass)
+	businessClassA := (self createInFamixModel: FamixJavaClass)
 		name: 'businessClassA';
 		yourself.
-	(self createInFamixModel: FAMIXInheritance)
+	(self createInFamixModel: FamixJavaInheritance)
 		superclass: abstractClass;
 		subclass: businessClassA.
 		
-	integerPrimitiveType := (self createInFamixModel: FAMIXPrimitiveType)
+	integerPrimitiveType := (self createInFamixModel: FamixJavaPrimitiveType)
 		name: 'int'.
 
-	(self createInFamixModel: FAMIXAttribute)
+	(self createInFamixModel: FamixJavaAttribute)
 		name: 'aPrimitiveIntParameter';
 		parentType: businessClassA;
 		declaredType: integerPrimitiveType.
@@ -49,7 +49,7 @@ CSNBuModelImporterCreateDTOTest >> famixModel [
 CSNBuModelImporterCreateDTOTest >> setUp [
 	super setUp.
 	buModelImporter := CSNBuModelImporter new.
-	buModelImporter famixModel: FAMIXModel new.
+	buModelImporter famixModel: FamixJavaModel new.
 	self famixModel.
 	buModelImporter buModel: CSNBuModel new.
 	buModelImporter import
