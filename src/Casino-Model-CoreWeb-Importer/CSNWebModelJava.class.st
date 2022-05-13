@@ -125,18 +125,25 @@ CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
 
-	^ widget affectedActions
-		  ifNotNil: [ :affectedActions | 
+	^ (widget affectedActions isNotNil and: [ 
+		   widget affectedActions isNotFound not ])
+		  ifTrue: [ 
 			  | usages |
 			  usages := widget affectedActions allUsages.
-			  usages := usages , (usages flatCollect: [ :el | el allContainers ]) reject: [ :el | 
-				            (el receiver isNotNil and: [ el receiver name includesSubstring: 'content' ]) or: [ (el signature beginsWithAnyOf: self domBuildingMethods) not ] ].
+			  usages := usages
+			            , (usages flatCollect: [ :el | el allContainers ]) 
+				            reject: [ :el | 
+					            (el receiver isNotNil and: [ 
+						             el receiver name includesSubstring: 'content' ]) 
+						            or: [ 
+						            (el signature beginsWithAnyOf:
+							             self domBuildingMethods) not ] ].
 			  responsabilityHandlerForUsages
 				  handleAddLinkedFromVariable: usages
 				  to: widget
 				  withXmlui: xmlUiWidgetLink
 				  andImporter: self ]
-		  ifNil: [ self addParentOfWidgetWithoutAffected: widget ]
+		  ifFalse: [ self addParentOfWidgetWithoutAffected: widget ]
 ]
 
 { #category : #adding }
