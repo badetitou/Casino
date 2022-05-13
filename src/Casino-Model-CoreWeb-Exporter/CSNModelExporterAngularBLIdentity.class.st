@@ -213,7 +213,9 @@ import { HttpClientModule } from ''@angular/common/http'';'.
 			crlf.
 		self << 'providers: '.
 		self inBrakets: [ 
-			aMooseModel allCSNService
+			(aMooseModel allCSNService reject: [ :service | "Parent services are abstract and not @Injectable, so they're not providers."
+				 service source directSubclasses anySatisfy: [ :subclass | 
+					 subclass isInterface ] ])
 				do: [ :service | self << service uniqueName ]
 				separatedBy: [ 
 					self
