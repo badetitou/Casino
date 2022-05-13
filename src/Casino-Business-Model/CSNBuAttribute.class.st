@@ -4,12 +4,11 @@ I represent an attribute of a businessType.
 Class {
 	#name : #CSNBuAttribute,
 	#superclass : #CSNBuEntity,
-	#traits : 'CSNBuTWithSource',
-	#classTraits : 'CSNBuTWithSource classTrait',
+	#traits : 'CSNBuTWithComment + CSNBuTWithSource',
+	#classTraits : 'CSNBuTWithComment classTrait + CSNBuTWithSource classTrait',
 	#instVars : [
 		'#attributeType => FMOne type: #CSNBuDTO opposite: #usedInAttributes',
 		'#businessType => FMOne type: #CSNBuBusinessType opposite: #attributes',
-		'#comment => FMProperty',
 		'#isFinal => FMProperty',
 		'#isStatic => FMProperty',
 		'#isTransient => FMProperty',
@@ -63,20 +62,6 @@ CSNBuAttribute >> businessTypeGroup [
 	<generated>
 	<navigation: 'BusinessType'>
 	^ MooseSpecializedGroup with: self businessType
-]
-
-{ #category : #accessing }
-CSNBuAttribute >> comment [
-
-	<FMProperty: #comment type: #String>
-	<generated>
-	^ comment
-]
-
-{ #category : #accessing }
-CSNBuAttribute >> comment: anObject [
-	<generated>
-	comment := anObject
 ]
 
 { #category : #accessing }

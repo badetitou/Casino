@@ -54,3 +54,10 @@ CSNBuEntity >> isPrimitive [
 	<generated>
 	^ false
 ]
+
+{ #category : #testing }
+CSNBuEntity >> isSetType [
+
+	<generated>
+	^ false
+]

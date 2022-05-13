@@ -161,6 +161,16 @@ CSNBuModelImporter >> importPrimitiveType: aClass [
 		  yourself
 ]
 
+{ #category : #visiting }
+CSNBuModelImporter >> importSetType: aClass [
+
+	^ (self factory create: CSNBuSetType)
+		  type: (aClass arguments
+				   ifEmpty: [ self factory create: CSNBuDTO ]
+				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
+		  yourself
+]
+
 { #category : #initialization }
 CSNBuModelImporter >> initialize [
 	super initialize.
@@ -218,6 +228,7 @@ CSNBuModelImporter >> visitParameterizedType: aClass [
 	"Probably a complex Type"
 
 	aClass withSuperclassHierarchy do: [ :superclass | 
+		superclass name = #Set ifTrue: [ ^ self importSetType: aClass ].
 		superclass name = #Collection ifTrue: [ 
 			^ self importCollectionType: aClass ].
 		superclass name = #Map ifTrue: [ 

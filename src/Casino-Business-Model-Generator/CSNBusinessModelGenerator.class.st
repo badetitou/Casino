@@ -11,7 +11,9 @@ Class {
 		'attribute',
 		'serviceAPI',
 		'serviceAPIParameter',
-		'tWithSource'
+		'tWithSource',
+		'tWithComment',
+		'setType'
 	],
 	#category : #'Casino-Business-Model-Generator'
 }
@@ -78,6 +80,12 @@ CSNBusinessModelGenerator >> commentForPrimitive [
 ]
 
 { #category : #definition }
+CSNBusinessModelGenerator >> commentForSetType [
+
+	^ 'I represent a set of one DataType.'
+]
+
+{ #category : #definition }
 CSNBusinessModelGenerator >> defineClasses [
 
 	super defineClasses.
@@ -95,6 +103,8 @@ CSNBusinessModelGenerator >> defineClasses [
 	"Kind of complexType"
 	collectionType := builder newClassNamed: #CollectionType comment: self commentForCollectionType.
 	collectionType withTesting.
+	setType := builder newClassNamed: #SetType comment: self commentForSetType.
+	setType withTesting.
 	dictionaryType := builder newClassNamed: #DictionaryType comment: self commentForDictionaryType.
 	dictionaryType withTesting.
 	
@@ -109,14 +119,18 @@ CSNBusinessModelGenerator >> defineHierarchy [
 	super defineHierarchy.
 	dto --|> #TEntityMetaLevelDependency.
 	attribute --|> tWithSource.
+	attribute --|> tWithComment.
 	businessType --|> tWithSource.
+	businessType --|> tWithComment.
 
 	primitive --|> dto.
 	businessType --|> dto.
 	complexType --|> dto.
 
 	collectionType --|> complexType.
-	dictionaryType --|> complexType
+	dictionaryType --|> complexType.
+
+	setType --|> collectionType
 ]
 
 { #category : #definition }
@@ -125,18 +139,17 @@ CSNBusinessModelGenerator >> defineProperties [
 	super defineProperties.
 
 	businessType property: #name type: #String.
-	businessType property: #comment type: #String.
 	businessType property: #isAbstract type: #Boolean.
 
 	attribute property: #name type: #String.
-	attribute property: #comment type: #String.
 	attribute property: #isFinal type: #Boolean.
 	attribute property: #isStatic type: #Boolean.
 	attribute property: #isTransient type: #Boolean.
 
 	primitive property: #name type: #String.
 
-	tWithSource property: #source type: #Object
+	tWithSource property: #source type: #Object.
+	tWithComment property: #comment type: #String
 ]
 
 { #category : #definition }
@@ -159,5 +172,6 @@ CSNBusinessModelGenerator >> defineRelations [
 { #category : #definition }
 CSNBusinessModelGenerator >> defineTraits [
 
-	tWithSource := builder newTraitNamed: #TWithSource comment: 'I contain a reference to the original source'
+	tWithSource := builder newTraitNamed: #TWithSource comment: 'I contain a reference to the original source'.
+	tWithComment := builder newTraitNamed: #TWithComment comment: 'I contain a comment concerning the associated entity'
 ]

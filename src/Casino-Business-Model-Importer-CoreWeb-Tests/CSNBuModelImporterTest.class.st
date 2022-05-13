@@ -188,6 +188,47 @@ CSNBuModelImporterTest >> testImportPrimitiveTypeOnlyOneCreated [
 ]
 
 { #category : #tests }
+CSNBuModelImporterTest >> testImportSetType [
+
+	| sourceClass argument |
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType) 
+		               name: 'Set'.
+	argument := (self createInFamixModel: FamixJavaPrimitiveType) name:
+		            'int'.
+	sourceClass addArgument: argument.
+	buModelImporter importCollectionType: sourceClass.
+	self
+		assert:
+		(buModelImporter buModel allWithType: CSNBuCollectionType) size
+		equals: 1.
+	self
+		assert:
+		(buModelImporter buModel allWithType: CSNBuCollectionType) anyOne
+			type
+		equals: (buModelImporter buModel allWithType: CSNBuPrimitive) anyOne.
+	self
+		assert:
+		(buModelImporter buModel allWithType: CSNBuPrimitive) anyOne name
+		equals: #int
+]
+
+{ #category : #tests }
+CSNBuModelImporterTest >> testImportSetTypeWithoutArguments [
+
+	| sourceClass |
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType) 
+		               name: 'Set'.
+	buModelImporter importCollectionType: sourceClass.
+	self
+		assert:
+		(buModelImporter buModel allWithType: CSNBuCollectionType) size
+		equals: 1.
+	self
+		assert: (buModelImporter buModel allWithType: CSNBuDTO) size
+		equals: 1
+]
+
+{ #category : #tests }
 CSNBuModelImporterTest >> testImportSeveralClasses [
 	| sourceClass sourceClassA sourceClassB |
 	sourceClass := (self createInFamixModel: FamixJavaClass)
