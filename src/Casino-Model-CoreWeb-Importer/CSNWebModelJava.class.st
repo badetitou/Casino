@@ -306,19 +306,27 @@ CSNWebModelJava >> generateServiceAction [
 
 { #category : #'private - actions' }
 CSNWebModelJava >> generateWidget [
+
 	| col |
-	col := self widgetConstructorsInvocation , self widgetAnonymousSubclasses , self widgetFactoryInvocation
-		reject: [ :invocationOrClass | 
-			(invocationOrClass source mooseName beginsWithAnyOf: self widgetNamespaces)
-				or: [ (invocationOrClass asString includesSubstring: 'noname#super')
-						or: [ (invocationOrClass asString includesSubstring: 'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ].
-	col asOrderedCollection
-		withIndexDo: [ :invocation :index | 
-			| blWidget |
-			blWidget := self factoryCreateWidgetFrom: invocation.
-			blWidget affectedActions: invocation affectation.
-			(blWidget affectedActions isNotNil and: [ blWidget affectedActions isInvocation not ]) ifTrue: [ blWidget name: blWidget affectedActions name ].
-			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
+	col := self widgetConstructorsInvocation
+	       , self widgetAnonymousSubclasses
+	       , self widgetFactoryInvocation reject: [ :invocationOrClass | 
+		       (invocationOrClass source mooseName beginsWithAnyOf:
+			        self widgetNamespaces) or: [ 
+			       (invocationOrClass asString includesSubstring:
+				        'noname#super') or: [ 
+				       (invocationOrClass asString includesSubstring:
+					        'noname#this') or: [ self isInFactory: invocationOrClass ] ] ] ].
+	col asOrderedCollection withIndexDo: [ :invocation :index | 
+		| blWidget |
+		blWidget := self factoryCreateWidgetFrom: invocation.
+		blWidget affectedActions: invocation affectation.
+		(blWidget affectedActions isNotNil and: [ 
+			 blWidget affectedActions isNotFound not and: [ 
+				 blWidget affectedActions isInvocation not ] ]) ifTrue: [ 
+			blWidget name: blWidget affectedActions name ].
+		index \\ 200 = 0 ifTrue: [ 
+			((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #accessing }
