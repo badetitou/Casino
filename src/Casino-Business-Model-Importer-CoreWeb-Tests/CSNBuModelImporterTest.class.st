@@ -75,13 +75,15 @@ CSNBuModelImporterTest >> testImportCollectionType [
 
 { #category : #tests }
 CSNBuModelImporterTest >> testImportCollectionTypeWithoutArgument [
+
 	| sourceClass |
-	sourceClass := (self createInFamixModel: FamixJavaParameterizedType)
-		name: 'List'.
+	sourceClass := (self createInFamixModel: FamixJavaParameterizedType) 
+		               name: 'List'.
 	buModelImporter importCollectionType: sourceClass.
 	self
-		assert: (buModelImporter buModel allWithType: CSNBuCollectionType) size
-		equals: 0.
+		assert:
+		(buModelImporter buModel allWithType: CSNBuCollectionType) size
+		equals: 1.
 	self
 		assert: (buModelImporter buModel allWithType: CSNBuDTO) size
 		equals: 1

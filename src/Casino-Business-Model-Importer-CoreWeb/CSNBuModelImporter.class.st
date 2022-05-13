@@ -111,9 +111,10 @@ CSNBuModelImporter >> importClass: concreteClass [
 { #category : #importing }
 CSNBuModelImporter >> importCollectionType: aClass [
 
-	aClass arguments ifEmpty: [ ^ self factory create: CSNBuDTO ].
 	^ (self factory create: CSNBuCollectionType)
-		  type: (aClass arguments anyOne accept: self);
+		  type: (aClass arguments
+				   ifEmpty: [ self factory create: CSNBuDTO ]
+				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
 		  yourself
 ]
 
