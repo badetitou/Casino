@@ -29,20 +29,24 @@ CSNBusinessExporter >> export: aCSNBuModel [
 	(self modelRoot / self barrelName)
 		deleteIfAbsent: nil;
 		writeStreamDo: [ :barrelStream | 
+			| toExport exported |
+			toExport := aCSNBuModel allWithSubTypesOf: CSNBuBusinessType.
+			exported := Set new: toExport size.
 			self writeBarrelCommentOn: barrelStream.
-			((aCSNBuModel allWithSubTypesOf: CSNBuBusinessType) asArray 
-				 sorted: [ :b1 :b2 | "tri par hiérarchie de classe, superclasses en premier"
-					 (b2 allParents includes: b1)
-						 ifTrue: true
-						 ifFalse: [ 
-							 (b1 allParents includes: b2)
-								 ifTrue: false
-								 ifFalse: [ "pas dans la même hiérarchie -> priorité à une classe mère" 
-									 b2 children isEmpty ] ] ]) do: [ :businessType | 
-					self exportBusinessType: businessType.
-					barrelStream << 'export * from ''./dto/' << businessType name
-					<< '.model'';'.
-					barrelStream crlf ] ]
+			toExport do: [ :buType | 
+					(exported includes: buType) ifFalse: [ "recursively export buType's hierarchy, starting from the root"
+							| root export |
+							root := buType.
+							[ root parent isNil ] whileFalse: [ root := root parent ].
+							export := [ :businessType | 
+							          self exportBusinessType: businessType.
+							          barrelStream crlf.
+							          barrelStream << 'export * from ''./dto/'
+							          << businessType name << '.model'';'.
+							          exported add: businessType.
+							          businessType children do: export ].
+							export value: root.
+							barrelStream crlf ] ] ]
 ]
 
 { #category : #accessing }
@@ -56,7 +60,7 @@ CSNBusinessExporter >> exportBusinessType: businessType [
 			  self businessTypeExporter exportBusinessType: businessType ]
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 CSNBusinessExporter >> initialize [
 	super initialize.
 	self businessTypeExporter: CSNBuModelExporter new
@@ -81,6 +85,5 @@ CSNBusinessExporter >> writeBarrelCommentOn: barrelStream [
  *
  * Until we fixed the problem of dependency please use this file to import the DTO
  **/
-
 '
 ]
