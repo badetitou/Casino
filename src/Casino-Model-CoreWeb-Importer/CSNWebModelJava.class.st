@@ -155,30 +155,33 @@ CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandl
 
 { #category : #adding }
 CSNWebModelJava >> addWidgetAttributes [
-	(self model allCSNWidgetExceptPage
-		select: [ :widget | widget variable isNotNil ])
+
+	(self model allCSNWidgetExceptPage select: [ :widget | 
+		 widget variable isNotNil and: [ widget variable isNotFound not ] ]) 
 		do: [ :widget | 
-			widget variable receivingInvocations
-				do: [ :invoc | 
-					invoc signature = 'getFlexCellFormatter()'
-						ifTrue: [ invoc affectation
-								ifNotNil: [ :variableWithFlexCellFormater | 
-									| variable |
-									variable := variableWithFlexCellFormater isAccess
-										ifTrue: [ variableWithFlexCellFormater variable ]
-										ifFalse: [ variableWithFlexCellFormater ].
-									variable receivingInvocations
-										do: [ :invocOnFlexCellVariable | 
-											invocOnFlexCellVariable parameters size >= 2
-												ifTrue: [ self factory
-														createAttributeFrom: invocOnFlexCellVariable
-														forCellOf: widget ] ] ]
-								ifNil: [ (invoc previous isNotNil
-										and: [ invoc previous receiver
-												ifNotNil: [ :receiver | receiver isImplicitVariable not ]
-												ifNil: [ true ] ])
-										ifTrue: [ self factory createAttributeFrom: invoc previous forCellOf: widget ] ] ]
-						ifFalse: [ self factory createAttributeFor: widget from: invoc ] ] ]
+			widget variable receivingInvocations do: [ :invoc | 
+				invoc signature = 'getFlexCellFormatter()'
+					ifTrue: [ 
+						invoc affectation
+							ifNotNil: [ :variableWithFlexCellFormater | 
+								| variable |
+								variable := variableWithFlexCellFormater isAccess
+									            ifTrue: [ variableWithFlexCellFormater variable ]
+									            ifFalse: [ variableWithFlexCellFormater ].
+								variable receivingInvocations do: [ :invocOnFlexCellVariable | 
+									invocOnFlexCellVariable parameters size >= 2 ifTrue: [ 
+										self factory
+											createAttributeFrom: invocOnFlexCellVariable
+											forCellOf: widget ] ] ]
+							ifNil: [ 
+								(invoc previous isNotNil and: [ 
+									 invoc previous receiver
+										 ifNotNil: [ :receiver | receiver isImplicitVariable not ]
+										 ifNil: [ true ] ]) ifTrue: [ 
+									self factory
+										createAttributeFrom: invoc previous
+										forCellOf: widget ] ] ]
+					ifFalse: [ self factory createAttributeFor: widget from: invoc ] ] ]
 ]
 
 { #category : #adding }
