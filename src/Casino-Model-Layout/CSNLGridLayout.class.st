@@ -151,11 +151,11 @@ CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 										                ifNotNil: [ 
 										                anPreviousInvocation sourceAnchor endPos ]) ] ].
 							  positions do: [ :val | "if the usage is something like ++var or var++, we increment the currentXValue"
-								  ((anInvocation from sourceAnchor
+								  ((anInvocation source sourceAnchor
 									    copyFrom: val - 2
 									    to: val + localVariable first name size - 1)
 								   = ('++' , localVariable first name) or: [ 
-									   (anInvocation from sourceAnchor
+									   (anInvocation source sourceAnchor
 										    copyFrom: val
 										    to: val + localVariable first name size - 1 + 2)
 									   = (localVariable first name , '++') ])
@@ -171,7 +171,7 @@ CSNLGridLayout >> determineYFrom: anInvocation andPrevious: anPreviousInvocation
 			  (aYValue beginsWith: '++')
 				  ifTrue: [ 
 					  currentYValue := currentYValue + 1.
-					  (self privateState
+					  (self
 						   attributeAt: #addGridVariable
 						   ifAbsentPut: [ Dictionary new ])
 						  at: (aYValue removePrefix: '++')

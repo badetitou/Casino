@@ -5,7 +5,10 @@ FamixTMethod >> allUsages [
 
 	^ self incomingInvocations
 	  , (self incomingInvocations flatCollect: [ :invoc | 
-			   (invoc affectation isNil or: [ invoc affectation isNotFound ])
+			   (invoc affectation isNil or: [ 
+				    invoc affectation isNotFound or: [ 
+					    (self accesses collect: #variable as: Set) includes:
+						    invoc affectation ] ])
 				   ifTrue: [ {  } ]
 				   ifFalse: [ invoc affectation allUsages ] ]) ifEmpty: [ 
 		  self parentType allUsages ]
