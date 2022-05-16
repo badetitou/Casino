@@ -67,6 +67,36 @@ CSNBuModelImporter >> import [
 ]
 
 { #category : #importing }
+CSNBuModelImporter >> importAttribute: anAttribute [
+
+	| declaration declarator buAttribute |
+	"Use FAST to handle arrays and the eventual initialization expression"
+	declaration := (anAttribute parentType generateFastIfNotDoneAndBind 
+		                allWithType: FASTJavaVarDeclStatement) detect: [ 
+		               :varDecl | 
+		               declarator := varDecl declarators
+			                             anyOneIfOnlyOneElement.
+		               declarator variable name = anAttribute name ].
+
+	buAttribute := self factory create: CSNBuAttribute.
+	buAttribute
+		name: anAttribute name;
+		source: anAttribute;
+		comment: (anAttribute comments
+				 ifEmpty: nil
+				 ifNotEmpty: [ :comments | comments anyOne ]);
+		isFinal: anAttribute isFinal isNotNil;
+		isStatic: anAttribute isClassSide;
+		isTransient: anAttribute isTransient isNotNil;
+		expression: declarator expression;
+		attributeType: (anAttribute declaredType
+				 ifNotNil: [ :declaredType | self importAttribute: declaredType ]
+				 ifNil: [ self getDefaultDTOEntity ]).
+
+	anAttribute declaredType accept: self
+]
+
+{ #category : #importing }
 CSNBuModelImporter >> importClass: concreteClass [
 
 	"Import a new BusinessType DTO"
@@ -92,21 +122,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 
 	"Handle attributes, which are also DTOs"
 	concreteClass attributes do: [ :attribute | 
-		| buAttribute |
-		buAttribute := self factory create: CSNBuAttribute.
-		buAttribute
-			name: attribute name;
-			source: attribute;
-			comment: (attribute comments
-					 ifEmpty: nil
-					 ifNotEmpty: [ :comments | comments anyOne ]);
-			isFinal: attribute isFinal isNotNil;
-			isStatic: attribute isClassSide;
-			isTransient: attribute isTransient isNotNil.
-		buAttribute attributeType: (attribute declaredType
-				 ifNotNil: [ :declaredType | declaredType accept: self ]
-				 ifNil: [ self createDefaultDTOEntity ]).
-		businessType addAttribute: buAttribute ].
+		businessType addAttribute: (self importAttribute: attribute) ].
 	^ businessType
 ]
 
