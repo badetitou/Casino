@@ -54,13 +54,20 @@ Class {
 
 { #category : #adding }
 CSNWebModelJava >> addLinkBetweenWidgets [
+
 	| responsabilityHandlerForUsages col |
-	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
-	col := self model allCSNWidgetExceptPage reject: [ :widget | widget widgetContainer isNotNil ].
-	col
-		withIndexDo: [ :widget :index | 
-			self addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages.
-			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
+	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler
+		                                  new.
+	col := self model allCSNWidgetExceptPage reject: [ :widget | 
+		       widget widgetContainer isNotNil ].
+
+	col withIndexDo: [ :widget :index | 
+		(widget name) recordDebug. 
+		self
+			addParentTo: widget
+			withHandlerForUsages: responsabilityHandlerForUsages.
+		index \\ 200 = 0 ifTrue: [ 
+			((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #adding }
