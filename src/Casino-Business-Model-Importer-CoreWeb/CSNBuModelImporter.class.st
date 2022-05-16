@@ -88,12 +88,21 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 		isFinal: anAttribute isFinal isNotNil;
 		isStatic: anAttribute isClassSide;
 		isTransient: anAttribute isTransient isNotNil;
-		expression: declarator expression;
-		attributeType: (anAttribute declaredType
-				 ifNotNil: [ :declaredType | self importAttribute: declaredType ]
-				 ifNil: [ self getDefaultDTOEntity ]).
+		expression: declarator expression.
 
-	anAttribute declaredType accept: self
+	anAttribute declaredType
+		ifNil: [ buAttribute attributeType: self getDefaultDTOEntity ]
+		ifNotNil: [ :declaredType | "handle eventual arrays, which are a collection type"
+			| outerType innerType |
+			outerType := declaration type.
+			innerType := anAttribute declaredType accept: self.
+			[ outerType class == FASTJavaArrayTypeExpression ] whileTrue: [ 
+				outerType := outerType baseType.
+				innerType := (self factory create: CSNBuCollectionType) type:
+					             innerType ].
+			buAttribute attributeType: innerType ].
+
+	^ buAttribute
 ]
 
 { #category : #importing }
