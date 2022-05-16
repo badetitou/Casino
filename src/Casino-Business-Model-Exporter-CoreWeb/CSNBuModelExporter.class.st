@@ -18,10 +18,10 @@ CSNBuModelExporter >> exportAttribute: attribute [
 		self << comment sourceText.
 		self crlf ].
 	(attribute isStatic or: [ attribute isTransient ]) ifFalse: [ 
+		self << '@JsonProperty()'.
+		self crlf.
+		"print @JsonClassType annotation if possible"
 		attribute attributeType printJsonClassOn: self ].
-	attribute isTransient ifTrue: [ 
-		self << '@JsonIgnore()'.
-		self crlf ].
 	self indent.
 	attribute isStatic ifTrue: [ self <<< 'static ' ].
 	attribute isFinal ifTrue: [ self <<< 'readonly ' ].
@@ -107,6 +107,8 @@ CSNBuModelExporter >> printAnnotationsFor: aBusinessType [
 			self
 				<< 'types: ';
 				inBrakets: [ 
+					self << '{ class: () => ' <<< aBusinessType name <<< ' },'.
+					self crlf.
 					aBusinessType children
 						do: [ :child | 
 							self << '{ class: () => ' <<< child name <<< ' },' ]
@@ -147,7 +149,7 @@ CSNBuModelExporter >> printImports [
 { #category : #export }
 CSNBuModelExporter >> printImportsFor: aBusinessType [
 
-	self << 'import { JsonClassType'.
+	self << 'import { JsonProperty, JsonClassType'.
 	aBusinessType children ifNotEmpty: [ self <<< ', JsonSubTypes' ].
 	self
 		<<< ' } from "@outfoxx/jackson-js";';
