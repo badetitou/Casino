@@ -25,12 +25,6 @@ CSNBuModelImporter >> buModel: anObject [
 	self factory model: buModel
 ]
 
-{ #category : #visiting }
-CSNBuModelImporter >> createDefaultDTOEntity [
-
-	^ self factory create: CSNBuDTO
-]
-
 { #category : #accessing }
 CSNBuModelImporter >> dtoAbstractName [
 	^ 'AbstractPersistentObjectGWT'
@@ -49,6 +43,14 @@ CSNBuModelImporter >> famixModel [
 { #category : #accessing }
 CSNBuModelImporter >> famixModel: anObject [
 	famixModel := anObject
+]
+
+{ #category : #visiting }
+CSNBuModelImporter >> getDefaultDTOEntity [
+
+	^ (buModel allWithType: CSNBuDTO)
+		  ifEmpty: [ self factory create: CSNBuDTO ]
+		  ifNotEmpty: [ :dto | dto first ]
 ]
 
 { #category : #importing }
@@ -113,7 +115,7 @@ CSNBuModelImporter >> importCollectionType: aClass [
 
 	^ (self factory create: CSNBuCollectionType)
 		  type: (aClass arguments
-				   ifEmpty: [ self factory create: CSNBuDTO ]
+				   ifEmpty: [ self getDefaultDTOEntity ]
 				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
 		  yourself
 ]
@@ -123,21 +125,27 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 
 	| dictionary |
 	dictionary := self factory create: CSNBuDictionaryType.
-
 	aClass arguments
 		ifEmpty: [ "If parameters are not declared or not found, use defaults"
-			dictionary key: (factory create: CSNBuDTO).
-			dictionary value: (factory create: CSNBuDTO) ]
-		ifNotEmpty: [ :arguments | "Hack to export the type parameters in the correct order from source text"
-			((aClass typedEntities anyOne sourceText copyAfter: $<) 
-				 beginsWith: arguments first name)
-				ifTrue: [ 
+			dictionary key: self getDefaultDTOEntity.
+			dictionary value: self getDefaultDTOEntity ]
+		ifNotEmpty: [ :arguments | 
+			arguments size = 1
+				ifTrue: [ "Key and value are of the same type"
 					dictionary key: (arguments first accept: self).
-					dictionary value: (arguments second accept: self) ]
-				ifFalse: [ 
-					dictionary key: (arguments second accept: self).
-					dictionary value: (arguments first accept: self) ] ].
-
+					dictionary value: dictionary key ]
+				ifFalse: [ "Hack to export the type parameters in the correct order from source text"
+					| source |
+					source := aClass typedEntities anyOne sourceText.
+					(source
+						 includesSubstring: arguments first name
+						 at: (source indexOf: $<) + 1)
+						ifTrue: [ 
+							dictionary key: (arguments first accept: self).
+							dictionary value: (arguments second accept: self) ]
+						ifFalse: [ 
+							dictionary key: (arguments second accept: self).
+							dictionary value: (arguments first accept: self) ] ] ].
 	^ dictionary
 ]
 
@@ -166,7 +174,7 @@ CSNBuModelImporter >> importSetType: aClass [
 
 	^ (self factory create: CSNBuSetType)
 		  type: (aClass arguments
-				   ifEmpty: [ self factory create: CSNBuDTO ]
+				   ifEmpty: [ self getDefaultDTOEntity ]
 				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
 		  yourself
 ]
@@ -180,21 +188,20 @@ CSNBuModelImporter >> initialize [
 { #category : #visiting }
 CSNBuModelImporter >> visitClass: aClass [
 
-	^ (#( Boolean Byte Character Date Double Float Integer Long Short
-	      String Void ) includes: aClass name)
-		  ifTrue: [ self importPrimitiveType: aClass ]
-		  ifFalse: [ 
-			  (aClass superclassHierarchy anySatisfy: [ :class | 
-				   class name = self dtoAbstractName ])
-				  ifTrue: [ self importClass: aClass ]
-				  ifFalse: [ self factory create: CSNBuDTO ] ]
+	(#( Boolean Byte Character Date Double Float Integer Long Short String
+	    Void ) includes: aClass name) ifTrue: [ 
+		^ self importPrimitiveType: aClass ].
+	(aClass superclassHierarchy anySatisfy: [ :class | 
+		 class name = self dtoAbstractName ]) ifTrue: [ 
+		^ self importClass: aClass ].
+	^ self getDefaultDTOEntity
 ]
 
 { #category : #visiting }
 CSNBuModelImporter >> visitEnum: aParameterType [
 
 	self flag: 'Stil not suported'.
-	^ self createDefaultDTOEntity
+	^ self getDefaultDTOEntity
 ]
 
 { #category : #visiting }
@@ -210,7 +217,7 @@ CSNBuModelImporter >> visitParameter: aParameter [
 CSNBuModelImporter >> visitParameterType: aParameterType [
 
 	self flag: 'Stil not suported'.
-	^ self createDefaultDTOEntity
+	^ self getDefaultDTOEntity
 ]
 
 { #category : #visiting }
@@ -219,7 +226,7 @@ CSNBuModelImporter >> visitParameterizableClass: aClass [
 	"ParametrizedType but we do not know the parameters..."
 
 	self flag: 'Stil not suported'.
-	^ self createDefaultDTOEntity
+	^ self getDefaultDTOEntity
 ]
 
 { #category : #visiting }
@@ -246,5 +253,5 @@ CSNBuModelImporter >> visitPrimitiveType: aPrimitiveType [
 CSNBuModelImporter >> visitType: aType [
 
 	self flag: 'Stil not suported'.
-	^ self createDefaultDTOEntity
+	^ self getDefaultDTOEntity
 ]
