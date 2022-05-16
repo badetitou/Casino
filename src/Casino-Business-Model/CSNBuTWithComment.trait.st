@@ -1,5 +1,5 @@
 "
-I contain a comment concerning the associated entity
+I contain a comment concerning the associated entity.
 "
 Trait {
 	#name : #CSNBuTWithComment,

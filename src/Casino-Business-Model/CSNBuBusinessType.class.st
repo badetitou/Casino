@@ -141,15 +141,3 @@ CSNBuBusinessType >> parentGroup [
 	<navigation: 'Parent'>
 	^ MooseSpecializedGroup with: self parent
 ]
-
-{ #category : #printing }
-CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [
-
-	aCSNExporter <<< 'this.objectMapper.parse<'.
-	self writeBusinessTypeOn: aCSNExporter.
-	aCSNExporter <<< '>(JSON.stringify(res), ' inBraces: [ 
-		aCSNExporter << 'mainCreator: () => ['.
-		self printJsonClassTypeOn: aCSNExporter.
-		aCSNExporter <<< ']' ].
-	aCSNExporter <<< ');'
-]

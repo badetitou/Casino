@@ -145,6 +145,7 @@ CSNBusinessModelGenerator >> defineProperties [
 	attribute property: #isFinal type: #Boolean.
 	attribute property: #isStatic type: #Boolean.
 	attribute property: #isTransient type: #Boolean.
+	attribute property: #expression type: #String.
 
 	primitive property: #name type: #String.
 
@@ -163,7 +164,7 @@ CSNBusinessModelGenerator >> defineRelations [
 	(collectionType property: #type) *- (dto property: #inCollectionTypes).
 	(dictionaryType property: #key) *- (dto property: #asKeyInDictionaryTypes).
 	(dictionaryType property: #value) *- (dto property: #asValueInDictionaryTypes).
-	
+
 	"remote relations"
 	(serviceAPI property: #dataType) *- (dto property: #usedInServices).
 	(serviceAPIParameter property: #dataType) *- (dto property: #usedAsParameterType)
@@ -172,6 +173,6 @@ CSNBusinessModelGenerator >> defineRelations [
 { #category : #definition }
 CSNBusinessModelGenerator >> defineTraits [
 
-	tWithSource := builder newTraitNamed: #TWithSource comment: 'I contain a reference to the original source'.
-	tWithComment := builder newTraitNamed: #TWithComment comment: 'I contain a comment concerning the associated entity'
+	tWithSource := builder newTraitNamed: #TWithSource comment: 'I contain a reference to the original source.'.
+	tWithComment := builder newTraitNamed: #TWithComment comment: 'I contain a comment concerning the associated entity.'
 ]

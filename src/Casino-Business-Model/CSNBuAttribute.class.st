@@ -9,6 +9,7 @@ Class {
 	#instVars : [
 		'#attributeType => FMOne type: #CSNBuDTO opposite: #usedInAttributes',
 		'#businessType => FMOne type: #CSNBuBusinessType opposite: #attributes',
+		'#expression => FMProperty',
 		'#isFinal => FMProperty',
 		'#isStatic => FMProperty',
 		'#isTransient => FMProperty',
@@ -62,6 +63,20 @@ CSNBuAttribute >> businessTypeGroup [
 	<generated>
 	<navigation: 'BusinessType'>
 	^ MooseSpecializedGroup with: self businessType
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> expression [
+
+	<FMProperty: #expression type: #String>
+	<generated>
+	^ expression
+]
+
+{ #category : #accessing }
+CSNBuAttribute >> expression: anObject [
+	<generated>
+	expression := anObject
 ]
 
 { #category : #accessing }

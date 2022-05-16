@@ -1,5 +1,5 @@
 "
-I contain a reference to the original source
+I contain a reference to the original source.
 "
 Trait {
 	#name : #CSNBuTWithSource,

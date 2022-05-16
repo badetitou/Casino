@@ -31,6 +31,25 @@ CSNBuBusinessType >> printJsonClassTypeOn: aCSNExporter [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [
+
+	aCSNExporter <<< 'jsonParser.transform(res, ' inBraces: [ 
+		aCSNExporter << 'mainCreator: () => ['.
+		self printJsonClassTypeOn: aCSNExporter.
+		aCSNExporter <<< ']' ].
+	aCSNExporter <<< ')'
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuBusinessType >> sortedAttributes [
+
+	^ attributes sorted: [ :a1 :a2 | 
+		  (a1 source ifNil: 0 ifNotNil: [ :src | src sourceAnchor startPos ])
+		  <
+		  (a2 source ifNil: 0 ifNotNil: [ :src | src sourceAnchor startPos ]) ]
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> writeBusinessTypeOn: aCSNExporter [
 	aCSNExporter <<< self name
 ]

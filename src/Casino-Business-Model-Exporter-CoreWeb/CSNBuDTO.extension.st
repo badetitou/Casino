@@ -33,7 +33,7 @@ CSNBuDTO >> printJsonClassTypeOn: aCSNExporter [
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printServiceDeserializeOn: aCSNExporter [
 
-	aCSNExporter <<< 'res;'
+	aCSNExporter <<< 'res'
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
