@@ -164,13 +164,15 @@ CSNModelExporterAngularBLSpecific >> visitCSNService: aCSNService [
 		generateService: aCSNService
 ]
 
-{ #category : #generate }
+{ #category : #visiting }
 CSNModelExporterAngularBLSpecific >> visitMooseModel: aMooseModel [
 
 	super visitMooseModel: aMooseModel.
 	currentWriteStream := (self root / 'service-globals.ts')
 		                      asFileReference writeStream.
-	self serviceExporter new generateServiceGlobals.
+	self serviceExporter new
+		currentWriteStream: currentWriteStream;
+		generateServiceGlobals.
 	currentWriteStream
 		flush;
 		close
