@@ -49,7 +49,7 @@ CSNModelServiceExporterAngularCoreWeb >> printConstructorFor: aCSNService [
 	self << 'constructor('.
 	isParentService ifTrue: [ 
 		isChildService ifFalse: [ self <<< 'protected ' ].
-		self <<< 'nomService: string, ' ].
+		self <<< 'serviceName: string, ' ].
 	isChildService ifFalse: [ self <<< 'protected ' ].
 	self <<< 'http: HttpClient) {'.
 	isChildService ifTrue: [ 
@@ -58,7 +58,7 @@ CSNModelServiceExporterAngularCoreWeb >> printConstructorFor: aCSNService [
 			crlf;
 			<< 'super('.
 		isParentService
-			ifTrue: [ self <<< 'nomService' ]
+			ifTrue: [ self <<< 'serviceName' ]
 			ifFalse: [ self <<< $" <<< aCSNService targetPoint <<< $" ].
 		self
 			<<< ', http);';
@@ -211,12 +211,20 @@ CSNModelServiceExporterAngularCoreWeb >> rootServiceName [
 CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
 
 	"Check if aCSNService is a parent service"
-	isParentService := aCSNService source directSubclasses anySatisfy: [ 
-		                   :subclass | subclass isInterface ].
+	isParentService := (aCSNService source directSubclasses anySatisfy: [ 
+		                    :subclass | subclass isInterface ]) or: [ 
+		                   (aCSNService source isKindOf:
+			                    FamixJavaParameterizableClass) and: [ 
+			                   aCSNService source parameterizedTypes 
+				                   anySatisfy: [ :parameterizedType | 
+					                   parameterizedType directSubclasses 
+						                   anySatisfy: [ :subclass | 
+						                   subclass isInterface ] ] ] ].
 
 	"Check if aCSNService is a child service to a parent other than the root"
 	isChildService := aCSNService source directSuperclasses noneSatisfy: [ 
-		                  :superclass | superclass name = self rootServiceName ].
+		                  :superclass | 
+		                  superclass name = self rootServiceName ].
 	parentService := isChildService ifTrue: [ 
 		                 | superclassName |
 		                 superclassName := aCSNService source
@@ -290,7 +298,7 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 				inIndented: [ 
 					self << '"/rest/'.
 					isParentService
-						ifTrue: [ self <<< '" + this.nomService + "' ]
+						ifTrue: [ self <<< '" + this.serviceName + "' ]
 						ifFalse: [ self <<< aServiceAPI serviceOwner targetPoint ].
 					self <<< $/ <<< aServiceAPI uniqueName <<< '",'.
 					self
