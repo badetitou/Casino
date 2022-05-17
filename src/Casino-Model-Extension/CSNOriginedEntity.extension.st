@@ -44,7 +44,7 @@ CSNOriginedEntity >> parentNode [
 
 { #category : #'*Casino-Model-Extension' }
 CSNOriginedEntity >> realName [
-	^ name
+	^ name ifNil: [ ^ 'widget' ]
 ]
 
 { #category : #'*Casino-Model-Extension' }

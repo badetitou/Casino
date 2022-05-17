@@ -62,7 +62,7 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self printImports.
 	self printImportDependencenciesOf: aBusinessType.
 	aBusinessType comment ifNotNil: [ :comment | 
-		self << comment content.
+		self << comment sourceText.
 		self crlf ].
 	self printAnnotationsFor: aBusinessType.
 	self << 'export '.
