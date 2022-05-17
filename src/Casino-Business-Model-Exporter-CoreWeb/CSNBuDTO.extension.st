@@ -37,6 +37,12 @@ CSNBuDTO >> printServiceDeserializeOn: aCSNExporter [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDTO >> printServiceSerializeOn: aCSNExporter named: aName [
+
+	aCSNExporter <<< aName
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> writeBusinessTypeOn: aCSNExporter [
 	aCSNExporter <<< 'any'
 ]

@@ -11,6 +11,12 @@ CSNBuComplexType >> printServiceDeserializeOn: aCSNExporter [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuComplexType >> printServiceSerializeOn: aCSNExporter named: aName [
+
+	aCSNExporter <<< 'jsonStringifier.transform(' <<< aName <<< $)
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuComplexType >> writeBusinessTypeOn: aCSNExporter [
 	self flag: 'todo'.
 	aCSNExporter <<< 'any'

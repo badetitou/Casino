@@ -41,6 +41,12 @@ CSNBuBusinessType >> printServiceDeserializeOn: aCSNExporter [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuBusinessType >> printServiceSerializeOn: aCSNExporter named: aName [
+
+	aCSNExporter <<< 'jsonStringifier.transform(' <<< aName <<< $)
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> sortedAttributes [
 
 	^ attributes sorted: [ :a1 :a2 | 

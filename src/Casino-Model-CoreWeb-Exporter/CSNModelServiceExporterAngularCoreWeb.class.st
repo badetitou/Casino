@@ -75,20 +75,9 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 		aCSNServiceAPI sortedParameters
 			do: [ :parameter | 
 				self << parameter name <<< ': '.
-				parameter dataType isBusinessType ifTrue: [ 
-					self <<< 'jsonStringifier.transform(' ].
-				self <<< parameter name.
-				parameter dataType isBusinessType ifTrue: [ 
-					self
-						<<< ', {';
-						crlf;
-						indentPlus;
-						<< 'mainCreator: () => [';
-						<<< parameter dataType name;
-						<<< $];
-						crlf;
-						indentMinus;
-						<< '})' ] ]
+				parameter dataType
+					printServiceSerializeOn: self
+					named: parameter name ]
 			separatedBy: [ 
 				self <<< $,.
 				self crlf ] ]
