@@ -84,7 +84,7 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 		source: anAttribute;
 		comment: (anAttribute comments
 				 ifEmpty: nil
-				 ifNotEmpty: [ :comments | comments anyOne ]);
+				 ifNotEmpty: [ :comments | comments anyOne sourceText ]);
 		isFinal: anAttribute isFinal isNotNil;
 		isStatic: anAttribute isClassSide;
 		isTransient: anAttribute isTransient isNotNil;
@@ -121,7 +121,8 @@ CSNBuModelImporter >> importClass: concreteClass [
 		                source: concreteClass;
 		                comment: (concreteClass comments
 				                 ifEmpty: nil
-				                 ifNotEmpty: [ :comments | comments anyOne ]);
+				                 ifNotEmpty: [ :comments | 
+					                 comments anyOne sourceText ]);
 		                isAbstract: concreteClass isAbstract isNotNil;
 		                yourself.
 

@@ -15,7 +15,7 @@ CSNBuModelExporter >> attributeInExceptionList: attribute [
 CSNBuModelExporter >> exportAttribute: attribute [
 
 	attribute comment ifNotNil: [ :comment | 
-		self << comment sourceText.
+		self << comment.
 		self crlf ].
 	(attribute isStatic or: [ attribute isTransient ]) ifFalse: [ 
 		self << '@JsonProperty()'.
