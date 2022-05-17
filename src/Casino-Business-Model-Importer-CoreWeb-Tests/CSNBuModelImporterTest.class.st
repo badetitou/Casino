@@ -136,7 +136,7 @@ CSNBuModelImporterTest >> testImportDictionaryTypeWithoutArgument [
 		equals: 1.
 	self
 		assert: (buModelImporter buModel allWithType: CSNBuDTO) size
-		equals: 2
+		equals: 1
 ]
 
 { #category : #tests }

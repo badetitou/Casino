@@ -47,7 +47,8 @@ CSNBuModelExporterTest >> testExportAttribute [
 		isTransient: false;
 		attributeType: buAttributeType.
 
-	expected := String crlf join: #( 'myAttribute: any;' ).
+	expected := String crlf join:
+		            #( '@JsonProperty()' 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttribute: buAttribute ].
@@ -70,7 +71,7 @@ CSNBuModelExporterTest >> testExportAttributeBusiness [
 		attributeType: buAttributeType.
 
 	expected := String crlf join:
-		            #( '@JsonClassType({ type: () => [Hello] })'
+		            #( '@JsonProperty()' '@JsonClassType({ type: () => [Hello] })'
 		               'myAttribute: Hello;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
@@ -92,7 +93,8 @@ CSNBuModelExporterTest >> testExportAttributeDTO [
 		isTransient: false;
 		attributeType: buAttributeType.
 
-	expected := String crlf join: #( 'myAttribute: any;' ).
+	expected := String crlf join:
+		            #( '@JsonProperty()' 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
 		          businessExporter exportAttribute: buAttribute ].
