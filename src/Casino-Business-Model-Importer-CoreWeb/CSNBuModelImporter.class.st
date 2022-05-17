@@ -88,7 +88,7 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 		isFinal: anAttribute isFinal isNotNil;
 		isStatic: anAttribute isClassSide;
 		isTransient: anAttribute isTransient isNotNil;
-		expression: declarator expression.
+		expression: (self importAttributeExpression: declarator expression).
 
 	anAttribute declaredType
 		ifNil: [ buAttribute attributeType: self getDefaultDTOEntity ]
@@ -103,6 +103,48 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 			buAttribute attributeType: innerType ].
 
 	^ buAttribute
+]
+
+{ #category : #importing }
+CSNBuModelImporter >> importAttributeExpression: anExpression [
+
+	"Return the attribute's initializion expression, transpiled to typescript if necessary."
+
+	anExpression ifNil: [ ^ nil ].
+
+	anExpression class == FASTJavaNullLiteral ifTrue: [ ^ 'null' ].
+
+	((anExpression class usesTrait: FASTTLiteral) or: [ 
+		 anExpression class == FASTJavaStringLiteral or: [ 
+			 anExpression class == FASTJavaUnaryExpression ] ]) ifTrue: [ 
+		^ anExpression sourceCode ].
+
+	anExpression class == FASTJavaVariableExpression ifTrue: [ 
+		anExpression famixVariable isClassSide
+			ifNil: [ ^ 'this.' , anExpression name ]
+			ifNotNil: [ 
+				^ anExpression famixVariable parentType name , '.'
+				  , anExpression name ] ].
+
+	anExpression class == FASTJavaArrayInitializer ifTrue: [ 
+		^ '['
+		  ,
+			  (', ' join:
+				   (anExpression initializers collect: [ :initializer | 
+					    self importAttributeExpression: initializer ])) , ']' ].
+
+	anExpression class == FASTJavaNewExpression ifTrue: [ 
+		| invoked |
+		invoked := anExpression famixInvocation invokedClass.
+		(invoked fullName beginsWith: 'java')
+			ifFalse: [ ^ anExpression sourceCode ]
+			ifTrue: [ 
+				invoked allSuperclassesDo: [ :superclass | 
+					superclass name = #Set ifTrue: [ ^ 'new Set()' ].
+					superclass name = #Map ifTrue: [ ^ 'new Map()' ].
+					superclass name = #Collection ifTrue: [ ^ '[]' ] ] ] ].
+
+	^ 'null /* FIXME: could not transpile initialization expression. */'
 ]
 
 { #category : #importing }

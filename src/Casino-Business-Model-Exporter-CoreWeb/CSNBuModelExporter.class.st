@@ -27,6 +27,7 @@ CSNBuModelExporter >> exportAttribute: attribute [
 	attribute isFinal ifTrue: [ self <<< 'readonly ' ].
 	self <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
+	attribute expression ifNotNil: [ :expr | self <<< ' = ' <<< expr ].
 	self <<< ';'
 ]
 
