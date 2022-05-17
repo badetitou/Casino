@@ -161,7 +161,10 @@ CSNWidget >> id [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> idTag [
-	^ self variable ifNil: [ '' ] ifNotNil: [ ' #' , self id ]
+
+	^ (self variable isNil or: [ self variable isNotFound ])
+		  ifTrue: [ '' ]
+		  ifFalse: [ ' #' , self id ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

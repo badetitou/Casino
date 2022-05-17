@@ -72,9 +72,10 @@ CSNBusinessPage >> getLocalComponentPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getLocalPath [
-	" return   pageMetierName/pageMetierName.component"
 
-	^ (self container) getLocalPath , '/components/' , self getAcceptedName
+	" return pageMetierName/pageMetierName.component"
+
+	^ self container getLocalPath , '/components/' , self getAcceptedName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -94,11 +95,13 @@ CSNBusinessPage >> getTag [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> idViewChildFrom: anExporter [
-	^ (self variable isNil or: [ self variable isInvocation ])
+
+	^ ((self variable isNil or: [ self variable isNotFound ]) or: [ 
+		   self variable isInvocation ])
 		  ifTrue: [ '' ]
 		  ifFalse: [ 
-			  '    @ViewChild(' , self componentName , ', { static: true}) ' , self id , ': '
-			  , self componentName , ';' , String crlf ]
+			  '    @ViewChild(' , self componentName , ', { static: true}) '
+			  , self id , ': ' , self componentName , ';' , String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
