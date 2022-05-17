@@ -19,8 +19,8 @@ String >> asRealCamelCase [
 		  (self substrings: (CSSeparators
 				    add: $_;
 				    add: $-;
-				    yourself)) do: [ :sub | 
-			  stream nextPutAll: sub capitalized ] ]
+				    add: $ ;
+				    yourself)) do: [ :sub | stream nextPutAll: sub asLowercase capitalized ] ]
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
