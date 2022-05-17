@@ -136,15 +136,13 @@ CSNBuModelImporter >> importAttributeExpression: anExpression [
 	anExpression class == FASTJavaNewExpression ifTrue: [ 
 		| invoked |
 		invoked := anExpression famixInvocation invokedClass.
-		(invoked fullName beginsWith: 'java')
-			ifFalse: [ ^ anExpression sourceCode ]
-			ifTrue: [ 
-				invoked allSuperclassesDo: [ :superclass | 
-					superclass name = #Set ifTrue: [ ^ 'new Set()' ].
-					superclass name = #Map ifTrue: [ ^ 'new Map()' ].
-					superclass name = #Collection ifTrue: [ ^ '[]' ] ] ] ].
+		(invoked fullName beginsWith: 'java') ifTrue: [ 
+			invoked allSuperclassesDo: [ :superclass | 
+				superclass name = #Set ifTrue: [ ^ 'new Set()' ].
+				superclass name = #Map ifTrue: [ ^ 'new Map()' ].
+				superclass name = #Collection ifTrue: [ ^ '[]' ] ] ] ].
 
-	^ 'null /* FIXME: could not transpile initialization expression. */'
+	^ 'null /* ' , anExpression sourceCode , ' */'
 ]
 
 { #category : #importing }
