@@ -234,7 +234,7 @@ CSNBuModelImporter >> visitParameter: aParameter [
 
 	"in case the declaredType is not extracted because verveineJ has failed (or the class is not present in our model)"
 
-	aParameter declaredType ifNil: [ ^ self factory create: CSNBuDTO ].
+	aParameter declaredType ifNil: [ ^ self getDefaultDTOEntity ].
 	^ aParameter declaredType accept: self
 ]
 
@@ -265,7 +265,7 @@ CSNBuModelImporter >> visitParameterizedType: aClass [
 			^ self importCollectionType: aClass ].
 		superclass name = #Map ifTrue: [ 
 			^ self importDictionaryType: aClass ] ].
-	^ self factory create: CSNBuDTO
+	^ self getDefaultDTOEntity
 ]
 
 { #category : #visiting }
