@@ -18,11 +18,14 @@ CSNWidgetFactoryAngular >> createAttributeFrom: invoc forCellOf: widget [
 
 { #category : #factory }
 CSNWidgetFactoryAngular >> createBusinessPageFromFAMIXClass: aFAMIXClass [
+
 	^ (self create: CSNBusinessPage)
-		name: aFAMIXClass name;
-		source: aFAMIXClass;
-		computeTitle;
-		yourself
+		  name: (aFAMIXClass isAnonymousClass
+				   ifFalse: [ aFAMIXClass name ]
+				   ifTrue: [ aFAMIXClass superclass name ]);
+		  source: aFAMIXClass;
+		  computeTitle;
+		  yourself
 ]
 
 { #category : #factory }

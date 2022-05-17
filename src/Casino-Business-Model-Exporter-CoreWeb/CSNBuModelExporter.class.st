@@ -60,7 +60,11 @@ CSNBuModelExporter >> exportAttributeSetter: attribute [
 { #category : #export }
 CSNBuModelExporter >> exportBusinessType: aBusinessType [
 
-	self printImports.
+	"Differences from CSNBuModelExporter:
+	- no getters/setters
+	- no excluded attribute"
+
+	self printImportsFor: aBusinessType.
 	self printImportDependencenciesOf: aBusinessType.
 	aBusinessType comment ifNotNil: [ :comment | 
 		self << comment sourceText.
@@ -71,30 +75,13 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self <<< 'class ' <<< aBusinessType name <<< ' extends '.
 	aBusinessType parent
 		ifNotNil: [ :superType | self <<< superType name ]
-		ifNil: [ self <<< 'AbstractDTO' ].
+		ifNil: [ self <<< 'AbstractIdentity' ].
 	self space.
 
 	self inBraces: [ "Class body"
-		(aBusinessType sortedAttributes reject: [ :attribute | 
-			 self attributeInExceptionList: attribute ])
+		aBusinessType sortedAttributes
 			do: [ :attribute | self exportAttribute: attribute ]
-			separatedBy: [ self crlf ].
-		self
-			crlf;
-			crlf.
-		((aBusinessType attributes asOrderedCollection sorted:
-			  #name ascending) reject: [ :attribute | 
-			 self attributeInExceptionList: attribute ])
-			do: [ :attribute | 
-				self exportAttributeGetter: attribute.
-				self
-					crlf;
-					crlf.
-				self exportAttributeSetter: attribute ]
-			separatedBy: [ 
-				self
-					crlf;
-					crlf ] ].
+			separatedBy: [ self crlf ] ].
 	self crlf
 ]
 
@@ -140,9 +127,11 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 CSNBuModelExporter >> printImports [
 
 	self
-		<< 'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
+		<<
+			'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
 		crlf;
-		<< 'import { AbstractDTO } from ''src/app/main/shared/composants/dto/user/abstract-dto.model'';';
+		<<
+			'import { AbstractDTO } from ''app/projects/bl-shell/src/public-api'';';
 		crlf;
 		crlf
 ]
@@ -152,11 +141,13 @@ CSNBuModelExporter >> printImportsFor: aBusinessType [
 
 	self << 'import { JsonProperty, JsonClassType'.
 	aBusinessType children ifNotEmpty: [ self <<< ', JsonSubTypes' ].
+	self <<< ' } from "@outfoxx/jackson-js";'.
+	aBusinessType parent ifNil: [ 
+		self
+			crlf;
+			<<
+				'import { AbstractIdentity } from "app/projects/bl-shell/src/public-api";' ].
 	self
-		<<< ' } from "@outfoxx/jackson-js";';
-		crlf;
-		<<
-			'import { AbstractDTO } from "src/app/main/shared/composants/dto/user/abstract-dto.model";';
 		crlf;
 		crlf
 ]
