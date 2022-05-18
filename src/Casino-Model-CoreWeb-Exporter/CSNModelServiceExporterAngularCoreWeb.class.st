@@ -77,7 +77,7 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 				self << parameter name <<< ': '.
 				parameter dataType
 					printServiceSerializeOn: self
-					named: parameter acceptedName ]
+					named: parameter acceptedName uncapitalized ]
 			separatedBy: [ 
 				self <<< $,.
 				self crlf ] ]
@@ -244,7 +244,8 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
 					printServiceAnnotations;
 					crlf ].
 			self << 'export '.
-			isParentService ifTrue: [ self <<< 'abstract ' ].
+			"self flag: 'BVER badetitou - Cannot be abstract or it cannot be used as a Provider in Angular (and so error)'"
+			"isParentService ifTrue: [ self <<< 'abstract ' ]."
 			self
 				<<< 'class ';
 				<<< aCSNService uniqueName.

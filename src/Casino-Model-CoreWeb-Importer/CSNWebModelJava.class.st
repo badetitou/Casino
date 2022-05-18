@@ -59,8 +59,7 @@ CSNWebModelJava >> addLinkBetweenWidgets [
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler
 		                                  new.
 	col := self model allCSNWidgetExceptPage reject: [ :widget | 
-		       widget widgetContainer isNotNil ].
-
+		       widget container isNotNil ].
 	col withIndexDo: [ :widget :index | 
 		(widget name) recordDebug. 
 		self

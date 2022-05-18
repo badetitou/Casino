@@ -50,19 +50,28 @@ BaselineOfCasino >> defineBusinessPackages: spec [
 
 { #category : #baselines }
 BaselineOfCasino >> defineDependencies: spec [
-	spec
-		baseline: 'FASTJava'
-		with: [ spec
-				loads: #('smacc' 'visitor');
-				repository: 'github://moosetechnology/FAST-Java:v2/src' ].
+
+	spec baseline: 'FASTJava' with: [ 
+		spec
+			loads: #( 'smacc' 'visitor' );
+			repository: 'github://moosetechnology/FAST-Java:v2/src' ].
 	spec
 		baseline: 'XMLParser'
-		with: [ spec
-				repository: 'github://pharo-contributions/XML-XMLParser/src' ].
-	spec baseline: 'TelescopeCytoscape' with: [ spec repository: 'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
-	spec baseline: 'Carrefour' with: [ spec repository: 'github://badetitou/Carrefour:v3/src' ].
-	spec baseline: 'TinyLogger' with: [ spec repository: 'github://jecisc/TinyLogger:v1.x.x/src' ].
-	spec baseline: 'Famix2Java' with: [ spec repository: 'github://moosetechnology/FAMIX2Java:v2/src' ]
+		with: [ 
+		spec repository: 'github://pharo-contributions/XML-XMLParser/src' ].
+	spec baseline: 'TelescopeCytoscape' with: [ 
+		spec repository:
+			'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
+	spec
+		baseline: 'Carrefour'
+		with: [ spec repository: 'github://badetitou/Carrefour:v3/src' ].
+	spec
+		baseline: 'MoreLogger'
+		with: [ spec repository: 'github://badetitou/MoreLogger:main/src' ].
+	spec
+		baseline: 'Famix2Java'
+		with: [ 
+		spec repository: 'github://moosetechnology/FAMIX2Java:v2/src' ]
 ]
 
 { #category : #baselines }
@@ -153,7 +162,7 @@ BaselineOfCasino >> definePackages: spec [
 			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary') ];
 		package: 'Casino-Model-Exporter-Angular-Tests' with: ['Casino-Model-Exporter-Angular' ];
 		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
-		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'TinyLogger' 'Casino-Helper') ];
+		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'MoreLogger' 'Casino-Helper') ];
 		package: 'Casino-Model-Importer-Tests' with: [ spec requires: #('Casino-Model-Importer') ];
 		package: 'Casino-Model-Importer-Java' with: [ spec requires: #('Casino-Model-Importer' 'Carrefour') ];
 		package: 'Casino-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Model-Importer-Java') ];

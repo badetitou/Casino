@@ -72,7 +72,8 @@ WidgetRepresentation >> exportAttribute: attribute with: anExporter [
 { #category : #export }
 WidgetRepresentation >> exportAttributes: attributes with: anExporter [
 
-	^ (attributes flattened groupedBy: [ :attribute | 
+	^ ((attributes flattened reject: [ :att | att name isNil ])  
+		   groupedBy: [ :attribute | 
 		   self attributeNameInComponent: attribute ]) asDictionary 
 		  associationsDo: [ :mapAttributeNameValues | 
 			  anExporter

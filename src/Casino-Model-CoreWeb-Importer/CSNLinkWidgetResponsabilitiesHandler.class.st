@@ -12,11 +12,21 @@ Class {
 
 { #category : #accessing }
 CSNLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd: mapVariableInvocationOfAdd to: widgetContainer in: theCurrentImporter [
-	((mapVariableInvocationOfAdd collect: [ :VariableInvocationOfAdd | (theCurrentImporter widgetInVariable: VariableInvocationOfAdd key) -> VariableInvocationOfAdd value ])
-		select: [ :assoc | assoc key isNotNil ])
-		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found key addWidget: widgetContainer withInvocationOfAdd: found value usingFactory: theCurrentImporter factory ].
-			^ true ].
+
+	((mapVariableInvocationOfAdd collect: [ :VariableInvocationOfAdd | 
+		  (theCurrentImporter widgetInVariable: VariableInvocationOfAdd key)
+		  -> VariableInvocationOfAdd value ]) select: [ :assoc | 
+		 assoc key isNotNil ]) ifNotEmpty: [ :founds | 
+		founds do: [ :found | 
+			| toAdd |
+			toAdd := widgetContainer container
+				         ifNil: [ widgetContainer ]
+				         ifNotNil: [ widgetContainer verticalVeryDeepCopy ].
+			found key
+				addWidget: toAdd
+				withInvocationOfAdd: found value
+				usingFactory: theCurrentImporter factory ].
+		^ true ].
 	^ false
 ]
 
@@ -24,7 +34,10 @@ CSNLinkWidgetResponsabilitiesHandler >> addLinkedFromMapVariableInvocationOfAdd:
 CSNLinkWidgetResponsabilitiesHandler >> addLinkedFromVariable: variables to: widgetContainer in: theCurrentImporter [
 	((variables collect: [ :var | theCurrentImporter widgetInVariable: var ] as: Set) select: #isNotNil)
 		ifNotEmpty: [ :founds | 
-			founds do: [ :found | found addWidget: widgetContainer ].
+			founds do: [ :found | 
+				| toAdd |
+				toAdd := widgetContainer container ifNil: [widgetContainer] ifNotNil: [ widgetContainer verticalVeryDeepCopy ].
+				found addWidget: widgetContainer ].
 			^ true ].
 	^ false
 ]

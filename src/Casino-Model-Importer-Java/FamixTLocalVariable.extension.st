@@ -10,18 +10,29 @@ FamixTLocalVariable >> allUsages [
 2 - the invocation in the method this variable is a parameter
 	"
 
-	| posUsages invocationsInvolved localInvocation externalInvocation |
-	posUsages := self parentBehaviouralEntity sourceAnchor findAllOccurrencesOfVariableNamed: self name.
-	invocationsInvolved := posUsages flatCollect: [ :usage | 
-		                       self parentBehaviouralEntity queryAllOutgoingInvocations select: [ :el | 
-			                       el hasSourceAnchor and: [ el sourceAnchor intervalAsCharPos rangeIncludes: usage ] ] ].
-	localInvocation := invocationsInvolved select: [ :invoc | 
-		                   invoc receiver ~= self and: [ invoc parameters anySatisfy: [ :param | param beginsWith: self name ] ] ].
-	externalInvocation := localInvocation collect: [ :invoc | 
-		                      (invoc invokedMethod isStub or: [ (invoc positionParameterNamed: self name) = 0 ])
-			                      ifTrue: [ {  } ]
-			                      ifFalse: [ (invoc invokedMethod parameterAtIndex: (invoc positionParameterNamed: self name)) allUsages ] ].
+	| posUsages invocationsInvolved externalInvocation |
+	self parentBehaviouralEntity generateFastIfNotDoneAndBind.
+	invocationsInvolved := (self fastAccesses reject: [ :access "not access as invoc receiver" | 
+		                        (access parentNode isKindOf:
+			                         FASTJavaMethodInvocation) and: [ 
+			                        access parentNode receiver = access ] ])
+		                       collect: [ :fastAccess | 
+			                       (fastAccess atScope:
+				                        FASTJavaMethodInvocation) ifNotEmpty: [ 
+				                       :invoc | invoc anyOne famixInvocation ] ]
+		                       thenReject: #isCollection.
+	externalInvocation := invocationsInvolved
+		                      reject: [ :involvedInvoc | 
+			                      involvedInvoc invokedMethod isStub or: [ 
+				                      (involvedInvoc fast arguments includes: self fastAccesses)
+					                      not ] ]
+		                      thenCollect: [ :invoc | 
+			                      (invoc invokedMethod parameterAtIndex:
+				                       (invoc positionParameterNamed: self name))
+				                      allUsages ].
 	^ { 
-		  localInvocation.
-		  externalInvocation } flattened ifEmpty: [ self parentBehaviouralEntity allUsages reject: [ :invoc | invoc receiver = self ] ]
+		  invocationsInvolved.
+		  externalInvocation } flattened ifEmpty: [ 
+		  self parentBehaviouralEntity allUsages reject: [ :invoc | 
+			  invoc receiver = self ] ]
 ]

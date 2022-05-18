@@ -984,8 +984,11 @@ CSNModelExporterAngular >> visitCSNUICWClickHandler: aCSNClickHandler [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
+
 	self crlf.
-	aBLHTML widgets do: [ :widget | self << widget text ] separatedBy: [ self crlf ].
+	aBLHTML widgets
+		do: [ :widget | self << (widget text ifNil: [ '' ]) ]
+		separatedBy: [ self crlf ].
 
 	self crlf
 ]

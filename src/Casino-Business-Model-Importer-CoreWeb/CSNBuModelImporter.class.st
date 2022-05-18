@@ -119,7 +119,8 @@ CSNBuModelImporter >> importAttributeExpression: anExpression [
 			 anExpression class == FASTJavaUnaryExpression ] ]) ifTrue: [ 
 		^ anExpression sourceCode ].
 
-	anExpression class == FASTJavaVariableExpression ifTrue: [ 
+	(anExpression class == FASTJavaVariableExpression and: [ 
+		 anExpression famixVariable isNotNil ]) ifTrue: [ 
 		anExpression famixVariable isClassSide
 			ifNil: [ ^ 'this.' , anExpression name ]
 			ifNotNil: [ 
