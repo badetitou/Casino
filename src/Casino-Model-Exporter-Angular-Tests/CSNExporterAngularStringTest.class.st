@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #tests }
+CSNExporterAngularStringTest >> testAsRealCamelCaseAlreadyCamelCase [
+	self assert: 'HelloWorld' asRealCamelCase equals: 'HelloWorld'
+]
+
+{ #category : #tests }
 CSNExporterAngularStringTest >> testAsRealCamelCaseDashed [
 	self assert: 'hello-world' asRealCamelCase equals: 'HelloWorld'
 ]
