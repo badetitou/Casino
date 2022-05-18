@@ -114,7 +114,7 @@ CSNModelExporterAngular >> exportAttributeValue: aCSNAttribute [
 CSNModelExporterAngular >> exportPage: aPage [
 
 	^ self clone
-		  currentPath: self rootPhases / aPage name asRealCamelCase;
+		  currentPath: self rootPhases / aPage getAcceptedName;
 		  currentPage: aPage;
 		  visit: aPage
 ]
@@ -499,9 +499,9 @@ const routes: Routes = [
     { path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
     { path: ''desktop'', component: IndexComponent, children: [';
      << String crlf.
-  (aModel allCSNPage sorted: #name ascending) do: [:phase |  currentWriteStream
+  (aModel allCSNPage sorted: #getAcceptedName ascending) do: [:phase |  currentWriteStream
            << '        { path: ''';
-           << phase name asRealCamelCase;
+           << phase getAcceptedName;
            << '/:id'', loadChildren: () => import(''./phases/';
            << phase getLocalModulePath;
 			  << ''').then(m => m.';

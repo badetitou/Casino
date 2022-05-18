@@ -27,7 +27,7 @@ CSNBusinessPage >> componentsRootFromExporter: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getAcceptedName [
-	^ (self name splitOn: ':') last
+	^ self uniqueName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -124,6 +124,25 @@ CSNBusinessPage >> recursiveWidgetsWithoutMetiers [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> rootFromExporter: anExporter [ 
 	^ ((self container) componentsRootFromExporter: anExporter) /  (self getAcceptedName )
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNBusinessPage >> uniqueName [
+
+	| dic |
+	dic := self container
+		       cacheAt: #businessUniqueName
+		       ifAbsentPut: [ 
+		       { (self -> self name asRealCamelCase) } asDictionary ].
+	^ dic at: self ifAbsentPut: [ 
+		  | index potentialName |
+		  index := 0.
+		  potentialName := self name asRealCamelCase.
+		  [ dic includes: potentialName ] whileTrue: [ 
+			  potentialName := (potentialName removeSuffix: index asString)
+			                   , index asString.
+			  index := index + 1 ].
+		  potentialName ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

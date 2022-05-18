@@ -77,7 +77,7 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 				self << parameter name <<< ': '.
 				parameter dataType
 					printServiceSerializeOn: self
-					named: parameter name ]
+					named: parameter acceptedName ]
 			separatedBy: [ 
 				self <<< $,.
 				self crlf ] ]
