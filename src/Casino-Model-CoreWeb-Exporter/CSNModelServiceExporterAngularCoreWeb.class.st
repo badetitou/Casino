@@ -239,10 +239,11 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
 				crlf;
 				printServiceDocumentation;
 				crlf.
-			isParentService ifFalse: [ 
+			"self flag: 'BVER badetitou - Since it cannot be abstract, must be injectable (see next issue)'"
+			"isParentService ifFalse: [" 
 				self
 					printServiceAnnotations;
-					crlf ].
+					crlf. "]."
 			self << 'export '.
 			"self flag: 'BVER badetitou - Cannot be abstract or it cannot be used as a Provider in Angular (and so error)'"
 			"isParentService ifTrue: [ self <<< 'abstract ' ]."
