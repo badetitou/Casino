@@ -65,7 +65,7 @@ CSNWebModelJavaAddParentTest >> prepareAffectationInParameter [
 		                      name: 'l';
 		                      yourself.
 	addInvocationAnchor := (self createInSourceModel: FamixJavaIndexedFileAnchor)
-		                       startPos: 67;
+		                       startPos: 77;
 		                       endPos: 84;
 		                       yourself.
 	addInvocation := (self createInSourceModel: FamixJavaInvocation)

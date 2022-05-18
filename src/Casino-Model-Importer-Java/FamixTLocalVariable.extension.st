@@ -20,12 +20,13 @@ FamixTLocalVariable >> allUsages [
 			                       (fastAccess atScope:
 				                        FASTJavaMethodInvocation) ifNotEmpty: [ 
 				                       :invoc | invoc anyOne famixInvocation ] ]
-		                       thenReject: #isCollection.
+		                       thenReject: [ :el | 
+		                       el isCollection or: [ el isNil ] ].
 	externalInvocation := invocationsInvolved
 		                      reject: [ :involvedInvoc | 
 			                      involvedInvoc invokedMethod isStub or: [ 
-				                      (involvedInvoc fast arguments includes: self fastAccesses)
-					                      not ] ]
+				                      (involvedInvoc fast arguments includesAny:
+					                       self fastAccesses) not ] ]
 		                      thenCollect: [ :invoc | 
 			                      (invoc invokedMethod parameterAtIndex:
 				                       (invoc positionParameterNamed: self name))
