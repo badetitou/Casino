@@ -41,7 +41,7 @@ CSNWidget >> container [
 CSNWidget >> csnInAngular: aBuilder [
 
 	<inspectorPresentationOrder: 1008 title: 'Angular HTML'>
-	| config code attributeExporter |
+	| config code attributeExporter presenter |
 	config := CSNExporterAngularConfiguration.
 	attributeExporter := CSNExporterAngularAttribute.
 	code := aBuilder newCode
@@ -50,7 +50,8 @@ CSNWidget >> csnInAngular: aBuilder [
 		        withoutSyntaxHighlight.
 	^ (self isKindOf: CSNPage) not
 		  ifTrue: [ 
-			  aBuilder newPresenter layout: (aBuilder newBoxLayoutTopToBottom
+			  presenter := SpPresenter new.
+			  presenter layout: (SpBoxLayout newTopToBottom
 					   add: (aBuilder newDropList
 							    extent: 800 @ 25;
 							    items: CSNExporterAngularConfiguration withAllSubclasses;
@@ -73,7 +74,8 @@ CSNWidget >> csnInAngular: aBuilder [
 							    yourself)
 					   expand: false;
 					   add: code;
-					   yourself) ]
+					   yourself).
+			  presenter ]
 		  ifFalse: [ aBuilder newText text: 'Not supported' ]
 ]
 
