@@ -595,15 +595,10 @@ export class ';
 			<< phase name;
 			<< ''');';
 			<< String crlf ].
-	currentWriteStream
-		<< '
+	currentWriteStream << '
     }
 
     public ngOnInit(): void {
-';
-		<< (aBLPageMetier recursiveWidgets flattened flatCollect:
-					 #getInitializations);
-		<< '
     }
 
     public ngOnDestroy(): void {
