@@ -65,7 +65,7 @@ CSNServiceAPI >> printCreateParamIn: aCSNExporter [
 CSNServiceAPI >> printParameterIn: aStream [
 	self sortedParameters
 		do: [ :parameter | 
-			aStream <<< parameter name <<< ': '.
+			aStream <<< parameter acceptedName <<< ': '.
 			parameter dataType ifNotNil: [ :dataType | dataType writeBusinessTypeOn: aStream ] ifNil: [ aStream << 'any' ] ]
 		separatedBy: [ aStream <<< ', ' ]
 ]

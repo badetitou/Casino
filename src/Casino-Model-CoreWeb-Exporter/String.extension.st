@@ -1,6 +1,21 @@
 Extension { #name : #String }
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }
+String >> asConsecutiveExpendedString [
+
+	"convert the consecutive camel case to long string.
+	ACamelCase >> a ACamel Case"
+
+	^ self class streamContents: [ :stream | 
+		  | previousUpper |
+		  previousUpper := false.
+		  self do: [ :char | 
+			  (char isUppercase and: [ previousUpper not ]) ifTrue: [ stream nextPut: $  ].
+			  previousUpper := char isUppercase.
+			  stream nextPut: char ] ]
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Exporter' }
 String >> asExpendedString [
 
 	"convert the camelCase to long string.
@@ -16,11 +31,9 @@ String >> asExpendedString [
 String >> asRealCamelCase [
 
 	^ self class streamContents: [ :stream | 
-		  (self substrings: (CSSeparators
-				    add: $_;
-				    add: $-;
-				    yourself)) do: [ :sub | 
-			  stream nextPutAll: sub capitalized ] ]
+		  (self asConsecutiveExpendedString substrings:
+			   (CharacterSet newFrom: #( $_ $- $  ))) do: [ :sub | 
+			  stream nextPutAll: sub asLowercase capitalized ] ]
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Exporter' }

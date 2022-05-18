@@ -2,7 +2,7 @@ Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getAcceptedName [
-	^ (self name splitOn: ':') last asRealCamelCase
+	^ self uniqueName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -27,7 +27,7 @@ CSNPage >> getLocalComponentPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalModulePath [
-	^ self name asRealCamelCase, '/' , self getAcceptedName , '.module'
+	^ self getAcceptedName, '/' , self getAcceptedName , '.module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -107,6 +107,24 @@ CSNPage >> rootFromExporter: anExporter [
 CSNPage >> sortedPageMetiers [
 	^ self businessPage asOrderedCollection
 		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> uniqueName [
+	| dic |
+	dic := self mooseModel
+		cacheAt: #pageUniqueName
+		ifAbsentPut: [ {(self -> self name asRealCamelCase)} asDictionary ].
+	^ dic
+		at: self
+		ifAbsentPut: [ | index potentialName |
+			index := 0.
+			potentialName := self name asRealCamelCase.
+			[ dic includes: potentialName ]
+				whileTrue: [ potentialName := (potentialName removeSuffix: index asString)
+						, index asString.
+					index := index + 1 ].
+			potentialName ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

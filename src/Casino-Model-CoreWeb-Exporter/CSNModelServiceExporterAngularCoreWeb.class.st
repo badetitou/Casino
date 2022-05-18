@@ -77,7 +77,7 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 				self << parameter name <<< ': '.
 				parameter dataType
 					printServiceSerializeOn: self
-					named: parameter name ]
+					named: parameter acceptedName ]
 			separatedBy: [ 
 				self <<< $,.
 				self crlf ] ]
@@ -108,7 +108,7 @@ CSNModelServiceExporterAngularCoreWeb >> printDeserializeFor: aBusinessType [
 { #category : #streaming }
 CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 
-	| hasReturnBusinessType hasParameterBusinessType |
+	| hasReturnBusinessType hasParameterBusinessType hasParameterComplexeType |
 	hasReturnBusinessType := aCSNService actions anySatisfy: [ :action | 
 		                         action dataType innerType isBusinessType ].
 	hasParameterBusinessType := aCSNService actions anySatisfy: [ :action | 
@@ -116,6 +116,10 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 			                            :parameter | 
 			                            parameter dataType innerType
 				                            isBusinessType ] ].
+	hasParameterComplexeType := aCSNService actions anySatisfy: [ :action | 
+		                            action parameters anySatisfy: [ 
+			                            :parameter | 
+			                            parameter dataType isComplexType ] ].
 	isParentService ifFalse: [ 
 		self
 			<< 'import { Injectable } from ''@angular/core'';';
@@ -134,7 +138,8 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		crlf;
 		<< 'import { httpOptions'.
 	hasReturnBusinessType ifTrue: [ self <<< ', jsonParser' ].
-	hasParameterBusinessType ifTrue: [ self <<< ', jsonStringifier' ].
+	(hasParameterBusinessType or: [ hasParameterComplexeType ]) ifTrue: [ 
+		self <<< ', jsonStringifier' ].
 	self
 		<<< ' } from ''../service-globals'';';
 		crlf;

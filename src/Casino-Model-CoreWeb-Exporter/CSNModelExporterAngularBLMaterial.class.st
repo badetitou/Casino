@@ -370,10 +370,6 @@ export class ';
     }
 
     public ngOnInit(): void {
-';
-		<< (aBLPageMetier recursiveWidgets flattened flatCollect:
-					 #getInitializations);
-		<< '
     }
 
     public ngOnDestroy(): void {
