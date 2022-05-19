@@ -124,7 +124,7 @@ CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> createNamespaceFolderForClass: class [
-	self visitNamespace: (class atScope: FamixTNamespace) anyOne
+	self visitNamespace: (class atScope: FamixTPackage) anyOne
 ]
 
 { #category : #accessing }
@@ -258,12 +258,13 @@ CSNBLRestServiceGenerator >> service: aService [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitAttribute: aAttribute [
-	((aAttribute annotationInstances anySatisfy: [ :ann | ann name beginsWith: '@Autowired'. ])
-		or: [ aAttribute declaredType isNil
-				or: [ aAttribute declaredType isPrimitiveType
-						or: [ (aAttribute cacheAt: #modifiers ifAbsent: [ aAttribute modifiers ])
-								includes: 'static' ] ] ])
-		ifFalse: [ self
+
+	((aAttribute annotationInstances anySatisfy: [ :ann | 
+		  ann name beginsWith: '@Autowired' ]) or: [ 
+		 aAttribute declaredType isNil or: [ 
+			 aAttribute declaredType isPrimitiveType or: [ aAttribute isClassSide ] ] ]) 
+		ifFalse: [ 
+			self
 				<< '@Autowired';
 				crlf ].
 	super visitAttribute: aAttribute
@@ -278,7 +279,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 	file writeStreamDo: [ :stream | 
 		currentStream := stream.
 		"Printing class package and imports if the class is not an inner class"
-		aClass typeContainer isNamespace ifTrue: [ 
+		aClass typeContainer isPackage ifTrue: [ 
 			self << 'package '.
 			aClass typeContainer fullNameLowerCasePrintOn: currentStream fromRoot: (self rootNamespace copyReplaceAll: '/' with: '.').
 			self
