@@ -1,6 +1,18 @@
 Extension { #name : #CSNService }
 
 { #category : #'*Casino-Helper' }
+CSNService >> isChildService [
+
+	^ parentService isNotNil
+]
+
+{ #category : #'*Casino-Helper' }
+CSNService >> isParentService [
+
+	^ childServices isNotEmpty
+]
+
+{ #category : #'*Casino-Helper' }
 CSNService >> sortedActions [
 
 	^ actions sorted: [ :a1 :a2 | 
