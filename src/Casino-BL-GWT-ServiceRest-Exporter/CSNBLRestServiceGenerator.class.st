@@ -1,7 +1,10 @@
 "
-""aCasinoModel""
-gwtModel 
-	allCSNService do: [ :service | CSNBLRestServiceGenerator export: service ]
+```
+restServiceExporter := CSNBLRestServiceGenerator new.
+restServiceExporter rootFolder: ('my/root/fr/local/package/path' asFileReference).
+restServiceExporter rootNamespace: 'fr/local/package/path'.
+gwtModel allCSNService do: [ :service | restServiceExporter service: service; export ].
+```
 "
 Class {
 	#name : #CSNBLRestServiceGenerator,
@@ -134,10 +137,12 @@ CSNBLRestServiceGenerator >> defaultRootNamespace [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> export [
+	| exporter |
+	exporter := self clone.
 	self rootFolder ensureCreateDirectory.
 	service ifNil: [ self error ].
-	service source ifNotNil: [ :source | self createNamespaceFolderForClass: source ].
-	self visit: service source
+	service source ifNotNil: [ :source | exporter createNamespaceFolderForClass: source ].
+	exporter visit: service source
 ]
 
 { #category : #accessing }
@@ -281,7 +286,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		"Printing class package and imports if the class is not an inner class"
 		aClass typeContainer isPackage ifTrue: [ 
 			self << 'package '.
-			aClass typeContainer fullNameLowerCasePrintOn: currentStream fromRoot: (self rootNamespace copyReplaceAll: '/' with: '.').
+			aClass typeContainer fullNameLowerCasePrintOn: currentStream fromRoot: ((self rootNamespace copyReplaceAll: '/' with: '.') copyReplaceAll: '\' with: '.').
 			self
 				<<< ';';
 				crlf;
