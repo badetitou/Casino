@@ -291,11 +291,32 @@ CSNWebModelJava >> generatePhase [
 
 { #category : #'private - actions' }
 CSNWebModelJava >> generateService [
-	| interfaceService |
-	interfaceService := self sourceModel allModelClasses asSet
-		select: [ :e | (e superclassHierarchy anySatisfy: [ :a | #('RestService' 'RemoteService') includes: a name ]) and: [ e isInterface ] ].
-	interfaceService addAll: ((interfaceService flatCollect: [ :class | class classes flatCollect: #attributes ]) collect: #declaredType).
-	interfaceService reject: [ :service | service name endsWith:  'Async' ] thenDo: [ :aServiceClass | self factory createServiceFromServiceClass: aServiceClass ]
+
+	| interfaceService createdServices |
+	"BVER 20/05/2022 ! I should take the subclass of the interface for the method parameter names "
+	interfaceService := self sourceModel allModelClasses asSet select: [ 
+		                    :e | 
+		                    (e superclassHierarchy anySatisfy: [ :a | 
+			                     #( 'RestService' 'RemoteService' ) includes:
+				                     a name ]) and: [ e isInterface not ] ].
+	interfaceService addAll: ((interfaceService flatCollect: [ :class | 
+			  class classes flatCollect: #attributes ]) collect: #declaredType).
+	createdServices := interfaceService
+		                   reject: [ :service | 
+		                   service name endsWith: 'Async' ]
+		                   thenCollect: [ :aServiceClass | 
+			                   self factory createServiceFromServiceClass:
+				                   aServiceClass ].
+
+	createdServices do: [ :service |
+		createdServices
+			detect: [ :owner | 
+				owner source = (service source superclass isParameterizedType
+					 ifTrue: [ service source superclass parameterizableClass ]
+					 ifFalse: [ service source superclass  ]) ]
+			ifFound: [ :owner | owner addChildService: service ]
+			ifNone: [ "no parent" ] ].
+	^ createdServices
 ]
 
 { #category : #'private - actions' }
@@ -309,7 +330,7 @@ CSNWebModelJava >> generateServiceAPIParameter [
 							((self factory create: CSNServiceAPIParameter fromSource: parameter)
 								name: parameter name;
 								yourself) ].
-			index \\ 10 = 0 ifTrue: [ ((index / self model allCSNService size) asFloat * 100) record ] ]
+			index \\ 100 = 0 ifTrue: [ ((index / self model allCSNServiceAPI size) asFloat * 100) record ] ]
 ]
 
 { #category : #'private - actions' }
@@ -365,6 +386,7 @@ CSNWebModelJava >> getFromSource: listofSourcedElement forClass: aClass [
 
 { #category : #accessing }
 CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
+
 	"Looking for class with `aServiceClass name ', Async'` 
 	
 	Currently disable because we don't know why we should want NOT async method... and all the method are the same.
@@ -372,9 +394,13 @@ CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 	Please consider this method return all the async method"
 
 	| listOfSubAsyncClass |
-	listOfSubAsyncClass := {} "self getAsyncClassFrom: aServiceClass".
-	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods reject: [ :method | method sourceAnchor isNil or: [ method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source"] ]
-		thenCollect: [ :method | CSNServiceAPI newFor: method ]
+	listOfSubAsyncClass := {  }. "self getAsyncClassFrom: aServiceClass"
+	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods
+		  reject: [ :method | 
+			  method isConstructor or: [ 
+				  method sourceAnchor isNil or: [ 
+					  method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source" ] ] ]
+		  thenCollect: [ :method | CSNServiceAPI newFor: method ]
 ]
 
 { #category : #accessing }

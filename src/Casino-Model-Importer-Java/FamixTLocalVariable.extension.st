@@ -31,9 +31,9 @@ FamixTLocalVariable >> allUsages [
 			                      (invoc invokedMethod parameterAtIndex:
 				                       (invoc positionParameterNamed: self name))
 				                      allUsages ].
-	^ { 
-		  invocationsInvolved.
-		  externalInvocation } flattened ifEmpty: [ 
+	^ ({ 
+		   invocationsInvolved.
+		   externalInvocation } flattened reject: #isNil) ifEmpty: [ 
 		  self parentBehaviouralEntity allUsages reject: [ :invoc | 
 			  invoc receiver = self ] ]
 ]
