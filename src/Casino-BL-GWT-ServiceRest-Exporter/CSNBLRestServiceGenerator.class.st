@@ -222,6 +222,12 @@ CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> printDefaultImport [
+
+	"can be override"
+]
+
+{ #category : #printing }
 CSNBLRestServiceGenerator >> printImports: aClass [
 
 	| declaredTypes annotationTypes |
@@ -246,10 +252,11 @@ CSNBLRestServiceGenerator >> printImports: aClass [
 
 	self
 		<< 'import java.util.ArrayList;';
-		crlf
+		crlf.
+		self printDefaultImport.
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 CSNBLRestServiceGenerator >> printRESTImports [
 	self << 'import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -274,7 +281,7 @@ import java.io.IOException;
 '
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 CSNBLRestServiceGenerator >> printSetterOf: aAttribute [
 
 	self << 'public void set' <<< aAttribute name capitalized <<< ' ('.
