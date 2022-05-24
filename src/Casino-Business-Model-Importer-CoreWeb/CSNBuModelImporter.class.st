@@ -69,14 +69,17 @@ CSNBuModelImporter >> import [
 { #category : #importing }
 CSNBuModelImporter >> importAttribute: anAttribute [
 
-	| declaration declarator buAttribute |
+	| declarator buAttribute |
 	"Use FAST to handle arrays and the eventual initialization expression"
-	declaration := (anAttribute parentType generateFastIfNotDoneAndBind 
-		                allWithType: FASTJavaVarDeclStatement) detect: [ 
-		               :varDecl | 
-		               declarator := varDecl declarators
-			                             anyOneIfOnlyOneElement.
-		               declarator variable name = anAttribute name ].
+	declarator := anAttribute parentType sourceAnchor
+		              ifNil: [ 
+			              ('No sourceAnchor for '
+			               , anAttribute parentType fullName) record.
+			              nil ]
+		              ifNotNil: [ 
+			              (anAttribute parentType generateFastIfNotDoneAndBind 
+				               allWithType: FASTJavaVariableDeclarator) detect: [ 
+				              :varDecl | varDecl variable name = anAttribute name ] ].
 
 	buAttribute := self factory create: CSNBuAttribute.
 	buAttribute
@@ -87,19 +90,22 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 				 ifNotEmpty: [ :comments | comments anyOne sourceText ]);
 		isFinal: anAttribute isFinal isNotNil;
 		isStatic: anAttribute isClassSide;
-		isTransient: anAttribute isTransient isNotNil;
-		expression: (self importAttributeExpression: declarator expression).
+		isTransient: anAttribute isTransient isNotNil.
+		"TODO: handle expression with behavior model
+		expression: (declarator ifNotNil: [ 
+					 self importAttributeExpression: declarator expression ])."
 
 	anAttribute declaredType
 		ifNil: [ buAttribute attributeType: self getDefaultDTOEntity ]
-		ifNotNil: [ :declaredType | "handle eventual arrays, which are a collection type"
+		ifNotNil: [ :declaredType | 
 			| outerType innerType |
-			outerType := declaration type.
 			innerType := anAttribute declaredType accept: self.
-			[ outerType class == FASTJavaArrayTypeExpression ] whileTrue: [ 
-				outerType := outerType baseType.
-				innerType := (self factory create: CSNBuCollectionType) type:
-					             innerType ].
+			declarator ifNotNil: [ "handle eventual arrays, which are a collection type"
+				outerType := declarator varDeclOwner type.
+				[ outerType class == FASTJavaArrayTypeExpression ] whileTrue: [ 
+					outerType := outerType baseType.
+					innerType := (self factory create: CSNBuCollectionType) type:
+						             innerType ] ].
 			buAttribute attributeType: innerType ].
 
 	^ buAttribute

@@ -51,10 +51,14 @@ CSNBuBusinessType >> printServiceSerializeOn: aCSNExporter named: aName [
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> sortedAttributes [
 
+	| srcPos |
+	srcPos := [ :elem | 
+	          elem source ifNil: 0 ifNotNil: [ :src | 
+		          src sourceAnchor
+			          ifNil: 0
+			          ifNotNil: [ :anchor | anchor startPos ] ] ].
 	^ attributes sorted: [ :a1 :a2 | 
-		  (a1 source ifNil: 0 ifNotNil: [ :src | src sourceAnchor startPos ])
-		  <
-		  (a2 source ifNil: 0 ifNotNil: [ :src | src sourceAnchor startPos ]) ]
+		  (srcPos value: a1) < (srcPos value: a2) ]
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
