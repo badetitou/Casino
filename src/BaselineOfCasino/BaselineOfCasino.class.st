@@ -83,7 +83,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec
 		baseline: 'Famix2Java'
 		with: [ 
-		spec repository: 'github://moosetechnology/FAMIX2Java:v2/src' ]
+		spec repository: 'github://moosetechnology/FAMIX2Java:v3/src' ]
 ]
 
 { #category : #baselines }

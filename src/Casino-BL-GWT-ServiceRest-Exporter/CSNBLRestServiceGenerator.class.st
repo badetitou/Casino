@@ -102,7 +102,11 @@ CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
 	serviceParameter source declaredType accept: self.
 	self <<< ' ' <<< serviceParameter name
 	<<< ' = CSNRestful.MAPPER.treeToValue(body.get("'
-	<<< serviceParameter name <<< '"), ArrayList.class);'
+	<<< serviceParameter name <<< '"), '.
+	self <<< (serviceParameter source declaredType name = 'List'
+		 ifTrue: [ 'ArrayList' ]
+		 ifFalse: [ serviceParameter source declaredType name ]).
+	self <<< '.class);'
 
 
 	"	<<< ' = new ArrayList<>();';
@@ -123,12 +127,17 @@ CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
 
 { #category : #convert }
 CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
+
 	(self << '// Convert ')
 		<<< serviceParameter name;
 		crlf.
 	self indent.
 	serviceParameter source declaredType accept: self.
-	self <<< ' ' <<< serviceParameter name <<< ' = CSNRestful.MAPPER.treeToValue(body.get("' <<< serviceParameter name <<< '"), Map.class);'
+	self <<< ' ' <<< serviceParameter name
+	<<< ' = CSNRestful.MAPPER.treeToValue(body.get("'
+	<<< serviceParameter name <<< '"), '.
+	self <<< serviceParameter source declaredType name.
+	self <<< '.class);'
 ]
 
 { #category : #accessing }
@@ -174,6 +183,11 @@ CSNBLRestServiceGenerator >> printAPIParameter [
 CSNBLRestServiceGenerator >> printAdditionalExceptionFor: aServiceAPI [
 	(aServiceAPI parameters anySatisfy: [ :parameter | parameter dataType isDictionaryType ])
 		ifTrue: [ self <<< ', JsonParseException, JsonMappingException, IOException' ]
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> printAdditionalMethodsFor: aClass [
+	"can be override to add additional methods"
 ]
 
 { #category : #accessing }
@@ -319,7 +333,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 
 	| file |
 	file := self rootFolder
-	        / ('Rest' , (aClass name removePrefix: 'IGwt') , '.java').
+	        / ('Rest' , (aClass name removePrefix: 'Gwt') , '.java').
 	file deleteIfAbsent: [  ].
 	file writeStreamDo: [ :stream | 
 		currentStream := stream.
@@ -348,7 +362,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		"Printing Class declaration"
 		currentStream << 'public '.
 		currentStream << 'class '.
-		currentStream << 'Rest' << (aClass name removePrefix: 'IGwt').
+		currentStream << 'Rest' << (aClass name removePrefix: 'Gwt').
 		currentStream
 			<< ' {';
 			<< String crlf.
@@ -369,6 +383,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 				self
 					crlf;
 					crlf ].
+		self printAdditionalMethodsFor: aClass.
 		currentStream
 			<< String crlf;
 			<< '}' ]
@@ -427,7 +442,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		 aMethod isInitializer and: [ aMethod isConstructor not ] ])
 		ifFalse: [ 
 			self
-				<<< aMethod name;
+				<<< aServiceAPI uniqueName;
 				<<< '('.
 			self printAPIParameter.
 			"self printAttributeOf: aMethod ofServiceApi: aServiceAPI."
