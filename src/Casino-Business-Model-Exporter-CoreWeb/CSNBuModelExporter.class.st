@@ -27,7 +27,7 @@ CSNBuModelExporter >> exportAttribute: attribute [
 	attribute isFinal ifTrue: [ self <<< 'readonly ' ].
 	self <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
-	attribute expression ifNotNil: [ :expr | self <<< ' = ' <<< expr ].
+	"attribute expression ifNotNil: [ :expr | self <<< ' = ' <<< expr ]."
 	self <<< ';'
 ]
 
@@ -97,7 +97,7 @@ CSNBuModelExporter >> printAnnotationsFor: aBusinessType [
 				inBrakets: [ 
 					self << '{ class: () => ' <<< aBusinessType name <<< ' },'.
 					self crlf.
-					aBusinessType children
+					(aBusinessType children sorted: [ :a :b | a name < b name ])
 						do: [ :child | 
 							self << '{ class: () => ' <<< child name <<< ' },' ]
 						separatedBy: [ self crlf ] ].

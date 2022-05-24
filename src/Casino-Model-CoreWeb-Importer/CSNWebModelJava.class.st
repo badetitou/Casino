@@ -385,22 +385,19 @@ CSNWebModelJava >> getFromSource: listofSourcedElement forClass: aClass [
 ]
 
 { #category : #accessing }
+CSNWebModelJava >> getListOfEndpointForServiceClass: aServiceClass [
+
+	^ aServiceClass methods reject: [ :method | 
+		  method isConstructor or: [ 
+			  method sourceAnchor isNil or: [ 
+				  method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source" ] ] ]
+]
+
+{ #category : #accessing }
 CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
-	"Looking for class with `aServiceClass name ', Async'` 
-	
-	Currently disable because we don't know why we should want NOT async method... and all the method are the same.
-	So we can say that all the non async method are also all the async method (with an arg less)
-	Please consider this method return all the async method"
-
-	| listOfSubAsyncClass |
-	listOfSubAsyncClass := {  }. "self getAsyncClassFrom: aServiceClass"
-	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods
-		  reject: [ :method | 
-			  method isConstructor or: [ 
-				  method sourceAnchor isNil or: [ 
-					  method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source" ] ] ]
-		  thenCollect: [ :method | CSNServiceAPI newFor: method ]
+	^ (self getListOfEndpointForServiceClass: aServiceClass) collect: [ 
+		  :method | CSNServiceAPI newFor: method ] "sourceText isEmpty" "reject method from src/target/... In source"
 ]
 
 { #category : #accessing }
