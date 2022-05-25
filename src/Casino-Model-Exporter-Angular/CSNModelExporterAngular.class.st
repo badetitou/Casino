@@ -592,7 +592,7 @@ export class ';
 			<< '        this.';
 			<< phase name;
 			<< ' = this._phaseService.getPhase(''';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ''');';
 			<< String crlf ].
 	currentWriteStream << '
