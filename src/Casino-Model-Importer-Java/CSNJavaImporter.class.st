@@ -129,12 +129,20 @@ CSNJavaImporter >> computeOutgoingInvocationForWidget: aWidget [
 				variable fastAccesses do: [ :fastAccess | 
 					fastAccess argumentOwner ifNotNil: [ "If argument owner is not nil, this access is a parameter of the target method"
 						| invoc |
-						invoc := (fastAccess atScope: FASTJavaMethodInvocation)
-							         anyOneIfOnlyOneElement famixInvocation.
-						invoc candidates anyOne isStub ifFalse: [ 
-							invocations addAll: (invoc candidates anyOne parameterAtIndex:
-									 (fastAccess argumentOwner arguments asOrderedCollection indexOf: fastAccess))
-									receivingInvocations ] ] ] ].
+						invoc := (fastAccess atAnyScope: { 
+								          FASTJavaMethodInvocation.
+								          FASTJavaNewExpression }) anyOneIfOnlyOneElement
+							         famixInvocation.
+
+						(invoc isNil or: [ invoc candidates anyOne isStub ]) ifFalse: [ 
+							| index |
+							index := fastAccess argumentOwner arguments asOrderedCollection 
+								         indexOf: fastAccess.
+							invoc candidates anyOne parameters size >= index ifTrue: [ 
+								invocations addAll:
+									(invoc candidates anyOne parameterAtIndex: index)
+										receivingInvocations ]
+									ifFalse: [ "the method should be of this form: myMethod(SomeClass ... att)" ] ] ] ] ].
 			"Then general cases"
 			invocations addAll:
 				(targetMethod outgoingInvocations select: [ :invoc | 
