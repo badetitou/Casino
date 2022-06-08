@@ -131,8 +131,10 @@ CSNJavaImporter >> computeOutgoingInvocationForWidget: aWidget [
 						| invoc |
 						invoc := (fastAccess atScope: FASTJavaMethodInvocation)
 							         anyOneIfOnlyOneElement famixInvocation.
-						invocations addAll: (invoc candidates anyOne parameterAtIndex:
-							(invoc positionParameterNamed: fastAccess name)) receivingInvocations ] ] ].
+						invoc candidates anyOne isStub ifFalse: [ 
+							invocations addAll: (invoc candidates anyOne parameterAtIndex:
+									 (fastAccess argumentOwner arguments asOrderedCollection indexOf: fastAccess))
+									receivingInvocations ] ] ] ].
 			"Then general cases"
 			invocations addAll:
 				(targetMethod outgoingInvocations select: [ :invoc | 
