@@ -679,7 +679,7 @@ CSNModelExporterAngularBLIdentity >> runExport [
 
 { #category : #accessing }
 CSNModelExporterAngularBLIdentity >> serviceExporter [
-	^ CSNModelServiceExporterAngularBLMaterial
+	^ CSNModelServiceExporterAngularBLIdentity
 ]
 
 { #category : #visiting }

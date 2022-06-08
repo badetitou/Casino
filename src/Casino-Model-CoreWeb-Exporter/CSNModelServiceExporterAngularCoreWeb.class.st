@@ -120,10 +120,9 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		                            action parameters anySatisfy: [ 
 			                            :parameter | 
 			                            parameter dataType isComplexType ] ].
-	isParentService ifFalse: [ 
-		self
-			<< 'import { Injectable } from ''@angular/core'';';
-			crlf ].
+	self
+		<< 'import { Injectable } from ''@angular/core'';';
+		crlf.
 	self
 		<< 'import { HttpClient } from ''@angular/common/http'';';
 		crlf;
@@ -279,7 +278,7 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 			self
 				<<< '>(';
 				inIndented: [ 
-					self << '"/rest/'.
+					self << '"/rest-csn/'.
 					isParentService
 						ifTrue: [ self <<< '" + this.serviceName + "' ]
 						ifFalse: [ self <<< aServiceAPI serviceOwner targetPoint ].

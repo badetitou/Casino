@@ -29,14 +29,14 @@ CSNBLRestServiceGenerator >> addAnnotation [
 		crlf;
 		<< '@ApplicationPath("/rest-csn")';
 		crlf.
-	(currentStream << '@Path("' << service targetPoint asKebabCase)
+	(currentStream << '@Path("' << service targetPoint)
 		<< '")';
 		crlf
 ]
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> addAnnotationForServiceAPI: aServiceAPI [
-	(self << '@Path("' <<< aServiceAPI name asKebabCase)
+	(self << '@Path("' <<< aServiceAPI uniqueName)
 		<<< '")';
 		crlf.
 	self addRESTTypeAnnotationFor: aServiceAPI.
@@ -234,6 +234,8 @@ CSNBLRestServiceGenerator >> printImports: aClass [
 	declaredTypes := (self extractDeclaredTypesFor: aClass) asSet.
 	aClass subclassHierarchyGroup do: [ :subClass | 
 		declaredTypes addAll: (self extractDeclaredTypesFor: subClass) ].
+	service parentService ifNotNil: [ :aParentService | 
+		declaredTypes add: aParentService source ].
 	self printImportsDeclaredTypes: declaredTypes asSet.
 	"fetching annotation imports"
 	self
@@ -253,7 +255,7 @@ CSNBLRestServiceGenerator >> printImports: aClass [
 	self
 		<< 'import java.util.ArrayList;';
 		crlf.
-		self printDefaultImport.
+	self printDefaultImport
 ]
 
 { #category : #printing }
@@ -370,6 +372,8 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		currentStream << 'public '.
 		currentStream << 'class '.
 		currentStream << 'Rest' << (aClass name removePrefix: 'Gwt').
+		service parentService ifNotNil: [ :parentService | 
+			self <<< ' extends ' <<< service parentService source name ].
 		currentStream
 			<< ' {';
 			<< String crlf.

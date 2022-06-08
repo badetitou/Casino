@@ -142,16 +142,24 @@ CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSN
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
- currentWriteStream << '<bl-phase-business-page-container>
-        <bl-phase-business-page-header>
-        </bl-phase-business-page-header>
 
-        <bl-phase-business-page id="P1" title="Page 1">
-            ' ; << aCSNPage businessPage anyOne getTag
-		; <<
-			'
-        </bl-phase-business-page>
-    </bl-phase-business-page-container>'
+	self
+		indentPlus;
+		<< '<bl-phase-business-page-container>'.
+	self inIndented: [ 
+		self
+			<< '<bl-phase-business-page-header>';
+			crlf;
+			<< '</bl-phase-business-page-header>' ].
+	self crlf.
+	self
+		inIndented: [ 
+			self
+				<< '<bl-phase-business-page id="P1">';
+				inIndented: [ self << aCSNPage businessPage anyOne getTag ];
+				<< '</bl-phase-business-page>' ];
+		indentMinus;
+		<< '</bl-phase-business-page-container>'
 ]
 
 { #category : #generate }
@@ -236,11 +244,14 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPag
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
-  currentWriteStream << '<bl-phase-container>
-	'.
-  self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
-  currentWriteStream << '
-</bl-phase-container>'
+
+	self
+		<< '<bl-phase-container>';
+		crlf.
+	self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
+	self
+		crlf;
+		<< '</bl-phase-container>'
 ]
 
 { #category : #generate }
