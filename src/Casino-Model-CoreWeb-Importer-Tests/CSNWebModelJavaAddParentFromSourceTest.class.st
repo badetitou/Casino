@@ -144,7 +144,6 @@ CSNWebModelJavaAddParentFromSourceTest >> resourcesFileReference [
 CSNWebModelJavaAddParentFromSourceTest >> setUp [
 
 	super setUp.
-	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler new.
 	uiImporter xmlUiWidgetLink: CSNMultiValueDictionary new.
 	(self resourcesFileReference / 'tests.json') readStreamDo: [ :stream | uiImporter sourceModel importFromJSONStream: stream ].
 	uiImporter sourceModel rootFolder: self resourcesFileReference
@@ -152,11 +151,10 @@ CSNWebModelJavaAddParentFromSourceTest >> setUp [
 
 { #category : #testing }
 CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMethodReturn [
-
 	self prepareMethodReturn.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -167,7 +165,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMet
 	self prepareMethodReturnDirect.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -178,7 +176,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesMet
 	self prepareMethodReturnNearlyDirect.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -189,7 +187,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesSet
 	self prepareSetWidget.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -200,7 +198,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesSim
 	self prepareSimplestCase.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -211,7 +209,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesSup
 	self prepareSuperClassSubClass.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -222,7 +220,7 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesTwo
 	self prepareTwoMethodsAffectation.
 	self assert: labelWidget widgetContainer equals: nil.
 	self assert: containerWidget widgets isEmpty.
-	uiImporter addParentTo: labelWidget withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
@@ -274,18 +272,15 @@ CSNWebModelJavaAddParentFromSourceTest >> testInnerWidget [
 					                     FamixJavaInvocation) detect: [ :invoc | 
 					                    invoc signature = 'ChildClass()' and: [ 
 							                    invoc affectation name = #child ] ]);
-		                   yourself.
-	uiImporter
-		addParentTo: innerWidget1
-		withHandlerForUsages: responsabilityHandlerForUsages.
-	uiImporter
-		addParentTo: innerWidget2
-		withHandlerForUsages: responsabilityHandlerForUsages.
-	uiImporter
-		addParentTo: innerWidget3
-		withHandlerForUsages: responsabilityHandlerForUsages.
+		                   realClass:
+			                   ((uiImporter sourceModel allWithType:
+					                     FamixJavaClass) detect: [ :cc | 
+					                    cc name = 'ChildClass' ]) yourself.
+	uiImporter computeChildrenOf: containerWidget.
 	self assert: innerWidget1 widgetContainer equals: containerWidget.
 	self assert: innerWidget2 widgetContainer equals: containerWidget.
 	self assert: innerWidget3 widgetContainer equals: containerWidget.
-	self assert: (containerWidget widgets includes: labelWidget)
+	self assert: (containerWidget widgets includes: innerWidget1).
+	self assert: (containerWidget widgets includes: innerWidget2).
+	self assert: (containerWidget widgets includes: innerWidget3)
 ]

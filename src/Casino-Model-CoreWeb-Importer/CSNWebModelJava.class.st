@@ -53,24 +53,6 @@ Class {
 }
 
 { #category : #adding }
-CSNWebModelJava >> addLinkBetweenWidgets [
-
-	| responsabilityHandlerForUsages col |
-	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler
-		                                  new.
-		1h.
-	"col := self model allCSNWidgetExceptPage reject: [ :widget | 
-		       widget container isNotNil ].
-	col withIndexDo: [ :widget :index | 
-		(widget name) recordDebug. 
-		self
-			addParentTo: widget
-			withHandlerForUsages: responsabilityHandlerForUsages.
-		index \\ 200 = 0 ifTrue: [ 
-			((index / col size) asFloat * 100) record ] ]"
-]
-
-{ #category : #adding }
 CSNWebModelJava >> addLinkForAbstractTabPhase [
 	self linkForAbstractTabPhase
 		do: [ :assoc | 
@@ -127,29 +109,6 @@ CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
 	foundAndInvocationOrNil ifNotNil: [ "The new Widget invocation is on the same statement as the widget
 		*e.g.*: new Widget().add(new Label());" 
 		foundAndInvocationOrNil first addWidget: widget withInvocationOfAdd: foundAndInvocationOrNil second usingFactory: self factory ]
-]
-
-{ #category : #adding }
-CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
-	^ (widget affectedActions isNotNil and: [ 
-		   widget affectedActions isNotFound not ])
-		  ifTrue: [ 
-			  | usages |
-			  usages := widget affectedActions allUsages.
-			  usages := usages
-			            , (usages flatCollect: [ :el | el allContainers ]) 
-				            reject: [ :el | 
-					            (el receiver isNotNil and: [ 
-						             el receiver name includesSubstring: 'content' ]) 
-						            or: [ 
-						            (el signature beginsWithAnyOf:
-							             self domBuildingMethods) not ] ].
-			  responsabilityHandlerForUsages
-				  handleAddLinkedFromVariable: usages
-				  to: widget
-				  withXmlui: xmlUiWidgetLink
-				  andImporter: self ]
-		  ifFalse: [ self addParentOfWidgetWithoutAffected: widget ]
 ]
 
 { #category : #adding }
@@ -493,10 +452,7 @@ CSNWebModelJava >> import [
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
 	self
 		execute: [ self generateWidgetsLink ]
-		recordedAs: '7/15 generateWidgetsLink'.
-	self
-		execute: [ self addLinkBetweenWidgets ]
-		recordedAs: '8/15 addLinkBetweenWidgets'.
+		recordedAs: '8/15 generateWidgetsLink'.
 	self
 		execute: [ self addPPPToWidget ]
 		recordedAs: '9/15 addPPPToWidget'.

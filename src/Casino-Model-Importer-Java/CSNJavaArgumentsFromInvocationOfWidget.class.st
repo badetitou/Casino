@@ -24,7 +24,9 @@ CSNJavaArgumentsFromInvocationOfWidget >> invocation: anObject [
 { #category : #'as yet unclassified' }
 CSNJavaArgumentsFromInvocationOfWidget >> visitCSNOriginedEntity: aCSNOriginedEntity [
 
-	^ { invocation fast arguments first }
+	^ (invocation signature beginsWith: 'setWidgets')
+		  ifTrue: [ invocation fast arguments ]
+		  ifFalse: [ { invocation fast arguments first } ]
 ]
 
 { #category : #'as yet unclassified' }

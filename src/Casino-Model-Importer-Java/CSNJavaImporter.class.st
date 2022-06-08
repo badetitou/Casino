@@ -92,11 +92,12 @@ CSNJavaImporter >> computeOutgoingAddInvocationForWidget: aWidget [
 					     = aWidget realClass superclass ] ]) or: [ 
 				    aWidget sources anySatisfy: [ :source | 
 					    source isInvocation not or: [ 
-						    source sender parentType
-						    = receivingInvocation sender parentType ] ] ] ]) and: [ 
-			   self possibleAddInvocationVisitor
-				   is: receivingInvocation
-				   correctForWidget: aWidget ] ]) asSet
+						    receivingInvocation sender parentType
+							    withSuperclassHierarchy includes: source sender parentType ] ] ] ]) 
+			   and: [ 
+				   self possibleAddInvocationVisitor
+					   is: receivingInvocation
+					   correctForWidget: aWidget ] ]) asSet
 ]
 
 { #category : #'as yet unclassified' }
@@ -122,14 +123,29 @@ CSNJavaImporter >> computeOutgoingInvocationForWidget: aWidget [
 	(aWidget source class usesTrait: FamixTParameter)
 		ifTrue: [ "special case if it is a parameter" 
 			invocations addAll: aWidget source receivingInvocations ]
-		ifFalse: [ "general cases"
+		ifFalse: [ "first look for places my variable (if one) is used as a parameter"
+			aWidget variable ifNotNil: [ :variable | 
+				aWidget source generateFastIfNotDoneAndBind.
+				variable fastAccesses do: [ :fastAccess | 
+					fastAccess argumentOwner ifNotNil: [ "If argument owner is not nil, this access is a parameter of the target method"
+						| invoc |
+						invoc := (fastAccess atScope: FASTJavaMethodInvocation)
+							         anyOneIfOnlyOneElement famixInvocation.
+						invocations addAll: (invoc candidates anyOne parameterAtIndex:
+							(invoc positionParameterNamed: fastAccess name)) receivingInvocations ] ] ].
+			"Then general cases"
 			invocations addAll:
 				(targetMethod outgoingInvocations select: [ :invoc | 
 					 invoc receiver isNotNil and: [ 
 						 invoc receiver isImplicitVariable ] ]) ].
 	targetMethod isConstructor ifTrue: [ "I might understand stuff based of parameters of the invocations of the constructor"
 		(aWidget source isKindOf: FamixJavaInvocation) ifTrue: [ 
-			invocations add: aWidget source ].
+			invocations add: aWidget source.
+			aWidget source generateFastIfNotDoneAndBind.
+			(aWidget source fast receiverOwner isNotNil and: [ 
+				 aWidget source fast receiverOwner isKindOf:
+					 FASTJavaMethodInvocation ]) ifTrue: [ 
+				invocations add: aWidget source fast receiverOwner famixInvocation ] ].
 		invocations addAll:
 			((self retrievedLocalCallFlowOf: targetMethod) flatCollect: [ 
 				 :method | 
@@ -172,6 +188,7 @@ CSNJavaImporter >> computeOutgoingInvocationForWidget: aWidget [
 			variableOfMethodThatCallMe isNotFound ifFalse: [ 
 				invocations addAll:
 					variableOfMethodThatCallMe receivingInvocations ] ] ]. "Test if the variable is returned"
+
 	aWidget variable ifNotNil: [ :variable | 
 		invocations addAll: variable receivingInvocations ].
 
@@ -370,6 +387,18 @@ CSNJavaImporter >> searchWidgetsFromArgument: anArgument for: aWidget [
 	possibleInvocations do: [ :invoc | 
 		(self widgetCreatedWithInvocation: invoc) ifNotNil: [ :wid | 
 			^ { wid } ] ].
+	"The variable is a parameter and thus the widget comes from another method (look for Hello call of ui test ressources)"
+	(anArgument famixVariable isKindOf: FamixJavaParameter) ifTrue: [ 
+		anArgument famixVariable parentBehaviouralEntity incomingInvocations 
+			do: [ :invoc | 
+				| reverseFlowRetrievedVariable |
+				invoc generateFastIfNotDoneAndBind.
+				reverseFlowRetrievedVariable := (invoc fast arguments at:
+					                                 anArgument famixVariable
+						                                 parameterIndex) famixVariable.
+				(self
+					 widgetsInVariable: reverseFlowRetrievedVariable
+					 forWidget: aWidget) ifNotEmpty: [ :wid | ^ wid ] ] ].
 	^ {  }
 ]
 
