@@ -1,6 +1,11 @@
 Extension { #name : #CSNLCell }
 
 { #category : #'*Casino-Model-Layout-Extension' }
+CSNLCell >> container [
+	^ self layoutOwner ifNil: [ self widgetContainer ]
+]
+
+{ #category : #'*Casino-Model-Layout-Extension' }
 CSNLCell >> verticalVeryDeepCopy [
 
 	| cellCopy |

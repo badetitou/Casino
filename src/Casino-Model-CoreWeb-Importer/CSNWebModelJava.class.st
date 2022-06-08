@@ -41,7 +41,7 @@ TinyLogger
 "
 Class {
 	#name : #CSNWebModelJava,
-	#superclass : #CSNWebModel,
+	#superclass : #CSNJavaImporter,
 	#instVars : [
 		'xml',
 		'xmlUiLink',
@@ -58,7 +58,8 @@ CSNWebModelJava >> addLinkBetweenWidgets [
 	| responsabilityHandlerForUsages col |
 	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler
 		                                  new.
-	col := self model allCSNWidgetExceptPage reject: [ :widget | 
+		1h.
+	"col := self model allCSNWidgetExceptPage reject: [ :widget | 
 		       widget container isNotNil ].
 	col withIndexDo: [ :widget :index | 
 		(widget name) recordDebug. 
@@ -66,7 +67,7 @@ CSNWebModelJava >> addLinkBetweenWidgets [
 			addParentTo: widget
 			withHandlerForUsages: responsabilityHandlerForUsages.
 		index \\ 200 = 0 ifTrue: [ 
-			((index / col size) asFloat * 100) record ] ]
+			((index / col size) asFloat * 100) record ] ]"
 ]
 
 { #category : #adding }
@@ -130,7 +131,6 @@ CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
 
 { #category : #adding }
 CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
-
 	^ (widget affectedActions isNotNil and: [ 
 		   widget affectedActions isNotFound not ])
 		  ifTrue: [ 
@@ -257,7 +257,7 @@ CSNWebModelJava >> customWidgetClassDictionnary [
 CSNWebModelJava >> domBuildingMethods [
 	"setWidgetDetail and setListe are for the ListAndDetails"
 
-	^ {'setWidget(' . 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'.
+	^ {'setWidget(' . 'setWidgets('. 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'.
 	'initWidget('}
 ]
 
@@ -366,6 +366,20 @@ CSNWebModelJava >> generateWidget [
 			((index / col size) asFloat * 100) record ] ]
 ]
 
+{ #category : #adding }
+CSNWebModelJava >> generateWidgetsLink [
+
+	| widgets |
+	widgets := (self model allWithSubTypesOf: CSNContainer) iterator
+	           | [ :containers | 
+		           (containers isKindOf: CSNBusinessPage) or: [ 
+			           containers isKindOf: CSNPage ] ] rejectIt > Array.
+	widgets withIndexDo: [ :widget :index | 
+		self computeChildrenOf: widget.
+		index \\ 200 = 0 ifTrue: [ 
+			((index / widgets size) asFloat * 100) record ] ]
+]
+
 { #category : #accessing }
 CSNWebModelJava >> getClassNamed: aClassName [
 	^ self sourceModel allModelClasses
@@ -458,24 +472,56 @@ CSNWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 CSNWebModelJava >> import [
+
 	self execute: [ self generatePhase ] recordedAs: '1/15 generatePhase'.
-	self execute: [ self generatePageMetier ] recordedAs: '2/15 generatePageMetier'.
+	self
+		execute: [ self generatePageMetier ]
+		recordedAs: '2/15 generatePageMetier'.
 	self execute: [ self addLinkXmlUi ] recordedAs: '3/15 addLinkXmlUi'.
-	self execute: [ self addLinkForAbstractTabPhase ] recordedAs: '4/15 addLinkForAbstractTabPhase'.
-	self execute: [ self addLinkPhaseToPageMetier ] recordedAs: '5/15 addLinkPhaseToPageMetier'.
-	self execute: [ self addLinkPageMetierToPageMetier ] recordedAs: '6/15 addLinkPageMetierToPageMetier'.
-	self execute: [ self generateWidget ] recordedAs: '7/15 generateWidget'.
+	self
+		execute: [ self addLinkForAbstractTabPhase ]
+		recordedAs: '4/15 addLinkForAbstractTabPhase'.
+	self
+		execute: [ self addLinkPhaseToPageMetier ]
+		recordedAs: '5/15 addLinkPhaseToPageMetier'.
+	self
+		execute: [ self addLinkPageMetierToPageMetier ]
+		recordedAs: '6/15 addLinkPageMetierToPageMetier'.
+	self
+		execute: [ self generateWidget ]
+		recordedAs: '7/15 generateWidget'.
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
-	self execute: [ self addLinkBetweenWidgets ] recordedAs: '8/15 addLinkBetweenWidgets'.
-	self execute: [ self addPPPToWidget ] recordedAs: '9/15 addPPPToWidget'.
-	self execute: [ self generateActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
-	self execute: [ self generateService ] recordedAs: '11/15 generateService'.
-	self execute: [ self generateServiceAction ] recordedAs: '12/15 generateServiceAction'.
-	self execute: [ self generateServiceAPIParameter ] recordedAs: '12/15 generateServiceAPIParameter'.
+	self
+		execute: [ self generateWidgetsLink ]
+		recordedAs: '7/15 generateWidgetsLink'.
+	self
+		execute: [ self addLinkBetweenWidgets ]
+		recordedAs: '8/15 addLinkBetweenWidgets'.
+	self
+		execute: [ self addPPPToWidget ]
+		recordedAs: '9/15 addPPPToWidget'.
+	self
+		execute: [ self generateActionAppel ]
+		recordedAs: '10/15 generateBLActionAppel'.
+	self
+		execute: [ self generateService ]
+		recordedAs: '11/15 generateService'.
+	self
+		execute: [ self generateServiceAction ]
+		recordedAs: '12/15 generateServiceAction'.
+	self
+		execute: [ self generateServiceAPIParameter ]
+		recordedAs: '12/15 generateServiceAPIParameter'.
 	"this last two should stay at the end"
-	self execute: [ self addWidgetAttributes ] recordedAs: '13/15 addWidgetAttributes'.
-	self execute: [ self addWidgetsActions ] recordedAs: '14/15 addWidgetsActions'.
-	self execute: [ self addWidgetDefaultAttributes ] recordedAs: '15/15 addWidgetDefaultAttributes'
+	self
+		execute: [ self addWidgetAttributes ]
+		recordedAs: '13/15 addWidgetAttributes'.
+	self
+		execute: [ self addWidgetsActions ]
+		recordedAs: '14/15 addWidgetsActions'.
+	self
+		execute: [ self addWidgetDefaultAttributes ]
+		recordedAs: '15/15 addWidgetDefaultAttributes'
 ]
 
 { #category : #accessing }

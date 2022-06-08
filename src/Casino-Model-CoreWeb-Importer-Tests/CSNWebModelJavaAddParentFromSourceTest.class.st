@@ -226,3 +226,66 @@ CSNWebModelJavaAddParentFromSourceTest >> testAddParentToWithHandlerForUsagesTwo
 	self assert: labelWidget widgetContainer equals: containerWidget.
 	self assert: (containerWidget widgets includes: labelWidget)
 ]
+
+{ #category : #testing }
+CSNWebModelJavaAddParentFromSourceTest >> testInnerWidget [
+
+	| innerWidget1 innerWidget2 innerWidget3 |
+	innerWidget1 := (self createInUIModel: CSNContainer)
+		                affectedActions:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaLocalVariable) detect: [ :var | 
+					                 var name = #innerWidget1 ]);
+		                source:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaInvocation) detect: [ :invoc | 
+					                 invoc signature = 'Widget()' and: [ 
+							                 invoc affectation name = #innerWidget1 ] ]);
+		                yourself.
+	innerWidget2 := (self createInUIModel: CSNContainer)
+		                affectedActions:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaLocalVariable) detect: [ :var | 
+					                 var name = #innerWidget2 ]);
+		                source:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaInvocation) detect: [ :invoc | 
+					                 invoc signature = 'Widget()' and: [ 
+							                 invoc affectation name = #innerWidget2 ] ]);
+		                yourself.
+	innerWidget3 := (self createInUIModel: CSNContainer)
+		                affectedActions:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaLocalVariable) detect: [ :var | 
+					                 var name = #innerWidget3 ]);
+		                source:
+			                ((uiImporter sourceModel allWithType:
+					                  FamixJavaInvocation) detect: [ :invoc | 
+					                 invoc signature = 'Widget()' and: [ 
+							                 invoc affectation name = #innerWidget3 ] ]);
+		                yourself.
+	containerWidget := (self createInUIModel: CSNContainer)
+		                   affectedActions:
+			                   ((uiImporter sourceModel allWithType:
+					                     FamixJavaAttribute) detect: [ :var | 
+					                    var name = #child ]);
+		                   source:
+			                   ((uiImporter sourceModel allWithType:
+					                     FamixJavaInvocation) detect: [ :invoc | 
+					                    invoc signature = 'ChildClass()' and: [ 
+							                    invoc affectation name = #child ] ]);
+		                   yourself.
+	uiImporter
+		addParentTo: innerWidget1
+		withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter
+		addParentTo: innerWidget2
+		withHandlerForUsages: responsabilityHandlerForUsages.
+	uiImporter
+		addParentTo: innerWidget3
+		withHandlerForUsages: responsabilityHandlerForUsages.
+	self assert: innerWidget1 widgetContainer equals: containerWidget.
+	self assert: innerWidget2 widgetContainer equals: containerWidget.
+	self assert: innerWidget3 widgetContainer equals: containerWidget.
+	self assert: (containerWidget widgets includes: labelWidget)
+]
