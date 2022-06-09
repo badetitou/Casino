@@ -578,7 +578,7 @@ export class ';
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
 		currentWriteStream
 			<< '    public ';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ': Phase;';
 			<< String crlf ].
 	currentWriteStream << '
@@ -601,7 +601,7 @@ export class ';
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
 		currentWriteStream
 			<< '        this.';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ' = this._phaseService.getPhase(''';
 			<< phase getAcceptedName;
 			<< ''');';
