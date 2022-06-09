@@ -195,7 +195,7 @@ export class ';
 
 ';
 		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
-					 '    public ' , phase name , ': Phase;' , String crlf ]);
+					 '    public ' , phase getAcceptedName , ': Phase;' , String crlf ]);
 		<< ((aBLPageMetier calledBehavior flatCollect: [ :action | 
 					  action behavior flatCollect: [ :behavior | 
 							  (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
@@ -226,9 +226,9 @@ export class ';
 		<< ') {
 ';
 		<< (aBLPageMetier collectPhaseCalled flatCollect: [ :phase | 
-					 '        this.' , phase name
-					 , ' = this._phaseService.getPhase(''' , phase name , ''');'
-					 , String crlf ]);
+					 '        this.' , phase getAcceptedName
+					 , ' = this._phaseService.getPhase(''' , phase getAcceptedName
+					 , ''');' , String crlf ]);
 		<< '
     }
 
