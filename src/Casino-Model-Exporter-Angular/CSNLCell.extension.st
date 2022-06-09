@@ -1,6 +1,11 @@
 Extension { #name : #CSNLCell }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNLCell >> containedElementAttribute [
+	^ {  }
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNLCell >> hierarchalAttributes [
 
 	^ { 
