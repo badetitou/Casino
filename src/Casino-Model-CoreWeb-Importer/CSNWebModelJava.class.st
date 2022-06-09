@@ -481,6 +481,12 @@ CSNWebModelJava >> import [
 ]
 
 { #category : #accessing }
+CSNWebModelJava >> initialize [
+	super initialize.
+	possibleAddInvocationVisitorClass := CSNCoreWebPossibleAddInvocationVisitor
+]
+
+{ #category : #accessing }
 CSNWebModelJava >> isElementFromApplication: e [
 	^ e hasSourceAnchor and: [ e sourceAnchor fileName includesSubstring: self applicationSource ]
 ]
