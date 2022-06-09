@@ -13,6 +13,12 @@ on:
       - main
       - v*
       - master
+  pull_request:
+    branches:    
+      - main
+      - v*
+      - master
+
 
 jobs:
   build:
