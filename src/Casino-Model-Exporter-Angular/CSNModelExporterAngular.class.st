@@ -397,7 +397,7 @@ import { TranslateModule } from ''@ngx-translate/core'';
 		crlf;
 		<< 'export const phases: Phase[] = [
 '.
-	(aModel allCSNPage sorted: #name ascending) do: [ :blPhase | 
+	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted: #name ascending) do: [ :blPhase | 
 		currentWriteStream
 			<< blPhase getMetadata;
 			<< ',';
@@ -501,25 +501,28 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngular >> generateRouteSourceCodeForModel: aModel [
-  currentWriteStream
-     << 'import { ModuleWithProviders } from ''@angular/core'';
+
+	currentWriteStream
+		<< 'import { ModuleWithProviders } from ''@angular/core'';
 import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
 import { IndexComponent } from ''./components/index/index.component'';
 
 const routes: Routes = [
     { path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
     { path: ''desktop'', component: IndexComponent, children: [';
-     << String crlf.
-  (aModel allCSNPage sorted: #getAcceptedName ascending) do: [:phase |  currentWriteStream
-           << '        { path: ''';
-           << phase getAcceptedName;
-           << '/:id'', loadChildren: () => import(''./phases/';
-           << phase getLocalModulePath;
-			  << ''').then(m => m.';
-			  << phase getModuleClassName;
-			  << ')},';
-           << String crlf ].
-  currentWriteStream << '    ]}
+		<< String crlf.
+	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted:
+		 #getAcceptedName ascending) do: [ :phase | 
+		currentWriteStream
+			<< '        { path: ''';
+			<< phase getAcceptedName;
+			<< '/:id'', loadChildren: () => import(''./phases/';
+			<< phase getLocalModulePath;
+			<< ''').then(m => m.';
+			<< phase getModuleClassName;
+			<< ')},';
+			<< String crlf ].
+	currentWriteStream << '    ]}
 ];
 export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
 ]
@@ -1135,7 +1138,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 		close.
 	rootPhases := self root / 'phases'.
 	rootPhases createDirectory.
-	aMooseModel allCSNPage
+	(aMooseModel allCSNPage reject: [ :page | page name = nil ])
 		do: [ :aPage | 
 			self
 				execute: [ self exportPage: aPage ]
