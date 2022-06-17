@@ -151,7 +151,7 @@ BaselineOfCasino >> defineGroups: spec [
 { #category : #baselines }
 BaselineOfCasino >> definePackages: spec [
 	spec
-		package: 'Casino-Helper';
+		package: 'Casino-Helper' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model' with: [ spec requires: #('Casino-Model-Generator') ];
 		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Extension-Tests' with: [ spec requires: #('Casino-Model-Extension') ];
