@@ -1,6 +1,30 @@
 Extension { #name : #FamixTInvocation }
 
 { #category : #'*Casino-Model-Importer-Java' }
+FamixTInvocation >> allAttributeUsages [
+
+	"Gather all attribute usages of this invocation's declared type."
+
+	| usages |
+	"affectation: x := self() => usages of the x variable"
+	self affectation ifNotNil: [ :affectation | 
+		^ affectation allAttributeUsages ].
+
+	self sender parentType generateFastIfNotDoneAndBind.
+
+	"argument: f(x: self()) => usages of the x parameter"
+	self fast argumentOwner ifNotNil: [ :fastInvoc | 
+		^ (fastInvoc famixInvocation invokedMethod parameterAtIndex:
+			   (fastInvoc famixInvocation positionParameterNamed: self name))
+			  allAttributeUsages ].
+
+	"return: func { return self() } => usages of func"
+	self fast returnOwner ifNotNil: [ ^ self sender allAttributeUsages ].
+
+	^ OrderedCollection new
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 FamixTInvocation >> allContainers [
 	^ self container
 		ifNotNil: [ :container | 

@@ -1,6 +1,18 @@
 Extension { #name : #FamixTAttribute }
 
 { #category : #'*Casino-Model-Importer-Java' }
+FamixTAttribute >> allAttributeUsages [
+
+	| usages |
+	usages := OrderedCollection new.
+	self declaredType isPrimitiveType ifTrue: [ ^ usages ].
+
+	Halt now.
+
+	^ usages
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 FamixTAttribute >> allUsages [
 	"check the usage of the variable in the method it is invoked"
 
