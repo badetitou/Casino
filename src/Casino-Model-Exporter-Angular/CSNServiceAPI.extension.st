@@ -1,6 +1,94 @@
 Extension { #name : #CSNServiceAPI }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> allUsedAttributesFromDeclaredTypeHierarch [
+
+	"Gather all attributes from the API's declared type hierarchy that are used."
+
+	| refs |
+	refs := Stack new.
+	refs push: Dictionary new.
+	self source hasDeclaredType ifFalse: [ ^ refs top ].
+
+	"incomingInvocations"
+	self source allUsages do: [ :usage | 
+		Halt now.
+		usage affectation ifNotNil: [ :affectation | 
+			affectation receivingInvocations do: [ :invocation | 
+				invocation candidates do: [ :candidate | 
+					candidate accesses do: [ :access | 
+						| attribute |
+						attribute := access variable.
+						attribute isImplicitVariable ifFalse: [ 
+							Halt now.
+							refs top at: attribute ifAbsentPut: [ Dictionary new ] ] ].
+					refs top associationsDo: [ :assoc | 
+						refs push: assoc key.
+						"TODO check attributes recursively"
+						refs pop ] ] ] ] ].
+	^ refs top
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> allUsedAttributesFromDeclaredTypeHierarchy [
+
+	"Gather all attributes from the API\'s declared type hierarchy that are used."
+
+	| refs type |
+	refs := Stack new.
+	refs push: Dictionary new.
+	self source hasDeclaredType ifFalse: [ ^ refs top ].
+	type := self source declaredType.
+
+	"incomingInvocations"
+	self source allUsagesReally do: [ :usage | 
+		Halt now.
+		usage receiver declaredType ifNotNil: [ :useType | 
+			(useType = self source declaredType or: [ 
+				 useType inheritsFrom: self source declaredType ]) ifTrue: [ 
+				Halt now.
+				usage candidates do: [ :method | 
+					Halt now.
+					method accesses do: [ :access | 
+						| attribute |
+						attribute := access variable.
+						(attribute isImplicitVariable not and: [ 
+							 Halt now.
+							 useType attributes includes: attribute ]) ifTrue: [ 
+							refs top at: attribute ifAbsentPut: [ Dictionary new ] ] ].
+					refs top associationsDo: [ :assoc | 
+						refs push: assoc value.
+						Halt now.
+						assoc key allUsages.
+						refs pop ] ] ] ] ].
+	^ refs top
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNServiceAPI >> allUsedAttributesFromDeclaredTypeWithSubclasses [
+
+	"Gather all attributes from the API\'s declared type hierarchy that are used."
+
+	| type refs recur |
+	type := self source declaredType.
+	(type isNil or: [ type isPrimitiveType ]) ifTrue: [ ^ Dictionary new ].
+	refs := Stack with: Dictionary new.
+
+	"find uses from this API's declared type and used attributes of attributes recursively"
+	recur := [ :usages | 
+				Halt now.
+				"gather attributes"
+				usages do: [ :usage | Halt now. ].
+	
+				"recursive call"
+	         refs push: (refs top at: 0 put: Dictionary new).
+	         "refs top keysDo: [ :attribute | attribute allAttributeUsages do: recur ]."
+	         refs pop ].
+	recur value: self source allAttributeUsages.
+	^ refs top
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> hasOnlyPrimitiveParameter [
 
 	^ self source
