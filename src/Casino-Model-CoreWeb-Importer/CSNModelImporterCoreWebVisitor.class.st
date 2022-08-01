@@ -466,9 +466,15 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIInputColor: aCSNUIInputColor [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputDate: aCSNUIInputDate [
-  ^(#('BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputDate)
-           addAttribute: ((self create: CSNUIPlaceholder) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-           yourself ] ifFalse: [ nil ]
+
+	^ (#( 'BLTextBoxDate' 'BLTextBoxDatePicker' 'DatePicker' ) includes:
+		   source invokedClassName)
+		  ifTrue: [ 
+			  (self createWidgetInput: aCSNUIInputDate)
+				  addAttribute: ((self create: CSNUIPlaceholder) attributeValue:
+							   (source parameters at: 1 ifAbsent: [ '' ]));
+				  yourself ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }

@@ -72,5 +72,8 @@ BLMAttachment >> modulePath [
 
 { #category : #accessing }
 BLMAttachment >> variableFor: widget [
-	^ widget affectedActions uniqueName
+
+	^ widget affectedActions
+		  ifNil: [ widget name ]
+		  ifNotNil: [ :affectedAction | affectedAction uniqueName ]
 ]

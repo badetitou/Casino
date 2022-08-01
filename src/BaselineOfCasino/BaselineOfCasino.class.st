@@ -83,7 +83,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec
 		baseline: 'Famix2Java'
 		with: [ 
-		spec repository: 'github://moosetechnology/FAMIX2Java:v2/src' ]
+		spec repository: 'github://moosetechnology/FAMIX2Java:v3/src' ]
 ]
 
 { #category : #baselines }
@@ -142,8 +142,6 @@ BaselineOfCasino >> defineGroups: spec [
 			   'Casino-Business-Model-Exporter-CoreWeb-Tests' );
 		"bl migration"group: 'omaje'
 		with: #( 'Casino-Migration-Omaje' 'behavior-bl' 'business' );
-		group: 'rh'
-		with: #( 'Casino-Migration-RH' 'behavior-bl' 'business' );
 		group: 'office'
 		with: #( 'Casino-Migration-PostOffice' 'behavior-bl' 'business' );
 		"export java"group: 'rest-java'
@@ -153,7 +151,7 @@ BaselineOfCasino >> defineGroups: spec [
 { #category : #baselines }
 BaselineOfCasino >> definePackages: spec [
 	spec
-		package: 'Casino-Helper';
+		package: 'Casino-Helper' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model' with: [ spec requires: #('Casino-Model-Generator') ];
 		package: 'Casino-Model-Extension' with: [ spec requires: #('Casino-Model') ];
 		package: 'Casino-Model-Extension-Tests' with: [ spec requires: #('Casino-Model-Extension') ];
@@ -184,7 +182,6 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb-Exporter-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Exporter') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('XMLParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
-		package: 'Casino-Migration-RH' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'Casino-Migration-Omaje' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ].

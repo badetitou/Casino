@@ -49,19 +49,6 @@ CSNBuBusinessType >> printServiceSerializeOn: aCSNExporter named: aName [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
-CSNBuBusinessType >> sortedAttributes [
-
-	| srcPos |
-	srcPos := [ :elem | 
-	          elem source ifNil: 0 ifNotNil: [ :src | 
-		          src sourceAnchor
-			          ifNil: 0
-			          ifNotNil: [ :anchor | anchor startPos ] ] ].
-	^ attributes sorted: [ :a1 :a2 | 
-		  (srcPos value: a1) < (srcPos value: a2) ]
-]
-
-{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuBusinessType >> writeBusinessTypeOn: aCSNExporter [
 	aCSNExporter <<< self name
 ]

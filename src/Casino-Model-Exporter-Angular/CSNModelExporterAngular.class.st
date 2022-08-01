@@ -142,16 +142,24 @@ CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSN
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage [
- currentWriteStream << '<bl-phase-business-page-container>
-        <bl-phase-business-page-header>
-        </bl-phase-business-page-header>
 
-        <bl-phase-business-page id="P1" title="Page 1">
-            ' ; << aCSNPage businessPage anyOne getTag
-		; <<
-			'
-        </bl-phase-business-page>
-    </bl-phase-business-page-container>'
+	self
+		indentPlus;
+		<< '<bl-phase-business-page-container>'.
+	self inIndented: [ 
+		self
+			<< '<bl-phase-business-page-header>';
+			crlf;
+			<< '</bl-phase-business-page-header>' ].
+	self crlf.
+	self
+		inIndented: [ 
+			self
+				<< '<bl-phase-business-page id="P1">';
+				inIndented: [ self << aCSNPage businessPage anyOne getTag ];
+				<< '</bl-phase-business-page>' ];
+		indentMinus;
+		<< '</bl-phase-business-page-container>'
 ]
 
 { #category : #generate }
@@ -236,11 +244,14 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPag
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
-  currentWriteStream << '<bl-phase-container>
-	'.
-  self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
-  currentWriteStream << '
-</bl-phase-container>'
+
+	self
+		<< '<bl-phase-container>';
+		crlf.
+	self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
+	self
+		crlf;
+		<< '</bl-phase-container>'
 ]
 
 { #category : #generate }
@@ -386,7 +397,7 @@ import { TranslateModule } from ''@ngx-translate/core'';
 		crlf;
 		<< 'export const phases: Phase[] = [
 '.
-	(aModel allCSNPage sorted: #name ascending) do: [ :blPhase | 
+	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted: #name ascending) do: [ :blPhase | 
 		currentWriteStream
 			<< blPhase getMetadata;
 			<< ',';
@@ -490,25 +501,28 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngular >> generateRouteSourceCodeForModel: aModel [
-  currentWriteStream
-     << 'import { ModuleWithProviders } from ''@angular/core'';
+
+	currentWriteStream
+		<< 'import { ModuleWithProviders } from ''@angular/core'';
 import { Routes, RouterModule, PreloadAllModules } from ''@angular/router'';
 import { IndexComponent } from ''./components/index/index.component'';
 
 const routes: Routes = [
     { path: '''', pathMatch: ''full'', redirectTo: ''desktop'' },
     { path: ''desktop'', component: IndexComponent, children: [';
-     << String crlf.
-  (aModel allCSNPage sorted: #getAcceptedName ascending) do: [:phase |  currentWriteStream
-           << '        { path: ''';
-           << phase getAcceptedName;
-           << '/:id'', loadChildren: () => import(''./phases/';
-           << phase getLocalModulePath;
-			  << ''').then(m => m.';
-			  << phase getModuleClassName;
-			  << ')},';
-           << String crlf ].
-  currentWriteStream << '    ]}
+		<< String crlf.
+	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted:
+		 #getAcceptedName ascending) do: [ :phase | 
+		currentWriteStream
+			<< '        { path: ''';
+			<< phase getAcceptedName;
+			<< '/:id'', loadChildren: () => import(''./phases/';
+			<< phase getLocalModulePath;
+			<< ''').then(m => m.';
+			<< phase getModuleClassName;
+			<< ')},';
+			<< String crlf ].
+	currentWriteStream << '    ]}
 ];
 export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
 ]
@@ -567,7 +581,7 @@ export class ';
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
 		currentWriteStream
 			<< '    public ';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ': Phase;';
 			<< String crlf ].
 	currentWriteStream << '
@@ -590,9 +604,9 @@ export class ';
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
 		currentWriteStream
 			<< '        this.';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ' = this._phaseService.getPhase(''';
-			<< phase name;
+			<< phase getAcceptedName;
 			<< ''');';
 			<< String crlf ].
 	currentWriteStream << '
@@ -1124,7 +1138,7 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 		close.
 	rootPhases := self root / 'phases'.
 	rootPhases createDirectory.
-	aMooseModel allCSNPage
+	(aMooseModel allCSNPage reject: [ :page | page name = nil ])
 		do: [ :aPage | 
 			self
 				execute: [ self exportPage: aPage ]

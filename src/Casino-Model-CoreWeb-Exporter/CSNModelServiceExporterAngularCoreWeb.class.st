@@ -120,10 +120,9 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		                            action parameters anySatisfy: [ 
 			                            :parameter | 
 			                            parameter dataType isComplexType ] ].
-	isParentService ifFalse: [ 
-		self
-			<< 'import { Injectable } from ''@angular/core'';';
-			crlf ].
+	self
+		<< 'import { Injectable } from ''@angular/core'';';
+		crlf.
 	self
 		<< 'import { HttpClient } from ''@angular/common/http'';';
 		crlf;
@@ -205,27 +204,14 @@ CSNModelServiceExporterAngularCoreWeb >> rootServiceName [
 CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
 
 	"Check if aCSNService is a parent service"
-	isParentService := (aCSNService source directSubclasses anySatisfy: [ 
-		                    :subclass | subclass isInterface ]) or: [ 
-		                   (aCSNService source isKindOf:
-			                    FamixJavaParameterizableClass) and: [ 
-			                   aCSNService source parameterizedTypes 
-				                   anySatisfy: [ :parameterizedType | 
-					                   parameterizedType directSubclasses 
-						                   anySatisfy: [ :subclass | 
-						                   subclass isInterface ] ] ] ].
+
+	isParentService := aCSNService childServices isNotEmpty.
 
 	"Check if aCSNService is a child service to a parent other than the root"
-	isChildService := aCSNService source directSuperclasses noneSatisfy: [ 
-		                  :superclass | 
-		                  superclass name = self rootServiceName ].
-	parentService := isChildService ifTrue: [ 
-		                 | superclassName |
-		                 superclassName := aCSNService source
-			                                   directSuperclasses
-			                                   anyOneIfOnlyOneElement name.
-		                 aCSNService mooseModel allCSNService detect: [ :s | 
-			                 s source name = superclassName ] ].
+	"I go two times up 
+	GWT impl -> GWT interface -> rootService interface"
+	isChildService := aCSNService parentService isNotNil.
+	parentService := isChildService ifTrue: [ aCSNService parentService ].
 
 	self rootFolder ensureCreateDirectory.
 	(self rootFolder / aCSNService getTSName)
@@ -240,10 +226,10 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
 				printServiceDocumentation;
 				crlf.
 			"self flag: 'BVER badetitou - Since it cannot be abstract, must be injectable (see next issue)'"
-			"isParentService ifFalse: [" 
-				self
-					printServiceAnnotations;
-					crlf. "]."
+			"isParentService ifFalse: ["
+			self
+				printServiceAnnotations;
+				crlf. "]."
 			self << 'export '.
 			"self flag: 'BVER badetitou - Cannot be abstract or it cannot be used as a Provider in Angular (and so error)'"
 			"isParentService ifTrue: [ self <<< 'abstract ' ]."
@@ -292,7 +278,7 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 			self
 				<<< '>(';
 				inIndented: [ 
-					self << '"/rest/'.
+					self << '"/rest-csn/'.
 					isParentService
 						ifTrue: [ self <<< '" + this.serviceName + "' ]
 						ifFalse: [ self <<< aServiceAPI serviceOwner targetPoint ].

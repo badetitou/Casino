@@ -41,7 +41,7 @@ TinyLogger
 "
 Class {
 	#name : #CSNWebModelJava,
-	#superclass : #CSNWebModel,
+	#superclass : #CSNJavaImporter,
 	#instVars : [
 		'xml',
 		'xmlUiLink',
@@ -51,23 +51,6 @@ Class {
 	],
 	#category : #'Casino-Model-CoreWeb-Importer'
 }
-
-{ #category : #adding }
-CSNWebModelJava >> addLinkBetweenWidgets [
-
-	| responsabilityHandlerForUsages col |
-	responsabilityHandlerForUsages := CSNLinkWidgetResponsabilitiesReceiverHandler
-		                                  new.
-	col := self model allCSNWidgetExceptPage reject: [ :widget | 
-		       widget container isNotNil ].
-	col withIndexDo: [ :widget :index | 
-		(widget name) recordDebug. 
-		self
-			addParentTo: widget
-			withHandlerForUsages: responsabilityHandlerForUsages.
-		index \\ 200 = 0 ifTrue: [ 
-			((index / col size) asFloat * 100) record ] ]
-]
 
 { #category : #adding }
 CSNWebModelJava >> addLinkForAbstractTabPhase [
@@ -126,30 +109,6 @@ CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
 	foundAndInvocationOrNil ifNotNil: [ "The new Widget invocation is on the same statement as the widget
 		*e.g.*: new Widget().add(new Label());" 
 		foundAndInvocationOrNil first addWidget: widget withInvocationOfAdd: foundAndInvocationOrNil second usingFactory: self factory ]
-]
-
-{ #category : #adding }
-CSNWebModelJava >> addParentTo: widget withHandlerForUsages: responsabilityHandlerForUsages [
-
-	^ (widget affectedActions isNotNil and: [ 
-		   widget affectedActions isNotFound not ])
-		  ifTrue: [ 
-			  | usages |
-			  usages := widget affectedActions allUsages.
-			  usages := usages
-			            , (usages flatCollect: [ :el | el allContainers ]) 
-				            reject: [ :el | 
-					            (el receiver isNotNil and: [ 
-						             el receiver name includesSubstring: 'content' ]) 
-						            or: [ 
-						            (el signature beginsWithAnyOf:
-							             self domBuildingMethods) not ] ].
-			  responsabilityHandlerForUsages
-				  handleAddLinkedFromVariable: usages
-				  to: widget
-				  withXmlui: xmlUiWidgetLink
-				  andImporter: self ]
-		  ifFalse: [ self addParentOfWidgetWithoutAffected: widget ]
 ]
 
 { #category : #adding }
@@ -257,7 +216,7 @@ CSNWebModelJava >> customWidgetClassDictionnary [
 CSNWebModelJava >> domBuildingMethods [
 	"setWidgetDetail and setListe are for the ListAndDetails"
 
-	^ {'setWidget(' . 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'.
+	^ {'setWidget(' . 'setWidgets('. 'add(' . 'setRecto(' . 'setListe' . 'setWidgetDetail'.
 	'initWidget('}
 ]
 
@@ -366,6 +325,20 @@ CSNWebModelJava >> generateWidget [
 			((index / col size) asFloat * 100) record ] ]
 ]
 
+{ #category : #adding }
+CSNWebModelJava >> generateWidgetsLink [
+
+	| widgets |
+	widgets := (self model allWithSubTypesOf: CSNContainer) iterator
+	           | [ :containers | 
+		           (containers isKindOf: CSNBusinessPage) or: [ 
+			           containers isKindOf: CSNPage ] ] rejectIt > Array.
+	widgets withIndexDo: [ :widget :index | 
+		self computeChildrenOf: widget.
+		index \\ 200 = 0 ifTrue: [ 
+			((index / widgets size) asFloat * 100) record ] ]
+]
+
 { #category : #accessing }
 CSNWebModelJava >> getClassNamed: aClassName [
 	^ self sourceModel allModelClasses
@@ -385,22 +358,19 @@ CSNWebModelJava >> getFromSource: listofSourcedElement forClass: aClass [
 ]
 
 { #category : #accessing }
+CSNWebModelJava >> getListOfEndpointForServiceClass: aServiceClass [
+
+	^ aServiceClass methods reject: [ :method | 
+		  method isConstructor or: [ 
+			  method sourceAnchor isNil or: [ 
+				  method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source" ] ] ]
+]
+
+{ #category : #accessing }
 CSNWebModelJava >> getListOfServiceActionForServiceClass: aServiceClass [
 
-	"Looking for class with `aServiceClass name ', Async'` 
-	
-	Currently disable because we don't know why we should want NOT async method... and all the method are the same.
-	So we can say that all the non async method are also all the async method (with an arg less)
-	Please consider this method return all the async method"
-
-	| listOfSubAsyncClass |
-	listOfSubAsyncClass := {  }. "self getAsyncClassFrom: aServiceClass"
-	^ (listOfSubAsyncClass flatCollect: #methods) , aServiceClass methods
-		  reject: [ :method | 
-			  method isConstructor or: [ 
-				  method sourceAnchor isNil or: [ 
-					  method sourceAnchor hasSource not "sourceText isEmpty" "reject method from src/target/... In source" ] ] ]
-		  thenCollect: [ :method | CSNServiceAPI newFor: method ]
+	^ (self getListOfEndpointForServiceClass: aServiceClass) collect: [ 
+		  :method | CSNServiceAPI newFor: method ] "sourceText isEmpty" "reject method from src/target/... In source"
 ]
 
 { #category : #accessing }
@@ -461,24 +431,59 @@ CSNWebModelJava >> gwtWidgetNamespace [
 
 { #category : #api }
 CSNWebModelJava >> import [
+
 	self execute: [ self generatePhase ] recordedAs: '1/15 generatePhase'.
-	self execute: [ self generatePageMetier ] recordedAs: '2/15 generatePageMetier'.
+	self
+		execute: [ self generatePageMetier ]
+		recordedAs: '2/15 generatePageMetier'.
 	self execute: [ self addLinkXmlUi ] recordedAs: '3/15 addLinkXmlUi'.
-	self execute: [ self addLinkForAbstractTabPhase ] recordedAs: '4/15 addLinkForAbstractTabPhase'.
-	self execute: [ self addLinkPhaseToPageMetier ] recordedAs: '5/15 addLinkPhaseToPageMetier'.
-	self execute: [ self addLinkPageMetierToPageMetier ] recordedAs: '6/15 addLinkPageMetierToPageMetier'.
-	self execute: [ self generateWidget ] recordedAs: '7/15 generateWidget'.
+	self
+		execute: [ self addLinkForAbstractTabPhase ]
+		recordedAs: '4/15 addLinkForAbstractTabPhase'.
+	self
+		execute: [ self addLinkPhaseToPageMetier ]
+		recordedAs: '5/15 addLinkPhaseToPageMetier'.
+	self
+		execute: [ self addLinkPageMetierToPageMetier ]
+		recordedAs: '6/15 addLinkPageMetierToPageMetier'.
+	self
+		execute: [ self generateWidget ]
+		recordedAs: '7/15 generateWidget'.
 	"keep this order for the widget adding. The second one depends on the first one.... Maybe i should create one method 'generate widgetlink'"
-	self execute: [ self addLinkBetweenWidgets ] recordedAs: '8/15 addLinkBetweenWidgets'.
-	self execute: [ self addPPPToWidget ] recordedAs: '9/15 addPPPToWidget'.
-	self execute: [ self generateActionAppel ] recordedAs: '10/15 generateBLActionAppel'.
-	self execute: [ self generateService ] recordedAs: '11/15 generateService'.
-	self execute: [ self generateServiceAction ] recordedAs: '12/15 generateServiceAction'.
-	self execute: [ self generateServiceAPIParameter ] recordedAs: '12/15 generateServiceAPIParameter'.
+	self
+		execute: [ self generateWidgetsLink ]
+		recordedAs: '8/15 generateWidgetsLink'.
+	self
+		execute: [ self addPPPToWidget ]
+		recordedAs: '9/15 addPPPToWidget'.
+	self
+		execute: [ self generateActionAppel ]
+		recordedAs: '10/15 generateBLActionAppel'.
+	self
+		execute: [ self generateService ]
+		recordedAs: '11/15 generateService'.
+	self
+		execute: [ self generateServiceAction ]
+		recordedAs: '12/15 generateServiceAction'.
+	self
+		execute: [ self generateServiceAPIParameter ]
+		recordedAs: '12/15 generateServiceAPIParameter'.
 	"this last two should stay at the end"
-	self execute: [ self addWidgetAttributes ] recordedAs: '13/15 addWidgetAttributes'.
-	self execute: [ self addWidgetsActions ] recordedAs: '14/15 addWidgetsActions'.
-	self execute: [ self addWidgetDefaultAttributes ] recordedAs: '15/15 addWidgetDefaultAttributes'
+	self
+		execute: [ self addWidgetAttributes ]
+		recordedAs: '13/15 addWidgetAttributes'.
+	self
+		execute: [ self addWidgetsActions ]
+		recordedAs: '14/15 addWidgetsActions'.
+	self
+		execute: [ self addWidgetDefaultAttributes ]
+		recordedAs: '15/15 addWidgetDefaultAttributes'
+]
+
+{ #category : #accessing }
+CSNWebModelJava >> initialize [
+	super initialize.
+	possibleAddInvocationVisitorClass := CSNCoreWebPossibleAddInvocationVisitor
 ]
 
 { #category : #accessing }

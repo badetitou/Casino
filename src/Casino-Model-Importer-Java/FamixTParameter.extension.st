@@ -113,3 +113,8 @@ FamixTParameter >> allUsedAttributes [
 FamixTParameter >> owningClass [
 	^ self parentType 
 ]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixTParameter >> parameterIndex [
+	^ self parentBehaviouralEntity sortedParameters indexOf: self
+]

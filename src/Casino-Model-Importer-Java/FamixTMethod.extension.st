@@ -100,7 +100,8 @@ FamixTMethod >> isInstanciationInitializer [
 
 { #category : #'*Casino-Model-Importer-Java' }
 FamixTMethod >> parameterAtIndex: anIndex [
-	^ (self parameters sorted: [ :param1 :param2 | param1 sourceAnchor startPos < param2 sourceAnchor startPos ]) at: anIndex
+
+	^ self sortedParameters at: anIndex
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
@@ -133,4 +134,11 @@ FamixTMethod >> returnedFamixVariable [
 				  ifOne: [ :statement | statement expression famixVariable ]
 				  ifNone: [ nil ] ]
 		  ifEmpty: [ nil ]
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
+FamixTMethod >> sortedParameters [
+
+	^ self parameters sorted: [ :param1 :param2 | 
+		  param1 sourceAnchor startPos < param2 sourceAnchor startPos ]
 ]
