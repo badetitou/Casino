@@ -140,8 +140,6 @@ BaselineOfCasino >> defineGroups: spec [
 		group: 'business-tests'
 		with: #( 'business' 'Casino-Business-Model-Importer-CoreWeb-Tests'
 			   'Casino-Business-Model-Exporter-CoreWeb-Tests' );
-		group: 'office'
-		with: #( 'Casino-Migration-PostOffice' 'behavior-bl' 'business' );
 		"export java"group: 'rest-java'
 		with: #( 'Casino-BL-GWT-ServiceRest-Exporter' )
 ]
@@ -180,7 +178,6 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb-Exporter-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Exporter') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('XMLParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
 		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
-		package: 'Casino-Migration-PostOffice' with: [ spec requires: #('Casino-Model-CoreWeb-Importer') ];
 		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ].
 	"models"
 	self defineBehaviorPackages: spec.
