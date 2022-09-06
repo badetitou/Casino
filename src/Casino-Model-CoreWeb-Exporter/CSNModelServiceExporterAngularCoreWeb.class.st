@@ -35,11 +35,6 @@ export const jsonParser = new JsonParser({
 });
 
 export const jsonStringifier = new JsonStringifier();
-
-export const httpOptions = {
-    headers: new HttpHeaders({ ''Content-Type'': ''application/json'' }),
-    withCredentials: true
-}
 '
 ]
 
@@ -80,7 +75,8 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 					named: parameter acceptedName uncapitalized ]
 			separatedBy: [ 
 				self <<< $,.
-				self crlf ] ]
+				self crlf ].
+			self <<< ', fieldNames' ]
 ]
 
 { #category : #streaming }
@@ -103,6 +99,22 @@ CSNModelServiceExporterAngularCoreWeb >> printDeserializeFor: aBusinessType [
 		aBusinessType printJsonClassTypeOn: self.
 		self <<< ']' ].
 	self <<< ')'
+]
+
+{ #category : #'as yet unclassified' }
+CSNModelServiceExporterAngularCoreWeb >> printHttpOptions [
+
+	self inBraces: [ 
+		self
+			<<
+				'headers: new HttpHeaders({ ''Content-Type'': ''application/json'' }),';
+			crlf.
+		self
+			<< 'withCredentials: true,';
+			crlf.
+		self
+			<< 'params: ';
+			inBraces: [ self << '"fieldNames[]" : fieldNames' ] ]
 ]
 
 { #category : #streaming }
@@ -135,10 +147,10 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		<<< ' } from ''rxjs/operators'';';
 		crlf;
 		crlf;
-		<< 'import { httpOptions'.
-	hasReturnBusinessType ifTrue: [ self <<< ', jsonParser' ].
+		<< 'import { '.
+	hasReturnBusinessType ifTrue: [ self <<< 'jsonParser,' ].
 	(hasParameterBusinessType or: [ hasParameterComplexeType ]) ifTrue: [ 
-		self <<< ', jsonStringifier' ].
+		self <<< ' jsonStringifier,' ].
 	self
 		<<< ' } from ''../service-globals'';';
 		crlf;
@@ -268,7 +280,7 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 
 	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
 	aServiceAPI printParameterIn: self.
-	self <<< '): Observable<'.
+	self <<< ', fieldNames = ''**''): Observable<'.
 	aServiceAPI dataType writeBusinessTypeOn: self.
 	self
 		<<< '> {';
@@ -288,8 +300,8 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 						indent;
 						printCreateParamsFor: aServiceAPI;
 						<<< $,;
-						crlf;
-						<< 'httpOptions' ];
+						crlf.
+					self printHttpOptions ];
 				<< ').pipe(first()'.
 			(aServiceAPI dataType innerType isBusinessType or: [ 
 				 aServiceAPI dataType isSetType ]) ifTrue: [ 
