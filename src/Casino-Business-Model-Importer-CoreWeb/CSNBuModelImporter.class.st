@@ -174,7 +174,9 @@ CSNBuModelImporter >> importClass: concreteClass [
 		                yourself.
 
 	"Link with subclasses to preserve the same hierarchy, and they are also DTOs"
-	concreteClass directSubclasses do: [ :subclass | 
+	concreteClass directSubclasses
+		reject: [ :subclass | subclass isAnonymousClass ]
+		thenDo: [ :subclass | 
 		(self importClass: subclass) parent: businessType ].
 
 	"Handle attributes, which are also DTOs"

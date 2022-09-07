@@ -33,7 +33,7 @@ CSNBusinessExporter >> export: aCSNBuModel [
 			toExport := aCSNBuModel allWithSubTypesOf: CSNBuBusinessType.
 			exported := Set new: toExport size.
 			self writeBarrelCommentOn: barrelStream.
-			toExport do: [ :buType | 
+			(toExport sorted: [ :e1 :e2 | e1 name < e2 name ]) do: [ :buType | 
 					(exported includes: buType) ifFalse: [ "recursively export buType's hierarchy, starting from the root"
 							| root export |
 							root := buType.

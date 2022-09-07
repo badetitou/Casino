@@ -25,6 +25,8 @@ CSNBuModelExporter >> exportAttribute: attribute [
 	self indent.
 	attribute isStatic ifTrue: [ self <<< 'static ' ].
 	attribute isFinal ifTrue: [ self <<< 'readonly ' ].
+	(attribute isStatic and: [ attribute name = 'name' ]) ifTrue: [ "'static name' is a reserved keyword of Angular" 
+		self <<< '__' ].
 	self <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	"attribute expression ifNotNil: [ :expr | self <<< ' = ' <<< expr ]."
