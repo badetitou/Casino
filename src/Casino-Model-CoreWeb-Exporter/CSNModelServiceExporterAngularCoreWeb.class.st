@@ -280,7 +280,8 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 
 	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
 	aServiceAPI printParameterIn: self.
-	self <<< ', fieldNames = ''**''): Observable<'.
+	aServiceAPI parameters ifNotEmpty: [ self <<< ', ' ].
+	self <<< 'fieldNames = ''**''): Observable<'.
 	aServiceAPI dataType writeBusinessTypeOn: self.
 	self
 		<<< '> {';

@@ -385,7 +385,9 @@ import { ComponentsModule, Phase, PHASES } from ''app/projects/bl-shell/src/publ
 import { IndexComponent } from ''./components/index/index.component'';
 import { TranslateModule } from ''@ngx-translate/core'';
 '.
-	(aModel allCSNService sorted: #uniqueName ascending) do: [ :service | 
+	((aModel allCSNService reject: [ :service | 
+		  service isParentService isNotNil and: [ service isParentService ] ]) 
+		 sorted: #uniqueName ascending) do: [ :service | 
 		currentWriteStream
 			<< 'import { ';
 			<< service uniqueName;
@@ -397,7 +399,8 @@ import { TranslateModule } from ''@ngx-translate/core'';
 		crlf;
 		<< 'export const phases: Phase[] = [
 '.
-	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted: #name ascending) do: [ :blPhase | 
+	((aModel allCSNPage reject: [ :page | page name = nil ]) sorted:
+		 #name ascending) do: [ :blPhase | 
 		currentWriteStream
 			<< blPhase getMetadata;
 			<< ',';
@@ -421,7 +424,9 @@ import { TranslateModule } from ''@ngx-translate/core'';
     ],
     providers: [
 '.
-	(aModel allCSNService sorted: #uniqueName ascending) do: [ :service | 
+	((aModel allCSNService reject: [ :service | 
+		  service isParentService isNotNil and: [ service isParentService ] ]) 
+		 sorted: #uniqueName ascending) do: [ :service | 
 		currentWriteStream
 			<< '        ';
 			<< service uniqueName;
