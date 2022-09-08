@@ -75,8 +75,7 @@ CSNModelServiceExporterAngularCoreWeb >> printCreateParamsFor: aCSNServiceAPI [
 					named: parameter acceptedName uncapitalized ]
 			separatedBy: [ 
 				self <<< $,.
-				self crlf ].
-			self <<< ', fieldNames' ]
+				self crlf ] ]
 ]
 
 { #category : #streaming }
@@ -103,7 +102,7 @@ CSNModelServiceExporterAngularCoreWeb >> printDeserializeFor: aBusinessType [
 
 { #category : #'as yet unclassified' }
 CSNModelServiceExporterAngularCoreWeb >> printHttpOptions [
-
+	self indent.
 	self inBraces: [ 
 		self
 			<<
@@ -136,7 +135,7 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		<< 'import { Injectable } from ''@angular/core'';';
 		crlf.
 	self
-		<< 'import { HttpClient } from ''@angular/common/http'';';
+		<< 'import { HttpClient, HttpHeaders } from ''@angular/common/http'';';
 		crlf;
 		crlf;
 		<< 'import { Observable } from ''rxjs'';';
