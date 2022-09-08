@@ -29,7 +29,9 @@ FamixJavaInvocation >> affectation [
 				^ aScopeWithOneElement anyOne variable famixVariable
 					  ifNotNil: [ :variable | 
 					  self cacheAt: #affectation put: variable ]
-					  ifNil: [ self cacheAt: #affectation put: CSNNotFound default ] ] ].
+					  ifNil: [ 
+						  self cacheAt: #affectation put: CSNNotFound default.
+						  nil ] ] ].
 	"old way can be executed if new way fail"
 	self container ifNotNil: [ 
 		self cacheAt: #affectation put: CSNNotFound default.
