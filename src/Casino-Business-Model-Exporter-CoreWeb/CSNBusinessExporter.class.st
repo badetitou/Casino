@@ -24,6 +24,12 @@ CSNBusinessExporter >> businessTypeExporter: anObject [
 ]
 
 { #category : #accessing }
+CSNBusinessExporter >> computeBusinessPackages: businessType [
+
+	^ businessType parentBusinessPackages
+]
+
+{ #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
 
 	(self modelRoot / self barrelName)
@@ -41,8 +47,13 @@ CSNBusinessExporter >> export: aCSNBuModel [
 							export := [ :businessType | 
 							          self exportBusinessType: businessType.
 							          barrelStream crlf.
-							          barrelStream << 'export * from ''./dto/'
-							          << businessType name << '.model'';'.
+							          barrelStream << 'export * from ''./dto/'.
+							          (self computeBusinessPackages: businessType) do: [ 
+									          :package | 
+									          barrelStream
+										          << package name;
+										          << '/' ].
+							          barrelStream << businessType name << '.model'';'.
 							          exported add: businessType.
 							          businessType children do: export ].
 							export value: root.
@@ -52,8 +63,12 @@ CSNBusinessExporter >> export: aCSNBuModel [
 { #category : #accessing }
 CSNBusinessExporter >> exportBusinessType: businessType [
 
-	(self modelRoot / 'dto') ensureCreateDirectory.
-	^ (self modelRoot / 'dto' / businessType name , 'model.ts')
+	| directory |
+	directory := self modelRoot / 'dto'.
+	(self computeBusinessPackages: businessType) do: [ :package | 
+		directory := directory / package name ].
+	directory ensureCreateDirectory.
+	^ (directory / businessType name , 'model.ts')
 		  deleteIfAbsent: nil;
 		  writeStreamDo: [ :stream | 
 			  self businessTypeExporter currentWriteStream: stream.

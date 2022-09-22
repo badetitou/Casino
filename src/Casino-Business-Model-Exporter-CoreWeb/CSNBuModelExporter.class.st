@@ -119,7 +119,9 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 				separatedBy: [ 
 					self <<< $,.
 					self crlf ] ].
-		self <<< ' from "..";'.
+		self <<< ' from "..'.
+		aBusinessType parentBusinessPackages do: [:package | self <<< '/..' ].
+		self <<< '";'.
 		self
 			crlf;
 			crlf ]
