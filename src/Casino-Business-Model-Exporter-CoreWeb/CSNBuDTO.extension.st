@@ -13,6 +13,15 @@ CSNBuDTO >> innerType [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDTO >> parentBusinessPackages [
+
+	^ self source
+		  ifNotNil: [ :aSource |
+			  aSource atScope: FamixTPackage until: [ :p | p name = 'model' ] ]
+		  ifNil: [ {  } ]
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> printJsonClassOn: aCSNExporter [
 
 	(self isBusinessType or: [ 
