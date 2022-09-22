@@ -53,7 +53,7 @@ CSNPage >> getMetadata [
 
 	^ '{
     id: ''' , self getAcceptedName , ''',
-    code: ''' , (self codeValue ifNil: [ self name asRealCamelCase ])
+    code: ''' , (self codePhase ifNil: [ self name asRealCamelCase ])
 	  , ''',
     codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
 	  , ''',

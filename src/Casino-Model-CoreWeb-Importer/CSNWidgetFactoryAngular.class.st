@@ -46,7 +46,7 @@ CSNWidgetFactoryAngular >> createPageFromXMLElement: xmlElement [
 		           codePhase: (xmlElement attributeAt: #codePhase);
 		           codeValue: (xmlElement attributeAt: #codeValue);
 		           shortcut: (xmlElement attributeAt: #raccourci);
-		           name: (xmlElement attributeAt: #codeValue).
+		           name: (xmlElement attributeAt: #codePhase).
 	blPhase realClassName = 'STUB C/S'
 		ifTrue: [ blPhase ]
 		ifFalse: [ 
