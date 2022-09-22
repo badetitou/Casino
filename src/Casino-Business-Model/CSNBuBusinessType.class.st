@@ -5,8 +5,8 @@ I am composed of other DTO.
 Class {
 	#name : #CSNBuBusinessType,
 	#superclass : #CSNBuDTO,
-	#traits : 'CSNBuTWithComment + CSNBuTWithSource',
-	#classTraits : 'CSNBuTWithComment classTrait + CSNBuTWithSource classTrait',
+	#traits : 'CSNBuTWithComment',
+	#classTraits : 'CSNBuTWithComment classTrait',
 	#instVars : [
 		'#attributes => FMMany type: #CSNBuAttribute opposite: #businessType',
 		'#children => FMMany type: #CSNBuBusinessType opposite: #parent',

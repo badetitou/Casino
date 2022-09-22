@@ -25,6 +25,17 @@ CSNBuModelImporter >> buModel: anObject [
 	self factory model: buModel
 ]
 
+{ #category : #visiting }
+CSNBuModelImporter >> buildDefaultDtoFrom: aSource [
+
+	^ (buModel allWithType: CSNBuDTO)
+		  detect: [ :bu | bu source = aSource ]
+		  ifNone: [ 
+			  (self factory create: CSNBuDTO)
+				  source: aSource;
+				  yourself ]
+]
+
 { #category : #accessing }
 CSNBuModelImporter >> dtoAbstractName [
 	^ 'AbstractPersistentObjectGWT'
@@ -43,14 +54,6 @@ CSNBuModelImporter >> famixModel [
 { #category : #accessing }
 CSNBuModelImporter >> famixModel: anObject [
 	famixModel := anObject
-]
-
-{ #category : #visiting }
-CSNBuModelImporter >> getDefaultDTOEntity [
-
-	^ (buModel allWithType: CSNBuDTO)
-		  ifEmpty: [ self factory create: CSNBuDTO ]
-		  ifNotEmpty: [ :dto | dto first ]
 ]
 
 { #category : #importing }
@@ -91,12 +94,12 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 		isFinal: anAttribute isFinal isNotNil;
 		isStatic: anAttribute isClassSide;
 		isTransient: anAttribute isTransient isNotNil.
-		"TODO: handle expression with behavior model
+	"TODO: handle expression with behavior model
 		expression: (declarator ifNotNil: [ 
 					 self importAttributeExpression: declarator expression ])."
 
 	anAttribute declaredType
-		ifNil: [ buAttribute attributeType: self getDefaultDTOEntity ]
+		ifNil: [ buAttribute attributeType: (self buildDefaultDtoFrom: nil) ]
 		ifNotNil: [ :declaredType | 
 			| outerType innerType |
 			innerType := anAttribute declaredType accept: self.
@@ -190,7 +193,7 @@ CSNBuModelImporter >> importCollectionType: aClass [
 
 	^ (self factory create: CSNBuCollectionType)
 		  type: (aClass arguments
-				   ifEmpty: [ self getDefaultDTOEntity ]
+				   ifEmpty: [ self buildDefaultDtoFrom: aClass ]
 				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
 		  yourself
 ]
@@ -202,8 +205,8 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 	dictionary := self factory create: CSNBuDictionaryType.
 	aClass arguments
 		ifEmpty: [ "If parameters are not declared or not found, use defaults"
-			dictionary key: self getDefaultDTOEntity.
-			dictionary value: self getDefaultDTOEntity ]
+			dictionary key: (self buildDefaultDtoFrom: nil).
+			dictionary value: (self buildDefaultDtoFrom: nil) ]
 		ifNotEmpty: [ :arguments | 
 			arguments size = 1
 				ifTrue: [ "Key and value are of the same type"
@@ -211,16 +214,21 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 					dictionary value: dictionary key ]
 				ifFalse: [ "Hack to export the type parameters in the correct order from source text"
 					| source |
-					source := aClass typedEntities anyOne sourceText.
-					(source
-						 includesSubstring: arguments first name
-						 at: (source indexOf: $<) + 1)
-						ifTrue: [ 
+					(aClass typedEntities isEmpty and: [ aClass isStub ])
+						ifTrue: [
 							dictionary key: (arguments first accept: self).
 							dictionary value: (arguments second accept: self) ]
 						ifFalse: [ 
-							dictionary key: (arguments second accept: self).
-							dictionary value: (arguments first accept: self) ] ] ].
+							source := aClass typedEntities anyOne sourceText.
+							(source
+								 includesSubstring: arguments first name
+								 at: (source indexOf: $<) + 1)
+								ifTrue: [ 
+									dictionary key: (arguments first accept: self).
+									dictionary value: (arguments second accept: self) ]
+								ifFalse: [
+									dictionary key: (arguments second accept: self).
+									dictionary value: (arguments first accept: self) ] ] ] ].
 	^ dictionary
 ]
 
@@ -249,7 +257,7 @@ CSNBuModelImporter >> importSetType: aClass [
 
 	^ (self factory create: CSNBuSetType)
 		  type: (aClass arguments
-				   ifEmpty: [ self getDefaultDTOEntity ]
+				   ifEmpty: [ self buildDefaultDtoFrom: aClass ]
 				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
 		  yourself
 ]
@@ -269,14 +277,14 @@ CSNBuModelImporter >> visitClass: aClass [
 	(aClass superclassHierarchy anySatisfy: [ :class | 
 		 class name = self dtoAbstractName ]) ifTrue: [ 
 		^ self importClass: aClass ].
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aClass
 ]
 
 { #category : #visiting }
 CSNBuModelImporter >> visitEnum: aParameterType [
 
 	self flag: 'Stil not suported'.
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aParameterType
 ]
 
 { #category : #visiting }
@@ -284,7 +292,7 @@ CSNBuModelImporter >> visitParameter: aParameter [
 
 	"in case the declaredType is not extracted because verveineJ has failed (or the class is not present in our model)"
 
-	aParameter declaredType ifNil: [ ^ self getDefaultDTOEntity ].
+	aParameter declaredType ifNil: [ ^ self buildDefaultDtoFrom: aParameter ].
 	^ aParameter declaredType accept: self
 ]
 
@@ -292,7 +300,7 @@ CSNBuModelImporter >> visitParameter: aParameter [
 CSNBuModelImporter >> visitParameterType: aParameterType [
 
 	self flag: 'Stil not suported'.
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aParameterType
 ]
 
 { #category : #visiting }
@@ -301,7 +309,7 @@ CSNBuModelImporter >> visitParameterizableClass: aClass [
 	"ParametrizedType but we do not know the parameters..."
 
 	self flag: 'Stil not suported'.
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aClass
 ]
 
 { #category : #visiting }
@@ -315,7 +323,7 @@ CSNBuModelImporter >> visitParameterizedType: aClass [
 			^ self importCollectionType: aClass ].
 		superclass name = #Map ifTrue: [ 
 			^ self importDictionaryType: aClass ] ].
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aClass
 ]
 
 { #category : #visiting }
@@ -328,5 +336,5 @@ CSNBuModelImporter >> visitPrimitiveType: aPrimitiveType [
 CSNBuModelImporter >> visitType: aType [
 
 	self flag: 'Stil not suported'.
-	^ self getDefaultDTOEntity
+	^ self buildDefaultDtoFrom: aType
 ]

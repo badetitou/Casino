@@ -118,9 +118,9 @@ CSNBusinessModelGenerator >> defineHierarchy [
 
 	super defineHierarchy.
 	dto --|> #TEntityMetaLevelDependency.
+	dto --|> tWithSource.
 	attribute --|> tWithSource.
 	attribute --|> tWithComment.
-	businessType --|> tWithSource.
 	businessType --|> tWithComment.
 
 	primitive --|> dto.

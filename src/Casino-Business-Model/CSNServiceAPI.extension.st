@@ -14,9 +14,5 @@ CSNServiceAPI >> dataType [
 CSNServiceAPI >> dataType: anObject [
 
 	<generated>
-	self attributeAt: #dataType put: (FMMultivalueLink
-			 on: self
-			 update: #usedInServices
-			 from: self dataType
-			 to: anObject)
+	self attributeAt: #dataType put: (FMMultivalueLink on: self update: #usedInServices from: self dataType to: anObject).
 ]

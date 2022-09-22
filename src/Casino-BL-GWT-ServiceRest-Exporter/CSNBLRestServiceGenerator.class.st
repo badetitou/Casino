@@ -99,7 +99,7 @@ CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
 		<<< serviceParameter name;
 		crlf.
 	self indent.
-	serviceParameter source declaredType accept: self.
+	self printDeclaredType: serviceParameter source declaredType.
 	self <<< ' ' <<< serviceParameter name
 	<<< ' = CSNRestful.MAPPER.treeToValue(body.get("'
 	<<< serviceParameter name <<< '"), '.
@@ -107,22 +107,6 @@ CSNBLRestServiceGenerator >> convertCollectionType: serviceParameter [
 		 ifTrue: [ 'ArrayList' ]
 		 ifFalse: [ serviceParameter source declaredType name ]).
 	self <<< '.class);'
-
-
-	"	<<< ' = new ArrayList<>();';
-		crlf.
-	(self << 'for (FormDataBodyPart formDataBodyPart: ' <<< serviceParameter name)
-		<<< 'Json) {';
-		crlf.
-	self indentPlus.
-	self
-		<< 'formDataBodyPart.setMediaType(MediaType.APPLICATION_JSON_TYPE);';
-		crlf.
-	(self << serviceParameter name <<< '.add(formDataBodyPart.getValueAs(' <<< serviceParameter source declaredType arguments anyOne name)
-		<<< '.class));';
-		crlf.
-	self indentMinus.
-	^ self << '}'"
 ]
 
 { #category : #convert }
@@ -132,7 +116,7 @@ CSNBLRestServiceGenerator >> convertDictionaryType: serviceParameter [
 		<<< serviceParameter name;
 		crlf.
 	self indent.
-	serviceParameter source declaredType accept: self.
+	serviceParameter dataType writeJavaBusinessTypeOn: self.
 	self <<< ' ' <<< serviceParameter name
 	<<< ' = CSNRestful.MAPPER.treeToValue(body.get("'
 	<<< serviceParameter name <<< '"), '.
@@ -207,18 +191,12 @@ CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 	self crlf.
 	aServiceAPI parameters do: [ :serviceParameter | 
 		serviceParameter dataType isCollectionType
-			ifTrue: [ 
-				self convertCollectionType: serviceParameter.
-				self crlf ]
+			ifTrue: [ self convertCollectionType: serviceParameter ]
 			ifFalse: [ 
 				serviceParameter dataType isDictionaryType
-					ifTrue: [ 
-						self convertDictionaryType: serviceParameter.
-						self crlf ]
-					ifFalse: [ "(serviceParameter dataType isBusinessType or: [ serviceParameter dataType isPrimitive not ])
-								ifTrue: ["
-						self convertBusinessType: serviceParameter.
-						self crlf "]" ] ] ]
+					ifTrue: [ self convertDictionaryType: serviceParameter ]
+					ifFalse: [ self convertBusinessType: serviceParameter ] ].
+		self crlf ]
 ]
 
 { #category : #accessing }
@@ -446,7 +424,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 				space ].
 	"Printing return type for method"
 	aMethod declaredType ifNotNil: [ :declaredType | 
-		self printDeclaredType: declaredType.
+		aServiceAPI dataType writeJavaBusinessTypeOn: self.
 		currentStream << String space ].
 	"Printing name + parameters of method"
 	(aMethod name = '<Initializer>' or: [ 
@@ -461,8 +439,9 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 		ifTrue: [ self << 'static' ].
 	"print exception"
 	(((aMethod withMethodsOverriding collect: [ :m | 
-		   m thrownExceptions collect: #exceptionClass ]) flattened asSet
-		  asOrderedCollection sorted: #name ascending) collect: #name)
+		   m thrownExceptions , m declaredExceptions collect:
+			   #exceptionClass ]) flattened asSet asOrderedCollection sorted:
+		  #name ascending) collect: #name)
 	, (self additionalExceptionFor: aServiceAPI) ifNotEmpty: [ 
 		:exceptionsName | 
 		self <<< ' throws '.
