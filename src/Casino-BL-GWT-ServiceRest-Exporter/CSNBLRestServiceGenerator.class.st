@@ -171,7 +171,16 @@ CSNBLRestServiceGenerator >> printAdditionalExceptionFor: aServiceAPI [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> printAdditionalMethodsFor: aClass [
+
 	"can be override to add additional methods"
+
+	((aClass methods difference: (service actions collect: #source)) 
+		 reject: #isConstructor)
+		do: [ :otherMethod | otherMethod accept: self ]
+		separatedBy: [ 
+			self
+				crlf;
+				crlf ]
 ]
 
 { #category : #accessing }
@@ -234,6 +243,17 @@ CSNBLRestServiceGenerator >> printImports: aClass [
 		<< 'import java.util.ArrayList;';
 		crlf.
 	self printDefaultImport
+]
+
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printMethodAnnotations: aMethod [
+
+	aMethod annotationInstances
+		reject: [ :annotationInstance | 
+			annotationInstance annotationType name = 'Override' ]
+		thenDo: [ :annotationInstance | 
+			self clone visit: annotationInstance.
+			self eol ]
 ]
 
 { #category : #printing }
@@ -456,12 +476,6 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	self indentPlus.
 	self printConvertParametersOf: aServiceAPI.
 	self << aMethod bodySourceText.
-	"aMethod methodsOverriding
-		ifNotEmpty: [ :methods | 
-			methods
-				do: [ :methodOverriding | self << methodOverriding bodySourceText ]
-				separatedBy: [ self crlf ] ]
-		ifEmpty: [ self << '// Error body not found ' ]"
 	self
 		indentMinus;
 		crlf;

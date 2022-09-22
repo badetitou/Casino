@@ -192,6 +192,7 @@ CSNBuModelImporter >> importClass: concreteClass [
 CSNBuModelImporter >> importCollectionType: aClass [
 
 	^ (self factory create: CSNBuCollectionType)
+		  source: aClass;
 		  type: (aClass arguments
 				   ifEmpty: [ self buildDefaultDtoFrom: aClass ]
 				   ifNotEmpty: [ :arguments | arguments anyOne accept: self ]);
@@ -203,6 +204,7 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 
 	| dictionary |
 	dictionary := self factory create: CSNBuDictionaryType.
+	dictionary source: aClass.
 	aClass arguments
 		ifEmpty: [ "If parameters are not declared or not found, use defaults"
 			dictionary key: (self buildDefaultDtoFrom: nil).
@@ -215,7 +217,7 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 				ifFalse: [ "Hack to export the type parameters in the correct order from source text"
 					| source |
 					(aClass typedEntities isEmpty and: [ aClass isStub ])
-						ifTrue: [
+						ifTrue: [ 
 							dictionary key: (arguments first accept: self).
 							dictionary value: (arguments second accept: self) ]
 						ifFalse: [ 
@@ -226,7 +228,7 @@ CSNBuModelImporter >> importDictionaryType: aClass [
 								ifTrue: [ 
 									dictionary key: (arguments first accept: self).
 									dictionary value: (arguments second accept: self) ]
-								ifFalse: [
+								ifFalse: [ 
 									dictionary key: (arguments second accept: self).
 									dictionary value: (arguments first accept: self) ] ] ] ].
 	^ dictionary
