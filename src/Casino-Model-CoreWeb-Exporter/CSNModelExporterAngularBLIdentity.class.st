@@ -664,6 +664,12 @@ CSNModelExporterAngularBLIdentity >> identityConfiguration: anObject [
 	identityConfiguration := anObject
 ]
 
+{ #category : #accessing }
+CSNModelExporterAngularBLIdentity >> initialize [
+	super initialize.
+	serviceExporter :=  CSNModelServiceExporterAngularBLIdentity new
+]
+
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> rootPhases [
 	^ self root / 'features'
@@ -677,11 +683,6 @@ CSNModelExporterAngularBLIdentity >> runExport [
 	self exportShell
 ]
 
-{ #category : #accessing }
-CSNModelExporterAngularBLIdentity >> serviceExporter [
-	^ CSNModelServiceExporterAngularBLIdentity
-]
-
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> serviceRoot [
 	^ self root / 'core' / 'store'
@@ -690,7 +691,7 @@ CSNModelExporterAngularBLIdentity >> serviceRoot [
 { #category : #visiting }
 CSNModelExporterAngularBLIdentity >> visitCSNService: aCSNService [
 
-	self serviceExporter new
+	self serviceExporter
 		rootFolder: self serviceRoot;
 		generateService: aCSNService
 ]

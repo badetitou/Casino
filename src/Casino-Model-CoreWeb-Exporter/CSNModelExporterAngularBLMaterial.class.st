@@ -270,14 +270,15 @@ export class ';
 ]
 
 { #category : #accessing }
-CSNModelExporterAngularBLMaterial >> serviceExporter [
-	^ CSNModelServiceExporterAngularCoreWeb
+CSNModelExporterAngularBLMaterial >> initialize [
+	super initialize.
+	serviceExporter :=  CSNModelServiceExporterAngularCoreWeb new
 ]
 
 { #category : #visiting }
 CSNModelExporterAngularBLMaterial >> visitCSNService: aCSNService [
 
-	self serviceExporter new
+	self serviceExporter
 		rootFolder: self serviceRoot;
 		generateService: aCSNService
 ]
@@ -288,7 +289,7 @@ CSNModelExporterAngularBLMaterial >> visitMooseModel: aMooseModel [
 	super visitMooseModel: aMooseModel.
 	currentWriteStream := (self root / 'service-globals.ts')
 		                      asFileReference writeStream.
-	self serviceExporter new
+	self serviceExporter
 		currentWriteStream: currentWriteStream;
 		generateServiceGlobals.
 	currentWriteStream

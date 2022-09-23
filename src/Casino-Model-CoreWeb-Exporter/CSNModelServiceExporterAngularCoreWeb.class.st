@@ -7,7 +7,8 @@ Class {
 		'rootFolder',
 		'isParentService',
 		'isChildService',
-		'parentService'
+		'parentService',
+		'parentServicePackagesRootName'
 	],
 	#category : #'Casino-Model-CoreWeb-Exporter-CoreWeb'
 }
@@ -36,6 +37,24 @@ export const jsonParser = new JsonParser({
 
 export const jsonStringifier = new JsonStringifier();
 '
+]
+
+{ #category : #initialization }
+CSNModelServiceExporterAngularCoreWeb >> initialize [
+	super initialize.
+	parentServicePackagesRootName := 'service'
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularCoreWeb >> parentServicePackagesRootName [
+
+	^ parentServicePackagesRootName
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularCoreWeb >> parentServicePackagesRootName: anObject [
+
+	parentServicePackagesRootName := anObject
 ]
 
 { #category : #streaming }
@@ -135,7 +154,8 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		<< 'import { Injectable } from ''@angular/core'';';
 		crlf.
 	self
-		<< 'import { HttpClient, HttpHeaders } from ''@angular/common/http'';';
+		<<
+			'import { HttpClient, HttpHeaders } from ''@angular/common/http'';';
 		crlf;
 		crlf;
 		<< 'import { Observable } from ''rxjs'';';
@@ -150,8 +170,12 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 	hasReturnBusinessType ifTrue: [ self <<< 'jsonParser,' ].
 	(hasParameterBusinessType or: [ hasParameterComplexeType ]) ifTrue: [ 
 		self <<< ' jsonStringifier,' ].
+	self <<< ' } from '''.
+	(aCSNService parentServicePackagesUntil:
+		 self parentServicePackagesRootName) do: [ :package | 
+		self <<< '../' ].
 	self
-		<<< ' } from ''../service-globals'';';
+		<<< '../service-globals'';';
 		crlf;
 		crlf;
 		printServiceDependencies: aCSNService.
@@ -180,7 +204,11 @@ CSNModelServiceExporterAngularCoreWeb >> printServiceDependencies: aCSNService [
 						self
 							<<< ',';
 							crlf ] ].
-		self <<< ' from ''../models'';' ]
+		self <<< ' from '''.
+		(aCSNService parentServicePackagesUntil:
+			 self parentServicePackagesRootName) do: [ :package | 
+			self <<< '../' ].
+		self <<< '../models'';' ]
 ]
 
 { #category : #streaming }
@@ -213,19 +241,22 @@ CSNModelServiceExporterAngularCoreWeb >> rootServiceName [
 
 { #category : #streaming }
 CSNModelServiceExporterAngularCoreWeb >> visitCSNService: aCSNService [
-
+	| directory |
 	"Check if aCSNService is a parent service"
 
 	isParentService := aCSNService childServices isNotEmpty.
 
 	"Check if aCSNService is a child service to a parent other than the root"
-	"I go two times up 
+	"I go two times up .
 	GWT impl -> GWT interface -> rootService interface"
 	isChildService := aCSNService parentService isNotNil.
 	parentService := isChildService ifTrue: [ aCSNService parentService ].
-
-	self rootFolder ensureCreateDirectory.
-	(self rootFolder / aCSNService getTSName)
+	directory := self rootFolder.
+	(aCSNService parentServicePackagesUntil: self parentServicePackagesRootName) do: [:package | 
+		directory := directory / package name
+		].
+	directory ensureCreateDirectory.
+	(directory / aCSNService getTSName)
 		deleteIfAbsent: nil;
 		writeStreamDo: [ :stream | 
 			self currentWriteStream: stream.

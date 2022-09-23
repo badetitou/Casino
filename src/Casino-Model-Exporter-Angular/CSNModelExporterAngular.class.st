@@ -28,7 +28,8 @@ Class {
 		'currentPage',
 		'exporterAngularConfiguration',
 		'attributeExporter',
-		'homePage'
+		'homePage',
+		'serviceExporter'
 	],
 	#category : #'Casino-Model-Exporter-Angular'
 }
@@ -777,6 +778,18 @@ CSNModelExporterAngular >> prepareExport [
 { #category : #accessing }
 CSNModelExporterAngular >> rootPhases [
 	^ self root / 'phases'
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> serviceExporter [
+
+	^ serviceExporter
+]
+
+{ #category : #accessing }
+CSNModelExporterAngular >> serviceExporter: anObject [
+
+	serviceExporter := anObject
 ]
 
 { #category : #accessing }
