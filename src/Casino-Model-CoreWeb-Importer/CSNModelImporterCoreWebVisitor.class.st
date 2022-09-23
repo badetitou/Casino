@@ -686,8 +686,11 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITabManager: aCSNUITabManager [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
-	^ (#('BLTableList' 'BLTableListBulk') includes: source invokedClassName)
-		ifTrue: [ self createWidget: aCSNUITable ] ifFalse: [ nil ]
+
+	^ (#( 'BLTableList' 'BLTableListBulk' 'BLTableListCategorized' ) 
+		   includes: source invokedClassName)
+		  ifTrue: [ self createWidget: aCSNUITable ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
