@@ -27,6 +27,39 @@ Class {
 }
 
 { #category : #accessing }
+MCExpansionModule >> exportContentOf: aWidget with: anExporter [
+
+	anExporter indentPlus.
+	aWidget widgets do: [ :widget | 
+		anExporter
+			crlf;
+			<< '<mat-expansion-panel>'.
+		anExporter inIndented: [ 
+			anExporter << '<mat-expansion-panel-header>'.
+			anExporter inIndented: [ 
+				anExporter
+					<< '<mat-panel-title>';
+					indentPlus;
+					crlf.
+				aWidget attributes
+					detect: [ :a | a isOfType: CSNUITitle ]
+					ifFound: [ :attribute | anExporter visit: attribute ]
+					ifNone: [ anExporter << 'Please complete title' ].
+				anExporter
+					indentMinus;
+					crlf;
+					<< '</mat-panel-title>' ].
+			anExporter
+				<< '</mat-expansion-panel-header>';
+				crlf.
+			anExporter visit: widget ].
+		anExporter << '</mat-expansion-panel>' ].
+
+	anExporter crlf.
+	anExporter indentMinus
+]
+
+{ #category : #accessing }
 MCExpansionModule >> getSelector [
 	^ 'mat-accordion'
 ]

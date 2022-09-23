@@ -38,6 +38,6 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUITable -> MCTable new).
 				  (CSNUIImage -> HTMLImgComponent new).
 				  (CSNUIMenu -> MCMenu new beWithArrow).
-				  (CSNUICWAccordion --> MCExpansionModule) } asDictionary;
+				  (CSNUICWAccordion -> MCExpansionModule new) } asDictionary;
 		  yourself
 ]

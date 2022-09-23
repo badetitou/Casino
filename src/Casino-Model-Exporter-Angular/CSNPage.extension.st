@@ -132,7 +132,9 @@ CSNPage >> widgetsDependenciesFrom: anExporter [
 
 	^ (((self recursiveMetiers collect: #recursiveWidgets) , { 
 		    self.
-		    self recursiveMetiers }) flattened collect: [ :el | el getExternalDependenciesFrom: anExporter ]) flattened asSet asOrderedCollection
+		    self recursiveMetiers }) flattened collect: [ :el | 
+		   el getExternalDependenciesFrom: anExporter ]) flattened asSet
+		  asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -146,8 +148,8 @@ CSNPage >> widgetsDependenciesImportInstructionFrom: anExporter [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> widgetsDependenciesNameFrom: anExporter [
 
-	^ ''
-	  ,
-		 ((((self widgetsDependenciesFrom: anExporter) reject: [ :a | a isLocal ]) collect: [ :dependency | '        ' , dependency moduleName , ',' , String crlf ])
-			  asSet asOrderedCollection sorted: [ :a :b | a < b ]) flatten
+	^ '' , ((((self widgetsDependenciesFrom: anExporter) reject: [ :a | 
+		     a isLocal ]) collect: [ :dependency | 
+		    '        ' , dependency moduleName , ',' , String crlf ]) asSet
+		   asOrderedCollection sorted: [ :a :b | a < b ]) flatten
 ]
