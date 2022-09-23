@@ -3,12 +3,27 @@ Class {
 	#superclass : #Object,
 	#traits : 'TCSNExporter',
 	#classTraits : 'TCSNExporter classTrait',
+	#instVars : [
+		'defaultSuperclassName'
+	],
 	#category : #'Casino-Business-Model-Exporter-CoreWeb'
 }
 
 { #category : #export }
 CSNBuModelExporter >> attributeInExceptionList: attribute [
 	^ attribute name = #id
+]
+
+{ #category : #accessing }
+CSNBuModelExporter >> defaultSuperclassName [
+
+	^ defaultSuperclassName
+]
+
+{ #category : #accessing }
+CSNBuModelExporter >> defaultSuperclassName: anObject [
+
+	defaultSuperclassName := anObject
 ]
 
 { #category : #export }
@@ -77,7 +92,7 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 	self <<< 'class ' <<< aBusinessType name <<< ' extends '.
 	aBusinessType parent
 		ifNotNil: [ :superType | self <<< superType name ]
-		ifNil: [ self <<< 'AbstractIdentity' ].
+		ifNil: [ self <<< self defaultSuperclassName ].
 	self space.
 
 	self inBraces: [ "Class body"
@@ -128,19 +143,6 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 ]
 
 { #category : #export }
-CSNBuModelExporter >> printImports [
-
-	self
-		<<
-			'import { JsonClassType, JsonProperty, JsonTypeName } from ''@outfoxx/jackson-js'';';
-		crlf;
-		<<
-			'import { AbstractDTO } from ''app/projects/bl-shell/src/public-api'';';
-		crlf;
-		crlf
-]
-
-{ #category : #export }
 CSNBuModelExporter >> printImportsFor: aBusinessType [
 
 	self << 'import { JsonProperty, JsonClassType'.
@@ -149,8 +151,9 @@ CSNBuModelExporter >> printImportsFor: aBusinessType [
 	aBusinessType parent ifNil: [ 
 		self
 			crlf;
-			<<
-				'import { AbstractIdentity } from "app/projects/bl-shell/src/public-api";' ].
+			<< 'import { '.
+		self <<< self defaultSuperclassName.
+		self <<< ' } from "app/projects/bl-shell/src/public-api";' ].
 	self
 		crlf;
 		crlf

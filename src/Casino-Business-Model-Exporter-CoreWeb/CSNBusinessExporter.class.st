@@ -30,6 +30,18 @@ CSNBusinessExporter >> computeBusinessPackages: businessType [
 ]
 
 { #category : #accessing }
+CSNBusinessExporter >> defaultSuperclassName [
+
+	^ self businessTypeExporter defaultSuperclassName
+]
+
+{ #category : #accessing }
+CSNBusinessExporter >> defaultSuperclassName: anObject [
+
+	self businessTypeExporter defaultSuperclassName: anObject
+]
+
+{ #category : #accessing }
 CSNBusinessExporter >> export: aCSNBuModel [
 
 	(self modelRoot / self barrelName)
@@ -77,8 +89,11 @@ CSNBusinessExporter >> exportBusinessType: businessType [
 
 { #category : #initialization }
 CSNBusinessExporter >> initialize [
+
 	super initialize.
-	self businessTypeExporter: CSNBuModelExporter new
+	self businessTypeExporter: CSNBuModelExporter new.
+	self defaultSuperclassName: 'AbstractIdentity'
+	
 ]
 
 { #category : #accessing }
