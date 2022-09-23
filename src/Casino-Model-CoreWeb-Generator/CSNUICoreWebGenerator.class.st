@@ -33,7 +33,8 @@ Class {
 		'fileUploadPanel',
 		'extendedLink',
 		'uiLink',
-		'csnActions'
+		'csnActions',
+		'accordion'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -55,6 +56,11 @@ CSNUICoreWebGenerator class >> submetamodels [
 	^ { CSNMetamodelGenerator . CSNUISubEntitiesGenerator }
 ]
 
+{ #category : #comments }
+CSNUICoreWebGenerator >> commentForAccordion [
+	^ 'Similar to a (accordion)[https://mui.com/material-ui/react-accordion/]'
+]
+
 { #category : #definition }
 CSNUICoreWebGenerator >> defineClasses [
 	super defineClasses.
@@ -65,6 +71,7 @@ CSNUICoreWebGenerator >> defineClasses [
 	groupFieldset := builder newClassNamed: #GroupFieldset.
 	html := builder newClassNamed: #HTML.
 	autoComplete := builder newClassNamed: #AutoComplete.
+	accordion := builder newClassNamed: #Accordion comment: self commentForAccordion.
 	richTextArea := builder newClassNamed: #RichTextArea.
 	splitButton := builder newClassNamed: #SplitButton.
 	switch := builder newClassNamed: #Switch.
@@ -109,6 +116,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	chart --|> csnContainer.
 	dialog --|> csnContainer.
 	html --|> csnContainer.
+	accordion --|> csnContainer.
 	progressBar --|> csnContainer.
 	listAndDetails --|> csnContainer.
 	linkSimple --|> csnContainer.

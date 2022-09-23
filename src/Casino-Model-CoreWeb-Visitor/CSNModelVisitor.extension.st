@@ -1,6 +1,18 @@
 Extension { #name : #CSNModelVisitor }
 
 { #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor >> visitCSNUICWAccordion: aCSNUICWAccordion [
+
+	^ self visitCSNContainer: aCSNUICWAccordion
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor class >> visitCSNUICWAccordion: aCSNUICWAccordion [
+
+	^ self visitCSNContainer: aCSNUICWAccordion
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
 CSNModelVisitor class >> visitCSNUICWAutoComplete: aCSNUICWAutoComplete [
 	<generated>
 	^ self visitCSNUIInput: aCSNUICWAutoComplete

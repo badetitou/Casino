@@ -151,16 +151,12 @@ CSNBLRestServiceGenerator >> initialize [
 ]
 
 { #category : #accessing }
-CSNBLRestServiceGenerator >> printAPIParameter [
-	self <<< '@RequestBody ObjectNode body'
-	"parameter dataType isDictionaryType
-		ifTrue: [ self <<< 'String ' <<< parameter name ]
-		ifFalse: [ parameter dataType isCollectionType
-				ifTrue: [ self <<< 'List<FormDataBodyPart> ' <<< parameter name ]
-				ifFalse: [ (parameter dataType isBusinessType or: [ parameter dataType isPrimitive not ])
-						ifTrue: [ self <<< 'FormDataBodyPart ' <<< parameter name ]
-						ifFalse: [ self visitParameter: parameter source ] ] ].
-	parameter dataType isPrimitive not ifTrue: [ self <<< 'Json' ]"
+CSNBLRestServiceGenerator >> printAPIParameterFor: aServiceAPI [
+	self <<< '@RequestParam(value="fieldNames[]", required = false) String[] fieldNames,'.
+	self crlf.
+	self indentPlus.
+	self << '@RequestBody ObjectNode body'.
+	self indentMinus 
 ]
 
 { #category : #accessing }
@@ -272,6 +268,7 @@ import fr.bl.server.gf.rest.CSNRestful;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -453,7 +450,7 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 			self
 				<<< aServiceAPI uniqueName;
 				<<< '('.
-			self printAPIParameter.
+			self printAPIParameterFor: aServiceAPI.
 			"self printAttributeOf: aMethod ofServiceApi: aServiceAPI."
 			self <<< ')' ]
 		ifTrue: [ self << 'static' ].

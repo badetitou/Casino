@@ -176,6 +176,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWAccordion: aCSNUICWAccordion [
+	^ (#('BLStackPanel')
+		includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
+		ifTrue: [ self createWidget: CSNUICWAccordion ]
+		ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
 	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch')
 		includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))

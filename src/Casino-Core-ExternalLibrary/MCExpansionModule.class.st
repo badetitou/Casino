@@ -28,7 +28,7 @@ Class {
 
 { #category : #accessing }
 MCExpansionModule >> getSelector [
-	^ 'mat-expansion-panel'
+	^ 'mat-accordion'
 ]
 
 { #category : #accessing }
