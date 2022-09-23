@@ -666,8 +666,9 @@ CSNModelExporterAngularBLIdentity >> identityConfiguration: anObject [
 
 { #category : #accessing }
 CSNModelExporterAngularBLIdentity >> initialize [
+
 	super initialize.
-	serviceExporter :=  CSNModelServiceExporterAngularBLIdentity new
+	serviceExporter := CSNModelServiceExporterAngularBLIdentity new
 ]
 
 { #category : #visiting }

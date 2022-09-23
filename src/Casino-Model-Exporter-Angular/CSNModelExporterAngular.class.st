@@ -393,7 +393,7 @@ import { TranslateModule } from ''@ngx-translate/core'';
 			<< 'import { ';
 			<< service uniqueName;
 			<< ' } from ''./';
-			<< service getLocalPath;
+			<< (self serviceExporter getLocalPathOf: service);
 			<< ''';';
 			crlf ].
 	currentWriteStream
@@ -764,7 +764,9 @@ CSNModelExporterAngular >> homePage: anObject [
 
 { #category : #initialization }
 CSNModelExporterAngular >> initialize [
+
 	indentLevel := 0.
+	self serviceExporter: CSNModelServiceExporter new
 ]
 
 { #category : #run }

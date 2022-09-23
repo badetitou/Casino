@@ -271,8 +271,9 @@ export class ';
 
 { #category : #accessing }
 CSNModelExporterAngularBLMaterial >> initialize [
+
 	super initialize.
-	serviceExporter :=  CSNModelServiceExporterAngularCoreWeb new
+	serviceExporter := CSNModelServiceExporterAngularCoreWeb new
 ]
 
 { #category : #visiting }

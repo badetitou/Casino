@@ -1,6 +1,6 @@
 Class {
 	#name : #CSNModelServiceExporterAngularCoreWeb,
-	#superclass : #Object,
+	#superclass : #CSNModelServiceExporter,
 	#traits : 'TCSNExporter',
 	#classTraits : 'TCSNExporter classTrait',
 	#instVars : [
@@ -37,6 +37,20 @@ export const jsonParser = new JsonParser({
 
 export const jsonStringifier = new JsonStringifier();
 '
+]
+
+{ #category : #streaming }
+CSNModelServiceExporterAngularCoreWeb >> getLocalPathOf: aService [
+
+	^ String streamContents: [ :stream | 
+		stream << 'services/'.
+		(aService parentServicePackagesUntil:
+			 self parentServicePackagesRootName) do: [ :package | 
+			stream
+				<< package name;
+				<< '/' ].
+
+		stream << aService getServiceName ]
 ]
 
 { #category : #initialization }
@@ -181,8 +195,16 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 		printServiceDependencies: aCSNService.
 	isChildService ifFalse: [ ^ self ].
 	self crlf.
-	self << 'import { ' <<< parentService name <<< ' } from ''./'
-	<<< parentService name <<< '.service'';'
+	self << 'import { ' <<< parentService name <<< ' } from '''.
+	(aCSNService parentServicePackagesUntil:
+		 self parentServicePackagesRootName)
+		ifEmpty: [ self <<< './' ]
+		ifNotEmpty: [ :parentPackages | 
+		parentPackages do: [ :package | self <<< '../' ] ].
+	(parentService parentServicePackagesUntil:
+		 self parentServicePackagesRootName) do: [ :parentServicePackage | 
+		self <<< parentServicePackage name <<< '/' ].
+	self <<< parentService getServiceName <<< ''';'
 ]
 
 { #category : #streaming }

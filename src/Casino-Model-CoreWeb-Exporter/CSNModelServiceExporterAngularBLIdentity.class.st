@@ -553,6 +553,7 @@ export class ' << aCSNService uniqueName << ' {
 
 { #category : #generating }
 CSNModelServiceExporterAngularBLIdentity >> initialize [
+
 	super initialize.
 	serviceAPINameDictionnary := Dictionary new
 ]

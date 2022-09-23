@@ -149,6 +149,7 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngularBLSpecific >> initialize [
+
 	super initialize.
 	serviceExporter := CSNModelServiceExporterAngularCoreWeb new
 ]
