@@ -635,6 +635,15 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIParagraph: aCSNUIParagraph [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUIPlaceholder: aCSNUIPlaceholder [
+
+	^ (source isInvocation and: [ 
+		   source signature beginsWith: 'setHelperText' ])
+		  ifTrue: [ self createAttribute: aCSNUIPlaceholder for: source ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIRelativeHeight: aCSNUIRelativeHeight [
 	"because the subclass also need to check before creation, we externalise the condition"
 
