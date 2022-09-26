@@ -56,6 +56,14 @@ MCAutocomplete >> getSelector [
 ]
 
 { #category : #accessing }
+MCAutocomplete >> internalDependenciesOf: aWidgetInstance [
+
+	^ { 
+		  MCFormFieldModule new.
+		  MCInput new }
+]
+
+{ #category : #accessing }
 MCAutocomplete >> moduleName [
 	^ 'MatAutocompleteModule'
 ]
