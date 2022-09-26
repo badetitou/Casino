@@ -292,23 +292,28 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreVerticalAlignement: aCSNCoreVe
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
-	^ 'BLDialogBox' = source invokedClassName
-		ifTrue: [ | dialog |
-			dialog := self createWidget: aCSNDialog.
-			dialog  addAttribute: ((self create: CSNUICWHeader) attributeValue: (source parameters at: 1 ifAbsent: [ 'todo' ])).
-			source parameters size = 1
-				ifTrue: [ dialog
-						addAttribute:
-							((self create: CSNUIModal)
-								attributeValue: 'true';
-								yourself) ]
-				ifFalse: [ dialog
-						addAttribute:
-							((self create: CSNUIModal)
-								attributeValue: source parameters last;
-								yourself) ].
-			dialog ]
-		ifFalse: [ nil ]
+
+	^ (#( 'BLDialogBox' ) includesAny:
+		   (source invokedClass withSuperclassHierarchy collect:
+			    #invokedClassName))
+		  ifTrue: [ 
+			  | dialog |
+			  dialog := self createWidget: aCSNDialog.
+			  dialog addAttribute:
+				  ((self create: CSNUICWHeader) attributeValue:
+					   (source parameters at: 1 ifAbsent: [ 'todo' ])).
+			  source parameters size = 1
+				  ifTrue: [ 
+					  dialog addAttribute: ((self create: CSNUIModal)
+							   attributeValue: 'true';
+							   yourself) ]
+				  ifFalse: [ 
+					  source parameters size ~= 0 ifTrue: [ 
+						  dialog addAttribute: ((self create: CSNUIModal)
+								   attributeValue: source parameters last;
+								   yourself) ] ].
+			  dialog ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
@@ -585,12 +590,16 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIMaxlength: aCSNUIMaxlength [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIPanel: aCSNUIPanel [
-	^ ('BLImageUploadPanel' ~= source invokedClassName
-		and: [ 'BLFileUploadPanel' ~= source invokedClassName
-				and: [ 'TabSubPanel' ~= source invokedClassName
-						and: [ (#('FlexTable' 'BLFlexTable' 'BLGrid' 'Grid') includes: source invokedClassName) or: [ source invokedClassName endsWith: 'Panel' ] ] ] ])
-		ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
-		ifFalse: [ nil ]
+
+	^ ('BLImageUploadPanel' ~= source invokedClassName and: [ 
+		   'BLFileUploadPanel' ~= source invokedClassName and: [ 
+			   'TabSubPanel' ~= source invokedClassName and: [ 
+				   (#( 'FlexTable' 'BLFlexTable' 'BLGrid' 'Grid' ) includesAny:
+					    (source invokedClass withSuperclassHierarchy collect:
+						     #invokedClassName)) or: [ 
+					   source invokedClassName endsWith: 'Panel' ] ] ] ])
+		  ifTrue: [ self createWidgetPanel: aCSNUIPanel ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
