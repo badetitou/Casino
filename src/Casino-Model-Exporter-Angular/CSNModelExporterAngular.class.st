@@ -896,9 +896,9 @@ CSNModelExporterAngular >> visitCSNLCell: aCSNLCell [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
+CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 
-	0 to: aBLUIGridLayout maxLevel do: [ :number | "self
+	0 to: aCSNLGridLayout maxLevel do: [ :number | "self
 		crlf;
 		indentPlus;
 		<< '<tbody>';
@@ -940,32 +940,33 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
 			crlf.
 		cells do: [ :cell | self visit: cell ] ]"
 		self crlf.
-		aBLUIGridLayout cell size >= 1 ifTrue: [ 
-			self
-				<< '<div class="row">';
-				crlf ].
-		(aBLUIGridLayout atLevelSorted: number)
-			reject: #isNil
-			thenDo: [ :cell | 
+		((aCSNLGridLayout atLevelSorted: number) reject: #isNil) 
+			ifNotEmpty: [ :cells | 
 				self
 					indentPlus;
-					visit: cell;
-					indentMinus ].
-		aBLUIGridLayout cell size >= 1 ifTrue: [ 
-			self
-				<< '</div>';
-				crlf ] ]
+					<< '<div class="row">';
+					crlf.
+				cells do: [ :cell | 
+					self
+						indentPlus;
+						visit: cell;
+						indentMinus;
+						crlf ].
+				self
+					<< '</div>';
+					indentMinus ] ]
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
-	aBLLayout container widgets , aBLLayout cell
-		do: [ :widget | 
-			self
-				crlf;
-				indentPlus.
-			self visit: widget.
-			self indentMinus ]
+
+	aBLLayout container widgets , aBLLayout cell do: [ :widget | 
+		self
+			crlf;
+			indentPlus.
+		self visit: widget.
+		self
+			indentMinus ]
 ]
 
 { #category : #visiting }

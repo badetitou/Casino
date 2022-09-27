@@ -41,9 +41,11 @@ MCExpansionModule >> exportContentOf: aWidget with: anExporter [
 					<< '<mat-panel-title>';
 					indentPlus;
 					crlf.
-				aWidget attributes
+				widget attributes
 					detect: [ :a | a isOfType: CSNUITitle ]
-					ifFound: [ :attribute | anExporter visit: attribute ]
+					ifFound: [ :attribute | 
+						anExporter indent.
+						anExporter visit: attribute ]
 					ifNone: [ anExporter << 'Please complete title' ].
 				anExporter
 					indentMinus;
