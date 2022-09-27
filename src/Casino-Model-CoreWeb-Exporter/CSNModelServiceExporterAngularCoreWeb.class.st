@@ -154,12 +154,16 @@ CSNModelServiceExporterAngularCoreWeb >> printImportsFor: aCSNService [
 
 	| hasReturnBusinessType hasParameterBusinessType hasParameterComplexeType |
 	hasReturnBusinessType := aCSNService actions anySatisfy: [ :action | 
-		                         action dataType innerType isBusinessType ].
+		                         action dataType innerTypeDependencies flattened
+			                         anySatisfy: [ :typeDependency | 
+			                         typeDependency isBusinessType ] ].
 	hasParameterBusinessType := aCSNService actions anySatisfy: [ :action | 
 		                            action parameters anySatisfy: [ 
 			                            :parameter | 
-			                            parameter dataType innerType
-				                            isBusinessType ] ].
+			                            parameter dataType
+				                            innerTypeDependencies flattened anySatisfy: [ 
+				                            :typeDependency | 
+				                            typeDependency isBusinessType ] ] ].
 	hasParameterComplexeType := aCSNService actions anySatisfy: [ :action | 
 		                            action parameters anySatisfy: [ 
 			                            :parameter | 

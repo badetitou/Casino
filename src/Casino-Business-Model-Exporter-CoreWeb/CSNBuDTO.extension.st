@@ -13,6 +13,14 @@ CSNBuDTO >> innerType [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDTO >> innerTypeDependencies [
+
+	"Usefull for collection and map that can contain other collection and map"
+
+	^ { self innerType }
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDTO >> parentBusinessPackages [
 
 	^ self source

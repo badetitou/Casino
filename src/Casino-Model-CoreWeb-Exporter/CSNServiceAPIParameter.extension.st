@@ -5,6 +5,7 @@ CSNServiceAPIParameter >> dependencies [
 
 	| dependencies |
 	dependencies := Set new.
-	self dataType ifNotNil: [ :dataType | dependencies add: dataType innerType ].
+	self dataType ifNotNil: [ :dataType | 
+		dependencies addAll: dataType innerTypeDependencies flattened ].
 	^ dependencies
 ]

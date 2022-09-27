@@ -11,6 +11,14 @@ CSNBuDictionaryType >> innerType [
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
+CSNBuDictionaryType >> innerTypeDependencies [
+
+	^ { 
+		  self key innerTypeDependencies.
+		  self value innerTypeDependencies }
+]
+
+{ #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
 CSNBuDictionaryType >> printJsonClassTypeOn: aCSNExporter [
 	aCSNExporter <<< 'Map, ['.
 	self key printJsonClassTypeOn: aCSNExporter.
