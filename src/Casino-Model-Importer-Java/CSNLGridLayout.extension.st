@@ -32,6 +32,12 @@ CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFact
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
+CSNLGridLayout >> childAttribute [
+
+	^ { (CSNUIClass new attributeValue: 'col') }
+]
+
+{ #category : #'*Casino-Model-Importer-Java' }
 CSNLGridLayout >> extractAddingPosition: anAssocWidgetArrayOrArrayValue [
 	"the first ifTrue is False is only use when we debug to avoid a bug when we restart"
 	^  anAssocWidgetArrayOrArrayValue value isArray ifTrue: [ 0 ] ifFalse: [  (anAssocWidgetArrayOrArrayValue value sourceAnchor )

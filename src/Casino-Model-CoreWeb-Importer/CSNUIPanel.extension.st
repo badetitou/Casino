@@ -17,7 +17,7 @@ CSNUIPanel >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory:
 						  withInvocationOfAdd: anInvocation
 						  usingFactory: aFactory ] ]
 		  ifTrue: [ 
-			  ('CSNCOntainer - AddWidgetWithInvocation: ' , aWidget printString
+			  ('CSNContainer - AddWidgetWithInvocation: ' , aWidget printString
 			   , ' is already present in the hierarchy') record ]
 ]
 

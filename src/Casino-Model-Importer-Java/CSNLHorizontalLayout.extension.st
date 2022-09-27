@@ -2,13 +2,8 @@ Extension { #name : #CSNLHorizontalLayout }
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNLHorizontalLayout >> childAttribute [
-	| subset |
-	(self container attributes select: [ :a | a isKindOf: CSNUIWidth ]) ifNotEmpty: [ ^ {} ].
-	subset := 12 / self cell size.
-	subset := subset < 1
-		ifTrue: [ 1 ]
-		ifFalse: [ subset floor ].
-	^ CSNUIClass new attributeValue: 'col-' , subset asString
+
+	^ CSNUIClass new attributeValue: 'col'
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

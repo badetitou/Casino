@@ -171,8 +171,8 @@ CSNModelExporterAngularBLMaterial >> generateTSSourceCodeForBusinessPage: aBLPag
 		self writeImportForNavigation ].
 	currentWriteStream
 		<<
-			(String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self)
-					   , (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+			(String crlf join: (("(aBLPageMetier widgetsDependenciesFrom: self)
+					   ," (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
 								    self behaviorImportExporter
 									    export: behavior
 									    withContext: self context

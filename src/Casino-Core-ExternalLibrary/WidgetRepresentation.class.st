@@ -120,7 +120,7 @@ WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter
 	anExporter <<< (aWidget getSelectorFrom: anExporter).
 	self componentAttributeOn: anExporter forWidget: aWidget.
 	self componentActionsOn: anExporter forWidget: aWidget.
-	anExporter <<< aWidget idTag
+	"anExporter <<< aWidget idTag"
 ]
 
 { #category : #export }

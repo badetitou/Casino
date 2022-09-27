@@ -415,13 +415,23 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 		   (source invokedClass withSuperclassHierarchy collect:
 			    #invokedClassName))
 		  ifTrue: [ 
-			  | panel |
+			  | panel parameters |
 			  panel := self createWidgetPanel: aCSNUIFieldset.
-			  source parameters at: 1 ifPresent: [ :param | 
-				  panel addAttribute: ((self create: CSNUITitle)
-						   attributeValue: param;
-						   yourself) ].
-
+			  parameters := source parameters.
+			  parameters size >= 1
+				  ifTrue: [ 
+					  panel addAttribute: ((self create: CSNUITitle)
+							   attributeValue: parameters first;
+							   yourself) ]
+				  ifFalse: [ 
+					  ((source target anyOne atScope: FamixTClass) anyOne
+						   queryAllOutgoingInvocations select: [ :invoc | 
+						   invoc receiver isNotNil and: [ invoc receiver name = 'super' ] ]) 
+						  ifNotEmpty: [ :superInvocs | 
+							  superInvocs anyOne parameters ifNotEmpty: [ :params | 
+								  panel addAttribute: ((self create: CSNUITitle)
+										   attributeValue: params first;
+										   yourself) ] ] ].
 
 			  ((source invokedClass withSuperclassHierarchy collect:
 				    #invokedClassName) includes: 'BLFieldSetPanelDynamic') 

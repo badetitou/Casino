@@ -51,7 +51,7 @@ CSNWidgetFactory >> createLayoutFor: theWidgetSource withParent: parent [
 		   newFrom: theWidgetSource
 		   for: parent
 		   withImporters: visitorImporters) ifNil: [ 
-		  (self create: CSNLHorizontalLayout)
+		  (self create: CSNLLayout)
 			  source: theWidgetSource;
 			  yourself ]
 ]

@@ -567,9 +567,9 @@ CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeImportForNavigation ].
-	currentWriteStream
-		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self));
-		<< '
+	"currentWriteStream
+		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self))."
+		currentWriteStream << '
 
 @Component({
     selector: ''';
@@ -898,7 +898,7 @@ CSNModelExporterAngular >> visitCSNLCell: aCSNLCell [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
 
-	self
+	0 to: aBLUIGridLayout maxLevel do: [ :number | "self
 		crlf;
 		indentPlus;
 		<< '<tbody>';
@@ -938,7 +938,23 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aBLUIGridLayout [
 			crlf;
 			<< '<!-- not positionned cells -->';
 			crlf.
-		cells do: [ :cell | self visit: cell ] ]
+		cells do: [ :cell | self visit: cell ] ]"
+		self crlf.
+		aBLUIGridLayout cell size >= 1 ifTrue: [ 
+			self
+				<< '<div class="row">';
+				crlf ].
+		(aBLUIGridLayout atLevelSorted: number)
+			reject: #isNil
+			thenDo: [ :cell | 
+				self
+					indentPlus;
+					visit: cell;
+					indentMinus ].
+		aBLUIGridLayout cell size >= 1 ifTrue: [ 
+			self
+				<< '</div>';
+				crlf ] ]
 ]
 
 { #category : #visiting }
