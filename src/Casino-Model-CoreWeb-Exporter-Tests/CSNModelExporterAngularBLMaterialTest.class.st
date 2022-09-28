@@ -141,7 +141,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 			          << String crlf;
 			          << '            <td>';
 			          << String crlf;
-			          << '                <div id="unknow" #unknow>';
+			          << '                <div id="unknow">';
 			          << String crlf;
 			          << '                </div>';
 			          << String crlf;
@@ -153,7 +153,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 			          << String crlf;
 			          << '            <td style="text-align: center;">';
 			          << String crlf;
-			          << '                <div id="north" #north>';
+			          << '                <div id="north">';
 			          << String crlf;
 			          << '                </div>';
 			          << String crlf;
@@ -165,7 +165,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 			          << String crlf;
 			          << '            <td style="text-align: center;">';
 			          << String crlf;
-			          << '                <div id="center" #center>';
+			          << '                <div id="center">';
 			          << String crlf;
 			          << '                </div>';
 			          << String crlf;
@@ -177,7 +177,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 			          << String crlf;
 			          << '            <td style="text-align: center;">';
 			          << String crlf;
-			          << '                <div id="south" #south>';
+			          << '                <div id="south">';
 			          << String crlf;
 			          << '                </div>';
 			          << String crlf;
@@ -208,7 +208,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportButton [
 		yourself.
 
 	expected := String crlf join:
-		            #( '<button id="buttonAttribute" mat-stroked-button #buttonAttribute>'
+		            #( '<button id="buttonAttribute" mat-stroked-button>'
 		               '</button>' ).
 
 	result := String streamContents: [ :stream | 
@@ -233,7 +233,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportButtonWithLabel [
 		yourself.
 
 	expected := String crlf join:
-		            #( '<button id="buttonAttribute" mat-stroked-button #buttonAttribute>'
+		            #( '<button id="buttonAttribute" mat-stroked-button>'
 		               '    label' '</button>' ).
 
 	result := String streamContents: [ :stream | 
@@ -455,27 +455,14 @@ CSNModelExporterAngularBLMaterialTest >> testExportGirdBag [
 	(grid attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		at: cell
 		put: #( 0 0 ).
-	result := String streamContents: [ :stream | 
-		          stream
-			          << '<table>';
-			          << String crlf;
-			          << '    <tbody>';
-			          << String crlf;
-			          << '        <tr>';
-			          << String crlf;
-			          << '            <td colspan="2">';
-			          << String crlf;
-			          << '                <div>';
-			          << String crlf;
-			          << '                </div>';
-			          << String crlf;
-			          << '            </td>';
-			          << String crlf;
-			          << '        </tr>';
-			          << String crlf;
-			          << '    </tbody>';
-			          << String crlf;
-			          << '</table>' ].
+	result := String crlf join: { 
+	'<div>'.
+	'    <div class="row">'.
+	'        <div class="col">'.
+	'        </div>'.
+	'    </div>'.
+	'</div>' }
+		           .
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
@@ -496,7 +483,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportHyperlink [
 		yourself.
 
 	expected := String crlf join:
-		            #( '<bl-hyperlink id="buttonAttribute" #buttonAttribute>'
+		            #( '<bl-hyperlink id="buttonAttribute">'
 		               '</bl-hyperlink>' ).
 
 	result := String streamContents: [ :stream | 
@@ -521,7 +508,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportHyperlinkWithLabel [
 	link addAttribute: label.
 
 	expected := String crlf join:
-		            #( '<bl-hyperlink id="buttonAttribute" #buttonAttribute>'
+		            #( '<bl-hyperlink id="buttonAttribute">'
 		'    label'
 		               '</bl-hyperlink>' ).
 
@@ -574,7 +561,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportInputWithAffectation [
 	'    <mat-label>'
 	'        label'
 	'    </mat-label>'
-	'    <input id="myInput" matInput #myInput>'
+	'    <input id="myInput" matInput>'
 	'</mat-form-field>'
 	).
 
@@ -697,7 +684,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTable [
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
-				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
 			          << String crlf;
 			          <<
 				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
@@ -736,7 +723,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneHeader [
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
-				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
 			          << String crlf;
 			          << '    <ng-container matColumnDef="Label1">';
 			          << String crlf;
@@ -792,7 +779,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
-				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort #table>';
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
 			          << String crlf;
 			          << '    <ng-container matColumnDef="Label1">';
 			          << String crlf;
@@ -848,7 +835,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTextArea [
 				          '<mat-form-field appearance="fill">';
 			          << String crlf;
 			          <<
-				          '    <textarea id="textarea" matInput #textarea></textarea>';
+				          '    <textarea id="textarea" matInput></textarea>';
 			          << String crlf;
 			          << '</mat-form-field>' ].
 

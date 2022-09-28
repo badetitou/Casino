@@ -37,8 +37,9 @@ CSNBuModelImporter >> buildDefaultDtoFrom: aSource [
 ]
 
 { #category : #accessing }
-CSNBuModelImporter >> dtoAbstractName [
-	^ 'AbstractPersistentObjectGWT'
+CSNBuModelImporter >> dtoAbstractNames [
+
+	^ { 'AbstractPersistentObjectGWT'. 'AbstractEnumDTO' }
 ]
 
 { #category : #accessing }
@@ -60,7 +61,7 @@ CSNBuModelImporter >> famixModel: anObject [
 CSNBuModelImporter >> import [
 
 	self famixModel allClasses asOrderedCollection
-		detect: [ :class | class name = self dtoAbstractName ]
+		detect: [ :class | self dtoAbstractNames includes: class name  ]
 		ifFound: [ :class | 
 			class subclassHierarchy
 				reject: [ :a | 
@@ -277,7 +278,7 @@ CSNBuModelImporter >> visitClass: aClass [
 	    Void ) includes: aClass name) ifTrue: [ 
 		^ self importPrimitiveType: aClass ].
 	(aClass superclassHierarchy anySatisfy: [ :class | 
-		 class name = self dtoAbstractName ]) ifTrue: [ 
+		 self dtoAbstractNames includes: class name ]) ifTrue: [ 
 		^ self importClass: aClass ].
 	^ self buildDefaultDtoFrom: aClass
 ]

@@ -268,7 +268,7 @@ CSNBuModelImporterTest >> testVisitClass [
 
 	| abstractClass businessClassA |
 	abstractClass := (self createInFamixModel: FamixJavaClass)
-		name: buModelImporter dtoAbstractName;
+		name: buModelImporter dtoAbstractNames first;
 		yourself.
 	businessClassA := (self createInFamixModel: FamixJavaClass)
 		name: 'businessClassA';

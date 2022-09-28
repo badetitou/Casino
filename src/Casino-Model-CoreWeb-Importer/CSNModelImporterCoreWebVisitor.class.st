@@ -439,9 +439,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIFieldset: aCSNUIFieldset [
 					  panel addAttribute: (self create: CSNUICWDynamicFieldset).
 					  (source parameters at: 2 ifAbsent: [ '' ]) = 'true' ifTrue: [ 
 						  panel addAttribute: (self create: CSNUICWLightFieldset) ] ].
-			  ((source invokedClass withSuperclassHierarchy collect:
-				    #invokedClassName) includes: 'BLGroupBoxPanel') ifTrue: [ 
-				  panel addAttribute: (self create: CSNUICWGroupFieldset) ].
 			  ^ panel ]
 		  ifFalse: [ nil ]
 ]

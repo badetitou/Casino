@@ -45,9 +45,9 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 	container addWidget: (self createEntity: CSNUIButton).
 	result := String streamContents: [ :stream | 
 		          stream
-			          << '<div class="grid">';
+			          << '<div class="row">';
 			          << String crlf;
-			          << '    <div class="col-12">';
+			          << '    <div class="col">';
 			          << String crlf;
 			          << '        <bl-button-link>';
 			          << String crlf;
@@ -186,27 +186,13 @@ CSNModelExporterAngularBLSpecificTest >> testExportGirdBagWithCellsWithColSpan [
 	(grid attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		at: cell
 		put: #( 0 0 ).
-	result := String streamContents: [ :stream | 
-		          stream
-			          << '<table>';
-			          << String crlf;
-			          << '    <tbody>';
-			          << String crlf;
-			          << '        <tr>';
-			          << String crlf;
-			          << '            <td colspan="2">';
-			          << String crlf;
-			          << '                <div>';
-			          << String crlf;
-			          << '                </div>';
-			          << String crlf;
-			          << '            </td>';
-			          << String crlf;
-			          << '        </tr>';
-			          << String crlf;
-			          << '    </tbody>';
-			          << String crlf;
-			          << '</table>' ].
+	result := result := String crlf join: { 
+	'<div>'.
+	'    <div class="row">'.
+	'        <div class="col">'.
+	'        </div>'.
+	'    </div>'.
+	'</div>' }.
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.

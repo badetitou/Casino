@@ -47,7 +47,6 @@ CSNJavaImporter >> affectationsToWidget [
 
 { #category : #'as yet unclassified' }
 CSNJavaImporter >> computeChildrenOf: widget [
-
 	((self computeOutgoingAddInvocationForWidget: widget) collect: [ 
 		 :invoc | 
 		 (self searchWidgetsFromAddInvocation: invoc for: widget) -> invoc ]) 

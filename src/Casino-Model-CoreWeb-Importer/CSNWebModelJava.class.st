@@ -91,24 +91,26 @@ CSNWebModelJava >> addLinkXmlUi [
 
 { #category : #adding }
 CSNWebModelJava >> addPPPToWidget [
+
 	| col |
-	col := (self model allCSNWidgetExceptPage select: [ :widget | widget parents isEmpty ]) asOrderedCollection.
-	col
-		withIndexDo: [ :widget :index | 
-			| founds |
-			founds := self widgetOwnerCase1: widget source source maxLevel: 15 level: 0.
-			founds do: [ :found | found addWidget: widget ].
-			index \\ 200 = 0 ifTrue: [ ((index / col size) asFloat * 100) record ] ]
-]
+	col := (self model allCSNWidgetExceptPage select: [ :widget | 
+		        widget parents isEmpty ]) asOrderedCollection.
+	col withIndexDo: [ :widget :index | 
+		| founds |
+		founds := self
+			          widgetOwnerCase1: widget source source
+			          maxLevel: 15
+			          level: 0.
+		founds do: [ :found | 
+			self addWidgetVisitor
+				addWidget: widget
+				to: found
+				withInvocationOfAdd: nil
+				usingFactory: self factory
 
-{ #category : #'private - adding' }
-CSNWebModelJava >> addParentOfWidgetWithoutAffected: widget [
-
-	| foundAndInvocationOrNil |
-	foundAndInvocationOrNil := self getWidgetContainerOfWidgetWithoutAffectation: widget.
-	foundAndInvocationOrNil ifNotNil: [ "The new Widget invocation is on the same statement as the widget
-		*e.g.*: new Widget().add(new Label());" 
-		foundAndInvocationOrNil first addWidget: widget withInvocationOfAdd: foundAndInvocationOrNil second usingFactory: self factory ]
+			" found addWidget: widget" ].
+		index \\ 200 = 0 ifTrue: [ 
+			((index / col size) asFloat * 100) record ] ]
 ]
 
 { #category : #adding }

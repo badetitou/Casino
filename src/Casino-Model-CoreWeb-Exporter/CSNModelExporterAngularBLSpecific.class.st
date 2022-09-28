@@ -81,12 +81,13 @@ export class ';
 				asOrderedCollection;
 		<< '
 '.
+
 	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
-			:widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptVariableOf: widget
-				usingExporter: self ] ].
+		aBLPageMetier recursiveWidgets flattened asSet asOrderedCollection 
+			do: [ :widget | 
+				(self exporterAngularConfiguration angularRepresentationOf: widget)
+					exportTypeScriptVariableOf: widget
+					usingExporter: self ] ].
 	self
 		<< '
 

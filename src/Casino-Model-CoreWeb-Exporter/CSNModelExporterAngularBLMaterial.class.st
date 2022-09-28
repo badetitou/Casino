@@ -170,15 +170,13 @@ CSNModelExporterAngularBLMaterial >> generateTSSourceCodeForBusinessPage: aBLPag
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeImportForNavigation ].
 	currentWriteStream
-		<<
-			(String crlf join: (("(aBLPageMetier widgetsDependenciesFrom: self)
-					   ," (aBLPageMetier calledBehavior flatCollect: [ :behavior | 
-								    self behaviorImportExporter
-									    export: behavior
-									    withContext: self context
-									    andConfiguration: self exporterAngularConfiguration ])
-							   flattened) asSet asOrderedCollection sorted: [ :a :d | 
-							  a < d ]));
+		<< (String crlf join:
+					 ((aBLPageMetier calledBehavior flatCollect: [ :behavior | 
+							   self behaviorImportExporter
+								   export: behavior
+								   withContext: self context
+								   andConfiguration: self exporterAngularConfiguration ])
+						  flattened asSet asOrderedCollection sorted: [ :a :d | a < d ]));
 		<< '
 
 @Component({
@@ -201,10 +199,10 @@ export class ';
 							  (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
 				 asSet collect: [ :widget | widget idViewChildFrom: self ])
 				asOrderedCollection;
-		<< '
-'.
-	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+		crlf. "(aBLPageMetier widgetsDependenciesFrom: self)
+					   ,"
+	self inIndented: [
+		aBLPageMetier recursiveWidgets flattened asSet do: [ 
 			:widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget

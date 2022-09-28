@@ -25,12 +25,12 @@ CSNBuModelImporterCreateDTOTest >> famixModel [
 
 	| abstractClass businessClassA integerPrimitiveType |
 	abstractClass := (self createInFamixModel: FamixJavaClass)
-		                 name: buModelImporter dtoAbstractName;
+		                 name: buModelImporter dtoAbstractNames first;
 		                 sourceAnchor:
 			                 ((self createInFamixModel:
 					                   FamixJavaSourceTextAnchor) source:
 					                  'abstract class '
-					                  , buModelImporter dtoAbstractName , '{}');
+					                  , buModelImporter dtoAbstractNames first , '{}');
 		                 yourself.
 	businessClassA := (self createInFamixModel: FamixJavaClass)
 		                  name: 'businessClassA';
@@ -38,7 +38,7 @@ CSNBuModelImporterCreateDTOTest >> famixModel [
 			                  ((self createInFamixModel:
 					                    FamixJavaSourceTextAnchor) source:
 					                   'class businessClassA extends '
-					                   , buModelImporter dtoAbstractName
+					                   , buModelImporter dtoAbstractNames first
 					                   , '{int aPrimitiveIntParameter;}');
 		                  yourself.
 	(self createInFamixModel: FamixJavaInheritance)

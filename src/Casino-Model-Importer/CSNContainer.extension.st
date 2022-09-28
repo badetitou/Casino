@@ -20,6 +20,7 @@ CSNContainer >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactor
 
 	(self allParents , { self } includes: aWidget)
 		ifFalse: [ 
+			anInvocation ifNil: [ ^ self addWidget: aWidget  ].
 			aWidget addingPosition: anInvocation sourceAnchor startPos.
 			self layout
 				ifNotNil: [ :layout | 
