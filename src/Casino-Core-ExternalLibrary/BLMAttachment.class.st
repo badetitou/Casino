@@ -11,7 +11,10 @@ BLMAttachment >> exportContentOf: aWidget with: anExporter [
 		indentPlus;
 		<< '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
-	anExporter <<< '>'
+	anExporter
+		<<< ' ';
+		<<< aWidget idTag;
+		<<< '>'
 ]
 
 { #category : #accessing }

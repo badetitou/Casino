@@ -5,7 +5,13 @@ Trait {
 
 { #category : #api }
 TAngularExporter >> protectString: aString [
+
 	^ aString
-		ifNotNil: [ ((aString asString copyReplaceAll: '"' with: '&quot;') copyReplaceAll: '<' with: '&lt;') copyReplaceAll: '>' with: '&gt;' ]
-		ifNil: [ '' ]
+		  ifNotNil: [ 
+			  (((aString asString copyReplaceAll: '"' with: '&quot;')
+				    copyReplaceAll: '<'
+				    with: '&lt;') copyReplaceAll: '>' with: '&gt;')
+				  copyReplaceAll: '{'
+				  with: '{{ ''{'' }}' ]
+		  ifNil: [ '' ]
 ]
