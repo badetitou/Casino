@@ -34,6 +34,40 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 	exporter model: testModel
 ]
 
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportBLMAttachment [
+
+	| result expected input class model package |
+	input := self createEntity: CSNUIInputFile.
+	class := FamixJavaClass new.
+	package := FamixJavaPackage new.
+	input
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'buttonAttribute';
+				 yourself);
+		name: 'buttonAttribute';
+		yourself.
+	class addAttribute: input affectedActions.
+	model := FamixJavaModel new.
+	package addClass: class.
+	model addAll: { 
+			package.
+			class.
+			input affectedActions }.
+
+
+	expected := String crlf join:
+		            #( '<mat-form-field appearance="fill">'
+		               '    <bl-attachment id="buttonAttribute" #buttonAttribute></bl-attachment>'
+		               '    <bl-attachment-chooser matSuffix [for]="buttonAttribute"></bl-attachment-chooser>'
+		               '</mat-form-field>' ).
+
+	result := String streamContents: [ :stream | 
+		          exporter currentWriteStream: stream.
+		          exporter visitCSNUIInputFile: input ].
+	self assert: expected equals: result
+]
+
 { #category : #'as yet unclassified' }
 CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
 

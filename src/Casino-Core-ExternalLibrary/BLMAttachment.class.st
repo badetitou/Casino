@@ -12,7 +12,6 @@ BLMAttachment >> exportContentOf: aWidget with: anExporter [
 		<< '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter
-		<<< ' ';
 		<<< aWidget idTag;
 		<<< '>'
 ]
