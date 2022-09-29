@@ -302,16 +302,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 			  dialog addAttribute:
 				  ((self create: CSNUICWHeader) attributeValue:
 					   (source parameters at: 1 ifAbsent: [ 'todo' ])).
-			  source parameters size = 1
-				  ifTrue: [ 
-					  dialog addAttribute: ((self create: CSNUIModal)
-							   attributeValue: 'true';
-							   yourself) ]
-				  ifFalse: [ 
-					  source parameters size ~= 0 ifTrue: [ 
-						  dialog addAttribute: ((self create: CSNUIModal)
-								   attributeValue: source parameters last;
-								   yourself) ] ].
 			  dialog ]
 		  ifFalse: [ nil ]
 ]
