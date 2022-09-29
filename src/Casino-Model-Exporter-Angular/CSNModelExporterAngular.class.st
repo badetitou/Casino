@@ -1046,16 +1046,6 @@ CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUICWSplitButton: aBLSplitButton [
-  self << '<'.
-  aBLSplitButton getListPropertiesAsStringWith: self.
-  self
-     <<< '></';
-     <<< (aBLSplitButton getSelectorFrom: self);
-     <<< '>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIImage: aBLUIImage [
   self << '<'.
   aBLUIImage getListPropertiesAsStringWith: self.
