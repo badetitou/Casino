@@ -933,12 +933,7 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 		<< '</tbody>';
 		indentMinus.
 
-	aBLUIGridLayout notPositionnedCell ifNotEmpty: [ :cells | 
-		self
-			crlf;
-			<< '<!-- not positionned cells -->';
-			crlf.
-		cells do: [ :cell | self visit: cell ] ]"
+	"
 		self crlf.
 		((aCSNLGridLayout atLevelSorted: number) reject: #isNil) 
 			ifNotEmpty: [ :cells | 
@@ -954,7 +949,13 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 						crlf ].
 				self
 					<< '</div>';
-					indentMinus ] ]
+					indentMinus ] ].
+	aCSNLGridLayout notPositionnedCell ifNotEmpty: [ :cells | 
+		self
+			crlf;
+			<< '<!-- not positionned cells -->';
+			crlf.
+		cells do: [ :cell | self visit: cell ] ]
 ]
 
 { #category : #visiting }

@@ -2,33 +2,34 @@ Extension { #name : #CSNLGridLayout }
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
-	| tmpCell |
-	anInvocation
-		ifNil: [ self addWidget: aWidget ]
-		ifNotNil: [ | param |
-			anInvocation
-				ifNotNil: [ aWidget addingPosition: anInvocation sourceAnchor startPos ].
-			"widget on the grid"
-			param := anInvocation parameters.
-			tmpCell := (aFactory create: CSNLCell)
-				widget: aWidget;
-				yourself.
-			(self attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
-				add: tmpCell -> anInvocation.
 
-			"alignement of the widget"
-			aWidget
-				position:
-					(param size >= 4
-						ifTrue: [ ((param at: 4) beginsWith: 'HasHorizontalAlignment.')
-								ifTrue: [ CSNLAlignement
-										createAlignementWithHorizontal: (param at: 4)
-										andVertical: (param at: 5 ifAbsent: [ nil ]) ]
-								ifFalse: [ CSNLAlignement
-										createAlignementWithHorizontal: (param at: 5 ifAbsent: [ nil ])
-										andVertical: (param at: 4) ] ]
-						ifFalse: [ nil ]).
-			cell add: tmpCell ]
+	| tmpCell |
+	anInvocation ifNil: [ self h. self addWidget: aWidget ] ifNotNil: [ 
+		| param |
+		aWidget addingPosition: anInvocation sourceAnchor startPos.
+		"widget on the grid"
+		param := anInvocation parameters.
+		tmpCell := (aFactory create: CSNLCell)
+			           widget: aWidget;
+			           yourself.
+		self addCell: tmpCell.
+		(self attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) 
+			add: tmpCell -> anInvocation.
+
+		"alignement of the widget"
+		aWidget position: (param size >= 4
+				 ifTrue: [ 
+					 ((param at: 4) beginsWith: 'HasHorizontalAlignment.')
+						 ifTrue: [ 
+							 CSNLAlignement
+								 createAlignementWithHorizontal: (param at: 4)
+								 andVertical: (param at: 5 ifAbsent: [ nil ]) ]
+						 ifFalse: [ 
+							 CSNLAlignement
+								 createAlignementWithHorizontal:
+								 (param at: 5 ifAbsent: [ nil ])
+								 andVertical: (param at: 4) ] ]
+				 ifFalse: [ nil ]) ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }
@@ -39,10 +40,15 @@ CSNLGridLayout >> childAttribute [
 
 { #category : #'*Casino-Model-Importer-Java' }
 CSNLGridLayout >> extractAddingPosition: anAssocWidgetArrayOrArrayValue [
+
 	"the first ifTrue is False is only use when we debug to avoid a bug when we restart"
-	^  anAssocWidgetArrayOrArrayValue value isArray ifTrue: [ 0 ] ifFalse: [  (anAssocWidgetArrayOrArrayValue value sourceAnchor )
-				ifNil: [ 0 ]
-				ifNotNil: [ :sourceText | sourceText startPos ] ]
+
+	^ anAssocWidgetArrayOrArrayValue value isArray
+		  ifTrue: [ 0 ]
+		  ifFalse: [ 
+			  anAssocWidgetArrayOrArrayValue value sourceAnchor
+				  ifNil: [ 0 ]
+				  ifNotNil: [ :sourceText | sourceText startPos ] ]
 ]
 
 { #category : #'*Casino-Model-Importer-Java' }

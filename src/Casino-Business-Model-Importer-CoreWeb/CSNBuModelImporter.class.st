@@ -78,7 +78,7 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 	declarator := anAttribute parentType sourceAnchor
 		              ifNil: [ 
 			              ('No sourceAnchor for '
-			               , anAttribute parentType fullName) record.
+			               , anAttribute parentType name) record.
 			              nil ]
 		              ifNotNil: [ 
 			              (anAttribute parentType generateFastIfNotDoneAndBind 

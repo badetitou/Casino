@@ -18,6 +18,7 @@ CSNLLayout class >> annotation [
 
 { #category : #adding }
 CSNLLayout >> addCell: anObject [
+
 	<generated>
 	^ self cell add: anObject
 ]

@@ -47,35 +47,41 @@ CSNJavaImporter >> affectationsToWidget [
 
 { #category : #'as yet unclassified' }
 CSNJavaImporter >> computeChildrenOf: widget [
+
+	| widgetDictionary |
+	widgetDictionary := Dictionary new.
 	((self computeOutgoingAddInvocationForWidget: widget) collect: [ 
 		 :invoc | 
 		 (self searchWidgetsFromAddInvocation: invoc for: widget) -> invoc ]) 
-		do: [ :assocWidgetsWithAddInvoc |
-			assocWidgetsWithAddInvoc key do: [ :foundWidget | 
-				| widgetToAdd |
-				widgetToAdd := (foundWidget widgetContainer isNotNil or: [ 
-					                foundWidget cellOwner isNotNil ])
-					               ifTrue: [ 
-						               | copy |
-						               copy := foundWidget verticalVeryDeepCopy.
-						               (copy recursiveWidgets , { copy }) flattened
-							               select: [ :wid | 
-							               wid isContainer and: [ wid children isEmpty ] ]
-							               thenDo: [ :wid | 
-								               self
-									               execute: [ self computeChildrenOf: wid ]
-									               recordedAs:
-										               (String streamContents: [ :stream | 
-											                stream << 'Compute child: '
-											                << wid printString << ' of '
-											                << foundWidget printString ]) ].
-						               copy ]
-					               ifFalse: [ foundWidget ].
-				self addWidgetVisitor
-					addWidget: widgetToAdd
-					to: widget
-					withInvocationOfAdd: assocWidgetsWithAddInvoc value
-					usingFactory: self factory ] ]
+		collect: [ :a | 
+		a key do: [ :k | widgetDictionary at: k put: a value ] ].
+	widgetDictionary associationsDo: [ :assocWidgetsWithAddInvoc | 
+		| foundWidget widgetToAdd |
+		foundWidget := assocWidgetsWithAddInvoc key.
+		widgetToAdd := (foundWidget widgetContainer isNotNil or: [ 
+			                foundWidget cellOwner isNotNil ])
+			               ifTrue: [ 
+				               | copy |
+				               copy := foundWidget verticalVeryDeepCopy.
+				               (copy recursiveWidgets , { copy }) flattened
+					               select: [ :wid | 
+					               wid isContainer and: [ wid children isEmpty ] ]
+					               thenDo: [ :wid | 
+						               self
+							               execute: [ self computeChildrenOf: wid ]
+							               recordedAs:
+								               (String streamContents: [ :stream | 
+									                stream << 'Compute child: '
+									                << wid printString << ' of '
+									                << foundWidget printString ]) ].
+				               copy ]
+			               ifFalse: [ foundWidget ].
+
+		self addWidgetVisitor
+			addWidget: widgetToAdd
+			to: widget
+			withInvocationOfAdd: assocWidgetsWithAddInvoc value
+			usingFactory: self factory ]
 ]
 
 { #category : #'as yet unclassified' }
