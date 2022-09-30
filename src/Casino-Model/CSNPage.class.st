@@ -109,11 +109,6 @@ CSNPage >> codeValue: anObject [
 ]
 
 { #category : #accessing }
-CSNPage >> componentName [
-	^ (self getAcceptedName , 'Component') capitalized 
-]
-
-{ #category : #accessing }
 CSNPage >> realClassName [
 
 	<FMProperty: #realClassName type: #String>

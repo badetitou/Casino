@@ -7,27 +7,8 @@ CSNBusinessPage >> calledBehavior [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> collectPhaseCalled [
-	^ (self recursiveWidgets flattened
-		flatCollect: [ :localWidget | 
-			(localWidget actions
-				select: #isActionAppel
-				thenCollect: #call) select: #isNotNil ]) asSet asOrderedCollection sort: #name ascending 
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> componentName [
-	^ (self getAcceptedName , 'Component') capitalized 
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> componentsRootFromExporter: anExporter [
 	^ (self rootFromExporter: anExporter ) / 'components'
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getAcceptedName [
-	^ self uniqueName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -48,19 +29,9 @@ CSNBusinessPage >> getHTMLName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getImportStringAndSubBusinessPageImportStringWithLocalPath: aLocalPath [
-	^ (self getImportStringWithLocalPath: aLocalPath) , String crlf
-		,
-			(self metiers
-				flatCollect: [ :businessPage | 
-					businessPage
-						getImportStringAndSubBusinessPageImportStringWithLocalPath: aLocalPath , '/components/' , self getAcceptedName ])
-]
+CSNBusinessPage >> getImportStringFromLocalPath [
 
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getImportStringWithLocalPath: aLocalPath [
-	^ 'import { ' , self componentName , ' } from ''' , aLocalPath , '/components/'
-		, self getAcceptedName , '/' , self getAcceptedName , '.component'';'
+	^ 'components/' , self getAcceptedName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -84,13 +55,27 @@ CSNBusinessPage >> getSelector [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getTSName [
-	^ self getAcceptedName  , '.component.ts'
+CSNBusinessPage >> getTag [
+	^ '<', self getSelector , '>', '</', self getSelector , '>'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getTag [
-	^ '<', self getSelector , '>', '</', self getSelector , '>'
+CSNBusinessPage >> id [
+
+	| dic |
+	dic := self container
+		       cacheAt: #businessUniqueName
+		       ifAbsentPut: [ 
+		       { (self -> self name asRealCamelCase) } asDictionary ].
+	^ dic at: self ifAbsentPut: [ 
+		  | index potentialName |
+		  index := 0.
+		  potentialName := self name asRealCamelCase.
+		  [ dic includes: potentialName ] whileTrue: [ 
+			  potentialName := (potentialName removeSuffix: index asString)
+			                   , index asString.
+			  index := index + 1 ].
+		  potentialName ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -124,33 +109,6 @@ CSNBusinessPage >> recursiveWidgetsWithoutMetiers [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> rootFromExporter: anExporter [ 
 	^ ((self container) componentsRootFromExporter: anExporter) /  (self getAcceptedName )
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> uniqueName [
-
-	| dic |
-	dic := self container
-		       cacheAt: #businessUniqueName
-		       ifAbsentPut: [ 
-		       { (self -> self name asRealCamelCase) } asDictionary ].
-	^ dic at: self ifAbsentPut: [ 
-		  | index potentialName |
-		  index := 0.
-		  potentialName := self name asRealCamelCase.
-		  [ dic includes: potentialName ] whileTrue: [ 
-			  potentialName := (potentialName removeSuffix: index asString)
-			                   , index asString.
-			  index := index + 1 ].
-		  potentialName ]
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> widgetsDependenciesFrom: anExporter [
-
-	^ (((self recursiveWidgets , {self}) flattened collect: [ :el | el getExternalDependenciesFrom: anExporter ]) flattened asSet asOrderedCollection
-		   collect: [ :dependency | dependency importString ]
-		   as: Set) asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

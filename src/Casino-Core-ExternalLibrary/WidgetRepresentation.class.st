@@ -163,6 +163,11 @@ WidgetRepresentation >> isNative [
 ]
 
 { #category : #accessing }
+WidgetRepresentation >> isSubComponent [
+	^ false
+]
+
+{ #category : #accessing }
 WidgetRepresentation >> moduleName [
 	^ 'ElementRef'
 ]

@@ -1,13 +1,15 @@
 Extension { #name : #CSNPage }
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> getAcceptedName [
-	^ self uniqueName
+CSNPage >> getComponentSelector [
+	^ self getSelector
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getComponentsPageMetierListName [
-	^ self recursiveMetiers flattened flatCollect: [ :metier | '    ', metier componentName, ',', String crlf ]
+
+	^ self recursiveMetiers flattened flatCollect: [ :metier | 
+		  '    ' , metier componentName , ',' , String crlf ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -89,28 +91,12 @@ CSNPage >> getSelector [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> getTSName [
-	^ self getAcceptedName  , '.component.ts'
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getTag [
 	^ '<' , self getSelector , '>' , '</' , self getSelector , '>'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> rootFromExporter: anExporter [
-	^ anExporter rootPhases / self name
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> sortedPageMetiers [
-	^ self businessPage asOrderedCollection
-		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNPage >> uniqueName [
+CSNPage >> id [
 	| dic |
 	dic := self mooseModel
 		cacheAt: #pageUniqueName
@@ -128,11 +114,36 @@ CSNPage >> uniqueName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> pageSubComponentsUsing: anExporter [
+
+	^ self recursiveWidgets flattened select: [ :widget | 
+		  (anExporter angularRepresentationOf: widget) isSubComponent ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> recursiveWidgets [
+
+	^ ((self recursiveMetiers collect: #recursiveWidgets) , { 
+		   self.
+		   self recursiveMetiers.
+		   super recursiveWidgets }) flattened
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> rootFromExporter: anExporter [
+	^ anExporter rootPhases / self name
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNPage >> sortedPageMetiers [
+	^ self businessPage asOrderedCollection
+		sort: [ :pageMetier1 :pageMetier2 | pageMetier1 addingPosition < pageMetier2  addingPosition ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> widgetsDependenciesFrom: anExporter [
 
-	^ (((self recursiveMetiers collect: #recursiveWidgets) , { 
-		    self.
-		    self recursiveMetiers }) flattened collect: [ :el | 
+	^ (self recursiveWidgets collect: [ :el | 
 		   el getExternalDependenciesFrom: anExporter ]) flattened asSet
 		  asOrderedCollection
 ]

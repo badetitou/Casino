@@ -23,3 +23,8 @@ BLMBusinessPage >> internalDependenciesOf: aCSNBusinessPage [
 BLMBusinessPage >> isLocal [
 	^ true
 ]
+
+{ #category : #accessing }
+BLMBusinessPage >> isSubComponent [
+	^ true
+]

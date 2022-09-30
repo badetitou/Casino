@@ -23,6 +23,20 @@ CSNWidget >> attributesTagWith: anExporter [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> collectPhaseCalled [
+	^ (self recursiveWidgets flattened
+		flatCollect: [ :localWidget | 
+			(localWidget actions
+				select: #isActionAppel
+				thenCollect: #call) select: #isNotNil ]) asSet asOrderedCollection sort: #name ascending 
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> componentName [
+	^ (self getAcceptedName , 'Component') capitalized 
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> computeSelfAttributes [
 	^ {self attributes. self getPositionAttribute. self generateDefaultClassAttribute. self containedElementAttribute } flattened asOrderedCollection 
 ]
@@ -92,6 +106,11 @@ CSNWidget >> generateDefaultClassAttribute [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getAcceptedName [
+	^ self id
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getExternalDependenciesFrom: anExporter [
 
 	^ { 
@@ -102,6 +121,25 @@ CSNWidget >> getExternalDependenciesFrom: anExporter [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getExternalDependencyFrom: anExporter [
 	^ { anExporter angularRepresentationOf: self }
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getHTMLName [
+	^ self id  , '.component.html'
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getImportStringFromLocalPath [
+
+	^  self getAcceptedName
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getImportStringWithLocalPath: aLocalPath [
+
+	^ 'import { ' , self componentName , ' } from ''' , aLocalPath, '/'
+	  , self getImportStringFromLocalPath , '/' , self getAcceptedName
+	  , '.component'';'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -126,6 +164,11 @@ CSNWidget >> getPositionAttribute [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getSelectorFrom: anExporter [
 	^ (anExporter angularRepresentationOf: self) getSelector
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getTSName [
+	^ self id  , '.component.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -181,4 +224,34 @@ CSNWidget >> idViewChildFrom: anExporter [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> isPageMetier [
 	^ false
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> printImportStringForSubComponentsFrom: aLocalPath using: anExporter [
+
+	(anExporter angularRepresentationOf: self) isSubComponent
+		ifTrue: [ 
+			anExporter
+				<< (self getImportStringWithLocalPath: aLocalPath);
+				crlf.
+			self subWidgets do: [ :widget | 
+				widget
+					printImportStringForSubComponentsFrom:
+					aLocalPath , '/' , self getImportStringFromLocalPath
+					using: anExporter ] ]
+		ifFalse: [ 
+			self subWidgets do: [ :widget | 
+				widget
+					printImportStringForSubComponentsFrom: aLocalPath
+					using: anExporter ] ]
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> widgetsDependenciesFrom: anExporter [
+
+	^ (((self recursiveWidgets , { self }) flattened collect: [ :el | 
+		    el getExternalDependenciesFrom: anExporter ]) flattened asSet
+		   asOrderedCollection
+		   collect: [ :dependency | dependency importString ]
+		   as: Set) asOrderedCollection
 ]

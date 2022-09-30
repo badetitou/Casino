@@ -61,6 +61,11 @@ CSNWidget >> csnSourcesIn: aBuilder [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> getComponentSelector [
+	^ self getAcceptedName
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> isWidget [ 
 	^ true
 ]

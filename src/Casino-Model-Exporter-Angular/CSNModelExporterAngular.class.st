@@ -130,6 +130,35 @@ CSNModelExporterAngular >> exporterAngularConfiguration: anObject [
 	exporterAngularConfiguration := anObject
 ]
 
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> generateAsSubComponent: aCSNWidget [
+
+	"This generate the sub component. It is probably a dialog"
+
+	| componentName exporter |
+	componentName := (aCSNWidget name beginsWith: 'widget')
+		                 ifFalse: [ aCSNWidget name ]
+		                 ifTrue: [ 
+		                 (aCSNWidget source target anyOne atScope:
+			                  FamixTClass) anyOne name ].
+	exporter := self clone.
+	exporter indentLevel: 0.
+	exporter currentPath: self currentPath / aCSNWidget id.
+	[ exporter currentPath ensureCreateDirectory ]
+		on: DirectoryExists
+		do: [ 'directory already exists' recordInfo ].
+
+	(exporter currentPath / aCSNWidget getHTMLName) asFileReference 
+		writeStreamDo: [ :aWriteStream | 
+			exporter currentWriteStream: aWriteStream.
+			exporter generateInnerHtmlOf: aCSNWidget ].
+
+	(exporter currentPath / aCSNWidget getTSName) asFileReference 
+		writeStreamDo: [ :aWriteStream | 
+			exporter currentWriteStream: aWriteStream.
+			exporter generateTSSourceCodeForWidgetComponent: aCSNWidget ]
+]
+
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeDependOfPageMetierForPage: aCSNPage [
 	aCSNPage hasMultiplePageMetier
@@ -166,7 +195,6 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 { #category : #generate }
 CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
 
-	| angularRepresentation |
 	aBLPageMetier metiers ifNotEmpty: [ 
 		currentWriteStream
 			<< '<bl-tabs>';
@@ -186,19 +214,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
 		currentWriteStream
 			<< '</bl-tabs>';
 			<< String crlf ].
-
-	aBLPageMetier layout ifNotNil: [ 
-		angularRepresentation := self angularRepresentationOf: aBLPageMetier.
-		angularRepresentation exportHeaderOf: aBLPageMetier with: self.
-		self visit: aBLPageMetier layout.
-		angularRepresentation exportFooterOf: aBLPageMetier with: self.
-		self crlf ].
-
-	aBLPageMetier widgets
-		reject: [ :widget | widget isPageMetier ]
-		thenDo: [ :widget | 
-			self visit: widget.
-			currentWriteStream << String crlf ]
+	self generateInnerHtmlOf: aBLPageMetier
 ]
 
 { #category : #generate }
@@ -253,6 +269,24 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 	self
 		crlf;
 		<< '</bl-phase-container>'
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
+
+	| angularRepresentation |
+	aCSNWidget layout ifNotNil: [ 
+		angularRepresentation := self angularRepresentationOf: aCSNWidget.
+		angularRepresentation exportHeaderOf: aCSNWidget with: self.
+		self visit: aCSNWidget layout.
+		angularRepresentation exportFooterOf: aCSNWidget with: self.
+		self crlf ].
+
+	aCSNWidget widgets
+		reject: [ :widget | widget isPageMetier ]
+		thenDo: [ :widget | 
+			self visit: widget.
+			currentWriteStream << String crlf ]
 ]
 
 { #category : #generate }
@@ -445,9 +479,9 @@ export class ';
 
 { #category : #generate }
 CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
+
 	currentWriteStream
-		<<
-			'import { NgModule } from ''@angular/core'';
+		<< 'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
 import { Phase, PhaseService, ComponentsModule } from ''app/projects/bl-shell/src/public-api'';
@@ -457,28 +491,37 @@ import { ';
 		<< aCSNPage getFolderName;
 		<< '/';
 		<< aCSNPage getAcceptedName;
-		<<
-			'.component'';
+		<< '.component'';
 import { PHASE_ROUTES } from ''./';
 		<< aCSNPage getAcceptedName;
 		<< '.route'';';
 		<< String crlf;
-		<< (aCSNPage widgetsDependenciesImportInstructionFrom: self);
-		<< (aCSNPage businessPage flatCollect: [ :aBusinessPage | aBusinessPage getImportStringAndSubBusinessPageImportStringWithLocalPath: '.' ]);
-		<<
-			'
-export const COMPONENTS: any[] = [
-    ';
+		<< (aCSNPage widgetsDependenciesImportInstructionFrom: self).
+	aCSNPage businessPage do: [ :aBusinessPage | 
+		aBusinessPage printImportStringForSubComponentsFrom: '.' using: self ].
+	self << '
+export const COMPONENTS: any[] = ['.
+	self
+		crlf;
+		indentPlus;
 		<< aCSNPage componentName;
-		<<
-			',
-';
-		<< aCSNPage getComponentsPageMetierListName;
-		<<
-			'
-];
+		<<< ','.
+	self crlf.
+	(aCSNPage pageSubComponentsUsing: self)
+		do: [ :subComponent | 
+			self
+				<< subComponent componentName;
+				<<< ',' ]
+		separatedBy: [ self crlf ].
+	currentWriteStream << '
+];'.
+	self
+		indentMinus;
+		crlf;
+		crlf.
 
-@NgModule({
+	self
+		<< '@NgModule({
     declarations: [
         COMPONENTS
     ],
@@ -487,16 +530,14 @@ export const COMPONENTS: any[] = [
         PHASE_ROUTES,
 ';
 		<< (aCSNPage widgetsDependenciesNameFrom: self);
-		<<
-			'
+		<< '
         ComponentsModule,
         TranslateModule
     ],
     entryComponents: [
         ';
 		<< aCSNPage componentName;
-		<<
-			'
+		<< '
     ]
 })
 export class ';
@@ -748,6 +789,72 @@ export class ';
     }
 }';
 		<< String crlf
+]
+
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> generateTSSourceCodeForWidgetComponent: aCSNWidget [
+
+	| phaseCalled |
+	phaseCalled := aCSNWidget collectPhaseCalled.
+	self writeBusinessPageImportList.
+	phaseCalled ifNotEmpty: [ self writeImportForNavigation ].
+
+	self crlf.
+	self
+		<< '@Component({
+    selector: ''';
+		<< aCSNWidget getComponentSelector;
+		<< ''',
+    templateUrl: ''./';
+		<< aCSNWidget getHTMLName;
+		<< '''
+})
+export class ';
+		<< aCSNWidget componentName;
+		<< ' implements OnInit, OnDestroy {'.
+	self indentPlus.
+	phaseCalled do: [ :phase | 
+		currentWriteStream
+			<< '    public ';
+			<< phase getAcceptedName;
+			<< ': Phase;';
+			<< String crlf ].
+	phaseCalled ifNotEmpty: [ self crlf ].
+	self inIndented: [ 
+		aCSNWidget recursiveWidgets asSet flattened do: [ :widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptVariableOf: widget
+				usingExporter: self ] ].
+	self << 'constructor('.
+	aCSNWidget collectPhaseCalled ifNotEmpty: [ 
+		currentWriteStream
+		<<
+		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+	currentWriteStream << ') {
+'.
+	aCSNWidget collectPhaseCalled do: [ :phase | 
+		currentWriteStream
+			<< '        this.';
+			<< phase getAcceptedName;
+			<< ' = this._phaseService.getPhase(''';
+			<< phase getAcceptedName;
+			<< ''');';
+			<< String crlf ].
+	self <<< '
+    }
+
+    public ngOnInit(): void {
+    }
+
+    public ngOnDestroy(): void {
+
+    }
+'.
+	phaseCalled ifNotEmpty: [ 
+		self writeOpenPhaseMethod.
+		self crlf ].
+	self indentMinus.
+	self <<< '}'
 ]
 
 { #category : #accessing }
