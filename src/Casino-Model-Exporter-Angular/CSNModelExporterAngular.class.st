@@ -1196,7 +1196,10 @@ CSNModelExporterAngular >> visitCSNUICWHTML: aBLHTML [
 
 	self crlf.
 	aBLHTML widgets
-		do: [ :widget | self << (widget text ifNil: [ '' ]) ]
+		do: [ :widget | 
+			self
+			<<
+			((widget text ifNil: [ '' ]) copyReplaceAll: '</br>' with: '<br/>') ]
 		separatedBy: [ self crlf ].
 
 	self crlf
