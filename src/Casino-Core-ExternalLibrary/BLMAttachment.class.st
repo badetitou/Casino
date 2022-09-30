@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #accessing }
+BLMAttachment >> attributeOf: aWidget [
+
+	| attributes |
+	"Same as super class but MUST have a CSNUIID"
+	attributes := aWidget computeSelfAttributes.
+	attributes add: (CSNUIId new attributeValue: aWidget id).
+	^ attributes
+]
+
+{ #category : #accessing }
 BLMAttachment >> exportContentOf: aWidget with: anExporter [
 
 	anExporter
@@ -12,7 +22,8 @@ BLMAttachment >> exportContentOf: aWidget with: anExporter [
 		<< '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter
-		<<< aWidget idTag;
+		<<< ' #';
+		<<< aWidget id;
 		<<< '>'
 ]
 
@@ -26,7 +37,7 @@ BLMAttachment >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		crlf;
 		<< '<bl-attachment-chooser matSuffix [for]="';
-		<<< (self variableFor: aWidget);
+		<<< aWidget id;
 		<<< '"></bl-attachment-chooser>';
 		crlf;
 		indentMinus;
@@ -75,7 +86,5 @@ BLMAttachment >> modulePath [
 { #category : #accessing }
 BLMAttachment >> variableFor: widget [
 
-	^ widget affectedActions
-		  ifNil: [ widget name ]
-		  ifNotNil: [ :affectedAction | affectedAction uniqueName ]
+	^ widget id
 ]
