@@ -109,30 +109,27 @@ import { HttpClientModule } from ''@angular/common/http'';'.
 
 { #category : #visiting }
 CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
-  aBLPageMetier metiers ifNotEmpty: [ currentWriteStream
-           << '<mat-tab-group>';
-           << String crlf.
-        aBLPageMetier metiers do: [:metier |  currentWriteStream
-                 << '     <mat-tab label=';
-                 << (self class convertIfString: (self protectString: metier title));
-                 << '>';
-                 << String crlf;
-                 << '        ';
-                 << metier getTag;
-                 << String crlf;
-                 << '    </mat-tab>';
-                 << String crlf ].
-        currentWriteStream
-           << '</mat-tab-group>';
-           << String crlf ].
-  aBLPageMetier layout
-		ifNotNil: [ self visit: aBLPageMetier layout ]
-		ifNil: [ 
-			aBLPageMetier widgets
-				reject: [ :widget | widget isPageMetier ]
-				thenDo: [ :widget | 
-					self visit: widget.
-					currentWriteStream << String crlf ] ]
+
+	aBLPageMetier metiers ifNotEmpty: [ 
+		currentWriteStream
+			<< '<mat-tab-group>';
+			<< String crlf.
+		aBLPageMetier metiers do: [ :metier | 
+			currentWriteStream
+				<< '     <mat-tab label=';
+				<<
+					(self class convertIfString: (self protectString: metier title));
+				<< '>';
+				<< String crlf;
+				<< '        ';
+				<< metier getTag;
+				<< String crlf;
+				<< '    </mat-tab>';
+				<< String crlf ].
+		currentWriteStream
+			<< '</mat-tab-group>';
+			<< String crlf ].
+	self generateInnerHtmlOf: aBLPageMetier
 ]
 
 { #category : #visiting }
@@ -201,19 +198,24 @@ export class ';
 				asOrderedCollection;
 		crlf. "(aBLPageMetier widgetsDependenciesFrom: self)
 					   ,"
-	self inIndented: [
-		aBLPageMetier recursiveWidgets flattened asSet do: [ 
-			:widget | 
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets flattened asSet do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
-				usingExporter: self ] ].
+				usingExporter: self ].
+		self crlf.
+		self
+			<< aBLPageMetier id uncapitalized;
+			<<< 'Form: FormGroup;'.
+		self crlf ].
 	self
 		<< '
-
     constructor(';
 		<< (aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
-					 ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ]);
-		<<
+					 ' protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService,' ]).
+	self <<< ' private _fb: FormBuilder,'.
+	self
+		<<<
 			(', ' join: ((aBLPageMetier calledBehavior collect: [ :behavior | 
 							   self behaviorInitializeVariableExporter
 								   export: behavior
@@ -230,7 +232,11 @@ export class ';
 		<< '
     }
 
-    public ngOnInit(): void {
+    public ngOnInit(): void {'.
+	self indentPlus.
+	self printBuildTSFormGroupFor: aBLPageMetier.
+	self indentMinus.
+	self <<< '
     }
 
     public ngOnDestroy(): void {

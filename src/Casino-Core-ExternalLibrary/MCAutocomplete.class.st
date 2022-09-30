@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #accessing }
+MCAutocomplete >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	attributes add: (CSNAttribute new
+			 name: 'formControlName';
+			 attributeValue: aWidget id;
+			 yourself).
+	^ attributes
+]
+
+{ #category : #accessing }
 MCAutocomplete >> componentAttributeOn: anExporter [
 	anExporter <<< ' type="text" matInput [matAutocomplete]="auto"'
 ]
@@ -61,6 +73,12 @@ MCAutocomplete >> internalDependenciesOf: aWidgetInstance [
 	^ { 
 		  MCFormFieldModule new.
 		  MCInput new }
+]
+
+{ #category : #accessing }
+MCAutocomplete >> isFormControl [
+	"If true this representation support the formControl"
+	^ true
 ]
 
 { #category : #accessing }

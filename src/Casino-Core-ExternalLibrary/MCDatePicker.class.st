@@ -26,6 +26,18 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #accessing }
+MCDatePicker >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	attributes add: (CSNAttribute new
+			 name: 'formControlName';
+			 attributeValue: aWidget id;
+			 yourself).
+	^ attributes
+]
+
 { #category : #export }
 MCDatePicker >> exportContentOf: aWidget with: anExporter [
 
@@ -96,6 +108,12 @@ MCDatePicker >> internalDependenciesOf: aWidgetInstance [
 	^ { 
 		  MCDateAdapter new.
 		  MCFormFieldModule new }
+]
+
+{ #category : #accessing }
+MCDatePicker >> isFormControl [
+	"If true this representation support the formControl"
+	^ true
 ]
 
 { #category : #accessing }

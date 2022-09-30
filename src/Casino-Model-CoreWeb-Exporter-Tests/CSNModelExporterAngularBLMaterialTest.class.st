@@ -309,7 +309,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportDatePicker [
 			          << '<mat-form-field appearance="fill">';
 			          << String crlf;
 			          <<
-				          '    <input id="datePicker" matInput [matDatepicker]="datePicker">';
+				          '    <input formControlName="datePicker" id="datePicker" matInput [matDatepicker]="datePicker">';
 			          << String crlf;
 			          <<
 				          '    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>';
@@ -566,7 +566,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportInput [
 	'    <mat-label>'
 	'        label'
 	'    </mat-label>'
-	'    <input matInput>'
+	'    <input formControlName="widget" matInput>'
 	'</mat-form-field>'
 	).
 
@@ -595,7 +595,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportInputWithAffectation [
 	'    <mat-label>'
 	'        label'
 	'    </mat-label>'
-	'    <input id="myInput" matInput>'
+	'    <input formControlName="myInput" id="myInput" matInput>'
 	'</mat-form-field>'
 	).
 

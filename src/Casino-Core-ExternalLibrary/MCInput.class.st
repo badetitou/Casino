@@ -26,6 +26,18 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
+{ #category : #accessing }
+MCInput >> attributeOf: aWidget [
+
+	| attributes |
+	attributes := super attributeOf: aWidget.
+	attributes add: (CSNAttribute new
+			 name: 'formControlName';
+			 attributeValue: aWidget id;
+			 yourself).
+	^ attributes
+]
+
 { #category : #export }
 MCInput >> componentAttributeOn: anExporter [
 	anExporter <<< ' matInput'
@@ -79,6 +91,12 @@ MCInput >> getSelector [
 { #category : #export }
 MCInput >> internalDependenciesOf: aWidgetInstance [
 	^ { MCFormFieldModule new }
+]
+
+{ #category : #accessing }
+MCInput >> isFormControl [
+	"If true this representation support the formControl"
+	^ true
 ]
 
 { #category : #accessing }

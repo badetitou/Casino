@@ -37,13 +37,35 @@ CSNWidget >> componentName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> componentSubWidgetsUsing: anExporter [
+
+	"I returned sub widgets in the sub component (for instance, not going inside dialog definition)"
+
+	| widgs |
+	widgs := self widgets reject: [ :w | 
+		           (anExporter angularRepresentationOf: w) isSubComponent ].
+
+	^ { 
+		  widgs.
+		  (widgs collect: [ :w | w componentSubWidgetsUsing: anExporter ]) }
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> computeSelfAttributes [
-	^ {self attributes. self getPositionAttribute. self generateDefaultClassAttribute. self containedElementAttribute } flattened asOrderedCollection 
+
+	^ { 
+		  self attributes.
+		  self getPositionAttribute.
+		  self generateDefaultClassAttribute.
+		  self containedElementAttribute } flattened asOrderedCollection
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> containedElementAttribute [
-	^ self container ifNil: [ {  } ] ifNotNil: [ :a | a hierarchalAttributes ]
+
+	^ self container
+		  ifNil: [ {  } ]
+		  ifNotNil: [ :a | a hierarchalAttributes ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

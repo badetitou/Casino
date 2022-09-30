@@ -275,6 +275,14 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
 
 	| angularRepresentation |
+	self
+		<< '<form [formGroup]="';
+		<<< aCSNWidget id uncapitalized;
+		<<< 'Form';
+		<<< '">';
+		indentPlus;
+		crlf.
+
 	aCSNWidget layout ifNotNil: [ 
 		angularRepresentation := self angularRepresentationOf: aCSNWidget.
 		angularRepresentation exportHeaderOf: aCSNWidget with: self.
@@ -286,7 +294,11 @@ CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
 		reject: [ :widget | widget isPageMetier ]
 		thenDo: [ :widget | 
 			self visit: widget.
-			currentWriteStream << String crlf ]
+			currentWriteStream << String crlf ].
+
+	self
+		indentMinus;
+		<< '</form>'
 ]
 
 { #category : #generate }
@@ -484,6 +496,7 @@ CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
 		<< 'import { NgModule } from ''@angular/core'';
 import { TranslateModule } from ''@ngx-translate/core'';
 import { CommonModule } from ''@angular/common'';
+import { FormsModule, ReactiveFormsModule } from ''@angular/forms'';
 import { Phase, PhaseService, ComponentsModule } from ''app/projects/bl-shell/src/public-api'';
 import { ';
 		<< aCSNPage componentName;
@@ -507,7 +520,8 @@ export const COMPONENTS: any[] = ['.
 		<< aCSNPage componentName;
 		<<< ','.
 	self crlf.
-	(aCSNPage pageSubComponentsUsing: self)
+	((aCSNPage pageSubComponentsUsing: self) asSet asOrderedCollection 
+		 sorted: [ :a :b | a componentName < b componentName ])
 		do: [ :subComponent | 
 			self
 				<< subComponent componentName;
@@ -526,6 +540,8 @@ export const COMPONENTS: any[] = ['.
         COMPONENTS
     ],
     imports: [
+        ReactiveFormsModule,
+        FormsModule,
         CommonModule,
         PHASE_ROUTES,
 ';
@@ -610,7 +626,8 @@ CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 		self writeImportForNavigation ].
 	"currentWriteStream
 		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self))."
-		currentWriteStream << '
+	currentWriteStream
+		<< '
 
 @Component({
     selector: ''';
@@ -638,14 +655,19 @@ export class ';
 			:widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
-				usingExporter: self ] ].
+				usingExporter: self ].
+		self crlf.
+		self
+			<< aBLPageMetier id uncapitalized;
+			<<< 'Form: FormGroup;'.
+		self crlf ].
 	self << '
-
     constructor('.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		currentWriteStream
 		<<
 		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+	self <<< ' private _fb: FormBuilder,'.
 	currentWriteStream << ') {
 '.
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
@@ -824,12 +846,19 @@ export class ';
 		aCSNWidget recursiveWidgets asSet flattened do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
-				usingExporter: self ] ].
+				usingExporter: self ].
+		self crlf.
+		self
+			<< aCSNWidget id uncapitalized;
+			<<< 'Form: FormGroup;'.
+		self crlf ].
+	self crlf.
 	self << 'constructor('.
 	aCSNWidget collectPhaseCalled ifNotEmpty: [ 
 		currentWriteStream
 		<<
 		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+	self <<< 'private _fb: FormBuilder,'.
 	currentWriteStream << ') {
 '.
 	aCSNWidget collectPhaseCalled do: [ :phase | 
@@ -843,8 +872,9 @@ export class ';
 	self <<< '
     }
 
-    public ngOnInit(): void {
-    }
+    public ngOnInit(): void {'.
+	self printBuildTSFormGroupFor: aCSNWidget.
+	self <<< '    }
 
     public ngOnDestroy(): void {
 
@@ -882,6 +912,26 @@ CSNModelExporterAngular >> prepareExport [
 	context := CSNContext new
 		root: (FileSystem disk workingDirectory / model name) asFileReference;
 		yourself
+]
+
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
+
+	self inIndented: [ 
+		self
+			<< 'this.';
+			<<< aCSNWidget id uncapitalized;
+			<<< 'Form = this._fb.group('.
+		self inBraces: [ 
+			(((aCSNWidget componentSubWidgetsUsing: self) flattened select: [ 
+				  :w | (self angularRepresentationOf: w) isFormControl ]) asSet
+				 asOrderedCollection sorted: [ :a :b | a id < b id ])
+				do: [ :w | 
+					self
+						<< w id uncapitalized;
+						<<< ': new FormControl(),' ]
+				separatedBy: [ self crlf ] ].
+		self <<< ')' ]
 ]
 
 { #category : #accessing }
@@ -1285,15 +1335,18 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 
 { #category : #'private-generate' }
 CSNModelExporterAngular >> writeBusinessPageImportList [
+
 	currentWriteStream
-		<<
-			'import {
+		<< 'import {
 ';
 		<< self businessPageImportList;
-		<<
-			'
+		<< '
 } from ''@angular/core'';
-'
+'.
+	self
+	<<
+	'import { FormBuilder, FormControl, FormGroup } from ''@angular/forms'';'.
+	self crlf
 ]
 
 { #category : #generate }

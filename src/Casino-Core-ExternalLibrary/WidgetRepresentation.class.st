@@ -150,6 +150,12 @@ WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
 ]
 
 { #category : #accessing }
+WidgetRepresentation >> isFormControl [
+	"If true this representation support the formControl"
+	^ false
+]
+
+{ #category : #accessing }
 WidgetRepresentation >> isLocal [
 	"The widget is NOT imported from a distant library
 	It is already part of the exported project"
@@ -164,6 +170,7 @@ WidgetRepresentation >> isNative [
 
 { #category : #accessing }
 WidgetRepresentation >> isSubComponent [
+	"If true this representation will be exported as a component"
 	^ false
 ]
 

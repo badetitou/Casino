@@ -37,26 +37,32 @@ CSNModelExporterAngularBLSpecificTest >> setUp [
 { #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidget [
 
-	| result business container |
+	| result business container page |
+	page := self createEntity: CSNPage.
 	business := self createEntity: CSNBusinessPage.
+	page addBusinessPage: business.
+	business name: 'aPage'.
 	business layout: (self createEntity: CSNLHorizontalLayout).
 	container := self createEntity: CSNContainer.
 	business layout addWidget: container.
 	container addWidget: (self createEntity: CSNUIButton).
 	result := String streamContents: [ :stream | 
 		          stream
-			          << '<div class="row">';
+			          << '<form [formGroup]="aPageForm">';
 			          << String crlf;
-			          << '    <div class="col">';
+			          << '    <div class="row">';
 			          << String crlf;
-			          << '        <bl-button-link>';
+			          << '        <div class="col">';
 			          << String crlf;
-			          << '        </bl-button-link>';
+			          << '            <bl-button-link>';
+			          << String crlf;
+			          << '            </bl-button-link>';
+			          << String crlf;
+			          << '        </div>';
 			          << String crlf;
 			          << '    </div>';
 			          << String crlf;
-			          << '</div>';
-			          << String crlf ].
+			          << '</form>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
