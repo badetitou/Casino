@@ -23,8 +23,23 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #MCSelect,
 	#superclass : #MaterialComponent,
+	#instVars : [
+		'multiple'
+	],
 	#category : #'Casino-Core-ExternalLibrary'
 }
+
+{ #category : #accessing }
+MCSelect >> beMultiple [
+
+	self multiple: true
+]
+
+{ #category : #accessing }
+MCSelect >> componentAttributeOn: anExporter [
+
+	self multiple ifTrue: [ anExporter <<< ' multiple' ]
+]
 
 { #category : #accessing }
 MCSelect >> exportFooterOf: aWidget with: anExporter [
@@ -60,6 +75,12 @@ MCSelect >> getSelector [
 ]
 
 { #category : #accessing }
+MCSelect >> initialize [
+	super initialize.
+	multiple := false
+]
+
+{ #category : #accessing }
 MCSelect >> moduleName [
 	^ 'MatSelectModule'
 ]
@@ -67,4 +88,16 @@ MCSelect >> moduleName [
 { #category : #accessing }
 MCSelect >> modulePath [
 	^ '@angular/material/select'
+]
+
+{ #category : #accessing }
+MCSelect >> multiple [
+
+	^ multiple
+]
+
+{ #category : #accessing }
+MCSelect >> multiple: anObject [
+
+	multiple := anObject
 ]

@@ -4,8 +4,3 @@ Extension { #name : #CSNUICWSplitButton }
 CSNUICWSplitButton class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWSplitButton: self 
 ]
-
-{ #category : #'*Casino-Model-Visitor' }
-CSNUICWSplitButton >> accept: aVisitor [
-	^ aVisitor visitCSNUICWSplitButton: self 
-]

@@ -4,8 +4,3 @@ Extension { #name : #CSNUICWOpen }
 CSNUICWOpen class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWOpen: self 
 ]
-
-{ #category : #'*Casino-Model-Visitor' }
-CSNUICWOpen >> accept: aVisitor [
-	^ aVisitor visitCSNUICWOpen: self 
-]

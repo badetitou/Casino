@@ -34,7 +34,8 @@ Class {
 		'extendedLink',
 		'uiLink',
 		'csnActions',
-		'accordion'
+		'accordion',
+		'multipleLinks'
 	],
 	#category : #'Casino-Model-CoreWeb-Generator'
 }
@@ -88,7 +89,11 @@ CSNUICoreWebGenerator >> defineClasses [
 		yourself.
 	fileUploadPanel := (builder newClassNamed: #FileUploadPanel)
 		comment: 'Correspond to the BLCore class BLFileUploadPanel';
-		yourself. 
+		yourself.
+
+	multipleLinks := (builder newClassNamed: #MultipleLinks)
+		comment: 'Correspond to the BLCore class BLAbstractLienMultiple';
+		yourself.
 
 	"attributes"
 	header := builder newClassNamed: #Header.
@@ -123,6 +128,7 @@ CSNUICoreWebGenerator >> defineHierarchy [
 	multiCombo --|> csnContainer.
 	rechercheEtListe --|> csnContainer.
 	fileUploadPanel --|> csnContainer.
+	multipleLinks --|> csnContainer.
 
 	autoComplete --|> csnContainer.
 	richTextArea --|> uiInput.

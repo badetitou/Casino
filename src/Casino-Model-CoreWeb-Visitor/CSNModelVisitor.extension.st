@@ -219,6 +219,18 @@ CSNModelVisitor class >> visitCSNUICWMultiCombo: aCSNUICWMultiCombo [
 ]
 
 { #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor >> visitCSNUICWMultipleLinks: aCSNUICWMultipleLinks [
+
+	^ self visitCSNContainer: aCSNUICWMultipleLinks
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
+CSNModelVisitor class >> visitCSNUICWMultipleLinks: aCSNUICWMultipleLinks [
+
+	^ self visitCSNContainer: aCSNUICWMultipleLinks
+]
+
+{ #category : #'*Casino-Model-CoreWeb-Visitor' }
 CSNModelVisitor class >> visitCSNUICWOpen: aCSNUICWOpen [
 	<generated>
 	^ self visitCSNAttribute: aCSNUICWOpen

@@ -347,6 +347,16 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWMultiCombo: aCSNUICWMultiCombo [
 ]
 
 { #category : #visiting }
+CSNModelImporterCoreWebVisitor >> visitCSNUICWMultipleLinks: aCSNUICWMultipleLinks [
+
+	^ (#( 'BLLienMultiple' 'AbstractLienMultiple' ) includesAny:
+		   (source invokedClass withSuperclassHierarchy collect:
+			    #invokedClassName))
+		  ifTrue: [ self createWidget: aCSNUICWMultipleLinks ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWOpen: aCSOpen [
 	^ (source isInvocation and: [ source attributeName = 'open' ]) ifTrue: [ self createAttribute: aCSOpen for: source ] ifFalse: [ nil ]
 ]

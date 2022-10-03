@@ -39,6 +39,7 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUIImage -> HTMLImgComponent new).
 				  (CSNUIMenu -> MCMenu new beWithArrow).
 				  (CSNUICWAccordion -> MCExpansionModule new).
-				  (CSNUICWSplitButton -> MCMenu new beWithArrow) } asDictionary;
+				  (CSNUICWSplitButton -> MCMenu new beWithArrow).
+				  (CSNUICWMultipleLinks -> MCSelect new beMultiple) } asDictionary;
 		  yourself
 ]

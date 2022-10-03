@@ -4,8 +4,3 @@ Extension { #name : #CSNUICWLightFieldset }
 CSNUICWLightFieldset class >> accept: aVisitor [
 	^ aVisitor visitCSNUICWLightFieldset: self 
 ]
-
-{ #category : #'*Casino-Model-Visitor' }
-CSNUICWLightFieldset >> accept: aVisitor [
-	^ aVisitor visitCSNUICWLightFieldset: self 
-]
