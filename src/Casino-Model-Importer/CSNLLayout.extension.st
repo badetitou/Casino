@@ -8,9 +8,12 @@ CSNLLayout >> addWidget: aWidget [
 			  (aWidget isKindOf: CSNLCell)
 				  ifTrue: [ self addCell: aWidget ]
 				  ifFalse: [ 
-					  | createdCell |
+					  | createdCell myWidget |
+					  aWidget container
+						  ifNil: [ myWidget := aWidget ]
+						  ifNotNil: [ myWidget := aWidget verticalVeryDeepCopy ].
 					  createdCell := self mooseModel add: (CSNLCell new
-							                  widget: aWidget;
+							                  widget: myWidget;
 							                  yourself).
 					  self addCell: createdCell ] ]
 		  ifTrue: [ 
