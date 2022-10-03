@@ -293,7 +293,7 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWCoreVerticalAlignement: aCSNCoreVe
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWDialog: aCSNDialog [
 
-	^ (#( 'BLDialogBox' ) includesAny:
+	^ (#( 'BLDialogBox' 'AbstractBLDialogBox' ) includesAny:
 		   (source invokedClass withSuperclassHierarchy collect:
 			    #invokedClassName))
 		  ifTrue: [ 
@@ -702,8 +702,10 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITabManager: aCSNUITabManager [
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
 
-	^ (#( 'BLTableList' 'BLTableListBulk' 'BLTableListCategorized' ) 
-		   includes: source invokedClassName)
+	^ (#( 'BLTableList' 'BLTableListBulk' 'BLTableListCategorized'
+	      'BLAbstractCrud' ) includesAny:
+		   (source invokedClass withSuperclassHierarchy collect:
+			    #invokedClassName))
 		  ifTrue: [ self createWidget: aCSNUITable ]
 		  ifFalse: [ nil ]
 ]
