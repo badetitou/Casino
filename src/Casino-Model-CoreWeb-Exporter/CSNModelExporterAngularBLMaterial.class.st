@@ -196,18 +196,8 @@ export class ';
 							  (behavior allToScope: CSNBDOMElementAcccess) collect: #widget ] ])
 				 asSet collect: [ :widget | widget idViewChildFrom: self ])
 				asOrderedCollection;
-		crlf. "(aBLPageMetier widgetsDependenciesFrom: self)
-					   ,"
-	self inIndented: [ 
-		aBLPageMetier recursiveWidgets flattened asSet do: [ :widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptVariableOf: widget
-				usingExporter: self ].
-		self crlf.
-		self
-			<< aBLPageMetier id uncapitalized;
-			<<< 'Form: FormGroup;'.
-		self crlf ].
+		crlf.
+	self printTSVariablesForComponent: aBLPageMetier.
 	self
 		<< '
     constructor(';

@@ -82,12 +82,7 @@ export class ';
 		<< '
 '.
 
-	self inIndented: [ 
-		aBLPageMetier recursiveWidgets flattened asSet asOrderedCollection 
-			do: [ :widget | 
-				(self exporterAngularConfiguration angularRepresentationOf: widget)
-					exportTypeScriptVariableOf: widget
-					usingExporter: self ] ].
+	self printTSVariablesForComponent: aBLPageMetier.
 	self
 		<< '
 

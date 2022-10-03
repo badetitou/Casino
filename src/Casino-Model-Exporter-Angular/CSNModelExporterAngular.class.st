@@ -650,17 +650,7 @@ export class ';
 			<< String crlf ].
 	currentWriteStream << '
 '.
-	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
-			:widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptVariableOf: widget
-				usingExporter: self ].
-		self crlf.
-		self
-			<< aBLPageMetier id uncapitalized;
-			<<< 'Form: FormGroup;'.
-		self crlf ].
+	self printTSVariablesForComponent: aBLPageMetier.
 	self << '
     constructor('.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
@@ -932,6 +922,22 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 						<<< ': new FormControl(),' ]
 				separatedBy: [ self crlf ] ].
 		self <<< ')' ]
+]
+
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
+
+	self inIndented: [ 
+		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+			asOrderedCollection do: [ :widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptVariableOf: widget
+				usingExporter: self ].
+		self crlf.
+		self
+			<< aCSNWidget id uncapitalized;
+			<<< 'Form: FormGroup;'.
+		self crlf ]
 ]
 
 { #category : #accessing }
