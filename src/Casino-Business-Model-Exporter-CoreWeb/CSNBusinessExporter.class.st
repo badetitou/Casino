@@ -70,7 +70,9 @@ CSNBusinessExporter >> export: aCSNBuModel [
 										          << package name;
 										          << '/' ].
 							          barrelStream << businessType name << '.model'';'.
-							          businessType children reject: [ :child | exported includes: child ] thenDo: export ].
+							          businessType children
+								          reject: [ :child | exported includes: child ]
+								          thenDo: export ].
 							export value: root.
 							barrelStream crlf ] ] ]
 ]

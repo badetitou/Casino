@@ -47,8 +47,6 @@ CSNPage >> getMetadata [
     codePhase: 'a long name',
     label: 'Phase 1 - 2',
     link: 'phase1',
-    subLabel: 'Bienvenue sur la phase 1 - 2',
-    icon: 'address-book',
     datas: {'text': '2'}
 }
    "
@@ -64,8 +62,6 @@ CSNPage >> getMetadata [
 		    ifFound: [ :attTitle | attTitle attributeValue ]
 		    ifNone: [ self title ]) ifNil: [ '' ]) protectQuote , ''',
     link: ''' , self name asRealCamelCase , ''',
-    subLabel: ''' , (self subtitle ifNil: [ '' ]) protectQuote , ''',
-    icon: ''address-book'',
     datas: {},
 }'
 ]
