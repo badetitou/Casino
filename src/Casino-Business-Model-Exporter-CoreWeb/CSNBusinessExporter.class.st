@@ -57,6 +57,10 @@ CSNBusinessExporter >> export: aCSNBuModel [
 							root := buType.
 							[ root parent isNil ] whileFalse: [ root := root parent ].
 							export := [ :businessType | 
+							          ('Export' , businessType name) recordInfo.
+							          ('Already exported: ' , exported size printString
+							           , '/' , toExport size printString) recordInfo.
+							          exported add: businessType.
 							          self exportBusinessType: businessType.
 							          barrelStream crlf.
 							          barrelStream << 'export * from ''./dto/'.
@@ -66,8 +70,7 @@ CSNBusinessExporter >> export: aCSNBuModel [
 										          << package name;
 										          << '/' ].
 							          barrelStream << businessType name << '.model'';'.
-							          exported add: businessType.
-							          businessType children do: export ].
+							          businessType children reject: [ :child | exported includes: child ] thenDo: export ].
 							export value: root.
 							barrelStream crlf ] ] ]
 ]
