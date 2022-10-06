@@ -38,16 +38,9 @@ BLMHyperlink >> exportHeaderOf: aWidget with: anExporter [
 	aWidget additionalActions
 		do: [ :action | 
 			anExporter
-				<<
-					'<span class="fa-stack fa-2xs" style="vertical-align: top; float: right;" (click)="openPhase(';
-				<<< action call name;
-				<<< ')">';
-				inIndented: [ 
-					anExporter
-						<< '<i class="fa-regular fa-circle fa-stack-2x"></i>';
-						crlf;
-						<< '<i class="fa-solid fa-file fa-stack-1x"></i>' ];
-				<< '</span>';
+				<< '<i class="ph-file-light" (click)="openPhase(';
+				<<< action call getAcceptedName;
+				<<< ')"></i>';
 				crlf ]
 		separatedBy: [ anExporter crlf ].
 	super exportHeaderOf: aWidget with: anExporter

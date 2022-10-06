@@ -721,51 +721,45 @@ export class IndexComponent implements OnInit {
 
 { #category : #'generate - page' }
 CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
-	currentWriteStream
-		<<
-			'import {
+
+	currentWriteStream << 'import {
     Component,
     OnDestroy,
     OnInit'.
-	aCSNPage hasMultiplePageMetier
-		ifTrue: [ currentWriteStream
-				<< ',';
-				"			<< String crlf;
-			<< '    ElementRef,';"
-					<< String crlf;
-				<< '    ViewChild' ].
-	currentWriteStream
-		<<
-			'
+	aCSNPage hasMultiplePageMetier ifTrue: [ 
+		currentWriteStream
+			<< ',';
+			"			<< String crlf;
+			<< '    ElementRef,';"<< String crlf;
+			<< '    ViewChild' ].
+	currentWriteStream << '
 } from ''@angular/core'';
 import { Router } from ''@angular/router'';
 import { PhaseComponent } from ''app/projects/bl-shell/src/public-api'';
 import { AbstractPhaseComponent } from ''app/projects/bl-shell/src/public-api'';
 import { DesktopStateService } from ''app/projects/bl-shell/src/public-api'';
 '.
-	aCSNPage hasMultiplePageMetier
-		ifTrue: [ currentWriteStream
-				<< 'import { BusinessPageContainerComponent } from ''app/projects/bl-shell/src/public-api'';';
-				<< String crlf ].
-	aCSNPage businessPage
-		do: [ :metier | 
-			currentWriteStream
-				<< 'import { ';
-				<< metier componentName;
-				<< ' } from ''../..';
-				<< metier getLocalComponentPath;
-				<< ''';';
-				<< String crlf ].
+	aCSNPage hasMultiplePageMetier ifTrue: [ 
+		currentWriteStream
+			<<
+				'import { BusinessPageContainerComponent } from ''app/projects/bl-shell/src/public-api'';';
+			<< String crlf ].
+	aCSNPage businessPage do: [ :metier | 
+		currentWriteStream
+			<< 'import { ';
+			<< metier componentName;
+			<< ' } from ''../..';
+			<< metier getLocalComponentPath;
+			<< ''';';
+			<< String crlf ].
 	currentWriteStream
-		<<
-			'
+		<< '
 
 
 @Component({
     templateUrl: ''./';
 		<< aCSNPage getHTMLName;
-		<<
-			'''
+		<< '''
 })
 export class ';
 		<< aCSNPage componentName capitalized;
@@ -773,16 +767,17 @@ export class ';
 			' extends AbstractPhaseComponent implements PhaseComponent, OnInit, OnDestroy {
 
 '.
-	aCSNPage hasMultiplePageMetier
-		ifTrue: [ currentWriteStream
-				<<
-					'    @ViewChild(BusinessPageContainerComponent, { static: false }) public container: BusinessPageContainerComponent;
+	aCSNPage hasMultiplePageMetier ifTrue: [ 
+		currentWriteStream
+			<<
+				'    @ViewChild(BusinessPageContainerComponent, { static: false }) public container: BusinessPageContainerComponent;
 ';
-				<< String crlf ].
-	aCSNPage hasMultiplePageMetier ifTrue: [ aCSNPage businessPage do: [ :metier | currentWriteStream << (metier idViewChildFrom: self) << String crlf ] ].
+			<< String crlf ].
+	aCSNPage hasMultiplePageMetier ifTrue: [ 
+		aCSNPage businessPage do: [ :metier | 
+			currentWriteStream << (metier idViewChildFrom: self) << String crlf ] ].
 	currentWriteStream
-		<<
-			'
+		<< '
 
     constructor(public phaseService: DesktopStateService, public router: Router) {
         super(phaseService, router);

@@ -33,7 +33,7 @@ CSNELCWBLFieldsetComponent >> angularActionRepresentationOf: action forWidget: a
 		action call ifNil: [ "guard" ^ nil ].
 		^ anExporter
 			  <<< '(moreDetails)="openPhase(';
-			  <<< action call name;
+			  <<< action call getAcceptedName;
 			  <<< ')"' ].
 	anExporter <<< (action getAngularRepresentationWith: anExporter)
 ]

@@ -10,7 +10,7 @@ CSNELCWBLExtendedLinkComponent >> angularActionRepresentationOf: action forWidge
 	(aWidget additionalActions includes: action) ifTrue: [ 
 		^ anExporter
 			  <<< '(clickSecondLink)="openPhase(';
-			  <<< action call name;
+			  <<< action call getAcceptedName;
 			  <<< ')"' ].
 	(action isKindOf: CSNActionAppel) ifTrue: [ ^ anExporter
 			  <<< '(clickMainLink)="openPhase(';

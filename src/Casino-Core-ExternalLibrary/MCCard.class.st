@@ -46,17 +46,9 @@ MCCard >> exportActionAppel: action with: anExporter [
 	anExporter
 		indentPlus;
 		indent;
-		<<<
-			'<span class="fa-stack" style="vertical-align: top; float: right;" (click)="openPhase(';
-			  <<< action call name;
-			  <<< ')">';
-		inIndented: [ 
-			anExporter
-				<< '<i class="fa-regular fa-circle fa-stack-2x"></i>';
-				crlf;
-				<< '<i class="fa-solid fa-folder-open fa-stack-1x"></i>' ];
-		<< '</span>';
-		indentMinus;
+		<<< '<i class="ph-file-light" (click)="openPhase(';
+		<<< action call getAcceptedName;
+		<<< ')"></i>';
 		crlf
 ]
 
