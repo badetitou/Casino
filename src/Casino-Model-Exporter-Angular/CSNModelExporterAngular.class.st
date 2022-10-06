@@ -217,7 +217,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
 	self generateInnerHtmlOf: aBLPageMetier
 ]
 
-{ #category : #generate }
+{ #category : #'generate - model' }
 CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
 	currentWriteStream << '<bl-layout>
     <bl-desktop [homePhase]="phaseHome"></bl-desktop>
@@ -301,7 +301,7 @@ CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
 		<< '</form>'
 ]
 
-{ #category : #generate }
+{ #category : #'generate - model' }
 CSNModelExporterAngular >> generateMaterialModuleSourceCodeForModel: aModel [
 	currentWriteStream
 		<<
@@ -416,7 +416,7 @@ export class DemoMaterialModule {}
     can be found in the LICENSE file at http://angular.io/license */'
 ]
 
-{ #category : #generate }
+{ #category : #'generate - model' }
 CSNModelExporterAngular >> generateModuleSourceCodeForModel: aModel [
 
 	currentWriteStream
@@ -489,7 +489,7 @@ export class ';
 		<< String crlf
 ]
 
-{ #category : #generate }
+{ #category : #'generate - page' }
 CSNModelExporterAngular >> generateModuleSourceCodeForPage: aCSNPage [
 
 	currentWriteStream
@@ -562,7 +562,7 @@ export class ';
 		<< String crlf
 ]
 
-{ #category : #generate }
+{ #category : #'generate - model' }
 CSNModelExporterAngular >> generateRouteSourceCodeForModel: aModel [
 
 	currentWriteStream
@@ -590,7 +590,7 @@ const routes: Routes = [
 export const DEMOS_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes, { useHash: false });'
 ]
 
-{ #category : #generate }
+{ #category : #'generate - page' }
 CSNModelExporterAngular >> generateRouteSourceCodeForPage: aCSNPage [
 	currentWriteStream
 		<<
@@ -689,7 +689,7 @@ export class ';
 '
 ]
 
-{ #category : #generate }
+{ #category : #'generate - model' }
 CSNModelExporterAngular >> generateTSSourceCodeForModel: aModel [
 
 	currentWriteStream
@@ -719,7 +719,7 @@ export class IndexComponent implements OnInit {
 '
 ]
 
-{ #category : #generate }
+{ #category : #'generate - page' }
 CSNModelExporterAngular >> generateTSSourceCodeForPage: aCSNPage [
 	currentWriteStream
 		<<
