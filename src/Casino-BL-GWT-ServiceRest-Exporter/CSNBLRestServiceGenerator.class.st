@@ -11,7 +11,8 @@ Class {
 	#superclass : #FAMIX2JavaVisitor,
 	#instVars : [
 		'service',
-		'rootNamespace'
+		'rootNamespace',
+		'isJersey'
 	],
 	#category : #'Casino-BL-GWT-ServiceRest-Exporter'
 }
@@ -74,6 +75,11 @@ CSNBLRestServiceGenerator >> additionalExceptionFor: aServiceAPI [
 	^ { 'JsonProcessingException' } "(aServiceAPI parameters anySatisfy: [ :parameter | parameter dataType isDictionaryType ])
 		ifTrue: [ {'JsonParseException' . 'JsonMappingException' . 'IOException'} ]
 		ifFalse: [ {} ]"
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> beForJersey [
+	self isJersey: true
 ]
 
 { #category : #convert }
@@ -147,12 +153,28 @@ CSNBLRestServiceGenerator >> export [
 { #category : #accessing }
 CSNBLRestServiceGenerator >> initialize [
 	super initialize.
-	self rootFolder: FileSystem disk workingDirectory asFileReference / self rootNamespace
+	self rootFolder: FileSystem disk workingDirectory asFileReference / self rootNamespace.
+	isJersey := false
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> isJersey [
+
+	^ isJersey
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> isJersey: anObject [
+
+	isJersey := anObject
 ]
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> printAPIParameterFor: aServiceAPI [
-	self <<< '@RequestParam(value="fieldNames[]", required = false) String[] fieldNames,'.
+	self isJersey ifTrue:
+		[ self <<< '@DefaultValue("**") @QueryParam("fieldNames[]") String[] fieldNames,' ]
+	 ifFalse: [ 
+	self <<< '@RequestParam(value="fieldNames[]", required = false) String[] fieldNames,' ].
 	self crlf.
 	self indentPlus.
 	self << '@RequestBody ObjectNode body'.
@@ -356,6 +378,7 @@ CSNBLRestServiceGenerator >> printNameAndParametersFor: aServiceAPI [
 
 { #category : #printing }
 CSNBLRestServiceGenerator >> printRESTImports [
+
 	self << 'import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -363,14 +386,22 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.ApplicationPath;
-
+import javax.ws.rs.ApplicationPath;'.
+	self isJersey ifTrue: [ 
+		self
+			<< 'import javax.ws.rs.QueryParam;';
+			crlf;
+			<< 'import javax.ws.rs.DefaultValue;' ].
+	self << '
 import fr.bl.rest.casino.CSNRestful;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;'.
+	self isJersey ifFalse: [ 
+		self
+		<< 'import org.springframework.web.bind.annotation.RequestParam;' ].
+
+	self << 'import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
