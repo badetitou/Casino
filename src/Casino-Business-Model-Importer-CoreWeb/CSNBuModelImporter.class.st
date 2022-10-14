@@ -39,7 +39,7 @@ CSNBuModelImporter >> buildDefaultDtoFrom: aSource [
 { #category : #accessing }
 CSNBuModelImporter >> dtoAbstractNames [
 
-	^ { 'AbstractPersistentObjectGWT'. 'AbstractEnumDTO' }
+	^ { 'BLLazyServerPojo' }
 ]
 
 { #category : #accessing }

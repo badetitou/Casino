@@ -234,14 +234,18 @@ CSNWebModelJava >> generateActionAppel [
 
 { #category : #'private - actions' }
 CSNWebModelJava >> generatePageMetier [
-	sourceModel allModelClasses
+
+	(sourceModel allWithType: FamixJavaInterface)
 		detect: [ :class | class name = #IPageMetier ]
-		ifFound: [ :iPageMetierClass | 
-			iPageMetierClass subclassHierarchy
-				reject: [ :class | class isStub or: [ class name endsWith: 'XMLUi' ] ]
-				thenDo:
-					[ :aPageMetier | self factory createBusinessPageFromFAMIXClass: aPageMetier ] ]
-		ifNone: [ Exception signal: 'No IPageMetier abstract class found' ]
+		ifFound: [ :iPageMetierInterface | 
+			(iPageMetierInterface implementations collect: [ :a | 
+				 a implementingClass subclassHierarchy ]) flattened
+				reject: [ :class | 
+				class isStub or: [ class name endsWith: 'XMLUi' ] ]
+				thenDo: [ :aPageMetier | 
+					self factory createBusinessPageFromFAMIXClass: aPageMetier ] ]
+		ifNone: [ 
+		Exception signal: 'No IPageMetier abstract interface found' ]
 ]
 
 { #category : #'private - actions' }
@@ -253,28 +257,30 @@ CSNWebModelJava >> generatePhase [
 { #category : #'private - actions' }
 CSNWebModelJava >> generateService [
 
-	| interfaceService createdServices |
-	"BVER 20/05/2022 ! I should take the subclass of the interface for the method parameter names "
-	interfaceService := self sourceModel allModelClasses asSet select: [ 
+	| uc createdServices |
+	"BVER 20/05/2022 ! I should take the subclass of the interface for the method parameter names ""interfaceService := self sourceModel allModelClasses asSet select: [ 
 		                    :e | 
 		                    (e superclassHierarchy anySatisfy: [ :a | 
 			                     #( 'RestService' 'RemoteService' ) includes:
 				                     a name ]) and: [ e isInterface not ] ].
 	interfaceService addAll: ((interfaceService flatCollect: [ :class | 
-			  class classes flatCollect: #attributes ]) collect: #declaredType).
-	createdServices := interfaceService
+			  class classes flatCollect: #attributes ]) collect: #declaredType)."
+	uc := self sourceModel allModelClasses select: [ :class | 
+		      (class name beginsWith: 'Uc') and: [ 
+			      (class name endsWith: 'Test') not ] ].
+	createdServices := uc
 		                   reject: [ :service | 
 		                   service name endsWith: 'Async' ]
 		                   thenCollect: [ :aServiceClass | 
 			                   self factory createServiceFromServiceClass:
 				                   aServiceClass ].
 
-	createdServices do: [ :service |
+	createdServices do: [ :service | 
 		createdServices
 			detect: [ :owner | 
 				owner source = (service source superclass isParameterizedType
 					 ifTrue: [ service source superclass parameterizableClass ]
-					 ifFalse: [ service source superclass  ]) ]
+					 ifFalse: [ service source superclass ]) ]
 			ifFound: [ :owner | owner addChildService: service ]
 			ifNone: [ "no parent" ] ].
 	^ createdServices
@@ -382,7 +388,7 @@ CSNWebModelJava >> getPageMetierFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseCallInvocations [
-	^ (self sourceModel allClasses
+	^ ((self sourceModel allWithType: FamixJavaInterface)
 		detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ]
 		ifNone: [ self error: 'No call invocation strategy' ]) methods flatCollect: #incomingInvocations
 ]

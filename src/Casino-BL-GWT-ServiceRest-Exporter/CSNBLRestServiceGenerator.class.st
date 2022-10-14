@@ -190,6 +190,14 @@ CSNBLRestServiceGenerator >> printAttributeOf: aMethod ofServiceApi: aServiceAPI
 		separatedBy: [ self <<< ', ' ]
 ]
 
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printCommentsFor: aMethod [
+
+	aMethod comments do: [ :comment | 
+		self << comment sourceText.
+		self crlf ]
+]
+
 { #category : #convert }
 CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 
@@ -208,6 +216,23 @@ CSNBLRestServiceGenerator >> printConvertParametersOf: aServiceAPI [
 CSNBLRestServiceGenerator >> printDefaultImport [
 
 	"can be override"
+]
+
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printFactoryMethod [
+
+	self
+		<< 'public ';
+		<<< service source name;
+		<<< ' create() {';
+		crlf;
+		indentPlus;
+		<< 'return new ';
+		<<< service source name;
+		<<< '();';
+		indentMinus;
+		crlf;
+		<< $}
 ]
 
 { #category : #printing }
@@ -253,6 +278,83 @@ CSNBLRestServiceGenerator >> printMethodAnnotations: aMethod [
 ]
 
 { #category : #printing }
+CSNBLRestServiceGenerator >> printMethodBodyFor: aServiceAPI [
+
+	| instName |
+	instName := service targetPoint uncapitalized , 'Impl'.
+	self << 'final ' <<< aServiceAPI serviceOwner source name <<< ' '
+	<<< instName <<< ' = this.create();'.
+	self crlf.
+	aServiceAPI source declaredType name = 'void'
+		ifTrue: [ self indent ]
+		ifFalse: [ 
+			self << 'return '
+			"	(aServiceAPI dataType isNil or: [ aServiceAPI dataType isPrimitive ]) 
+				ifFalse: [ self <<< 'new BLFilterMappingJacksonValue<>(' ]" ].
+	self <<< instName <<< $. <<< aServiceAPI name <<< $(.
+	aServiceAPI sortedParameters
+		do: [ :serviceParameter | self <<< serviceParameter name ]
+		separatedBy: [ self <<< ', ' ].
+	aServiceAPI source declaredType name = 'void'
+		ifTrue: [ self <<< ');' ]
+		ifFalse: [ "(aServiceAPI dataType isNil or: [ aServiceAPI dataType isPrimitive ]) 
+				ifFalse: [ self <<< '), fieldNames' ]." 
+			self <<< ');' ]
+]
+
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printModifiersFor: aMethod [
+
+	"Turns out we only ever need to put the method's visibility, which is always public (even if Famix doesn't think so) ."
+
+	self << 'public'
+
+	"Old code was"
+	"
+(aMethod cacheAt: #modifiers ifAbsent: [ 
+		 (aMethod respondsTo: #modifiers)
+			 ifTrue: [ aMethod modifiers ]
+			 ifFalse: [ {  } ] ])
+		ifNotEmptyDo: [ :modifier | 
+			self
+				<<< modifier;
+				space ]
+		ifEmpty: [ 
+			self
+				<<< 'public';
+				space ]."
+]
+
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printNameAndParametersFor: aServiceAPI [
+
+	| aMethod |
+	"Printing name + parameters of method"
+	aMethod := aServiceAPI source.
+	(aMethod name = '<Initializer>' or: [ 
+		 aMethod isInitializer and: [ aMethod isConstructor not ] ])
+		ifFalse: [ 
+			self
+				<<< aServiceAPI uniqueName;
+				<<< '('.
+			self printAPIParameterFor: aServiceAPI.
+			"self printAttributeOf: aMethod ofServiceApi: aServiceAPI."
+			self <<< ')' ]
+		ifTrue: [ self << 'static' ].
+	"print exception"
+	(((aMethod withMethodsOverriding collect: [ :m | 
+		   m thrownExceptions , m declaredExceptions collect:
+			   #exceptionClass ]) flattened asSet asOrderedCollection sorted:
+		  #name ascending) collect: #name)
+	, (self additionalExceptionFor: aServiceAPI) ifNotEmpty: [ 
+		:exceptionsName | 
+		self <<< ' throws '.
+		exceptionsName
+			do: [ :exceptionName | self <<< exceptionName ]
+			separatedBy: [ self <<< ', ' ] ]
+]
+
+{ #category : #printing }
 CSNBLRestServiceGenerator >> printRESTImports [
 	self << 'import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -260,11 +362,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ApplicationPath;
 
-import fr.bl.server.gf.rest.CSNRestful;
+import fr.bl.rest.casino.CSNRestful;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -276,6 +377,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 '
+]
+
+{ #category : #printing }
+CSNBLRestServiceGenerator >> printReturnTypeFor: aServiceAPI [
+
+	"Because Famix can't modelize arrays, we have to hack the declared type out of the source text."
+
+	| start end method |
+	method := aServiceAPI source.
+	start := method sourceText findString: method declaredType name.
+	end := method sourceText
+		       findString: method name
+		       startingAt: start + method declaredType name size + 1.
+"	(aServiceAPI dataType isNil or: [ aServiceAPI dataType isPrimitive ]) 
+		ifFalse: [ self <<< 'BLFilterMappingJacksonValue<' ]."
+
+	self <<< (method sourceText copyFrom: start to: end - 1) trim.
+	"(aServiceAPI dataType isNil or: [ aServiceAPI dataType isPrimitive ]) 
+		ifFalse: [ self <<< '>' ]"
 ]
 
 { #category : #printing }
@@ -375,13 +495,16 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		"Printing Attributs"
 		self indentPlus.
 
-		(aClass attributes
+		"(aClass attributes
 		 , (aClass subclassHierarchyGroup collect: #attributes)) flattened 
 			do: [ :attribute | 
 				self clone visit: attribute.
 				self
 					crlf;
-					crlf ].
+					crlf ]."
+		self
+			printFactoryMethod;
+			crlf.
 		"Closing Class"
 		service actions
 			do: [ :action | self visitServiceAPI: action ]
@@ -389,7 +512,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 				self
 					crlf;
 					crlf ].
-		self printAdditionalMethodsFor: aClass.
+		"self printAdditionalMethodsFor: aClass."
 		currentStream
 			<< String crlf;
 			<< '}' ]
@@ -414,69 +537,38 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	aServiceAPI name record.
 	aMethod := aServiceAPI source.
 	aMethod isStub ifTrue: [ ^ self ].
+	(aMethod visibility = 'private' or: [ 
+		 (aMethod respondsTo: #modifiers) and: [ 
+			 aMethod modifiers includes: 'private' ] ]) ifTrue: [ ^ self ].
 	"Printing method annotations"
-	aMethod comments
-		do: [ :comment | self << comment sourceText ]
-		separatedBy: [ self crlf ].
-	aMethod withMethodsOverriding
-		do: [ :methodOverriding | 
-			methodOverriding comments do: [ :comment | 
-				self << comment sourceText ] ]
-		separatedBy: [ self crlf ].
+
+
 	self crlf.
+	self indentPlus.
+	self printCommentsFor: aMethod.
 	self addAnnotationForServiceAPI: aServiceAPI.
 	"Printing modifiers of method ex: static,public/private/protected"
-	self indent.
-	(aMethod cacheAt: #modifiers ifAbsent: [ 
-		 (aMethod respondsTo: #modifiers)
-			 ifTrue: [ aMethod modifiers ]
-			 ifFalse: [ {  } ] ])
-		ifNotEmptyDo: [ :modifier | 
-			self
-				<<< modifier;
-				space ]
-		ifEmpty: [ 
-			self
-				<<< 'public';
-				space ].
-	"Printing return type for method"
-	aMethod declaredType ifNotNil: [ :declaredType | 
-		aServiceAPI dataType writeJavaBusinessTypeOn: self.
-		currentStream << String space ].
-	"Printing name + parameters of method"
-	(aMethod name = '<Initializer>' or: [ 
-		 aMethod isInitializer and: [ aMethod isConstructor not ] ])
-		ifFalse: [ 
-			self
-				<<< aServiceAPI uniqueName;
-				<<< '('.
-			self printAPIParameterFor: aServiceAPI.
-			"self printAttributeOf: aMethod ofServiceApi: aServiceAPI."
-			self <<< ')' ]
-		ifTrue: [ self << 'static' ].
-	"print exception"
-	(((aMethod withMethodsOverriding collect: [ :m | 
-		   m thrownExceptions , m declaredExceptions collect:
-			   #exceptionClass ]) flattened asSet asOrderedCollection sorted:
-		  #name ascending) collect: #name)
-	, (self additionalExceptionFor: aServiceAPI) ifNotEmpty: [ 
-		:exceptionsName | 
-		self <<< ' throws '.
-		exceptionsName
-			do: [ :exceptionName | self <<< exceptionName ]
-			separatedBy: [ self <<< ', ' ] ].
-
-	"Printing body of method if class is not abstract or an interface"
-	currentStream
-		<< ' {';
-		<< String crlf.
-	self indentPlus.
-	self printConvertParametersOf: aServiceAPI.
-	self << aMethod bodySourceText.
 	self
-		indentMinus;
+		printModifiersFor: aMethod;
+		space.
+
+	self
+		printReturnTypeFor: aServiceAPI;
+		space.
+
+	"Printing name + parameters of method"
+	self printNameAndParametersFor: aServiceAPI.
+
+	"Printing body of method"
+	self
+		<<< ' {';
 		crlf;
-		<< '}'
+		printConvertParametersOf: aServiceAPI;
+		crlf;
+		printMethodBodyFor: aServiceAPI;
+		crlf;
+		<< '}'.
+	self indentMinus
 ]
 
 { #category : #accessing }
