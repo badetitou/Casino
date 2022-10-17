@@ -151,6 +151,24 @@ CSNBLRestServiceGenerator >> export [
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> extractDeclaredTypesFor: aClass [
+
+	| declaredTypes |
+	declaredTypes := super extractDeclaredTypesFor: aClass.
+	declaredTypes addAll: (service actions collect: [ :action | 
+			 action dependencies collect: #source ]) flattened.
+	service actions do: [ :action | 
+		action parameters do: [ :parameter | 
+			parameter dataType isDictionaryType ifTrue: [ 
+				declaredTypes add:
+					(aClass mooseModel allParameterizableClasses detect: [ :c | 
+						 c name = 'Map' ]) ] ] ].
+	aClass interfaceImplementations ifNotEmpty: [ :interfaces | 
+		declaredTypes add: interfaces anyOne interface ].
+	^ declaredTypes
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> initialize [
 	super initialize.
 	self rootFolder: FileSystem disk workingDirectory asFileReference / self rootNamespace.
@@ -171,14 +189,20 @@ CSNBLRestServiceGenerator >> isJersey: anObject [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> printAPIParameterFor: aServiceAPI [
-	self isJersey ifTrue:
-		[ self <<< '@DefaultValue("**") @QueryParam("fieldNames[]") String[] fieldNames,' ]
-	 ifFalse: [ 
-	self <<< '@RequestParam(value="fieldNames[]", required = false) String[] fieldNames,' ].
-	self crlf.
-	self indentPlus.
-	self << '@RequestBody ObjectNode body'.
-	self indentMinus 
+
+	self isJersey
+		ifTrue: [ "self <<< '@DefaultValue(""**"") @QueryParam(""fieldNames[]"") String[] fieldNames,'"
+			 ]
+		ifFalse: [ 
+			self
+			<<<
+			'@RequestParam(value="fieldNames[]", required = false) String[] fieldNames,'.
+			self crlf.
+			self
+				indentPlus;
+				indent ].
+	self <<< '@RequestBody ObjectNode body'.
+	self isJersey ifFalse: [ self indentMinus ]
 ]
 
 { #category : #accessing }
@@ -243,15 +267,23 @@ CSNBLRestServiceGenerator >> printDefaultImport [
 { #category : #printing }
 CSNBLRestServiceGenerator >> printFactoryMethod [
 
+	| interfaceName |
+	interfaceName := service source interfaceImplementations
+		                 ifEmpty: [ service source name ]
+		                 ifNotEmpty: [ :interfaces | 
+		                 interfaces anyOne interface name ].
 	self
-		<< 'public ';
-		<<< service source name;
+		<< 'private ';
+		<<< interfaceName;
 		<<< ' create() {';
 		crlf;
 		indentPlus;
-		<< 'return new ';
-		<<< service source name;
-		<<< '();';
+		<<
+			'return ContextLoader.getCurrentWebApplicationContext().getBean("';
+		<<< service source name uncapitalized;
+		<<< '", ';
+		<<< interfaceName;
+		<<< '.class);';
 		indentMinus;
 		crlf;
 		<< $}
@@ -302,10 +334,14 @@ CSNBLRestServiceGenerator >> printMethodAnnotations: aMethod [
 { #category : #printing }
 CSNBLRestServiceGenerator >> printMethodBodyFor: aServiceAPI [
 
-	| instName |
+	| instName interfaceName |
+	interfaceName := service source interfaceImplementations
+		                 ifEmpty: [ service source name ]
+		                 ifNotEmpty: [ :interfaces | 
+		                 interfaces anyOne interface name ].
 	instName := service targetPoint uncapitalized , 'Impl'.
-	self << 'final ' <<< aServiceAPI serviceOwner source name <<< ' '
-	<<< instName <<< ' = this.create();'.
+	self << 'final ' <<< interfaceName <<< ' ' <<< instName
+	<<< ' = this.create();'.
 	self crlf.
 	aServiceAPI source declaredType name = 'void'
 		ifTrue: [ self indent ]
@@ -388,12 +424,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ApplicationPath;'.
 	self isJersey ifTrue: [ 
-		self
+		"self
 			<< 'import javax.ws.rs.QueryParam;';
 			crlf;
-			<< 'import javax.ws.rs.DefaultValue;' ].
-	self << '
-import fr.bl.rest.casino.CSNRestful;
+			<< 'import javax.ws.rs.DefaultValue;'" ].
+	self << 'import fr.bl.rest.casino.CSNRestful;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;'.
@@ -402,6 +437,7 @@ import org.springframework.web.bind.annotation.RequestBody;'.
 		<< 'import org.springframework.web.bind.annotation.RequestParam;' ].
 
 	self << 'import org.springframework.stereotype.Component;
+import org.springframework.web.context.ContextLoader;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -575,7 +611,6 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 
 
 	self crlf.
-	self indentPlus.
 	self printCommentsFor: aMethod.
 	self addAnnotationForServiceAPI: aServiceAPI.
 	"Printing modifiers of method ex: static,public/private/protected"
@@ -594,12 +629,13 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	self
 		<<< ' {';
 		crlf;
+		indentPlus;
 		printConvertParametersOf: aServiceAPI;
 		crlf;
 		printMethodBodyFor: aServiceAPI;
 		crlf;
-		<< '}'.
-	self indentMinus
+		indentMinus;
+		<< '}'
 ]
 
 { #category : #accessing }
