@@ -8,10 +8,17 @@ Class {
 		'isParentService',
 		'isChildService',
 		'parentService',
-		'parentServicePackagesRootName'
+		'parentServicePackagesRootName',
+		'isJersey'
 	],
 	#category : #'Casino-Model-CoreWeb-Exporter-CoreWeb'
 }
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularCoreWeb >> beForJersey [
+
+	self isJersey: true
+]
 
 { #category : #streaming }
 CSNModelServiceExporterAngularCoreWeb >> generateService: aCSNService [
@@ -56,7 +63,18 @@ CSNModelServiceExporterAngularCoreWeb >> getLocalPathOf: aService [
 { #category : #initialization }
 CSNModelServiceExporterAngularCoreWeb >> initialize [
 	super initialize.
-	parentServicePackagesRootName := 'service'
+	parentServicePackagesRootName := 'service'.
+	isJersey := false.
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularCoreWeb >> isJersey [
+	^ isJersey
+]
+
+{ #category : #accessing }
+CSNModelServiceExporterAngularCoreWeb >> isJersey: aBoolean [
+	isJersey := aBoolean
 ]
 
 { #category : #accessing }
@@ -135,6 +153,7 @@ CSNModelServiceExporterAngularCoreWeb >> printDeserializeFor: aBusinessType [
 
 { #category : #'as yet unclassified' }
 CSNModelServiceExporterAngularCoreWeb >> printHttpOptions [
+
 	self indent.
 	self inBraces: [ 
 		self
@@ -144,9 +163,10 @@ CSNModelServiceExporterAngularCoreWeb >> printHttpOptions [
 		self
 			<< 'withCredentials: true,';
 			crlf.
-		self
-			<< 'params: ';
-			inBraces: [ self << '"fieldNames[]" : fieldNames' ] ]
+		self isJersey ifFalse: [ 
+			self
+				<< 'params: ';
+				inBraces: [ self << '"fieldNames[]" : fieldNames' ] ] ]
 ]
 
 { #category : #streaming }
@@ -336,8 +356,9 @@ CSNModelServiceExporterAngularCoreWeb >> visitCSNServiceAPI: aServiceAPI [
 
 	self << 'public ' <<< aServiceAPI uniqueName <<< '('.
 	aServiceAPI printParameterIn: self.
-	aServiceAPI parameters ifNotEmpty: [ self <<< ', ' ].
-	self <<< 'fieldNames = ''**''): Observable<'.
+	(self isJersey not and: [ aServiceAPI parameters isNotEmpty ]) 
+		ifTrue: [ self <<< ', fieldNames = ''**''' ].
+	self <<< '): Observable<'.
 	aServiceAPI dataType writeBusinessTypeOn: self.
 	self
 		<<< '> {';
