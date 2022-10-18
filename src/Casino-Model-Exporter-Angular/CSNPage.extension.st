@@ -52,18 +52,19 @@ CSNPage >> getMetadata [
    "
 
 	^ '{
-    id: ''' , self getAcceptedName , ''',
-    code: ''' , (self codePhase ifNil: [ self name asRealCamelCase ])
+        id: ''' , self getAcceptedName , ''',
+        code: ''' , (self codePhase ifNil: [ self name asRealCamelCase ])
 	  , ''',
-    codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
+        codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
 	  , ''',
-    label: ''' , ((self attributes
+        gwtCodePhase: ''', self codeValue ,''',
+        label: ''' , ((self attributes
 		    detect: [ :att | att isKindOf: CSNUITitle ]
 		    ifFound: [ :attTitle | attTitle attributeValue ]
 		    ifNone: [ self title ]) ifNil: [ '' ]) protectQuote , ''',
-    link: ''' , self name asRealCamelCase , ''',
-    datas: {},
-}'
+        link: ''' , self name asRealCamelCase , ''',
+        datas: {},
+    }'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
