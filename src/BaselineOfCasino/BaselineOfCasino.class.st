@@ -17,22 +17,40 @@ BaselineOfCasino >> baseline: spec [
 
 { #category : #baselines }
 BaselineOfCasino >> defineBehaviorPackages: spec [
+
 	"behavior-core"
 
 	spec
-		package: 'Casino-Behavior-Model' with: [ spec requires: #('FASTJava' 'Casino-Behavior-Model-Generator') ];
-		package: 'Casino-Behavior-Model-Generator' with: [ spec requires: #('FASTJava') ];
-		package: 'Casino-Behavior-Model-Visitor' with: [ spec requires: #('Casino-Behavior-Model') ];
-		package: 'Casino-Behavior-Model-Extension' with: [ spec requires: #('Casino-Behavior-Model') ];
-		"behavior-importer"
-			package: 'Casino-Behavior-Model-Importer' with: [ spec requires: #('FASTJava') ];
-		package: 'Casino-Behavior-Model-Importer-Java' with: [ spec requires: #('Carrefour' 'Casino-Behavior-Model-Importer') ];
-		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ spec requires: #('Casino-Behavior-Model-Importer-Java' 'Casino-Behavior-Model-Extension') ];
-		"behavior-exporter"
-			package: 'Casino-Behavior-Model-Exporter' with: [ spec requires: #('Casino-Exporter' 'Casino-Behavior-Model' 'Casino-Behavior-Model-Visitor') ];
-		package: 'Casino-Behavior-Model-Exporter-Angular' with: [ spec requires: #('Casino-Behavior-Model-Exporter') ];
-		package: 'Casino-Behavior-Model-Exporter-CoreWeb' with: [ spec requires: #('Casino-Behavior-Model-Exporter-Angular') ];
-		package: 'Casino-BL-GWT-ServiceRest-Exporter' with: [ spec requires: #('Casino-Helper' 'Famix2Java') ]
+		package: 'Casino-Behavior-Model'
+		with: [ 
+			spec requires: #( 'FASTJava' 'Casino-Behavior-Model-Generator' ) ];
+		package: 'Casino-Behavior-Model-Generator'
+		with: [ spec requires: #( 'FASTJava' ) ];
+		package: 'Casino-Behavior-Model-Visitor'
+		with: [ spec requires: #( 'Casino-Behavior-Model' ) ];
+		package: 'Casino-Behavior-Model-Extension'
+		with: [ spec requires: #( 'Casino-Behavior-Model' ) ];
+		"behavior-importer"package: 'Casino-Behavior-Model-Importer'
+		with: [ spec requires: #( 'FASTJava' ) ];
+		package: 'Casino-Behavior-Model-Importer-Java'
+		with: [ 
+			spec requires: #( 'Carrefour' 'Casino-Behavior-Model-Importer' ) ];
+		package: 'Casino-Behavior-Model-Importer-Java-Tests' with: [ 
+			spec requires: #( 'Casino-Behavior-Model-Importer-Java'
+					   'Casino-Behavior-Model-Extension' ) ];
+		"behavior-exporter"package: 'Casino-Behavior-Model-Exporter'
+		with: [ 
+			spec requires:
+					#( 'Casino-Exporter' 'Casino-Behavior-Model'
+					   'Casino-Behavior-Model-Visitor' ) ];
+		package: 'Casino-Behavior-Model-Exporter-Angular'
+		with: [ spec requires: #( 'Casino-Behavior-Model-Exporter' ) ];
+		package: 'Casino-Behavior-Model-Exporter-CoreWeb'
+		with: [ 
+			spec requires: #( 'Casino-Behavior-Model-Exporter-Angular' ) ];
+		package: 'Casino-BL-GWT-ServiceRest-Exporter' with: [ 
+			spec requires:
+					#( 'Casino-Helper' 'Famix2Java' 'Casino-Business-Model' ) ]
 ]
 
 { #category : #baselines }
