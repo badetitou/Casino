@@ -49,7 +49,8 @@ MCCard >> exportActionAppel: action with: anExporter [
 		<<< '<i class="ph-file-light" (click)="openPhase(';
 		<<< action call getAcceptedName;
 		<<< ')"></i>';
-		crlf
+		crlf;
+		indentMinus
 ]
 
 { #category : #export }

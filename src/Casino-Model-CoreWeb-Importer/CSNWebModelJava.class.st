@@ -235,11 +235,15 @@ CSNWebModelJava >> generateActionAppel [
 { #category : #'private - actions' }
 CSNWebModelJava >> generatePageMetier [
 
-	(sourceModel allWithType: FamixJavaInterface)
+	(sourceModel allWithSubTypesOf: FamixJavaType) asSet
 		detect: [ :class | class name = #IPageMetier ]
 		ifFound: [ :iPageMetierInterface | 
-			(iPageMetierInterface implementations collect: [ :a | 
-				 a implementingClass subclassHierarchy ]) flattened
+			((iPageMetierInterface isKindOf: FamixJavaInterface)
+				 ifTrue: [ 
+					 (iPageMetierInterface implementations collect: [ :a | 
+						  a implementingClass subclassHierarchy ]) flattened ]
+				 ifFalse: [ "iPageMetierInterface is probable a class like in Moose9" 
+					 iPageMetierInterface subclassHierarchy ])
 				reject: [ :class | 
 				class isStub or: [ class name endsWith: 'XMLUi' ] ]
 				thenDo: [ :aPageMetier | 

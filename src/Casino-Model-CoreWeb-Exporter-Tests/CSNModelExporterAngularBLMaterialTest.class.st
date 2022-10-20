@@ -344,13 +344,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportExtendedLinkWithTwoActions [
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
-				          '<span class="fa-stack fa-2xs" style="vertical-align: top; float: right;" (click)="openPhase(Page2)">';
-			          << String crlf;
-			          << '    <i class="fa-regular fa-circle fa-stack-2x"></i>';
-			          << String crlf;
-			          << '    <i class="fa-solid fa-file fa-stack-1x"></i>';
-			          << String crlf;
-			          << '</span>';
+				          '<i class="ph-file-light" (click)="openPhase(Page2)"></i>';
 			          << String crlf;
 			          << '<bl-hyperlink (click)="openPhase(Page)" >';
 			          << String crlf;
@@ -397,15 +391,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSetWithAction [
 			          << '    <mat-card-header>';
 			          << String crlf;
 			          <<
-				          '        <span class="fa-stack" style="vertical-align: top; float: right;" (click)="openPhase(Page)">';
-			          << String crlf;
-			          <<
-				          '            <i class="fa-regular fa-circle fa-stack-2x"></i>';
-			          << String crlf;
-			          <<
-				          '            <i class="fa-solid fa-folder-open fa-stack-1x"></i>';
-			          << String crlf;
-			          << '        </span>';
+				          '        <i class="ph-file-light" (click)="openPhase(Page)"></i>';
 			          << String crlf;
 			          << '    </mat-card-header>';
 			          << String crlf;
