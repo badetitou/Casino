@@ -54,7 +54,7 @@ MCMenu >> exportHeaderOf: aWidget with: anExporter [
 		ifFound: [ :att | anExporter visit: att ].
 	withArrow ifTrue: [ 
 		anExporter
-		<<< '<mat-icon aria-hidden="false" >arrow_drop_down</mat-icon>' ].
+		<<< '<i class="ph-caret-up-light"></i>' ].
 	anExporter <<< '</button>'.
 	anExporter
 		crlf;

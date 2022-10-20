@@ -628,7 +628,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportMenuWithArrow [
 	result := String streamContents: [ :stream | 
 		          stream
 			          <<
-				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><mat-icon aria-hidden="false" >arrow_drop_down</mat-icon></button>';
+				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><i class="ph-caret-up-light"></i></button>';
 			          << String crlf;
 			          << '<mat-menu #menu="matMenu">';
 			          << String crlf;
