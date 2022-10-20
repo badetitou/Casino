@@ -143,16 +143,19 @@ CSNJavaImporter >> computeOutgoingInvocationForWidget: aWidget [
 							| index |
 							index := fastAccess argumentOwner arguments asOrderedCollection 
 								         indexOf: fastAccess.
-							invoc candidates anyOne parameters size >= index ifTrue: [ 
-								invocations addAll:
-									(invoc candidates anyOne parameterAtIndex: index)
-										receivingInvocations ]
-									ifFalse: [ "the method should be of this form: myMethod(SomeClass ... att)" ] ] ] ] ].
+							invoc candidates anyOne parameters size >= index
+								ifTrue: [ 
+									invocations addAll:
+										(invoc candidates anyOne parameterAtIndex: index)
+											receivingInvocations ]
+								ifFalse: [ "the method should be of this form: myMethod(SomeClass ... att)"
+								 ] ] ] ] ].
 			"Then general cases"
-			invocations addAll:
-				(targetMethod outgoingInvocations select: [ :invoc | 
-					 invoc receiver isNotNil and: [ 
-						 invoc receiver isImplicitVariable ] ]) ].
+			((aWidget source isKindOf: FamixJavaType) not or: [ aWidget source isAnonymousClass not ] ) ifTrue: [ 
+				invocations addAll:
+					(targetMethod outgoingInvocations select: [ :invoc | 
+						 invoc receiver isNotNil and: [ 
+							 invoc receiver isImplicitVariable ] ]) ] ].
 	targetMethod isConstructor ifTrue: [ "I might understand stuff based of parameters of the invocations of the constructor"
 		(aWidget source isKindOf: FamixJavaInvocation) ifTrue: [ 
 			invocations add: aWidget source.
