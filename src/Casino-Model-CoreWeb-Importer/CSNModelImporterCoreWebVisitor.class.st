@@ -185,10 +185,14 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWAccordion: aCSNUICWAccordion [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWAutoComplete: aCSNAutoComplete [
-	^ (#('BLDefaultQuickSearch' 'QuicksearchExempleREL' 'SuggestBox4QuickSearch')
-		includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
-		ifTrue: [ self createWidget: aCSNAutoComplete ]
-		ifFalse: [ nil ]
+
+	^ ('QuickSearchAgent' ~= source invokedClassName and: [ 
+		   #( 'BLDefaultQuickSearch' 'QuicksearchExempleREL'
+		      'SuggestBox4QuickSearch' ) includesAny:
+			   (source invokedClass withSuperclassHierarchy collect:
+				    #invokedClassName) ])
+		  ifTrue: [ self createWidget: aCSNAutoComplete ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }

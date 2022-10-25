@@ -64,6 +64,7 @@ CSNUICoreWebGenerator >> commentForAccordion [
 
 { #category : #definition }
 CSNUICoreWebGenerator >> defineClasses [
+
 	super defineClasses.
 	"components"
 	chart := builder newClassNamed: #Chart.
@@ -72,28 +73,34 @@ CSNUICoreWebGenerator >> defineClasses [
 	groupFieldset := builder newClassNamed: #GroupFieldset.
 	html := builder newClassNamed: #HTML.
 	autoComplete := builder newClassNamed: #AutoComplete.
-	accordion := builder newClassNamed: #Accordion comment: self commentForAccordion.
+	accordion := builder
+		             newClassNamed: #Accordion
+		             comment: self commentForAccordion.
 	richTextArea := builder newClassNamed: #RichTextArea.
 	splitButton := builder newClassNamed: #SplitButton.
 	switch := builder newClassNamed: #Switch.
 	lightFieldset := builder newClassNamed: #LightFieldset.
 	progressBar := builder newClassNamed: #ProgressBar.
 	listAndDetails := (builder newClassNamed: #ListAndDetails)
-		comment: 'Correspond to the BLCore class BLAbstractListeEtDetail';
-		yourself.
+		                  comment:
+			                  'Correspond to the BLCore class BLAbstractListeEtDetail';
+		                  yourself.
 	linkSimple := builder newClassNamed: #LinkSimple.
 	extendedLink := builder newClassNamed: #ExtendedLink.
 	multiCombo := builder newClassNamed: #MultiCombo.
 	rechercheEtListe := (builder newClassNamed: #RechercheEtListe)
-		comment: 'Correspond to the BLCore class BLAbstractRechercheEtListe';
-		yourself.
+		                    comment:
+			                    'Correspond to the BLCore class BLAbstractRechercheEtListe';
+		                    yourself.
 	fileUploadPanel := (builder newClassNamed: #FileUploadPanel)
-		comment: 'Correspond to the BLCore class BLFileUploadPanel';
-		yourself.
+		                   comment:
+			                   'Correspond to the BLCore class BLFileUploadPanel';
+		                   yourself.
 
 	multipleLinks := (builder newClassNamed: #MultipleLinks)
-		comment: 'Correspond to the BLCore class BLAbstractLienMultiple';
-		yourself.
+		                 comment:
+			                 'Correspond to the BLCore class BLAbstractLienMultiple';
+		                 yourself.
 
 	"attributes"
 	header := builder newClassNamed: #Header.
@@ -101,15 +108,19 @@ CSNUICoreWebGenerator >> defineClasses [
 	open := builder newClassNamed: #Open.
 	coreCellWidth := builder newClassNamed: #CoreCellWidth.
 	coreColSpan := builder newClassNamed: #CoreColSpan.
-	coreHorizontalAlignement := builder newClassNamed: #CoreHorizontalAlignement.
+	coreHorizontalAlignement := builder newClassNamed:
+		                            #CoreHorizontalAlignement.
 	coreRowSpan := builder newClassNamed: #CoreRowSpan.
-	coreVerticalAlignement := builder newClassNamed: #CoreVerticalAlignement.
+	coreVerticalAlignement := builder newClassNamed:
+		                          #CoreVerticalAlignement.
 
 	"remotes"
 	csnContainer := self remoteEntity: #Container withPrefix: #CSN.
 	csnAttribute := self remoteEntity: #Attribute withPrefix: #CSN.
 	csnActions := self remoteEntity: #Action withPrefix: #CSN.
-	csnVariableAttribute := self remoteEntity: #VariableAttribute withPrefix: #CSN.
+	csnVariableAttribute := self
+		                        remoteEntity: #VariableAttribute
+		                        withPrefix: #CSN.
 
 	uiInput := self remoteEntity: #Input withPrefix: #CSNUI.
 	uiLink := self remoteEntity: #Link withPrefix: #CSNUI
