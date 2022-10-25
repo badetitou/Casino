@@ -164,13 +164,6 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIButton: aCSNUIButton [
 					            ((self create: CSNUILabel) attributeValue:
 							             (source parameters at: 1 ifAbsent: [ '' ]));
 				            yourself.
-			  "if BL"
-			  'BLLinkButton' = source invokedClassName ifTrue: [ 
-				  button addAttribute: ((self create: CSNUIClass) attributeValue:
-						   (((source parameters size >= 2 and: [ 
-							      source parameters second beginsWith: 'BLLinkButton.' ])
-							     ifTrue: [ source parameters second ]
-							     ifFalse: [ 'NIVEAU2' ]) removePrefix: 'BLLinkButton.')) ].
 			  button ]
 		  ifFalse: [ nil ]
 ]
