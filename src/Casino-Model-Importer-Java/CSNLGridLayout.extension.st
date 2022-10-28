@@ -4,7 +4,7 @@ Extension { #name : #CSNLGridLayout }
 CSNLGridLayout >> addWidget: aWidget withInvocationOfAdd: anInvocation usingFactory: aFactory [
 
 	| tmpCell |
-	anInvocation ifNil: [ self h. self addWidget: aWidget ] ifNotNil: [ 
+	anInvocation ifNil: [ self addWidget: aWidget ] ifNotNil: [ 
 		| param |
 		aWidget addingPosition: anInvocation sourceAnchor startPos.
 		"widget on the grid"

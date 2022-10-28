@@ -392,9 +392,13 @@ CSNWebModelJava >> getPageMetierFromClass: aClass [
 
 { #category : #private }
 CSNWebModelJava >> getPhaseCallInvocations [
-	^ ((self sourceModel allWithType: FamixJavaInterface)
-		detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ]
-		ifNone: [ self error: 'No call invocation strategy' ]) methods flatCollect: #incomingInvocations
+
+	^ (((Smalltalk includesKey: #FamixJavaInterface)
+		    ifTrue: [ self sourceModel allWithType: FamixJavaInterface ]
+		    ifFalse: [ self sourceModel allWithType: FamixJavaClass ])
+		   detect: [ :a | a mooseName endsWith: 'ConstantsPhase' ]
+		   ifNone: [ self error: 'No call invocation strategy' ]) methods 
+		  flatCollect: #incomingInvocations
 ]
 
 { #category : #accessing }
