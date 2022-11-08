@@ -163,8 +163,14 @@ CSNBLRestServiceGenerator >> extractDeclaredTypesFor: aClass [
 				declaredTypes add:
 					(aClass mooseModel allParameterizableClasses detect: [ :c | 
 						 c name = 'Map' ]) ] ] ].
-	aClass interfaceImplementations ifNotEmpty: [ :interfaces | 
-		declaredTypes add: interfaces anyOne interface ].
+	(Smalltalk includesKey: #FamixJavaInterface)
+		ifTrue: [ 
+			aClass interfaceImplementations ifNotEmpty: [ :interfaces | 
+				declaredTypes add: interfaces anyOne interface ] ]
+		ifFalse: [ 
+			aClass superclassHierarchy
+				select: #isInterface
+				thenDo: [ :interface | declaredTypes add: interface  ] ].
 	^ declaredTypes
 ]
 
@@ -268,10 +274,19 @@ CSNBLRestServiceGenerator >> printDefaultImport [
 CSNBLRestServiceGenerator >> printFactoryMethod [
 
 	| interfaceName |
-	interfaceName := service source interfaceImplementations
-		                 ifEmpty: [ service source name ]
-		                 ifNotEmpty: [ :interfaces | 
-		                 interfaces anyOne interface name ].
+	interfaceName := (Smalltalk includesKey: #FamixJavaInterface)
+		                 ifTrue: [ 
+			                 service source interfaceImplementations
+				                 ifEmpty: [ service source name ]
+				                 ifNotEmpty: [ :interfaces | 
+				                 interfaces anyOne interface name ] ]
+		                 ifFalse: [ 
+			                 (service source superclassHierarchy select:
+				                  #isInterface)
+				                 ifEmpty: [ service source name ]
+				                 ifNotEmpty: [ :interfaces | 
+				                 interfaces anyOne name ] ].
+
 	self
 		<< 'private ';
 		<<< interfaceName;
@@ -334,11 +349,19 @@ CSNBLRestServiceGenerator >> printMethodAnnotations: aMethod [
 { #category : #printing }
 CSNBLRestServiceGenerator >> printMethodBodyFor: aServiceAPI [
 
-	| instName interfaceName |
-	interfaceName := service source interfaceImplementations
-		                 ifEmpty: [ service source name ]
-		                 ifNotEmpty: [ :interfaces | 
-		                 interfaces anyOne interface name ].
+	| interfaceName instName |
+	interfaceName := (Smalltalk includesKey: #FamixJavaInterface)
+		                 ifTrue: [ 
+			                 service source interfaceImplementations
+				                 ifEmpty: [ service source name ]
+				                 ifNotEmpty: [ :interfaces | 
+				                 interfaces anyOne interface name ] ]
+		                 ifFalse: [ 
+			                 (service source superclassHierarchy select:
+				                  #isInterface)
+				                 ifEmpty: [ service source name ]
+				                 ifNotEmpty: [ :interfaces | 
+				                 interfaces anyOne name ] ].
 	instName := service targetPoint uncapitalized , 'Impl'.
 	self << 'final ' <<< interfaceName <<< ' ' <<< instName
 	<<< ' = this.create();'.
