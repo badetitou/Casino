@@ -12,7 +12,9 @@ Class {
 	#instVars : [
 		'service',
 		'rootNamespace',
-		'isJersey'
+		'isJersey',
+		'withoutPrefix',
+		'withPrefix'
 	],
 	#category : #'Casino-BL-GWT-ServiceRest-Exporter'
 }
@@ -151,6 +153,12 @@ CSNBLRestServiceGenerator >> export [
 ]
 
 { #category : #accessing }
+CSNBLRestServiceGenerator >> exportedClassNameOf: aClass [
+
+	^ withPrefix , (aClass name removePrefix: withoutPrefix)
+]
+
+{ #category : #accessing }
 CSNBLRestServiceGenerator >> extractDeclaredTypesFor: aClass [
 
 	| declaredTypes |
@@ -178,7 +186,9 @@ CSNBLRestServiceGenerator >> extractDeclaredTypesFor: aClass [
 CSNBLRestServiceGenerator >> initialize [
 	super initialize.
 	self rootFolder: FileSystem disk workingDirectory asFileReference / self rootNamespace.
-	isJersey := false
+	isJersey := false.
+	withoutPrefix := ''.
+	withPrefix := ''
 ]
 
 { #category : #accessing }
@@ -451,6 +461,7 @@ import javax.ws.rs.ApplicationPath;'.
 			<< 'import javax.ws.rs.QueryParam;';
 			crlf;
 			<< 'import javax.ws.rs.DefaultValue;'" ].
+		self crlf.
 	self << 'import fr.bl.rest.casino.CSNRestful;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -547,7 +558,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 
 	| file |
 	file := self rootFolder
-	        / ('Rest' , (aClass name removePrefix: 'Gwt') , '.java').
+	        / ((self exportedClassNameOf: aClass) , '.java').
 	file deleteIfAbsent: [  ].
 	file writeStreamDo: [ :stream | 
 		currentStream := stream.
@@ -576,7 +587,7 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		"Printing Class declaration"
 		currentStream << 'public '.
 		currentStream << 'class '.
-		currentStream << 'Rest' << (aClass name removePrefix: 'Gwt').
+		currentStream << (self exportedClassNameOf: aClass).
 		service parentService ifNotNil: [ :parentService | 
 			self <<< ' extends ' <<< service parentService source name ].
 		currentStream
@@ -672,4 +683,28 @@ CSNBLRestServiceGenerator >> visitServiceAPIParameter: parameter [
 						ifTrue: [ self <<< 'FormDataBodyPart ' <<< parameter name ]
 						ifFalse: [ self visitParameter: parameter source ] ] ].
 	parameter dataType isPrimitive not ifTrue: [ self <<< 'Json' ]"
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> withPrefix [
+
+	^ withPrefix
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> withPrefix: anObject [
+
+	withPrefix := anObject
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> withoutPrefix [
+
+	^ withoutPrefix
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> withoutPrefix: anObject [
+
+	withoutPrefix := anObject
 ]
