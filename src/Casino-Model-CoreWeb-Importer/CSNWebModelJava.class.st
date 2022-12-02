@@ -282,7 +282,7 @@ CSNWebModelJava >> generateService [
 	createdServices do: [ :service | 
 		createdServices
 			detect: [ :owner | 
-				owner source = (service source superclass isParameterizedType
+				owner source = ((service source superclass isKindOf: FamixJavaParameterizedType)
 					 ifTrue: [ service source superclass parameterizableClass ]
 					 ifFalse: [ service source superclass ]) ]
 			ifFound: [ :owner | owner addChildService: service ]
