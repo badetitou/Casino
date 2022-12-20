@@ -291,6 +291,18 @@ CSNBuModelImporter >> visitEnum: aParameterType [
 ]
 
 { #category : #visiting }
+CSNBuModelImporter >> visitException: aClass [
+
+	(#( Boolean Byte Character Date Double Float Integer Long Short String
+	    Void ) includes: aClass name) ifTrue: [ 
+		^ self importPrimitiveType: aClass ].
+	(aClass superclassHierarchy anySatisfy: [ :class | 
+		 self dtoAbstractNames includes: class name ]) ifTrue: [ 
+		^ self importClass: aClass ].
+	^ self buildDefaultDtoFrom: aClass
+]
+
+{ #category : #visiting }
 CSNBuModelImporter >> visitParameter: aParameter [
 
 	"in case the declaredType is not extracted because verveineJ has failed (or the class is not present in our model)"
