@@ -14,7 +14,8 @@ Class {
 	#instVars : [
 		'modules',
 		'collapseModuleWhen',
-		'vizualization'
+		'vizualization',
+		'propertiesForModuleBlock'
 	],
 	#category : #'Casino-Model-Visualisation-Modules'
 }
@@ -28,14 +29,15 @@ CSNVModulesDependency >> build [
 	rootNode := HNode new name: 'Root'.
 	rootNode layout: RSSugiyamaLayout new.
 	modulesNodes := modules collect: [ :module | 
-		                HNode new
+		                CSNVNode new
 			                rawModel: module;
 			                name: module name;
+			                propertiesDic: (self propertiesForModule: module);
 			                yourself ].
 	subNodes := (modulesNodes collect: [ :moduleNode | 
 		             | pagesNode |
 		             pagesNode := moduleNode rawModel pages collect: [ :page | 
-			                          HNode new
+			                          CSNVNode new
 				                          rawModel: page;
 				                          name: page name;
 				                          yourself ].
@@ -55,7 +57,7 @@ CSNVModulesDependency >> build [
 		(collapseModuleWhen cull: moduleNode rawModel) ifTrue: [ 
 			moduleNode collapse ] ].
 
-	vizualization := HSimpleVisualizationBuilder new
+	vizualization := CSNVSimpleVisualizationBuilder new
 		                 rootNode: rootNode;
 		                 build.
 	vizualization zoomToFit.
@@ -84,7 +86,8 @@ CSNVModulesDependency >> collapseModuleWhen: anObject [
 CSNVModulesDependency >> initialize [
 
 	super initialize.
-	collapseModuleWhen := [ :module | false ]
+	collapseModuleWhen := [ :module | false ].
+	propertiesForModuleBlock := [ :module | {  } asDictionary ]
 ]
 
 { #category : #accessing }
@@ -97,6 +100,23 @@ CSNVModulesDependency >> modules [
 CSNVModulesDependency >> modules: anObject [
 
 	modules := anObject
+]
+
+{ #category : #accessing }
+CSNVModulesDependency >> propertiesForModule: aModule [
+	^ self propertiesForModuleBlock value: aModule
+]
+
+{ #category : #accessing }
+CSNVModulesDependency >> propertiesForModuleBlock [
+
+	^ propertiesForModuleBlock
+]
+
+{ #category : #accessing }
+CSNVModulesDependency >> propertiesForModuleBlock: anObject [
+
+	propertiesForModuleBlock := anObject
 ]
 
 { #category : #accessing }
