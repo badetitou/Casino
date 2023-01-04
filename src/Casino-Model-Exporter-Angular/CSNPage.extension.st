@@ -57,7 +57,7 @@ CSNPage >> getMetadata [
 	  , ''',
         codePhase: ''' , (self codePhase ifNil: [ '' ]) protectQuote
 	  , ''',
-        gwtCodePhase: ''', self codeValue ,''',
+        gwtCodePhase: ''', (self codeValue ifNil: [ '' ]) ,''',
         label: ''' , ((self attributes
 		    detect: [ :att | att isKindOf: CSNUITitle ]
 		    ifFound: [ :attTitle | attTitle attributeValue ]

@@ -23,7 +23,10 @@ CSNExporterAngularConfiguration >> at: aWidgetClass put: aWidgetRepresentationIn
 
 { #category : #initialization }
 CSNExporterAngularConfiguration >> defaultConfiguration [
-	^ { CSNWidget -> WidgetRepresentation new } asDictionary
+
+	^ { 
+		  (CSNWidget -> WidgetRepresentation new).
+		  (CSNUIPanel -> HTMLDivPanelComponent new) } asDictionary
 ]
 
 { #category : #initialization }

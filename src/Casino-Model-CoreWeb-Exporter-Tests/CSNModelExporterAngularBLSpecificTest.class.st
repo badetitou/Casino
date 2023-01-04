@@ -263,6 +263,29 @@ CSNModelExporterAngularBLSpecificTest >> testExportPanel [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLSpecificTest >> testExportPanelWithLabel [
+
+	| result panel label |
+	panel := self createEntity: CSNUIPanel.
+	label := self createEntity: CSNUILabel.
+	label attributeValue: 'label'.
+	panel addAttribute: label.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          << '<div>';
+			          << String crlf;
+			          << '    label';
+			          << String crlf;
+			          << '</div>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIPanel: panel.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLSpecificTest >> testExportParagraph [
 	| result paragraph |
 	paragraph := self createEntity: CSNUIParagraph.
