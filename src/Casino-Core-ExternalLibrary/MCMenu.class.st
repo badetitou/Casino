@@ -17,15 +17,19 @@ MCMenu >> beWithArrow [
 	withArrow := true
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCMenu >> exportContentOf: aWidget with: anExporter [
 
 	anExporter indentPlus.
 	aWidget widgets do: [ :widget | 
+		| attributes |
 		anExporter
 			crlf;
 			<< '<button mat-menu-item'.
-		self componentAttributeOn: anExporter forWidget: widget.
+		attributes := (self attributeOf: widget) reject: [ :att | 
+			              att isOfType: CSNUILabel ].
+		self exportAttributes: attributes with: anExporter.
+		self componentAttributeOn: anExporter.
 		anExporter <<< (widget actionsTagFrom: anExporter).
 		anExporter <<< '>'.
 		widget attributes
@@ -38,12 +42,12 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 	anExporter indentMinus
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCMenu >> exportFooterOf: aWidget with: anExporter [
 	anExporter << '</mat-menu>'
 ]
 
-{ #category : #accessing }
+{ #category : #export }
 MCMenu >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<button mat-stroked-button [matMenuTriggerFor]="';
@@ -68,7 +72,7 @@ MCMenu >> getSelector [
 	^ 'mat-menu'
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 MCMenu >> initialize [
 	super initialize.
 	withArrow := false

@@ -614,6 +614,51 @@ CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportMenuInMenu [
+
+	| result menu innerMenu label1 |
+	menu := self createEntity: CSNUIMenu.
+
+	menu
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'menu';
+				 yourself);
+		name: 'menu';
+		yourself.
+
+	innerMenu := self createEntity: CSNUIMenu.
+	innerMenu
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'innerMenu';
+				 yourself);
+		name: 'innerMenu';
+		yourself.
+
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	menu addWidget: innerMenu.
+	innerMenu addAttribute: label1.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><i class="ph-caret-up-light"></i></button>';
+			          << String crlf;
+			          << '<mat-menu #menu="matMenu">';
+			          << String crlf;
+			          <<
+				          '    <button mat-menu-item id="innerMenu">Label1</button>';
+			          << String crlf;
+			          << '</mat-menu>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUIMenu: menu.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportMenuWithArrow [
 
 	| result menu |
@@ -686,6 +731,39 @@ CSNModelExporterAngularBLMaterialTest >> testExportSelectWithLabel [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUISelect: select.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportSplitButtonWithArrowAndInnerMenu [
+
+	| result splitButton label1 |
+	splitButton := self createEntity: CSNUICWSplitButton.
+
+	splitButton
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'splitButton';
+				 yourself);
+		name: 'splitButton';
+		yourself.
+
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	splitButton addAttribute: label1.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<button mat-stroked-button [matMenuTriggerFor]="splitButton">Label1<i class="ph-caret-up-light"></i></button>';
+			          << String crlf;
+			          << '<mat-menu #splitButton="matMenu">';
+			          << String crlf;
+			          << '</mat-menu>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUICWSplitButton: splitButton.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
