@@ -32,8 +32,10 @@ MCTable >> attributeOf: aWidget [
 	| attributes |
 	attributes := super attributeOf: aWidget.
 	attributes := attributes , { (CSNAttribute new
-		 name: '[dataSource]';
-		 attributeValue: aWidget id , 'Source') }.
+		               name: '[dataSource]';
+		               attributeValue: aWidget id , 'Source') }.
+	attributes := attributes reject: [ :attribute | "Label can not be use in <table>" 
+		              attribute isKindOf: CSNUILabel ].
 	^ attributes
 ]
 
@@ -49,6 +51,12 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 		 widget isKindOf: CSNUITableHeader ]) do: [ :header | 
 		anExporter inIndented: [ 
 			self exportTableHeader: header with: anExporter ] ].
+
+	aWidget attributes
+		detect: [ :attribute | attribute isOfType: CSNUILabel ]
+		ifFound: [ :attribute | anExporter inIndented: [ 
+			self exportLabelAsTableHeader: attribute with: anExporter ]].
+
 	anExporter
 		crlf;
 		indentPlus;
@@ -60,6 +68,23 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 		<<< aWidget id;
 		<<< 'DisplayedColumns;"></tr>';
 		indentMinus
+]
+
+{ #category : #accessing }
+MCTable >> exportLabelAsTableHeader: label with: anExporter [
+
+	| labelName |
+	labelName := label attributeValue.
+	anExporter << '<ng-container matColumnDef="' <<< labelName <<< '">'.
+	anExporter inIndented: [ 
+		anExporter << '<th mat-header-cell *matHeaderCellDef>'.
+		anExporter visit: label.
+		anExporter
+			<<< '</th>';
+			crlf.
+		anExporter
+		<< '<td mat-cell *matCellDef="let element">{{element}}</td>' ].
+	anExporter << '</ng-container>'
 ]
 
 { #category : #accessing }

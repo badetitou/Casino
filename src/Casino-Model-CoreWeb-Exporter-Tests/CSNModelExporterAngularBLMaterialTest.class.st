@@ -771,6 +771,54 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneHeader [
 ]
 
 { #category : #running }
+CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneLabel [
+
+	| result table label1 |
+	table := self createEntity: CSNUITable.
+
+	table
+		affectedActions: ((self createEntity: FamixJavaAttribute)
+				 name: 'table';
+				 yourself);
+		name: 'table';
+		yourself.
+
+	label1 := (self createEntity: CSNUILabel)
+		          attributeValue: 'Label1';
+		          yourself.
+	table addAttribute: label1.
+
+	result := String streamContents: [ :stream | 
+		          stream
+			          <<
+				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
+			          << String crlf;
+			          << '    <ng-container matColumnDef="Label1">';
+			          << String crlf;
+			          <<
+				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
+			          << String crlf;
+			          <<
+				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
+			          << String crlf;
+			          << '    </ng-container>';
+			          << String crlf;
+			          << String crlf;
+			          <<
+				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
+			          << String crlf;
+			          <<
+				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
+			          << String crlf;
+			          << '</table>' ].
+
+	String streamContents: [ :stream | 
+		exporter currentWriteStream: stream.
+		exporter visitCSNUITable: table.
+		self assert: exporter currentWriteStream contents equals: result ]
+]
+
+{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 
 	| result table header1 label1 header2 label2 |
