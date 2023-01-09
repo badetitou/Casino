@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #accessing }
-MCTextArea >> attributeOf: aWidget [
+MCTextArea >> attributeOf: aWidget with: anExporter [
 
-	^ (super attributeOf: aWidget) reject: [ :attribute | "Label are used in the content" 
+	^ (super attributeOf: aWidget with: anExporter) reject: [ :attribute | "Label are used in the content" 
 		  attribute isKindOf: CSNUILabel ]
 ]
 

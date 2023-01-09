@@ -5,8 +5,8 @@ Class {
 }
 
 { #category : #export }
-CSNELCWBLInputComponent >> attributeOf: aWidget [
-	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
+CSNELCWBLInputComponent >> attributeOf: aWidget with: anExporter [
+	^ (super attributeOf: aWidget with: anExporter) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
 
 { #category : #export }

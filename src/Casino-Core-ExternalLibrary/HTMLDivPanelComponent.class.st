@@ -8,9 +8,9 @@ Class {
 }
 
 { #category : #accessing }
-HTMLDivPanelComponent >> attributeOf: aWidget [
+HTMLDivPanelComponent >> attributeOf: aWidget with: anExporter [
 
-	^ (super attributeOf: aWidget) flattened reject: [ :attribute | "Label can not be use in <div>" 
+	^ (super attributeOf: aWidget with: anExporter) flattened reject: [ :attribute | "Label can not be use in <div>" 
 		  attribute isKindOf: CSNUILabel ]
 ]
 

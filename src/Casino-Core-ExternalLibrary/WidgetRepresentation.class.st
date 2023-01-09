@@ -20,10 +20,13 @@ WidgetRepresentation >> attributeNameInComponent: attribute [
 ]
 
 { #category : #export }
-WidgetRepresentation >> attributeOf: aWidget [
+WidgetRepresentation >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
 	attributes := aWidget computeSelfAttributes.
+	attributes addAll: (anExporter
+			 additionalAttributesForWidget: aWidget
+			 withRepresentation: self).
 	aWidget variable ifNotNil: [ :variable | 
 		attributes add: (CSNUIId new attributeValue: aWidget id) ].
 	^ attributes
@@ -50,7 +53,7 @@ WidgetRepresentation >> componentAttributeOn: anExporter [
 { #category : #export }
 WidgetRepresentation >> componentAttributeOn: anExporter forWidget: aWidget [
 	| attributes |
-	attributes := self attributeOf: aWidget.
+	attributes := self attributeOf: aWidget with: anExporter.
 	self exportAttributes: attributes with: anExporter.
 	self componentAttributeOn: anExporter
 ]

@@ -26,7 +26,7 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 		anExporter
 			crlf;
 			<< '<button mat-menu-item'.
-		attributes := (self attributeOf: widget) reject: [ :att | 
+		attributes := (self attributeOf: widget with: anExporter) reject: [ :att | 
 			              att isOfType: CSNUILabel ].
 		self exportAttributes: attributes with: anExporter.
 		self componentAttributeOn: anExporter.

@@ -27,10 +27,10 @@ Class {
 }
 
 { #category : #accessing }
-MCTable >> attributeOf: aWidget [
+MCTable >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
-	attributes := super attributeOf: aWidget.
+	attributes := super attributeOf: aWidget with: anExporter.
 	attributes := attributes , { (CSNAttribute new
 		               name: '[dataSource]';
 		               attributeValue: aWidget id , 'Source') }.

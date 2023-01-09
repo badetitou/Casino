@@ -27,10 +27,10 @@ Class {
 }
 
 { #category : #accessing }
-MCDatePicker >> attributeOf: aWidget [
+MCDatePicker >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
-	attributes := super attributeOf: aWidget.
+	attributes := super attributeOf: aWidget with: anExporter.
 	attributes add: (CSNAttribute new
 			 name: 'formControlName';
 			 attributeValue: aWidget id;

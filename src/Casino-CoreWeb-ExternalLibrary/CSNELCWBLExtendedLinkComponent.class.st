@@ -20,10 +20,10 @@ CSNELCWBLExtendedLinkComponent >> angularActionRepresentationOf: action forWidge
 ]
 
 { #category : #accessing }
-CSNELCWBLExtendedLinkComponent >> attributeOf: aWidget [
+CSNELCWBLExtendedLinkComponent >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
-	attributes := super attributeOf: aWidget.
+	attributes := super attributeOf: aWidget with: anExporter.
 	(aWidget actions anySatisfy: [ :action | 
 		 aWidget additionalActions includes: action ]) ifTrue: [ 
 		attributes := attributes , { (CSNAttribute new

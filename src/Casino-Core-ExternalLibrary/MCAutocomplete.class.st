@@ -5,10 +5,10 @@ Class {
 }
 
 { #category : #accessing }
-MCAutocomplete >> attributeOf: aWidget [
+MCAutocomplete >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
-	attributes := super attributeOf: aWidget.
+	attributes := super attributeOf: aWidget with: anExporter.
 	attributes add: (CSNAttribute new
 			 name: 'formControlName';
 			 attributeValue: aWidget id;

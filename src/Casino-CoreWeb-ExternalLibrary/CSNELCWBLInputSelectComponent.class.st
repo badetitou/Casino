@@ -34,8 +34,8 @@ CSNELCWBLInputSelectComponent >> attributeDictionary [
 ]
 
 { #category : #export }
-CSNELCWBLInputSelectComponent >> attributeOf: aWidget [
-	^ (super attributeOf: aWidget) , ({CSNUIClass new attributeValue: 'blcore-input'})
+CSNELCWBLInputSelectComponent >> attributeOf: aWidget with: anExporter [
+	^ (super attributeOf: aWidget with: anExporter) , ({CSNUIClass new attributeValue: 'blcore-input'})
 ]
 
 { #category : #export }

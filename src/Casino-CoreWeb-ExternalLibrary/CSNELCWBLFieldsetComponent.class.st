@@ -39,10 +39,10 @@ CSNELCWBLFieldsetComponent >> angularActionRepresentationOf: action forWidget: a
 ]
 
 { #category : #accessing }
-CSNELCWBLFieldsetComponent >> attributeOf: aWidget [
+CSNELCWBLFieldsetComponent >> attributeOf: aWidget with: anExporter [
 
 	| attributes |
-	attributes := super attributeOf: aWidget.
+	attributes := super attributeOf: aWidget with: anExporter.
 	(aWidget actions anySatisfy: [ :action | action isActionAppel ]) 
 		ifTrue: [ 
 			attributes := attributes , { (CSNAttribute new
