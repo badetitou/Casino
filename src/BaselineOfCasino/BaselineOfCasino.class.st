@@ -102,9 +102,9 @@ BaselineOfCasino >> defineDependencies: spec [
 		baseline: 'Famix2Java'
 		with: [ 
 		spec repository: 'github://moosetechnology/FAMIX2Java:v3/src' ].
-	spec baseline: 'PharoStringCaseFormater' with: [ 
+	spec baseline: 'PharoStringCaseFormating' with: [ 
 		spec repository:
-			'github://badetitou/PharoStringCaseFormater:main/src' ]
+			'github://badetitou/PharoStringCaseFormating:main/src' ]
 ]
 
 { #category : #baselines }
@@ -186,7 +186,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Exporter';
 		package: 'Casino-Model-Exporter' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'Casino-Exporter' 'Casino-Helper') ];
 		package: 'Casino-Model-Exporter-Angular'
-			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary' 'PharoStringCaseFormater') ];
+			with: [ spec requires: #('Casino-Model-Exporter' 'Casino-CoreWeb-ExternalLibrary' 'Casino-Core-ExternalLibrary' 'PharoStringCaseFormating') ];
 		package: 'Casino-Model-Exporter-Angular-Tests' with: ['Casino-Model-Exporter-Angular' ];
 		package: 'Casino-Behavior-Model-Exporter-Angular-Tests' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-Importer' with: [ spec requires: #('Casino-Model-CoreWeb-Visitor' 'MoreLogger' 'Casino-Helper') ];
