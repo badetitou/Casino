@@ -1,8 +1,7 @@
 # Casino <!-- omit in toc -->
-[![CI Moose 9 (buggy from Pharo)](https://github.com/badetitou/Casino/actions/workflows/blank.yml/badge.svg?branch=v2)](https://github.com/badetitou/Casino/actions/workflows/blank.yml)
-[![CI Moose 10](https://github.com/badetitou/Casino/actions/workflows/moose10.yml/badge.svg)](https://github.com/badetitou/Casino/actions/workflows/moose10.yml)
+[![CI Moose 10 (buggy from Pharo)](https://github.com/badetitou/Casino/actions/workflows/blank.yml/badge.svg?branch=v2)](https://github.com/badetitou/Casino/actions/workflows/blank.yml)
 [![Coverage Status](https://coveralls.io/repos/github/badetitou/Casino/badge.svg?branch=v2)](https://coveralls.io/github/badetitou/Casino?branch=v2)
-[![Moose version 9](https://img.shields.io/badge/Moose-9-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
+[![Moose version 10](https://img.shields.io/badge/Moose-10-%23aac9ff.svg)](https://github.com/moosetechnology/Moose)
 
 This project aims to ease the migration of application front-end using metamodels.
 To do so, it extracts the UI model of an application and generates the target application from the model.
