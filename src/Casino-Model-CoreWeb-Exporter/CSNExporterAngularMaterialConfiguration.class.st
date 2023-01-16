@@ -27,7 +27,7 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUITab -> MCTab new).
 				  (CSNUITabManager -> MCTabGroup new).
 				  (CSNBusinessPage -> CSNContainer new).
-				  (CSNPage -> BLMPage new).
+				  (CSNPage -> CSNContainer new).
 				  (CSNUIInputFile -> MCInput new).
 				  (CSNUICWFileUploadPanel -> MCInput new).
 				  (CSNUILink -> CSNContainer new).
