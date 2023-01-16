@@ -28,6 +28,8 @@ CSNWidget >> variable [
 	in P9. but we keep this version for compatibility purpose
 	"
 
-	((self affectedActions isKindOf: FAMIXAccess) or: [ self affectedActions isKindOf: FamixJavaAccess ]) ifTrue: [ ^ self affectedActions variable ].
+	((self affectedActions isKindOf: FAMIXAccess) or: [ 
+		 self affectedActions isKindOf: FamixJavaAccess ]) ifTrue: [ 
+		^ self affectedActions variable ].
 	^ self affectedActions
 ]

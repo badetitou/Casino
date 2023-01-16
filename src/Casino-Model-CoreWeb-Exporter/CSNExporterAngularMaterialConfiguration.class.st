@@ -26,15 +26,15 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUISelect -> MCSelect new).
 				  (CSNUITab -> MCTab new).
 				  (CSNUITabManager -> MCTabGroup new).
-				  (CSNBusinessPage -> BLMBusinessPage new).
+				  (CSNBusinessPage -> CSNContainer new).
 				  (CSNPage -> BLMPage new).
-				  (CSNUIInputFile -> BLMAttachment new).
-				  (CSNUICWFileUploadPanel -> BLMAttachment new).
-				  (CSNUILink -> BLMHyperlink new).
+				  (CSNUIInputFile -> MCInput new).
+				  (CSNUICWFileUploadPanel -> MCInput new).
+				  (CSNUILink -> CSNContainer new).
 				  (CSNUITextarea -> MCTextArea new).
 				  (CSNUICWDynamicFieldset -> MCExpansionModule new).
 				  (CSNUICWDialog -> MCDialog new).
-				  (CSNUICWProgressBar -> BLMHorizontalGauge new).
+				  (CSNUICWProgressBar -> MCProgressBar new).
 				  (CSNUITable -> MCTable new).
 				  (CSNUIImage -> HTMLImgComponent new).
 				  (CSNUIMenu -> MCMenu new beWithArrow).
