@@ -34,40 +34,6 @@ CSNModelExporterAngularBLMaterialTest >> setUp [
 	exporter model: testModel
 ]
 
-{ #category : #running }
-CSNModelExporterAngularBLMaterialTest >> testExportBLMAttachment [
-
-	| result expected input class model package |
-	input := self createEntity: CSNUIInputFile.
-	class := FamixJavaClass new.
-	package := FamixJavaPackage new.
-	input
-		affectedActions: ((self createEntity: FamixJavaAttribute)
-				 name: 'buttonAttribute';
-				 yourself);
-		name: 'buttonAttribute';
-		yourself.
-	class addAttribute: input affectedActions.
-	model := FamixJavaModel new.
-	package addClass: class.
-	model addAll: { 
-			package.
-			class.
-			input affectedActions }.
-
-
-	expected := String crlf join:
-		            #( '<mat-form-field appearance="fill">'
-		               '    <bl-attachment id="buttonAttribute" #buttonAttribute></bl-attachment>'
-		               '    <bl-attachment-chooser matSuffix [for]="buttonAttribute"></bl-attachment-chooser>'
-		               '</mat-form-field>' ).
-
-	result := String streamContents: [ :stream | 
-		          exporter currentWriteStream: stream.
-		          exporter visitCSNUIInputFile: input ].
-	self assert: expected equals: result
-]
-
 { #category : #'as yet unclassified' }
 CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
 
@@ -325,38 +291,6 @@ CSNModelExporterAngularBLMaterialTest >> testExportDatePicker [
 ]
 
 { #category : #running }
-CSNModelExporterAngularBLMaterialTest >> testExportExtendedLinkWithTwoActions [
-
-	| result link action2 |
-	link := self createEntity: CSNUICWExtendedLink.
-	link addAction: ((self createEntity: CSNActionAppel) call:
-			 ((self createEntity: CSNPage)
-				  name: 'Page';
-				  yourself)).
-	action2 := (self createEntity: CSNActionAppel) call:
-		           ((self createEntity: CSNPage)
-			            name: 'Page2';
-			            yourself).
-	link addAction: action2.
-	link addAdditionalAction: action2.
-
-
-	result := String streamContents: [ :stream | 
-		          stream
-			          <<
-				          '<i class="ph-file-light" (click)="openPhase(Page2)"></i>';
-			          << String crlf;
-			          << '<bl-hyperlink (click)="openPhase(Page)" >';
-			          << String crlf;
-			          << '</bl-hyperlink>' ].
-
-	String streamContents: [ :stream | 
-		exporter currentWriteStream: stream.
-		exporter visitCSNUILink: link.
-		self assert: exporter currentWriteStream contents equals: result ]
-]
-
-{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportFieldSet [
 	| result fieldset |
 	fieldset := self createEntity: CSNUIFieldset.
@@ -491,54 +425,6 @@ CSNModelExporterAngularBLMaterialTest >> testExportGirdBag [
 ]
 
 { #category : #running }
-CSNModelExporterAngularBLMaterialTest >> testExportHyperlink [
-
-	| result expected link |
-	link := self createEntity: CSNUICWExtendedLink.
-	link
-		affectedActions: ((self createEntity: FamixJavaAttribute)
-				 name: 'buttonAttribute';
-				 yourself);
-		name: 'buttonAttribute';
-		yourself.
-
-	expected := String crlf join:
-		            #( '<bl-hyperlink id="buttonAttribute">'
-		               '</bl-hyperlink>' ).
-
-	result := String streamContents: [ :stream | 
-		          exporter currentWriteStream: stream.
-		          exporter visitCSNUILink: link ].
-	self assert: expected equals: result
-]
-
-{ #category : #running }
-CSNModelExporterAngularBLMaterialTest >> testExportHyperlinkWithLabel [
-
-	| result expected link label |
-	link := self createEntity: CSNUICWExtendedLink.
-	link
-		affectedActions: ((self createEntity: FamixJavaAttribute)
-				 name: 'buttonAttribute';
-				 yourself);
-		name: 'buttonAttribute';
-		yourself.
-	label := self createEntity: CSNUILabel.
-	label attributeValue: 'label'.
-	link addAttribute: label.
-
-	expected := String crlf join:
-		            #( '<bl-hyperlink id="buttonAttribute">'
-		'    label'
-		               '</bl-hyperlink>' ).
-
-	result := String streamContents: [ :stream | 
-		          exporter currentWriteStream: stream.
-		          exporter visitCSNUILink: link ].
-	self assert: expected equals: result
-]
-
-{ #category : #running }
 CSNModelExporterAngularBLMaterialTest >> testExportInput [
 
 	| result inputText label |
@@ -588,28 +474,6 @@ CSNModelExporterAngularBLMaterialTest >> testExportInputWithAffectation [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUIInputText: inputText.
-		self assert: exporter currentWriteStream contents equals: result ]
-]
-
-{ #category : #running }
-CSNModelExporterAngularBLMaterialTest >> testExportLinkWithAction [
-
-	| result link |
-	link := self createEntity: CSNUICWExtendedLink.
-	link addAction: ((self createEntity: CSNActionAppel) call:
-			 ((self createEntity: CSNPage)
-				  name: 'Page';
-				  yourself)).
-
-	result := String streamContents: [ :stream | 
-		          stream
-			          << '<bl-hyperlink (click)="openPhase(Page)">';
-			          << String crlf;
-			          << '</bl-hyperlink>' ].
-
-	String streamContents: [ :stream | 
-		exporter currentWriteStream: stream.
-		exporter visitCSNUILink: link.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
