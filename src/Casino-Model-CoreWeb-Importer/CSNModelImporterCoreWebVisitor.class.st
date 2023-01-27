@@ -713,7 +713,41 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
 	      'BLAbstractCrud' ) includesAny:
 		   (source invokedClass withSuperclassHierarchy collect:
 			    #invokedClassName))
-		  ifTrue: [ self createWidget: aCSNUITable ]
+		  ifTrue: [ 
+			  | table modelArg famixModelType |
+			  table := self createWidget: aCSNUITable.
+			  "check for header"
+			  (source isKindOf: FamixJavaInvocation) ifTrue: [ 
+				  source generateFastIfNotDoneAndBind.
+				  source fast arguments ifNotEmpty: [ 
+					  modelArg := source fast arguments size = 4
+						              ifTrue: [ source fast arguments third ]
+						              ifFalse: [ source fast arguments last ].
+					  famixModelType := (modelArg isKindOf: FASTJavaNewExpression)
+						                    ifTrue: [ modelArg argumentOwner famixType ]
+						                    ifFalse: [ 
+							                    modelArg famixVariable
+								                    ifNotNil: [ :var | var declaredType ]
+								                    ifNil: [ nil ] ].
+					  famixModelType ifNotNil: [ :notNilFamixModelType | 
+						  notNilFamixModelType queryAllOutgoingInvocations
+							  select: [ :invoc | 
+							  invoc signature beginsWith: 'addBusinessColumn' ]
+							  thenDo: [ :invocation | "create a TableHeader for each addBusinessColumn found in the model"
+								  | header |
+								  header := self factory create: CSNUITableHeader.
+								  header addSource: invocation.
+								  invocation generateFastIfNotDoneAndBind.
+								  invocation fast arguments ifNotEmpty: [ :arguments | 
+									  | string |
+									  string := CSNFastJavaStringValueResolver resolve:
+										            arguments first.
+									  string ifNotEmpty: [ 
+										  header addAttribute: ((self factory create: CSNUILabel)
+												   attributeValue: string;
+												   yourself) ] ].
+								  table addWidget: header ] ] ].
+				  table ] ]
 		  ifFalse: [ nil ]
 ]
 
