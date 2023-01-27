@@ -97,7 +97,6 @@ CSNModelImporterCoreWebVisitor >> createWidgetPanel: aWidgetClass [
 { #category : #'private - table' }
 CSNModelImporterCoreWebVisitor >> extractFamixModelTypeForTable [
 
-	| modelArg |
 	^ (source isKindOf: FamixJavaInvocation)
 		  ifTrue: [ 
 		  self extractFamixModelTypeForTableFromInvocation: source ]
@@ -111,9 +110,9 @@ CSNModelImporterCoreWebVisitor >> extractFamixModelTypeForTableFromInvocation: a
 	anInvocation generateFastIfNotDoneAndBind.
 	^ anInvocation fast arguments
 		  ifNotEmpty: [ 
-			  modelArg := anInvocation fast arguments size = 4
-				              ifTrue: [ anInvocation fast arguments third ]
-				              ifFalse: [ anInvocation fast arguments last ].
+			  modelArg := anInvocation fast arguments size < 3
+				              ifTrue: [ anInvocation fast arguments last ]
+				              ifFalse: [ anInvocation fast arguments third ].
 			  (modelArg isKindOf: FASTJavaNewExpression)
 				  ifTrue: [ modelArg famixInvocation candidates anyOne parentType ]
 				  ifFalse: [ 
