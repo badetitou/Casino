@@ -108,18 +108,17 @@ CSNModelImporterCoreWebVisitor >> extractFamixModelTypeForTableFromInvocation: a
 
 	| modelArg |
 	anInvocation generateFastIfNotDoneAndBind.
-	^ anInvocation fast arguments
-		  ifNotEmpty: [ 
-			  modelArg := anInvocation fast arguments size < 3
-				              ifTrue: [ anInvocation fast arguments last ]
-				              ifFalse: [ anInvocation fast arguments third ].
+	^ (anInvocation fast arguments isEmpty or: [ 
+		   anInvocation fast arguments size < 3 ])
+		  ifFalse: [ 
+			  modelArg := anInvocation fast arguments third.
 			  (modelArg isKindOf: FASTJavaNewExpression)
 				  ifTrue: [ modelArg famixInvocation candidates anyOne parentType ]
 				  ifFalse: [ 
 					  modelArg famixVariable
 						  ifNotNil: [ :var | var declaredType ]
 						  ifNil: [ nil ] ] ]
-		  ifEmpty: [ 
+		  ifTrue: [ 
 			  source candidates anyOne isConstructor
 				  ifTrue: [ 
 					  (source candidates anyOne queryLocalOutgoing:
