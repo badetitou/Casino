@@ -94,6 +94,45 @@ CSNModelImporterCoreWebVisitor >> createWidgetPanel: aWidgetClass [
 	^ panel
 ]
 
+{ #category : #'private - table' }
+CSNModelImporterCoreWebVisitor >> extractFamixModelTypeForTable [
+
+	| modelArg |
+	^ (source isKindOf: FamixJavaInvocation)
+		  ifTrue: [ 
+		  self extractFamixModelTypeForTableFromInvocation: source ]
+		  ifFalse: [ nil ]
+]
+
+{ #category : #'private - table' }
+CSNModelImporterCoreWebVisitor >> extractFamixModelTypeForTableFromInvocation: anInvocation [
+
+	| modelArg |
+	anInvocation generateFastIfNotDoneAndBind.
+	^ anInvocation fast arguments
+		  ifNotEmpty: [ 
+			  modelArg := anInvocation fast arguments size = 4
+				              ifTrue: [ anInvocation fast arguments third ]
+				              ifFalse: [ anInvocation fast arguments last ].
+			  (modelArg isKindOf: FASTJavaNewExpression)
+				  ifTrue: [ modelArg famixInvocation candidates anyOne parentType ]
+				  ifFalse: [ 
+					  modelArg famixVariable
+						  ifNotNil: [ :var | var declaredType ]
+						  ifNil: [ nil ] ] ]
+		  ifEmpty: [ 
+			  source candidates anyOne isConstructor
+				  ifTrue: [ 
+					  (source candidates anyOne queryLocalOutgoing:
+						   FamixJavaInvocation)
+						  detect: [ :invoc | invoc signature beginsWith: 'super(' ]
+						  ifFound: [ :superInvoc | 
+							  ^ self extractFamixModelTypeForTableFromInvocation:
+								    superInvoc ]
+						  ifNone: [ nil ] ]
+				  ifFalse: [ nil ] ]
+]
+
 { #category : #private }
 CSNModelImporterCoreWebVisitor >> getAttributeValueFrom: anInvocation [
 	^ anInvocation parameters first
@@ -714,40 +753,30 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
 		   (source invokedClass withSuperclassHierarchy collect:
 			    #invokedClassName))
 		  ifTrue: [ 
-			  | table modelArg famixModelType |
+			  | table famixModelType |
 			  table := self createWidget: aCSNUITable.
 			  "check for header"
-			  (source isKindOf: FamixJavaInvocation) ifTrue: [ 
-				  source generateFastIfNotDoneAndBind.
-				  source fast arguments ifNotEmpty: [ 
-					  modelArg := source fast arguments size = 4
-						              ifTrue: [ source fast arguments third ]
-						              ifFalse: [ source fast arguments last ].
-					  famixModelType := (modelArg isKindOf: FASTJavaNewExpression)
-						                    ifTrue: [ modelArg argumentOwner famixType ]
-						                    ifFalse: [ 
-							                    modelArg famixVariable
-								                    ifNotNil: [ :var | var declaredType ]
-								                    ifNil: [ nil ] ].
-					  famixModelType ifNotNil: [ :notNilFamixModelType | 
-						  notNilFamixModelType queryAllOutgoingInvocations
-							  select: [ :invoc | 
-							  invoc signature beginsWith: 'addBusinessColumn' ]
-							  thenDo: [ :invocation | "create a TableHeader for each addBusinessColumn found in the model"
-								  | header |
-								  header := self factory create: CSNUITableHeader.
-								  header addSource: invocation.
-								  invocation generateFastIfNotDoneAndBind.
-								  invocation fast arguments ifNotEmpty: [ :arguments | 
-									  | string |
-									  string := CSNFastJavaStringValueResolver resolve:
-										            arguments first.
-									  string ifNotEmpty: [ 
-										  header addAttribute: ((self factory create: CSNUILabel)
-												   attributeValue: string;
-												   yourself) ] ].
-								  table addWidget: header ] ] ].
-				  table ] ]
+			  famixModelType := self extractFamixModelTypeForTable.
+			  "famixModelType ifNil: [ self h ]."
+			  famixModelType ifNotNil: [ :notNilFamixModelType | 
+				  notNilFamixModelType queryAllOutgoingInvocations
+					  select: [ :invoc | 
+					  invoc signature beginsWith: 'addBusinessColumn' ]
+					  thenDo: [ :invocation | "create a TableHeader for each addBusinessColumn found in the model"
+						  | header |
+						  header := self factory create: CSNUITableHeader.
+						  header addSource: invocation.
+						  invocation generateFastIfNotDoneAndBind.
+						  invocation fast arguments ifNotEmpty: [ :arguments | 
+							  | string |
+							  string := CSNFastJavaStringValueResolver resolve:
+								            arguments first.
+							  string ifNotEmpty: [ 
+								  header addAttribute: ((self factory create: CSNUILabel)
+										   attributeValue: string;
+										   yourself) ] ].
+						  table addWidget: header ] ].
+			  table ]
 		  ifFalse: [ nil ]
 ]
 
