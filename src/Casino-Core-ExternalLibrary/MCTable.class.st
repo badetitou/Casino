@@ -131,7 +131,9 @@ MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 					<<< ' ''';
 					<<< (header attributes
 							 detect: [ :att | att isKindOf: CSNUILabel ]
-							 ifFound: [ :label | label attributeValue ]
+							 ifFound: [ :label | 
+								 anExporter protectTypescriptQuotedString:
+										 label attributeValue ]
 							 ifNone: [ 'header' , header mooseID printString ]);
 					<<< '''' ]
 			separatedBy: [ anExporter <<< ',' ].

@@ -15,3 +15,11 @@ TAngularExporter >> protectString: aString [
 				  with: '{{ ''{'' }}' ]
 		  ifNil: [ '' ]
 ]
+
+{ #category : #api }
+TAngularExporter >> protectTypescriptQuotedString: aString [
+
+	^ aString
+		  ifNotNil: [ aString asString copyReplaceAll: '''' with: '\''' ]
+		  ifNil: [ '' ]
+]
