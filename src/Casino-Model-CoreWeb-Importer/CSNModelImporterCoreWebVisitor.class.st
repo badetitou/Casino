@@ -766,13 +766,20 @@ CSNModelImporterCoreWebVisitor >> visitCSNUITable: aCSNUITable [
 						  header addSource: invocation.
 						  invocation generateFastIfNotDoneAndBind.
 						  invocation fast arguments ifNotEmpty: [ :arguments | 
-							  | string |
+							  | string colValue |
 							  string := CSNFastJavaStringValueResolver resolve:
 								            arguments first.
+								colValue := CSNFastJavaStringValueResolver resolve:
+								            arguments second.
 							  string ifNotEmpty: [ 
 								  header addAttribute: ((self factory create: CSNUILabel)
 										   attributeValue: string;
-										   yourself) ] ].
+										   yourself).
+								header addAttribute: ((self factory create: CSNAttribute)
+											name: 'colValue';
+										   attributeValue: colValue;
+										   yourself)
+								 ] ].
 						  table addWidget: header ] ].
 			  table ]
 		  ifFalse: [ nil ]

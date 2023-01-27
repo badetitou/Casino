@@ -105,8 +105,14 @@ MCTable >> exportTableHeader: header with: anExporter [
 		anExporter
 			<<< '</th>';
 			crlf.
-		anExporter
-		<< '<td mat-cell *matCellDef="let element">{{element}}</td>' ].
+		anExporter << '<td mat-cell *matCellDef="let element">{{element'.
+		header attributes
+			detect: [ :att | att name = 'colValue' ]
+			ifFound: [ :colValue | 
+				anExporter
+					<<< '.';
+					<<< colValue attributeValue ].
+		anExporter <<< '}}</td>' ].
 	anExporter << '</ng-container>'
 ]
 
