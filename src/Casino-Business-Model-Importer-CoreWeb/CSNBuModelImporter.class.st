@@ -244,6 +244,39 @@ CSNBuModelImporter >> importForServiceApi: aServiceAPI [
 ]
 
 { #category : #importing }
+CSNBuModelImporter >> importInterface: concreteInterface [
+
+	"Import a new BusinessType DTO"
+
+	| businessType |
+	"Does not import already existing BusinessType of the model"
+	(self buModel allWithType: CSNBuBusinessType)
+		detect: [ :existingBusinessType | 
+			existingBusinessType name = concreteInterface name ]
+		ifFound: [ :existingBusinessType | ^ existingBusinessType ].
+	businessType := (self factory create: CSNBuBusinessType)
+		                name: concreteInterface name;
+		                source: concreteInterface;
+		                comment: (concreteInterface comments
+				                 ifEmpty: nil
+				                 ifNotEmpty: [ :comments | 
+					                 comments anyOne sourceText ]);
+		                isAbstract: false;
+		                yourself.
+
+	"Link with subclasses to preserve the same hierarchy, and they are also DTOs"
+	concreteInterface directSubclasses
+		reject: [ :subclass | subclass isAnonymousClass ]
+		thenDo: [ :subclass | 
+		(self importInterface: subclass) parent: businessType ].
+
+	"Handle attributes, which are also DTOs"
+	concreteInterface attributes do: [ :attribute | 
+		businessType addAttribute: (self importAttribute: attribute) ].
+	^ businessType
+]
+
+{ #category : #importing }
 CSNBuModelImporter >> importPrimitiveType: aClass [
 
 	(self buModel allWithType: CSNBuPrimitive)
@@ -299,6 +332,18 @@ CSNBuModelImporter >> visitException: aClass [
 	(aClass superclassHierarchy anySatisfy: [ :class | 
 		 self dtoAbstractNames includes: class name ]) ifTrue: [ 
 		^ self importClass: aClass ].
+	^ self buildDefaultDtoFrom: aClass
+]
+
+{ #category : #visiting }
+CSNBuModelImporter >> visitInterface: aClass [
+
+	(#( Boolean Byte Character Date Double Float Integer Long Short String
+	    Void ) includes: aClass name) ifTrue: [ 
+		^ self importPrimitiveType: aClass ].
+	(aClass superclassHierarchy anySatisfy: [ :class | 
+		 self dtoAbstractNames includes: class name ]) ifTrue: [ 
+		^ self importInterface: aClass ].
 	^ self buildDefaultDtoFrom: aClass
 ]
 
