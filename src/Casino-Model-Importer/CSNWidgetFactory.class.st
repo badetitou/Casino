@@ -63,7 +63,7 @@ CSNWidgetFactory >> createWidgetFor: theWidgetSource withParent: parent [
 		   newFrom: theWidgetSource
 		   for: parent
 		   withImporters: visitorImporters) ifNil: [ 
-		  (self create: CSNContainer)
+		  (self create: CSNUICustomWidget)
 			  source: theWidgetSource;
 			  yourself ]
 ]

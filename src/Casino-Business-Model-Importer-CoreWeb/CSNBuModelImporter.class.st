@@ -147,7 +147,7 @@ CSNBuModelImporter >> importAttributeExpression: anExpression [
 	anExpression class == FASTJavaNewExpression ifTrue: [ 
 		| invoked |
 		invoked := anExpression famixInvocation invokedClass.
-		(invoked fullName beginsWith: 'java') ifTrue: [ 
+		( (invoked allAtScope: FamixTPackage) anySatisfy: [ :p | p name = 'java' ]) ifTrue: [ 
 			invoked allSuperclassesDo: [ :superclass | 
 				superclass name = #Set ifTrue: [ ^ 'new Set()' ].
 				superclass name = #Map ifTrue: [ ^ 'new Map()' ].
