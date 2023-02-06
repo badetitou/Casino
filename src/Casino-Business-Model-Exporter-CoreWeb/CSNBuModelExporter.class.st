@@ -29,9 +29,21 @@ CSNBuModelExporter >> defaultSuperclassName: anObject [
 { #category : #export }
 CSNBuModelExporter >> exportAttribute: attribute [
 
+	| isInSuperType |
 	attribute comment ifNotNil: [ :comment | 
 		self << comment.
 		self crlf ].
+
+
+	isInSuperType := (attribute businessType allParents flatCollect:
+		                  #attributes) anySatisfy: [ :parentAttribute | 
+		                 parentAttribute name = attribute name ].
+
+	isInSuperType ifTrue: [ 
+		self
+			<<
+				'/* TODO : Casino detected that this attribute is also define in the super class';
+			crlf ].
 	(attribute isStatic or: [ attribute isTransient ]) ifFalse: [ 
 		self << '@JsonProperty()'.
 		self crlf.
@@ -45,7 +57,8 @@ CSNBuModelExporter >> exportAttribute: attribute [
 	self <<< attribute name <<< ': '.
 	self exportAttributeDTO: attribute attributeType.
 	"attribute expression ifNotNil: [ :expr | self <<< ' = ' <<< expr ]."
-	self <<< ';'
+	self <<< ';'.
+	isInSuperType ifTrue: [ self <<< '*/' ]
 ]
 
 { #category : #export }
