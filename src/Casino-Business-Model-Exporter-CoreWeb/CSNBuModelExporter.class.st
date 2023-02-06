@@ -35,9 +35,12 @@ CSNBuModelExporter >> exportAttribute: attribute [
 		self crlf ].
 
 
-	isInSuperType := (attribute businessType allParents flatCollect:
-		                  #attributes) anySatisfy: [ :parentAttribute | 
-		                 parentAttribute name = attribute name ].
+	isInSuperType := attribute businessType
+		                 ifNil: [ false ]
+		                 ifNotNil: [ 
+			                 (attribute businessType allParents flatCollect:
+				                  #attributes) anySatisfy: [ :parentAttribute | 
+				                 parentAttribute name = attribute name ] ].
 
 	isInSuperType ifTrue: [ 
 		self
