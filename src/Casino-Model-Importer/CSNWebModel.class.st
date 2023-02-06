@@ -14,10 +14,17 @@ Class {
 	#instVars : [
 		'model',
 		'sourceModel',
-		'factory'
+		'factory',
+		'postImporters'
 	],
 	#category : #'Casino-Model-Importer'
 }
+
+{ #category : #accessing }
+CSNWebModel >> addPostImporters: aPostImporter [
+
+	postImporters add: aPostImporter
+]
 
 { #category : #initialization }
 CSNWebModel >> createFactory [
@@ -54,6 +61,12 @@ CSNWebModel >> import [
 ]
 
 { #category : #accessing }
+CSNWebModel >> initialize [
+	super initialize.
+	postImporters := OrderedCollection new
+]
+
+{ #category : #accessing }
 CSNWebModel >> model [
 	^ model
 ]
@@ -65,7 +78,21 @@ CSNWebModel >> model: anObject [
 
 { #category : #api }
 CSNWebModel >> postImport [
-	
+
+	self postImporters do: [ :postImporter | 
+		postImporter runFromImporter: self ]
+]
+
+{ #category : #accessing }
+CSNWebModel >> postImporters [
+
+	^ postImporters
+]
+
+{ #category : #accessing }
+CSNWebModel >> postImporters: anObject [
+
+	postImporters := anObject
 ]
 
 { #category : #api }
@@ -84,13 +111,7 @@ CSNWebModel >> sourceModel: anObject [
 ]
 
 { #category : #accessing }
-CSNWebModel >> webRoot [
-	"I represent the root of URL"
-	^ 'http://ap15mogbl:8080/Web_coreincubator/coreincubator/'
-]
-
-{ #category : #accessing }
 CSNWebModel >> webSkinRoot [
 	"I represent the root of URL"
-	^ self webRoot , 'skins/e-sedit/'
+	^ 'https://todo:8080/skins'
 ]
