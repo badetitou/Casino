@@ -3,7 +3,8 @@ Class {
 	#superclass : #CSNModelVisitor,
 	#instVars : [
 		'model',
-		'context'
+		'context',
+		'pluginExporters'
 	],
 	#category : #'Casino-Model-Exporter'
 }
@@ -11,6 +12,12 @@ Class {
 { #category : #actions }
 CSNModelExporter class >> export: aBLMooseModel [
 	self new model: aBLMooseModel; export
+]
+
+{ #category : #accessing }
+CSNModelExporter >> addPluginExporters: aPluginExporter [
+
+	pluginExporters add: aPluginExporter
 ]
 
 { #category : #accessing }
@@ -31,6 +38,11 @@ CSNModelExporter >> export [
 	self postExport 
 ]
 
+{ #category : #initialization }
+CSNModelExporter >> initialize [
+	pluginExporters := OrderedCollection new
+]
+
 { #category : #accessing }
 CSNModelExporter >> model [
 	^ model
@@ -39,6 +51,18 @@ CSNModelExporter >> model [
 { #category : #accessing }
 CSNModelExporter >> model: anObject [
 	model := anObject
+]
+
+{ #category : #accessing }
+CSNModelExporter >> pluginExporters [
+
+	^ pluginExporters
+]
+
+{ #category : #accessing }
+CSNModelExporter >> pluginExporters: anObject [
+
+	pluginExporters := anObject
 ]
 
 { #category : #run }

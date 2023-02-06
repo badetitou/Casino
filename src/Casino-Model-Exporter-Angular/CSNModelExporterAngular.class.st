@@ -629,6 +629,10 @@ CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeImportForNavigation ].
+
+	self pluginExporters do: [ :pluginExporter | 
+		pluginExporter printImportOf: aBLPageMetier using: self ].
+
 	"currentWriteStream
 		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self))."
 	currentWriteStream
@@ -656,6 +660,12 @@ export class ';
 	currentWriteStream << '
 '.
 	self printTSVariablesForComponent: aBLPageMetier.
+
+	self pluginExporters do: [ :pluginExporter | 
+		pluginExporter
+			printTSVariablesForComponent: aBLPageMetier
+			using: self ].
+
 	self << '
     constructor('.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
@@ -663,6 +673,8 @@ export class ';
 		<<
 		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
 	self <<< ' private _fb: FormBuilder,'.
+	self pluginExporters do: [ :pluginExporter | 
+		pluginExporter printConstructorVariable: aBLPageMetier using: self ].
 	currentWriteStream << ') {
 '.
 	aBLPageMetier collectPhaseCalled do: [ :phase | 
@@ -683,8 +695,11 @@ export class ';
 
     }
 '.
+
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeOpenPhaseMethod ].
+	self pluginExporters do: [ :pluginExporter | 
+		pluginExporter printAdditionalMethodsFor: aBLPageMetier using: self ].
 	currentWriteStream
 		<< '
 
@@ -891,7 +906,7 @@ CSNModelExporterAngular >> homePage: anObject [
 
 { #category : #initialization }
 CSNModelExporterAngular >> initialize [
-
+	super initialize.
 	indentLevel := 0.
 	self serviceExporter: CSNModelServiceExporter new
 ]
