@@ -84,7 +84,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec baseline: 'FASTJava' with: [ 
 		spec
 			loads: #( 'smacc' 'visitor' );
-			repository: 'github://moosetechnology/FAST-Java:v2/src' ].
+			repository: 'github://moosetechnology/FAST-Java:v3/src' ].
 	spec
 		baseline: 'XMLParser'
 		with: [ 
