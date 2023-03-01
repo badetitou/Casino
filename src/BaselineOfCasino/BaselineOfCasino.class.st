@@ -84,7 +84,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec baseline: 'FASTJava' with: [ 
 		spec
 			loads: #( 'smacc' 'visitor' );
-			repository: 'github://moosetechnology/FAST-Java:v2/src' ].
+			repository: 'github://moosetechnology/FAST-Java:v3/src' ].
 	spec
 		baseline: 'XMLParser'
 		with: [ 
@@ -94,7 +94,7 @@ BaselineOfCasino >> defineDependencies: spec [
 			'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
 	spec
 		baseline: 'Carrefour'
-		with: [ spec repository: 'github://badetitou/Carrefour:v3/src' ].
+		with: [ spec repository: 'github://badetitou/Carrefour:v4/src' ].
 	spec
 		baseline: 'MoreLogger'
 		with: [ spec repository: 'github://badetitou/MoreLogger:main/src' ].
