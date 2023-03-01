@@ -167,3 +167,48 @@ CSNServiceAPITest >> testPrintCreateFormDataInWithBusinessParam [
 		               'formData.append(''business-type'', JSON.stringify(businessType));' ).
 	self assert: result equals: expected
 ]
+
+{ #category : #test }
+CSNServiceAPITest >> testUniqueName [
+
+	| myService |
+	myService := self create: CSNService.
+	serviceAPI name: 'serviceAPI'.
+	myService addAction: serviceAPI.
+	self assert: serviceAPI uniqueName equals: 'serviceAPI'
+]
+
+{ #category : #test }
+CSNServiceAPITest >> testUniqueNameChildServiceThenOwner [
+
+	| myService myServiceOwner myServiceOwnerAPI |
+	myService := self create: CSNService.
+	myServiceOwner := self create: CSNService.
+	myServiceOwner addChildService: myService.
+	serviceAPI name: 'serviceAPI'.
+	myServiceOwnerAPI := (self create: CSNServiceAPI)
+		                     name: 'serviceAPI';
+		                     yourself.
+	myServiceOwner addAction: myServiceOwnerAPI.
+	myService addAction: serviceAPI.
+	self assert: serviceAPI uniqueName equals: 'serviceAPI1'.
+	self assert: myServiceOwnerAPI uniqueName equals: 'serviceAPI'
+]
+
+{ #category : #test }
+CSNServiceAPITest >> testUniqueNameOwnerThenChildService [
+
+	| myService myServiceOwner myServiceOwnerAPI |
+	myService := self create: CSNService.
+	myServiceOwner := self create: CSNService.
+	myServiceOwner addChildService: myService.
+	serviceAPI name: 'serviceAPI'.
+	myServiceOwnerAPI := (self create: CSNServiceAPI)
+		                     name: 'serviceAPI';
+		                     yourself.
+	myServiceOwner addAction: myServiceOwnerAPI.
+	myService addAction: serviceAPI.
+	self assert: myServiceOwnerAPI uniqueName equals: 'serviceAPI'.
+	self assert: serviceAPI uniqueName equals: 'serviceAPI1'.
+	
+]

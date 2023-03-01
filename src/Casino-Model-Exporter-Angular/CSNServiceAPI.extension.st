@@ -95,12 +95,16 @@ CSNServiceAPI >> uniqueName [
 	| dic |
 	dic := self serviceOwner
 		       cacheAt: #uniqueName
-		       ifAbsentPut: [ { (self -> self name) } asDictionary ].
+		       ifAbsentPut: [ Dictionary new ].
 	^ dic at: self ifAbsentPut: [ 
 		  | index potentialName |
 		  index := 0.
 		  potentialName := self name.
-		  [ dic includes: potentialName ] whileTrue: [ 
+		  [ 
+		  (dic includes: potentialName) or: [ 
+			  self serviceOwner parentService isNotNil and: [ 
+				  (self serviceOwner parentService actions collect: #uniqueName) 
+					  includes: potentialName ] ] ] whileTrue: [ 
 			  potentialName := potentialName
 				                   replaceSuffix: index asString
 				                   with: (index := index + 1) asString ].
