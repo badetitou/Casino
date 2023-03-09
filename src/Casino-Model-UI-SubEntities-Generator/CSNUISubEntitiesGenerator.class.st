@@ -84,7 +84,8 @@ Class {
 		'uiMenu',
 		'uiMenuItem',
 		'uiVisibility',
-		'uiTableHeader'
+		'uiTableHeader',
+		'uiInputYear'
 	],
 	#category : #'Casino-Model-UI-SubEntities-Generator'
 }
@@ -145,6 +146,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 	uiInputEmail := builder newClassNamed: #InputEmail.
 	uiInputPassword := builder newClassNamed: #InputPassword.
 	uiInputTime := builder newClassNamed: #InputTime.
+	uiInputYear := builder newClassNamed: #InputYear.
 	uiInputUrl := builder newClassNamed: #InputUrl.
 	uiInputWeek := builder newClassNamed: #InputWeek.
 	uiSelect := builder newClassNamed: #Select.
@@ -199,6 +201,7 @@ CSNUISubEntitiesGenerator >> defineClasses [
 
 { #category : #definition }
 CSNUISubEntitiesGenerator >> defineHierarchy [
+
 	super defineHierarchy.
 	"widgets"
 	uiCustomWidget --|> container.
@@ -227,6 +230,7 @@ CSNUISubEntitiesGenerator >> defineHierarchy [
 	uiInputDatetimeLocal --|> uiInput.
 	uiInputFile --|> uiInput.
 	uiInputMonth --|> uiInput.
+	uiInputYear --|> uiInput.
 	uiInputNumber --|> uiInput.
 	uiInputRadio --|> uiInput.
 	uiInputRange --|> uiInput.

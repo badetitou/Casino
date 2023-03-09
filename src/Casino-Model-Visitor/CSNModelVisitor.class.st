@@ -439,6 +439,12 @@ CSNModelVisitor class >> visitCSNUIInputWeek: aCSNUIInputWeek [
 ]
 
 { #category : #visiting }
+CSNModelVisitor class >> visitCSNUIInputYear: aCSNUIInputYear [
+
+	^ self visitCSNUIInput: aCSNUIInputYear
+]
+
+{ #category : #visiting }
 CSNModelVisitor class >> visitCSNUILabel: aCSNUILabel [
 	<generated>
 	^ self visitCSNAttribute: aCSNUILabel
@@ -1084,6 +1090,12 @@ CSNModelVisitor >> visitCSNUIInputUrl: aCSNUIInputUrl [
 CSNModelVisitor >> visitCSNUIInputWeek: aCSNUIInputWeek [
 	<generated>
 	^ self visitCSNUIInput: aCSNUIInputWeek
+]
+
+{ #category : #visiting }
+CSNModelVisitor >> visitCSNUIInputYear: aCSNUIInputYear [
+
+	^ self visitCSNUIInput: aCSNUIInputYear
 ]
 
 { #category : #visiting }

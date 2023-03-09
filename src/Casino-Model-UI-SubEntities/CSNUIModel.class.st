@@ -16,3 +16,9 @@ CSNUIModel class >> annotation [
 	<package: #'Casino-Model-UI-SubEntities'>
 	<generated>
 ]
+
+{ #category : #testing }
+CSNUIModel class >> canBeImportedFromFile [
+	<generated>
+	^true
+]
