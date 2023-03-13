@@ -567,6 +567,12 @@ export class ';
 	currentWriteStream << '
 
 '.
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+			:widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptMethodsOf: widget
+				usingExporter: self ] ].
 	calledActions := (aBLPageMetier calledBehavior asOrderedCollection 
 		                  reject: [ :action | action behavior isEmpty ]) 
 		                 sort: [ :action1 :action2 | 

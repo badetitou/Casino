@@ -3,7 +3,8 @@ Trait {
 	#instVars : [
 		'currentWriteStream',
 		'indentLevel',
-		'indentNumber'
+		'indentNumber',
+		'eolSeparator'
 	],
 	#category : #'Casino-Exporter'
 }

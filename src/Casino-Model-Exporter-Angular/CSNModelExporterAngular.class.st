@@ -695,7 +695,12 @@ export class ';
 
     }
 '.
-
+	self inIndented: [ 
+		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
+			:widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptMethodsOf: widget
+				usingExporter: self ] ].
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeOpenPhaseMethod ].
 	self pluginExporters do: [ :pluginExporter | 
