@@ -629,7 +629,7 @@ CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeImportForNavigation ].
-
+	self writeTypeScriptImportOf: aBLPageMetier.
 	self pluginExporters do: [ :pluginExporter | 
 		pluginExporter printImportOf: aBLPageMetier using: self ].
 

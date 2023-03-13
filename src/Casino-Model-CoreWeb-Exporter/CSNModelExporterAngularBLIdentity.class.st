@@ -495,6 +495,7 @@ CSNModelExporterAngularBLIdentity >> generateTSSourceCodeForBusinessPage: aBLPag
 	self writeBusinessPageImportList.
 	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
 		self writeImportForNavigation ].
+	self writeTypeScriptImportOf: aBLPageMetier.
 	currentWriteStream
 		<<
 			(String crlf join: (((aBLPageMetier widgetsDependenciesFrom: self)
