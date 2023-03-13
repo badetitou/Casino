@@ -830,6 +830,7 @@ CSNModelExporterAngular >> generateTSSourceCodeForWidgetComponent: aCSNWidget [
 	phaseCalled := aCSNWidget collectPhaseCalled.
 	self writeBusinessPageImportList.
 	phaseCalled ifNotEmpty: [ self writeImportForNavigation ].
+	self writeTypeScriptImportOf: aCSNWidget.
 
 	self crlf.
 	self
@@ -1394,4 +1395,13 @@ CSNModelExporterAngular >> writeOpenPhaseMethod [
 			'    public openPhase(phase: Phase): void {
         this._desktopStateService.selectPhase({id: undefined, phase: phase});
     }'
+]
+
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
+
+	aCSNWidget recursiveWidgets asSet flattened do: [ :widget | 
+		(self exporterAngularConfiguration angularRepresentationOf: widget)
+			exportTypeScriptImportOf: widget
+			usingExporter: self ]
 ]

@@ -127,6 +127,11 @@ WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter
 ]
 
 { #category : #export }
+WidgetRepresentation >> exportTypeScriptImportOf: widget usingExporter: anExporter [
+	"I export in the TS component of my widget the variables required for its proper working"
+]
+
+{ #category : #export }
 WidgetRepresentation >> exportTypeScriptMethodsOf: widget usingExporter: anExporter [
 	"I export in the TS component of my widget the variables required for its proper working"
 ]
