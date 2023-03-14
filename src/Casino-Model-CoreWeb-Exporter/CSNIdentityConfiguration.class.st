@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'modules'
 	],
-	#category : #'Casino-Model-CoreWeb-Exporter-BLIdentity'
+	#category : #'Casino-Model-CoreWeb-Exporter'
 }
 
 { #category : #'instance creation' }
@@ -36,7 +36,11 @@ CSNIdentityConfiguration >> initialize [
 
 { #category : #accessing }
 CSNIdentityConfiguration >> moduleOfPage: aCSNPage [
-	^ self modules detect: [ :aModule | aModule pages anySatisfy: [ :page | page = aCSNPage ] ]
+
+	^ self modules
+		  detect: [ :aModule | 
+		  aModule pages anySatisfy: [ :page | page = aCSNPage ] ]
+		  ifNone: [ nil ]
 ]
 
 { #category : #accessing }

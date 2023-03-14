@@ -6,7 +6,7 @@ Class {
 		'name',
 		'port'
 	],
-	#category : #'Casino-Model-CoreWeb-Exporter-BLIdentity'
+	#category : #'Casino-Model-CoreWeb-Exporter'
 }
 
 { #category : #initialization }
