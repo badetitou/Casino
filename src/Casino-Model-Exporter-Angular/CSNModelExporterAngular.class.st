@@ -120,7 +120,7 @@ CSNModelExporterAngular >> exportAttributeValue: aCSNAttribute [
 CSNModelExporterAngular >> exportPage: aPage [
 
 	^ self clone
-		  currentPath: self rootPhases / aPage getAcceptedName;
+		  currentPath: self rootPhases / aPage getAcceptedPathName;
 		  currentPage: aPage;
 		  visit: aPage
 ]
@@ -606,7 +606,7 @@ import { ';
 		<< ' } from ''./components/';
 		<< aCSNPage getFolderName;
 		<< '/';
-		<< aCSNPage getAcceptedName;
+		<< aCSNPage getAcceptedPathName;
 		<<
 			'.component'';
 
@@ -1209,7 +1209,7 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	aBLPhase businessPage do: [ :metier | 
 		self clone
 			currentPage: metier;
-			currentPath: componentsRoot / metier getAcceptedName;
+			currentPath: componentsRoot / metier getAcceptedPathName;
 			visit: metier ]
 ]
 

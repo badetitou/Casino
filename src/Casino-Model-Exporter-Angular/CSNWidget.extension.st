@@ -133,6 +133,12 @@ CSNWidget >> getAcceptedName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
+CSNWidget >> getAcceptedPathName [
+
+	^ (PharoStringCaseFormater on: self getAcceptedName) asKebabCase
+]
+
+{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getExternalDependenciesFrom: anExporter [
 
 	^ { 
@@ -147,20 +153,21 @@ CSNWidget >> getExternalDependencyFrom: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getHTMLName [
-	^ self id  , '.component.html'
+
+	^ self getAcceptedPathName , '.component.html'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getImportStringFromLocalPath [
 
-	^  self getAcceptedName
+	^  self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getImportStringWithLocalPath: aLocalPath [
 
 	^ 'import { ' , self componentName , ' } from ''' , aLocalPath, '/'
-	  , self getImportStringFromLocalPath , '/' , self getAcceptedName
+	  , self getImportStringFromLocalPath , '/' , self getAcceptedPathName
 	  , '.component'';'
 ]
 
@@ -190,17 +197,7 @@ CSNWidget >> getSelectorFrom: anExporter [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getTSName [
-	^ self id  , '.component.ts'
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> gtInAngular: composite [
-	<gtInspectorPresentationOrder: 1005>
-	composite text
-		title: 'Angular HTML';
-		display: [ String streamContents: [ :s | (CSNModelExporterAngular on: s) visit: self ] ];
-		withLineNumbers: true;
-		when: [ self isPageMetier not and: [ (self isKindOf: CSNPage) not ] ]
+	^ self getAcceptedPathName , '.component.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

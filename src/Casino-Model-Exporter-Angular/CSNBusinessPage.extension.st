@@ -20,25 +20,26 @@ CSNBusinessPage >> getBehaviorImportString [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getFolderName [
-	^ self getAcceptedName
+	^ self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getHTMLName [
-	^ self getAcceptedName  , '.component.html'
+
+	^ self getAcceptedPathName , '.component.html'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getImportStringFromLocalPath [
 
-	^ 'components/' , self getAcceptedName
+	^ 'components/' , self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getLocalComponentPath [
 	" return pageMetierName/pageMetierName.component"
 
-	^ self getLocalPath , '/' , self getAcceptedName , '.component'
+	^ self getLocalPath , '/' , self getAcceptedPathName , '.component'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -46,7 +47,7 @@ CSNBusinessPage >> getLocalPath [
 
 	" return pageMetierName/pageMetierName.component"
 
-	^ self container getLocalPath , '/components/' , self getAcceptedName
+	^ self container getLocalPath , '/components/' , self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

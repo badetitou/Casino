@@ -14,22 +14,24 @@ CSNPage >> getComponentsPageMetierListName [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getFolderName [
-	^ self getAcceptedName
+	^ self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getHTMLName [
-	^ self getAcceptedName  , '.component.html'
+
+	^ self getAcceptedPathName , '.component.html'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalComponentPath [
-	^ self getLocalPath  , '/' , self name , '.component'
+
+	^ self getLocalPath , '/' , self getAcceptedPathName , '.component'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getLocalModulePath [
-	^ self getAcceptedName, '/' , self getAcceptedName , '.module'
+	^ self getAcceptedPathName, '/' , self getAcceptedPathName , '.module'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
@@ -74,12 +76,12 @@ CSNPage >> getModuleClassName [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getModuleName [
-	^ self getAcceptedName , '.module.ts'
+	^ self getAcceptedPathName , '.module.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> getRouteName [
-	^ self getAcceptedName , '.route.ts'
+	^ self getAcceptedPathName , '.route.ts'
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
