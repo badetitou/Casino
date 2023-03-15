@@ -57,17 +57,26 @@ CSNBusinessExporter >> export: aCSNBuModel [
 							root := buType.
 							[ root parent isNil ] whileFalse: [ root := root parent ].
 							export := [ :businessType | 
+							          | rootFileRef |
 							          ('Export' , businessType name) recordInfo.
 							          ('Already exported: ' , exported size printString
 							           , '/' , toExport size printString) recordInfo.
+							          rootFileRef := self modelRoot / 'dto'.
 							          exported add: businessType.
 							          self exportBusinessType: businessType.
 							          barrelStream crlf.
+							          self locationToExport: businessType.
 							          barrelStream << 'export * from ''./dto/'.
 							          (self computeBusinessPackages: businessType) do: [ 
 									          :package | 
+									          rootFileRef := rootFileRef
+									                         /
+										                         (rootFileRef children detect: [ 
+												                          :child | 
+												                          child basename sameAs:
+														                          package name ]) basename.
 									          barrelStream
-										          << package name;
+										          << rootFileRef basename;
 										          << '/' ].
 							          barrelStream << businessType name << '.model'';'.
 							          businessType children
@@ -81,9 +90,7 @@ CSNBusinessExporter >> export: aCSNBuModel [
 CSNBusinessExporter >> exportBusinessType: businessType [
 
 	| directory |
-	directory := self modelRoot / 'dto'.
-	(self computeBusinessPackages: businessType) do: [ :package | 
-		directory := directory / package name ].
+	directory := self locationToExport: businessType.
 	directory ensureCreateDirectory.
 	^ (directory / businessType name , 'model.ts')
 		  deleteIfAbsent: nil;
@@ -99,6 +106,16 @@ CSNBusinessExporter >> initialize [
 	self businessTypeExporter: CSNBuModelExporter new.
 	self defaultSuperclassName: 'AbstractIdentity'
 	
+]
+
+{ #category : #accessing }
+CSNBusinessExporter >> locationToExport: businessType [
+
+	| directory |
+	directory := self modelRoot / 'dto'.
+	(self computeBusinessPackages: businessType) do: [ :package | 
+		directory := directory / package name ].
+	^ directory
 ]
 
 { #category : #accessing }
