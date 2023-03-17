@@ -128,11 +128,11 @@ CSNBuModelExporter >> printAnnotationsFor: aBusinessType [
 				self
 					<< 'types: ';
 					inBrakets: [ 
-						self << '{ class: () => ' <<< aBusinessType name <<< ' },'.
+						self << '{ class: () => ' <<< aBusinessType name <<< ', name: ''' <<< aBusinessType name <<< ''' },'.
 						self crlf.
 						(aBusinessType children sorted: [ :a :b | a name < b name ])
 							do: [ :child | 
-								self << '{ class: () => ' <<< child name <<< ' },' ]
+								self << '{ class: () => ' <<< child name <<< ', name: ''' <<< child name <<< ''' },' ]
 							separatedBy: [ self crlf ] ].
 				self <<< $, ];
 			<<< $);
