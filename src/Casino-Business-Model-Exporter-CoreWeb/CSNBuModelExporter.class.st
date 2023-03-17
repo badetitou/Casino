@@ -121,21 +121,26 @@ CSNBuModelExporter >> exportBusinessType: aBusinessType [
 { #category : #export }
 CSNBuModelExporter >> printAnnotationsFor: aBusinessType [
 
-	aBusinessType children ifEmpty: [ ^ self ].
+	aBusinessType children ifNotEmpty: [ 
+		self
+			<< '@JsonSubTypes(';
+			inBraces: [ 
+				self
+					<< 'types: ';
+					inBrakets: [ 
+						self << '{ class: () => ' <<< aBusinessType name <<< ' },'.
+						self crlf.
+						(aBusinessType children sorted: [ :a :b | a name < b name ])
+							do: [ :child | 
+								self << '{ class: () => ' <<< child name <<< ' },' ]
+							separatedBy: [ self crlf ] ].
+				self <<< $, ];
+			<<< $);
+			crlf ].
 	self
-		<< '@JsonSubTypes(';
-		inBraces: [ 
-			self
-				<< 'types: ';
-				inBrakets: [ 
-					self << '{ class: () => ' <<< aBusinessType name <<< ' },'.
-					self crlf.
-					(aBusinessType children sorted: [ :a :b | a name < b name ])
-						do: [ :child | 
-							self << '{ class: () => ' <<< child name <<< ' },' ]
-						separatedBy: [ self crlf ] ].
-			self <<< $, ];
-		<<< $);
+		<< '@JsonTypeName({value: ''';
+		<<< aBusinessType name;
+		<<< '''})';
 		crlf
 ]
 
@@ -161,7 +166,7 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 { #category : #export }
 CSNBuModelExporter >> printImportsFor: aBusinessType [
 
-	self << 'import { JsonProperty, JsonClassType'.
+	self << 'import { JsonProperty, JsonClassType, JsonTypeName'.
 	aBusinessType children ifNotEmpty: [ self <<< ', JsonSubTypes' ].
 	self <<< ' } from "@outfoxx/jackson-js";'.
 	aBusinessType parent ifNil: [ 
