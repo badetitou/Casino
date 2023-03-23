@@ -129,7 +129,7 @@ CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForBusinessPage: aBLP
 		currentWriteStream
 			<< '</mat-tab-group>';
 			<< String crlf ].
-	self generateInnerHtmlOf: aBLPageMetier
+	self generateRootHtmlOf: aBLPageMetier
 ]
 
 { #category : #visiting }
