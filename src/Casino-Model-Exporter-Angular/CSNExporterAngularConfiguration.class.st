@@ -9,10 +9,14 @@ Class {
 
 { #category : #initialization }
 CSNExporterAngularConfiguration >> angularRepresentationOf: aCSNWidget [
-	aCSNWidget class withAllSuperclasses
-		do: [:class | mapping
-				at: class
-				ifPresent: [ :widgetRepresentation | ^ widgetRepresentation ] ].
+
+	mapping
+		at: aCSNWidget
+		ifPresent: [ :widgetRepresentation | ^ widgetRepresentation ].
+	aCSNWidget class withAllSuperclasses do: [ :class | 
+		mapping
+			at: class
+			ifPresent: [ :widgetRepresentation | ^ widgetRepresentation ] ].
 	^ WidgetRepresentation new
 ]
 

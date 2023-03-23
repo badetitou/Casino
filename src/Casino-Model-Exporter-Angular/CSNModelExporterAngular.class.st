@@ -156,7 +156,7 @@ CSNModelExporterAngular >> generateAsSubComponent: aCSNWidget [
 	(exporter currentPath / aCSNWidget getHTMLName) asFileReference 
 		writeStreamDo: [ :aWriteStream | 
 			exporter currentWriteStream: aWriteStream.
-			exporter generateInnerHtmlOf: aCSNWidget ].
+			exporter generateRootHtmlOf: aCSNWidget ].
 
 	(exporter currentPath / aCSNWidget getTSName) asFileReference 
 		writeStreamDo: [ :aWriteStream | 
@@ -219,7 +219,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier 
 		currentWriteStream
 			<< '</bl-tabs>';
 			<< String crlf ].
-	self generateInnerHtmlOf: aBLPageMetier
+	self generateRootHtmlOf: aBLPageMetier
 ]
 
 { #category : #'generate - model' }
@@ -277,17 +277,9 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 ]
 
 { #category : #generate }
-CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
+CSNModelExporterAngular >> generateInnerHTMLOf: aCSNWidget [
 
 	| angularRepresentation |
-	self
-		<< '<form [formGroup]="';
-		<<< aCSNWidget id uncapitalized;
-		<<< 'Form';
-		<<< '">';
-		indentPlus;
-		crlf.
-
 	aCSNWidget layout ifNotNil: [ 
 		angularRepresentation := self angularRepresentationOf: aCSNWidget.
 		angularRepresentation exportHeaderOf: aCSNWidget with: self.
@@ -299,11 +291,7 @@ CSNModelExporterAngular >> generateInnerHtmlOf: aCSNWidget [
 		reject: [ :widget | widget isPageMetier ]
 		thenDo: [ :widget | 
 			self visit: widget.
-			currentWriteStream << String crlf ].
-
-	self
-		indentMinus;
-		<< '</form>'
+			currentWriteStream << String crlf ]
 ]
 
 { #category : #'generate - model' }
@@ -565,6 +553,22 @@ export class ';
 		<< aCSNPage getModuleClassName;
 		<< ' {}';
 		<< String crlf
+]
+
+{ #category : #generate }
+CSNModelExporterAngular >> generateRootHtmlOf: aCSNWidget [
+
+	self
+		<< '<form [formGroup]="';
+		<<< aCSNWidget id uncapitalized;
+		<<< 'Form';
+		<<< '">';
+		indentPlus;
+		crlf.
+	self generateInnerHTMLOf: aCSNWidget.
+	self
+		indentMinus;
+		<< '</form>'
 ]
 
 { #category : #'generate - model' }
