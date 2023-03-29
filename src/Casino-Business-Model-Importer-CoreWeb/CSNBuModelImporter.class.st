@@ -77,8 +77,8 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 	"Use FAST to handle arrays and the eventual initialization expression"
 	declarator := anAttribute parentType sourceAnchor
 		              ifNil: [ 
-			              ('No sourceAnchor for '
-			               , anAttribute parentType name) record.
+			              ('No sourceAnchor for ' , anAttribute parentType name)
+				              record.
 			              nil ]
 		              ifNotNil: [ 
 			              (anAttribute parentType generateFastIfNotDoneAndBind 
@@ -92,7 +92,9 @@ CSNBuModelImporter >> importAttribute: anAttribute [
 		comment: (anAttribute comments
 				 ifEmpty: nil
 				 ifNotEmpty: [ :comments | comments anyOne sourceText ]);
-		isFinal: anAttribute isFinal isNotNil;
+		isFinal: (anAttribute isFinal
+				 ifNil: [ false ]
+				 ifNotNil: [ anAttribute isFinal ]);
 		isStatic: anAttribute isClassSide;
 		isTransient: anAttribute isTransient isNotNil.
 	"TODO: handle expression with behavior model
