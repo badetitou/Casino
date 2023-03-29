@@ -174,7 +174,9 @@ CSNBuModelImporter >> importClass: concreteClass [
 				                 ifEmpty: nil
 				                 ifNotEmpty: [ :comments | 
 					                 comments anyOne sourceText ]);
-		                isAbstract: concreteClass isAbstract isNotNil;
+		                isAbstract: (concreteClass isAbstract
+				                 ifNil: [ false ]
+				                 ifNotNil: [ concreteClass isAbstract ]);
 		                yourself.
 
 	"Link with subclasses to preserve the same hierarchy, and they are also DTOs"
