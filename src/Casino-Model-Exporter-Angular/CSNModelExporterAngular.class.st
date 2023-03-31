@@ -1404,8 +1404,12 @@ CSNModelExporterAngular >> writeOpenPhaseMethod [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 
-	aCSNWidget recursiveWidgets asSet flattened do: [ :widget | 
-		(self exporterAngularConfiguration angularRepresentationOf: widget)
-			exportTypeScriptImportOf: widget
-			usingExporter: self ]
+	(aCSNWidget recursiveWidgets asSet flattened
+		 collect: [ :widget | 
+			 String streamContents: [ :stream | 
+				 (self exporterAngularConfiguration angularRepresentationOf:
+					  widget)
+					 exportTypeScriptImportOf: widget
+					 usingExporter: (CSNDefaultExporter on: stream) ] ]
+		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self crlf ]
 ]

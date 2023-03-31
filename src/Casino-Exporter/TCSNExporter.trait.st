@@ -121,6 +121,8 @@ TCSNExporter >> indentLevel: aLevel [
 
 { #category : #streaming }
 TCSNExporter >> indentMinus [
+
+	self assert: indentLevel > 0.
 	^ indentLevel := indentLevel - 1
 ]
 

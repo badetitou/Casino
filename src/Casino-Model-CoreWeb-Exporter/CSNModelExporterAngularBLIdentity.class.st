@@ -530,11 +530,11 @@ export class ';
 		<< '
 '.
 	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
-			:widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptVariableOf: widget
-				usingExporter: self ] ].
+		aBLPageMetier recursiveWidgets removeDuplicates flattened
+			do: [ :widget | 
+				(self exporterAngularConfiguration angularRepresentationOf: widget)
+					exportTypeScriptVariableOf: widget
+					usingExporter: self ] ].
 	self
 		<< '
 
