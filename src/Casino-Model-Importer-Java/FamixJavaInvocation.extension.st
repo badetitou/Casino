@@ -21,7 +21,7 @@ FamixJavaInvocation >> affectation [
 					generateFastIfNotDoneAndBind ].
 		(self fast
 			 atAnyScope: { 
-					 FASTJavaAssignementExpression.
+					 FASTJavaAssignmentExpression.
 					 FASTJavaVariableDeclarator }
 			 until: [ :node | 
 				 self fast ~= node and: [ node isKindOf: FASTJavaNewExpression ] ]) 
