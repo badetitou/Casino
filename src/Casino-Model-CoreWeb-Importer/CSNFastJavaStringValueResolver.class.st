@@ -30,7 +30,7 @@ CSNFastJavaStringValueResolver >> stream: anObject [
 ]
 
 { #category : #visiting }
-CSNFastJavaStringValueResolver >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
+CSNFastJavaStringValueResolver >> visitFASTJavaAssignmentExpression: aFASTJavaAssignementExpression [
 
 	aFASTJavaAssignementExpression expression accept: self
 ]

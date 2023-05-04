@@ -83,7 +83,7 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaArrayInitializer: aFASTJavaArray
 ]
 
 { #category : #generated }
-CSNBehaviorModelExporterAngular >> visitFASTJavaAssignementExpression: aFASTJavaAssignementExpression [
+CSNBehaviorModelExporterAngular >> visitFASTJavaAssignmentExpression: aFASTJavaAssignementExpression [
 	self accept: aFASTJavaAssignementExpression variable.
 	self <<< ' = '.
 	self accept: aFASTJavaAssignementExpression expression
