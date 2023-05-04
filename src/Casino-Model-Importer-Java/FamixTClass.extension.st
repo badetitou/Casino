@@ -10,7 +10,7 @@ FamixTClass >> affectation [
 			 method1 sourceAnchor startPos < method2 sourceAnchor startPos ]) ifNotEmpty: [ :theAncessorsMethod | 
 			theAncessorsMethod first generateFastIfNotDoneAndBind.
 			(self fastDeclaration first atAnyScope: { 
-					 FASTJavaAssignementExpression.
+					 FASTJavaAssignmentExpression.
 					 FASTJavaVariableDeclarator }) ifNotEmpty: [ :aScopeWithOneElement | ^ aScopeWithOneElement anyOne variable famixVariable ] ] ].
 	selfSourceAnchor := self sourceAnchor ifNil: [ self container sourceAnchor ].
 	^ ((self typeContainer localVariables select: #hasSourceAnchor) select: [ :localVariable | 
