@@ -77,7 +77,7 @@ CSNFastJavaStringValueResolver >> visitFASTTVariableExpression: aFASTVariableExp
 					aFASTVariableExpression famixVariable fastDeclaration anyOne
 						expression ifNotNil: [ :expression | expression accept: self ] ]
 				ifTrue: [ 
-					aFASTVariableExpression famixVariable fastAssignement 
+					aFASTVariableExpression famixVariable fastAssignment 
 						ifNotEmpty: [ :assignements | 
 							(assignements sorted: [ :a :b | a startPos < b startPos ])
 								first accept: self ] ] ] ]
