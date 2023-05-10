@@ -193,6 +193,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUIPanel: panel.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
