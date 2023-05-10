@@ -70,6 +70,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUIPanel: panel.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
@@ -659,6 +660,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTable [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUITable: table.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
@@ -709,6 +711,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneHeader [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUITable: table.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
@@ -757,6 +760,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneLabel [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUITable: table.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
@@ -824,6 +828,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
 		exporter visitCSNUITable: table.
+		exporter eolSeparator: String crlf.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
