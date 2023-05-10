@@ -162,26 +162,34 @@ WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
 	^ {  }
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
 WidgetRepresentation >> isFormControl [
 	"If true this representation support the formControl"
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
 WidgetRepresentation >> isLocal [
 	"The widget is NOT imported from a distant library
 	It is already part of the exported project"
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
 WidgetRepresentation >> isNative [
 	"The widget is part of the html standard"
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
+WidgetRepresentation >> isOverrideLayout [
+
+	"If true this representation ask to bypass the classic export of layout because it deals with it in the `exportContentOf:with:` method "
+
+	^ false
+]
+
+{ #category : #'accessing - testing' }
 WidgetRepresentation >> isSubComponent [
 	"If true this representation will be exported as a component"
 	^ false

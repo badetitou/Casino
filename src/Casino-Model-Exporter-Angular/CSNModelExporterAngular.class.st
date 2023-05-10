@@ -85,7 +85,8 @@ CSNModelExporterAngular >> businessPageImportList [
     OnDestroy,
     OnInit,
     Renderer2,
-    ViewChild'
+    ViewChild,
+    ChangeDetectorRef'
 ]
 
 { #category : #accessing }
@@ -1026,14 +1027,13 @@ CSNModelExporterAngular >> visitCSNContainer: aBLUIContainer [
 
 	| angularRepresentation |
 	angularRepresentation := self angularRepresentationOf: aBLUIContainer.
-	aBLUIContainer layout
-		ifNotNil: [ :layout | 
+	(aBLUIContainer layout isNotNil and: [ 
+		 angularRepresentation isOverrideLayout not ])
+		ifTrue: [ 
 			angularRepresentation exportHeaderOf: aBLUIContainer with: self.
-			self visit: layout.
-			aBLUIContainer widgets ifNotEmpty: [ 
-				angularRepresentation export: aBLUIContainer with: self ].
+			self visit: aBLUIContainer layout.
 			angularRepresentation exportFooterOf: aBLUIContainer with: self ]
-		ifNil: [ angularRepresentation export: aBLUIContainer with: self ]
+		ifFalse: [ angularRepresentation export: aBLUIContainer with: self ]
 ]
 
 { #category : #visiting }

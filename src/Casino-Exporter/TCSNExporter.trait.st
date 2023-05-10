@@ -48,6 +48,24 @@ TCSNExporter >> currentWriteStream: anObject [
 ]
 
 { #category : #streaming }
+TCSNExporter >> eol [
+  ^ self <<< self eolSeparator
+]
+
+{ #category : #accessing }
+TCSNExporter >> eolSeparator [
+
+	^ eolSeparator ifNil: [ 
+		  eolSeparator := OSPlatform current lineEnding ]
+]
+
+{ #category : #accessing }
+TCSNExporter >> eolSeparator: anObject [
+
+	eolSeparator := anObject
+]
+
+{ #category : #streaming }
 TCSNExporter >> inBraces: aBlock [
 	self
 		<<< '{';
@@ -78,11 +96,11 @@ TCSNExporter >> inIndented: aBlock [
 
 	self
 		indentPlus;
-		crlf.
+		eol.
 	aBlock value.
 	self
 		indentMinus;
-		crlf
+		eol
 ]
 
 { #category : #streaming }

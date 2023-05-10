@@ -16,6 +16,7 @@ MCDialog >> getSelector [
 
 { #category : #accessing }
 MCDialog >> isSubComponent [
+
 	^ true
 ]
 
