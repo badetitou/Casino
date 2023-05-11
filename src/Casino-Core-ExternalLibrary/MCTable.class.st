@@ -140,7 +140,7 @@ MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 		anExporter space ].
 	anExporter
 		<<< '];';
-		crlf
+		eol
 ]
 
 { #category : #accessing }

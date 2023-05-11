@@ -959,7 +959,7 @@ CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
 				usingExporter: self ].
-		self crlf.
+		self eol.
 		self
 			<< aCSNWidget id uncapitalized;
 			<<< 'Form: FormGroup;'.
