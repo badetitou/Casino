@@ -828,8 +828,8 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter visitCSNUITable: table.
 		exporter eolSeparator: String crlf.
+		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
