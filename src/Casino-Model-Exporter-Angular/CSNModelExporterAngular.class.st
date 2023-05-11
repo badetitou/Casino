@@ -185,17 +185,17 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 	self inIndented: [ 
 		self
 			<< '<bl-phase-business-page-header>';
-			crlf;
+			eol;
 			<< '</bl-phase-business-page-header>' ].
-	self crlf.
+	self eol.
 	self
 		inIndented: [ 
 			self
 				<< '<bl-phase-business-page id="P1">';
 				inIndented: [ self << aCSNPage businessPage anyOne getTag ];
 				<< '</bl-phase-business-page>' ];
-		indentMinus;
-		<< '</bl-phase-business-page-container>'
+		<< '</bl-phase-business-page-container>';
+		indentMinus
 ]
 
 { #category : #generate }
