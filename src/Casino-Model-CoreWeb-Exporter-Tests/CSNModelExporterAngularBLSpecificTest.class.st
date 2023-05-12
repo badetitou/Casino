@@ -48,25 +48,22 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 	container addWidget: (self createEntity: CSNUIButton).
 	result := String streamContents: [ :stream | 
 		          stream
-			          << '<form [formGroup]="aPageForm">';
+			          << '<div class="row">';
 			          << String crlf;
-			          << '    <div class="row">';
+			          << '    <div class="col">';
 			          << String crlf;
-			          << '        <div class="col">';
+			          << '        <bl-button-link>';
 			          << String crlf;
-			          << '            <bl-button-link>';
-			          << String crlf;
-			          << '            </bl-button-link>';
-			          << String crlf;
-			          << '        </div>';
+			          << '        </bl-button-link>';
 			          << String crlf;
 			          << '    </div>';
 			          << String crlf;
-			          << '</form>' ].
+			          << '</div>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter generateHTMLSourceCodeForBusinessPage: business.
+		exporter eolSeparator: String crlf.
+		business accept: exporter.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
 
