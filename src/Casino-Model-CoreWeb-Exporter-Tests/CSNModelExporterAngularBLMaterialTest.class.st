@@ -897,6 +897,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportTypeScriptVariableOfTableWith
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
+		exporter eolSeparator: String crlf.
 		MCTable new
 			exportTypeScriptVariableOf: table
 			usingExporter: exporter.
