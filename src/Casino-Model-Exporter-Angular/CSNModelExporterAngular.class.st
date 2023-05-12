@@ -192,35 +192,10 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 		inIndented: [ 
 			self
 				<< '<bl-phase-business-page id="P1">';
-				inIndented: [ self << aCSNPage businessPage anyOne getTag ];
+				inIndented: [ aCSNPage businessPage anyOne accept: self ];
 				<< '</bl-phase-business-page>' ];
 		<< '</bl-phase-business-page-container>';
 		indentMinus
-]
-
-{ #category : #generate }
-CSNModelExporterAngular >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
-
-	aBLPageMetier metiers ifNotEmpty: [ 
-		currentWriteStream
-			<< '<bl-tabs>';
-			<< String crlf.
-		aBLPageMetier metiers do: [ :metier | 
-			currentWriteStream
-				<< '    <bl-tab title=';
-				<<
-					(self class convertIfString: (self protectString: metier title));
-				<< '>';
-				<< String crlf;
-				<< '        ';
-				<< metier getTag;
-				<< String crlf;
-				<< '    </bl-tab>';
-				<< String crlf ].
-		currentWriteStream
-			<< '</bl-tabs>';
-			<< String crlf ].
-	self generateRootHtmlOf: aBLPageMetier
 ]
 
 { #category : #'generate - model' }
@@ -951,6 +926,27 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 ]
 
 { #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
+
+	(aCSNWidget componentSubWidgetsUsing: self) flattened asSet do: [ 
+		:widget | 
+		(self exporterAngularConfiguration angularRepresentationOf: widget)
+			exportTypeScriptConstructorInjectionOf: widget
+			usingExporter: self ]
+]
+
+{ #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
+
+	self inIndented: [ 
+		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+			asOrderedCollection do: [ :widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptOnInitOf: widget
+				usingExporter: self ] ]
+]
+
+{ #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 
 	self inIndented: [ 
@@ -958,12 +954,7 @@ CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 			asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
-				usingExporter: self ].
-		self eol.
-		self
-			<< aCSNWidget id uncapitalized;
-			<<< 'Form: FormGroup;'.
-		self crlf ]
+				usingExporter: self ] ]
 ]
 
 { #category : #accessing }
@@ -993,33 +984,6 @@ CSNModelExporterAngular >> visitCSNAttribute: aCSNAttribute [
 	aCSNAttribute widget
 		ifNil: [ WidgetRepresentation new exportAttribute: aCSNAttribute with: self ]
 		ifNotNil: [ :widget | widget exportAttribute: aCSNAttribute with: self ]
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNBusinessPage: aBLPageMetier [
-
-	| pageMetierRoot |
-	pageMetierRoot := self currentPath.
-	[ pageMetierRoot ensureCreateDirectory ]
-		on: DirectoryExists
-		do: [  ].
-
-	"Write pageMetier.module.ts"
-	currentWriteStream := (pageMetierRoot / aBLPageMetier getHTMLName) asFileReference writeStream.
-	[ 
-	self generateHTMLSourceCodeForBusinessPage: aBLPageMetier.
-	currentWriteStream flush ] ensure: [ currentWriteStream close ].
-
-	"Write pageMetier.route.ts"
-	currentWriteStream := (pageMetierRoot / aBLPageMetier getTSName) asFileReference writeStream.
-	[ 
-	self generateTSSourceCodeForBusinessPage: aBLPageMetier.
-	currentWriteStream flush ] ensure: [ currentWriteStream close ].
-	aBLPageMetier metiers do: [ :metier | 
-		self clone
-			currentPage: metier;
-			currentPath: pageMetierRoot / 'components' / metier getFolderName;
-			visit: metier ]
 ]
 
 { #category : #visiting }
@@ -1185,12 +1149,14 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getModuleName) asFileReference writeStream.
+	currentWriteStream := (phaseRoot / aBLPhase getModuleName)
+		                      asFileReference writeStream.
 	[ 
 	self generateModuleSourceCodeForPage: aBLPhase.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write phase.route.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getRouteName) asFileReference writeStream.
+	currentWriteStream := (phaseRoot / aBLPhase getRouteName)
+		                      asFileReference writeStream.
 	[ 
 	self generateRouteSourceCodeForPage: aBLPhase.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
@@ -1200,21 +1166,17 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	indexRoot := componentsRoot / aBLPhase getFolderName.
 	indexRoot ensureCreateDirectory.
 
-	currentWriteStream := (indexRoot / aBLPhase getTSName) asFileReference writeStream.
+	currentWriteStream := (indexRoot / aBLPhase getTSName)
+		                      asFileReference writeStream.
 	[ 
 	self generateTSSourceCodeForPage: aBLPhase.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 
-	currentWriteStream := (indexRoot / aBLPhase getHTMLName) asFileReference writeStream.
+	currentWriteStream := (indexRoot / aBLPhase getHTMLName)
+		                      asFileReference writeStream.
 	[ 
 	self generateHTMLSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ] ensure: [ currentWriteStream close ].
-
-	aBLPhase businessPage do: [ :metier | 
-		self clone
-			currentPage: metier;
-			currentPath: componentsRoot / metier getAcceptedPathName;
-			visit: metier ]
+	currentWriteStream flush ] ensure: [ currentWriteStream close ]
 ]
 
 { #category : #visiting }
@@ -1404,7 +1366,7 @@ CSNModelExporterAngular >> writeOpenPhaseMethod [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 
-	(aCSNWidget recursiveWidgets asSet flattened
+	((aCSNWidget componentSubWidgetsUsing: self) flattened asSet
 		 collect: [ :widget | 
 			 String streamContents: [ :stream | 
 				 (self exporterAngularConfiguration angularRepresentationOf:

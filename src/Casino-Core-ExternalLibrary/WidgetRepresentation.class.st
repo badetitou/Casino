@@ -126,17 +126,31 @@ WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter
 	"anExporter <<< aWidget idTag"
 ]
 
-{ #category : #export }
+{ #category : #'export - typescript' }
+WidgetRepresentation >> exportTypeScriptConstructorInjectionOf: widget usingExporter: anExporter [
+	"I export in the TS injection in the constructor for my widget"
+]
+
+{ #category : #'export - typescript' }
 WidgetRepresentation >> exportTypeScriptImportOf: widget usingExporter: anExporter [
 	"I export in the TS component of my widget the variables required for its proper working"
 ]
 
-{ #category : #export }
+{ #category : #'export - typescript' }
 WidgetRepresentation >> exportTypeScriptMethodsOf: widget usingExporter: anExporter [
 	"I export in the TS component of my widget the variables required for its proper working"
 ]
 
-{ #category : #export }
+{ #category : #'export - typescript' }
+WidgetRepresentation >> exportTypeScriptOnInitOf: widget usingExporter: anExporter [
+
+	"I export in the TS code inside ngOnInit of my widget.
+	It is often about inizializing some attributes"
+
+	
+]
+
+{ #category : #'export - typescript' }
 WidgetRepresentation >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 	"I export in the TS component of my widget the variables required for its proper working"
 ]
@@ -146,12 +160,30 @@ WidgetRepresentation >> getSelector [
 	^ 'div'
 ]
 
-{ #category : #export }
+{ #category : #'accessing - export' }
+WidgetRepresentation >> getTypeScriptExtendsRequiredBy: widget usingExporter: anExporter [
+
+	"I return the list of extend of the root component this representation need.
+	If multiple component in the same DOM tree have this set to something, it might create huge problem"
+
+	^ {  }
+]
+
+{ #category : #'accessing - export' }
+WidgetRepresentation >> getTypeScriptSuperRequiredBy: widget usingExporter: anExporter [
+
+	"I return the list of super() of the root component this representation need.
+	If multiple component in the same DOM tree have this set to something, it might create huge problem"
+
+	^ {  }
+]
+
+{ #category : #'export - typescript' }
 WidgetRepresentation >> importString [
 	^ 'import { ' , self moduleName , ' } from ''' , self modulePath , ''';'
 ]
 
-{ #category : #export }
+{ #category : #'export - typescript' }
 WidgetRepresentation >> importStringOf: aWidget [
 
 	^ self importString
