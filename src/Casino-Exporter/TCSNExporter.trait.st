@@ -28,6 +28,20 @@ TCSNExporter >> <<< elements [
 ]
 
 { #category : #streaming }
+TCSNExporter >> <<<| elements [
+
+	self <<< elements.
+	self eol
+]
+
+{ #category : #streaming }
+TCSNExporter >> <<| elements [
+
+	self << elements.
+	self eol
+]
+
+{ #category : #streaming }
 TCSNExporter >> cr [
   ^ self <<< String cr 
 ]
@@ -70,10 +84,10 @@ TCSNExporter >> inBraces: aBlock [
 	self
 		<<< '{';
 		indentPlus;
-		crlf.
+		eol.
 	aBlock value.
 	self
-		crlf;
+		eol;
 		indentMinus;
 		<< '}'
 ]
