@@ -32,7 +32,7 @@ CSNBuModelExporter >> exportAttribute: attribute [
 	| isInSuperType |
 	attribute comment ifNotNil: [ :comment | 
 		self << comment.
-		self crlf ].
+		self eol ].
 
 
 	isInSuperType := attribute businessType
@@ -46,10 +46,10 @@ CSNBuModelExporter >> exportAttribute: attribute [
 		self
 			<<
 				'/* TODO : Casino detected that this attribute is also define in the super class';
-			crlf ].
+			eol ].
 	(attribute isStatic or: [ attribute isTransient ]) ifFalse: [ 
 		self << '@JsonProperty()'.
-		self crlf.
+		self eol.
 		"print @JsonClassType annotation if possible"
 		attribute attributeType printJsonClassOn: self ].
 	self indent.
