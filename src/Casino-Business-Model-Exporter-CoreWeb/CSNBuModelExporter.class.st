@@ -154,13 +154,13 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 				do: [ :dependency | self << dependency name ]
 				separatedBy: [ 
 					self <<< $,.
-					self crlf ] ].
+					self eol ] ].
 		self <<< ' from "..'.
 		aBusinessType parentBusinessPackages do: [:package | self <<< '/..' ].
 		self <<< '";'.
 		self
-			crlf;
-			crlf ]
+			eol;
+			eol ]
 ]
 
 { #category : #export }

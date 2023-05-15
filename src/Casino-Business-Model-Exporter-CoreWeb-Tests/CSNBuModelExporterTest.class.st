@@ -47,7 +47,7 @@ CSNBuModelExporterTest >> testExportAttribute [
 		isTransient: false;
 		attributeType: buAttributeType.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '@JsonProperty()' 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
@@ -70,7 +70,7 @@ CSNBuModelExporterTest >> testExportAttributeBusiness [
 		isTransient: false;
 		attributeType: buAttributeType.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '@JsonProperty()' '@JsonClassType({ type: () => [Hello] })'
 		               'myAttribute: Hello;' ).
 	result := String streamContents: [ :stream | 
@@ -93,7 +93,7 @@ CSNBuModelExporterTest >> testExportAttributeDTO [
 		isTransient: false;
 		attributeType: buAttributeType.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '@JsonProperty()' 'myAttribute: any;' ).
 	result := String streamContents: [ :stream | 
 		          businessExporter currentWriteStream: stream.
@@ -142,7 +142,7 @@ CSNBuModelExporterTest >> testExportAttributeGetter [
 	buAttribute name: 'myAttribute'.
 	buAttribute attributeType: buAttributeType.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( 'getMyAttribute() {'
 		               '    return this.myAttribute;'
 		               '}' ).
@@ -163,7 +163,7 @@ CSNBuModelExporterTest >> testExportAttributeSetter [
 	buAttribute name: 'myAttribute'.
 	buAttribute attributeType: buAttributeType.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( 'setMyAttribute(myAttribute: any) {'
 		               '    this.myAttribute = myAttribute;'
 		               '}' ).
@@ -192,7 +192,7 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf [
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( 'import {' '    HelloAttributeBusinessType'
 		               '} from "..";' '' '' ).
 	self assert: result equals: expected
@@ -221,7 +221,7 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( 'import {' '    HelloAttributeBusinessType'
 		               '} from "..";' '' '' ).
 	self assert: result equals: expected
@@ -253,7 +253,7 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentT
 		          businessExporter currentWriteStream: stream.
 		          businessExporter printImportDependencenciesOf:
 			          aBusinessType ].
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( 'import {' '    Hello2AttributeBusinessType,'
 		               '    HelloAttributeBusinessType'
 		               '} from "..";' '' '' ).
