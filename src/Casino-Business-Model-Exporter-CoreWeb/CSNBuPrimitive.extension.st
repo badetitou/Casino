@@ -13,7 +13,7 @@ CSNBuPrimitive >> printJsonClassOn: aCSNExporter [
 	self printJsonClassTypeOn: aCSNExporter.
 	aCSNExporter
 		<<< '] })';
-		crlf
+		eol
 ]
 
 { #category : #'*Casino-Business-Model-Exporter-CoreWeb' }
