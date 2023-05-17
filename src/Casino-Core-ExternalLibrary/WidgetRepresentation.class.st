@@ -94,7 +94,7 @@ WidgetRepresentation >> exportContentOf: aWidget with: anExporter [
 	aWidget widgets
 		do: [ :widget | 
 			anExporter
-				crlf;
+				eol;
 				indentPlus.
 			anExporter
 				visit: widget;
@@ -104,7 +104,7 @@ WidgetRepresentation >> exportContentOf: aWidget with: anExporter [
 { #category : #export }
 WidgetRepresentation >> exportFooterOf: aWidget with: anExporter [
 	anExporter
-		crlf;
+		eol;
 		<< '</';
 		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>'
