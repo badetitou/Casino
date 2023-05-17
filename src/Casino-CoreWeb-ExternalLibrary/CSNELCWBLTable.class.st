@@ -30,27 +30,27 @@ Class {
 CSNELCWBLTable >> exportContentOf: aWidget with: anExporter [
 	anExporter
 		indentPlus;
-		crlf;
+		eol;
 		<< '<span slot="bl-table-foot">';
 		indentPlus;
-		crlf;
+		eol;
 		<< '<div class="row" style="float: right; margin-right: 1em;">';
 		indentPlus;
-		crlf.
+		eol.
 	aWidget widgets
 		do: [ :widget | 
 			anExporter
-				crlf;
+				eol;
 				indentPlus.
 			anExporter
 				visit: widget;
 				indentMinus ].
 	anExporter
 		indentMinus;
-		crlf;
+		eol;
 		<< '</div>';
 		indentMinus;
-		crlf;
+		eol;
 		<< '</span>';
 		indentMinus
 ]
