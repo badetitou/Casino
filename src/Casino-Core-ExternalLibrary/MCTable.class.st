@@ -58,12 +58,12 @@ MCTable >> exportContentOf: aWidget with: anExporter [
 			self exportLabelAsTableHeader: attribute with: anExporter ]].
 
 	anExporter
-		crlf;
+		eol;
 		indentPlus;
 		<< '<tr mat-header-row *matHeaderRowDef="';
 		<<< aWidget id;
 		<<< 'DisplayedColumns"></tr>';
-		crlf;
+		eol;
 		<< '<tr mat-row *matRowDef="let row; columns: ';
 		<<< aWidget id;
 		<<< 'DisplayedColumns;"></tr>';
@@ -81,7 +81,7 @@ MCTable >> exportLabelAsTableHeader: label with: anExporter [
 		anExporter visit: label.
 		anExporter
 			<<< '</th>';
-			crlf.
+			eol.
 		anExporter
 		<< '<td mat-cell *matCellDef="let element">{{element}}</td>' ].
 	anExporter << '</ng-container>'
@@ -104,7 +104,7 @@ MCTable >> exportTableHeader: header with: anExporter [
 			ifNone: [ anExporter <<< 'header' <<< header mooseID printString ].
 		anExporter
 			<<< '</th>';
-			crlf.
+			eol.
 		anExporter << '<td mat-cell *matCellDef="let element">{{element'.
 		header attributes
 			detect: [ :att | att name = 'colValue' ]
@@ -121,7 +121,7 @@ MCTable >> exportTypeScriptVariableOf: widget usingExporter: anExporter [
 
 	(anExporter << widget id)
 		<<< 'Source = [];';
-		crlf.
+		eol.
 	anExporter << widget id <<< 'DisplayedColumns : string[] = ['.
 	(widget widgets select: [ :childWidget | 
 		 childWidget isKindOf: CSNUITableHeader ]) ifNotEmpty: [ :headers | 

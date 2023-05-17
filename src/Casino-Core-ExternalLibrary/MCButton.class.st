@@ -51,7 +51,7 @@ MCButton >> exportContentOf: aWidget with: anExporter [
 		ifFound: [ :attribute | 
 			anExporter
 				indentPlus;
-				crlf;
+				eol;
 				indent;
 				visit: attribute;
 				indentMinus ].
