@@ -48,28 +48,27 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayout [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<table>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <tbody>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            <td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                <div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            </td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </tbody>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUIPanel: panel.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -135,64 +134,63 @@ CSNModelExporterAngularBLMaterialTest >> testExportBorderLayoutWithFourthLevel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<table>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <tbody>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            <td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                <div id="unknow">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            </td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            <td style="text-align: center;">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                <div id="north">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            </td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            <td style="text-align: center;">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                <div id="center">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            </td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            <td style="text-align: center;">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                <div id="south">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '                </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '            </td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </tbody>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUIPanel: panel.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -209,7 +207,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportButton [
 		name: 'buttonAttribute';
 		yourself.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '<button id="buttonAttribute" mat-stroked-button>'
 		               '</button>' ).
 
@@ -234,7 +232,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportButtonWithLabel [
 		name: 'buttonAttribute';
 		yourself.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '<button id="buttonAttribute" mat-stroked-button>'
 		               '    label' '</button>' ).
 
@@ -250,7 +248,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportButtonWithoutAttribute [
 	| result expected button |
 	button := self createEntity: CSNUIButton.
 
-	expected := String crlf join:
+	expected := OSPlatform current lineEnding join:
 		            #( '<button mat-stroked-button>'
 		               '</button>' ).
 
@@ -275,15 +273,15 @@ CSNModelExporterAngularBLMaterialTest >> testExportDatePicker [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-form-field appearance="fill">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <input formControlName="datePicker" id="datePicker" matInput [matDatepicker]="datePicker">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-datepicker #datePicker></mat-datepicker>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-form-field>' ].
 
 	String streamContents: [ :stream | 
@@ -300,7 +298,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSet [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-card>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-card>' ].
 
 	String streamContents: [ :stream | 
@@ -323,14 +321,14 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSetWithAction [
 	result := String streamContents: [ :stream | "we added a little space in '<mat-card >' to make test pass for this little stuff. But it might be improved"
 		          stream
 			          << '<mat-card >';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-card-header>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <i class="ph-file-light" (click)="openPhase(Page)"></i>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </mat-card-header>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-card>' ].
 
 	String streamContents: [ :stream | 
@@ -350,15 +348,15 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSetWithChildren [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-card>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-card-content>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </mat-card-content>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-card>' ].
 
 	String streamContents: [ :stream | 
@@ -379,13 +377,13 @@ CSNModelExporterAngularBLMaterialTest >> testExportFieldSetWithTitle [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-card>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-card-header>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <mat-card-title>title</mat-card-title>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </mat-card-header>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-card>' ].
 
 	String streamContents: [ :stream | 
@@ -411,7 +409,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportGirdBag [
 	(grid attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		at: cell
 		put: #( 0 0 ).
-	result := String crlf join: { 
+	result := OSPlatform current lineEnding join: { 
 	'<div>'.
 	'    <div class="row">'.
 	'        <div class="col">'.
@@ -435,7 +433,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportInput [
 	label attributeValue: 'label'.
 	inputText addAttribute: label.
 
-	result := String crlf join: #(
+	result := OSPlatform current lineEnding join: #(
 	'<mat-form-field appearance="fill">'
 	'    <mat-label>'
 	'        label'
@@ -464,7 +462,7 @@ CSNModelExporterAngularBLMaterialTest >> testExportInputWithAffectation [
 		name: 'myInput';
 		yourself.
 
-	result := String crlf join: #(
+	result := OSPlatform current lineEnding join: #(
 	'<mat-form-field appearance="fill">'
 	'    <mat-label>'
 	'        label'
@@ -510,12 +508,12 @@ CSNModelExporterAngularBLMaterialTest >> testExportMenuInMenu [
 		          stream
 			          <<
 				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><i class="ph-caret-up-light"></i></button>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '<mat-menu #menu="matMenu">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <button mat-menu-item id="innerMenu">Label1</button>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-menu>' ].
 
 	String streamContents: [ :stream | 
@@ -540,9 +538,9 @@ CSNModelExporterAngularBLMaterialTest >> testExportMenuWithArrow [
 		          stream
 			          <<
 				          '<button mat-stroked-button [matMenuTriggerFor]="menu"><i class="ph-caret-up-light"></i></button>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '<mat-menu #menu="matMenu">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-menu>' ].
 
 	String streamContents: [ :stream | 
@@ -560,11 +558,11 @@ CSNModelExporterAngularBLMaterialTest >> testExportSelect [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-form-field appearance="fill">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-select>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </mat-select>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-form-field>' ].
 
 	String streamContents: [ :stream | 
@@ -585,13 +583,13 @@ CSNModelExporterAngularBLMaterialTest >> testExportSelectWithLabel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<mat-form-field appearance="fill">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-label>label</mat-label>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <mat-select>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </mat-select>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-form-field>' ].
 
 	String streamContents: [ :stream | 
@@ -622,9 +620,9 @@ CSNModelExporterAngularBLMaterialTest >> testExportSplitButtonWithArrowAndInnerM
 		          stream
 			          <<
 				          '<button mat-stroked-button [matMenuTriggerFor]="splitButton">Label1<i class="ph-caret-up-light"></i></button>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '<mat-menu #splitButton="matMenu">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-menu>' ].
 
 	String streamContents: [ :stream | 
@@ -649,18 +647,17 @@ CSNModelExporterAngularBLMaterialTest >> testExportTable [
 		          stream
 			          <<
 				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -689,29 +686,28 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneHeader [
 		          stream
 			          <<
 				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <ng-container matColumnDef="Label1">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </ng-container>';
-			          << String crlf;
-			          << String crlf;
+			          << OSPlatform current lineEnding;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -738,29 +734,28 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithOneLabel [
 		          stream
 			          <<
 				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <ng-container matColumnDef="Label1">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </ng-container>';
-			          << String crlf;
-			          << String crlf;
+			          << OSPlatform current lineEnding;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -795,40 +790,39 @@ CSNModelExporterAngularBLMaterialTest >> testExportTableWithTwoHeaders [
 		          stream
 			          <<
 				          '<table [dataSource]="tableSource" id="table" mat-table mat-sort>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <ng-container matColumnDef="Label1">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <th mat-header-cell *matHeaderCellDef>Label1</th>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </ng-container>';
-			          << String crlf;
-			          << String crlf;
+			          << OSPlatform current lineEnding;
+			          << OSPlatform current lineEnding;
 			          << '    <ng-container matColumnDef="Label2">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <th mat-header-cell *matHeaderCellDef>Label2</th>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <td mat-cell *matCellDef="let element">{{element}}</td>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </ng-container>';
-			          << String crlf;
-			          << String crlf;
+			          << OSPlatform current lineEnding;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</table>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		exporter visitCSNUITable: table.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -849,10 +843,10 @@ CSNModelExporterAngularBLMaterialTest >> testExportTextArea [
 		          stream
 			          <<
 				          '<mat-form-field appearance="fill">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '    <textarea id="textarea" matInput></textarea>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</mat-form-field>' ].
 
 	String streamContents: [ :stream | 
@@ -890,14 +884,13 @@ CSNModelExporterAngularBLMaterialTest >> testExportTypeScriptVariableOfTableWith
 	result := String streamContents: [ :stream | 
 		          stream
 			          << 'tableSource = [];';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          'tableDisplayedColumns : string[] = [ ''Label1'', ''Label2'' ];';
-			          << String crlf ].
+			          << OSPlatform current lineEnding ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		MCTable new
 			exportTypeScriptVariableOf: table
 			usingExporter: exporter.

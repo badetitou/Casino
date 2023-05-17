@@ -49,20 +49,19 @@ CSNModelExporterAngularBLSpecificTest >> testExportBusinessPageWithLayoutAndWidg
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<div class="row">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <div class="col">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        <bl-button-link>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '        </bl-button-link>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</div>' ].
 
 	String streamContents: [ :stream | 
 		exporter currentWriteStream: stream.
-		exporter eolSeparator: String crlf.
 		business accept: exporter.
 		self assert: exporter currentWriteStream contents equals: result ]
 ]
@@ -75,7 +74,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportCheckBox [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-checkbox>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-checkbox>' ].
 
 	String streamContents: [ :stream | 
@@ -95,7 +94,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportCheckBoxWithLabel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-checkbox label="My Checkbox">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-checkbox>' ].
 
 	String streamContents: [ :stream | 
@@ -124,7 +123,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportExtendedLinkWithTwoActions [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-extended-link [secondLink]="true" (clickMainLink)="openPhase(Page)" (clickSecondLink)="openPhase(Page2)">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-extended-link>' ].
 
 	String streamContents: [ :stream | 
@@ -141,7 +140,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportFieldSet [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-fieldset>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-fieldset>' ].
 
 	String streamContents: [ :stream | 
@@ -163,7 +162,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportFieldSetWithAction [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-fieldset [withDetails]="true" (moreDetails)="openPhase(Page)">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-fieldset>' ].
 
 	String streamContents: [ :stream | 
@@ -189,7 +188,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportGirdBagWithCellsWithColSpan [
 	(grid attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ])
 		at: cell
 		put: #( 0 0 ).
-	result := result := String crlf join: { 
+	result := result := OSPlatform current lineEnding join: { 
 	'<div>'.
 	'    <div class="row">'.
 	'        <div class="col">'.
@@ -212,7 +211,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportLightFieldSet [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-fieldset light="true">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-fieldset>' ].
 
 	String streamContents: [ :stream | 
@@ -234,7 +233,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportLinkWithAction [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-simple-link (click)="openPhase(Page)">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-simple-link>' ].
 
 	String streamContents: [ :stream | 
@@ -250,7 +249,7 @@ CSNModelExporterAngularBLSpecificTest >> testExportPanel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</div>' ].
 
 	String streamContents: [ :stream | 
@@ -271,9 +270,9 @@ CSNModelExporterAngularBLSpecificTest >> testExportPanelWithLabel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    label';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</div>' ].
 
 	String streamContents: [ :stream | 
@@ -309,9 +308,9 @@ CSNModelExporterAngularBLSpecificTest >> testExportParagraphWithLabel [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<p>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    label';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</p>' ].
 
 	String streamContents: [ :stream | 
@@ -336,9 +335,9 @@ CSNModelExporterAngularBLSpecificTest >> testExportParagraphWithLabelAndBoldStyl
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<p style="font-weight: bold;">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    label';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</p>' ].
 
 	String streamContents: [ :stream | 
@@ -356,17 +355,17 @@ CSNModelExporterAngularBLSpecificTest >> testExportTable [
 	result := String streamContents: [ :stream | 
 		          stream
 			          << '<bl-table>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    <span slot="bl-table-foot">';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          <<
 				          '        <div class="row" style="float: right; margin-right: 1em;">';
-			          << String crlf;
-			          << String crlf;
+			          << OSPlatform current lineEnding;
+			          << OSPlatform current lineEnding;
 			          << '        </div>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '    </span>';
-			          << String crlf;
+			          << OSPlatform current lineEnding;
 			          << '</bl-table>' ].
 
 	String streamContents: [ :stream | 
