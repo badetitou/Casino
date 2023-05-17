@@ -89,12 +89,6 @@ CSNModelExporterAngular >> businessPageImportList [
     ChangeDetectorRef'
 ]
 
-{ #category : #streaming }
-CSNModelExporterAngular >> crlf [
-	self h.
-  ^ self <<< String crlf 
-]
-
 { #category : #accessing }
 CSNModelExporterAngular >> currentPage [
 
