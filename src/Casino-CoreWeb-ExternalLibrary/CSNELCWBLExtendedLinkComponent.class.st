@@ -38,7 +38,7 @@ CSNELCWBLExtendedLinkComponent >> exportContentOf: aWidget with: anExporter [
 		detect: [ :attribute | attribute isOfType: CSNUILabel ]
 		ifFound: [ :label | 
 			anExporter
-				crlf;
+				eol;
 				indentPlus;
 				indent;
 				visit: label;
@@ -46,7 +46,7 @@ CSNELCWBLExtendedLinkComponent >> exportContentOf: aWidget with: anExporter [
 	aWidget widgets
 		do: [ :widget | 
 			anExporter
-				crlf;
+				eol;
 				indentPlus.
 			anExporter
 				visit: widget;
