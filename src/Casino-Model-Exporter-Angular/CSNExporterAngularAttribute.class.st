@@ -8,7 +8,16 @@ Class {
 
 { #category : #visiting }
 CSNExporterAngularAttribute >> visitCSNAttribute: aCSNAttribute [
-	self <<< (self protectString: aCSNAttribute attributeValue) 
+
+ | shouldInterpolate | 
+   
+    shouldInterpolate := aCSNAttribute attributeAt: #shouldInterpolate ifAbsent: [ true ].
+    shouldInterpolate ifFalse: [ self <<< '''' ].
+    self <<< (self protectString: aCSNAttribute attributeValue).
+    shouldInterpolate ifFalse: [ self <<< '''' ].
+
+
+	
 ]
 
 { #category : #visiting }
