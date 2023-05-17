@@ -29,7 +29,7 @@ MCTextArea >> exportContentOf: aWidget with: anExporter [
 		<<< (aWidget getSelectorFrom: anExporter);
 		<<< '>'.
 	anExporter
-		crlf;
+		eol;
 		indentMinus
 ]
 
@@ -43,16 +43,16 @@ MCTextArea >> exportFooterOf: aWidget with: anExporter [
 MCTextArea >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';
-		crlf.
+		eol.
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]
 		ifFound: [ :att | 
 			anExporter
 				indentPlus;
 				<< '<mat-label>';
-				crlf;
+				eol;
 				visit: att;
-				crlf;
+				eol;
 				<< '</mat-label>';
 				indentMinus ]
 ]

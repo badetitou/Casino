@@ -47,7 +47,7 @@ MCSelect >> exportFooterOf: aWidget with: anExporter [
 	super exportFooterOf: aWidget with: anExporter.
 	anExporter
 		indentMinus;
-		crlf;
+		eol;
 		<< '</mat-form-field>'
 ]
 
@@ -57,7 +57,7 @@ MCSelect >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';
 		indentPlus;
-		crlf.
+		eol.
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]
 		ifFound: [ :att | 
@@ -65,7 +65,7 @@ MCSelect >> exportHeaderOf: aWidget with: anExporter [
 				<< '<mat-label>';
 				visit: att;
 				<<< '</mat-label>';
-				crlf ].
+				eol ].
 	super exportHeaderOf: aWidget with: anExporter
 ]
 

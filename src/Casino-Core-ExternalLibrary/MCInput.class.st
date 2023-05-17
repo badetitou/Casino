@@ -51,7 +51,7 @@ MCInput >> exportContentOf: aWidget with: anExporter [
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter
 		<<< '>';
-		crlf;
+		eol;
 		indentMinus
 ]
 
@@ -65,22 +65,22 @@ MCInput >> exportHeaderOf: aWidget with: anExporter [
 
 	anExporter
 		<< '<mat-form-field appearance="fill">';
-		crlf.
+		eol.
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]
 		ifFound: [ :att | 
 			anExporter
 				indentPlus;
 				<< '<mat-label>';
-				crlf;
+				eol;
 				indentPlus;
 				indent;
 				visit: att;
 				indentMinus;
-				crlf;
+				eol;
 				<< '</mat-label>';
 				indentMinus;
-				crlf ]
+				eol ]
 ]
 
 { #category : #accessing }

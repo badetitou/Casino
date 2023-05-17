@@ -89,6 +89,12 @@ CSNModelExporterAngular >> businessPageImportList [
     ChangeDetectorRef'
 ]
 
+{ #category : #streaming }
+CSNModelExporterAngular >> crlf [
+	self h.
+  ^ self <<< String crlf 
+]
+
 { #category : #accessing }
 CSNModelExporterAngular >> currentPage [
 
@@ -245,10 +251,10 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 
 	self
 		<< '<bl-phase-container>';
-		crlf.
+		eol.
 	self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
 	self
-		crlf;
+		eol;
 		<< '</bl-phase-container>'
 ]
 
@@ -540,7 +546,7 @@ CSNModelExporterAngular >> generateRootHtmlOf: aCSNWidget [
 		<<< 'Form';
 		<<< '">';
 		indentPlus;
-		crlf.
+		eol.
 	self generateInnerHTMLOf: aCSNWidget.
 	self
 		indentMinus;
@@ -921,7 +927,7 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 					self
 						<< w id uncapitalized;
 						<<< ': new FormControl(),' ]
-				separatedBy: [ self crlf ] ].
+				separatedBy: [ self eol ] ].
 		self <<< ')' ]
 ]
 
@@ -1015,7 +1021,7 @@ CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
 	southCell := aCSNLBorderLayout cell select: [ :cell | 
 		             cell position isNotNil and: [ cell position isSouth ] ].
 	self
-		crlf;
+		eol;
 		indentPlus;
 		<< '<tbody>';
 		inIndented: [ 
@@ -1034,9 +1040,9 @@ CSNModelExporterAngular >> visitCSNLBorderLayout: aCSNLBorderLayout [
 									self <<< '>'.
 									self inIndented: [ self visit: cell ].
 									self << '</td>' ]
-								separatedBy: [ self crlf ] ].
+								separatedBy: [ self eol ] ].
 					self << '</tr>' ]
-				separatedBy: [ self crlf ] ];
+				separatedBy: [ self eol ] ];
 		<< '</tbody>';
 		indentMinus
 ]
@@ -1086,27 +1092,27 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 		indentMinus.
 
 	"
-		self crlf.
+		self eol.
 		((aCSNLGridLayout atLevelSorted: number) reject: #isNil) 
 			ifNotEmpty: [ :cells | 
 				self
 					indentPlus;
 					<< '<div class="row">';
-					crlf.
+					eol.
 				cells do: [ :cell | 
 					self
 						indentPlus;
 						visit: cell;
 						indentMinus;
-						crlf ].
+						eol ].
 				self
 					<< '</div>';
 					indentMinus ] ].
 	aCSNLGridLayout notPositionnedCell ifNotEmpty: [ :cells | 
 		self
-			crlf;
+			eol;
 			<< '<!-- not positionned cells -->';
-			crlf.
+			eol.
 		cells do: [ :cell | self visit: cell ] ]
 ]
 
@@ -1115,7 +1121,7 @@ CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
 
 	aBLLayout container widgets , aBLLayout cell do: [ :widget | 
 		self
-			crlf;
+			eol;
 			indentPlus.
 		self visit: widget.
 		self
@@ -1244,13 +1250,13 @@ CSNModelExporterAngular >> visitCSNUIParagraph: aBLUIParagraph [
   aBLUIParagraph getListPropertiesAsStringWith: self.
   self <<< '>'.
   aBLUIParagraph attributes select: [:a |  a isKindOf: CSNUILabel ] thenDo: [:attribute |  self
-           crlf;
+           eol;
            indentPlus;
            indent.
         self visit: attribute.
         self
            indentMinus;
-           crlf ].
+           eol ].
   self
      << '</';
      <<< (self angularRepresentationOf: aBLUIParagraph) getSelector;
@@ -1373,5 +1379,5 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 					  widget)
 					 exportTypeScriptImportOf: widget
 					 usingExporter: (CSNDefaultExporter on: stream) ] ]
-		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self crlf ]
+		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]

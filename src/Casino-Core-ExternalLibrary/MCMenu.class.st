@@ -24,7 +24,7 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 	aWidget widgets do: [ :widget | 
 		| attributes |
 		anExporter
-			crlf;
+			eol;
 			<< '<button mat-menu-item'.
 		attributes := (self attributeOf: widget with: anExporter) reject: [ :att | 
 			              att isOfType: CSNUILabel ].
@@ -38,7 +38,7 @@ MCMenu >> exportContentOf: aWidget with: anExporter [
 
 		anExporter <<< '</button>' ].
 
-	anExporter crlf.
+	anExporter eol.
 	anExporter indentMinus
 ]
 
@@ -61,7 +61,7 @@ MCMenu >> exportHeaderOf: aWidget with: anExporter [
 		<<< '<i class="ph-caret-up-light"></i>' ].
 	anExporter <<< '</button>'.
 	anExporter
-		crlf;
+		eol;
 		<< '<mat-menu #';
 		<<< (self variableFor: aWidget);
 		<<< '="matMenu">'

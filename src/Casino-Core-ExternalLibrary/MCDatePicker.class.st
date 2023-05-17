@@ -50,7 +50,7 @@ MCDatePicker >> exportContentOf: aWidget with: anExporter [
 		<<< (self variableFor: aWidget);
 		<<< '"';
 		<<< '>';
-		crlf;
+		eol;
 		indentMinus
 ]
 
@@ -62,11 +62,11 @@ MCDatePicker >> exportFooterOf: aWidget with: anExporter [
 		<< '<mat-datepicker-toggle matSuffix [for]="';
 		<<< (self variableFor: aWidget);
 		<<< '"></mat-datepicker-toggle>';
-		crlf;
+		eol;
 		<< '<mat-datepicker #';
 		<<< (self variableFor: aWidget);
 		<<< '></mat-datepicker>';
-		crlf;
+		eol;
 		indentMinus;
 		<< '</mat-form-field>'
 ]
@@ -75,16 +75,16 @@ MCDatePicker >> exportFooterOf: aWidget with: anExporter [
 MCDatePicker >> exportHeaderOf: aWidget with: anExporter [
 	anExporter
 		<< '<mat-form-field appearance="fill">';
-		crlf.
+		eol.
 	aWidget attributes
 		detect: [ :att | att isOfType: CSNUILabel ]
 		ifFound: [ :att | 
 			anExporter
 				indentPlus;
 				<< '<mat-label>';
-				crlf;
+				eol;
 				visit: att;
-				crlf;
+				eol;
 				<< '</mat-label>';
 				indentMinus ]
 ]

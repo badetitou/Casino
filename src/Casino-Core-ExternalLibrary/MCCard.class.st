@@ -49,7 +49,7 @@ MCCard >> exportActionAppel: action with: anExporter [
 		<<< '<i class="ph-file-light" (click)="openPhase(';
 		<<< action call getAcceptedName;
 		<<< ')"></i>';
-		crlf;
+		eol;
 		indentMinus
 ]
 
@@ -58,10 +58,10 @@ MCCard >> exportFooterOf: aWidget with: anExporter [
 
 	(aWidget children reject: [ :child | (child isKindOf: CSNAttribute) or: [ child isKindOf: CSNAction ] ]) isNotEmpty ifTrue: [ 
 		anExporter
-			crlf;
+			eol;
 			<< '</mat-card-content>';
 			indentMinus;
-			crlf ].
+			eol ].
 	anExporter
 		<< '</';
 		<<< (aWidget getSelectorFrom: anExporter);
@@ -74,7 +74,7 @@ MCCard >> exportHeaderOf: aWidget with: anExporter [
 	anExporter << '<'.
 	self exportListPropertiesOf: aWidget asStringWith: anExporter.
 	anExporter <<< '>'.
-	anExporter crlf.
+	anExporter eol.
 	((aWidget attributes anySatisfy: [ :att | att isKindOf: CSNUITitle ]) 
 		 or: [ 
 			 aWidget actions anySatisfy: [ :action | 
@@ -82,7 +82,7 @@ MCCard >> exportHeaderOf: aWidget with: anExporter [
 		anExporter
 			indentPlus;
 			<< '<mat-card-header>';
-			crlf.
+			eol.
 
 		aWidget attributes
 			detect: [ :a | a isOfType: CSNUITitle ]
@@ -94,13 +94,13 @@ MCCard >> exportHeaderOf: aWidget with: anExporter [
 				anExporter
 					<<< '</mat-card-title>';
 					indentMinus;
-					crlf ].
+					eol ].
 		(aWidget actions select: [ :action | action isActionAppel ])
 			do: [ :action | self exportActionAppel: action with: anExporter ]
-			separatedBy: [ anExporter crlf ].
+			separatedBy: [ anExporter eol ].
 		anExporter
 			<< '</mat-card-header>';
-			crlf;
+			eol;
 			indentMinus ].
 	(aWidget children reject: [ :child | 
 		 (child isKindOf: CSNAttribute) or: [ child isKindOf: CSNAction ] ])

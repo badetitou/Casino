@@ -97,10 +97,10 @@ TCSNExporter >> inBrakets: aBlock [
 	self
 		<<< '[';
 		indentPlus;
-		crlf.
+		eol.
 	aBlock value.
 	self
-		crlf;
+		eol;
 		indentMinus;
 		<< ']'
 ]
