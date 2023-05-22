@@ -101,7 +101,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec
 		baseline: 'Famix2Java'
 		with: [ 
-		spec repository: 'github://moosetechnology/FAMIX2Java:v3/src' ].
+		spec repository: 'github://moosetechnology/FAMIX2Java:v4/src' ].
 	spec baseline: 'PharoStringCaseFormating' with: [ 
 		spec repository:
 			'github://badetitou/PharoStringCaseFormating:main/src' ]
