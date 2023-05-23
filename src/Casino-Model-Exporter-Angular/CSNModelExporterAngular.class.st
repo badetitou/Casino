@@ -149,7 +149,7 @@ CSNModelExporterAngular >> generateAsSubComponent: aCSNWidget [
 			                  FamixTClass) anyOne name ].
 	exporter := self clone.
 	exporter indentLevel: 0.
-	exporter currentPath: self currentPath / aCSNWidget id.
+	exporter currentPath: self currentPath / aCSNWidget getAcceptedPathName.
 	[ exporter currentPath ensureCreateDirectory ]
 		on: DirectoryExists
 		do: [ 'directory already exists' recordInfo ].
@@ -928,11 +928,14 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 
-	(aCSNWidget componentSubWidgetsUsing: self) flattened asSet do: [ 
-		:widget | 
-		(self exporterAngularConfiguration angularRepresentationOf: widget)
-			exportTypeScriptConstructorInjectionOf: widget
-			usingExporter: self ]
+	((aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+		 collect: [ :widget | 
+			 String streamContents: [ :stream | 
+				 (self exporterAngularConfiguration angularRepresentationOf:
+					  widget)
+					 exportTypeScriptConstructorInjectionOf: widget
+					 usingExporter: (CSNDefaultExporter on: stream) ] ]
+		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]
 
 { #category : #'generate - subcomponent' }
