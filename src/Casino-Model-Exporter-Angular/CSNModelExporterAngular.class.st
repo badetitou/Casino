@@ -207,9 +207,12 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage [
-  | id |
-  id := 0.
-  currentWriteStream << '<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
+
+	| id |
+	id := 0.
+	currentWriteStream
+	<<
+		'<bl-phase-business-pages-tab-container> <!-- (tabSelected)="onTabSelected($event)" -->
         <bl-phase-business-pages-tab-header>
             <div class="save-action">
                 <div class="cursor-pointer"> <!-- (click)="save()" -->
@@ -217,39 +220,41 @@ CSNModelExporterAngular >> generateHTMLSourceCodeForMultiplePageMetierForPage: a
                 </div>
             </div>
         </bl-phase-business-pages-tab-header>'.
-  aCSNPage sortedPageMetiers do: [:metier |  id := id + 1.
-        currentWriteStream
-           << '
+	aCSNPage sortedPageMetiers do: [ :metier | 
+		id := id + 1.
+		currentWriteStream
+			<< '
             <bl-phase-business-page-tab id="P';
-           << id asString;
-           << '" title="';
-           << (self protectString: metier title);
-           << '">	';
-           << String crlf;
-           << '                ';
-           << metier getTag;
-           << String crlf;
-           << '            </bl-phase-business-page-tab>';
-           << String crlf ].
-  currentWriteStream << '    </bl-phase-business-pages-tab-container>'
+			<< id asString;
+			<< '" title="';
+			<< (self protectString: metier title);
+			<< '">	';
+			<< String crlf;
+			<< '                '.
+			self h.
+		metier accept: self.
+		self
+			<< String crlf;
+			<< '            </bl-phase-business-page-tab>';
+			<< String crlf ].
+	currentWriteStream << '    </bl-phase-business-pages-tab-container>'
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForNoPageMetierForPage: aCSNPage [
-  aCSNPage widgets do: [:widget |  self visit: widget.
-        currentWriteStream << String crlf ]
+
+	aCSNPage widgets do: [ :widget | 
+		self visit: widget.
+		currentWriteStream << String crlf ]
 ]
 
 { #category : #visiting }
 CSNModelExporterAngular >> generateHTMLSourceCodeForPage: aBLPhase [
 
-	self
-		<< '<bl-phase-container>';
-		eol.
-	self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase.
-	self
-		eol;
-		<< '</bl-phase-container>'
+	self << '<bl-phase-container>'.
+	self inIndented: [ 
+		self generateHTMLSourceCodeDependOfPageMetierForPage: aBLPhase ].
+	self << '</bl-phase-container>'
 ]
 
 { #category : #generate }
