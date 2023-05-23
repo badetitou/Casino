@@ -543,13 +543,9 @@ CSNModelExporterAngular >> generateRootHtmlOf: aCSNWidget [
 		<< '<form [formGroup]="';
 		<<< aCSNWidget id uncapitalized;
 		<<< 'Form';
-		<<< '">';
-		indentPlus;
-		eol.
-	self generateInnerHTMLOf: aCSNWidget.
-	self
-		indentMinus;
-		<< '</form>'
+		<<< '">'.
+	self inIndented: [ self generateInnerHTMLOf: aCSNWidget ].
+	self << '</form>'
 ]
 
 { #category : #'generate - model' }
