@@ -212,7 +212,11 @@ CSNLGridLayout >> maxLevel [
 { #category : #accessing }
 CSNLGridLayout >> notPositionnedCell [
 
-	^ (((self attributeAt: #cellPosition ifAbsentPut: [ Dictionary new ]) 
-		    reject: [ :position | position isArray ]) associationsCollect:
-		   #yourself) collect: #key
+	| allTriedPositionedCells otherCells |
+	allTriedPositionedCells := self
+		                           attributeAt: #cellPosition
+		                           ifAbsentPut: [ Dictionary new ].
+	otherCells := self cell \ allTriedPositionedCells keys.
+	^ (((allTriedPositionedCells reject: [ :position | position isArray ]) 
+		    associationsCollect: #yourself) collect: #key) , otherCells
 ]

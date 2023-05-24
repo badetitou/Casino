@@ -1054,42 +1054,7 @@ CSNModelExporterAngular >> visitCSNLCell: aCSNLCell [
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 
-	0 to: aCSNLGridLayout maxLevel do: [ :number | "self
-		crlf;
-		indentPlus;
-		<< '<tbody>';
-		crlf;
-		indentPlus.
-	0 to: aBLUIGridLayout maxLevel do: [ :number | 
-		self
-			<< '<tr>';
-			crlf;
-			indentPlus.
-		(aBLUIGridLayout atLevelSorted: number)
-			reject: #isNil
-			thenDo: [ :cell | 
-				self << '<td'.
-				cell attributesTagWith: self.
-				self
-					<<< '>';
-					crlf.
-				self indentPlus.
-				self visit: cell.
-				self indentMinus.
-				self
-					crlf;
-					<< '</td>';
-					crlf ].
-		self
-			indentMinus;
-			<< '</tr>';
-			crlf ].
-	self
-		indentMinus;
-		<< '</tbody>';
-		indentMinus.
-
-	"
+	0 to: aCSNLGridLayout maxLevel do: [ :number | 
 		self eol.
 		((aCSNLGridLayout atLevelSorted: number) reject: #isNil) 
 			ifNotEmpty: [ :cells | 
@@ -1111,7 +1076,7 @@ CSNModelExporterAngular >> visitCSNLGridLayout: aCSNLGridLayout [
 			eol;
 			<< '<!-- not positionned cells -->';
 			eol.
-		cells do: [ :cell | self visit: cell ] ]
+		cells do: [ :cell | self inIndented: [ self visit: cell ] ] ]
 ]
 
 { #category : #visiting }
