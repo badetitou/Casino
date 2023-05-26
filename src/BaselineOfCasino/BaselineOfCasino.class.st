@@ -94,7 +94,7 @@ BaselineOfCasino >> defineDependencies: spec [
 			'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
 	spec
 		baseline: 'Carrefour'
-		with: [ spec repository: 'github://badetitou/Carrefour:v4/src' ].
+		with: [ spec repository: 'github://moosetechnology/Carrefour:v4/src' ].
 	spec
 		baseline: 'MoreLogger'
 		with: [ spec repository: 'github://badetitou/MoreLogger:main/src' ].
