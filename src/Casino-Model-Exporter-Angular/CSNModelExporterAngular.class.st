@@ -1189,20 +1189,6 @@ CSNModelExporterAngular >> visitCSNUIInputMonth: aBLUIInputMonth [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputNumber: aBLUIInputNumber [
-  self << '<'.
-  aBLUIInputNumber getListPropertiesAsStringWith: self.
-  self <<< ' type="number"/>'
-]
-
-{ #category : #visiting }
-CSNModelExporterAngular >> visitCSNUIInputTime: aBLUIInputTime [
-  self << '<'.
-  aBLUIInputTime getListPropertiesAsStringWith: self.
-  self <<< ' type="time"/>'
-]
-
-{ #category : #visiting }
 CSNModelExporterAngular >> visitCSNUIPanel: aBLUIPanel [
  	self visitCSNContainer:  aBLUIPanel
 ]

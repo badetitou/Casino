@@ -15,6 +15,12 @@ MCDialog >> getSelector [
 ]
 
 { #category : #accessing }
+MCDialog >> isFormContainer [
+	"If true this representation support the formControl"
+	^ true
+]
+
+{ #category : #accessing }
 MCDialog >> isSubComponent [
 
 	^ true

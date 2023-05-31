@@ -155,6 +155,17 @@ WidgetRepresentation >> exportTypeScriptVariableOf: widget usingExporter: anExpo
 	"I export in the TS component of my widget the variables required for its proper working"
 ]
 
+{ #category : #'accessing - form' }
+WidgetRepresentation >> extractFormContainerOf: aWidget with: anExporter [
+
+	^ ((aWidget
+		    allAtScope: CSNWidget
+		    until: [ :w | 
+		    (anExporter angularRepresentationOf: w) isFormContainer ]) 
+		   select: [ :w | 
+		   (anExporter angularRepresentationOf: w) isFormContainer ]) anyOne
+]
+
 { #category : #accessing }
 WidgetRepresentation >> getSelector [
 	^ 'div'
@@ -194,7 +205,13 @@ WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
 	^ {  }
 ]
 
-{ #category : #'accessing - testing' }
+{ #category : #'accessing - form' }
+WidgetRepresentation >> isFormContainer [
+	"If true this representation support the formControl"
+	^ false
+]
+
+{ #category : #'accessing - form' }
 WidgetRepresentation >> isFormControl [
 	"If true this representation support the formControl"
 	^ false
