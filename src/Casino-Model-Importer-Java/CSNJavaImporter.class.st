@@ -354,7 +354,7 @@ CSNJavaImporter >> searchWidgetsFromArgument: anArgument for: aWidget [
 		       ifTrue: [ anArgument expression famixVariable ]
 		       ifFalse: [ 
 			       anArgument famixVariable ifNil: [ 
-				       (anArgument isKindOf: FASTJavaAssignementExpression)
+				       (anArgument isKindOf: FASTJavaAssignmentExpression)
 					       ifTrue: [ anArgument variable famixVariable ]
 					       ifFalse: [ nil ] ] ].
 	(var isNil and: [ anArgument isKindOf: FASTJavaMethodInvocation ]) 
