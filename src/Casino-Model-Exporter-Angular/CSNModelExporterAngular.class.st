@@ -1321,6 +1321,9 @@ CSNModelExporterAngular >> writeOpenPhaseMethod [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 
+	| importList |
+	importList := Set new.
+
 	((aCSNWidget componentSubWidgetsUsing: self) flattened asSet
 		 collect: [ :widget | 
 			 String streamContents: [ :stream | 
@@ -1328,5 +1331,7 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 					  widget)
 					 exportTypeScriptImportOf: widget
 					 usingExporter: (CSNDefaultExporter on: stream) ] ]
-		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self eol ]
+		 as: Set) do: [ :line | line lines do: [ :l | importList add: l ] ].
+	
+	importList do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]
