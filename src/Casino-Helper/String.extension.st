@@ -6,17 +6,6 @@ String >> asJavaComment [
 ]
 
 { #category : #'*Casino-Helper' }
-String >> asKebabCase [
-	^ self class
-		streamContents: [ :stream | 
-			self uncapitalized
-				do: [ :char | 
-					char isUppercase
-						ifTrue: [ stream << '-' << char asLowercase ]
-						ifFalse: [ stream << char ] ] ]
-]
-
-{ #category : #'*Casino-Helper' }
 String >> includesSubstring: substring at: index [
 
 	"CSN taken from Pharo 9"
