@@ -155,9 +155,7 @@ CSNBuModelExporter >> printImportDependencenciesOf: aBusinessType [
 				separatedBy: [ 
 					self <<< $,.
 					self eol ] ].
-		self <<< ' from "..'.
-		aBusinessType parentBusinessPackages do: [:package | self <<< '/..' ].
-		self <<< '";'.
+		self <<< ' from "@core/index";'.
 		self
 			eol;
 			eol ]
