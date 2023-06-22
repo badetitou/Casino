@@ -223,7 +223,7 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2Attribute [
 			          aBusinessType ].
 	expected := OSPlatform current lineEnding join:
 		            #( 'import {' '    HelloAttributeBusinessType'
-		               '} from "..";' '' '' ).
+		               '} from "@core/index";' '' '' ).
 	self assert: result equals: expected
 ]
 
@@ -256,6 +256,6 @@ CSNBuModelExporterTest >> testPrintImportDependencenciesOf2AttributeOfDifferentT
 	expected := OSPlatform current lineEnding join:
 		            #( 'import {' '    Hello2AttributeBusinessType,'
 		               '    HelloAttributeBusinessType'
-		               '} from "..";' '' '' ).
+		               '} from "@core/index";' '' '' ).
 	self assert: result equals: expected
 ]
