@@ -940,6 +940,17 @@ CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 ]
 
 { #category : #'generate - subcomponent' }
+CSNModelExporterAngular >> printTSOnDestroyOf: aCSNWidget [
+
+	self inIndented: [ 
+		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+			asOrderedCollection do: [ :widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptOnDestroyOf: widget
+				usingExporter: self ] ]
+]
+
+{ #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 
 	self inIndented: [ 

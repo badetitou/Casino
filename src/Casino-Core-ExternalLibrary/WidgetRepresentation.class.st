@@ -142,6 +142,15 @@ WidgetRepresentation >> exportTypeScriptMethodsOf: widget usingExporter: anExpor
 ]
 
 { #category : #'export - typescript' }
+WidgetRepresentation >> exportTypeScriptOnDestroyOf: widget usingExporter: anExporter [
+
+	"I export in the TS code inside ngOnInit of my widget.
+	It is often about inizializing some attributes"
+
+	
+]
+
+{ #category : #'export - typescript' }
 WidgetRepresentation >> exportTypeScriptOnInitOf: widget usingExporter: anExporter [
 
 	"I export in the TS code inside ngOnInit of my widget.
