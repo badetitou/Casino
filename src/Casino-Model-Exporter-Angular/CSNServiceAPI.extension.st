@@ -39,7 +39,7 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 		crlf.
 	self sortedParameters
 		do: [ :parameter | 
-			aStream << 'formData.append(''' <<< parameter name asKebabCase
+			aStream << 'formData.append(''' <<< (PharoStringCaseFormater on: parameter name) asKebabCase
 			<<< ''', '.
 			parameter dataType isDictionaryType
 				ifFalse: [ aStream <<< 'JSON.stringify(' ]
@@ -51,13 +51,18 @@ CSNServiceAPI >> printCreateFormDataIn: aStream [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> printCreateParamIn: aCSNExporter [
-	(self source isNotNil and: [  self source parameters isNotEmpty ])
-		ifTrue: [ aCSNExporter crlf.
+
+	(self source isNotNil and: [ self source parameters isNotEmpty ]) 
+		ifTrue: [ 
+			aCSNExporter crlf.
 			aCSNExporter
 				<< 'let params = new HttpParams();';
 				crlf.
 			self sortedParameters
-				do: [ :parameter | aCSNExporter << 'params = params.append(''' <<< parameter name asKebabCase <<< ''', ' <<< parameter name <<< '.toString());' ]
+				do: [ :parameter | 
+					aCSNExporter << 'params = params.append('''
+					<<< (PharoStringCaseFormater on: parameter name) asKebabCase <<< ''', ' <<< parameter name
+					<<< '.toString());' ]
 				separatedBy: [ aCSNExporter crlf ] ]
 ]
 
@@ -113,9 +118,8 @@ CSNServiceAPI >> uniqueName [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNServiceAPI >> writeCodeIn: aStream [
-	aStream
-		<<
-			'    // TODO: Please check this service
+
+	aStream << '    // TODO: Please check this service
     public ' << self uniqueName << '('.
 	self printParameterIn: aStream.
 
@@ -123,29 +127,23 @@ CSNServiceAPI >> writeCodeIn: aStream [
 	self isGET
 		ifTrue: [ self printCreateParamIn: aStream ]
 		ifFalse: [ self printCreateFormDataIn: aStream ].
-	aStream
-		<<
-			'
+	aStream << '
         return this.http.'.
 	self printRestTypeIn: aStream.
-	aStream << '<any>(''/ws/' << self serviceOwner targetPoint asKebabCase << '/' << self name asKebabCase << ''''.
-	self isPOST
-		ifTrue: [ aStream
-				<< ',';
-				crlf;
-				<< '            formData' ].
-	aStream
-		<<
-			', {
+	aStream << '<any>(''/ws/'
+	<< (PharoStringCaseFormater on: (self serviceOwner targetPoint)) asKebabCase << '/'
+	<< (PharoStringCaseFormater on: (self name)) asKebabCase << ''''.
+	self isPOST ifTrue: [ 
+		aStream
+			<< ',';
+			crlf;
+			<< '            formData' ].
+	aStream << ', {
             withCredentials: true'.
-	(self isGET and: [ self source parameters isNotEmpty ])
-		ifTrue: [ aStream
-				<<
-					',
+	(self isGET and: [ self source parameters isNotEmpty ]) ifTrue: [ 
+		aStream << ',
             params: params' ].
-	aStream
-		<<
-			'
+	aStream << '
         }).pipe(first());
     }
 '

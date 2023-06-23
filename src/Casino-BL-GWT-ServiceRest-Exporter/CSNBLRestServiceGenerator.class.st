@@ -243,11 +243,16 @@ CSNBLRestServiceGenerator >> printAdditionalMethodsFor: aClass [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> printAttributeOf: aMethod ofServiceApi: aServiceAPI [
-	(aServiceAPI parameters sorted: [ :p :p2 | p source sourceAnchor startPos < p2 source sourceAnchor startPos ])
+
+	(aServiceAPI parameters sorted: [ :p :p2 | 
+		 p source sourceAnchor startPos < p2 source sourceAnchor startPos ])
 		do: [ :parameter | 
 			aServiceAPI isGET
-				ifTrue: [ self <<< '@QueryParam("' <<< parameter name asKebabCase <<< '") ' ]
-				ifFalse: [ self <<< '@FormDataParam("' <<< parameter name asKebabCase <<< '") ' ].
+				ifTrue: [ 
+				self <<< '@QueryParam("' <<< (PharoStringCaseFormater on: parameter name) asKebabCase  <<< '") ' ]
+				ifFalse: [ 
+					self <<< '@FormDataParam("' <<< (PharoStringCaseFormater on: parameter name) asKebabCase
+					<<< '") ' ].
 			self visitServiceAPIParameter: parameter ]
 		separatedBy: [ self <<< ', ' ]
 ]
