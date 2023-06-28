@@ -166,7 +166,7 @@ CSNModelServiceExporterAngularCoreWeb >> printHttpOptions [
 		self isJersey ifFalse: [ 
 			self
 				<< 'params: ';
-				inBraces: [ self << '"fieldNames[]" : fieldNames' ] ] ]
+				inBraces: [ self << '"fieldNames[]": fieldNames' ] ] ]
 ]
 
 { #category : #streaming }
