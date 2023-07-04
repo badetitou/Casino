@@ -180,6 +180,15 @@ WidgetRepresentation >> getSelector [
 	^ 'div'
 ]
 
+{ #category : #'as yet unclassified' }
+WidgetRepresentation >> getSubWidgets: aWidget usingExporter: anExporter [
+
+	^ (aWidget widgets , (aWidget isContainer ifTrue: [ aWidget layout
+		    ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ]
+		    ifNil: [ {  } ]]ifFalse:[{}]) reject: [ :el | el = aWidget ]) reject: [ :w | 
+		  (anExporter angularRepresentationOf: w) isSubComponent ]
+]
+
 { #category : #'accessing - export' }
 WidgetRepresentation >> getTypeScriptExtendsRequiredBy: widget usingExporter: anExporter [
 
@@ -261,4 +270,18 @@ WidgetRepresentation >> moduleName [
 { #category : #accessing }
 WidgetRepresentation >> modulePath [
 	^ '@angular/core'
+]
+
+{ #category : #'as yet unclassified' }
+WidgetRepresentation >> representationSubWidgetsOf: aWidget usingExporter: anExporter [
+
+	"la liste des widgets en dessous du widget courant, filtré si besoin "
+
+	| subs |
+	subs := self getSubWidgets: aWidget usingExporter: anExporter.
+
+	^ subs , (subs collect: [ :w | 
+		  (anExporter angularRepresentationOf: w)
+			  representationSubWidgetsOf: w
+			  usingExporter: anExporter ])
 ]

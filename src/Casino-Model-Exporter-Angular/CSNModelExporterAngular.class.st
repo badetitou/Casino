@@ -829,7 +829,7 @@ export class ';
 	self indentPlus.
 	phaseCalled do: [ :phase | 
 		currentWriteStream
-			<< '    public ';
+			<< '    public /*TOTO*/';
 			<< phase getAcceptedName;
 			<< ': Phase;';
 			<< String crlf ].
@@ -929,7 +929,12 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 
-	((aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+	|widgetsList|
+	
+	widgetsList := (aCSNWidget componentSubWidgetsUsing: self).
+	widgetsList := (self angularRepresentationOf: aCSNWidget) representationSubWidgetsOf: aCSNWidget usingExporter: self.
+
+	( widgetsList flattened asSet
 		 collect: [ :widget | 
 			 String streamContents: [ :stream | 
 				 (self exporterAngularConfiguration angularRepresentationOf:
@@ -964,9 +969,15 @@ CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 
+	| widgetsList |
+	"widgetsList := aCSNWidget componentSubWidgetsUsing: self."
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
+
+
 	self inIndented: [ 
-		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
-			asOrderedCollection do: [ :widget | 
+		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
 				usingExporter: self ] ]
@@ -1332,10 +1343,16 @@ CSNModelExporterAngular >> writeOpenPhaseMethod [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 
-	| importList |
+	| importList widgetsList |
 	importList := Set new.
 
-	((aCSNWidget componentSubWidgetsUsing: self) flattened asSet
+
+	"widgetsList := aCSNWidget componentSubWidgetsUsing: self."
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
+
+	(widgetsList flattened asSet
 		 collect: [ :widget | 
 			 String streamContents: [ :stream | 
 				 (self exporterAngularConfiguration angularRepresentationOf:
@@ -1343,6 +1360,6 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 					 exportTypeScriptImportOf: widget
 					 usingExporter: (CSNDefaultExporter on: stream) ] ]
 		 as: Set) do: [ :line | line lines do: [ :l | importList add: l ] ].
-	
+
 	importList do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]
