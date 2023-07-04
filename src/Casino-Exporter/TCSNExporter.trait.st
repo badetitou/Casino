@@ -118,6 +118,14 @@ TCSNExporter >> inIndented: aBlock [
 ]
 
 { #category : #streaming }
+TCSNExporter >> inIndentedNoEol: aBlock [
+
+	self indentPlus.
+	aBlock value.
+	self indentMinus
+]
+
+{ #category : #streaming }
 TCSNExporter >> inParenthesis: aBlock [
 	self <<< '('.
 	aBlock value.

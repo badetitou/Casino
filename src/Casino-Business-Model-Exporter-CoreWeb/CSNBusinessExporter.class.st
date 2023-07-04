@@ -30,6 +30,13 @@ CSNBusinessExporter >> computeBusinessPackages: businessType [
 ]
 
 { #category : #accessing }
+CSNBusinessExporter >> computeBusinessPackagesNames: businessType [
+
+	^ (self computeBusinessPackages: businessType) collect: [ :package | 
+		  package name ]
+]
+
+{ #category : #accessing }
 CSNBusinessExporter >> defaultSuperclassName [
 
 	^ self businessTypeExporter defaultSuperclassName
@@ -67,14 +74,14 @@ CSNBusinessExporter >> export: aCSNBuModel [
 							          barrelStream crlf.
 							          self locationToExport: businessType.
 							          barrelStream << 'export * from ''./dto/'.
-							          (self computeBusinessPackages: businessType) do: [ 
-									          :package | 
+							          (self computeBusinessPackagesNames: businessType) do: [ 
+									          :packageName | 
 									          rootFileRef := rootFileRef
 									                         /
 										                         (rootFileRef children detect: [ 
 												                          :child | 
 												                          child basename sameAs:
-														                          package name ]) basename.
+														                          packageName ]) basename.
 									          barrelStream
 										          << rootFileRef basename;
 										          << '/' ].
@@ -113,8 +120,8 @@ CSNBusinessExporter >> locationToExport: businessType [
 
 	| directory |
 	directory := self modelRoot / 'dto'.
-	(self computeBusinessPackages: businessType) do: [ :package | 
-		directory := directory / package name ].
+	(self computeBusinessPackagesNames:  businessType) do: [ :packageName | 
+		directory := directory / packageName ].
 	^ directory
 ]
 
