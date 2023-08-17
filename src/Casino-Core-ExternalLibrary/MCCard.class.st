@@ -36,8 +36,10 @@ MCCard >> angularActionRepresentationOf: action forWidget: aWidget using: anExpo
 { #category : #accessing }
 MCCard >> attributeOf: aWidget with: anExporter [
 
-	^ (super attributeOf: aWidget with: anExporter) flattened reject: [ :attribute | "Title is used in the header" 
-		  attribute isKindOf: CSNUITitle ]
+	^ (super attributeOf: aWidget with: anExporter) flattened reject: [ 
+		  :attribute | "Title or Label is used in the header" 
+		  (attribute isKindOf: CSNUITitle) or: [ 
+			  attribute isKindOf: CSNUILabel ] ]
 ]
 
 { #category : #export }
