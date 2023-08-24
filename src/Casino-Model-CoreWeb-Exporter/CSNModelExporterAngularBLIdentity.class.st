@@ -438,11 +438,6 @@ export const COMPONENTS: any[] = [
 		<< '
         MatSnackBarModule,
         TranslateModule
-    ],
-    entryComponents: [
-        ';
-		<< aCSNPage componentName;
-		<< '
     ]
 })
 export class ';

@@ -523,11 +523,6 @@ export const COMPONENTS: any[] = ['.
 		<< '
         ComponentsModule,
         TranslateModule
-    ],
-    entryComponents: [
-        ';
-		<< aCSNPage componentName;
-		<< '
     ]
 })
 export class ';
