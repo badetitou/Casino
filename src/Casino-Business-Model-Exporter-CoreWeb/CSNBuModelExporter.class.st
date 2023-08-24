@@ -166,7 +166,7 @@ CSNBuModelExporter >> printImportsFor: aBusinessType [
 
 	self << 'import { JsonProperty, JsonClassType, JsonTypeName'.
 	aBusinessType children ifNotEmpty: [ self <<< ', JsonSubTypes' ].
-	self <<< ' } from "@outfoxx/jackson-js";'.
+	self <<< ' } from "@badetitou/jackson-js";'.
 	aBusinessType parent ifNil: [ 
 		self
 			crlf;

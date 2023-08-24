@@ -515,7 +515,7 @@ import { Observable } from ''rxjs'';
 import { first, map } from ''rxjs/operators'';
 
 import { HttpClient, HttpHeaders, HttpParams } from ''@angular/common/http'';
-import { ObjectMapper } from ''@outfoxx/jackson-js'';
+import { ObjectMapper } from ''@badetitou/jackson-js'';
 import { MapToStringJsonConverterService } from ''src/app/main/shared/services/map-to-string-json-converter.service'';
 ';
 			crlf;

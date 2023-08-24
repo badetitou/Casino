@@ -29,7 +29,7 @@ CSNModelServiceExporterAngularCoreWeb >> generateService: aCSNService [
 CSNModelServiceExporterAngularCoreWeb >> generateServiceGlobals [
 
 	self <<< 'import { HttpHeaders } from ''@angular/common/http'';
-import { JsonParser, JsonStringifier } from ''@outfoxx/jackson-js'';
+import { JsonParser, JsonStringifier } from ''@badetitou/jackson-js'';
 
 export const jsonParser = new JsonParser({
     features: {
