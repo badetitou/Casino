@@ -74,48 +74,6 @@ CSNWidget >> container [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> csnInAngular: aBuilder [
-
-	<inspectorPresentationOrder: 1008 title: 'Angular HTML'>
-	| config code attributeExporter presenter |
-	config := CSNExporterAngularConfiguration.
-	attributeExporter := CSNExporterAngularAttribute.
-	code := aBuilder newCode
-		        beNotEditable;
-		        withLineNumbers;
-		        withoutSyntaxHighlight.
-	^ (self isKindOf: CSNPage) not
-		  ifTrue: [ 
-			  presenter := SpPresenter new.
-			  presenter layout: (SpBoxLayout newTopToBottom
-					   add: (aBuilder newDropList
-							    extent: 800 @ 25;
-							    items: CSNExporterAngularConfiguration withAllSubclasses;
-							    display: [ :aClass | aClass name ];
-							    whenSelectedItemChangedDo: [ :aClass | 
-								    config := aClass.
-								    code text: (String streamContents: [ :s | 
-												     | exporter |
-												     exporter := (CSNModelExporterAngular on: s)
-													                 currentPage: (self atAnyScope: { 
-																	                  CSNPage.
-																	                  CSNBusinessPage }) anyOne;
-													                 attributeExporter: attributeExporter new;
-													                 exporterAngularConfiguration: config new.
-												     (self isKindOf: CSNBusinessPage)
-													     ifFalse: [ self accept: exporter ]
-													     ifTrue: [ 
-													     exporter generateHTMLSourceCodeForBusinessPage: self ] ]) ];
-							    selectIndex: 1;
-							    yourself)
-					   expand: false;
-					   add: code;
-					   yourself).
-			  presenter ]
-		  ifFalse: [ aBuilder newText text: 'Not supported' ]
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> exportAttribute: normalyOneOfMyWidget with: anExporter [
 	(anExporter angularRepresentationOf: self) exportAttribute: normalyOneOfMyWidget with: anExporter
 ]

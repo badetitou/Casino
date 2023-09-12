@@ -201,7 +201,7 @@ CSNModelExporterAngular >> generateHTMLSourceCodeFor1PageMetierForPage: aCSNPage
 { #category : #'generate - model' }
 CSNModelExporterAngular >> generateHTMLSourceCodeForModel: aModel [
 	currentWriteStream << '<bl-layout>
-    <bl-desktop [homePhase]="phaseHome"></bl-desktop>
+    <bl-desktop [homePhase]="phaseHome" [withTabNavigation]="true"></bl-desktop>
 </bl-layout>'
 ]
 
@@ -1110,22 +1110,8 @@ CSNModelExporterAngular >> visitCSNLLayout: aBLLayout [
 
 { #category : #visiting }
 CSNModelExporterAngular >> visitCSNLeaf: aCSNLeaf [
-^ self visitCSNWidget: aCSNLeaf
-  "self << '<'.
-  aBLUILeaf getListPropertiesAsStringWith: self.
-  self <<< '>'.
-  aBLUILeaf attributes select: [:a |  a isKindOf: CSNUILabel ] thenDo: [:attribute |  self
-           crlf;
-           indentPlus;
-           indent.
-        self visit: attribute.
-        self
-           crlf;
-           indentMinus ].
-  self
-     << '</';
-     <<< aBLUILeaf getSelector;
-     <<< '>'"
+
+	^ self visitCSNWidget: aCSNLeaf
 ]
 
 { #category : #visiting }
@@ -1162,7 +1148,7 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 		                      asFileReference writeStream.
 	[ 
 	self generateHTMLSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ] ensure: [ currentWriteStream close ]
+	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 ]
 
 { #category : #visiting }

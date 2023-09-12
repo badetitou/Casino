@@ -108,31 +108,6 @@ import { HttpClientModule } from ''@angular/common/http'';'.
 ]
 
 { #category : #visiting }
-CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForBusinessPage: aBLPageMetier [
-
-	aBLPageMetier metiers ifNotEmpty: [ 
-		currentWriteStream
-			<< '<mat-tab-group>';
-			<< String crlf.
-		aBLPageMetier metiers do: [ :metier | 
-			currentWriteStream
-				<< '     <mat-tab label=';
-				<<
-					(self class convertIfString: (self protectString: metier title));
-				<< '>';
-				<< String crlf;
-				<< '        ';
-				<< metier getTag;
-				<< String crlf;
-				<< '    </mat-tab>';
-				<< String crlf ].
-		currentWriteStream
-			<< '</mat-tab-group>';
-			<< String crlf ].
-	self generateRootHtmlOf: aBLPageMetier
-]
-
-{ #category : #visiting }
 CSNModelExporterAngularBLMaterial >> generateHTMLSourceCodeForMultiplePageMetierForPage: aCSNPage [
 
 	currentWriteStream << '<mat-tab-group>'.
