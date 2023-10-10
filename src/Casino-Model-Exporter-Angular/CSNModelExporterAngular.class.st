@@ -904,21 +904,20 @@ CSNModelExporterAngular >> prepareExport [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 
-	self inIndented: [ 
-		self
-			<< 'this.';
-			<<< aCSNWidget id uncapitalized;
-			<<< 'Form = this._fb.group('.
-		self inBraces: [ 
-			(((aCSNWidget componentSubWidgetsUsing: self) flattened select: [ 
-				  :w | (self angularRepresentationOf: w) isFormControl ]) asSet
-				 asOrderedCollection sorted: [ :a :b | a id < b id ])
-				do: [ :w | 
-					self
-						<< w id uncapitalized;
-						<<< ': new FormControl(),' ]
-				separatedBy: [ self eol ] ].
-		self <<< ')' ]
+	self
+		<< 'this.';
+		<<< aCSNWidget id uncapitalized;
+		<<< 'Form = this._fb.group('.
+	self inBraces: [ 
+		(((aCSNWidget componentSubWidgetsUsing: self) flattened select: [ :w | 
+			  (self angularRepresentationOf: w) isFormControl ]) asSet
+			 asOrderedCollection sorted: [ :a :b | a id < b id ])
+			do: [ :w | 
+				self
+					<< w id uncapitalized;
+					<<< ': new FormControl(),' ]
+			separatedBy: [ self eol ] ].
+	self <<< ');'
 ]
 
 { #category : #'generate - subcomponent' }
