@@ -924,19 +924,23 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 
-	|widgetsList|
-	
-	widgetsList := (aCSNWidget componentSubWidgetsUsing: self).
-	widgetsList := (self angularRepresentationOf: aCSNWidget) representationSubWidgetsOf: aCSNWidget usingExporter: self.
+	| widgetsList injectList |
+	injectList := Set new.
 
-	( widgetsList flattened asSet
-		 collect: [ :widget | 
-			 String streamContents: [ :stream | 
-				 (self exporterAngularConfiguration angularRepresentationOf:
-					  widget)
-					 exportTypeScriptConstructorInjectionOf: widget
-					 usingExporter: (CSNDefaultExporter on: stream) ] ]
-		 as: Set) do: [ :line | self <<< line ] separatedBy: [ self eol ]
+	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
+
+	(widgetsList flattened asSet
+		 flatCollect: [ :widget | 
+			 (String streamContents: [ :stream | 
+				  (self exporterAngularConfiguration angularRepresentationOf:
+					   widget)
+					  exportTypeScriptConstructorInjectionOf: widget
+					  usingExporter: (CSNDefaultExporter on: stream) ]) lines ]
+		 as: Set) do: [ :line | injectList add: line ].
+	injectList do: [ :line | self << line ] separatedBy: [ self eol ]
 ]
 
 { #category : #'generate - subcomponent' }
