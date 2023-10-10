@@ -1334,13 +1334,20 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 		               usingExporter: self.
 
 	(widgetsList flattened asSet
-		 collect: [ :widget | 
-			 String streamContents: [ :stream | 
+		 flatCollect: [ :widget | 
+			 (String streamContents: [ :stream | 
+				|exporter | 
+				exporter := (CSNDefaultExporter on: stream).
 				 (self exporterAngularConfiguration angularRepresentationOf:
 					  widget)
 					 exportTypeScriptImportOf: widget
-					 usingExporter: (CSNDefaultExporter on: stream) ] ]
-		 as: Set) do: [ :line | line lines do: [ :l | importList add: l ] ].
-
+					 usingExporter: exporter.
+					exporter eol.
+				 ((self exporterAngularConfiguration angularRepresentationOf:
+					   widget) internalDependenciesOf: widget) do: [ :rep | 
+					 rep
+						 exportTypeScriptImportOf: widget
+						 usingExporter: exporter ] separatedBy: [ exporter eol ] ]) lines ]
+		 as: Set) do: [ :line | importList add: line ].
 	importList do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]

@@ -131,7 +131,7 @@ CSNWidget >> getImportStringWithLocalPath: aLocalPath [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> getListPropertiesAsStringWith: anExporter [
-	anExporter <<< (self getSelectorFrom: anExporter).
+	anExporter <<< ((anExporter angularRepresentationOf: self) getSelector).
 	(anExporter angularRepresentationOf: self) componentAttributeOn: anExporter forWidget: self.
 	anExporter <<< (self actionsTagFrom: anExporter).
 	anExporter <<< self idTag
@@ -146,11 +146,6 @@ CSNWidget >> getPositionAttribute [
 				attributeValue: self position angularValue;
 				yourself ]
 		ifNil: [ {} ]
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
-CSNWidget >> getSelectorFrom: anExporter [
-	^ (anExporter angularRepresentationOf: self) getSelector
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

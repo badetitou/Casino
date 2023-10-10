@@ -106,7 +106,7 @@ WidgetRepresentation >> exportFooterOf: aWidget with: anExporter [
 	anExporter
 		eol;
 		<< '</';
-		<<< (aWidget getSelectorFrom: anExporter);
+		<<< (self getSelector);
 		<<< '>'
 ]
 
@@ -120,9 +120,9 @@ WidgetRepresentation >> exportHeaderOf: aWidget with: anExporter [
 { #category : #export }
 WidgetRepresentation >> exportListPropertiesOf: aWidget asStringWith: anExporter [
 
-	anExporter <<< (aWidget getSelectorFrom: anExporter).
+	anExporter <<< self getSelector.
 	self componentAttributeOn: anExporter forWidget: aWidget.
-	self componentActionsOn: anExporter forWidget: aWidget.
+	self componentActionsOn: anExporter forWidget: aWidget
 	"anExporter <<< aWidget idTag"
 ]
 
@@ -220,6 +220,7 @@ WidgetRepresentation >> importStringOf: aWidget [
 
 { #category : #accessing }
 WidgetRepresentation >> internalDependenciesOf: aWidgetInstance [
+
 	^ {  }
 ]
 
@@ -264,6 +265,7 @@ WidgetRepresentation >> isSubComponent [
 
 { #category : #accessing }
 WidgetRepresentation >> moduleName [
+
 	^ 'ElementRef'
 ]
 

@@ -90,6 +90,7 @@ MCInput >> getSelector [
 
 { #category : #export }
 MCInput >> internalDependenciesOf: aWidgetInstance [
+
 	^ { MCFormFieldModule new }
 ]
 
