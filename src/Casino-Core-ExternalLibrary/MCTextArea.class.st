@@ -26,7 +26,7 @@ MCTextArea >> exportContentOf: aWidget with: anExporter [
 	anExporter <<< '>'.
 	anExporter
 		<<< '</';
-		<<< (aWidget getSelectorFrom: anExporter);
+		<<< (self getSelector);
 		<<< '>'.
 	anExporter
 		eol;

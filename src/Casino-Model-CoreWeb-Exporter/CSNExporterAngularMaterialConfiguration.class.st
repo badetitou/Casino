@@ -40,6 +40,7 @@ CSNExporterAngularMaterialConfiguration >> defaultConfiguration [
 				  (CSNUIMenu -> MCMenu new beWithArrow).
 				  (CSNUICWAccordion -> MCExpansionModule new).
 				  (CSNUICWSplitButton -> MCMenu new beWithArrow).
-				  (CSNUICWMultipleLinks -> MCSelect new beMultiple) } asDictionary;
+				  (CSNUICWMultipleLinks -> MCSelect new beMultiple).
+				(CSNUIPanel -> MCPanel new) } asDictionary;
 		  yourself
 ]

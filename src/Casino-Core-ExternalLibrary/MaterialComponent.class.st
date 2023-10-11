@@ -26,12 +26,13 @@ Class {
 	#category : #'Casino-Core-ExternalLibrary'
 }
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
 MaterialComponent >> isLocal [
+
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - testing' }
 MaterialComponent >> isNative [
 	"The widget is part of the html standard"
 	^ false

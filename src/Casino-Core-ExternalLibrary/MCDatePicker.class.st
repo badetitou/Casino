@@ -92,7 +92,7 @@ MCDatePicker >> exportHeaderOf: aWidget with: anExporter [
 { #category : #export }
 MCDatePicker >> exportListPropertiesOf: aWidget asStringWith: anExporter [
 
-	anExporter <<< (aWidget getSelectorFrom: anExporter).
+	anExporter <<< self getSelector.
 	self componentAttributeOn: anExporter forWidget: aWidget.
 	anExporter <<< (aWidget actionsTagFrom: anExporter)
 ]

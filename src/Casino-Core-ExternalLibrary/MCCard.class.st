@@ -66,7 +66,7 @@ MCCard >> exportFooterOf: aWidget with: anExporter [
 			eol ].
 	anExporter
 		<< '</';
-		<<< (aWidget getSelectorFrom: anExporter);
+		<<< (self getSelector);
 		<<< '>'
 ]
 
