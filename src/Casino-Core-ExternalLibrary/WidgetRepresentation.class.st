@@ -180,7 +180,7 @@ WidgetRepresentation >> getSelector [
 	^ 'div'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 WidgetRepresentation >> getSubWidgets: aWidget usingExporter: anExporter [
 
 	^ (aWidget widgets , (aWidget isContainer ifTrue: [ aWidget layout
@@ -274,7 +274,7 @@ WidgetRepresentation >> modulePath [
 	^ '@angular/core'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 WidgetRepresentation >> representationSubWidgetsOf: aWidget usingExporter: anExporter [
 
 	"la liste des widgets en dessous du widget courant, filtré si besoin "
