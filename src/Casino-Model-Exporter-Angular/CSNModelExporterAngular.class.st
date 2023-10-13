@@ -886,6 +886,32 @@ CSNModelExporterAngular >> homePage: anObject [
 	homePage := anObject
 ]
 
+{ #category : #streaming }
+CSNModelExporterAngular >> inTag: aTagName put: aBlock [
+
+	self inTag: aTagName withAttributesString: '' put: aBlock
+]
+
+{ #category : #streaming }
+CSNModelExporterAngular >> inTag: aTagName withAttributesString: anAttributeString put: aBlock [
+
+	self
+		<< '<';
+		<<< aTagName.
+	anAttributeString ifNotEmpty: [ :atts | 
+		self
+			<<< ' ';
+			<<< atts ].
+	self <<< '>'.
+	self eol.
+	self inIndentedNoEol: aBlock.
+	self
+		<< '</';
+		<<< aTagName;
+		<<< '>';
+		eol
+]
+
 { #category : #initialization }
 CSNModelExporterAngular >> initialize [
 	super initialize.
