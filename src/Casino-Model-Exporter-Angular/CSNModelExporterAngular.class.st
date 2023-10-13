@@ -930,12 +930,17 @@ CSNModelExporterAngular >> prepareExport [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 
+	| widgetsList |
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
 	self
 		<< 'this.';
 		<<< aCSNWidget id uncapitalized;
 		<<< 'Form = this._fb.group('.
+
 	self inBraces: [ 
-		(((aCSNWidget componentSubWidgetsUsing: self) flattened select: [ :w | 
+		((widgetsList flattened select: [ :w | 
 			  (self angularRepresentationOf: w) isFormControl ]) asSet
 			 asOrderedCollection sorted: [ :a :b | a id < b id ])
 			do: [ :w | 
@@ -971,9 +976,13 @@ CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSOnDestroyOf: aCSNWidget [
 
+	| widgetsList |
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
+
 	self inIndented: [ 
-		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
-			asOrderedCollection do: [ :widget | 
+		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptOnDestroyOf: widget
 				usingExporter: self ] ]
@@ -982,9 +991,12 @@ CSNModelExporterAngular >> printTSOnDestroyOf: aCSNWidget [
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 
+	| widgetsList |
+	widgetsList := (self angularRepresentationOf: aCSNWidget)
+		               representationSubWidgetsOf: aCSNWidget
+		               usingExporter: self.
 	self inIndented: [ 
-		(aCSNWidget componentSubWidgetsUsing: self) flattened asSet
-			asOrderedCollection do: [ :widget | 
+		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptOnInitOf: widget
 				usingExporter: self ] ]
@@ -994,7 +1006,6 @@ CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 
 	| widgetsList |
-	"widgetsList := aCSNWidget componentSubWidgetsUsing: self."
 	widgetsList := (self angularRepresentationOf: aCSNWidget)
 		               representationSubWidgetsOf: aCSNWidget
 		               usingExporter: self.
