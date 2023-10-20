@@ -183,10 +183,13 @@ WidgetRepresentation >> getSelector [
 { #category : #accessing }
 WidgetRepresentation >> getSubWidgets: aWidget usingExporter: anExporter [
 
-	^ (aWidget widgets , (aWidget isContainer ifTrue: [ aWidget layout
-		    ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ]
-		    ifNil: [ {  } ]]ifFalse:[{}]) reject: [ :el | el = aWidget ]) reject: [ :w | 
-		  (anExporter angularRepresentationOf: w) isSubComponent ]
+	^ (aWidget widgets , (aWidget isContainer
+		    ifTrue: [ 
+			    aWidget layout
+				    ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ]
+				    ifNil: [ {  } ] ]
+		    ifFalse: [ {  } ]) reject: [ :el | el = aWidget ]) reject: [ :w | 
+		  (anExporter angularRepresentationOf: w) isSubComponent: w ]
 ]
 
 { #category : #'accessing - export' }
@@ -258,7 +261,7 @@ WidgetRepresentation >> isOverrideLayout [
 ]
 
 { #category : #'accessing - testing' }
-WidgetRepresentation >> isSubComponent [
+WidgetRepresentation >> isSubComponent: aWidget [
 	"If true this representation will be exported as a component"
 	^ false
 ]

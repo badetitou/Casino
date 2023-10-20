@@ -21,7 +21,7 @@ MCDialog >> isFormContainer [
 ]
 
 { #category : #accessing }
-MCDialog >> isSubComponent [
+MCDialog >> isSubComponent: aWidget [
 
 	^ true
 ]

@@ -11,7 +11,7 @@ CSNPage >> componentSubWidgetsUsing: anExporter [
 		           a cell collect: #widget thenReject: #isNil ]
 		           ifNil: [ {  } ]) reject: [ :el | el = self ]) reject: [ 
 		         :w | 
-		         (anExporter angularRepresentationOf: w) isSubComponent ].
+		         (anExporter angularRepresentationOf: w) isSubComponent: w ].
 
 	^ { 
 		  widgs.
@@ -132,9 +132,9 @@ CSNPage >> id [
 
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNPage >> pageSubComponentsUsing: anExporter [
-
+	
 	^ self recursiveWidgets flattened select: [ :widget | 
-		  (anExporter angularRepresentationOf: widget) isSubComponent ]
+		  (anExporter angularRepresentationOf: widget) isSubComponent: widget ]
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

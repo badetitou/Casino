@@ -43,7 +43,7 @@ CSNWidget >> componentSubWidgetsUsing: anExporter [
 
 	| widgs |
 	widgs := self widgets reject: [ :w | 
-		           (anExporter angularRepresentationOf: w) isSubComponent ].
+		         (anExporter angularRepresentationOf: w) isSubComponent: w ].
 
 	^ { 
 		  widgs.
@@ -201,7 +201,7 @@ CSNWidget >> isPageMetier [
 { #category : #'*Casino-Model-Exporter-Angular' }
 CSNWidget >> printImportStringForSubComponentsFrom: aLocalPath using: anExporter [
 
-	(anExporter angularRepresentationOf: self) isSubComponent
+	((anExporter angularRepresentationOf: self) isSubComponent: self)
 		ifTrue: [ 
 			anExporter
 				<< (self getImportStringWithLocalPath: aLocalPath);

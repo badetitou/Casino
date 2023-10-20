@@ -30,12 +30,6 @@ CSNBusinessPage >> getHTMLName [
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }
-CSNBusinessPage >> getImportStringFromLocalPath [
-
-	^ 'components/' , self getAcceptedPathName
-]
-
-{ #category : #'*Casino-Model-Exporter-Angular' }
 CSNBusinessPage >> getLocalComponentPath [
 	" return pageMetierName/pageMetierName.component"
 
@@ -47,7 +41,7 @@ CSNBusinessPage >> getLocalPath [
 
 	" return pageMetierName/pageMetierName.component"
 
-	^ self container getLocalPath , '/components/' , self getAcceptedPathName
+	^ self container getLocalPath , '/' , self getAcceptedPathName
 ]
 
 { #category : #'*Casino-Model-Exporter-Angular' }

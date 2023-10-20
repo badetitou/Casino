@@ -11,7 +11,7 @@ CSNContainer >> componentSubWidgetsUsing: anExporter [
 		           a cell collect: #widget thenReject: #isNil ]
 		           ifNil: [ {  } ]) reject: [ :el | el = self ]) reject: [ 
 		         :w | 
-		         (anExporter angularRepresentationOf: w) isSubComponent ].
+		         (anExporter angularRepresentationOf: w) isSubComponent: w ].
 
 	^ { 
 		  widgs.

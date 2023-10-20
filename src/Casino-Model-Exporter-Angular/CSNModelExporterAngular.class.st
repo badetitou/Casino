@@ -579,7 +579,7 @@ CSNModelExporterAngular >> generateRouteSourceCodeForPage: aCSNPage [
 import { RouterModule, Routes } from ''@angular/router'';
 import { ';
 		<< aCSNPage componentName;
-		<< ' } from ''./components/';
+		<< ' } from ''./';
 		<< aCSNPage getFolderName;
 		<< '/';
 		<< aCSNPage getAcceptedPathName;
@@ -1173,7 +1173,7 @@ CSNModelExporterAngular >> visitCSNPage: aBLPhase [
 	self generateRouteSourceCodeForPage: aBLPhase.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write components"
-	componentsRoot := self currentPath / 'components'.
+	componentsRoot := self currentPath.
 	componentsRoot ensureCreateDirectory.
 	indexRoot := componentsRoot / aBLPhase getFolderName.
 	indexRoot ensureCreateDirectory.

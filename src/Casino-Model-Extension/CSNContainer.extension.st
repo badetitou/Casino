@@ -27,7 +27,10 @@ CSNContainer >> recursiveWidgets [
 
 { #category : #'*Casino-Model-Extension' }
 CSNContainer >> subWidgets [
-	^ (self widgets, (self layout ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ] ifNil: [{}])) flattened.
+
+	^ (self widgets , (self layout
+		    ifNotNil: [ :a | a cell collect: #widget thenReject: #isNil ]
+		    ifNil: [ {  } ])) flattened
 ]
 
 { #category : #'*Casino-Model-Extension' }

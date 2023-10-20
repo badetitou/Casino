@@ -98,6 +98,7 @@ CSNWidget >> recursiveWidgets [
 
 { #category : #'*Casino-Model-Extension' }
 CSNWidget >> subWidgets [
+
 	^ self widgets
 ]
 
