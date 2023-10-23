@@ -497,7 +497,7 @@ export class ';
 		<< '
 '.
 	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened
+		(aBLPageMetier componentSubWidgetsUsing: self) removeDuplicates flattened
 			do: [ :widget | 
 				(self exporterAngularConfiguration angularRepresentationOf: widget)
 					exportTypeScriptVariableOf: widget

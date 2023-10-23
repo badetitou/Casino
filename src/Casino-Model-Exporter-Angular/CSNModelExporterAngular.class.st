@@ -119,7 +119,6 @@ CSNModelExporterAngular >> exportAttributeValue: aCSNAttribute [
 
 { #category : #api }
 CSNModelExporterAngular >> exportPage: aPage [
-
 	^ self clone
 		  currentPath: self rootPhases / aPage getAcceptedPathName;
 		  currentPage: aPage;
@@ -802,13 +801,13 @@ export class ';
 { #category : #'generate - subcomponent' }
 CSNModelExporterAngular >> generateTSSourceCodeForWidgetComponent: aCSNWidget [
 
-	| phaseCalled |
+	| phaseCalled widgestList |
 	phaseCalled := aCSNWidget collectPhaseCalled.
 	self writeBusinessPageImportList.
 	phaseCalled ifNotEmpty: [ self writeImportForNavigation ].
 	self writeTypeScriptImportOf: aCSNWidget.
 
-	self crlf.
+	self eol.
 	self
 		<< '@Component({
     selector: ''';
@@ -820,57 +819,56 @@ CSNModelExporterAngular >> generateTSSourceCodeForWidgetComponent: aCSNWidget [
 })
 export class ';
 		<< aCSNWidget componentName;
-		<< ' implements OnInit, OnDestroy {'.
-	self indentPlus.
-	phaseCalled do: [ :phase | 
-		currentWriteStream
-			<< '    public /*TOTO*/';
-			<< phase getAcceptedName;
-			<< ': Phase;';
-			<< String crlf ].
-	phaseCalled ifNotEmpty: [ self crlf ].
+		<< ' implements OnInit {'.
 	self inIndented: [ 
-		aCSNWidget recursiveWidgets asSet flattened do: [ :widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptVariableOf: widget
-				usingExporter: self ].
-		self crlf.
-		self
-			<< aCSNWidget id uncapitalized;
-			<<< 'Form: FormGroup;'.
-		self crlf ].
-	self crlf.
-	self << 'constructor('.
-	aCSNWidget collectPhaseCalled ifNotEmpty: [ 
-		currentWriteStream
-		<<
-		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
-	self <<< 'private _fb: FormBuilder,'.
-	currentWriteStream << ') {
-'.
-	aCSNWidget collectPhaseCalled do: [ :phase | 
-		currentWriteStream
-			<< '        this.';
-			<< phase getAcceptedName;
-			<< ' = this._phaseService.getPhase(''';
-			<< phase getAcceptedName;
-			<< ''');';
-			<< String crlf ].
-	self <<< '
-    }
+		phaseCalled do: [ :phase | 
+			self
+				<< 'public /*TOTO*/';
+				<<< phase getAcceptedName;
+				<<< ': Phase;';
+				eol ].
+		phaseCalled ifNotEmpty: [ self eol ] ].
 
-    public ngOnInit(): void {'.
-	self printBuildTSFormGroupFor: aCSNWidget.
-	self <<< '    }
+	"Print Variables"
+	self printTSVariablesForComponent: aCSNWidget.
+	self pluginExporters do: [ :pluginExporter | 
+		pluginExporter printTSVariablesForComponent: aCSNWidget using: self ].
 
-    public ngOnDestroy(): void {
+	self eol.
+	self inIndented: [ 
+		self << 'constructor('.
+		aCSNWidget collectPhaseCalled ifNotEmpty: [ 
+			currentWriteStream
+			<<
+			'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
+		self inIndented: [ 
+			self printTSConstructorInjectionForComponent: aCSNWidget ].
 
-    }
-'.
+		self << ') {'.
+		aCSNWidget collectPhaseCalled do: [ :phase | 
+			self
+				<< 'this.';
+				<<< phase getAcceptedName;
+				<<< ' = this._phaseService.getPhase(''';
+				<<< phase getAcceptedName;
+				<<< ''');';
+				eol ].
+		self << '}' ].
+	self inIndented: [ 
+		self << 'public ngOnInit(): void {'.
+		self printTSOnInitOf: aCSNWidget.
+		self <<| '}' ].
+
 	phaseCalled ifNotEmpty: [ 
-		self writeOpenPhaseMethod.
-		self crlf ].
-	self indentMinus.
+		self inIndented: [ self writeOpenPhaseMethod ] ].
+	"component definition call"
+
+	self inIndented: [ 
+		widgestList := aCSNWidget componentSubWidgetsUsing: self.
+		({ aCSNWidget } , widgestList) flattened asSet do: [ :widget | 
+			(self exporterAngularConfiguration angularRepresentationOf: widget)
+				exportTypeScriptMethodsOf: widget
+				usingExporter: self ] ].
 	self <<< '}'
 ]
 
@@ -948,7 +946,7 @@ CSNModelExporterAngular >> printBuildTSFormGroupFor: aCSNWidget [
 					<< w id uncapitalized;
 					<<< ': new FormControl(),' ]
 			separatedBy: [ self eol ] ].
-	self <<< ');'
+	self <<<| ');'
 ]
 
 { #category : #'generate - subcomponent' }
@@ -958,11 +956,10 @@ CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 	injectList := Set new.
 
 	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
-	widgetsList := (self angularRepresentationOf: aCSNWidget)
-		               representationSubWidgetsOf: aCSNWidget
-		               usingExporter: self.
 
-	(widgetsList flattened asSet
+	({ 
+		 aCSNWidget.
+		 widgetsList } flattened asSet
 		 flatCollect: [ :widget | 
 			 (String streamContents: [ :stream | 
 				  (self exporterAngularConfiguration angularRepresentationOf:
@@ -977,9 +974,7 @@ CSNModelExporterAngular >> printTSConstructorInjectionForComponent: aCSNWidget [
 CSNModelExporterAngular >> printTSOnDestroyOf: aCSNWidget [
 
 	| widgetsList |
-	widgetsList := (self angularRepresentationOf: aCSNWidget)
-		               representationSubWidgetsOf: aCSNWidget
-		               usingExporter: self.
+	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
 
 	self inIndented: [ 
 		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
@@ -992,11 +987,11 @@ CSNModelExporterAngular >> printTSOnDestroyOf: aCSNWidget [
 CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 
 	| widgetsList |
-	widgetsList := (self angularRepresentationOf: aCSNWidget)
-		               representationSubWidgetsOf: aCSNWidget
-		               usingExporter: self.
+	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
 	self inIndented: [ 
-		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
+		{ 
+			aCSNWidget.
+			widgetsList } flattened asSet asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptOnInitOf: widget
 				usingExporter: self ] ]
@@ -1006,16 +1001,22 @@ CSNModelExporterAngular >> printTSOnInitOf: aCSNWidget [
 CSNModelExporterAngular >> printTSVariablesForComponent: aCSNWidget [
 
 	| widgetsList |
-	widgetsList := (self angularRepresentationOf: aCSNWidget)
-		               representationSubWidgetsOf: aCSNWidget
-		               usingExporter: self.
+	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
 
 
 	self inIndented: [ 
-		widgetsList flattened asSet asOrderedCollection do: [ :widget | 
+		{ 
+			aCSNWidget.
+			widgetsList } flattened asSet asOrderedCollection do: [ :widget | 
 			(self exporterAngularConfiguration angularRepresentationOf: widget)
 				exportTypeScriptVariableOf: widget
 				usingExporter: self ] ]
+]
+
+{ #category : #streaming }
+CSNModelExporterAngular >> printTag: aTagName [
+
+	self inTag: aTagName withAttributesString: '' put: [  ]
 ]
 
 { #category : #accessing }
@@ -1155,40 +1156,43 @@ CSNModelExporterAngular >> visitCSNLeaf: aCSNLeaf [
 ]
 
 { #category : #visiting }
-CSNModelExporterAngular >> visitCSNPage: aBLPhase [
+CSNModelExporterAngular >> visitCSNPage: aPage [
 
 	| phaseRoot componentsRoot indexRoot |
 	phaseRoot := self currentPath.
 	phaseRoot ensureCreateDirectory.
 	"Write phase.module.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getModuleName)
+	currentWriteStream := (phaseRoot / aPage getModuleName)
 		                      asFileReference writeStream.
+
 	[ 
-	self generateModuleSourceCodeForPage: aBLPhase.
+	self generateModuleSourceCodeForPage: aPage.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write phase.route.ts"
-	currentWriteStream := (phaseRoot / aBLPhase getRouteName)
+	currentWriteStream := (phaseRoot / aPage getRouteName)
 		                      asFileReference writeStream.
 	[ 
-	self generateRouteSourceCodeForPage: aBLPhase.
+	self generateRouteSourceCodeForPage: aPage.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 	"Write components"
 	componentsRoot := self currentPath.
 	componentsRoot ensureCreateDirectory.
-	indexRoot := componentsRoot / aBLPhase getFolderName.
+	indexRoot := componentsRoot / aPage getFolderName.
 	indexRoot ensureCreateDirectory.
 
-	currentWriteStream := (indexRoot / aBLPhase getTSName)
-		                      asFileReference writeStream.
+	currentWriteStream := (indexRoot / aPage getTSName) asFileReference
+		                      writeStream.
+			self haltIf: [ aPage name includesSubstring: 'PHASE_SEDIT_CLIENT' ].
 	[ 
-	self generateTSSourceCodeForPage: aBLPhase.
+	self generateTSSourceCodeForPage: aPage.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
 
-	currentWriteStream := (indexRoot / aBLPhase getHTMLName)
-		                      asFileReference writeStream.
+	currentWriteStream := (indexRoot / aPage getHTMLName) asFileReference
+		                      writeStream.
+
 	[ 
-	self generateHTMLSourceCodeForPage: aBLPhase.
-	currentWriteStream flush ] ensure: [ currentWriteStream close ].
+	self generateHTMLSourceCodeForPage: aPage.
+	currentWriteStream flush ] ensure: [ currentWriteStream close ]
 ]
 
 { #category : #visiting }
@@ -1366,12 +1370,7 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 
 	| importList widgetsList |
 	importList := Set new.
-
-
-	"widgetsList := aCSNWidget componentSubWidgetsUsing: self."
-	widgetsList := (self angularRepresentationOf: aCSNWidget)
-		               representationSubWidgetsOf: aCSNWidget
-		               usingExporter: self.
+	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
 
 	(widgetsList flattened asSet
 		 flatCollect: [ :widget | 
