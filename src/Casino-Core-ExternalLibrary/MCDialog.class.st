@@ -17,6 +17,17 @@ MCDialog >> exportTypeScriptConstructorInjectionOf: widget usingExporter: anExpo
 ]
 
 { #category : #'export - typescript' }
+MCDialog >> exportTypeScriptImportOf: widget usingExporter: anExporter [
+
+	"I export in the TS component of my widget the variables required for its proper working"
+
+	anExporter
+		<<| 'import { FormBuilder } from ''@angular/forms'';';
+		<<| 'import { FormControl } from ''@angular/forms'';';
+		<<| 'import { FormGroup } from ''@angular/forms'';'
+]
+
+{ #category : #'export - typescript' }
 MCDialog >> exportTypeScriptOnInitOf: widget usingExporter: anExporter [
 
 	anExporter printBuildTSFormGroupFor: widget.

@@ -598,97 +598,6 @@ export const PHASE_ROUTES: ModuleWithProviders<RouterModule> = RouterModule.forC
 '
 ]
 
-{ #category : #generate }
-CSNModelExporterAngular >> generateTSSourceCodeForBusinessPage: aBLPageMetier [
-
-	self writeBusinessPageImportList.
-	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
-		self writeImportForNavigation ].
-	self writeTypeScriptImportOf: aBLPageMetier.
-	self pluginExporters do: [ :pluginExporter | 
-		pluginExporter printImportOf: aBLPageMetier using: self ].
-
-	"currentWriteStream
-		<< (String crlf join: (aBLPageMetier widgetsDependenciesFrom: self))."
-	currentWriteStream
-		<< '
-
-@Component({
-    selector: ''';
-		<< aBLPageMetier getSelector;
-		<< ''',
-    templateUrl: ''./';
-		<< aBLPageMetier getHTMLName;
-		<< '''
-})
-export class ';
-		<< aBLPageMetier componentName;
-		<< ' implements OnInit, OnDestroy {
-
-'.
-	aBLPageMetier collectPhaseCalled do: [ :phase | 
-		currentWriteStream
-			<< '    public ';
-			<< phase getAcceptedName;
-			<< ': Phase;';
-			<< String crlf ].
-	currentWriteStream << '
-'.
-	self printTSVariablesForComponent: aBLPageMetier.
-
-	self pluginExporters do: [ :pluginExporter | 
-		pluginExporter
-			printTSVariablesForComponent: aBLPageMetier
-			using: self ].
-
-	self << '
-    constructor('.
-	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
-		currentWriteStream
-		<<
-		'protected _desktopStateService: DesktopStateService, private _phaseService: PhaseService, ' ].
-	self <<< ' private _fb: FormBuilder,'.
-	self pluginExporters do: [ :pluginExporter | 
-		pluginExporter printConstructorVariable: aBLPageMetier using: self ].
-	currentWriteStream << ') {
-'.
-	aBLPageMetier collectPhaseCalled do: [ :phase | 
-		currentWriteStream
-			<< '        this.';
-			<< phase getAcceptedName;
-			<< ' = this._phaseService.getPhase(''';
-			<< phase getAcceptedName;
-			<< ''');';
-			<< String crlf ].
-	currentWriteStream << '
-    }
-
-    public ngOnInit(): void {
-    }
-
-    public ngOnDestroy(): void {
-
-    }
-'.
-	self inIndented: [ 
-		aBLPageMetier recursiveWidgets removeDuplicates flattened do: [ 
-			:widget | 
-			(self exporterAngularConfiguration angularRepresentationOf: widget)
-				exportTypeScriptMethodsOf: widget
-				usingExporter: self ] ].
-	aBLPageMetier collectPhaseCalled ifNotEmpty: [ 
-		self writeOpenPhaseMethod ].
-	self pluginExporters do: [ :pluginExporter | 
-		pluginExporter printAdditionalMethodsFor: aBLPageMetier using: self ].
-	currentWriteStream
-		<< '
-
-';
-		<< '
-}
-'
-]
-
 { #category : #'generate - model' }
 CSNModelExporterAngular >> generateTSSourceCodeForModel: aModel [
 
@@ -1182,7 +1091,7 @@ CSNModelExporterAngular >> visitCSNPage: aPage [
 
 	currentWriteStream := (indexRoot / aPage getTSName) asFileReference
 		                      writeStream.
-			self haltIf: [ aPage name includesSubstring: 'PHASE_SEDIT_CLIENT' ].
+
 	[ 
 	self generateTSSourceCodeForPage: aPage.
 	currentWriteStream flush ] ensure: [ currentWriteStream close ].
@@ -1334,17 +1243,10 @@ CSNModelExporterAngular >> visitMooseModel: aMooseModel [
 { #category : #'private-generate' }
 CSNModelExporterAngular >> writeBusinessPageImportList [
 
-	currentWriteStream
-		<< 'import {
-';
-		<< self businessPageImportList;
-		<< '
-} from ''@angular/core'';
-'.
 	self
-	<<
-	'import { FormBuilder, FormControl, FormGroup } from ''@angular/forms'';'.
-	self crlf
+		<<| 'import {';
+		<<| self businessPageImportList;
+		<<| '} from ''@angular/core'';'.
 ]
 
 { #category : #generate }
@@ -1372,21 +1274,21 @@ CSNModelExporterAngular >> writeTypeScriptImportOf: aCSNWidget [
 	importList := Set new.
 	widgetsList := aCSNWidget componentSubWidgetsUsing: self.
 
-	(widgetsList flattened asSet
+	(({ aCSNWidget } , widgetsList) flattened asSet
 		 flatCollect: [ :widget | 
 			 (String streamContents: [ :stream | 
-				|exporter | 
-				exporter := (CSNDefaultExporter on: stream).
-				 (self exporterAngularConfiguration angularRepresentationOf:
-					  widget)
-					 exportTypeScriptImportOf: widget
-					 usingExporter: exporter.
-					exporter eol.
-				 ((self exporterAngularConfiguration angularRepresentationOf:
-					   widget) internalDependenciesOf: widget) do: [ :rep | 
-					 rep
-						 exportTypeScriptImportOf: widget
-						 usingExporter: exporter ] separatedBy: [ exporter eol ] ]) lines ]
+				  | exporter |
+				  exporter := CSNDefaultExporter on: stream.
+				  (self exporterAngularConfiguration angularRepresentationOf:
+					   widget)
+					  exportTypeScriptImportOf: widget
+					  usingExporter: exporter.
+				  exporter eol.
+				  ((self exporterAngularConfiguration angularRepresentationOf:
+					    widget) internalDependenciesOf: widget)
+					  do: [ :rep | 
+					  rep exportTypeScriptImportOf: widget usingExporter: exporter ]
+					  separatedBy: [ exporter eol ] ]) lines ]
 		 as: Set) do: [ :line | importList add: line ].
 	importList do: [ :line | self <<< line ] separatedBy: [ self eol ]
 ]
