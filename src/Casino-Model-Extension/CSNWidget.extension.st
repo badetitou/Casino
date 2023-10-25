@@ -71,6 +71,32 @@ CSNWidget >> isWidget [
 ]
 
 { #category : #'*Casino-Model-Extension' }
+CSNWidget >> miTreeExtension [
+
+	<inspectorPresentationOrder: 15 title: 'CSN Tree'>
+	^ SpTreeTablePresenter new
+		  addColumn: (SpCompositeTableColumn new
+				  " addColumn: ((SpImageTableColumn evaluated: #midasIcon)
+						    width: 20;
+						    yourself);"
+				   addColumn: (SpStringTableColumn evaluated: [ :csnElement | 
+						    csnElement name ifNil: [ '?' ] ]);
+				   addColumn: ((SpImageTableColumn evaluated: [ :csnElement | 
+							     String streamContents: [ :stream | 
+									     stream
+										     << '(';
+										     << csnElement class name;
+										     << ')' ] ])
+						    width: 20;
+						    yourself);
+				   yourself);
+		  children: [ :aClass | aClass children asOrderedCollection ];
+		  beMultipleSelection;
+		  roots: { self };
+		  beResizable
+]
+
+{ #category : #'*Casino-Model-Extension' }
 CSNWidget >> name [
 	^ (name ifNil: [ 'widget' ])  , self mooseID asString
 ]
