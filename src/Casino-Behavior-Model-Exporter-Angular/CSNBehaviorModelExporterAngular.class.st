@@ -139,6 +139,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaElse
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaEmptyDimExpression: aFASTJavaEmptyDimExpression [
+
+	
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
 	"This is empty and useless so I decided to remove this useless method declaration"
 ]
@@ -229,6 +235,17 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 	self <<< ')'.
 
 	self errorStream << 'Unknow invocation: ' << (aFASTJavaMethodInvocation uniqueNameInPage: self currentPage) << '(...) | '
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaNewArray: aFASTJavaNewArray [
+
+	aFASTJavaNewArray type accept: self.
+	self <<< '['.
+	aFASTJavaNewArray arguments
+		do: [ :arg | self accept: arg ]
+		separatedBy: [ self <<< ',' ].
+	self <<< ']'
 ]
 
 { #category : #generated }
