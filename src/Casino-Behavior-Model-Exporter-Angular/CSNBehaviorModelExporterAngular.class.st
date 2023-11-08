@@ -318,6 +318,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaParameter: aFASTJavaParameter [
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaStatement: aFASTJavaStatement [
+
+	^ self visitFASTTStatement: aFASTJavaStatement
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaStringLiteral: aFASTJavaStringLiteral [
 	self
 		<<< '''';
