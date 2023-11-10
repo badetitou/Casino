@@ -663,6 +663,10 @@ CSNBLRestServiceGenerator >> visitServiceAPI: aServiceAPI [
 	self crlf.
 	self printCommentsFor: aMethod.
 	self addAnnotationForServiceAPI: aServiceAPI.
+	aServiceAPI uniqueName endsWithDigit ifTrue: [ "Probably a name of a service duplicated"
+		self
+			<< '// TODO: rename service path';
+			eol ].
 	"Printing modifiers of method ex: static,public/private/protected"
 	self
 		printModifiersFor: aMethod;
