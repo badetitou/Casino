@@ -369,7 +369,7 @@ CSNWebModelJava >> getFromSource: listofSourcedElement forClass: aClass [
 		  collect: [ :class | (listofSourcedElement select: [ :a | a source = class ]) ifEmpty: [ ^ nil ] ifNotEmpty: [ :a | a at: 1 ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #'private - actions' }
 CSNWebModelJava >> getListOfEndpointForServiceClass: aServiceClass [
 
 	^ aServiceClass methods reject: [ :method | 
