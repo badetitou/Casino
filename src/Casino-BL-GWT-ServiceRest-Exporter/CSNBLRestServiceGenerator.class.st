@@ -149,7 +149,7 @@ CSNBLRestServiceGenerator >> export [
 	self rootFolder ensureCreateDirectory.
 	service ifNil: [ self error ].
 	service source ifNotNil: [ :source | exporter createNamespaceFolderForClass: source ].
-	exporter visit: service source
+	service source accept: exporter
 ]
 
 { #category : #accessing }
@@ -577,17 +577,17 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 						 with: '.').
 			self
 				<<< ';';
-				crlf;
-				crlf.
+				eol;
+				eol.
 			self printImports: aClass.
-			self crlf.
+			self eol.
 			self printRESTImports.
 			self
-				crlf;
-				crlf ].
+				eol;
+				eol ].
 		"Printing class annotations"
 		self addAuthors.
-		self crlf.
+		self eol.
 		self addAnnotation.
 		"Printing Class declaration"
 		currentStream << 'public '.
@@ -595,11 +595,10 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 		currentStream << (self exportedClassNameOf: aClass).
 		service parentService ifNotNil: [ :parentService | 
 			self <<< ' extends ' <<< service parentService source name ].
-		currentStream
-			<< ' {';
-			<< String crlf.
-		"Printing Attributs"
+		currentStream << ' {'.
+		self eol.
 		self indentPlus.
+		"Printing Attributs"
 
 		"(aClass attributes
 		 , (aClass subclassHierarchyGroup collect: #attributes)) flattened 
@@ -626,6 +625,18 @@ CSNBLRestServiceGenerator >> visitClass: aClass [
 
 { #category : #accessing }
 CSNBLRestServiceGenerator >> visitNamespace: aNamespace [
+	aNamespace name = '<Default Package>' ifTrue: [ ^ self ].
+	((aNamespace allParents reject: [ :p | p name = 'remote' ]) reverse allButFirst: 4)
+		do: [ :namespace | 
+			self rootFolder: self rootFolder / namespace name asLowercase.
+			self rootFolder ensureCreateDirectory ].
+	aNamespace name = 'remote'
+		ifFalse: [ self rootFolder: self rootFolder / aNamespace name asLowercase.
+			self rootFolder ensureCreateDirectory ]
+]
+
+{ #category : #accessing }
+CSNBLRestServiceGenerator >> visitPackage: aNamespace [
 	aNamespace name = '<Default Package>' ifTrue: [ ^ self ].
 	((aNamespace allParents reject: [ :p | p name = 'remote' ]) reverse allButFirst: 4)
 		do: [ :namespace | 
