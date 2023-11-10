@@ -139,6 +139,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaElsePartStatement: aFASTJavaElse
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaEmptyDimExpression: aFASTJavaEmptyDimExpression [
+
+	
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaEmptyMethodDeclaration: aFASTJavaEmptyMethodDeclaration [
 	"This is empty and useless so I decided to remove this useless method declaration"
 ]
@@ -232,6 +238,17 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaMethodInvocation: aFASTJavaMetho
 ]
 
 { #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaNewArray: aFASTJavaNewArray [
+
+	aFASTJavaNewArray type accept: self.
+	self <<< '['.
+	aFASTJavaNewArray arguments
+		do: [ :arg | self accept: arg ]
+		separatedBy: [ self <<< ',' ].
+	self <<< ']'
+]
+
+{ #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaNewClassExpression: aFASTJavaNewClassExpression [
 	aFASTJavaNewClassExpression famixType isAnonymousClass
 		ifTrue: [ self <<< 'new class'.
@@ -298,6 +315,12 @@ CSNBehaviorModelExporterAngular >> visitFASTJavaOuterThis: aFASTJavaOuterThis [
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTJavaParameter: aFASTJavaParameter [
 	^ self visitFASTTVariableExpression: aFASTJavaParameter variable
+]
+
+{ #category : #generated }
+CSNBehaviorModelExporterAngular >> visitFASTJavaStatement: aFASTJavaStatement [
+
+	^ self visitFASTTStatement: aFASTJavaStatement
 ]
 
 { #category : #generated }
@@ -373,8 +396,12 @@ CSNBehaviorModelExporterAngular >> visitFASTTBooleanLiteral: aFASTBooleanLiteral
 
 { #category : #generated }
 CSNBehaviorModelExporterAngular >> visitFASTTEntity: aFASTEntity [
+
 	self debugMode
-		ifTrue: [ self error: 'You need to implement a visitor because we must not export an ''Entity''' ]
+		ifTrue: [ 
+			self error:
+				'You need to implement a visitor because we must not export an ''Entity''. Issue raised with '
+				, aFASTEntity class name ]
 		ifFalse: [ super visitFASTEntity: aFASTEntity ]
 ]
 
