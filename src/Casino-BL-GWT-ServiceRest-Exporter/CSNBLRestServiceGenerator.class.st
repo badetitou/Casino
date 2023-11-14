@@ -439,8 +439,7 @@ CSNBLRestServiceGenerator >> printNameAndParametersFor: aServiceAPI [
 		ifTrue: [ self << 'static' ].
 	"print exception"
 	(((aMethod withMethodsOverriding collect: [ :m | 
-		   m thrownExceptions , m declaredExceptions collect:
-			   #exceptionClass ]) flattened asSet asOrderedCollection sorted:
+		   m thrownExceptions , m declaredExceptions]) flattened asSet asOrderedCollection sorted:
 		  #name ascending) collect: #name)
 	, (self additionalExceptionFor: aServiceAPI) ifNotEmpty: [ 
 		:exceptionsName | 
