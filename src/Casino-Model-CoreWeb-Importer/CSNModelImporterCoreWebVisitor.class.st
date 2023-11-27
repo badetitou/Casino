@@ -507,10 +507,23 @@ CSNModelImporterCoreWebVisitor >> visitCSNUIImage: aCSNUIImage [
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUIInputCheckbox: aCSNUIInputCheckbox [
-  ^(#('BLCheckBox' 'CheckBox') includes: source invokedClassName) ifTrue: [ (self createWidgetInput: aCSNUIInputCheckbox)
-           addAttribute: ((self create: CSNUILabel) attributeValue: (source parameters at: 1 ifAbsent: [ '' ]));
-           addAttribute: ((self create: CSNUICWLabelPosition) attributeValue: (source parameters at: 4 ifAbsent: [ '0' ]));
-           yourself ] ifFalse: [ nil ]
+
+	^ (#( 'BLCheckBox' 'CheckBox' ) includes: source invokedClassName)
+		  ifTrue: [ 
+			  | checkBox |
+			  checkBox := self createWidgetInput: aCSNUIInputCheckbox.
+			  source candidates anyOne parameters ifNotEmpty: [ 
+				  source candidates anyOne parameters first declaredType name
+				  = 'String' ifTrue: [ 
+					  checkBox addAttribute:
+						  ((self create: CSNUILabel) attributeValue:
+							   (source parameters at: 1 ifAbsent: [ '' ])).
+					  checkBox addAttribute:
+						  ((self create: CSNUICWLabelPosition) attributeValue:
+							   (source parameters at: 4 ifAbsent: [ '0' ])) ] ].
+
+			  checkBox ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
