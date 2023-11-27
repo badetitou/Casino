@@ -375,9 +375,12 @@ CSNModelImporterCoreWebVisitor >> visitCSNUICWListAndDetails: aCSNUICWListAndDet
 
 { #category : #visiting }
 CSNModelImporterCoreWebVisitor >> visitCSNUICWMultiCombo: aCSNUICWMultiCombo [
-	^ (#('BLMultiCombo') includesAny: (source invokedClass withSuperclassHierarchy collect: #invokedClassName))
-		ifTrue: [ self createWidget: aCSNUICWMultiCombo ]
-		ifFalse: [ nil ]
+
+	^ (#( 'BLMultiCombo' ) includesAny:
+		   (source invokedClass withSuperclassHierarchy collect:
+			    #invokedClassName))
+		  ifTrue: [ self createWidget: aCSNUICWMultiCombo ]
+		  ifFalse: [ nil ]
 ]
 
 { #category : #visiting }
