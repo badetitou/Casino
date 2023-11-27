@@ -52,13 +52,15 @@ jobs:
 
 
       - name: Generate SVG Core Diagrams
-        uses: cloudbees/plantuml-github-action@master
+        uses: rotaract/plantuml-action@v1.3.0
         with:
-            args: -v -tsvg uml.puml
+          format: svg
+          pattern: uml.puml
       - name: Generate SVG Full Diagrams
-        uses: cloudbees/plantuml-github-action@master
+        uses: rotaract/plantuml-action@v1.3.0
         with:
-            args: -v -tsvg full.puml
+          format: svg
+          pattern: full.puml
           
       - name: Move artifact
         run: |
