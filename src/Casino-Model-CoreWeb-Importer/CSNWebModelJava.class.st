@@ -102,13 +102,12 @@ CSNWebModelJava >> addPPPToWidget [
 			          maxLevel: 15
 			          level: 0.
 		founds do: [ :found | 
-			self addWidgetVisitor
-				addWidget: widget
-				to: found
-				withInvocationOfAdd: nil
-				usingFactory: self factory
-
-			" found addWidget: widget" ].
+			(found isKindOf: CSNBusinessPage) ifTrue: [ " found addWidget: widget"
+				self addWidgetVisitor
+					addWidget: widget
+					to: found
+					withInvocationOfAdd: nil
+					usingFactory: self factory ] ].
 		index \\ 200 = 0 ifTrue: [ 
 			((index / col size) asFloat * 100) record ] ]
 ]
