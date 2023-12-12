@@ -137,7 +137,7 @@ CSNWebModelJavaAddParentFromSourceTest >> resourcesFileReference [
 		ifFalse: [ (IceRepository registry
 				detect: [ :each | each includesPackageNamed: self class package name ]
 				ifNone: [ self error: 'Please add a clone of this project to Iceberg to access to the resources' ]) location ].
-	^ repo / 'tests-resources' / 'tUI'
+	^ repo / 'tests-resources' / 'tUI' / 'hello'
 ]
 
 { #category : #running }
