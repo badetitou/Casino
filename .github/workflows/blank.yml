@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PROJECT_NAME: PharoLanguageServer
+      PROJECT_NAME: Casino
     strategy:
       matrix:
         smalltalk: [ Moose64-10 ]
