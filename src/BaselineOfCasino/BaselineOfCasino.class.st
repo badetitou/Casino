@@ -84,7 +84,7 @@ BaselineOfCasino >> defineDependencies: spec [
 	spec baseline: 'FASTJava' with: [ 
 		spec
 			loads: #( 'smacc' 'visitor' );
-			repository: 'github://moosetechnology/FAST-Java:v3/src' ].
+			repository: 'github://moosetechnology/FAST-Java:v3.0.2/src' ].
 	spec
 		baseline: 'XMLParser'
 		with: [ 
@@ -94,7 +94,7 @@ BaselineOfCasino >> defineDependencies: spec [
 			'github://TelescopeSt/TelescopeCytoscape:v2.x.x/src' ].
 	spec
 		baseline: 'Carrefour'
-		with: [ spec repository: 'github://moosetechnology/Carrefour:v4/src' ].
+		with: [ spec repository: 'github://moosetechnology/Carrefour:v4.0.2/src' ].
 	spec
 		baseline: 'MoreLogger'
 		with: [ spec repository: 'github://badetitou/MoreLogger:main/src' ].
@@ -198,8 +198,7 @@ BaselineOfCasino >> definePackages: spec [
 		package: 'Casino-Model-CoreWeb-Exporter' with: [ spec requires: #('Casino-Model-Exporter-Angular') ];
 		package: 'Casino-Model-CoreWeb-Exporter-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Exporter') ];
 		package: 'Casino-Model-CoreWeb-Importer' with: [ spec requires: #('XMLParser' 'Casino-Model-CoreWeb' 'Casino-Model-Importer-Java') ];
-		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ];
-		package: 'CSN-UIFASTBinding' with: [ spec requires: #('Casino-Model' 'FASTJava') ].
+		package: 'Casino-Model-CoreWeb-Importer-Tests' with: [ spec requires: #('Casino-Model-CoreWeb-Importer' 'Casino-Model-Importer-Java-Tests') ].
 	"models"
 	self defineBehaviorPackages: spec.
 	self defineBusinessPackages: spec
