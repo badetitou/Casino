@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI Moose11
+name: CI Moose12
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,7 +26,7 @@ jobs:
       PROJECT_NAME: Casino
     strategy:
       matrix:
-        smalltalk: [ Moose64-11 ]
+        smalltalk: [ Moose64-12 ]
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
