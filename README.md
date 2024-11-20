@@ -50,10 +50,10 @@ To install Casino:
 
 ```Smalltalk
 Metacello new
-  githubUser: 'badetitou' project: 'Casino' commitish: 'v2.0.24' path: 'src';
+  githubUser: 'badetitou' project: 'Casino' commitish: 'v2.0.29' path: 'src';
   baseline: 'Casino';
   onConflictUseIncoming;
-  load
+  load: #('core' 'behavior')
 ```
 
 This should load the version *v2.0.24* of the project (you can also specify another version or branch).
