@@ -80,7 +80,7 @@ There are three main parts:
 'path/to/model.json' asFileReference readStreamDo: [ :stream | famixModel := FamixJavaModel new importFromJSONStream: stream ]
 ```
 
-> You can create a JSON model using [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ)
+> You can create a JSON model using [VerveineJ](https://modularmoose.org/developers/parsers/verveinej/)
 > With the command: `& 'D:\Developpement\mse\VerveineJ\verveinej.bat' -o test.json -format json -anchor assoc -autocp .\lib\ .\src`
 
 2. Create a Casino model
